@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        /*
         radioGroup.setOnCheckedChangeListener{
             buttonView , isChecked ->
                when ( buttonView ) {
@@ -20,6 +21,14 @@ class MainActivity : AppCompatActivity() {
                    radioButton2 -> textView.text = "RadioButton2がオンです"
                    else        -> textView.text = "RadioButton3がオンです"
                }
+        }
+        */
+
+        // http://www.adakoda.com/android/000067.html
+        radioGroup.setOnCheckedChangeListener {
+            group, checkedId ->
+            val radioButton = findViewById(checkedId) as RadioButton
+            textView.setText( radioButton.text.toString() + "がオンです"  )
         }
     }
 }
