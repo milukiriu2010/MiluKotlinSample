@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_below="@+id/editText"
         android:text="Hello World!"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,10 +25,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
         android:ems="10"
-        android:hint="Enter you name"
+        android:hint="@string/enter_your_name"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="@string/name" />
 
     <Button
         android:id="@+id/button"
@@ -36,6 +38,15 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="117dp"
-        android:text="Save" />
+        android:text="@string/save" />
+
+    <Button
+        android:id="@+id/vibration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="202dp"
+        android:text="@string/vibration" />
 
 </RelativeLayout>
