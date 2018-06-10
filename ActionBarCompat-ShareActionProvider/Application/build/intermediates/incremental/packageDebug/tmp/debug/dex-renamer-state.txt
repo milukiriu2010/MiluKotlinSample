@@ -1,0 +1,10 @@
+#Sun Jun 10 14:10:19 JST 2018
+path.2=classes.dex
+path.1=classes.dex
+path.0=classes.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+base.2=C\:\\mykotlin\\MiluKotlinSample\\ActionBarCompat-ShareActionProvider\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\11
+base.1=C\:\\mykotlin\\MiluKotlinSample\\ActionBarCompat-ShareActionProvider\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\12
+base.0=C\:\\mykotlin\\MiluKotlinSample\\ActionBarCompat-ShareActionProvider\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\13

@@ -1,0 +1,27 @@
+#Internal package file, do not edit.
+#Sun Jun 10 14:10:20 JST 2018
+2.base=C\:\\mykotlin\\MiluKotlinSample\\ActionBarCompat-ShareActionProvider\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\13
+5.set=DEX
+0.path=classes.dex
+2.baseType=DIRECTORY
+3.base=C\:\\mykotlin\\MiluKotlinSample\\ActionBarCompat-ShareActionProvider\\Application\\build\\intermediates\\assets\\debug
+2.set=DEX
+1.path=photo_1.jpg
+4.base=C\:\\mykotlin\\MiluKotlinSample\\ActionBarCompat-ShareActionProvider\\Application\\build\\intermediates\\assets\\debug
+count=6
+5.baseType=DIRECTORY
+2.path=classes.dex
+5.base=C\:\\mykotlin\\MiluKotlinSample\\ActionBarCompat-ShareActionProvider\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\12
+4.set=ASSET
+3.path=photo_2.jpg
+3.baseType=DIRECTORY
+1.set=ASSET
+4.path=photo_3.jpg
+1.baseType=DIRECTORY
+5.path=classes.dex
+0.base=C\:\\mykotlin\\MiluKotlinSample\\ActionBarCompat-ShareActionProvider\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\11
+0.baseType=DIRECTORY
+3.set=ASSET
+1.base=C\:\\mykotlin\\MiluKotlinSample\\ActionBarCompat-ShareActionProvider\\Application\\build\\intermediates\\assets\\debug
+4.baseType=DIRECTORY
+0.set=DEX
