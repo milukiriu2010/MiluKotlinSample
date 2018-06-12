@@ -9,6 +9,7 @@ import android.widget.ListAdapter
 import android.widget.ListView
 import kotlinx.android.synthetic.main.activity_main.*
 import android.view.View
+import android.content.Intent
 
 // https://www.raywenderlich.com/186976/android-listview-tutorial-2
 // https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        /*
         val data = resources.getString(R.string.sunday)
         val days3 = arrayOf(
                 resources.getString(R.string.sunday),
@@ -58,5 +60,13 @@ class MainActivity : AppCompatActivity() {
         //val adapter = ArrayAdapter( this, android.R.layout.simple_list_item_1, DAYS2 )
         val adapter = ArrayAdapter( this, android.R.layout.simple_list_item_1, days3 )
         listView1.adapter = adapter
+        */
+
+        button.setOnClickListener {
+            val intent = Intent( this, MyListActivity::class.java )
+            val putExtra = intent.putExtra("aaa", "AAA")
+            startActivity(intent)
+        }
+        
     }
 }
