@@ -2,6 +2,7 @@ package com.example.milu.intent2
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import com.example.milu.intent2.abc.TeamSoccer
 
 class MainActivity : AppCompatActivity() {
     private val ID_USER_ADD = 1
+    private val ID_TEAM = 2
     private val teamLst: MutableList<Team> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +26,11 @@ class MainActivity : AppCompatActivity() {
 
         this.setListView()
 
+        this.setAction()
+
+    }
+
+    private fun setAction() {
         btnAddUser.setOnClickListener{
             val intent = Intent( this, UserAddActivity::class.java )
             val strFirstName = txtFirstName.text ?: "<arere>"
@@ -32,10 +39,30 @@ class MainActivity : AppCompatActivity() {
 
             startActivityForResult( intent, ID_USER_ADD )
         }
+
+        // http://www.vogella.com/tutorials/AndroidIntent/article.html
+        // start browser
+        btnBrowse.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("https://sourceforge.net/projects/miludbviewer/files/?source=navbar")
+            startActivity(intent)
+        }
+
+        // https://www.raywenderlich.com/186976/android-listview-tutorial-2
+        teamListView.setOnItemClickListener { _, _, position, _ ->
+            val intent = Intent( this, TeamActivity::class.java )
+            val team : Team = this.teamLst[position]
+            intent.putExtra( "team", team )
+
+            startActivityForResult( intent, ID_TEAM )
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if ( requestCode == ID_USER_ADD ){
+
+        }
+        else if ( requestCode == ID_TEAM ){
 
         }
         //if ( resultCode == Activity.RESULT_OK )
@@ -66,6 +93,7 @@ class MainActivity : AppCompatActivity() {
         var urawa = TeamSoccer()
         urawa.type = "soccer"
         urawa.name = "urawa"
+        urawa.level = 1
         urawa.addPlayer("makino")
         urawa.addPlayer("kuroki")
         urawa.putYearPosMap(2016, 1)
@@ -75,6 +103,7 @@ class MainActivity : AppCompatActivity() {
         var kashima = TeamSoccer()
         kashima.type = "soccer"
         kashima.name = "kashima"
+        kashima.level = 2
         kashima.addPlayer("ogasawara")
         kashima.addPlayer("sogahata")
         kashima.putYearPosMap(2016, 11)
@@ -90,7 +119,5 @@ class MainActivity : AppCompatActivity() {
         )
 
         teamListView.adapter = adapter
-
-
     }
 }

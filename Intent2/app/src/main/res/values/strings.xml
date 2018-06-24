@@ -3,4 +3,5 @@
     <string name="LABEL_FIRST_NAME">First Name</string>
     <string name="BTN_ADD_USER">Add User</string>
     <string name="BTN_BACK">Back</string>
+    <string name="BTN_BROWSE">Browse</string>
 </resources>

@@ -1,6 +1,8 @@
 package com.example.milu.intent2.abc
 
-open class Team() {
+import java.io.Serializable
+
+open class Team() : Serializable {
     var type: String? = null
     var name: String? = null
     var playerLst: MutableList<String> = mutableListOf()
