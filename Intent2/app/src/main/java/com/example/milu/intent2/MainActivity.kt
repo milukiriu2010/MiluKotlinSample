@@ -1,17 +1,20 @@
 package com.example.milu.intent2
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.content.SharedPreferences
 import kotlinx.android.synthetic.main.activity_main.*
 import com.example.milu.intent2.abc.Team
 import com.example.milu.intent2.abc.TeamBaseBall
 import com.example.milu.intent2.abc.TeamBaseBall.LEAGUE.*
 import com.example.milu.intent2.abc.TeamSoccer
+import com.example.milu.intent2.abc.AppConst
 
 class MainActivity : AppCompatActivity() {
     private val ID_USER_ADD = 1
@@ -22,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        this.setTextFirstName()
+
         this.createTeamLst()
 
         this.setListView()
@@ -29,6 +34,11 @@ class MainActivity : AppCompatActivity() {
         this.setAction()
 
     }
+
+    private fun setTextFirstName(){
+        val pref: SharedPreferences = getApplicationContext().getSharedPreferences(AppConst.KEY_USER_FIRST_NAME.value(), Context.MODE_PRIVATE)
+    }
+
 
     private fun setAction() {
         btnAddUser.setOnClickListener{
