@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.content.SharedPreferences
+import android.content.SharedPreferences.Editor
 import kotlinx.android.synthetic.main.activity_main.*
 import com.example.milu.intent2.abc.Team
 import com.example.milu.intent2.abc.TeamBaseBall
@@ -36,7 +37,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setTextFirstName(){
-        val pref: SharedPreferences = getApplicationContext().getSharedPreferences(AppConst.KEY_USER_FIRST_NAME.value(), Context.MODE_PRIVATE)
+        val pref: SharedPreferences = getApplicationContext().getSharedPreferences(AppConst.PREF_USER_FIRST_NAME.toString(), Context.MODE_PRIVATE)
+        val firstName = pref.getString( AppConst.KEY_USER_FIRST_NAME.toString(), "" )
+        txtFirstName.setText(firstName)
     }
 
 
@@ -46,6 +49,11 @@ class MainActivity : AppCompatActivity() {
             val strFirstName = txtFirstName.text ?: "<arere>"
             Log.d("aXXXXXXXXXXXX:", strFirstName.toString() )
             intent.putExtra("firstName", strFirstName.toString() )
+
+            val pref: SharedPreferences = getApplicationContext().getSharedPreferences(AppConst.PREF_USER_FIRST_NAME.toString(), Context.MODE_PRIVATE)
+            val editor : Editor = pref.edit()
+            editor.putString( AppConst.KEY_USER_FIRST_NAME.toString(), strFirstName.toString() )
+            editor.apply()
 
             startActivityForResult( intent, ID_USER_ADD )
         }
