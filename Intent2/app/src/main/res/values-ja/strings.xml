@@ -5,5 +5,6 @@
     <string name="BTN_ADD_USER">ユーザ登録</string>
     <string name="BTN_BACK">戻る</string>
     <string name="BTN_BROWSE">ブラウズ</string>
-    <string name="BTN_GET">取得</string>
+    <string name="BTN_GET_ASYNC">取得(Async)</string>
+    <string name="BTN_GET_NOSYNC">取得(NoSync)</string>
 </resources>

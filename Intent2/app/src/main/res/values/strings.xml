@@ -4,5 +4,6 @@
     <string name="BTN_ADD_USER">Add User</string>
     <string name="BTN_BACK">Back</string>
     <string name="BTN_BROWSE">Browse</string>
-    <string name="BTN_GET">Get</string>
+    <string name="BTN_GET_ASYNC">Get(Async)</string>
+    <string name="BTN_GET_NOSYNC">Get(NoSync)</string>
 </resources>
