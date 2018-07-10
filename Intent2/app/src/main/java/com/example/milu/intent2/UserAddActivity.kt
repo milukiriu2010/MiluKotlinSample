@@ -10,7 +10,10 @@ import kotlinx.android.synthetic.main.activity_user_add.*
 import com.example.milu.intent2.net.HttpGetTask
 import java.net.URL
 import android.os.StrictMode
+import com.example.milu.intent2.xml.MyXMLParse
 import org.xmlpull.v1.XmlPullParser
+import java.io.BufferedReader
+import java.io.InputStreamReader
 import java.util.stream.Collectors
 
 
@@ -48,12 +51,13 @@ class UserAddActivity : AppCompatActivity() {
             Log.w("HttpGet:",strGet)
         }
 
-        // XML example
-        // http://android-er.blogspot.com/2010/04/read-xml-resources-in-android-using.html
-        //val strXML = this.loadXML()
-        //Log.w("strXML:", strXML )
-        //textXML.text = this.loadXML()
-        textXML.text = this.loadXML2()
+        btnSAX.setOnClickListener{
+            textXML.text = this.loadXMLbySAX()
+        }
+
+        btnDOM.setOnClickListener{
+            textXML.text = this.loadXMLbyDOM()
+        }
     }
 
     private fun loadXML(): String{
@@ -74,7 +78,7 @@ class UserAddActivity : AppCompatActivity() {
         return sb.toString()
     }
 
-    private fun loadXML2() : String {
+    private fun loadXMLbySAX() : String {
         val foodLst = mutableListOf<String>()
         val xpp = this.resources.getXml(R.xml.myxml)
         xpp.next()
@@ -89,6 +93,35 @@ class UserAddActivity : AppCompatActivity() {
             eventType = xpp.next()
         }
 
-        return foodLst.stream().collect(Collectors.joining("\n") )
+        return foodLst.joinToString(separator = "\n", prefix = "SAX\n")
+
+        //return foodLst.joinToString("\n")
+
+        //return foodLst.stream().collect(Collectors.joining("\n") )
+    }
+
+    private fun loadXMLbyDOM(): String{
+        val myXmlParse = MyXMLParse()
+        val istream = this.resources.openRawResource(R.raw.myxml)
+        val br = BufferedReader(InputStreamReader(istream))
+
+        var line: String? = null
+        val sb = StringBuffer()
+        while ( { line = br.readLine(); line } != null ){
+            sb.append(line)
+        }
+
+        val xmlDoc = myXmlParse.str2doc(sb.toString())
+        val nodeListTitle = myXmlParse.searchNodeList( xmlDoc, "//PreferenceScreen/food/name")
+
+        val foodLst = mutableListOf<String>()
+        for ( i in 0 until nodeListTitle.length){
+            val nodeTitle = nodeListTitle.item(i)
+            val title = myXmlParse.searchNodeText( nodeTitle, "./text()")
+            foodLst.add(title)
+        }
+
+        return foodLst.joinToString(separator = "\n", prefix = "DOM\n")
+
     }
 }

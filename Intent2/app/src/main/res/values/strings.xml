@@ -6,4 +6,6 @@
     <string name="BTN_BROWSE">Browse</string>
     <string name="BTN_GET_ASYNC">Get(Async)</string>
     <string name="BTN_GET_NOSYNC">Get(NoSync)</string>
+    <string name="BTN_SAX">SAX</string>
+    <string name="BTN_DOM">DOM</string>
 </resources>
