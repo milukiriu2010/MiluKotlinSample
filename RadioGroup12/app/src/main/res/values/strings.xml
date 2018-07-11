@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RadioGroup1</string>
+    <string name="BTN_GET">Get</string>
+    <string name="BTN_DOM">DOM</string>
+    <string name="LABEL_FEMALE">female</string>
+    <string name="LABEL_MALE">male</string>
 </resources>
