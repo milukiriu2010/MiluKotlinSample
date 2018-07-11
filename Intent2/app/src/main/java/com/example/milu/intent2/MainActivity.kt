@@ -1,6 +1,5 @@
 package com.example.milu.intent2
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -10,16 +9,19 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
+import android.graphics.Typeface
 import kotlinx.android.synthetic.main.activity_main.*
-import com.example.milu.intent2.abc.Team
-import com.example.milu.intent2.abc.TeamBaseBall
-import com.example.milu.intent2.abc.TeamBaseBall.LEAGUE.*
-import com.example.milu.intent2.abc.TeamSoccer
-import com.example.milu.intent2.abc.AppConst
+import com.example.milu.abc.Team
+import com.example.milu.abc.TeamBaseBall
+import com.example.milu.abc.TeamBaseBall.LEAGUE.*
+import com.example.milu.abc.TeamSoccer
+import com.example.milu.abc.AppConst
+import kotlinx.android.synthetic.main.activity_user_add.*
 
 class MainActivity : AppCompatActivity() {
     private val ID_USER_ADD = 1
     private val ID_TEAM = 2
+    private val ID_IMAGE = 3
     private val teamLst: MutableList<Team> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +39,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setTextFirstName(){
+        // https://techacademy.jp/magazine/4773
+        //lblFirstName.setTypeface(Typeface.DEFAULT, Typeface.BOLD)
         val pref: SharedPreferences = getApplicationContext().getSharedPreferences(AppConst.PREF_USER_FIRST_NAME.toString(), Context.MODE_PRIVATE)
         val firstName = pref.getString( AppConst.KEY_USER_FIRST_NAME.toString(), "" )
         txtFirstName.setText(firstName)
@@ -47,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         btnAddUser.setOnClickListener{
             val intent = Intent( this, UserAddActivity::class.java )
             val strFirstName = txtFirstName.text ?: "<arere>"
-            Log.d("aXXXXXXXXXXXX:", strFirstName.toString() )
+            Log.d(this.javaClass.name, strFirstName.toString() )
             intent.putExtra("firstName", strFirstName.toString() )
 
             val pref: SharedPreferences = getApplicationContext().getSharedPreferences(AppConst.PREF_USER_FIRST_NAME.toString(), Context.MODE_PRIVATE)
@@ -64,6 +68,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse("https://sourceforge.net/projects/miludbviewer/files/?source=navbar")
             startActivity(intent)
+        }
+
+        btnImage.setOnClickListener{
+            val intent = Intent( this, ImageActivity::class.java )
+            startActivityForResult( intent, ID_IMAGE )
         }
 
         // https://www.raywenderlich.com/186976/android-listview-tutorial-2

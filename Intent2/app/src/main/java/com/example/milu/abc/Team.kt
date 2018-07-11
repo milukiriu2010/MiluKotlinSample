@@ -1,4 +1,4 @@
-package com.example.milu.intent2.abc
+package com.example.milu.abc
 
 import java.io.Serializable
 

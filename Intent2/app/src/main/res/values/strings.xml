@@ -8,4 +8,6 @@
     <string name="BTN_GET_NOSYNC">Get(NoSync)</string>
     <string name="BTN_SAX">SAX</string>
     <string name="BTN_DOM">DOM</string>
+    <string name="LABEL_NAME">Name</string>
+    <string name="BTN_IMAGE">Image</string>
 </resources>

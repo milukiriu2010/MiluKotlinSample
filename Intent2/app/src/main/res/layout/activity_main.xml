@@ -9,12 +9,13 @@
 
     <EditText
         android:id="@+id/txtFirstName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_width="191dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="@string/LABEL_NAME"
+        android:typeface="serif"
         app:layout_constraintStart_toEndOf="@+id/lblFristName"
         app:layout_constraintTop_toTopOf="@+id/lblFristName" />
 
@@ -25,6 +26,8 @@
         android:layout_marginStart="16dp"
         android:text="@string/LABEL_FIRST_NAME"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:typeface="sans"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -50,6 +53,16 @@
         android:text="@string/BTN_BROWSE"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtFirstName" />
+
+    <Button
+        android:id="@+id/btnImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/BTN_IMAGE"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        app:layout_constraintStart_toEndOf="@+id/btnBrowse"
+        app:layout_constraintTop_toTopOf="@+id/btnBrowse" />
 
     <ListView
         android:id="@+id/teamListView"

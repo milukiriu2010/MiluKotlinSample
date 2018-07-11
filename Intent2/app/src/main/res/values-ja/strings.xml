@@ -7,4 +7,8 @@
     <string name="BTN_BROWSE">ブラウズ</string>
     <string name="BTN_GET_ASYNC">取得(Async)</string>
     <string name="BTN_GET_NOSYNC">取得(NoSync)</string>
+    <string name="LABEL_NAME">名前</string>
+    <string name="BTN_SAX">SAX</string>
+    <string name="BTN_DOM">DOM</string>
+    <string name="BTN_IMAGE">画像</string>
 </resources>

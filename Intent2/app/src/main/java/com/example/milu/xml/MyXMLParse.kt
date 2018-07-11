@@ -1,4 +1,4 @@
-package com.example.milu.intent2.xml
+package com.example.milu.xml
 
 import org.w3c.dom.Document
 import org.w3c.dom.Node

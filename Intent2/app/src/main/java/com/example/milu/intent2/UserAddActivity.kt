@@ -5,16 +5,15 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.milu.intent2.net.HttpGet
+import com.example.milu.net.HttpGet
 import kotlinx.android.synthetic.main.activity_user_add.*
-import com.example.milu.intent2.net.HttpGetTask
+import com.example.milu.net.HttpGetTask
 import java.net.URL
 import android.os.StrictMode
-import com.example.milu.intent2.xml.MyXMLParse
+import com.example.milu.xml.MyXMLParse
 import org.xmlpull.v1.XmlPullParser
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.util.stream.Collectors
 
 
 class UserAddActivity : AppCompatActivity() {

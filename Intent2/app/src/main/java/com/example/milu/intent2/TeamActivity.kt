@@ -5,10 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_team.*
-import com.example.milu.intent2.abc.Team
-import com.example.milu.intent2.abc.TeamBaseBall
-import com.example.milu.intent2.abc.TeamBaseBall.LEAGUE.*
-import com.example.milu.intent2.abc.TeamSoccer
+import com.example.milu.abc.Team
+import com.example.milu.abc.TeamSoccer
 
 class TeamActivity : AppCompatActivity() {
 

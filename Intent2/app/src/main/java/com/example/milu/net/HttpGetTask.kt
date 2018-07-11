@@ -1,13 +1,18 @@
-package com.example.milu.intent2.net
+package com.example.milu.net
 
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
+import android.os.AsyncTask
+
 import java.net.URL
 
-class HttpGet {
-    fun doGet( url: URL) : String{
+// http://www.programing-style.com/android/android-api/android-httpurlconnection-get-text/
+class HttpGetTask: AsyncTask<URL,Unit,String>() {
+
+    override fun doInBackground(vararg params: URL?): String {
+        val httpGet = HttpGet()
+        return httpGet.doGet(params[0]!!)
+        /*
         val result = StringBuilder()
+        val url = params[0]
         var con: HttpURLConnection? = null
 
         try{
@@ -37,6 +42,6 @@ class HttpGet {
         } finally{
             con?.disconnect()
         }
-
+        */
     }
 }
