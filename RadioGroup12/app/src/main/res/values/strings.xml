@@ -4,4 +4,5 @@
     <string name="BTN_DOM">DOM</string>
     <string name="LABEL_FEMALE">female</string>
     <string name="LABEL_MALE">male</string>
+    <string name="BTN_RECYCLE">Recycle</string>
 </resources>

@@ -52,9 +52,18 @@
         android:id="@+id/btnDOM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="24dp"
         android:text="@string/BTN_DOM"
         app:layout_constraintStart_toEndOf="@+id/btnGet"
         app:layout_constraintTop_toTopOf="@+id/btnGet" />
+
+    <Button
+        android:id="@+id/btnRecycle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/BTN_RECYCLE"
+        app:layout_constraintStart_toEndOf="@+id/btnDOM"
+        app:layout_constraintTop_toTopOf="@+id/btnDOM" />
 
 </android.support.constraint.ConstraintLayout>

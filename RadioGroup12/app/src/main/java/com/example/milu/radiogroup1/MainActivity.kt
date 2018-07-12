@@ -1,5 +1,6 @@
 package com.example.milu.radiogroup1
 
+import android.content.Intent
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +16,7 @@ import java.io.InputStreamReader
 import java.net.URL
 
 class MainActivity : AppCompatActivity() {
+    private val ID_RECYCLE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,12 @@ class MainActivity : AppCompatActivity() {
 
         btnDOM.setOnClickListener{
             Log.d(this.javaClass.name, this.loadXMLbyDOM() )
+        }
+
+        btnRecycle.setOnClickListener{
+            val intent = Intent(this,RecycleActivity::class.java )
+
+            this.startActivityForResult( intent, this.ID_RECYCLE )
         }
     }
 
