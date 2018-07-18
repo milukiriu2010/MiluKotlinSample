@@ -10,4 +10,7 @@
     <string name="BTN_DOM">DOM</string>
     <string name="LABEL_NAME">Name</string>
     <string name="BTN_IMAGE">Image</string>
+    <string name="IMG_BLUE">blue</string>
+    <string name="BTN_BLUE">blue</string>
+    <string name="BTN_RED">Red</string>
 </resources>
