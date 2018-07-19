@@ -19,23 +19,13 @@ import com.example.milu.abc.AppConst
 import kotlinx.android.synthetic.main.activity_user_add.*
 
 class MainActivity : AppCompatActivity() {
-    private val ID_USER_ADD = 1
-    private val ID_TEAM = 2
-    private val ID_IMAGE = 3
-    private val teamLst: MutableList<Team> = mutableListOf()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         this.setTextFirstName()
 
-        this.createTeamLst()
-
-        this.setListView()
-
         this.setAction()
-
     }
 
     private fun setTextFirstName(){
@@ -59,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             editor.putString( AppConst.KEY_USER_FIRST_NAME.toString(), strFirstName.toString() )
             editor.apply()
 
-            startActivityForResult( intent, ID_USER_ADD )
+            startActivityForResult( intent, IntentID.ID_USER_ADD.value )
         }
 
         // http://www.vogella.com/tutorials/AndroidIntent/article.html
@@ -72,79 +62,23 @@ class MainActivity : AppCompatActivity() {
 
         btnImage.setOnClickListener{
             val intent = Intent( this, ImageActivity::class.java )
-            startActivityForResult( intent, ID_IMAGE )
+            startActivityForResult( intent, IntentID.ID_IMAGE.value )
         }
 
-        // https://www.raywenderlich.com/186976/android-listview-tutorial-2
-        teamListView.setOnItemClickListener { _, _, position, _ ->
-            val intent = Intent( this, TeamActivity::class.java )
-            val team : Team = this.teamLst[position]
-            intent.putExtra( "team", team )
-
-            startActivityForResult( intent, ID_TEAM )
+        btnTeamLst.setOnClickListener {
+            val intent = Intent( this, TeamListActivity::class.java )
+            startActivityForResult( intent, IntentID.ID_TEAM_LIST.value )
         }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if ( requestCode == ID_USER_ADD ){
-
-        }
-        else if ( requestCode == ID_TEAM ){
-
+        when ( requestCode ){
+            IntentID.ID_USER_ADD.value  -> ""
+            IntentID.ID_IMAGE.value      -> ""
+            IntentID.ID_TEAM_LIST.value -> ""
         }
         //if ( resultCode == Activity.RESULT_OK )
         super.onActivityResult(requestCode, resultCode, data)
-    }
-
-    private fun createTeamLst() {
-        var tigers = TeamBaseBall()
-        tigers.type = "baseball"
-        tigers.name = "tigers"
-        tigers.league = CENTRAL
-        tigers.addPlayer("nomi")
-        tigers.addPlayer("fujinami")
-        tigers.putYearPosMap(2016,4)
-        tigers.putYearPosMap(2017,2)
-        this.teamLst.add(tigers)
-
-        var giants = TeamBaseBall()
-        giants.type = "baseball"
-        giants.name = "giants"
-        giants.league = CENTRAL
-        giants.addPlayer("sugano")
-        giants.addPlayer("sawamura")
-        giants.putYearPosMap(2016,2)
-        giants.putYearPosMap(2017,4)
-        this.teamLst.add(giants)
-
-        var urawa = TeamSoccer()
-        urawa.type = "soccer"
-        urawa.name = "urawa"
-        urawa.level = 1
-        urawa.addPlayer("makino")
-        urawa.addPlayer("kuroki")
-        urawa.putYearPosMap(2016, 1)
-        urawa.putYearPosMap(2017, 2)
-        this.teamLst.add(urawa)
-
-        var kashima = TeamSoccer()
-        kashima.type = "soccer"
-        kashima.name = "kashima"
-        kashima.level = 2
-        kashima.addPlayer("ogasawara")
-        kashima.addPlayer("sogahata")
-        kashima.putYearPosMap(2016, 11)
-        kashima.putYearPosMap( 2017, 2)
-        this.teamLst.add(kashima)
-    }
-
-    private fun setListView(){
-        val adapter = ArrayAdapter<Team>(
-                this,
-                android.R.layout.simple_list_item_1,
-                this.teamLst
-        )
-
-        teamListView.adapter = adapter
     }
 }

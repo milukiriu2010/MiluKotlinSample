@@ -11,6 +11,7 @@
     <string name="LABEL_NAME">Name</string>
     <string name="BTN_IMAGE">Image</string>
     <string name="IMG_BLUE">blue</string>
-    <string name="BTN_BLUE">blue</string>
+    <string name="BTN_BLUE">Blue</string>
     <string name="BTN_RED">Red</string>
+    <string name="BTN_TEAM_LIST">TeamList</string>
 </resources>

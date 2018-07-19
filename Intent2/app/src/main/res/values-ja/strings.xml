@@ -11,4 +11,8 @@
     <string name="BTN_SAX">SAX</string>
     <string name="BTN_DOM">DOM</string>
     <string name="BTN_IMAGE">画像</string>
+    <string name="IMG_BLUE">青</string>
+    <string name="BTN_BLUE">青</string>
+    <string name="BTN_RED">赤</string>
+    <string name="BTN_TEAM_LIST">チームリスト</string>
 </resources>
