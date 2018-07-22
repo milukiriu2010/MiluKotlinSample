@@ -14,4 +14,5 @@
     <string name="BTN_BLUE">Blue</string>
     <string name="BTN_RED">Red</string>
     <string name="BTN_TEAM_LIST">TeamList</string>
+    <string name="BTN_XML">XML</string>
 </resources>

@@ -19,7 +19,9 @@ class MyXMLParse {
         val builder = factory.newDocumentBuilder()
         // http://www.baeldung.com/convert-string-to-input-stream
         val inStreamXML = ByteArrayInputStream(strXML.toByteArray())
-        return builder.parse(inStreamXML)
+        val document = builder.parse(inStreamXML)
+        inStreamXML.close()
+        return document
     }
 
     @Throws(XPathExpressionException::class)

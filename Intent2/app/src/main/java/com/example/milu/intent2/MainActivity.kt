@@ -70,6 +70,10 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult( intent, IntentID.ID_TEAM_LIST.value )
         }
 
+        btnXML.setOnClickListener {
+            val intent = Intent( this, XMLActivity::class.java )
+            startActivityForResult( intent, IntentID.ID_XML.value )
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -77,6 +81,7 @@ class MainActivity : AppCompatActivity() {
             IntentID.ID_USER_ADD.value  -> ""
             IntentID.ID_IMAGE.value      -> ""
             IntentID.ID_TEAM_LIST.value -> ""
+            IntentID.ID_XML.value        -> ""
         }
         //if ( resultCode == Activity.RESULT_OK )
         super.onActivityResult(requestCode, resultCode, data)

@@ -25,7 +25,8 @@
         <activity android:name=".UserAddActivity" />
         <activity android:name=".TeamActivity" />
         <activity android:name=".ImageActivity" />
-        <activity android:name=".TeamListActivity"></activity>
+        <activity android:name=".TeamListActivity" />
+        <activity android:name=".XMLActivity"></activity>
     </application>
 
 </manifest>

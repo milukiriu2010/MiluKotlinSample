@@ -51,36 +51,17 @@
         app:layout_constraintStart_toEndOf="@+id/btnGetAsync"
         app:layout_constraintTop_toTopOf="@+id/btnGetAsync" />
 
-    <Button
-        android:id="@+id/btnSAX"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/BTN_SAX"
-        app:layout_constraintStart_toStartOf="@+id/btnGetAsync"
-        app:layout_constraintTop_toBottomOf="@+id/btnGetAsync" />
-
-    <Button
-        android:id="@+id/btnDOM"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:text="@string/BTN_DOM"
-        app:layout_constraintStart_toEndOf="@+id/btnSAX"
-        app:layout_constraintTop_toTopOf="@+id/btnSAX" />
-
     <TextView
         android:id="@+id/textXML"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
-        app:layout_constraintEnd_toEndOf="@+id/btnGetNosync"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.458"
-        app:layout_constraintStart_toStartOf="@+id/btnGetAsync"
-        app:layout_constraintTop_toBottomOf="@+id/btnSAX" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGetAsync" />
 </android.support.constraint.ConstraintLayout>
