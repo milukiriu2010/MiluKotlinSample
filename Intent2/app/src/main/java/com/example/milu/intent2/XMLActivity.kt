@@ -54,8 +54,10 @@ class XMLActivity : AppCompatActivity() {
     }
 
     private fun loadXMLbyDOM(): String{
+        Log.v( this.javaClass.toString(), "loadXMLbyDOM start." )
         val myXmlParse = MyXMLParse()
         val istream = this.resources.openRawResource(R.raw.myxml)
+        /*
         val br = BufferedReader(InputStreamReader(istream))
 
         var line: String? = null
@@ -64,6 +66,24 @@ class XMLActivity : AppCompatActivity() {
             Log.e( this.javaClass.toString(), line )
             sb.append(line)
         }
+        */
+
+        val sb = StringBuffer()
+        // https://stackoverflow.com/questions/41000584/best-way-to-use-bufferedreader-in-kotlin
+        /*
+        istream.bufferedReader().useLines { it.map { line -> sb.append(line) } }
+        Log.v( this.javaClass.toString(), "=== XML content ================" )
+        Log.v( this.javaClass.toString(), sb.toString() )
+        Log.v( this.javaClass.toString(), "================================" )
+        */
+        Log.v( this.javaClass.toString(), "=== XML content ================" )
+        val reader = istream.bufferedReader()
+        val iterator = reader.lineSequence().iterator()
+        while ( iterator.hasNext() ) {
+            sb.append( iterator.next() )
+        }
+        Log.v( this.javaClass.toString(), sb.toString() )
+        Log.v( this.javaClass.toString(), "================================" )
 
         val xmlDoc = myXmlParse.str2doc(sb.toString())
         val nodeListTitle = myXmlParse.searchNodeList( xmlDoc, "//PreferenceScreen/food/name")
