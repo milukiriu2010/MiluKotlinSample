@@ -15,4 +15,5 @@
     <string name="BTN_BLUE">青</string>
     <string name="BTN_RED">赤</string>
     <string name="BTN_TEAM_LIST">チームリスト</string>
+    <string name="BTN_HTTP">Http</string>
 </resources>

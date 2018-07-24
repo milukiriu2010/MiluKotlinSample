@@ -6,17 +6,10 @@ import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
-import android.graphics.Typeface
 import kotlinx.android.synthetic.main.activity_main.*
-import com.example.milu.abc.Team
-import com.example.milu.abc.TeamBaseBall
-import com.example.milu.abc.TeamBaseBall.LEAGUE.*
-import com.example.milu.abc.TeamSoccer
 import com.example.milu.abc.AppConst
-import kotlinx.android.synthetic.main.activity_user_add.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,6 +67,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent( this, XMLActivity::class.java )
             startActivityForResult( intent, IntentID.ID_XML.value )
         }
+
+        btnHTTP.setOnClickListener {
+            val intent = Intent( this, HttpActivity::class.java )
+            startActivityForResult( intent, IntentID.ID_HTTP.value )
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -82,6 +80,7 @@ class MainActivity : AppCompatActivity() {
             IntentID.ID_IMAGE.value      -> ""
             IntentID.ID_TEAM_LIST.value -> ""
             IntentID.ID_XML.value        -> ""
+            IntentID.ID_HTTP.value       -> ""
         }
         //if ( resultCode == Activity.RESULT_OK )
         super.onActivityResult(requestCode, resultCode, data)

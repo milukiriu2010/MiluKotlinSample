@@ -5,5 +5,6 @@ enum class IntentID( val value: Int ) {
     ID_TEAM(2),
     ID_IMAGE(3),
     ID_TEAM_LIST(4),
-    ID_XML(5)
+    ID_XML(5),
+    ID_HTTP(6)
 }

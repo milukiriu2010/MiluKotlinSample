@@ -15,4 +15,6 @@
     <string name="BTN_RED">Red</string>
     <string name="BTN_TEAM_LIST">TeamList</string>
     <string name="BTN_XML">XML</string>
+    <string name="title_activity_http_get">HttpGetActivity</string>
+    <string name="BTN_HTTP">Http</string>
 </resources>

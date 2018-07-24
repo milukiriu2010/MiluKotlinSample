@@ -26,7 +26,11 @@
         <activity android:name=".TeamActivity" />
         <activity android:name=".ImageActivity" />
         <activity android:name=".TeamListActivity" />
-        <activity android:name=".XMLActivity"></activity>
+        <activity android:name=".XMLActivity" />
+        <activity
+            android:name=".HttpActivity"
+            android:label="@string/title_activity_http_get"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
