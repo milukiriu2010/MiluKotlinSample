@@ -72,6 +72,16 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent( this, HttpActivity::class.java )
             startActivityForResult( intent, IntentID.ID_HTTP.value )
         }
+
+        btnJSON.setOnClickListener {
+            val intent = Intent( this, JsonActivity::class.java )
+            startActivityForResult( intent, IntentID.ID_JSON.value )
+        }
+
+        btnTimeZone.setOnClickListener {
+            val intent = Intent( this, ListTimeZoneActivity::class.java )
+            startActivityForResult( intent, IntentID.ID_TIMEZONE.value )
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -81,6 +91,8 @@ class MainActivity : AppCompatActivity() {
             IntentID.ID_TEAM_LIST.value -> ""
             IntentID.ID_XML.value        -> ""
             IntentID.ID_HTTP.value       -> ""
+            IntentID.ID_JSON.value       -> ""
+            IntentID.ID_TIMEZONE.value  -> ""
         }
         //if ( resultCode == Activity.RESULT_OK )
         super.onActivityResult(requestCode, resultCode, data)

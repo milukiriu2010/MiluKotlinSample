@@ -31,6 +31,11 @@
             android:name=".HttpActivity"
             android:label="@string/title_activity_http_get"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".JsonActivity"
+            android:label="@string/title_activity_json"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ListTimeZoneActivity"></activity>
     </application>
 
 </manifest>

@@ -16,4 +16,6 @@
     <string name="BTN_RED">赤</string>
     <string name="BTN_TEAM_LIST">チームリスト</string>
     <string name="BTN_HTTP">Http</string>
+    <string name="BTN_JSON">Json</string>
+    <string name="BTN_TIMEZONE">TimeZone</string>
 </resources>

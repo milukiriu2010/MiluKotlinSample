@@ -1,5 +1,6 @@
 package com.example.milu.intent2
 
+import android.app.Activity
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +16,11 @@ class HttpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_http)
+
+        btnBack.setOnClickListener {
+            setResult(Activity.RESULT_OK)
+            finish()
+        }
 
         btnGetSync.setOnClickListener{
             // https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123
