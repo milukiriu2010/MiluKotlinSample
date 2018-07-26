@@ -82,6 +82,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent( this, ListTimeZoneActivity::class.java )
             startActivityForResult( intent, IntentID.ID_TIMEZONE.value )
         }
+
+        btnClock.setOnClickListener {
+            val intent = Intent( this, WorldClockActivity::class.java )
+            startActivityForResult( intent, IntentID.ID_CLOCK.value )
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

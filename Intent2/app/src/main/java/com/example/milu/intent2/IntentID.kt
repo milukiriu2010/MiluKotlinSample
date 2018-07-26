@@ -8,5 +8,7 @@ enum class IntentID( val value: Int ) {
     ID_XML(5),
     ID_HTTP(6),
     ID_JSON(7),
-    ID_TIMEZONE(8)
+    ID_TIMEZONE(8),
+    ID_CLOCK(9),
+    ID_TIMEZONE_SELECT(10)
 }

@@ -121,6 +121,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/BTN_JSON" />
 
+            <Button
+                android:id="@+id/btnClock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/BTN_CLOCK" />
+
         </TableRow>
 
         <TableRow

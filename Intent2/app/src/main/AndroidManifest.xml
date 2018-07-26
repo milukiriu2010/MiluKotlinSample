@@ -35,7 +35,9 @@
             android:name=".JsonActivity"
             android:label="@string/title_activity_json"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ListTimeZoneActivity"></activity>
+        <activity android:name=".ListTimeZoneActivity" />
+        <activity android:name=".WorldClockActivity" />
+        <activity android:name=".TimeZoneSelectActivity"></activity>
     </application>
 
 </manifest>
