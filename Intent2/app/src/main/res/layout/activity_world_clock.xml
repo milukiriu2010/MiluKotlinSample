@@ -51,7 +51,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtClock"
-        tools:listitem="@layout/list_time_zone_row2">
+        tools:listitem="@layout/list_time_zone_row_for_worldclock">
 
     </ListView>
 
