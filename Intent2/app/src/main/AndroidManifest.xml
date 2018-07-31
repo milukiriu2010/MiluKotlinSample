@@ -37,7 +37,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ListTimeZoneActivity" />
         <activity android:name=".WorldClockActivity" />
-        <activity android:name=".TimeZoneSelectActivity"></activity>
+        <activity android:name=".TimeZoneSelectActivity" />
+        <activity android:name=".RecycleTimeZoneActivity"></activity>
     </application>
 
 </manifest>

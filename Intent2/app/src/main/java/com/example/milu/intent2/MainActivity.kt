@@ -87,6 +87,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent( this, WorldClockActivity::class.java )
             startActivityForResult( intent, IntentID.ID_CLOCK.value )
         }
+
+        btnTimeZoneRV.setOnClickListener {
+            val intent = Intent( this, RecycleTimeZoneActivity::class.java )
+            startActivityForResult( intent, IntentID.ID_TIMEZONE_RV.value )
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -98,6 +103,7 @@ class MainActivity : AppCompatActivity() {
             IntentID.ID_HTTP.value       -> ""
             IntentID.ID_JSON.value       -> ""
             IntentID.ID_TIMEZONE.value  -> ""
+            IntentID.ID_TIMEZONE_RV.value  -> ""
         }
         //if ( resultCode == Activity.RESULT_OK )
         super.onActivityResult(requestCode, resultCode, data)

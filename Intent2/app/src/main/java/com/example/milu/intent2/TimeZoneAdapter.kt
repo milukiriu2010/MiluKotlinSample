@@ -18,7 +18,8 @@ class TimeZoneAdapter(private val context: Context,
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view = convertView ?: createView(parent)
 
-        val timeZone = getItem(position) as TimeZone
+        val timeZoneId = getItem(position) as String
+        val timeZone = TimeZone.getTimeZone(timeZoneId)
 
         val viewHolder = view.tag as ViewHolder
 

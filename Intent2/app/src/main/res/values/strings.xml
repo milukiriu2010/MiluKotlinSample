@@ -23,4 +23,5 @@
     <string name="BTN_CLOCK">Clock</string>
     <string name="BTN">Add</string>
     <string name="BTN_ADD">Add</string>
+    <string name="BTN_TIMEZONE_RV">TimeZone(RV)</string>
 </resources>

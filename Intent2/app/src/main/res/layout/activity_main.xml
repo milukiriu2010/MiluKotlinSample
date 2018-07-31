@@ -127,6 +127,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/BTN_CLOCK" />
 
+            <Button
+                android:id="@+id/btnTimeZoneRV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/BTN_TIMEZONE_RV" />
+
         </TableRow>
 
         <TableRow
