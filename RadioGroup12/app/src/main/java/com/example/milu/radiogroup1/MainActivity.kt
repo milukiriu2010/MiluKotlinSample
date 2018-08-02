@@ -23,11 +23,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        gender.setOnCheckedChangeListener(
-            RadioGroup.OnCheckedChangeListener { radioGroup, checkedId ->
-                val radio: RadioButton = findViewById(checkedId) as RadioButton
+        gender.setOnCheckedChangeListener { radioGroup, checkedId ->
+                val radio: RadioButton = findViewById<RadioButton>(checkedId)
                 Toast.makeText(applicationContext, "On checked change : ${radio.text}", Toast.LENGTH_LONG).show()
-            })
+        }
 
         btnGet.setOnClickListener{
             Log.d(this.javaClass.name,"XXXXXX")
