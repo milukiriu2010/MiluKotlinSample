@@ -1,6 +1,7 @@
 package milu.kiriu2010.milurssviewer
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import milu.kiriu2010.entity.URLData
+import java.net.URL
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,13 +20,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val adapter = URLAdapter(this ) { urlData ->
-
+        val adapter = URLAdapter(this, loadURLData() ) { urlData ->
+            val intent = Intent( this, RssEachActivity::class.java )
+            intent.putExtra( IntentKey.KEY_RSS_EACH.key, urlData )
+            startActivity(intent)
         }
 
         rvURL.adapter = adapter
 
         rvURL.layoutManager = LinearLayoutManager( this, LinearLayoutManager.VERTICAL, false )
+    }
+
+    private fun loadURLData(): MutableList<URLData> {
+        val urlLst: MutableList<URLData> = mutableListOf<URLData>()
+
+        urlLst.add( URLData( "ビジネスIT+IT HotTopics", URL("https://www.sbbit.jp/rss/HotTopics.rss")) )
+
+        return urlLst
     }
 
     class URLAdapter(context: Context,
@@ -52,7 +64,8 @@ class MainActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: URLViewHolder, position: Int) {
             val urlData = urlLst[position]
             holder.labelTitle.text = urlData.title
-            holder.labelURL.text   = urlData.url.path
+            //holder.labelURL.text   = urlData.url.path
+            holder.labelURL.text   = urlData.url.toString()
         }
 
         class URLViewHolder(view: View): RecyclerView.ViewHolder(view) {
