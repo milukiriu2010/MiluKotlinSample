@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.Toast
 import com.example.milu.net.HttpGet
 import com.example.milu.xml.MyXMLParse
@@ -16,8 +15,6 @@ import java.io.InputStreamReader
 import java.net.URL
 
 class MainActivity : AppCompatActivity() {
-    private val ID_RECYCLE = 1
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -34,39 +31,26 @@ class MainActivity : AppCompatActivity() {
             httpGetTask.execute(URL("https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123"))
         }
 
-        btnDOM.setOnClickListener{
-            Log.d(this.javaClass.name, this.loadXMLbyDOM() )
+        btnRATE.setOnClickListener{
+            val intent = Intent(this,RateActivity::class.java )
+
+            this.startActivityForResult( intent, IntentID2.ID_RATE.value )
         }
 
         btnRecycle.setOnClickListener{
             val intent = Intent(this,RecycleActivity::class.java )
 
-            this.startActivityForResult( intent, this.ID_RECYCLE )
-        }
-    }
-
-    private fun loadXMLbyDOM(): String{
-        val myXmlParse = MyXMLParse()
-        val istream = this.resources.openRawResource(R.raw.myxml)
-        val br = BufferedReader(InputStreamReader(istream))
-
-        var line: String? = null
-        val sb = StringBuffer()
-        while ( { line = br.readLine(); line } != null ){
-            sb.append(line)
+            this.startActivityForResult( intent, IntentID2.ID_RECYCLE.value )
         }
 
-        val xmlDoc = myXmlParse.str2doc(sb.toString())
-        val nodeListTitle = myXmlParse.searchNodeList( xmlDoc, "//PreferenceScreen/food/name")
+        // https://stackoverflow.com/questions/26958909/why-is-my-button-text-forced-to-all-caps-on-lollipop
+        // large => small caps
+        btnANIME.transformationMethod = null
+        btnANIME.setOnClickListener{
+            val intent = Intent(this,AnimeActivity::class.java )
 
-        val foodLst = mutableListOf<String>()
-        for ( i in 0 until nodeListTitle.length){
-            val nodeTitle = nodeListTitle.item(i)
-            val title = myXmlParse.searchNodeText( nodeTitle, "./text()")
-            foodLst.add(title)
+            this.startActivityForResult( intent, IntentID2.ID_ANIME.value )
         }
-
-        return foodLst.joinToString(separator = "\n", prefix = "DOM\n")
 
     }
 

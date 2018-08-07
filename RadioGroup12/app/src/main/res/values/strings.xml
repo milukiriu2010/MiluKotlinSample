@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">RadioGroup1</string>
+    <string name="app_name">ExRadio1</string>
     <string name="BTN_GET">Get</string>
     <string name="BTN_DOM">DOM</string>
     <string name="LABEL_FEMALE">female</string>
     <string name="LABEL_MALE">male</string>
     <string name="BTN_RECYCLE">Recycle</string>
+    <string name="BTN_RATE">Rate</string>
+    <string name="BTN_ANIME">Anime</string>
+    <string name="BTN_START">START</string>
 </resources>

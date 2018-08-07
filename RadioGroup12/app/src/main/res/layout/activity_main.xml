@@ -46,14 +46,15 @@
         android:onClick="onClick"
         android:text="@string/BTN_GET"
         app:layout_constraintStart_toStartOf="@+id/gender"
-        app:layout_constraintTop_toBottomOf="@+id/gender" />
+        app:layout_constraintTop_toBottomOf="@+id/gender"
+        tools:textAllCaps="false" />
 
     <Button
-        android:id="@+id/btnDOM"
+        android:id="@+id/btnRATE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="@string/BTN_DOM"
+        android:text="@string/BTN_RATE"
         app:layout_constraintStart_toEndOf="@+id/btnGet"
         app:layout_constraintTop_toTopOf="@+id/btnGet" />
 
@@ -63,7 +64,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:text="@string/BTN_RECYCLE"
-        app:layout_constraintStart_toEndOf="@+id/btnDOM"
-        app:layout_constraintTop_toTopOf="@+id/btnDOM" />
+        app:layout_constraintStart_toEndOf="@+id/btnRATE"
+        app:layout_constraintTop_toTopOf="@+id/btnRATE" />
+
+    <Button
+        android:id="@+id/btnANIME"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/BTN_ANIME"
+        app:layout_constraintStart_toStartOf="@+id/btnGet"
+        app:layout_constraintTop_toBottomOf="@+id/btnGet" />
 
 </android.support.constraint.ConstraintLayout>
