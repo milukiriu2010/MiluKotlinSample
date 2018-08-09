@@ -3,12 +3,12 @@ manifest
 ADDED from C:\mykotlin\MiluKotlinSample\ActionBarCompat-ShareActionProvider\Application\src\main\AndroidManifest.xml:18:1-52:12
 INJECTED from C:\mykotlin\MiluKotlinSample\ActionBarCompat-ShareActionProvider\Application\src\main\AndroidManifest.xml:18:1-52:12
 INJECTED from C:\mykotlin\MiluKotlinSample\ActionBarCompat-ShareActionProvider\Application\src\main\AndroidManifest.xml:18:1-52:12
-MERGED from [com.android.support:gridlayout-v7:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\gridlayout-v7-24.1.1.aar\2c0cd19e46d9c1b705a2528607023c3f\AndroidManifest.xml:17:1-24:12
-MERGED from [com.android.support:appcompat-v7:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\appcompat-v7-24.1.1.aar\3391399a0733c37c281c9207c4c86972\AndroidManifest.xml:17:1-27:12
-MERGED from [com.android.support:animated-vector-drawable:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-24.1.1.aar\dbc539f28547a0f7245d69050db2c1df\AndroidManifest.xml:17:1-24:12
-MERGED from [com.android.support:support-vector-drawable:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-24.1.1.aar\1cbe69637615a1041d80b0bbe4331ccb\AndroidManifest.xml:17:1-25:12
-MERGED from [com.android.support:support-v4:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\dfc352ff5e5feb60b2a3493b3cad49e9\AndroidManifest.xml:17:1-27:12
-MERGED from [com.android.support:cardview-v7:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\cardview-v7-24.1.1.aar\1e661ec8d1886e5b9a15d34172d96646\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:gridlayout-v7:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\gridlayout-v7-24.1.1.aar\1670d65c95dd483b873d06356c3291da\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:appcompat-v7:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\appcompat-v7-24.1.1.aar\0268e31d2bd7c715588da816d03c264a\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:animated-vector-drawable:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-24.1.1.aar\47f84f405fb07da780deb3b1ff30c97e\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:support-vector-drawable:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-24.1.1.aar\f24ce4318c382281a1aea5b68b6997e5\AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:support-v4:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\3d289f81e80d0eb466fc541537679c43\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:cardview-v7:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\cardview-v7-24.1.1.aar\ba6d667b7ef331eb4e7cdb68bcf3a3f6\AndroidManifest.xml:17:1-24:12
 INJECTED from C:\mykotlin\MiluKotlinSample\ActionBarCompat-ShareActionProvider\Application\src\main\AndroidManifest.xml:18:1-52:12
 INJECTED from C:\mykotlin\MiluKotlinSample\ActionBarCompat-ShareActionProvider\Application\src\main\AndroidManifest.xml:18:1-52:12
 	package
@@ -25,18 +25,18 @@ INJECTED from C:\mykotlin\MiluKotlinSample\ActionBarCompat-ShareActionProvider\A
 		INJECTED from C:\mykotlin\MiluKotlinSample\ActionBarCompat-ShareActionProvider\Application\src\main\AndroidManifest.xml
 application
 ADDED from C:\mykotlin\MiluKotlinSample\ActionBarCompat-ShareActionProvider\Application\src\main\AndroidManifest.xml:28:5-50:19
-MERGED from [com.android.support:gridlayout-v7:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\gridlayout-v7-24.1.1.aar\2c0cd19e46d9c1b705a2528607023c3f\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:gridlayout-v7:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\gridlayout-v7-24.1.1.aar\2c0cd19e46d9c1b705a2528607023c3f\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:appcompat-v7:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\appcompat-v7-24.1.1.aar\3391399a0733c37c281c9207c4c86972\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:appcompat-v7:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\appcompat-v7-24.1.1.aar\3391399a0733c37c281c9207c4c86972\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:animated-vector-drawable:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-24.1.1.aar\dbc539f28547a0f7245d69050db2c1df\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:animated-vector-drawable:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-24.1.1.aar\dbc539f28547a0f7245d69050db2c1df\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-vector-drawable:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-24.1.1.aar\1cbe69637615a1041d80b0bbe4331ccb\AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:support-vector-drawable:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-24.1.1.aar\1cbe69637615a1041d80b0bbe4331ccb\AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:support-v4:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\dfc352ff5e5feb60b2a3493b3cad49e9\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-v4:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\dfc352ff5e5feb60b2a3493b3cad49e9\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:cardview-v7:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\cardview-v7-24.1.1.aar\1e661ec8d1886e5b9a15d34172d96646\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:cardview-v7:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\cardview-v7-24.1.1.aar\1e661ec8d1886e5b9a15d34172d96646\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:gridlayout-v7:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\gridlayout-v7-24.1.1.aar\1670d65c95dd483b873d06356c3291da\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:gridlayout-v7:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\gridlayout-v7-24.1.1.aar\1670d65c95dd483b873d06356c3291da\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\appcompat-v7-24.1.1.aar\0268e31d2bd7c715588da816d03c264a\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:appcompat-v7:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\appcompat-v7-24.1.1.aar\0268e31d2bd7c715588da816d03c264a\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-24.1.1.aar\47f84f405fb07da780deb3b1ff30c97e\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:animated-vector-drawable:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-24.1.1.aar\47f84f405fb07da780deb3b1ff30c97e\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-24.1.1.aar\f24ce4318c382281a1aea5b68b6997e5\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-vector-drawable:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-24.1.1.aar\f24ce4318c382281a1aea5b68b6997e5\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-v4:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\3d289f81e80d0eb466fc541537679c43\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\3d289f81e80d0eb466fc541537679c43\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:cardview-v7:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\cardview-v7-24.1.1.aar\ba6d667b7ef331eb4e7cdb68bcf3a3f6\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:cardview-v7:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\cardview-v7-24.1.1.aar\ba6d667b7ef331eb4e7cdb68bcf3a3f6\AndroidManifest.xml:22:5-20
 	android:label
 		ADDED from C:\mykotlin\MiluKotlinSample\ActionBarCompat-ShareActionProvider\Application\src\main\AndroidManifest.xml:30:9-41
 	android:icon
@@ -73,22 +73,22 @@ uses-sdk
 INJECTED from C:\mykotlin\MiluKotlinSample\ActionBarCompat-ShareActionProvider\Application\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\mykotlin\MiluKotlinSample\ActionBarCompat-ShareActionProvider\Application\src\main\AndroidManifest.xml
 INJECTED from C:\mykotlin\MiluKotlinSample\ActionBarCompat-ShareActionProvider\Application\src\main\AndroidManifest.xml
-MERGED from [com.android.support:gridlayout-v7:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\gridlayout-v7-24.1.1.aar\2c0cd19e46d9c1b705a2528607023c3f\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:gridlayout-v7:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\gridlayout-v7-24.1.1.aar\2c0cd19e46d9c1b705a2528607023c3f\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:appcompat-v7:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\appcompat-v7-24.1.1.aar\3391399a0733c37c281c9207c4c86972\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:appcompat-v7:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\appcompat-v7-24.1.1.aar\3391399a0733c37c281c9207c4c86972\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:animated-vector-drawable:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-24.1.1.aar\dbc539f28547a0f7245d69050db2c1df\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-24.1.1.aar\dbc539f28547a0f7245d69050db2c1df\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-24.1.1.aar\1cbe69637615a1041d80b0bbe4331ccb\AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:support-vector-drawable:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-24.1.1.aar\1cbe69637615a1041d80b0bbe4331ccb\AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:support-v4:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\dfc352ff5e5feb60b2a3493b3cad49e9\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-v4:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\dfc352ff5e5feb60b2a3493b3cad49e9\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:cardview-v7:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\cardview-v7-24.1.1.aar\1e661ec8d1886e5b9a15d34172d96646\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:cardview-v7:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\cardview-v7-24.1.1.aar\1e661ec8d1886e5b9a15d34172d96646\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:gridlayout-v7:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\gridlayout-v7-24.1.1.aar\1670d65c95dd483b873d06356c3291da\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:gridlayout-v7:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\gridlayout-v7-24.1.1.aar\1670d65c95dd483b873d06356c3291da\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\appcompat-v7-24.1.1.aar\0268e31d2bd7c715588da816d03c264a\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:appcompat-v7:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\appcompat-v7-24.1.1.aar\0268e31d2bd7c715588da816d03c264a\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-24.1.1.aar\47f84f405fb07da780deb3b1ff30c97e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-24.1.1.aar\47f84f405fb07da780deb3b1ff30c97e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-24.1.1.aar\f24ce4318c382281a1aea5b68b6997e5\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-vector-drawable:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-24.1.1.aar\f24ce4318c382281a1aea5b68b6997e5\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-v4:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\3d289f81e80d0eb466fc541537679c43\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\3d289f81e80d0eb466fc541537679c43\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:cardview-v7:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\cardview-v7-24.1.1.aar\ba6d667b7ef331eb4e7cdb68bcf3a3f6\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:cardview-v7:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\cardview-v7-24.1.1.aar\ba6d667b7ef331eb4e7cdb68bcf3a3f6\AndroidManifest.xml:20:5-43
 INJECTED from C:\mykotlin\MiluKotlinSample\ActionBarCompat-ShareActionProvider\Application\src\main\AndroidManifest.xml
 INJECTED from C:\mykotlin\MiluKotlinSample\ActionBarCompat-ShareActionProvider\Application\src\main\AndroidManifest.xml
 	tools:overrideLibrary
-		ADDED from [com.android.support:appcompat-v7:24.1.1] C:\Users\Mitsuharu\.gradle\caches\transforms-1\files-1.1\appcompat-v7-24.1.1.aar\3391399a0733c37c281c9207c4c86972\AndroidManifest.xml:23:9-75
+		ADDED from [com.android.support:appcompat-v7:24.1.1] C:\Users\kiriu\.gradle\caches\transforms-1\files-1.1\appcompat-v7-24.1.1.aar\0268e31d2bd7c715588da816d03c264a\AndroidManifest.xml:23:9-75
 	android:targetSdkVersion
 		INJECTED from C:\mykotlin\MiluKotlinSample\ActionBarCompat-ShareActionProvider\Application\src\main\AndroidManifest.xml
 		ADDED from C:\mykotlin\MiluKotlinSample\ActionBarCompat-ShareActionProvider\Application\src\main\AndroidManifest.xml

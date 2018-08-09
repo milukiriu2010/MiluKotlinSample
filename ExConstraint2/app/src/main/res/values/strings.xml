@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">ExConstraint2</string>
+    <string name="BTN_GET">Get</string>
+    <string name="BTN_DOM">DOM</string>
+    <string name="LABEL_FEMALE">female</string>
+    <string name="LABEL_MALE">male</string>
+    <string name="BTN_RECYCLE">Recycle</string>
+    <string name="BTN_RATE">Rate</string>
+    <string name="BTN_ANIME">Anime</string>
+    <string name="BTN_START">START</string>
+    <string name="BTN_SEEK">Seek</string>
+    <string name="BTN_CM">ConMenu</string>
+    <string name="BTN_CELSIUS">Celsius</string>
+    <string name="BTN_FAHRENHEIT">Fahrenheit</string>
+    <string name="BTN_CALC">Calc</string>
+    <string name="BTN_TEMPERATURE">C/F</string>
+    <string name="BTN_STOP">Stop</string>
+    <string name="BTN_RESET">Reset</string>
+    <string name="BTN_STOP_WATCH">StopWatch</string>
+</resources>
