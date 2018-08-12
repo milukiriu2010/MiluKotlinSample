@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Intent2</string>
+    <string name="app_name">ExCon1</string>
     <string name="LABEL_FIRST_NAME">名</string>
     <string name="BTN_ADD_USER">ユーザ登録</string>
     <string name="BTN_BACK">戻る</string>

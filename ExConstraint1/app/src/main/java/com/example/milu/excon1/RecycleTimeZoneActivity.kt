@@ -1,4 +1,4 @@
-package com.example.milu.intent2
+package com.example.milu.excon1
 
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import com.example.milu.intent2.R
 import kotlinx.android.synthetic.main.activity_recycle_time_zone.*
 import java.util.*
 
@@ -19,8 +20,8 @@ class RecycleTimeZoneActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycle_time_zone)
 
-        val adapter = SampleAdapter(this) { timeZone->
-            Toast.makeText(this, timeZone.displayName, Toast.LENGTH_LONG ).show()
+        val adapter = SampleAdapter(this) { timeZone ->
+            Toast.makeText(this, timeZone.displayName, Toast.LENGTH_LONG).show()
         }
 
         rvTimeZone.adapter = adapter

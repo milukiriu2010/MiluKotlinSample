@@ -1,4 +1,4 @@
-package com.example.milu.intent2
+package com.example.milu.excon1
 
 import android.content.Context
 import android.content.Intent
@@ -10,6 +10,7 @@ import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import kotlinx.android.synthetic.main.activity_main.*
 import com.example.milu.abc.AppConst
+import com.example.milu.intent2.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,6 +92,11 @@ class MainActivity : AppCompatActivity() {
         btnTimeZoneRV.setOnClickListener {
             val intent = Intent( this, RecycleTimeZoneActivity::class.java )
             startActivityForResult( intent, IntentID.ID_TIMEZONE_RV.value )
+        }
+
+        btnFileRV.setOnClickListener {
+            val intent = Intent( this, FileRecycleActivity::class.java )
+            startActivityForResult( intent, IntentID.ID_FILE_RV.value )
         }
     }
 

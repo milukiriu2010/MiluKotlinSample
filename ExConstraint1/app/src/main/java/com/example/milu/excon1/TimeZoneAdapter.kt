@@ -1,4 +1,4 @@
-package com.example.milu.intent2
+package com.example.milu.excon1
 
 import android.content.Context
 import android.icu.util.TimeZone
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextClock
 import android.widget.TextView
+import com.example.milu.intent2.R
 
 // TimeZone.getAvailableIDs() => 24
 class TimeZoneAdapter(private val context: Context,

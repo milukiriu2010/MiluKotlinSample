@@ -1,4 +1,4 @@
-package com.example.milu.intent2
+package com.example.milu.excon1
 
 import android.app.Activity
 import android.os.AsyncTask
@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import com.example.milu.intent2.R
 import com.example.milu.net.HttpGet
 import com.example.milu.xml.MyXMLParse
 import kotlinx.android.synthetic.main.activity_http.*

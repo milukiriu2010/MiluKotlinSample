@@ -1,9 +1,10 @@
-package com.example.milu.intent2
+package com.example.milu.excon1
 
 import android.app.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.milu.intent2.R
 import com.example.milu.xml.MyXMLParse
 import kotlinx.android.synthetic.main.activity_xml.*
 import org.xmlpull.v1.XmlPullParser

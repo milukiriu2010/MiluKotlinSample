@@ -1,4 +1,4 @@
-package com.example.milu.intent2
+package com.example.milu.excon1
 
 import android.app.Activity
 import android.support.v7.app.AppCompatActivity
@@ -7,6 +7,7 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_team.*
 import com.example.milu.abc.Team
 import com.example.milu.abc.TeamSoccer
+import com.example.milu.intent2.R
 
 class TeamActivity : AppCompatActivity() {
 

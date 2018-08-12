@@ -3,6 +3,7 @@
     package="com.example.milu.intent2">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -13,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.milu.excon1.MainActivity">
 
             <!-- android:theme="@style/AppTheme.NoActionBar" -->
             <intent-filter>
@@ -22,23 +23,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UserAddActivity" />
-        <activity android:name=".TeamActivity" />
-        <activity android:name=".ImageActivity" />
-        <activity android:name=".TeamListActivity" />
-        <activity android:name=".XMLActivity" />
+        <activity android:name="com.example.milu.excon1.UserAddActivity" />
+        <activity android:name="com.example.milu.excon1.TeamActivity" />
+        <activity android:name="com.example.milu.excon1.ImageActivity" />
+        <activity android:name="com.example.milu.excon1.TeamListActivity" />
+        <activity android:name="com.example.milu.excon1.XMLActivity" />
         <activity
-            android:name=".HttpActivity"
+            android:name="com.example.milu.excon1.HttpActivity"
             android:label="@string/title_activity_http_get"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".JsonActivity"
+            android:name="com.example.milu.excon1.JsonActivity"
             android:label="@string/title_activity_json"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ListTimeZoneActivity" />
-        <activity android:name=".WorldClockActivity" />
-        <activity android:name=".TimeZoneSelectActivity" />
-        <activity android:name=".RecycleTimeZoneActivity"></activity>
+        <activity android:name="com.example.milu.excon1.ListTimeZoneActivity" />
+        <activity android:name="com.example.milu.excon1.WorldClockActivity" />
+        <activity android:name="com.example.milu.excon1.TimeZoneSelectActivity" />
+        <activity android:name="com.example.milu.excon1.RecycleTimeZoneActivity" />
+        <activity android:name="com.example.milu.excon1.FileRecycleActivity"></activity>
     </application>
 
 </manifest>

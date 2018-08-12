@@ -1,4 +1,4 @@
-package com.example.milu.intent2
+package com.example.milu.excon1
 
 import android.app.Activity
 import android.support.v7.app.AppCompatActivity
@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_user_add.*
 import com.example.milu.net.HttpGetTask
 import java.net.URL
 import android.os.StrictMode
+import com.example.milu.intent2.R
 import com.example.milu.xml.MyXMLParse
 import org.xmlpull.v1.XmlPullParser
 import java.io.BufferedReader

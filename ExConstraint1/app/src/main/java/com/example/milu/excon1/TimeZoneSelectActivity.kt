@@ -1,9 +1,10 @@
-package com.example.milu.intent2
+package com.example.milu.excon1
 
 import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.milu.intent2.R
 import kotlinx.android.synthetic.main.activity_time_zone_select.*
 import java.util.*
 
@@ -16,7 +17,7 @@ class TimeZoneSelectActivity : AppCompatActivity() {
         // tap "Cancel" button
         setResult(Activity.RESULT_CANCELED)
 
-        val adapter = TimeZoneAdapter(this )
+        val adapter = TimeZoneAdapter(this)
         lvClock.adapter = adapter
 
 

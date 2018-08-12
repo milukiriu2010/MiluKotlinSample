@@ -1,4 +1,4 @@
-package com.example.milu.intent2
+package com.example.milu.excon1
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

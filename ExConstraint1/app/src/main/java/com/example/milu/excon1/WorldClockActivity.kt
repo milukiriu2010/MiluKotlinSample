@@ -1,10 +1,11 @@
-package com.example.milu.intent2
+package com.example.milu.excon1
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.milu.intent2.R
 import kotlinx.android.synthetic.main.activity_world_clock.*
 import java.util.*
 
@@ -50,6 +51,6 @@ class WorldClockActivity : AppCompatActivity() {
         val pref = getSharedPreferences("prefs", Context.MODE_PRIVATE )
         val timeZones = pref.getStringSet( "time_zone", setOf() )
 
-        lvClock.adapter = TimeZoneAdapter( this, timeZones.toTypedArray() )
+        lvClock.adapter = TimeZoneAdapter(this, timeZones.toTypedArray())
     }
 }

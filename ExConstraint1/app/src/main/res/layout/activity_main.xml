@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@android:style/Theme.NoTitleBar"
-    tools:context=".MainActivity">
+    tools:context="com.example.milu.excon1.MainActivity">
 
     <TextView
         android:id="@+id/lblFirstName"
@@ -89,7 +89,8 @@
                 android:id="@+id/btnTimeZone"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/BTN_TIMEZONE" />
+                android:text="@string/BTN_TIMEZONE"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/btnTeamLst"
@@ -97,6 +98,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="16dp"
                 android:text="@string/BTN_TEAM_LIST"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:layout_editor_absoluteY="216dp" />
 
@@ -131,7 +133,15 @@
                 android:id="@+id/btnTimeZoneRV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/BTN_TIMEZONE_RV" />
+                android:text="@string/BTN_TIMEZONE_RV"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/btnFileRV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/BTN_FILE"
+                android:textSize="12sp" />
 
         </TableRow>
 

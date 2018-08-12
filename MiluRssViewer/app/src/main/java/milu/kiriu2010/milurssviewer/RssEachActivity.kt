@@ -1,5 +1,8 @@
 package milu.kiriu2010.milurssviewer
 
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
+import android.content.ComponentName
 import android.content.Context
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
@@ -18,6 +21,9 @@ import milu.kiriu2010.entity.URLData
 import milu.kiriu2010.entity.Article
 import milu.kiriu2010.entity.Rss
 import milu.kiriu2010.entity.RssLoader
+import milu.kiriu2010.job.PollingJob
+import milu.kiriu2010.job.createChannel
+import java.util.concurrent.TimeUnit
 
 class RssEachActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Rss> {
 
@@ -33,10 +39,23 @@ class RssEachActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Rss> 
         // ローダーを呼び出す
         // loaderManager.initLoader(1,null,this)
 
-
-        //loaderManager.initLoader(1,null,this)
         supportLoaderManager.initLoader(1,null, this )
 
+        // 通知チャネルを作成する
+        createChannel(this)
+
+        // 定期的に新しい記事がないかをチェックするジョブ
+        val fetchJob =
+                JobInfo.Builder(1, ComponentName(this, PollingJob::class.java ) )
+                        // 6時間ごとに実行
+                        .setPeriodic(TimeUnit.HOURS.toMillis(6))
+                        // 端末を再起動しても有効
+                        .setPersisted(true)
+                        // ネットワーク接続されていること
+                        .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                        .build()
+        // ジョブを登録する
+        getSystemService(JobScheduler::class.java).schedule(fetchJob)
     }
 
     // LoaderManager.LoaderCallbacks<Rss>

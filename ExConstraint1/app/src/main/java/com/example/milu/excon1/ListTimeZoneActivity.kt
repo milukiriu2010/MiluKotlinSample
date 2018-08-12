@@ -1,9 +1,10 @@
-package com.example.milu.intent2
+package com.example.milu.excon1
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.example.milu.intent2.R
 import kotlinx.android.synthetic.main.activity_list_time_zone.*
 import java.util.*
 
