@@ -1,4 +1,4 @@
-package com.example.milu.radiogroup1
+package com.example.milu.excon2
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

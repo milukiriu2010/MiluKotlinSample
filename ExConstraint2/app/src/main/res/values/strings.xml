@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ExConstraint2</string>
+    <string name="app_name">ExCon2</string>
     <string name="BTN_GET">Get</string>
     <string name="BTN_DOM">DOM</string>
     <string name="LABEL_FEMALE">female</string>
@@ -17,4 +17,12 @@
     <string name="BTN_STOP">Stop</string>
     <string name="BTN_RESET">Reset</string>
     <string name="BTN_STOP_WATCH">StopWatch</string>
+    <string name="MENU_ADD">add</string>
+    <string name="MENU_RESET">reset</string>
+    <string name="MENU_ABOUT">about</string>
+    <string name="MENU_EXIT">exit</string>
+    <string name="MENU_SETTINGS">Settings</string>
+    <string name="MENU_LOAD">Load</string>
+    <string name="BTN_CUSTOM_ACTION">CustomAct</string>
+    <string name="BTN_DICE">Dice</string>
 </resources>

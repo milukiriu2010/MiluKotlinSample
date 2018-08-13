@@ -1,18 +1,16 @@
-package com.example.milu.radiogroup1
+package com.example.milu.excon2
 
 import android.content.Intent
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.ContextMenu
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.RadioButton
 import android.widget.Toast
 import com.example.milu.net.HttpGet
-import com.example.milu.xml.MyXMLParse
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.BufferedReader
-import java.io.InputStreamReader
 import java.net.URL
 
 class MainActivity : AppCompatActivity() {
@@ -71,7 +69,57 @@ class MainActivity : AppCompatActivity() {
             this.startActivityForResult( intent, IntentID2.ID_STOP_WATCH.value )
         }
 
+        btnCustomAction.transformationMethod = null
+        btnCustomAction.setOnClickListener {
+            val intent = Intent(this,CustomActionBarActivity::class.java )
+            this.startActivityForResult( intent, IntentID2.ID_CUSTOM_ACTION.value )
+        }
+
+        btnDICE.transformationMethod = null
+        btnDICE.setOnClickListener {
+            val intent = Intent(this,DiceRollerActivity::class.java )
+            this.startActivityForResult( intent, IntentID2.ID_DICE.value )
+        }
+
     }
+
+    // -------------------------------------------------------------------
+    // Inflating the Menu Into the Android ActionBar
+    // -------------------------------------------------------------------
+    // https://www.journaldev.com/9357/android-actionbar-example-tutorial
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        //return super.onCreateOptionsMenu(menu)
+        menuInflater.inflate( R.menu.menu_journaldev, menu )
+        return true
+    }
+
+    // -------------------------------------------------------------------
+    // Responding to Android Action Bar Events
+    // -------------------------------------------------------------------
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when(item?.itemId) {
+            R.id.menuADD    -> {
+                Toast.makeText(this,"Add is clicked",Toast.LENGTH_LONG).show()
+                true
+            }
+            R.id.menuRESET  -> {
+                Toast.makeText(this,"Reset is clicked",Toast.LENGTH_SHORT).show()
+                true
+            }
+            R.id.menuABOUT  -> {
+                Toast.makeText(this,"About is clicked",Toast.LENGTH_LONG).show()
+                true
+            }
+            R.id.menuEXIT   -> {
+                finish()
+                true
+            }
+            else ->  super.onOptionsItemSelected(item)
+        }
+    }
+
+
+
 
     class HttpGetTask: AsyncTask<URL, Unit, String>() {
 

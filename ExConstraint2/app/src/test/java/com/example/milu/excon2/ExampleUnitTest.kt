@@ -1,4 +1,4 @@
-package com.example.milu.radiogroup1
+package com.example.milu.excon2
 
 import org.junit.Test
 
