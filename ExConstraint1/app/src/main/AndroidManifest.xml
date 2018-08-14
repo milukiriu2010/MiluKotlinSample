@@ -42,7 +42,8 @@
         <activity android:name="com.example.milu.excon1.TimeZoneSelectActivity" />
         <activity android:name="com.example.milu.excon1.RecycleTimeZoneActivity" />
         <activity android:name="com.example.milu.excon1.FileRecycleActivity" />
-        <activity android:name="com.example.milu.excon1.CounterActivity"></activity>
+        <activity android:name="com.example.milu.excon1.CounterActivity" />
+        <activity android:name="com.example.milu.excon1.MemoActivity"></activity>
     </application>
 
 </manifest>

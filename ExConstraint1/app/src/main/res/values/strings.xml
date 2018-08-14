@@ -25,4 +25,5 @@
     <string name="BTN_ADD">Add</string>
     <string name="BTN_TIMEZONE_RV">TimeZone(RV)</string>
     <string name="BTN_FILE">File</string>
+    <string name="last_modified">%1$tm月%1$td日 %1$tH時%1$tM分</string>
 </resources>
