@@ -14,14 +14,28 @@ class LabelFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        counter = arguments?.getInt("counter") ?: 0
+        //counter = arguments?.getInt("counter") ?: 0
+        counter = savedInstanceState?.getInt("counter")
+                ?: arguments?.getInt("counter")
+                ?: 0
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_label, container, false )
+        counterLabel = view.findViewById(R.id.counterLabel)
         counterLabel.setText(counter.toString())
         return view
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        //super.onSaveInstanceState(outState)
+        outState.putInt("counter", counter)
+    }
+
+    fun update() {
+        counter++
+        counterLabel.text = counter.toString()
     }
 }
 

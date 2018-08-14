@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.example.milu.intent2.R
 import kotlinx.android.synthetic.main.fragment_button.*
 import java.lang.RuntimeException
@@ -22,10 +23,18 @@ class ButtonFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_button, container,false )
+        /*
         button.setOnClickListener {
             val listener = context as? OnButtonClickListener
             listener?.onButtonClicked()
         }
+        */
+
+        view.findViewById<Button>(R.id.button)
+                .setOnClickListener {
+                    val listener = context as? OnButtonClickListener
+                    listener?.onButtonClicked()
+                }
         return view
     }
 

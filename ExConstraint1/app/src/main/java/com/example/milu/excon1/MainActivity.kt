@@ -98,6 +98,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent( this, FileRecycleActivity::class.java )
             startActivityForResult( intent, IntentID.ID_FILE_RV.value )
         }
+
+        btnCounter.transformationMethod = null
+        btnCounter.setOnClickListener {
+            val intent = Intent( this, CounterActivity::class.java )
+            startActivityForResult( intent, IntentID.ID_COUNTER.value )
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

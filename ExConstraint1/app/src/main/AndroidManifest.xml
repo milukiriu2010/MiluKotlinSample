@@ -3,7 +3,8 @@
     package="com.example.milu.intent2">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -40,7 +41,8 @@
         <activity android:name="com.example.milu.excon1.WorldClockActivity" />
         <activity android:name="com.example.milu.excon1.TimeZoneSelectActivity" />
         <activity android:name="com.example.milu.excon1.RecycleTimeZoneActivity" />
-        <activity android:name="com.example.milu.excon1.FileRecycleActivity"></activity>
+        <activity android:name="com.example.milu.excon1.FileRecycleActivity" />
+        <activity android:name="com.example.milu.excon1.CounterActivity"></activity>
     </application>
 
 </manifest>
