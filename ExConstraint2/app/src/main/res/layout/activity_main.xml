@@ -35,28 +35,13 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/btnGet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/gender"
-        android:layout_margin="16dp"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="48dp"
-        android:onClick="onClick"
-        android:text="@string/BTN_GET"
-        app:layout_constraintStart_toStartOf="@+id/gender"
-        app:layout_constraintTop_toBottomOf="@+id/gender"
-        tools:textAllCaps="false" />
-
-    <Button
         android:id="@+id/btnRATE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:text="@string/BTN_RATE"
-        app:layout_constraintStart_toEndOf="@+id/btnGet"
-        app:layout_constraintTop_toTopOf="@+id/btnGet" />
+        app:layout_constraintStart_toEndOf="@+id/btnLargeBmp"
+        app:layout_constraintTop_toTopOf="@+id/btnLargeBmp" />
 
     <Button
         android:id="@+id/btnRecycle"
@@ -72,14 +57,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/BTN_ANIME"
-        app:layout_constraintStart_toStartOf="@+id/btnGet"
-        app:layout_constraintTop_toBottomOf="@+id/btnGet" />
+        app:layout_constraintStart_toStartOf="@+id/btnLargeBmp"
+        app:layout_constraintTop_toBottomOf="@+id/btnLargeBmp" />
 
     <Button
         android:id="@+id/btnSEEK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="28dp"
         android:text="@string/BTN_SEEK"
         app:layout_constraintStart_toEndOf="@+id/btnANIME"
         app:layout_constraintTop_toBottomOf="@+id/btnRATE" />
@@ -105,7 +90,7 @@
         android:id="@+id/btnSTOPWATCH"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="28dp"
         android:text="@string/BTN_STOP_WATCH"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintStart_toEndOf="@+id/btnTemperature"
@@ -124,9 +109,61 @@
         android:id="@+id/btnDICE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:text="@string/BTN_DICE"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/btnTemperature"
         app:layout_constraintTop_toBottomOf="@+id/btnTemperature" />
+
+    <Button
+        android:id="@+id/btnLargeBmp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/BTN_LARGE_BMP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gender" />
+
+    <TextView
+        android:id="@+id/tvAppInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@+id/gender"
+        app:layout_constraintTop_toTopOf="@+id/gender"
+        tools:text="TRUE" />
+
+    <TextView
+        android:id="@+id/tvBuildConf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/tvAppInfo"
+        app:layout_constraintTop_toBottomOf="@+id/tvAppInfo"
+        tools:text="TRUE" />
+
+    <Button
+        android:id="@+id/btnTrafficLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="@string/BTN_TRAFFIC_LIGHT"
+        app:layout_constraintStart_toEndOf="@+id/btnDICE"
+        app:layout_constraintTop_toBottomOf="@+id/btnSTOPWATCH" />
+
+    <Button
+        android:id="@+id/btnEMAIL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Email"
+        app:layout_constraintStart_toEndOf="@+id/btnTrafficLight"
+        app:layout_constraintTop_toTopOf="@+id/btnTrafficLight" />
+
+    <Button
+        android:id="@+id/btnFibonnaci"
+        android:layout_width="wrap_content"
+        android:layout_height="51dp"
+        android:text="Fibonnaci"
+        app:layout_constraintStart_toStartOf="@+id/btnDICE"
+        app:layout_constraintTop_toBottomOf="@+id/btnDICE" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.milu.excon2
 
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -18,15 +19,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // http://tekeye.uk/android/examples/android-debug-vs-release-build
+        // check debug/release mode
+        //   not 0 => debug
+        //   0     => release
+        Log.d( this.javaClass.toString(), "Application Debug/Release:" + ( applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE ) )
+        if ( ( applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE ) != 0 ) {
+            tvAppInfo.setText("DEBUG")
+        }
+        else {
+            tvAppInfo.setText("RELEASE")
+        }
+
+        if ( BuildConfig.DEBUG ) {
+            tvBuildConf.setText("DEBUG")
+        }
+        else {
+            tvBuildConf.setText("RELEASE")
+        }
+
         gender.setOnCheckedChangeListener { radioGroup, checkedId ->
                 val radio: RadioButton = findViewById<RadioButton>(checkedId)
                 Toast.makeText(applicationContext, "On checked change : ${radio.text}", Toast.LENGTH_LONG).show()
-        }
-
-        btnGet.setOnClickListener{
-            Log.d(this.javaClass.name,"XXXXXX")
-            val httpGetTask = HttpGetTask()
-            httpGetTask.execute(URL("https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123"))
         }
 
         btnRATE.setOnClickListener{
@@ -79,6 +93,38 @@ class MainActivity : AppCompatActivity() {
         btnDICE.setOnClickListener {
             val intent = Intent(this,DiceRollerActivity::class.java )
             this.startActivityForResult( intent, IntentID2.ID_DICE.value )
+        }
+
+        btnLargeBmp.transformationMethod = null
+        btnLargeBmp.setOnClickListener {
+            val intent = Intent(this,LargeBmpActivity::class.java )
+            this.startActivityForResult( intent, IntentID2.ID_LARGE_BMP.value )
+        }
+
+        btnTrafficLight.transformationMethod = null
+        btnTrafficLight.setOnClickListener {
+            val intent = Intent(this,TrafficLightActivity::class.java )
+            this.startActivityForResult( intent, IntentID2.ID_TRAFFIC_LIGHT.value )
+        }
+
+        // http://tekeye.uk/android/examples/email-contact-form-in-app
+        btnEMAIL.transformationMethod = null
+        btnEMAIL.setOnClickListener {
+            val strTo = "milu.kiriu2010@gmail.com"
+            val strSub = "test"
+            val strMsg = "ExConstraint2"
+            val mail = Intent(Intent.ACTION_SEND)
+            mail.putExtra(Intent.EXTRA_EMAIL,arrayOf<String>(strTo))
+            mail.putExtra(Intent.EXTRA_SUBJECT,strSub)
+            mail.putExtra(Intent.EXTRA_TEXT,strMsg)
+            mail.setType("message/rfc822")
+            startActivity(Intent.createChooser(mail,"Send email via:"))
+        }
+
+        btnFibonnaci.transformationMethod = null
+        btnFibonnaci.setOnClickListener {
+            val intent = Intent(this,FibonnaciActivity::class.java )
+            this.startActivityForResult( intent, IntentID2.ID_FIBONNACI.value )
         }
 
     }

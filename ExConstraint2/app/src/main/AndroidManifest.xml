@@ -32,7 +32,10 @@
         <activity
             android:name=".CustomActionBarActivity"
             android:theme="@style/CustomTheme" />
-        <activity android:name=".DiceRollerActivity"></activity>
+        <activity android:name=".DiceRollerActivity" />
+        <activity android:name=".LargeBmpActivity" />
+        <activity android:name=".TrafficLightActivity" />
+        <activity android:name=".FibonnaciActivity"></activity>
     </application>
 
 </manifest>

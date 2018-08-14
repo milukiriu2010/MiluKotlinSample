@@ -25,4 +25,6 @@
     <string name="MENU_LOAD">Load</string>
     <string name="BTN_CUSTOM_ACTION">CustomAct</string>
     <string name="BTN_DICE">Dice</string>
+    <string name="BTN_LARGE_BMP">LargeBmp</string>
+    <string name="BTN_TRAFFIC_LIGHT">Traffic</string>
 </resources>

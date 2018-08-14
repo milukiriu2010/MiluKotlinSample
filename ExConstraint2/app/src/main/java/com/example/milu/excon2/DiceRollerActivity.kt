@@ -21,9 +21,11 @@ class DiceRollerActivity : AppCompatActivity() {
     //Post message to start roll
     lateinit var handler: Handler
     //Used to implement feedback to user
-    val timer = Timer()
+    var timer = Timer()
     //Is die rolling?
     private var rolling = false
+    private var repeatCnt = 0
+    private val repeatCntMax = 5
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +43,9 @@ class DiceRollerActivity : AppCompatActivity() {
                 //Start rolling sound
                 diceSound.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f )
                 //Pause to allow image to update
-                timer.schedule(Roll(), 400)
+                //timer.schedule(Roll(), 400)
+                timer = Timer()
+                timer.scheduleAtFixedRate(Roll(), 600, 200)
             }
         }
 
@@ -58,8 +62,13 @@ class DiceRollerActivity : AppCompatActivity() {
                 5 -> ivDICE.setImageResource(R.drawable.dado5)
                 6 -> ivDICE.setImageResource(R.drawable.dado6)
             }
-            // user can press again
-            rolling = false
+
+            if ( it.what >= repeatCntMax ) {
+                timer.cancel()
+                // user can press again
+                rolling = false
+                repeatCnt= 0
+            }
             true
         }
     }
@@ -93,7 +102,7 @@ class DiceRollerActivity : AppCompatActivity() {
     //When pause completed message sent to callback
     inner class Roll: TimerTask() {
         override fun run() {
-            handler.sendEmptyMessage(0)
+            handler.sendEmptyMessage(repeatCnt++)
         }
     }
 
