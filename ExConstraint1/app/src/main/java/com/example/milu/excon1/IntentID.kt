@@ -13,5 +13,6 @@ enum class IntentID( val value: Int ) {
     ID_TIMEZONE_SELECT(10),
     ID_TIMEZONE_RV(11),
     ID_FILE_RV(12),
-    ID_COUNTER(13)
+    ID_COUNTER(13),
+    ID_MEMO(14)
 }

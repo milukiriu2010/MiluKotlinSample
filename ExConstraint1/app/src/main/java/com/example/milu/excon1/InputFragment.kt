@@ -2,6 +2,7 @@ package com.example.milu.excon1
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,8 +58,11 @@ class InputFragment: Fragment() {
         // ファイルを読み込む
         val memo = inputFile(file)
 
+        Log.d(javaClass.toString(), "=== InputFragment show ===")
+
         // 表示を更新する
         val content = view?.findViewById<EditText>(R.id.content) ?: return
+        Log.d(javaClass.toString(), "=== InputFragment setMemo($memo) ===")
         content.setText(memo)
 
         currentFile = file

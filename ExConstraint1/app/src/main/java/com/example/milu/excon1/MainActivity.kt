@@ -104,6 +104,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent( this, CounterActivity::class.java )
             startActivityForResult( intent, IntentID.ID_COUNTER.value )
         }
+
+        btnMemo.transformationMethod = null
+        btnMemo.setOnClickListener {
+            val intent = Intent( this, MemoActivity::class.java )
+            startActivityForResult( intent, IntentID.ID_MEMO.value )
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

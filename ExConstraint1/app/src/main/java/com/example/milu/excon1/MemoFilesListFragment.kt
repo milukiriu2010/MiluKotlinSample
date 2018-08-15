@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,6 +47,8 @@ class MemoFilesListFragment: Fragment() {
         val ctx = context ?: return
         // ファイルの一覧を表示するためのアダプター
         val adapter = MemoFilesAdapter(ctx, getFiles()) {file ->
+
+            Log.d(javaClass.toString(), "=== MemoFilesListFragment show ===")
             // タップされたら、コールバックを呼ぶ
             (context as OnFileSelectListener).onFileSelected(file)
         }
