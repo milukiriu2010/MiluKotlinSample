@@ -166,4 +166,22 @@
         app:layout_constraintStart_toStartOf="@+id/btnDICE"
         app:layout_constraintTop_toBottomOf="@+id/btnDICE" />
 
+    <Button
+        android:id="@+id/btnScanBarcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Scan"
+        app:layout_constraintStart_toEndOf="@+id/btnFibonnaci"
+        app:layout_constraintTop_toTopOf="@+id/btnFibonnaci" />
+
+    <Button
+        android:id="@+id/btnWebSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="WebSearch"
+        app:layout_constraintStart_toEndOf="@+id/btnScanBarcode"
+        app:layout_constraintTop_toTopOf="@+id/btnScanBarcode" />
+
 </android.support.constraint.ConstraintLayout>

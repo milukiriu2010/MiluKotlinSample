@@ -35,7 +35,9 @@
         <activity android:name=".DiceRollerActivity" />
         <activity android:name=".LargeBmpActivity" />
         <activity android:name=".TrafficLightActivity" />
-        <activity android:name=".FibonnaciActivity"></activity>
+        <activity android:name=".FibonnaciActivity" />
+        <activity android:name=".ScanBarcodeActivity" />
+        <activity android:name=".WebSearchActivity"></activity>
     </application>
 
 </manifest>

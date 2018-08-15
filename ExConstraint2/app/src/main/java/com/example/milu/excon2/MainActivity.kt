@@ -127,6 +127,17 @@ class MainActivity : AppCompatActivity() {
             this.startActivityForResult( intent, IntentID2.ID_FIBONNACI.value )
         }
 
+        btnScanBarcode.transformationMethod = null
+        btnScanBarcode.setOnClickListener {
+            val intent = Intent(this,ScanBarcodeActivity::class.java )
+            this.startActivityForResult( intent, IntentID2.ID_SCAN_BARCODE.value )
+        }
+
+        btnWebSearch.transformationMethod = null
+        btnWebSearch.setOnClickListener {
+            val intent = Intent(this,WebSearchActivity::class.java )
+            this.startActivityForResult( intent, IntentID2.ID_WEB_SEARCH.value )
+        }
     }
 
     // -------------------------------------------------------------------
