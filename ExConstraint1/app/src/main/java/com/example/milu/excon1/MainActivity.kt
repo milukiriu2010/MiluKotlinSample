@@ -110,6 +110,18 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent( this, MemoActivity::class.java )
             startActivityForResult( intent, IntentID.ID_MEMO.value )
         }
+
+        btnAccBall.transformationMethod = null
+        btnAccBall.setOnClickListener {
+            val intent = Intent( this, AccBallActivity::class.java )
+            startActivityForResult( intent, IntentID.ID_ACC_BALL.value )
+        }
+
+        btnSlide.transformationMethod = null
+        btnSlide.setOnClickListener {
+            val intent = Intent( this, SlideShowActivity::class.java )
+            startActivityForResult( intent, IntentID.ID_SLIDE.value )
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

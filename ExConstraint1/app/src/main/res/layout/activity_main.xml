@@ -160,6 +160,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Memo" />
+
+            <Button
+                android:id="@+id/btnAccBall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AccBall" />
+
+            <Button
+                android:id="@+id/btnSlide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Slide" />
         </TableRow>
 
         <TableRow
