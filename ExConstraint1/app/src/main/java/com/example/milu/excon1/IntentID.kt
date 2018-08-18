@@ -16,5 +16,8 @@ enum class IntentID( val value: Int ) {
     ID_COUNTER(13),
     ID_MEMO(14),
     ID_ACC_BALL(15),
-    ID_SLIDE(16)
+    ID_SLIDE(16),
+    ID_COUNT_DOWN(17),
+    ID_SAINT_TROPEZ(18),
+    ID_ALARM_CLOCK(19)
 }

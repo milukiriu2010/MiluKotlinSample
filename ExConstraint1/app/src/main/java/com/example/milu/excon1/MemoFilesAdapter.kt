@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.milu.intent2.R
+import com.example.milu.excon1.R
 import kotlinx.android.synthetic.main.list_memo_row.view.*
 import java.io.File
 

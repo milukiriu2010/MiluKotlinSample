@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.example.milu.intent2.R
+import com.example.milu.excon1.R
 import kotlinx.android.synthetic.main.activity_time_zone_select.*
 import java.util.*
 

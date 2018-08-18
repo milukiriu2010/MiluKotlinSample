@@ -10,7 +10,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.Toast
-import com.example.milu.intent2.R
+import com.example.milu.excon1.R
 import kotlinx.android.synthetic.main.activity_file_recycle.*
 import java.io.File
 

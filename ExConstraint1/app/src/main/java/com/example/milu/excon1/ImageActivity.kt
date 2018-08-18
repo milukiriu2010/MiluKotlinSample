@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.RadioButton
-import com.example.milu.intent2.R
+import com.example.milu.excon1.R
 import kotlinx.android.synthetic.main.activity_image.*
 
 class ImageActivity : AppCompatActivity() {

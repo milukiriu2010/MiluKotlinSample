@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.milu.file.getFiles
-import com.example.milu.intent2.R
+import com.example.milu.excon1.R
 import java.io.File
 
 class MemoFilesListFragment: Fragment() {

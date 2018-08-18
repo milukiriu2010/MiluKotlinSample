@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import com.example.milu.file.inputFile
 import com.example.milu.file.outputFile
-import com.example.milu.intent2.R
+import com.example.milu.excon1.R
 import java.io.File
 
 class InputFragment: Fragment() {

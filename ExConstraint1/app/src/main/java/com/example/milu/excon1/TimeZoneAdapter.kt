@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextClock
 import android.widget.TextView
-import com.example.milu.intent2.R
+import com.example.milu.excon1.R
 
 // TimeZone.getAvailableIDs() => 24
 class TimeZoneAdapter(private val context: Context,

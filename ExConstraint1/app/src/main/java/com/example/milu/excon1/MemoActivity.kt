@@ -11,7 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v4.widget.DrawerLayout
 import android.util.Log
 import android.view.MenuItem
-import com.example.milu.intent2.R
+import com.example.milu.excon1.R
 import java.io.File
 
 class MemoActivity : AppCompatActivity(),

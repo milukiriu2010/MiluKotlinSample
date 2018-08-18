@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_user_add.*
 import com.example.milu.net.HttpGetTask
 import java.net.URL
 import android.os.StrictMode
-import com.example.milu.intent2.R
+import com.example.milu.excon1.R
 import com.example.milu.xml.MyXMLParse
 import org.xmlpull.v1.XmlPullParser
 import java.io.BufferedReader

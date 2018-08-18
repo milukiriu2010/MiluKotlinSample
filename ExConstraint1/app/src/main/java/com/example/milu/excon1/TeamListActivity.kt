@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter
 import com.example.milu.abc.Team
 import com.example.milu.abc.TeamBaseBall
 import com.example.milu.abc.TeamSoccer
-import com.example.milu.intent2.R
+import com.example.milu.excon1.R
 import kotlinx.android.synthetic.main.activity_team_list.*
 
 class TeamListActivity : AppCompatActivity() {

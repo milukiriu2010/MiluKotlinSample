@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.animation.BounceInterpolator
 import android.widget.ImageView
-import com.example.milu.intent2.R
+import com.example.milu.excon1.R
 import kotlinx.android.synthetic.main.activity_slide_show.*
 import kotlin.concurrent.timer
 

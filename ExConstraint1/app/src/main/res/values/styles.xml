@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -16,5 +17,16 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppThemeOrange" parent="AppTheme" >
+        <item name="android:colorPrimary">@android:color/holo_orange_light</item>
+        <item name="android:colorPrimaryDark">@android:color/holo_orange_dark</item>
+        <item name="android:colorBackground">@color/background_material_light</item>
+    </style>
+
+    <style name="AppTheme.AppThemeSaintTropez" parent="AppTheme" >
+        <item name="android:colorPrimary">@android:color/holo_orange_light</item>
+        <item name="android:colorPrimaryDark">@android:color/black</item>
+    </style>
 
 </resources>

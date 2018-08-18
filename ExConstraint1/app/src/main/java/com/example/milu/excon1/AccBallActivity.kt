@@ -12,7 +12,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.SurfaceHolder
-import com.example.milu.intent2.R
+import com.example.milu.excon1.R
 import kotlinx.android.synthetic.main.activity_acc_ball.*
 
 class AccBallActivity : AppCompatActivity(), SensorEventListener, SurfaceHolder.Callback {

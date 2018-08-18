@@ -10,7 +10,6 @@ import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import kotlinx.android.synthetic.main.activity_main.*
 import com.example.milu.abc.AppConst
-import com.example.milu.intent2.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -121,6 +120,24 @@ class MainActivity : AppCompatActivity() {
         btnSlide.setOnClickListener {
             val intent = Intent( this, SlideShowActivity::class.java )
             startActivityForResult( intent, IntentID.ID_SLIDE.value )
+        }
+
+        btnCountDown.transformationMethod = null
+        btnCountDown.setOnClickListener {
+            val intent = Intent( this, CountDownActivity::class.java )
+            startActivityForResult( intent, IntentID.ID_COUNT_DOWN.value )
+        }
+
+        btnSaintTropez.transformationMethod = null
+        btnSaintTropez.setOnClickListener {
+            val intent = Intent( this, SaintTropezActivity::class.java )
+            startActivityForResult( intent, IntentID.ID_SAINT_TROPEZ.value )
+        }
+
+        btnAlarmClock.transformationMethod = null
+        btnAlarmClock.setOnClickListener {
+            val intent = Intent( this, AlarmClockActivity::class.java )
+            startActivityForResult( intent, IntentID.ID_ALARM_CLOCK.value )
         }
     }
 

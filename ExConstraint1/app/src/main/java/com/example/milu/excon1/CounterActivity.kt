@@ -3,7 +3,7 @@ package com.example.milu.excon1
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.example.milu.intent2.R
+import com.example.milu.excon1.R
 
 class CounterActivity : AppCompatActivity(), ButtonFragment.OnButtonClickListener {
 

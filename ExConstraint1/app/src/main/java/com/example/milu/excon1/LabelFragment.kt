@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.milu.intent2.R
+import com.example.milu.excon1.R
 
 class LabelFragment: Fragment() {
     private var counter = 0

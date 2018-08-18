@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.milu.intent2">
+    package="com.example.milu.excon1">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.milu.excon1.MainActivity">
+        <activity android:name=".MainActivity">
 
             <!-- android:theme="@style/AppTheme.NoActionBar" -->
             <intent-filter>
@@ -24,28 +24,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.milu.excon1.UserAddActivity" />
-        <activity android:name="com.example.milu.excon1.TeamActivity" />
-        <activity android:name="com.example.milu.excon1.ImageActivity" />
-        <activity android:name="com.example.milu.excon1.TeamListActivity" />
-        <activity android:name="com.example.milu.excon1.XMLActivity" />
+        <activity android:name=".UserAddActivity" />
+        <activity android:name=".TeamActivity" />
+        <activity android:name=".ImageActivity" />
+        <activity android:name=".TeamListActivity" />
+        <activity android:name=".XMLActivity" />
         <activity
-            android:name="com.example.milu.excon1.HttpActivity"
+            android:name=".HttpActivity"
             android:label="@string/title_activity_http_get"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.example.milu.excon1.JsonActivity"
+            android:name=".JsonActivity"
             android:label="@string/title_activity_json"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.example.milu.excon1.ListTimeZoneActivity" />
-        <activity android:name="com.example.milu.excon1.WorldClockActivity" />
-        <activity android:name="com.example.milu.excon1.TimeZoneSelectActivity" />
-        <activity android:name="com.example.milu.excon1.RecycleTimeZoneActivity" />
-        <activity android:name="com.example.milu.excon1.FileRecycleActivity" />
-        <activity android:name="com.example.milu.excon1.CounterActivity" />
-        <activity android:name="com.example.milu.excon1.MemoActivity" />
-        <activity android:name="com.example.milu.excon1.AccBallActivity" />
-        <activity android:name="com.example.milu.excon1.SlideShowActivity"></activity>
+        <activity android:name=".ListTimeZoneActivity" />
+        <activity android:name=".WorldClockActivity" />
+        <activity android:name=".TimeZoneSelectActivity" />
+        <activity android:name=".RecycleTimeZoneActivity" />
+        <activity android:name=".FileRecycleActivity" />
+        <activity android:name=".CounterActivity" />
+        <activity android:name=".MemoActivity" />
+        <activity android:name=".AccBallActivity" />
+        <activity android:name=".SlideShowActivity" />
+        <activity
+            android:name=".CountDownActivity"
+            android:theme="@style/AppThemeOrange" />
+        <activity
+            android:name=".SaintTropezActivity"
+            android:theme="@style/AppTheme.AppThemeSaintTropez" />
+        <activity android:name=".AlarmClockActivity"></activity>
+        <receiver android:name=".AlarmBroadcastReceiver"/>
     </application>
 
 </manifest>
