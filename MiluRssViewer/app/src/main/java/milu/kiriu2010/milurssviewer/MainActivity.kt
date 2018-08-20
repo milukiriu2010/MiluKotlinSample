@@ -34,7 +34,9 @@ class MainActivity : AppCompatActivity() {
     private fun loadURLData(): MutableList<URLData> {
         val urlLst: MutableList<URLData> = mutableListOf<URLData>()
 
-        urlLst.add( URLData( "ビジネスIT+IT HotTopics", URL("https://www.sbbit.jp/rss/HotTopics.rss")) )
+        urlLst.add( URLData( "IT", "ビジネスIT+IT HotTopics", URL("https://www.sbbit.jp/rss/HotTopics.rss")) )
+        // RSS 2.0
+        urlLst.add( URLData( "IT", "＠IT Smart & Socialフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_smart.xml")) )
 
         return urlLst
     }

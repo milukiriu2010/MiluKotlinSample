@@ -11,8 +11,9 @@ http://www.parcelabler.com/
         url = (URL) in.readValue(URL.class.getClassLoader());
     }
  */
-data class URLData( val title: String, val url: URL ): Parcelable {
-    constructor( parcel: Parcel): this(
+data class URLData( val genre: String, val title: String, val url: URL ): Parcelable {
+    constructor( parcel: Parcel ): this(
+            parcel.readString(),
             parcel.readString(),
             parcel.readValue(URL::class.java.classLoader ) as URL
     )

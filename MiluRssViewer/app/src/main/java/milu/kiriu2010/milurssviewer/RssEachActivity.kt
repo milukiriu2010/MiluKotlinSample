@@ -27,19 +27,26 @@ import java.util.concurrent.TimeUnit
 
 class RssEachActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Rss> {
 
-    lateinit var urlData: URLData
+    //lateinit var urlData: URLData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rss_each)
 
-        this.urlData = intent.getParcelableExtra<URLData>(IntentKey.KEY_RSS_EACH.key)
+        val urlData = intent.getParcelableExtra<URLData>(IntentKey.KEY_RSS_EACH.key)
 
         // deprecated
         // ローダーを呼び出す
         // loaderManager.initLoader(1,null,this)
 
-        supportLoaderManager.initLoader(1,null, this )
+        val bundle = Bundle()
+        bundle.putParcelable(IntentKey.KEY_URL_DATA.key, urlData )
+
+        // 引数1:id:なんでもよい
+        // 引数2:args:Bundle => loaderのコンストラクタに渡される？
+        // 引数3:LoaderCallbaks
+        //supportLoaderManager.initLoader(1,null, this )
+        supportLoaderManager.initLoader(1,bundle, this )
 
         // 通知チャネルを作成する
         createChannel(this)
@@ -59,9 +66,15 @@ class RssEachActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Rss> 
     }
 
     // LoaderManager.LoaderCallbacks<Rss>
+    // ---------------------------------------
     // ローダが要求されたときによばれる
+    // 非同期処理を行うLoaderを生成する
+    // getLoaderManager().initLoaderで一回のみ呼び出される
+    // ---------------------------------------
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Rss> {
-        return RssLoader(this)
+        val urlData: URLData? = args?.getParcelable(IntentKey.KEY_URL_DATA.key)
+        return RssLoader(this, urlData )
+        //return RssLoader(this )
     }
 
     // LoaderManager.LoaderCallbacks<Rss>

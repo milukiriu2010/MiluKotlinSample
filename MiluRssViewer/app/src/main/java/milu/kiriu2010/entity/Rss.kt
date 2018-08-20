@@ -2,6 +2,7 @@ package milu.kiriu2010.entity
 
 import android.content.Context
 import android.support.v4.content.AsyncTaskLoader
+import android.util.Log
 import milu.kiriu2010.net.httpGet
 import org.w3c.dom.NodeList
 import java.io.InputStream
@@ -57,12 +58,17 @@ fun parseRss(stream: InputStream) : Rss {
 }
 
 // RSSフィードをダウンロードしてRssオブジェクトを返すローダー
-class RssLoader(context: Context) : AsyncTaskLoader<Rss>(context) {
+class RssLoader(context: Context,val urlData: URLData? ) : AsyncTaskLoader<Rss>(context) {
+//class RssLoader(context: Context) : AsyncTaskLoader<Rss>(context) {
 
     private var cache : Rss? = null
 
     // このローダーがバックグラウンドで行う処理
     override fun loadInBackground(): Rss? {
+        Log.d( javaClass.simpleName, "========================" )
+        //Log.d( javaClass.simpleName, urlData?.url?.path )
+        Log.d( javaClass.simpleName, "========================" )
+
         // HTTPでRSSのXMLを取得する
         val response = httpGet("https://www.sbbit.jp/rss/HotTopics.rss")
 
@@ -93,6 +99,7 @@ class RssLoader(context: Context) : AsyncTaskLoader<Rss>(context) {
 
         // コンテンツが変化している場合やキャッシュがない場合には、バックグラウンド処理を行う
         if (takeContentChanged() || cache == null) {
+            // 非同期処理を開始
             forceLoad()
         }
     }

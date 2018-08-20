@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "milu.jp.milurssviewer"
+        applicationId "milu.kiriu2010.milurssviewer"
         minSdkVersion 26
         targetSdkVersion 28
         versionCode 1
