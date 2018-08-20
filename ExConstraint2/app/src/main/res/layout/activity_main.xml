@@ -184,4 +184,12 @@
         app:layout_constraintStart_toEndOf="@+id/btnScanBarcode"
         app:layout_constraintTop_toTopOf="@+id/btnScanBarcode" />
 
+    <Button
+        android:id="@+id/btnHelloFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello"
+        app:layout_constraintStart_toStartOf="@+id/btnFibonnaci"
+        app:layout_constraintTop_toBottomOf="@+id/btnFibonnaci" />
+
 </android.support.constraint.ConstraintLayout>

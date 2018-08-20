@@ -138,6 +138,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this,WebSearchActivity::class.java )
             this.startActivityForResult( intent, IntentID2.ID_WEB_SEARCH.value )
         }
+
+        btnHelloFragment.transformationMethod = null
+        btnHelloFragment.setOnClickListener {
+            val intent = Intent(this,HelloActivity::class.java )
+            this.startActivityForResult( intent, IntentID2.ID_HELLO.value )
+        }
     }
 
     // -------------------------------------------------------------------

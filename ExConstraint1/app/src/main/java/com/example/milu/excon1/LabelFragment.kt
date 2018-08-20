@@ -24,6 +24,10 @@ class LabelFragment: Fragment() {
         //return super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_label, container, false )
         counterLabel = view.findViewById(R.id.counterLabel)
+        // ここをコメントアウトしないと、
+        // ボタンを押しても, 0がずっと残る
+        // しかし、コメントアウトすると、
+        // 初期表示のとき、何も表示されない
         counterLabel.setText(counter.toString())
         return view
     }
@@ -35,7 +39,7 @@ class LabelFragment: Fragment() {
 
     fun update() {
         counter++
-        counterLabel.text = counter.toString()
+        counterLabel.setText( counter.toString() )
     }
 }
 

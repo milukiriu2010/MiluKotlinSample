@@ -37,7 +37,8 @@
         <activity android:name=".TrafficLightActivity" />
         <activity android:name=".FibonnaciActivity" />
         <activity android:name=".ScanBarcodeActivity" />
-        <activity android:name=".WebSearchActivity"></activity>
+        <activity android:name=".WebSearchActivity" />
+        <activity android:name=".HelloActivity"></activity>
     </application>
 
 </manifest>

@@ -15,5 +15,6 @@ enum class IntentID2( val value: Int ) {
     ID_FIBONNACI(12),
     ID_SCAN_BARCODE(13),
     ID_SCAN_BARCODE_REQUEST(14),
-    ID_WEB_SEARCH(15)
+    ID_WEB_SEARCH(15),
+    ID_HELLO(16)
 }

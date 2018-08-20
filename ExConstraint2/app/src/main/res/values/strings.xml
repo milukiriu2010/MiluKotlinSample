@@ -27,4 +27,6 @@
     <string name="BTN_DICE">Dice</string>
     <string name="BTN_LARGE_BMP">LargeBmp</string>
     <string name="BTN_TRAFFIC_LIGHT">Traffic</string>
+
+    <string name="hello_world">Hello World</string>
 </resources>

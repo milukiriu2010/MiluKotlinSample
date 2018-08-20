@@ -11,11 +11,26 @@ class CounterActivity : AppCompatActivity(), ButtonFragment.OnButtonClickListene
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_counter)
 
-        // 動的にフラグメントを追加する
-        if ( supportFragmentManager.findFragmentByTag("labelFragment") == null ) {
+        if ( savedInstanceState == null ) {
+
+            // 動的にフラグメントを追加する
+            if (supportFragmentManager.findFragmentByTag("labelFragment") == null) {
+                // FragmentTransactionのインスタンスを取得
+                supportFragmentManager.beginTransaction()
+                        // Counter用のフラグメントを生成&追加し、counterに"0"を設定する
+                        //.add(R.id.containerFragment, newLabelFragment(0), "labelFragment")
+                        .replace(R.id.containerFragment, newLabelFragment(0), "labelFragment")
+                        // 貼り付けを実行
+                        .commit()
+            }
+            /*
+            // FragmentTransactionのインスタンスを取得
             supportFragmentManager.beginTransaction()
-                    .add(R.id.containerFragment, newLabelFragment(0), "labelFragment")
+                    // Counter用のフラグメントを生成&追加し、counterに"0"を設定する
+                    .replace(R.id.containerFragment, newLabelFragment(0), "labelFragment")
+                    // 貼り付けを実行
                     .commit()
+                    */
         }
     }
 
