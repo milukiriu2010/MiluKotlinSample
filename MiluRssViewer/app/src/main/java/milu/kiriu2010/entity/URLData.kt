@@ -13,13 +13,17 @@ http://www.parcelabler.com/
  */
 data class URLData( val genre: String, val title: String, val url: URL ): Parcelable {
     constructor( parcel: Parcel ): this(
+            // genre
             parcel.readString(),
+            // title
             parcel.readString(),
+            // URL
             parcel.readValue(URL::class.java.classLoader ) as URL
     )
 
     override fun writeToParcel( dest: Parcel?, flag: Int) {
         dest?.let {
+            it.writeString( genre )
             it.writeString( title )
             it.writeValue( url )
         }

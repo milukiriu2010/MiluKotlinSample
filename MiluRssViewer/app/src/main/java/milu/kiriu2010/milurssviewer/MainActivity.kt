@@ -12,6 +12,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import milu.kiriu2010.entity.URLData
+import milu.kiriu2010.id.IntentID
+import milu.kiriu2010.gui.each.RssEachActivity
 import java.net.URL
 
 class MainActivity : AppCompatActivity() {
@@ -22,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = URLAdapter(this, loadURLData() ) { urlData ->
             val intent = Intent( this, RssEachActivity::class.java )
-            intent.putExtra( IntentKey.KEY_RSS_EACH.key, urlData )
+            intent.putExtra( IntentID.KEY_RSS_EACH.id, urlData )
             startActivity(intent)
         }
 
@@ -66,7 +68,6 @@ class MainActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: URLViewHolder, position: Int) {
             val urlData = urlLst[position]
             holder.labelTitle.text = urlData.title
-            //holder.labelURL.text   = urlData.url.path
             holder.labelURL.text   = urlData.url.toString()
         }
 
