@@ -1,6 +1,7 @@
 package milu.kiriu2010.gui.main
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -21,7 +22,7 @@ class URLLstFragment: Fragment() {
 
     // URLをタップしたときのコールバックインターフェース
     interface OnURLSelectListener {
-        fun onSelectedURL( urlData: URLData)
+        fun onSelectedURL( urlData: URLData )
     }
 
     // ---------------------------------------------------------
@@ -53,9 +54,29 @@ class URLLstFragment: Fragment() {
         val layoutManager = LinearLayoutManager( context, LinearLayoutManager.VERTICAL, false )
         recyclerView.layoutManager = layoutManager
 
+        // コンテキストのnullチェック
+        val ctx = context ?: return view
+
+        // URL一覧を表示するためのアダプター
+        val adapter = URLLstAdapter( ctx, loadURLData() ) { urlData ->
+            // タップされたらコールバックを呼ぶ
+            // コールバックにタップされたURLDataオブジェクトを渡す
+            ( ctx as OnURLSelectListener).onSelectedURL(urlData)
+        }
+        recyclerView.adapter = adapter
+
         return view
     }
 
+    private fun loadURLData(): MutableList<URLData> {
+        val urlLst: MutableList<URLData> = mutableListOf<URLData>()
+
+        urlLst.add( URLData( "IT", "ビジネスIT+IT HotTopics", URL("https://www.sbbit.jp/rss/HotTopics.rss")) )
+        // RSS 2.0
+        urlLst.add( URLData( "IT", "＠IT Smart & Socialフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_smart.xml")) )
+
+        return urlLst
+    }
 
     class URLLstAdapter(context: Context,
                         // URL一覧

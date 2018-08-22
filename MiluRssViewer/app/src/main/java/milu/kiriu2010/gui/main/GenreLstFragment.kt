@@ -33,7 +33,7 @@ class GenreLstFragment: Fragment() {
 
         // アクティビティがコールバックを実装していなかったら例外を投げる
         if ( context !is OnGenreSelectListener ) {
-            throw RuntimeException("$context must implement OnGenreSelectListener")
+            //throw RuntimeException("$context must implement OnGenreSelectListener")
         }
     }
 
