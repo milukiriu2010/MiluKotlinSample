@@ -39,11 +39,13 @@ class URLLstActivity : AppCompatActivity(),
 
         if ( savedInstanceState == null ) {
             // URL一覧を表示するフラグメントを追加
-            val fragmentURLLst = supportFragmentManager.findFragmentById(R.id.fragmentURLLst) as URLLstFragment
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentURLLst, URLLstFragment(), "fragmentURLLst")
-                    .addToBackStack(null)
-                    .commit()
+            if ( supportFragmentManager.findFragmentByTag("fragmentURLLst") == null ) {
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.frameURLLst, URLLstFragment(), "fragmentURLLst")
+                        //.add(R.id.fragmentURLLst, URLLstFragment(), "fragmentURLLst")
+                        //.addToBackStack(null)
+                        .commit()
+            }
         }
     }
 

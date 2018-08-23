@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -65,15 +66,33 @@ class URLLstFragment: Fragment() {
         }
         recyclerView.adapter = adapter
 
+        // 区切り線を入れる
+        // https://qiita.com/morimonn/items/035b1d85fec56e64f3e1
+        val itemDecoration = DividerItemDecoration(ctx, DividerItemDecoration.VERTICAL )
+        recyclerView.addItemDecoration(itemDecoration)
+
         return view
     }
 
     private fun loadURLData(): MutableList<URLData> {
         val urlLst: MutableList<URLData> = mutableListOf<URLData>()
 
+        // RSS 2.0
         urlLst.add( URLData( "IT", "ビジネスIT+IT HotTopics", URL("https://www.sbbit.jp/rss/HotTopics.rss")) )
         // RSS 2.0
         urlLst.add( URLData( "IT", "＠IT Smart & Socialフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_smart.xml")) )
+        // RSS 2.0
+        urlLst.add( URLData( "IT", "＠IT HTML5 + UXフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_ux.xml")) )
+        // RSS 2.0
+        urlLst.add( URLData( "IT", "＠IT Coding Edgeフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_coding.xml")) )
+        // RSS 2.0
+        urlLst.add( URLData( "IT", "＠IT Java Agileフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_java.xml")) )
+        // RSS 2.0
+        urlLst.add( URLData( "IT", "＠IT Database Expertフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_db.xml")) )
+        // RSS 2.0
+        urlLst.add( URLData( "IT", "＠IT Linux＆OSSフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_linux.xml")) )
+        // RSS 2.0
+        urlLst.add( URLData( "IT", "GIGAZINE", URL("https://gigazine.net/news/rss_2.0/")) )
 
         return urlLst
     }
@@ -101,16 +120,15 @@ class URLLstFragment: Fragment() {
 
         override fun onBindViewHolder(holder: URLViewHolder, position: Int) {
             val urlData = urlDataLst[position]
-            holder.labelGenre.text = urlData.genre
             holder.labelTitle.text = urlData.title
+            holder.labelURL.text = urlData.url.toString()
         }
 
         private val inflater = LayoutInflater.from(context)
 
-
         class URLViewHolder(view: View): RecyclerView.ViewHolder(view) {
-            val labelGenre  = view.findViewById<TextView>(R.id.labelGenre)
             val labelTitle = view.findViewById<TextView>(R.id.labelTitle)
+            val labelURL  = view.findViewById<TextView>(R.id.labelURL)
         }
     }
 }

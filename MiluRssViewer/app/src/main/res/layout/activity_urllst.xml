@@ -9,15 +9,17 @@
 
     <!-- メインコンテンツ -->
     <FrameLayout
+        android:id="@+id/frameURLLst"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+<!--
         <fragment
             android:id="@+id/fragmentURLLst"
             android:name="milu.kiriu2010.gui.main.URLLstFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout="@layout/fragment_rss_urllst" />
+            -->
     </FrameLayout>
 
     <!-- ドロワーコンテンツ -->
