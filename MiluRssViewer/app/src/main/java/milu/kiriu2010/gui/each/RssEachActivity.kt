@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.support.customtabs.CustomTabsIntent
 import android.support.v4.app.LoaderManager
 import android.support.v4.content.Loader
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -30,20 +31,17 @@ import milu.kiriu2010.milurssviewer.R
 import java.util.concurrent.TimeUnit
 
 class RssEachActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Rss> {
-
-    //lateinit var urlData: URLData
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rss_each)
 
-        Log.d( javaClass.simpleName, "====================================" )
+        Log.d( javaClass.simpleName, "" )
         Log.d( javaClass.simpleName, "orCreate" )
         Log.d( javaClass.simpleName, "====================================" )
 
         val urlData = intent.getParcelableExtra<URLData>(IntentID.KEY_RSS_EACH.id)
 
-        Log.d( javaClass.simpleName, "====================================" )
+        Log.d( javaClass.simpleName, "" )
         Log.d( javaClass.simpleName, "urlData[" + urlData.url.toString() + "]" )
         Log.d( javaClass.simpleName, "====================================" )
 
@@ -57,7 +55,6 @@ class RssEachActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Rss> 
         // 引数1:id:なんでもよい
         // 引数2:args:Bundle => loaderのコンストラクタに渡される？
         // 引数3:LoaderCallbaks
-        //supportLoaderManager.initLoader(1,null, this )
         supportLoaderManager.initLoader(LoaderID.ID_RSS_GET.id, bundle, this )
 
         // 通知チャネルを作成する
@@ -84,7 +81,7 @@ class RssEachActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Rss> 
     // getLoaderManager().initLoaderで一回のみ呼び出される
     // ---------------------------------------
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Rss> {
-        Log.d( javaClass.simpleName, "====================================" )
+        Log.d( javaClass.simpleName, "" )
         Log.d( javaClass.simpleName, "orCreateLoader" )
         Log.d( javaClass.simpleName, "====================================" )
 
@@ -100,7 +97,7 @@ class RssEachActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Rss> 
 
     // LoaderManager.LoaderCallbacks<Rss>
     override fun onLoadFinished(loader: Loader<Rss>, data: Rss?) {
-        Log.d( javaClass.simpleName, "====================================" )
+        Log.d( javaClass.simpleName, "" )
         Log.d( javaClass.simpleName, "orLoadFInished" )
         Log.d( javaClass.simpleName, "====================================" )
         if ( data == null ) return;
@@ -118,6 +115,11 @@ class RssEachActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Rss> 
         // グリッドを表示するレイアウトマネージャ
         val layoutManager = GridLayoutManager(this, 2)
         recyclerView.layoutManager = layoutManager
+
+        // 区切り線を入れる
+        // https://qiita.com/morimonn/items/035b1d85fec56e64f3e1
+        val itemDecoration = DividerItemDecoration( this, DividerItemDecoration.VERTICAL  or DividerItemDecoration.HORIZONTAL )
+        recyclerView.addItemDecoration(itemDecoration)
     }
 
     // LoaderManager.LoaderCallbacks<Rss>

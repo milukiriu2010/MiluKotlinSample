@@ -14,16 +14,36 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.list_row_url.view.*
+import milu.kiriu2010.entity.GenreData
 import milu.kiriu2010.entity.URLData
+import milu.kiriu2010.id.BundleID
 import milu.kiriu2010.milurssviewer.R
 import java.net.URL
 
 class URLLstFragment: Fragment() {
     private lateinit var recyclerView: RecyclerView
 
+    private lateinit var genreData: GenreData
+
     // URLをタップしたときのコールバックインターフェース
     interface OnURLSelectListener {
         fun onSelectedURL( urlData: URLData )
+    }
+
+    // ---------------------------------------------------------
+    // URL一覧フラグメントを生成
+    // ---------------------------------------------------------
+    companion object {
+        fun newInstance( genreData: GenreData = GenreData( "IT" ) ): Fragment {
+            val fragmentURLLst = URLLstFragment()
+
+            // URL一覧フラグメントに渡すデータをセット
+            val args = Bundle()
+            args.putParcelable( BundleID.ID_GENRE.id, genreData )
+            fragmentURLLst.arguments = args
+
+            return fragmentURLLst
+        }
     }
 
     // ---------------------------------------------------------
@@ -42,23 +62,34 @@ class URLLstFragment: Fragment() {
         }
     }
 
+    // ---------------------------------------------------------
+    // 呼び出し時に渡される引数から指定されたジャンルを取り出す
+    // ---------------------------------------------------------
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val args = this.arguments ?: return
+        this.genreData = args.getParcelable(BundleID.ID_GENRE.id)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
         Log.d( javaClass.simpleName, "" )
         Log.d( javaClass.simpleName, "onCreateView" )
         Log.d( javaClass.simpleName, "============" )
 
+        // XMLからURL一覧を表示するビューを生成
         val view = inflater.inflate( R.layout.fragment_rss_urllst, container, false )
         recyclerView = view.findViewById(R.id.rvURL)
 
-        // ジャンルリストを縦方向に並べて表示
+        // URL一覧を縦方向に並べて表示
         val layoutManager = LinearLayoutManager( context, LinearLayoutManager.VERTICAL, false )
         recyclerView.layoutManager = layoutManager
 
         // コンテキストのnullチェック
         val ctx = context ?: return view
 
-        // URL一覧を表示するためのアダプター
+        // URL一覧を表示するためのアダプタ
         val adapter = URLLstAdapter( ctx, loadURLData() ) { urlData ->
             // タップされたらコールバックを呼ぶ
             // コールバックにタップされたURLDataオブジェクトを渡す
@@ -77,6 +108,18 @@ class URLLstFragment: Fragment() {
     private fun loadURLData(): MutableList<URLData> {
         val urlLst: MutableList<URLData> = mutableListOf<URLData>()
 
+        // RSS 1.0
+        urlLst.add( URLData( "2ch", "痛いニュース(ﾉ∀`)", URL("http://blog.livedoor.jp/dqnplus/index.rdf")) )
+        // RSS 1.0
+        urlLst.add( URLData( "2ch", "【2ch】ニュー速クオリティ", URL("http://news4vip.livedoor.biz/index.rdf")) )
+        // RSS 1.0
+        urlLst.add( URLData( "2ch", "ハムスター速報", URL("http://hamusoku.com/index.rdf")) )
+        // RSS 1.0
+        urlLst.add( URLData( "2ch", "ニュー速VIPブログ(`･ω･´)", URL("http://blog.livedoor.jp/insidears/index.rdf")) )
+        // RSS 2.0
+        urlLst.add( URLData("豆知識", "ライフハッカー", URL("http://feeds.lifehacker.jp/rss/lifehacker/index.xml")) )
+        // RSS 2.0
+        urlLst.add( URLData("豆知識", "ロケットニュース", URL("http://feeds.rocketnews24.com/rocketnews24")) )
         // RSS 2.0
         urlLst.add( URLData( "IT", "ビジネスIT+IT HotTopics", URL("https://www.sbbit.jp/rss/HotTopics.rss")) )
         // RSS 2.0
@@ -94,7 +137,10 @@ class URLLstFragment: Fragment() {
         // RSS 2.0
         urlLst.add( URLData( "IT", "GIGAZINE", URL("https://gigazine.net/news/rss_2.0/")) )
 
-        return urlLst
+
+        return urlLst.filter { urlData -> urlData.genre.equals(genreData.genre) }.toMutableList()
+
+        //return urlLst
     }
 
     class URLLstAdapter(context: Context,

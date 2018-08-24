@@ -10,30 +10,38 @@ import milu.kiriu2010.net.httpGet
 
 
 // RSSフィードをダウンロードしてRssオブジェクトを返すローダー
-class RssLoader(context: Context, val urlData: URLData? ) : AsyncTaskLoader<Rss>(context) {
+class RssV2Loader(context: Context, val urlData: URLData? ) : AsyncTaskLoader<AsyncResult<Rss>>(context) {
 
-    private var cache : Rss? = null
+    private var cache : AsyncResult<Rss>? = null
 
     // このローダーがバックグラウンドで行う処理
-    override fun loadInBackground(): Rss? {
+    override fun loadInBackground(): AsyncResult<Rss>? {
         Log.d( javaClass.simpleName, "========================" )
         Log.d( javaClass.simpleName, urlData?.url?.toString() )
         Log.d( javaClass.simpleName, "========================" )
         val strURL = urlData?.url?.toString() ?: return null
 
-        // HTTPでRSSのXMLを取得する
-        val response = httpGet(strURL)
+        val asyncResult = AsyncResult<Rss>()
+        try {
+            // HTTPでRSSのXMLを取得する
+            val response = httpGet(strURL)
 
-        if (response != null) {
-            // 取得に成功したら、パースして返す
-            return parseRss(response)
+            if (response != null) {
+
+                // 取得に成功したら、パースして返す
+                val rss = parseRss(response)
+                asyncResult.data = rss
+            }
+        }
+        catch ( ex: Exception ) {
+            asyncResult.exception = ex
         }
 
-        return null
+        return asyncResult
     }
 
     // コールバッククラスに返す前に通る処理
-    override fun deliverResult(data: Rss?) {
+    override fun deliverResult(data: AsyncResult<Rss>?) {
         // 破棄されていたら結果を返さない
         if (isReset || data == null) return
 

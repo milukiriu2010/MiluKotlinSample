@@ -24,16 +24,11 @@
 
     <!-- ドロワーコンテンツ -->
     <FrameLayout
+        android:id="@+id/frameGenreLst"
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="?android:attr/colorBackground">
 
-        <fragment
-            android:id="@+id/fragmentGenreLst"
-            android:name="milu.kiriu2010.gui.main.GenreLstFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/fragment_rss_genrelst"/>
     </FrameLayout>
 </android.support.v4.widget.DrawerLayout>

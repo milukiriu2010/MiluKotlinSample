@@ -4,17 +4,22 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.util.Log
 import android.view.MenuItem
+import milu.kiriu2010.entity.GenreData
 import milu.kiriu2010.entity.URLData
 import milu.kiriu2010.gui.each.RssEachActivity
+import milu.kiriu2010.gui.each.RssEachV2Activity
+import milu.kiriu2010.id.BundleID
 import milu.kiriu2010.id.IntentID
 import milu.kiriu2010.milurssviewer.R
 
 class URLLstActivity : AppCompatActivity(),
-    URLLstFragment.OnURLSelectListener {
+    URLLstFragment.OnURLSelectListener,
+    GenreLstFragment.OnGenreSelectListener {
 
     // ナビゲーションドロワーの状態操作用オブジェクト
     private var drawerToggle: ActionBarDrawerToggle? = null
@@ -41,9 +46,15 @@ class URLLstActivity : AppCompatActivity(),
             // URL一覧を表示するフラグメントを追加
             if ( supportFragmentManager.findFragmentByTag("fragmentURLLst") == null ) {
                 supportFragmentManager.beginTransaction()
-                        .add(R.id.frameURLLst, URLLstFragment(), "fragmentURLLst")
-                        //.add(R.id.fragmentURLLst, URLLstFragment(), "fragmentURLLst")
-                        //.addToBackStack(null)
+                        .replace(R.id.frameURLLst, URLLstFragment.newInstance(), "fragmentURLLst")
+                        .addToBackStack(null)
+                        .commit()
+            }
+            // ジャンル一覧を表示するフラグメントを追加
+            if ( supportFragmentManager.findFragmentByTag("fragmentGenreLst") == null ) {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameGenreLst, GenreLstFragment(), "fragmentGenreLst")
+                        .addToBackStack(null)
                         .commit()
             }
         }
@@ -89,6 +100,7 @@ class URLLstActivity : AppCompatActivity(),
 
         drawerToggle = toggle
 
+
         // アクションバーの設定を行う
         supportActionBar?.apply {
             // ドロワー用のアイコンを表示
@@ -100,9 +112,28 @@ class URLLstActivity : AppCompatActivity(),
     // URLLstFragment.OnURLSelectListener
     //   URLをタップするとRSSのコンテンツ一覧を表示する画面に遷移
     override fun onSelectedURL(urlData: URLData) {
-        val intent = Intent( this, RssEachActivity::class.java )
+        val intent = Intent( this, RssEachV2Activity::class.java )
         intent.putExtra( IntentID.KEY_RSS_EACH.id, urlData )
         startActivity(intent)
     }
 
+    // GenreLstFragment.OnGenreSelectListener
+    //   ジャンルをタップすると対応するジャンルのRSSコンテンツ一覧を表示する
+    override fun onSelectedGenre(genreData: GenreData) {
+        // ジャンルに対応するRSSコンテンツ一覧を表示
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.frameURLLst, URLLstFragment.newInstance(genreData), "fragmentURLLst")
+                .addToBackStack(null)
+                .commit()
+
+        // レイアウトからドロワーを探す
+        //   Portrait  => ドロワーあり
+        //   Landscape => ドロワーなし
+        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+
+        // ジャンルタップ時にドロワーを閉じる
+        if ( drawerLayout != null ) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        }
+    }
 }

@@ -3,6 +3,7 @@ package milu.kiriu2010.gui.main
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -33,7 +34,7 @@ class GenreLstFragment: Fragment() {
 
         // アクティビティがコールバックを実装していなかったら例外を投げる
         if ( context !is OnGenreSelectListener ) {
-            //throw RuntimeException("$context must implement OnGenreSelectListener")
+            throw RuntimeException("$context must implement OnGenreSelectListener")
         }
     }
 
@@ -53,7 +54,33 @@ class GenreLstFragment: Fragment() {
         val layoutManager = LinearLayoutManager( context, LinearLayoutManager.VERTICAL, false )
         recyclerView.layoutManager = layoutManager
 
+        // コンテキストのnullチェック
+        val ctx = context ?: return view
+
+        // ジャンル一覧を表示するためのアダプタ
+        val adapter = GenreLstAdapter( ctx, loadGenreData() ) { genreData ->
+            // タップされたらコールバックを呼ぶ
+            // コールバックにタップされたGenreDataオブジェクトを渡す
+            ( ctx as OnGenreSelectListener).onSelectedGenre(genreData)
+        }
+        recyclerView.adapter = adapter
+
+        // 区切り線を入れる
+        // https://qiita.com/morimonn/items/035b1d85fec56e64f3e1
+        val itemDecoration = DividerItemDecoration(ctx, DividerItemDecoration.VERTICAL )
+        recyclerView.addItemDecoration(itemDecoration)
+
         return view
+    }
+
+    private fun loadGenreData(): MutableList<GenreData> {
+        val genreLst: MutableList<GenreData> = mutableListOf<GenreData>()
+
+        genreLst.add( GenreData( "2ch", 1 ))
+        genreLst.add( GenreData( "豆知識", 2 ))
+        genreLst.add( GenreData( "IT", 3 ) )
+
+        return genreLst
     }
 
     class GenreLstAdapter(context: Context,

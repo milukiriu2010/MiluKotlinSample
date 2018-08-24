@@ -2,11 +2,13 @@ package milu.kiriu2010.net
 
 import java.io.BufferedInputStream
 import java.io.InputStream
+import java.net.HttpURLConnection
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
 fun httpGet( url: String ): InputStream? {
-    val con = URL(url).openConnection() as HttpsURLConnection
+    //val con = URL(url).openConnection() as HttpsURLConnection
+    val con = URL(url).openConnection() as HttpURLConnection
 
     con.apply {
         requestMethod = "GET"

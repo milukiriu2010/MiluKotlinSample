@@ -3,7 +3,7 @@ package milu.kiriu2010.entity
 import android.os.Parcel
 import android.os.Parcelable
 
-data class GenreData(val genre: String, val pos: Int ): Parcelable {
+data class GenreData(val genre: String, val pos: Int = -1 ): Parcelable {
 
     constructor(parcel: Parcel) : this(
             // genre
