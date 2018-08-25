@@ -33,9 +33,7 @@ data class Article( val title: String, val link: String, val pubDate: Date ): Pa
         }
     }
 
-    override fun describeContents(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun describeContents(): Int = 0
 
     companion object CREATOR : Parcelable.Creator<Article> {
         override fun createFromParcel(parcel: Parcel): Article {

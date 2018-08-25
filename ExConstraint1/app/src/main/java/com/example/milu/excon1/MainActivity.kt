@@ -10,6 +10,13 @@ import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import kotlinx.android.synthetic.main.activity_main.*
 import com.example.milu.abc.AppConst
+import com.example.milu.excon1.alarm.AlarmClockActivity
+import com.example.milu.excon1.countdown.CountDownActivity
+import com.example.milu.excon1.counter.CounterActivity
+import com.example.milu.excon1.http.HttpActivity
+import com.example.milu.excon1.image.ImageActivity
+import com.example.milu.excon1.memo.MemoActivity
+import com.example.milu.excon1.saintropez.SaintTropezActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

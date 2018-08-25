@@ -18,7 +18,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity"></activity>
         <activity android:name="milu.kiriu2010.gui.each.RssEachActivity" />
 
         <service

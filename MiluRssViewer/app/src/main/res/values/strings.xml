@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">MiluRssViewer</string>
+    <string name="app_name">MiluRss</string>
     <string name="LABEL_PUB_DATE">%1$tm月%1$td日%1$tH時</string>
 </resources>

@@ -26,11 +26,11 @@
         </activity>
         <activity android:name=".UserAddActivity" />
         <activity android:name=".TeamActivity" />
-        <activity android:name=".ImageActivity" />
+        <activity android:name=".image.ImageActivity" />
         <activity android:name=".TeamListActivity" />
         <activity android:name=".XMLActivity" />
         <activity
-            android:name=".HttpActivity"
+            android:name=".http.HttpActivity"
             android:label="@string/title_activity_http_get"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -42,18 +42,18 @@
         <activity android:name=".TimeZoneSelectActivity" />
         <activity android:name=".RecycleTimeZoneActivity" />
         <activity android:name=".FileRecycleActivity" />
-        <activity android:name=".CounterActivity" />
-        <activity android:name=".MemoActivity" />
+        <activity android:name=".counter.CounterActivity" />
+        <activity android:name=".memo.MemoActivity" />
         <activity android:name=".AccBallActivity" />
         <activity android:name=".SlideShowActivity" />
         <activity
-            android:name=".CountDownActivity"
+            android:name=".countdown.CountDownActivity"
             android:theme="@style/AppThemeOrange" />
         <activity
-            android:name=".SaintTropezActivity"
+            android:name=".saintropez.SaintTropezActivity"
             android:theme="@style/AppTheme.AppThemeSaintTropez" />
-        <activity android:name=".AlarmClockActivity"></activity>
-        <receiver android:name=".AlarmBroadcastReceiver"/>
+        <activity android:name=".alarm.AlarmClockActivity"></activity>
+        <receiver android:name=".alarm.AlarmBroadcastReceiver"/>
     </application>
 
 </manifest>
