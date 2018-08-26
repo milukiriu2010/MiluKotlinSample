@@ -7,6 +7,10 @@ import milu.kiriu2010.entity.Rss
 import milu.kiriu2010.entity.URLData
 import milu.kiriu2010.entity.parseRss
 import milu.kiriu2010.net.httpGet
+import milu.kiriu2010.netv2.MyURLConFactory
+import milu.kiriu2010.rss.MyRssParse
+import java.io.IOException
+import java.net.ConnectException
 
 
 // RSSフィードをダウンロードしてRssオブジェクトを返すローダー
@@ -14,6 +18,7 @@ class RssV2Loader(context: Context, val urlData: URLData? ) : AsyncTaskLoader<As
 
     private var cache : AsyncResult<Rss>? = null
 
+    /*
     // このローダーがバックグラウンドで行う処理
     override fun loadInBackground(): AsyncResult<Rss>? {
         Log.d( javaClass.simpleName, "========================" )
@@ -35,6 +40,48 @@ class RssV2Loader(context: Context, val urlData: URLData? ) : AsyncTaskLoader<As
         }
         catch ( ex: Exception ) {
             asyncResult.exception = ex
+        }
+
+        return asyncResult
+    }
+    */
+
+    // このローダーがバックグラウンドで行う処理
+    override fun loadInBackground(): AsyncResult<Rss>? {
+        Log.d( javaClass.simpleName, "========================" )
+        Log.d( javaClass.simpleName, urlData?.url?.toString() )
+        Log.d( javaClass.simpleName, "========================" )
+
+        // URLがない場合、何も処理せず終了する
+        urlData?.url?.toString() ?: return null
+
+        // Loader呼び出し元が受け取るデータ
+        val asyncResult = AsyncResult<Rss>()
+
+        // 接続＆データをGETする
+        val urlConAbs = MyURLConFactory.createInstance(urlData.url,null)
+        try {
+            urlConAbs?.apply {
+                openConnection()
+
+                // ------------------------------------------
+                // 接続＆GETする
+                // ------------------------------------------
+                doGet()
+
+                // ----------------------------------------------
+                // 通信が成功してれば、取得した文字列をRSS解析する
+                // ----------------------------------------------
+                if ( responseOK ) {
+                    val myRssParse = MyRssParse()
+                    val rss = myRssParse.str2rss(this.responseBuffer.toString())
+                    asyncResult.data = rss
+                }
+            }
+        }
+        catch ( ex: Exception ) {
+            asyncResult.exception = ex
+            ex.printStackTrace()
         }
 
         return asyncResult
