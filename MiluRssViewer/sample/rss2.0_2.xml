@@ -1,0 +1,294 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+    xmlns:admin="http://webns.net/mvcb/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/">
+
+    <channel>
+    
+    <title>GIGAZINE</title>
+    <link>https://gigazine.net/</link>
+    <description>日々のあらゆる雑談に役立つネタを提供するIT系ニュースサイト。起きている限りほぼ毎日更新中。</description>
+    <dc:language>english</dc:language>
+    
+    <dc:rights>Copyright 2018</dc:rights>
+    <dc:date>2018-08-27T19:00:00+09:00</dc:date>
+    <admin:generatorAgent rdf:resource="http://www.pmachine.com/" />
+    
+
+    <item>
+      <title>「子どもをゲームからうまく脱却させる」方法とは？</title>
+      <link>https://gigazine.net/news/20180827&#45;kids&#45;video&#45;game&#45;obsession/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180827-kids-video-game-obsession/</guid>
+      <description><![CDATA[子どもがゲームに熱中していることについて、「ゲーム依存症の傾向があるのではないか？」と心配する親はたくさんいるはず。海外メディアのThe Next Web(TNW)は、さまざまな心理学者の研究結果などから「子どもをゲームからうまく脱却させる方法」を提案しています。<p><b><a href="https://gigazine.net/news/20180827&#45;kids&#45;video&#45;game&#45;obsession/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>ゲーム,</dc:subject>
+      <dc:date>2018-08-27T19:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>2018年8月27日のヘッドラインニュース</title>
+      <link>https://gigazine.net/news/20180827&#45;headline/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180827-headline/</guid>
+      <description><![CDATA[創刊50周年の週刊少年ジャンプとマクドナルドのコラボ企画として、8月28日(火)から9月9日(日)まで、マクドナルドFREE Wi-Fiに接続してマンガアプリ「少年ジャンプ＋」を使うと、期間限定で作品の無料試し読みができる「ハラいっぱいジャンプ」が実施されます。<p><b><a href="https://gigazine.net/news/20180827&#45;headline/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>ヘッドライン,</dc:subject>
+      <dc:date>2018-08-27T18:45:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>人気ゲーム「フォートナイト」のインストーラーの脆弱性対応を巡って開発会社がGoogleを強く批判</title>
+      <link>https://gigazine.net/news/20180827&#45;fortnite&#45;deny&#45;google&#45;play/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180827-fortnite-deny-google-play/</guid>
+      <description><![CDATA[世界的に人気のあるバトルロイヤルアクションゲーム「フォートナイト」のAndroid版が、2018年8月からリリースされています。Android版「フォートナイト」はGoogle Playを使用せず、公式サイトからダウンロードできるインストーラーで配信されています。Googleは2018年8月15日にこのインストーラーに脆弱性があると通知し、同月17日に修正パッチが配信されました。しかし、Googleのその後の対応に対してEpic Gamesは強く批判しています。<p><b><a href="https://gigazine.net/news/20180827&#45;fortnite&#45;deny&#45;google&#45;play/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>モバイル, ソフトウェア, ゲーム, セキュリティ,</dc:subject>
+      <dc:date>2018-08-27T17:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>「ビジネス旅行客向けの快適な睡眠に特化したホテルの部屋」が特許を取得</title>
+      <link>https://gigazine.net/news/20180827&#45;groundbreaking&#45;new&#45;hotel&#45;room/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180827-groundbreaking-new-hotel-room/</guid>
+      <description><![CDATA[ホテルの部屋に入ると非日常感を覚えてテンションが上がる人も少なくないはずですが、実際に眠ろうとしてみると「家のベッドのほうがよく眠れる」と感じることがあります。インターコンチネンタルホテルズグループ(IHG)は「ビジネス旅行客向けの快適な睡眠に特化したホテルの部屋」を新たに設計し、米国特許商標庁に特許を申請して承認されたと報じられています。<p><b><a href="https://gigazine.net/news/20180827&#45;groundbreaking&#45;new&#45;hotel&#45;room/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>デザイン,</dc:subject>
+      <dc:date>2018-08-27T16:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>生徒の自殺願望を察知して教師や親に知らせるAIシステム「GoGuardian Beacon」</title>
+      <link>https://gigazine.net/news/20180827&#45;goguardian&#45;beacon/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180827-goguardian-beacon/</guid>
+      <description><![CDATA[いろんなことに行き詰まって自殺を考えてしまう生徒を早期に発見し、対策を取れるようにするための通報システム「Beacon」がアメリカの学校で取り入れられています。<p><b><a href="https://gigazine.net/news/20180827&#45;goguardian&#45;beacon/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>ソフトウェア,</dc:subject>
+      <dc:date>2018-08-27T15:30:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>テスラの元エンジニアがテスラ車の製造工程における不都合な真実を暴露投稿</title>
+      <link>https://gigazine.net/news/20180827&#45;tesla&#45;fart&#45;powered&#45;cars&#45;ama/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180827-tesla-fart-powered-cars-ama/</guid>
+      <description><![CDATA[元テスラのソフトウェアエンジニアだったという人物が、かつての仕事について赤裸々な告白を、掲示板「The Something Awful Forums」のサブフォーラムの中のサブフォーラムで行っています。テスラ車のファームウェアのインストール方法など、エンジニア目線でうんざりするような内容だったという告白は、多くの閲覧者の関心を引いており、質問に答えるAMA(Ask Me Anything)が行われています。<p><b><a href="https://gigazine.net/news/20180827&#45;tesla&#45;fart&#45;powered&#45;cars&#45;ama/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>ソフトウェア, ハードウェア, 乗り物,</dc:subject>
+      <dc:date>2018-08-27T14:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>Android版Google Chromeで低速接続時にJavaScriptが自動的に無効になる</title>
+      <link>https://gigazine.net/news/20180827&#45;google&#45;chrome&#45;java&#45;script/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180827-google-chrome-java-script/</guid>
+      <description><![CDATA[Google Chromeには2017年10月からJavaScriptの読み込みを無効化してページ読み込み時間を短縮する「NoScript」のプレビュー版が搭載されています。このたび、モバイル環境での機能改善のために、Android版Google Chromeではこの「NoScript」がデフォルトで有効化されることになりました。<p><b><a href="https://gigazine.net/news/20180827&#45;google&#45;chrome&#45;java&#45;script/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>ソフトウェア,</dc:subject>
+      <dc:date>2018-08-27T13:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>株式非公開化を「撤回」したテスラのマスクCEOが従業員に宛てたメールの一部が明らかに</title>
+      <link>https://gigazine.net/news/20180827&#45;tesla&#45;remain&#45;public/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180827-tesla-remain-public/</guid>
+      <description><![CDATA[アメリカ時間の2018年8月24日、テスラのイーロン・マスクCEOは同社の株式を非公開化するとしていた計画を撤回し、公開企業として株式の上場を維持するという方針を発表しました。マスク氏はその方針をここのところ過熱気味だったTwitter上ではなくテスラのブログで明らかにしているのですが、それとは別にテスラの従業員に宛てて今回の判断に至った理由を説明しています。<p><b><a href="https://gigazine.net/news/20180827&#45;tesla&#45;remain&#45;public/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>ソフトウェア, 乗り物, 動画, メモ,</dc:subject>
+      <dc:date>2018-08-27T12:45:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>「3万年以上前に死亡した子馬」がシベリアの永久凍土から完全な状態で発見される</title>
+      <link>https://gigazine.net/news/20180827&#45;preserved&#45;ancient&#45;foal&#45;siberia/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180827-preserved-ancient-foal-siberia/</guid>
+      <description><![CDATA[シベリアの永久凍土から約3万年～4万年前に死亡した子馬が発見されました。この子馬に外傷などはなく、皮膚やひづめなどが完全な状態で残っていたことが報告されています。<p><b><a href="https://gigazine.net/news/20180827&#45;preserved&#45;ancient&#45;foal&#45;siberia/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>生き物,</dc:subject>
+      <dc:date>2018-08-27T12:30:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>イギリスが独自の衛星測位システムの開発をスタート、EUの「ガリレオ」から完全離脱か</title>
+      <link>https://gigazine.net/news/20180827&#45;uk&#45;break&#45;away&#45;galileo/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180827-uk-break-away-galileo/</guid>
+      <description><![CDATA[イギリスが、独自の衛星測位システムの開発をスタートするために1億ポンド(約140億円)の予算を承認したと報じられています。この背景には2016年の国民投票によってEUからの離脱が決まったことから、EUが運用する衛星測位システム「ガリレオ」へのアクセス規制の懸念があるとみられています。<p><b><a href="https://gigazine.net/news/20180827&#45;uk&#45;break&#45;away&#45;galileo/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>メモ,</dc:subject>
+      <dc:date>2018-08-27T12:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>スパイシーで濃厚な味がクセになるエースコック「スーパーカップ1.5倍」超やみつきシリーズ全3種を食べてみた</title>
+      <link>https://gigazine.net/news/20180827&#45;acecook&#45;cho&#45;yamitsuki/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180827-acecook-cho-yamitsuki/</guid>
+      <description><![CDATA[エースコックのスーパーカップ発売30周年企画として、濃厚な味がやみつきになるという「スーパーカップ1.5倍豚キムチラーメン超やみつきブタキムオイル仕上げ」「スーパーカップ1.5倍担担麺超やみつきスパイス仕上げ」「スーパーカップ1.5倍たっぷり野菜タンメン超やみつきペッパー仕上げ」の3種が2018年8月27日に登場します。いずれもボリュームたっぷりな上に超やみつきになるおいしさとのことで、早速食べてみました。<p><b><a href="https://gigazine.net/news/20180827&#45;acecook&#45;cho&#45;yamitsuki/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>試食,</dc:subject>
+      <dc:date>2018-08-27T11:45:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>アメフトゲーム「マッデンNFL」の公式大会で銃乱射事件が発生、犯行の瞬間の生々しい音声も</title>
+      <link>https://gigazine.net/news/20180827&#45;mass&#45;shooting&#45;madden&#45;tournament/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180827-mass-shooting-madden-tournament/</guid>
+      <description><![CDATA[FIFAシリーズなどを手がけるEAスポーツからリリースされているアメリカンフットボールゲーム「MADDEN NFL 19」の公式大会が、アメリカ・フロリダ州ジャクソンビルで開催されました。しかし、大会の途中に突如男性が銃を発砲し、少なくとも3名が死亡、9名が負傷したと報じられています。<p><b><a href="https://gigazine.net/news/20180827&#45;mass&#45;shooting&#45;madden&#45;tournament/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>動画, ゲーム, メモ,</dc:subject>
+      <dc:date>2018-08-27T11:11:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>AIでダンサーの動きを完璧に別人に転送する技術が登場、誰でもマイケル・ジャクソンに</title>
+      <link>https://gigazine.net/news/20180827&#45;deepfake&#45;dance/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180827-deepfake-dance/</guid>
+      <description><![CDATA[ポルノ女優の顔を好きな俳優の顔に変換するという技術「フェイクポルノ」の登場によって、ディープラーニングを使った映像変換技術「Deepfake(ディープフェイク)」の恐るべき威力が知られることになりました。新たにディープフェイク技術を使って、ダンサーの動きを完璧に読み取り動きを別人のモデルに転送させる技術が登場しています。<p><b><a href="https://gigazine.net/news/20180827&#45;deepfake&#45;dance/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>ソフトウェア, 動画,</dc:subject>
+      <dc:date>2018-08-27T10:19:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>うんちが詰まって腸が破裂してしまう病気「メガコロン」とは？</title>
+      <link>https://gigazine.net/news/20180827&#45;idiopathic&#45;megacolon/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180827-idiopathic-megacolon/</guid>
+      <description><![CDATA[ひどい便秘に悩まされていた男性が、激しい腹痛と下痢によって緊急手術を受けたところ、糞便の詰まりすぎで大腸が破裂していたことが判明しました。手術を担当した医師は、「メガコロン(巨大結腸症)」による便秘と腸閉塞(へいそく)が原因だったと報告しています。<p><b><a href="https://gigazine.net/news/20180827&#45;idiopathic&#45;megacolon/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>メモ,</dc:subject>
+      <dc:date>2018-08-27T08:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>インサイダー取引のためにプレスリリース配信サイトを狙うハッカー集団が存在する</title>
+      <link>https://gigazine.net/news/20180827&#45;hacker&#45;stolen&#45;press&#45;release/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180827-hacker-stolen-press-release/</guid>
+      <description><![CDATA[企業の未公開情報は入手できれば株取引で大もうけできる可能性が上がる、株トレーダーにとっての「宝の山」です。このため、公開前の情報が眠っているプレスリリース配信サイトを狙うハッカーが多数存在します。<p><b><a href="https://gigazine.net/news/20180827&#45;hacker&#45;stolen&#45;press&#45;release/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>ネットサービス, セキュリティ,</dc:subject>
+      <dc:date>2018-08-27T07:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>たった1日徹夜しただけでも人間の体には脂肪増加や筋肉量減少といった悪影響が出る</title>
+      <link>https://gigazine.net/news/20180827&#45;poor&#45;sleep&#45;bad&#45;influence/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180827-poor-sleep-bad-influence/</guid>
+      <description><![CDATA[慢性的に睡眠不足が続くと、「記憶力が低下する」「免疫機能が低下する」といった悪影響が出ることが知られていますが、1日程度の睡眠不足であれば「休日にぐっすり眠れば大丈夫ではないか」と思っている人も少なくないはず。しかし、たった1日の徹夜でも「体重の増加や筋肉の減少」といった身体的な悪影響が出てしまうことが判明しました。<p><b><a href="https://gigazine.net/news/20180827&#45;poor&#45;sleep&#45;bad&#45;influence/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>サイエンス,</dc:subject>
+      <dc:date>2018-08-27T06:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>フィジーの首都スバで快適性で軒並み高い評価を得ているホテル「Quest Apartments Suva」に泊まってみました</title>
+      <link>https://gigazine.net/news/20180826&#45;quest&#45;apartments&#45;suva/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180826-quest-apartments-suva/</guid>
+      <description><![CDATA[成田-フィジー・ナンディの直行便が復活しましたが、フィジーから隣国ツバルに向かうにはフィジーのナウソリ空港へ向かう必要があります。ナウソリ-ツバルの便は週に3本しかないので、日本からツバルに向かおうとすると、必然的にフィジーでの滞在が不可欠。ツバル取材のために、ナウソリ空港近くにあるフィジーの首都スバで宿泊するホテルを探したところ、あらゆるホテルサイトで際立って高い評価を得ているホテル「Quest Apartments Suva」が気になったので、そのクオリティを確かめるべく宿泊してみました。<p><b><a href="https://gigazine.net/news/20180826&#45;quest&#45;apartments&#45;suva/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>レビュー,</dc:subject>
+      <dc:date>2018-08-26T23:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>お酒ではないのに酔っ払う＆うつ病を改善するという謎のドリンク「カヴァ」レビュー</title>
+      <link>https://gigazine.net/news/20180826&#45;kava/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180826-kava/</guid>
+      <description><![CDATA[アルコールを含まないのに酔った時のような酩酊感があり、天然の抗不安薬・抗うつ薬としても利用されるドリンクが「カヴァ」です。「飲むと口の中がしびれる」といったヤバげな感想もあり、一体どんな飲み物なんだ……飲んでみるしかない……となったので、フィジーで夜な夜な開かれるカヴァ会に参加してきました。<p><b><a href="https://gigazine.net/news/20180826&#45;kava/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>試食,</dc:subject>
+      <dc:date>2018-08-26T22:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>間もなくNintendo Switchでマンガが読めるように</title>
+      <link>https://gigazine.net/news/20180826&#45;read&#45;comics&#45;nintendo&#45;switch/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180826-read-comics-nintendo-switch/</guid>
+      <description><![CDATA[据え置きゲーム機としても携帯ゲーム機としても使える「Nintendo Switch」に、間もなくマンガアプリが登場します。従来のゲーム機と比べて携帯性が高く、ストリーミングサービスとの相性も抜群なNintendo Switchにマンガアプリが登場するということで、ますます汎用性の高いハードウェアとなりそうです。<p><b><a href="https://gigazine.net/news/20180826&#45;read&#45;comics&#45;nintendo&#45;switch/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>ソフトウェア, 動画, マンガ, ゲーム,</dc:subject>
+      <dc:date>2018-08-26T21:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>客先で使える「相手に好印象を与える」自己紹介とは？</title>
+      <link>https://gigazine.net/news/20180826&#45;how&#45;introduce&#45;unforgettable/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180826-how-introduce-unforgettable/</guid>
+      <description><![CDATA[商談や出張先などで取引先の人と初対面で会った場合に名刺交換と軽い自己紹介は不可欠です。しかし、多くの人はここで「〇〇(会社名)で△△(担当)をしています××(名前)です」など、無難に済ませてしまうもの。この後の打ち合わせで相手にインパクトを与えられたら良いのですが、その後の打ち合わせが大勢の人が参加するもので、発言機会が少なかった場合、相手になかなか自分のことを覚えてもらえずに悔しい思いをしてしまうことも。そこで、Amplify Labsのジョアンナ・ブロアー氏が相手にインパクトを与える自己紹介の方法を解説しています。<p><b><a href="https://gigazine.net/news/20180826&#45;how&#45;introduce&#45;unforgettable/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>メモ,</dc:subject>
+      <dc:date>2018-08-26T20:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>無料でマインドフルネス瞑想を管理して効果測定もしてくれるiOS向けアプリ「muon」</title>
+      <link>https://gigazine.net/news/20180826&#45;muon/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180826-muon/</guid>
+      <description><![CDATA[「いま・ここ」に意識を集中し、さまざまな価値判断を捨てて感じたままに現実を受け入れながら瞑想(めいそう)する「マインドフルネス瞑想」を自宅で簡単に習慣化できるiOS向けのアプリが「muon」です。ヨガスタジオのスタジオ・ヨギーの経営する瞑想専門スタジオ「muon」によるアプリで、基本無料で利用することができます。<p><b><a href="https://gigazine.net/news/20180826&#45;muon/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>レビュー, モバイル, ソフトウェア, 動画,</dc:subject>
+      <dc:date>2018-08-26T19:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>女性のセクシーな自撮り写真は男女の所得格差が大きい地域ほど多く投稿されるという傾向が明らかに</title>
+      <link>https://gigazine.net/news/20180826&#45;women&#45;sexy&#45;selfies&#45;income&#45;inequality/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180826-women-sexy-selfies-income-inequality/</guid>
+      <description><![CDATA[女性が自分のセクシーな姿をスマートフォンで撮影してSNSなどで公開するという行動には、「女性が差別されている」「社会的に弱い立場にある」といった原因が背景にあるのではなく、男女の間に存在する経済的格差が影響を与えているという研究結果が発表されました。<p><b><a href="https://gigazine.net/news/20180826&#45;women&#45;sexy&#45;selfies&#45;income&#45;inequality/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>メモ,</dc:subject>
+      <dc:date>2018-08-26T18:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>巨匠スタンリー・キューブリック監督の名作ホラー映画「シャイニング」に込められたメッセージとは？</title>
+      <link>https://gigazine.net/news/20180826&#45;shining&#45;ending&#45;explain/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180826-shining-ending-explain/</guid>
+      <description><![CDATA[スティーヴン・キング氏の同名小説をスタンリー・キューブリック監督が映画化した「シャイニング」は、冬期は閉鎖されるホテルの管理人をすることになった男が狂気にとりつかれ、妻と息子を惨殺しようとするというホラー映画です。そんなシャイニングに込められたメッセージについて解説したムービーが、YouTubeで公開されています。<p><b><a href="https://gigazine.net/news/20180826&#45;shining&#45;ending&#45;explain/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>動画, 映画,</dc:subject>
+      <dc:date>2018-08-26T12:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>無料で充実のコンテンツを楽しめるうえに毎月15冊ものマンガ雑誌をお得に読める講談社のマンガアプリ「コミックDAYS」</title>
+      <link>https://gigazine.net/news/20180826&#45;comic&#45;app&#45;comicdays/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180826-comic-app-comicdays/</guid>
+      <description><![CDATA[月額720円でマンガ雑誌6種類の最新号を読みまくれるということでリリース当初から話題沸騰していた講談社のマンガアプリコミックDAYSは、注目の定期購読だけではなく無料で連載されているコンテンツもかなり充実しているほか、定期購読には好きな話数が買えたり単行本が買えたりするポイントもおまけでついてくるという、まさに「最高のマンガ体験」ができるアプリということで、無料コンテンツを楽しみつつ定期購読の無料体験を試してみました。<p><b><a href="https://gigazine.net/news/20180826&#45;comic&#45;app&#45;comicdays/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>レビュー, ソフトウェア, マンガ,</dc:subject>
+      <dc:date>2018-08-26T10:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>GoogleのエキスパートがChromeのフリーズを直すまでの奮闘記</title>
+      <link>https://gigazine.net/news/20180825&#45;google&#45;engineer&#45;fix&#45;chrome&#45;hang/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180825-google-engineer-fix-chrome-hang/</guid>
+      <description><![CDATA[「24コアもあるCPUを積んでいるハイエンドPCであるにもかかわらずGmailを使っている際にChromeがフリーズしてしまった」という現象に遭遇したブルース・ドーソンさんが、その原因を発見するまでの取り組みをブログに書き残しています。なお、ドーソンさんはGoogleでChromeを開発しているエキスパート開発者です。<p><b><a href="https://gigazine.net/news/20180825&#45;google&#45;engineer&#45;fix&#45;chrome&#45;hang/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>ソフトウェア,</dc:subject>
+      <dc:date>2018-08-25T22:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>かつて人を喜ばせる存在だったピエロは今や「恐怖の象徴」として認識されつつある</title>
+      <link>https://gigazine.net/news/20180825&#45;why&#45;clowns&#45;are&#45;scary/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180825-why-clowns-are-scary/</guid>
+      <description><![CDATA[ピエロ(道化師)は本来おどけた動きや曲芸で人びとを笑わせる存在ですが、ピエロ恐怖症という症例がある通り、ピエロに恐怖を覚える人が増えています。このピエロ恐怖症を生んだきっかけの1つがスティーヴン・キングの作品「IT」だといわれています。ピエロがなぜ恐怖の象徴となっていったのか、ScreenPrismが「IT」を参考にしながら解説しています。<p><b><a href="https://gigazine.net/news/20180825&#45;why&#45;clowns&#45;are&#45;scary/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>動画, 映画,</dc:subject>
+      <dc:date>2018-08-25T21:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>「東京メトロ東西線の発車メロディー」に隠された秘密とは？</title>
+      <link>https://gigazine.net/news/20180825&#45;tokyo&#45;metro&#45;composer&#45;minoru&#45;mukaiya/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180825-tokyo-metro-composer-minoru-mukaiya/</guid>
+      <description><![CDATA[キーボード奏者であり、作曲家でもある向谷実氏は数多くの駅の発車メロディーなどを作曲したことで知られている人物。そんな向谷氏が作曲した東京メトロ東西線全駅の発車メロディーには、ちょっとした秘密が隠されているとのことで、その秘密に迫ったムービーが公開されています。<p><b><a href="https://gigazine.net/news/20180825&#45;tokyo&#45;metro&#45;composer&#45;minoru&#45;mukaiya/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>動画, アート,</dc:subject>
+      <dc:date>2018-08-25T20:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>「スマホ疲れ」の影響か、フィーチャーフォンの販売成長率がスマホを上回る</title>
+      <link>https://gigazine.net/news/20180825&#45;dumb&#45;phone&#45;sales&#45;rise/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180825-dumb-phone-sales-rise/</guid>
+      <description><![CDATA[ひっきりなしに更新されるTwitterのタイムラインや友人のSNSの投稿、友人から届くLINEのメッセージなど、現代人は常にスマートフォンに縛りつけられているといっても過言ではないといえます。「SNS疲れ」や「スマホ疲れ」という言葉に共感する人が増える中、イギリスでは「ダムフォン(dumb phone：スマートじゃないフォン)」、いわゆるフィーチャーフォンの販売成長率がスマートフォンの実績を上回ったことが報じられています。<p><b><a href="https://gigazine.net/news/20180825&#45;dumb&#45;phone&#45;sales&#45;rise/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>モバイル, ハードウェア,</dc:subject>
+      <dc:date>2018-08-25T19:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>「フィジー独立の父」の住居をレストランに改装した「Governors Museum Themed Restaurant」に行ってきました</title>
+      <link>https://gigazine.net/news/20180825&#45;governors&#45;museum&#45;themed&#45;restaurant/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180825-governors-museum-themed-restaurant/</guid>
+      <description><![CDATA[フィジーの首都スバは港町として栄えており、観光客も少なく、「リゾート」としてのフィジーとは違った顔を持った街です。そのスバに、イギリス植民地時代の首長の住居を改装したレストラン「Governors Museum Themed Restaurant」があると聞き、さっそく行ってみることにしました。<p><b><a href="https://gigazine.net/news/20180825&#45;governors&#45;museum&#45;themed&#45;restaurant/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>取材, 試食,</dc:subject>
+      <dc:date>2018-08-25T18:00:00+09:00</dc:date>
+    </item>
+
+    <item>
+      <title>「オナラ機関」を名乗り6カ月間オナラ自撮りを続けた男性が本職を失う</title>
+      <link>https://gigazine.net/news/20180825&#45;loses&#45;job&#45;viral&#45;farting&#45;work/</link>
+      <guid isPermaLink="true">https://gigazine.net/news/20180825-loses-job-viral-farting-work/</guid>
+      <description><![CDATA[SNSでは「娘のセクシー自撮り投稿を止めるべく同じ構図の写真を1年以上投稿し続けることで有名になったお父さん」や「乳首の男女平等を主張するために乳首のアップ画像を投稿するアカウント」など、一風変わったアカウントが人気を集めることがあります。そんな奇妙な活動を行うアカウントのひとつが「Paul Flart」で、「オナラ機関」を名乗るセキュリティガードのPaul Flartさんが、職場でおならをする様子をアップし続けるという謎過ぎる活動を続けていました。<p><b><a href="https://gigazine.net/news/20180825&#45;loses&#45;job&#45;viral&#45;farting&#45;work/">続きを読む...</a></b></p>]]></description>
+      <dc:subject>動画, メモ,</dc:subject>
+      <dc:date>2018-08-25T17:00:00+09:00</dc:date>
+    </item>
+
+    
+    </channel>
+</rss>

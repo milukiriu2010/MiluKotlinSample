@@ -22,6 +22,18 @@ class MyRssParse {
         val xmlRoot = this.str2doc(strXML)
 
         // -------------------------------------------------------
+        // DOMのルートタグ名を取得
+        // -------------------------------------------------------
+        val rootNode = xmlRoot.documentElement
+        Log.d( javaClass.simpleName, "root[${rootNode.nodeName}][${rootNode.nodeValue}]")
+
+        for ( i in 0 until rootNode.attributes.length ) {
+            val attr = rootNode.attributes.item(i)
+            Log.d( javaClass.simpleName, "rootAttr[$i][${attr.nodeName}][${attr.nodeValue}]")
+        }
+
+
+        // -------------------------------------------------------
         // RSSのtitleを取得
         // -------------------------------------------------------
         val titleNode = myXMLParse.searchNode( xmlRoot, "/rss/channel/title/text()")
