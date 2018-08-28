@@ -134,7 +134,7 @@ class URLLstFragment: Fragment() {
         urlLst.add( URLData( "IT", "＠IT Database Expertフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_db.xml")) )
         // RSS 2.0
         urlLst.add( URLData( "IT", "＠IT Linux＆OSSフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_linux.xml")) )
-        // RSS 2.0
+        // RSS 2.0+1.1?
         urlLst.add( URLData( "IT", "GIGAZINE", URL("https://gigazine.net/news/rss_2.0/")) )
 
 

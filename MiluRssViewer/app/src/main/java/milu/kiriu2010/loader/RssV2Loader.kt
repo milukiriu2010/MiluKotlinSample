@@ -9,6 +9,7 @@ import milu.kiriu2010.entity.parseRss
 import milu.kiriu2010.net.httpGet
 import milu.kiriu2010.netv2.MyURLConFactory
 import milu.kiriu2010.rss.MyRssParse
+import milu.kiriu2010.rss.MyRssParseFactory
 import java.io.IOException
 import java.net.ConnectException
 
@@ -73,9 +74,16 @@ class RssV2Loader(context: Context, val urlData: URLData? ) : AsyncTaskLoader<As
                 // 通信が成功してれば、取得した文字列をRSS解析する
                 // ----------------------------------------------
                 if ( responseOK ) {
-                    val myRssParse = MyRssParse()
-                    val rss = myRssParse.str2rss(this.responseBuffer.toString())
-                    asyncResult.data = rss
+                    //val myRssParse = MyRssParse()
+                    //val rss = myRssParse.str2rss(this.responseBuffer.toString())
+                    val myRssParseAbs = MyRssParseFactory.createInstance(this.responseBuffer.toString())
+                    if ( myRssParseAbs != null ) {
+                        val rss = myRssParseAbs.analyze()
+                        asyncResult.data = rss
+                    }
+                    else {
+                        throw Exception("Unknown Format RSS")
+                    }
                 }
             }
         }

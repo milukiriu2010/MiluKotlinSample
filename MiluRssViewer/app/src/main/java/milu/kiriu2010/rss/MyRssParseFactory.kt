@@ -8,7 +8,7 @@ import javax.xml.parsers.ParserConfigurationException
 
 object MyRssParseFactory {
     @Throws(ParserConfigurationException::class, IOException::class, SAXException::class)
-    fun createInstance( strXML: String ): MyRssParseAbs? {
+    fun createInstance( strXML: String ): MyRssParseRssAbs? {
         val myXMLParse = MyXMLParse()
         val xmlDoc = myXMLParse.str2doc(strXML)
         // ルート要素
@@ -21,7 +21,7 @@ object MyRssParseFactory {
             attrMap.put( attr.nodeName, attr.nodeValue )
         }
 
-        var myRssParseAbs: MyRssParseAbs? = null
+        var myRssParseAbs: MyRssParseRssAbs? = null
         /// ルート要素のタグ名によって、処理を振り分ける
         when ( rootNode.nodeName ) {
             // RSS2.0
@@ -31,21 +31,26 @@ object MyRssParseFactory {
             }
             // RSS1.0
             "rdf:RDF" ->{
-
+                myRssParseAbs = MyRssParseRss1M0()
             }
             else ->{
                 return myRssParseAbs
             }
         }
 
+        if ( myRssParseAbs != null ) {
+            myRssParseAbs.myXMLParse = myXMLParse
+            myRssParseAbs.xmlRoot = xmlDoc
+        }
+
         return myRssParseAbs
     }
 
-    fun analyzeRss( attrMap: MutableMap<String,String> ): MyRssParseAbs? {
+    private fun analyzeRss( attrMap: MutableMap<String,String> ): MyRssParseRssAbs? {
         val version: String? = attrMap["version"]
         val xmlnsDC: String? = attrMap["xmlns:dc"]
 
-        var myRssParseAbs: MyRssParseAbs? = null
+        var myRssParseAbs: MyRssParseRssAbs? = null
 
         myRssParseAbs =
             when ( version ) {
@@ -55,7 +60,7 @@ object MyRssParseFactory {
                         else -> MyRssParseRss2M0()
                     }
                 }
-                "0.91" -> MyRssParseRss2M0()
+                "0.91" -> MyRssParseRss0M91()
                 else -> null
             }
 

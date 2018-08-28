@@ -1,11 +1,16 @@
 package milu.kiriu2010.netv2
 
+import android.util.Log
 import java.io.BufferedReader
 import java.io.DataOutputStream
 import java.io.IOException
 import java.io.InputStreamReader
 import java.net.*
 
+// =======================================
+// ver 0.0.1 2018.08.28
+// ---------------------------------------
+// =======================================
 abstract class MyURLConAbs: Cloneable {
     // 接続先URL
     lateinit var url: URL
@@ -83,6 +88,9 @@ abstract class MyURLConAbs: Cloneable {
             con.setRequestProperty(k,v)
         }
 
+        // キャッシュを使用しない
+        con.useCaches = false
+
         // -------------------------------------
         // メソッドとしてGETをセットする
         // URLConnectionではなく
@@ -115,6 +123,18 @@ abstract class MyURLConAbs: Cloneable {
         this.responseCode = con.responseCode
 
         // -------------------------------------
+        // 全ヘッダ取得
+        // -------------------------------------
+        val responseHeaderMap = con.headerFields
+        responseHeaderMap.forEach{ k,v ->
+            Log.d( javaClass.simpleName, "responseHeaderMap:k[${k}]")
+            v.forEach {
+                Log.d( javaClass.simpleName, "responseHeaderMap:k[${k}]v[$it]")
+            }
+            Log.d( javaClass.simpleName, "=========================")
+        }
+
+        // -------------------------------------
         // レスポンスを受信バッファに詰め込む
         // -------------------------------------
         // HTTP 200-299はinputStream
@@ -130,10 +150,25 @@ abstract class MyURLConAbs: Cloneable {
             InputStreamReader( con.errorStream, "UTF-8" )
         }
 
+        /*
+        // Content-Lengthがないと、発生する？
+        // java.net.ProtocolException: unexpected end of stream
         val br = BufferedReader(isr)
         br.readLines().forEach {
             this.responseBuffer.append(it)
         }
+        */
+
+        // chunkedでも動作する？
+        // https://grokonez.com/android/kotlin-http-call-with-asynctask-example-android
+        val br = BufferedReader(isr)
+        var line: String? = null
+        do {
+            line = br.readLine()
+            if ( line != null ) {
+                this.responseBuffer.append(line)
+            }
+        } while ( line != null )
 
         isr.close()
         br.close()
@@ -186,6 +221,9 @@ abstract class MyURLConAbs: Cloneable {
         // ---------------------------------------------------------
         val postDataBytes = postData.toString().toByteArray()
         con.setRequestProperty("Content-Length", postDataBytes.size.toString())
+
+        // キャッシュを使用しない
+        con.useCaches = false
 
         // -------------------------------------
         // メソッドとしてPOSTをセットする
@@ -241,10 +279,23 @@ abstract class MyURLConAbs: Cloneable {
             InputStreamReader( con.errorStream, "UTF-8" )
         }
 
+        /*
         val br = BufferedReader(isr)
         br.readLines().forEach {
             this.responseBuffer.append(it)
         }
+        */
+
+        // chunkedでも動作する？
+        // https://grokonez.com/android/kotlin-http-call-with-asynctask-example-android
+        val br = BufferedReader(isr)
+        var line: String? = null
+        do {
+            line = br.readLine()
+            if ( line != null ) {
+                this.responseBuffer.append(line)
+            }
+        } while ( line != null )
 
         isr.close()
         br.close()
