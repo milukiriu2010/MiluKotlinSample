@@ -10,4 +10,7 @@
     <item
         android:id="@+id/menuItemScheduler"
         android:title="Schedule" />
+    <item
+        android:id="@+id/menuItemSQLite"
+        android:title="SQLite" />
 </menu>

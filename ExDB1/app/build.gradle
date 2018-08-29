@@ -7,7 +7,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.milu.exdb1"
+        applicationId "milu.kiriu2010.exdb1"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
