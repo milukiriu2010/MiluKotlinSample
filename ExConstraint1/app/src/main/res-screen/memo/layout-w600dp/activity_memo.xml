@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context="com.example.milu.excon1.memo.MemoActivity">
+    tools:context="milu.kiriu2010.excon1.memo.MemoActivity">
 
     <!-- ドロワーコンテンツ -->
     <FrameLayout
@@ -18,7 +18,7 @@
         >
         <fragment
             android:id="@+id/list"
-            android:name="com.example.milu.excon1.memo.MemoFilesListFragment"
+            android:name="milu.kiriu2010.excon1.memo.MemoFilesListFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout="@layout/fragment_list"
@@ -31,7 +31,7 @@
         android:layout_height="match_parent">
         <fragment
             android:id="@+id/input"
-            android:name="com.example.milu.excon1.memo.InputFragment"
+            android:name="milu.kiriu2010.excon1.memo.InputFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout="@layout/fragment_input"

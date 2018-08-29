@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@android:style/Theme.NoTitleBar"
+    tools:context="milu.kiriu2010.excon1.MainActivity">
+
+    <TextView
+        android:id="@+id/lblFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/LABEL_FIRST_NAME"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.059" />
+
+    <EditText
+        android:id="@+id/txtFirstName"
+        android:layout_width="191dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:labelFor="@+id/lblFirstName"
+        android:typeface="serif"
+        app:layout_constraintStart_toStartOf="@+id/lblFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/lblFirstName"
+        tools:text="@string/LABEL_FIRST_NAME" />
+
+    <Button
+        android:id="@+id/btnAddUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/BTN_ADD_USER"
+        app:layout_constraintStart_toEndOf="@+id/txtFirstName"
+        app:layout_constraintTop_toTopOf="@+id/txtFirstName" />
+
+    <TableLayout
+        android:layout_width="368dp"
+        android:layout_height="245dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="192dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnBrowse"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/BTN_BROWSE"
+                tools:layout_editor_absoluteX="207dp"
+                tools:layout_editor_absoluteY="216dp" />
+
+            <Button
+                android:id="@+id/btnHTTP"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/BTN_HTTP" />
+
+            <Button
+                android:id="@+id/btnImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:baselineAligned="false"
+                android:text="@string/BTN_IMAGE"
+                android:textAppearance="@android:style/TextAppearance.Material.Large"
+                tools:layout_editor_absoluteX="141dp"
+                tools:layout_editor_absoluteY="110dp" />
+
+            <Button
+                android:id="@+id/btnTimeZone"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/BTN_TIMEZONE"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btnTeamLst"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="16dp"
+                android:text="@string/BTN_TEAM_LIST"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="216dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnXML"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/BTN_XML"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="217dp" />
+
+            <Button
+                android:id="@+id/btnJSON"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/BTN_JSON" />
+
+            <Button
+                android:id="@+id/btnClock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/BTN_CLOCK" />
+
+            <Button
+                android:id="@+id/btnTimeZoneRV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/BTN_TIMEZONE_RV"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/btnFileRV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/BTN_FILE"
+                android:textSize="12sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnCounter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Counter" />
+
+            <Button
+                android:id="@+id/btnMemo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Memo" />
+
+            <Button
+                android:id="@+id/btnAccBall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AccBall" />
+
+            <Button
+                android:id="@+id/btnSlide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Slide" />
+
+            <Button
+                android:id="@+id/btnCountDown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CountDown" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:id="@+id/btnSaintTropez"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saint" />
+
+            <Button
+                android:id="@+id/btnAlarmClock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alarm" />
+        </TableRow>
+    </TableLayout>
+
+</android.support.constraint.ConstraintLayout>

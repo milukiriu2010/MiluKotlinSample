@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="milu.kiriu2010.excon1.team.UserAddActivity">
+
+    <TextView
+        android:id="@+id/lblFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="275dp"
+        android:layout_marginLeft="109dp"
+        android:layout_marginRight="275dp"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="28dp"
+        android:text="FirstName"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.325"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
+        android:text="@string/BTN_BACK"
+        app:layout_constraintStart_toEndOf="@+id/lblFirstName"
+        app:layout_constraintTop_toTopOf="@+id/lblFirstName" />
+
+    <Button
+        android:id="@+id/btnGetAsync"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/BTN_GET_ASYNC"
+        app:layout_constraintStart_toStartOf="@+id/lblFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/lblFirstName" />
+
+    <Button
+        android:id="@+id/btnGetNosync"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/BTN_GET_NOSYNC"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toEndOf="@+id/btnGetAsync"
+        app:layout_constraintTop_toTopOf="@+id/btnGetAsync" />
+
+    <TextView
+        android:id="@+id/textXML"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGetAsync" />
+</android.support.constraint.ConstraintLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.milu.excon1">
+    package="milu.kiriu2010.excon1">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -24,27 +24,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UserAddActivity" />
-        <activity android:name=".TeamActivity" />
+        <activity android:name=".team.UserAddActivity" />
+        <activity android:name=".team.TeamActivity" />
         <activity android:name=".image.ImageActivity" />
-        <activity android:name=".TeamListActivity" />
-        <activity android:name=".XMLActivity" />
+        <activity android:name=".team.TeamListActivity" />
+        <activity android:name=".file.XMLActivity" />
         <activity
             android:name=".http.HttpActivity"
             android:label="@string/title_activity_http_get"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".JsonActivity"
+            android:name=".file.JsonActivity"
             android:label="@string/title_activity_json"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ListTimeZoneActivity" />
-        <activity android:name=".WorldClockActivity" />
-        <activity android:name=".TimeZoneSelectActivity" />
-        <activity android:name=".RecycleTimeZoneActivity" />
-        <activity android:name=".FileRecycleActivity" />
+        <activity android:name=".timezone.ListTimeZoneActivity" />
+        <activity android:name=".clock.WorldClockActivity" />
+        <activity android:name=".timezone.TimeZoneSelectActivity" />
+        <activity android:name=".timezone.RecycleTimeZoneActivity" />
+        <activity android:name=".file.FileRecycleActivity" />
         <activity android:name=".counter.CounterActivity" />
         <activity android:name=".memo.MemoActivity" />
-        <activity android:name=".AccBallActivity" />
+        <activity android:name=".accball.AccBallActivity" />
         <activity android:name=".SlideShowActivity" />
         <activity
             android:name=".countdown.CountDownActivity"

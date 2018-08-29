@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 
 private const val DB_NAME = "SampleDatabase"
 private const val DB_VERSION = 1
@@ -16,14 +17,16 @@ class SampleDBOpenHelper(context: Context):
     // ・テキスト
     // ・作成日時
     override fun onCreate(db: SQLiteDatabase?) {
-        db?.execSQL("""
+        val sql = """
             |CREATE TABLE texts
             |(
             |_id         INTEGER PRIMARY KEY AUTOINCREMENT,
             |text        TEXT NOT NULL,
             |created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             |)
-        """.trimIndent())
+        """.trimMargin("|")
+        Log.d(javaClass.simpleName, "SQL=[$sql]")
+        db?.execSQL(sql)
     }
 
     // バージョン更新時のSQL発行
