@@ -10,6 +10,21 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.RadioButton
 import android.widget.Toast
+import com.example.milu.excon2.anime.AnimeActivity
+import com.example.milu.excon2.contextmenu.ContextMenuActivity
+import com.example.milu.excon2.customactionbar.CustomActionBarActivity
+import com.example.milu.excon2.dice.DiceRollerActivity
+import com.example.milu.excon2.fibonnaci.FibonnaciActivity
+import com.example.milu.excon2.largebmp.LargeBmpActivity
+import com.example.milu.excon2.pinch.PinchActivity
+import com.example.milu.excon2.rate.RateActivity
+import com.example.milu.excon2.recycler.RecycleActivity
+import com.example.milu.excon2.scan.ScanBarcodeActivity
+import com.example.milu.excon2.seek.SeekActivity
+import com.example.milu.excon2.stopwatch.StopWatchActivity
+import com.example.milu.excon2.temperature.TemperatureActivity
+import com.example.milu.excon2.traffic.TrafficLightActivity
+import com.example.milu.excon2.websearch.WebSearchActivity
 import com.example.milu.net.HttpGet
 import kotlinx.android.synthetic.main.activity_main.*
 import java.net.URL
@@ -23,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         // check debug/release mode
         //   not 0 => debug
         //   0     => release
-        Log.d( this.javaClass.toString(), "Application Debug/Release:" + ( applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE ) )
+        Log.d( javaClass.simpleName, "Application Debug/Release:" + ( applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE ) )
         if ( ( applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE ) != 0 ) {
             tvAppInfo.setText("DEBUG")
         }
@@ -43,14 +58,16 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "On checked change : ${radio.text}", Toast.LENGTH_LONG).show()
         }
 
+        btnRATE.transformationMethod = null
         btnRATE.setOnClickListener{
-            val intent = Intent(this,RateActivity::class.java )
+            val intent = Intent(this, RateActivity::class.java )
 
             this.startActivityForResult( intent, IntentID2.ID_RATE.value )
         }
 
+        btnRecycle.transformationMethod = null
         btnRecycle.setOnClickListener{
-            val intent = Intent(this,RecycleActivity::class.java )
+            val intent = Intent(this, RecycleActivity::class.java )
 
             this.startActivityForResult( intent, IntentID2.ID_RECYCLE.value )
         }
@@ -59,51 +76,55 @@ class MainActivity : AppCompatActivity() {
         // large => small caps
         btnANIME.transformationMethod = null
         btnANIME.setOnClickListener{
-            val intent = Intent(this,AnimeActivity::class.java )
+            val intent = Intent(this, AnimeActivity::class.java )
             this.startActivityForResult( intent, IntentID2.ID_ANIME.value )
         }
 
+        btnSEEK.transformationMethod = null
         btnSEEK.setOnClickListener {
-            val intent = Intent(this,SeekActivity::class.java )
+            val intent = Intent(this, SeekActivity::class.java )
             this.startActivityForResult( intent, IntentID2.ID_SEEK.value )
         }
 
+        btnCM.transformationMethod = null
         btnCM.setOnClickListener {
-            val intent = Intent(this,ContextMenuActivity::class.java )
+            val intent = Intent(this, ContextMenuActivity::class.java )
             this.startActivityForResult( intent, IntentID2.ID_CONTEXT_MENU.value )
         }
 
+        btnTemperature.transformationMethod = null
         btnTemperature.setOnClickListener {
-            val intent = Intent(this,TemperatureActivity::class.java )
+            val intent = Intent(this, TemperatureActivity::class.java )
             this.startActivityForResult( intent, IntentID2.ID_TEMPERATURE.value )
         }
 
+        btnSTOPWATCH.transformationMethod = null
         btnSTOPWATCH.setOnClickListener {
-            val intent = Intent(this,StopWatchActivity::class.java )
+            val intent = Intent(this, StopWatchActivity::class.java )
             this.startActivityForResult( intent, IntentID2.ID_STOP_WATCH.value )
         }
 
         btnCustomAction.transformationMethod = null
         btnCustomAction.setOnClickListener {
-            val intent = Intent(this,CustomActionBarActivity::class.java )
+            val intent = Intent(this, CustomActionBarActivity::class.java )
             this.startActivityForResult( intent, IntentID2.ID_CUSTOM_ACTION.value )
         }
 
         btnDICE.transformationMethod = null
         btnDICE.setOnClickListener {
-            val intent = Intent(this,DiceRollerActivity::class.java )
+            val intent = Intent(this, DiceRollerActivity::class.java )
             this.startActivityForResult( intent, IntentID2.ID_DICE.value )
         }
 
         btnLargeBmp.transformationMethod = null
         btnLargeBmp.setOnClickListener {
-            val intent = Intent(this,LargeBmpActivity::class.java )
+            val intent = Intent(this, LargeBmpActivity::class.java )
             this.startActivityForResult( intent, IntentID2.ID_LARGE_BMP.value )
         }
 
         btnTrafficLight.transformationMethod = null
         btnTrafficLight.setOnClickListener {
-            val intent = Intent(this,TrafficLightActivity::class.java )
+            val intent = Intent(this, TrafficLightActivity::class.java )
             this.startActivityForResult( intent, IntentID2.ID_TRAFFIC_LIGHT.value )
         }
 
@@ -123,26 +144,26 @@ class MainActivity : AppCompatActivity() {
 
         btnFibonnaci.transformationMethod = null
         btnFibonnaci.setOnClickListener {
-            val intent = Intent(this,FibonnaciActivity::class.java )
+            val intent = Intent(this, FibonnaciActivity::class.java )
             this.startActivityForResult( intent, IntentID2.ID_FIBONNACI.value )
         }
 
         btnScanBarcode.transformationMethod = null
         btnScanBarcode.setOnClickListener {
-            val intent = Intent(this,ScanBarcodeActivity::class.java )
+            val intent = Intent(this, ScanBarcodeActivity::class.java )
             this.startActivityForResult( intent, IntentID2.ID_SCAN_BARCODE.value )
         }
 
         btnWebSearch.transformationMethod = null
         btnWebSearch.setOnClickListener {
-            val intent = Intent(this,WebSearchActivity::class.java )
+            val intent = Intent(this, WebSearchActivity::class.java )
             this.startActivityForResult( intent, IntentID2.ID_WEB_SEARCH.value )
         }
 
-        btnHelloFragment.transformationMethod = null
-        btnHelloFragment.setOnClickListener {
-            val intent = Intent(this,HelloActivity::class.java )
-            this.startActivityForResult( intent, IntentID2.ID_HELLO.value )
+        btnPinch.transformationMethod = null
+        btnPinch.setOnClickListener {
+            val intent = Intent( this, PinchActivity::class.java )
+            this.startActivity( intent )
         }
     }
 

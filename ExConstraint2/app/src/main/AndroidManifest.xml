@@ -20,25 +20,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RecycleActivity" />
+        <activity android:name=".recycler.RecycleActivity" />
         <activity
-            android:name=".RateActivity"
+            android:name=".rate.RateActivity"
             android:theme="@style/CustomTheme" />
-        <activity android:name=".AnimeActivity" />
-        <activity android:name=".SeekActivity" />
-        <activity android:name=".ContextMenuActivity" />
-        <activity android:name=".TemperatureActivity" />
-        <activity android:name=".StopWatchActivity" />
+        <activity android:name=".anime.AnimeActivity" />
+        <activity android:name=".seek.SeekActivity" />
+        <activity android:name=".contextmenu.ContextMenuActivity" />
+        <activity android:name=".temperature.TemperatureActivity" />
+        <activity android:name=".stopwatch.StopWatchActivity" />
         <activity
-            android:name=".CustomActionBarActivity"
+            android:name=".customactionbar.CustomActionBarActivity"
             android:theme="@style/CustomTheme" />
-        <activity android:name=".DiceRollerActivity" />
-        <activity android:name=".LargeBmpActivity" />
-        <activity android:name=".TrafficLightActivity" />
-        <activity android:name=".FibonnaciActivity" />
-        <activity android:name=".ScanBarcodeActivity" />
-        <activity android:name=".WebSearchActivity" />
-        <activity android:name=".HelloActivity"></activity>
+        <activity android:name=".dice.DiceRollerActivity" />
+        <activity android:name=".largebmp.LargeBmpActivity" />
+        <activity android:name=".traffic.TrafficLightActivity" />
+        <activity android:name=".fibonnaci.FibonnaciActivity" />
+        <activity android:name=".scan.ScanBarcodeActivity" />
+        <activity android:name=".websearch.WebSearchActivity" />
+        <activity android:name=".HelloActivity" />
+        <activity android:name=".pinch.PinchActivity"></activity>
     </application>
 
 </manifest>

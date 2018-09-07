@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/tl_red" android:duration="1000"/>
+    <item android:drawable="@drawable/tl_redamber" android:duration="1000"/>
+    <item android:drawable="@drawable/tl_green" android:duration="1000"/>
+    <item android:drawable="@drawable/tl_amber" android:duration="1000"/>
+</animation-list>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/female"
+            android:text="@string/LABEL_FEMALE"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/male"
+            android:checked="true"
+
+            android:text="@string/LABEL_MALE"></RadioButton>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnRATE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/BTN_RATE"
+        app:layout_constraintBottom_toTopOf="@+id/btnTemperature"
+        app:layout_constraintStart_toEndOf="@+id/btnANIME"
+        app:layout_constraintTop_toTopOf="@+id/btnANIME"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnRecycle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/BTN_RECYCLE"
+        app:layout_constraintBottom_toTopOf="@+id/btnFibonnaci"
+        app:layout_constraintStart_toStartOf="@+id/btnCM"
+        app:layout_constraintTop_toTopOf="@+id/btnWebSearch"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnANIME"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/BTN_ANIME"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gender" />
+
+    <Button
+        android:id="@+id/btnSEEK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/BTN_SEEK"
+        app:layout_constraintStart_toStartOf="@+id/btnEMAIL"
+        app:layout_constraintTop_toBottomOf="@+id/btnEMAIL" />
+
+    <Button
+        android:id="@+id/btnCM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/BTN_CM"
+        app:layout_constraintBottom_toTopOf="@+id/btnWebSearch"
+        app:layout_constraintStart_toStartOf="@+id/btnCustomAction"
+        app:layout_constraintTop_toTopOf="@+id/btnSTOPWATCH"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnTemperature"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/BTN_TEMPERATURE"
+        app:layout_constraintStart_toEndOf="@+id/btnANIME"
+        app:layout_constraintStart_toStartOf="@+id/btnANIME"
+        app:layout_constraintTop_toBottomOf="@+id/btnANIME" />
+
+    <Button
+        android:id="@+id/btnSTOPWATCH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/BTN_STOP_WATCH"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnDICE"
+        app:layout_constraintStart_toEndOf="@+id/btnANIME"
+        app:layout_constraintTop_toTopOf="@+id/btnTemperature"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnCustomAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/BTN_CUSTOM_ACTION"
+        app:layout_constraintBottom_toTopOf="@+id/btnSTOPWATCH"
+        app:layout_constraintStart_toEndOf="@+id/btnRATE"
+        app:layout_constraintTop_toTopOf="@+id/btnRATE"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnDICE"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/BTN_DICE"
+        app:layout_constraintStart_toEndOf="@+id/btnTemperature"
+        app:layout_constraintStart_toStartOf="@+id/btnTemperature"
+        app:layout_constraintTop_toBottomOf="@+id/btnTemperature" />
+
+    <Button
+        android:id="@+id/btnLargeBmp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/BTN_LARGE_BMP"
+        app:layout_constraintBottom_toBottomOf="@+id/btnEMAIL"
+        app:layout_constraintStart_toStartOf="@+id/btnFibonnaci"
+        app:layout_constraintTop_toBottomOf="@+id/btnScanBarcode"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tvAppInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@+id/gender"
+        app:layout_constraintTop_toTopOf="@+id/gender"
+        tools:text="TRUE" />
+
+    <TextView
+        android:id="@+id/tvBuildConf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/tvAppInfo"
+        app:layout_constraintTop_toBottomOf="@+id/tvAppInfo"
+        tools:text="TRUE" />
+
+    <Button
+        android:id="@+id/btnTrafficLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/BTN_TRAFFIC_LIGHT"
+        app:layout_constraintBottom_toTopOf="@+id/btnLargeBmp"
+        app:layout_constraintStart_toStartOf="@+id/btnRecycle"
+        app:layout_constraintTop_toBottomOf="@+id/btnWebSearch"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnEMAIL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        app:layout_constraintStart_toStartOf="@+id/btnScanBarcode"
+        app:layout_constraintTop_toBottomOf="@+id/btnScanBarcode" />
+
+    <Button
+        android:id="@+id/btnFibonnaci"
+        android:layout_width="wrap_content"
+        android:layout_height="51dp"
+        android:layout_marginTop="8dp"
+        android:text="Fibonnaci"
+        app:layout_constraintBottom_toBottomOf="@+id/btnScanBarcode"
+        app:layout_constraintStart_toStartOf="@+id/btnWebSearch"
+        app:layout_constraintTop_toTopOf="@+id/btnScanBarcode"
+        app:layout_constraintVertical_bias="0.727" />
+
+    <Button
+        android:id="@+id/btnScanBarcode"
+        android:layout_width="86dp"
+        android:layout_height="wrap_content"
+        android:text="Scan"
+        app:layout_constraintStart_toStartOf="@+id/btnDICE"
+        app:layout_constraintTop_toBottomOf="@+id/btnDICE" />
+
+    <Button
+        android:id="@+id/btnWebSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="WebSearch"
+        app:layout_constraintBottom_toTopOf="@+id/btnScanBarcode"
+        app:layout_constraintStart_toStartOf="@+id/btnSTOPWATCH"
+        app:layout_constraintTop_toTopOf="@+id/btnDICE"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnPinch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pinch"
+        app:layout_constraintStart_toStartOf="@+id/btnSEEK"
+        app:layout_constraintTop_toBottomOf="@+id/btnSEEK" />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="red_option">Red</string>
-    <string name="blue_option">Blue</string>
-    <string name="green_option">Green</string>
-    <string name="clear_option">Clear</string>
-</resources>
