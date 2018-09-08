@@ -1,7 +1,6 @@
-package milu.kiriu2010.gui.main
+package milu.kiriu2010.milurssviewer.main
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
@@ -12,8 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.list_row_url.view.*
 import milu.kiriu2010.entity.GenreData
 import milu.kiriu2010.entity.URLData
 import milu.kiriu2010.id.BundleID
@@ -34,7 +31,7 @@ class URLLstFragment: Fragment() {
     // URL一覧フラグメントを生成
     // ---------------------------------------------------------
     companion object {
-        fun newInstance( genreData: GenreData = GenreData( "IT" ) ): Fragment {
+        fun newInstance( genreData: GenreData = GenreData( "2ch" ) ): Fragment {
             val fragmentURLLst = URLLstFragment()
 
             // URL一覧フラグメントに渡すデータをセット
@@ -121,6 +118,10 @@ class URLLstFragment: Fragment() {
         // RSS 2.0
         urlLst.add( URLData("豆知識", "ロケットニュース", URL("http://feeds.rocketnews24.com/rocketnews24")) )
         // RSS 2.0
+        urlLst.add( URLData( "ニュース", "Yahoo(主要)", URL("https://news.yahoo.co.jp/pickup/rss.xml")) )
+        // RSS 2.0
+        urlLst.add( URLData( "天気", "Yahoo(東京)", URL("https://rss-weather.yahoo.co.jp/rss/days/4410.xml")) )
+        // RSS 2.0
         urlLst.add( URLData( "IT", "ビジネスIT+IT HotTopics", URL("https://www.sbbit.jp/rss/HotTopics.rss")) )
         // RSS 2.0
         urlLst.add( URLData( "IT", "＠IT Smart & Socialフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_smart.xml")) )
@@ -136,7 +137,6 @@ class URLLstFragment: Fragment() {
         urlLst.add( URLData( "IT", "＠IT Linux＆OSSフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_linux.xml")) )
         // RSS 2.0+1.1?
         urlLst.add( URLData( "IT", "GIGAZINE", URL("https://gigazine.net/news/rss_2.0/")) )
-
 
         return urlLst.filter { urlData -> urlData.genre.equals(genreData.genre) }.toMutableList()
 

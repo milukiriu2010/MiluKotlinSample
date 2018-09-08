@@ -1,4 +1,4 @@
-package milu.kiriu2010.gui.main
+package milu.kiriu2010.milurssviewer.main
 
 import android.content.Intent
 import android.content.res.Configuration
@@ -11,9 +11,7 @@ import android.util.Log
 import android.view.MenuItem
 import milu.kiriu2010.entity.GenreData
 import milu.kiriu2010.entity.URLData
-import milu.kiriu2010.gui.each.RssEachActivity
-import milu.kiriu2010.gui.each.RssEachV2Activity
-import milu.kiriu2010.id.BundleID
+import milu.kiriu2010.milurssviewer.each.RssEachV2Activity
 import milu.kiriu2010.id.IntentID
 import milu.kiriu2010.milurssviewer.R
 

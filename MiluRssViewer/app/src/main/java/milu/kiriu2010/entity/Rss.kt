@@ -18,9 +18,9 @@ import javax.xml.xpath.XPathFactory
 data class Article( val title: String, val link: String, val pubDate: Date ): Parcelable {
     constructor(parcel: Parcel) : this(
             // title
-            parcel.readString(),
+            parcel.readString() ?: "",
             // link
-            parcel.readString(),
+            parcel.readString() ?: "",
             // pubDate
             Date(parcel.readLong())) {
     }
@@ -51,7 +51,7 @@ data class Article( val title: String, val link: String, val pubDate: Date ): Pa
 data class Rss( val title: String, val pubDate: Date, val articles: MutableList<Article> ): Parcelable {
     constructor(parcel: Parcel) : this(
             // title
-            parcel.readString(),
+            parcel.readString()  ?: "",
             // pubDate
             Date(parcel.readLong()),
             // https://haruue.moe/blog/2017/12/22/Kotlin-and-Android-Parcelable/

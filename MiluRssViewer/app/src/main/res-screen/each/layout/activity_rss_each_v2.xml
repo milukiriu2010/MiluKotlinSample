@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="milu.kiriu2010.gui.each.RssEachV2Activity">
+    tools:context=".each.RssEachV2Activity">
 
     <FrameLayout
         android:id="@+id/frameRssResult"

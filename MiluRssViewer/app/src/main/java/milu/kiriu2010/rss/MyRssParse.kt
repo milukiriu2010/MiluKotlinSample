@@ -3,7 +3,7 @@ package milu.kiriu2010.rss
 import android.util.Log
 import milu.kiriu2010.entity.Article
 import milu.kiriu2010.entity.Rss
-import milu.kiriu2010.xml.MyXMLParse
+import milu.kiriu2010.file.xml.MyXMLParse
 import org.w3c.dom.Document
 import org.xml.sax.SAXException
 import java.io.IOException

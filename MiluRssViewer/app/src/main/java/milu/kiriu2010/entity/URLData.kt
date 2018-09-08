@@ -14,9 +14,9 @@ http://www.parcelabler.com/
 data class URLData( val genre: String, val title: String, val url: URL ): Parcelable {
     constructor( parcel: Parcel ): this(
             // genre
-            parcel.readString(),
+            parcel.readString() ?: "",
             // title
-            parcel.readString(),
+            parcel.readString() ?: "",
             // URL
             parcel.readValue(URL::class.java.classLoader ) as URL
     )

@@ -1,7 +1,7 @@
 package milu.kiriu2010.rss
 
 import android.util.Log
-import milu.kiriu2010.xml.MyXMLParse
+import milu.kiriu2010.file.xml.MyXMLParse
 import org.xml.sax.SAXException
 import java.io.IOException
 import javax.xml.parsers.ParserConfigurationException

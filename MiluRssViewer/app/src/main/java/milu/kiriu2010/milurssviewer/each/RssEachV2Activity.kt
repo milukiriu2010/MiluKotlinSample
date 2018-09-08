@@ -1,4 +1,4 @@
-package milu.kiriu2010.gui.each
+package milu.kiriu2010.milurssviewer.each
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.support.v4.content.Loader
 import android.util.Log
 import milu.kiriu2010.entity.Rss
 import milu.kiriu2010.entity.URLData
-import milu.kiriu2010.gui.exp.ExceptionFragment
+import milu.kiriu2010.gui.common.ExceptionFragment
 import milu.kiriu2010.id.IntentID
 import milu.kiriu2010.id.LoaderID
 import milu.kiriu2010.loader.AsyncResult

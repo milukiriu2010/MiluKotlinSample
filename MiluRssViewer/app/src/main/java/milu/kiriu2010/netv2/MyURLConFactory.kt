@@ -5,14 +5,17 @@ import java.net.URL
 import java.net.URLConnection
 
 class MyURLConFactory {
+
     companion object {
+        private val TAG = "MyURLConFactory"
+
         fun createInstance( url: URL, myURLConAbsCmp: MyURLConAbs? ): MyURLConAbs? {
-            Log.d( javaClass.simpleName, "================================" )
-            Log.d( javaClass.simpleName, "URL protocol[" + url.protocol + "]" )
-            Log.d( javaClass.simpleName, "URL host[" + url.host + "]" )
-            Log.d( javaClass.simpleName, "URL port[" + url.port + "]" )
-            Log.d( javaClass.simpleName, "URL path[" + url.path + "]" )
-            Log.d( javaClass.simpleName, "================================" )
+            Log.d( TAG, "================================" )
+            Log.d( TAG, "URL protocol[" + url.protocol + "]" )
+            Log.d( TAG, "URL host[" + url.host + "]" )
+            Log.d( TAG, "URL port[" + url.port + "]" )
+            Log.d( TAG, "URL path[" + url.path + "]" )
+            Log.d( TAG, "================================" )
 
             // ------------------------------------------
             // 接続オブジェクトがある場合、

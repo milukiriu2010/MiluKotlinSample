@@ -8,7 +8,7 @@ import android.content.Intent
 import android.support.v4.app.NotificationCompat
 import android.support.v4.app.NotificationManagerCompat
 import milu.kiriu2010.milurssviewer.R
-import milu.kiriu2010.gui.each.RssEachActivity
+import milu.kiriu2010.milurssviewer.each.RssEachActivity
 
 // 通知関連の関数をまとめたファイル
 

@@ -1,4 +1,4 @@
-package milu.kiriu2010.gui.main
+package milu.kiriu2010.milurssviewer.main
 
 import android.content.Context
 import android.os.Bundle
@@ -78,7 +78,9 @@ class GenreLstFragment: Fragment() {
 
         genreLst.add( GenreData( "2ch", 1 ))
         genreLst.add( GenreData( "豆知識", 2 ))
-        genreLst.add( GenreData( "IT", 3 ) )
+        genreLst.add( GenreData( "ニュース", 3))
+        genreLst.add( GenreData( "天気", 4))
+        genreLst.add( GenreData( "IT", 5 ) )
 
         return genreLst
     }

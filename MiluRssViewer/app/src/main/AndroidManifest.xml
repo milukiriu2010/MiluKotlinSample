@@ -18,20 +18,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="milu.kiriu2010.gui.each.RssEachActivity" />
+        <activity android:name=".each.RssEachActivity" />
 
         <service
             android:name="milu.kiriu2010.job.PollingJob"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
-        <activity android:name="milu.kiriu2010.gui.main.URLLstActivity">
+        <activity android:name="milu.kiriu2010.milurssviewer.main.URLLstActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="milu.kiriu2010.gui.each.RssEachV2Activity"></activity>
+        <activity android:name=".each.RssEachV2Activity"></activity>
     </application>
 
 </manifest>

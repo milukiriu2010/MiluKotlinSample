@@ -1,4 +1,4 @@
-package milu.kiriu2010.gui.each
+package milu.kiriu2010.milurssviewer.each
 
 import android.content.Context
 import android.net.Uri
@@ -13,7 +13,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_rss_each.*
 import milu.kiriu2010.entity.Article
 import milu.kiriu2010.entity.Rss
 import milu.kiriu2010.id.BundleID
@@ -91,7 +90,7 @@ class RssEachFragment: Fragment() {
         val ctx = context ?: return view
 
         // RSS記事一覧を表示するためのアダプタ
-        val adapter = RssEachAdapter( ctx, this.rss.articles ) { article ->
+        val adapter = RssEachAdapter(ctx, this.rss.articles) { article ->
             // RSS記事をタップすると"Chrome Custom Tabs"を開く
             val intent = CustomTabsIntent.Builder().build()
             intent.launchUrl(ctx, Uri.parse(article.link))
@@ -114,11 +113,11 @@ class RssEachFragment: Fragment() {
 
         private val inflater = LayoutInflater.from(context)
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RssEachAdapter.RssEachViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RssEachViewHolder {
             // Viewを生成する
             val view = inflater.inflate(R.layout.list_row_rss_each,parent,false)
             // viewHolderを生成する
-            val viewHolder = RssEachAdapter.RssEachViewHolder(view)
+            val viewHolder = RssEachViewHolder(view)
 
             // 記事をクリックすると、表示するためのコールバックを呼ぶ
             view.setOnClickListener {
@@ -132,7 +131,7 @@ class RssEachFragment: Fragment() {
 
         override fun getItemCount(): Int = articleLst.size
 
-        override fun onBindViewHolder(holder: RssEachAdapter.RssEachViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: RssEachViewHolder, position: Int) {
             val article = articleLst[position]
             // 記事のタイトルを設定する
             holder.lblTitle.text = article.title

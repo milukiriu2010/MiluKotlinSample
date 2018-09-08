@@ -8,7 +8,8 @@ import java.io.InputStreamReader
 import java.net.*
 
 // =======================================
-// ver 0.0.1 2018.08.28
+// ver 0.0.1 2018.08.28  no cache
+// ver 0.0.2 2018.09.03  GET parameter
 // ---------------------------------------
 // =======================================
 abstract class MyURLConAbs: Cloneable {
@@ -33,6 +34,13 @@ abstract class MyURLConAbs: Cloneable {
 
     // 受信バッファ
     val responseBuffer = StringBuffer();
+
+    // URLにGETパラメータを付与する
+    enum class HAS_GET_PARAM{
+        YES,
+        NO
+    }
+
 
     // 送信ヘッダ追加
     fun addHeader( k: String, v: String ) {
@@ -61,9 +69,25 @@ abstract class MyURLConAbs: Cloneable {
     // 接続していたらスキップ
     // ------------------------------------
     @Throws(IOException::class)
-    public fun openConnection(): URLConnection? {
+    public fun openConnection( hasGetParam: HAS_GET_PARAM = HAS_GET_PARAM.NO ): URLConnection? {
         try {
             if ( connected == false ) {
+                // GETパラメータがある場合、URLにGETパラメータを付与する
+                if ( hasGetParam == HAS_GET_PARAM.YES ) {
+                    val strURL = url.toString()
+                    val getData = StringBuilder()
+                    this.dataMap.forEach{ k, v ->
+                        if ( getData.length != 0 ) {
+                            getData.append("&")
+                        }
+                        getData.append(URLEncoder.encode(k,"UTF-8"))
+                        getData.append("=")
+                        getData.append(URLEncoder.encode(v,"UTF-8"))
+                    }
+                    url = URL( strURL + "?" + getData.toString() )
+                    Log.d(javaClass.simpleName, "add get to URL[${url.toString()}]")
+                }
+
                 conAbs = url.openConnection()
                 setSocketOption()
                 //connected = true
@@ -264,6 +288,18 @@ abstract class MyURLConAbs: Cloneable {
         this.responseCode = con.responseCode
 
         // -------------------------------------
+        // 全ヘッダ取得
+        // -------------------------------------
+        val responseHeaderMap = con.headerFields
+        responseHeaderMap.forEach{ k,v ->
+            Log.d( javaClass.simpleName, "responseHeaderMap:k[${k}]")
+            v.forEach {
+                Log.d( javaClass.simpleName, "responseHeaderMap:k[${k}]v[$it]")
+            }
+            Log.d( javaClass.simpleName, "=========================")
+        }
+
+        // -------------------------------------
         // レスポンスを受信バッファに詰め込む
         // -------------------------------------
         // HTTP 200-299はinputStream
@@ -289,7 +325,7 @@ abstract class MyURLConAbs: Cloneable {
         // chunkedでも動作する？
         // https://grokonez.com/android/kotlin-http-call-with-asynctask-example-android
         val br = BufferedReader(isr)
-        var line: String? = null
+        var line: String?
         do {
             line = br.readLine()
             if ( line != null ) {

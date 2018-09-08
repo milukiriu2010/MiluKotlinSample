@@ -3,6 +3,7 @@ package milu.kiriu2010.rss
 import android.util.Log
 import milu.kiriu2010.entity.Article
 import milu.kiriu2010.entity.Rss
+import org.w3c.dom.Node
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -31,7 +32,17 @@ class MyRssParseRss2M0: MyRssParseRssAbs() {
         // -------------------------------------------------------
         // RSSのpubDateを取得
         // -------------------------------------------------------
-        val pubDateNode = myXMLParse.searchNode( xmlRoot, "/rss/channel/pubDate/text()")
+        var pubDateNode: Node
+        try {
+            pubDateNode = myXMLParse.searchNode( xmlRoot, "/rss/channel/pubDate/text()")
+        }
+        catch ( ex: Exception ) {
+            // https://rss-weather.yahoo.co.jp/rss/days/4410.xml
+            // Yahoo天気の場合、"pubDate"ではなく"lastBuildDate"になってる
+            // kotlin.TypeCastException: null cannot be cast to non-null type org.w3c.dom.Node
+            pubDateNode = myXMLParse.searchNode( xmlRoot, "/rss/channel/lastBuildDate/text()")
+        }
+
         Log.d( javaClass.simpleName, "pubDate[$pubDateNode.nodeValue]")
         // RSS2.0の日付書式である、RFC1123をDate型に変換するためのオブジェクト
         // Fri, 24 Aug 2018 07:10:00 +0900

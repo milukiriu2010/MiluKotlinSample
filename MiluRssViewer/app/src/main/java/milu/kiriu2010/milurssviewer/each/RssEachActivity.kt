@@ -1,4 +1,4 @@
-package milu.kiriu2010.gui.each
+package milu.kiriu2010.milurssviewer.each
 
 import android.app.job.JobInfo
 import android.app.job.JobScheduler

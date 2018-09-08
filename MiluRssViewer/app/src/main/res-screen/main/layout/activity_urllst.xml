@@ -4,8 +4,7 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_dark"
-    tools:context="milu.kiriu2010.gui.main.URLLstActivity">
+    tools:context="milu.kiriu2010.milurssviewer.main.URLLstActivity">
 
     <!-- メインコンテンツ -->
     <FrameLayout
@@ -15,7 +14,7 @@
         <!--
         <fragment
             android:id="@+id/fragmentURLLst"
-            android:name="milu.kiriu2010.gui.main.URLLstFragment"
+            android:name="milu.kiriu2010.milurssviewer.main.URLLstFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout="@layout/fragment_rss_urllst" />

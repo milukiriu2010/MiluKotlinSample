@@ -7,7 +7,7 @@ data class GenreData(val genre: String, val pos: Int = -1 ): Parcelable {
 
     constructor(parcel: Parcel) : this(
             // genre
-            parcel.readString(),
+            parcel.readString() ?: "",
             // pos
             parcel.readInt()) {
     }
