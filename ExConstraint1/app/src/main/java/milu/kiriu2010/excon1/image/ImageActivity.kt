@@ -15,7 +15,7 @@ class ImageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image)
 
-        rgImage.setOnCheckedChangeListener { group, checkedId ->
+        rgImage.setOnCheckedChangeListener { _, checkedId ->
             val rbImage = findViewById<RadioButton>(checkedId) as RadioButton
 
             val bmpID = if ( rbBlue.equals(rbImage) ) R.drawable.blue else R.drawable.red

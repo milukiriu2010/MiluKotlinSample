@@ -19,7 +19,7 @@ class RateActivity : AppCompatActivity() {
 
         this.setRatingBarValue( ratingBar.rating )
 
-        ratingBar.setOnRatingBarChangeListener { ratingBar, rating, b ->
+        ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
             this.setRatingBarValue( rating )
         }
 

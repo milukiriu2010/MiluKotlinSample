@@ -34,11 +34,11 @@ class SimpleAlertDialog: DialogFragment() {
             return super.onCreateDialog(savedInstanceState)
         val builder = AlertDialog.Builder(context).apply {
             setMessage("時間になりました！")
-            setPositiveButton("起きる") { dialog, which ->
+            setPositiveButton("起きる") { _, _ ->
                 //context.toast("起きるがクリックされました")
                 listener.onPositiveClick()
             }
-            setNegativeButton("あと５分") { dialog, which ->
+            setNegativeButton("あと５分") { _, _ ->
                 //context.toast("あと５分がクリックされました")
                 listener.onNegativeClick()
             }
@@ -69,7 +69,7 @@ class DatePickerFragment: DialogFragment(),
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val date = c.get(Calendar.DAY_OF_MONTH)
-        return DatePickerDialog(context,this, year, month, date)
+        return DatePickerDialog(context!!,this, year, month, date)
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {

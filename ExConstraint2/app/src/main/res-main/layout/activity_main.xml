@@ -212,4 +212,14 @@
         app:layout_constraintStart_toStartOf="@+id/btnSEEK"
         app:layout_constraintTop_toBottomOf="@+id/btnSEEK" />
 
+    <Button
+        android:id="@+id/btnSensorTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="温度センサ"
+        app:layout_constraintBottom_toTopOf="@+id/btnPinch"
+        app:layout_constraintStart_toEndOf="@+id/btnEMAIL"
+        app:layout_constraintTop_toBottomOf="@+id/btnEMAIL"
+        app:layout_constraintVertical_bias="1.0" />
+
 </android.support.constraint.ConstraintLayout>

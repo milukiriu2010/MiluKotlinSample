@@ -5,7 +5,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import milu.kiriu2010.excon2.IntentID2
+import milu.kiriu2010.id.IntentID
 import milu.kiriu2010.excon2.R
 import kotlinx.android.synthetic.main.activity_scan_barcode.*
 
@@ -23,11 +23,11 @@ class ScanBarcodeActivity : AppCompatActivity() {
             R.id.btnProd -> intent.putExtra("SCAN_MODE", "PRODUCT_MODE")
             R.id.btnOther -> intent.putExtra("SCAN_FORMATS", "CODE_39,CODE_93,CODE_128,DATA_MATRIX,ITF,CODABAR")
         }
-        startActivityForResult(intent, IntentID2.ID_SCAN_BARCODE_REQUEST.value)
+        startActivityForResult(intent, IntentID.ID_SCAN_BARCODE_REQUEST.value)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent? ) {
-        if ( requestCode == IntentID2.ID_SCAN_BARCODE_REQUEST.value ) {
+        if ( requestCode == IntentID.ID_SCAN_BARCODE_REQUEST.value ) {
             if ( resultCode == RESULT_OK ) {
                 tvStatus.setText(intent?.getStringExtra("SCAN_RESULT_FORMAT"))
                 tvResult.setText(intent?.getStringExtra("SCAN_RESULT"))

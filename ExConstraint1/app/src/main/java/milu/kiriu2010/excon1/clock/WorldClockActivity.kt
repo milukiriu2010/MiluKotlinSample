@@ -42,7 +42,7 @@ class WorldClockActivity : AppCompatActivity() {
             val pref = getSharedPreferences( "prefs", Context.MODE_PRIVATE )
             val timeZones = pref.getStringSet("time_zone", mutableSetOf() )
 
-            timeZones.add( timeZone )
+            timeZones?.add( timeZone )
 
             pref.edit().putStringSet("time_zone", timeZones ).apply()
 
@@ -54,6 +54,8 @@ class WorldClockActivity : AppCompatActivity() {
         val pref = getSharedPreferences("prefs", Context.MODE_PRIVATE )
         val timeZones = pref.getStringSet( "time_zone", setOf() )
 
-        lvClock.adapter = TimeZoneAdapter(this, timeZones.toTypedArray())
+        timeZones?.let {
+            lvClock.adapter = TimeZoneAdapter(this, it.toTypedArray() )
+        }
     }
 }

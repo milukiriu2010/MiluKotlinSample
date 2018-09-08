@@ -57,6 +57,7 @@ class CountDownActivity : AppCompatActivity() {
         super.onResume()
         soundPool =
                 if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP ) {
+                    @Suppress("DEPRECATION")
                     SoundPool(2, AudioManager.STREAM_ALARM, 0)
                 }
                 else {

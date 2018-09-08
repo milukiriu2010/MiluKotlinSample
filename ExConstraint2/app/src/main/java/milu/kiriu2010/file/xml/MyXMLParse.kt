@@ -1,4 +1,4 @@
-package milu.kiriu2010.xml
+package milu.kiriu2010.file.xml
 
 import org.w3c.dom.Document
 import org.w3c.dom.Node

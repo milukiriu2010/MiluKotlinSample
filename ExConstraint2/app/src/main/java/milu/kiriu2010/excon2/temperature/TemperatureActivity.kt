@@ -20,11 +20,10 @@ class TemperatureActivity : AppCompatActivity() {
     // this method is called at button click because we assigned the name to the
     // "OnClick" property of the button
     fun onClick(view: View) {
-
         Log.d( this.javaClass.toString(), "=== TemperatureActivity Click ================" )
         when (view.id) {
             R.id.btnCAL -> {
-                if ( txtSRC.text.length === 0 ) {
+                if ( txtSRC.text.length == 0 ) {
                     Toast.makeText( this, "Please enter a valid number.", Toast.LENGTH_LONG ).show()
                 }
                 else {

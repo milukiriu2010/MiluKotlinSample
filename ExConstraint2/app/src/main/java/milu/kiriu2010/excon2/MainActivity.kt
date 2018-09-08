@@ -2,7 +2,6 @@ package milu.kiriu2010.excon2
 
 import android.content.Intent
 import android.content.pm.ApplicationInfo
-import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -25,9 +24,9 @@ import milu.kiriu2010.excon2.stopwatch.StopWatchActivity
 import milu.kiriu2010.excon2.temperature.TemperatureActivity
 import milu.kiriu2010.excon2.traffic.TrafficLightActivity
 import milu.kiriu2010.excon2.websearch.WebSearchActivity
-import milu.kiriu2010.net.HttpGet
 import kotlinx.android.synthetic.main.activity_main.*
-import java.net.URL
+import milu.kiriu2010.excon2.sensortemp.SensorTemperatureActivity
+import milu.kiriu2010.id.IntentID
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             tvBuildConf.setText("RELEASE")
         }
 
-        gender.setOnCheckedChangeListener { radioGroup, checkedId ->
+        gender.setOnCheckedChangeListener { _, checkedId ->
                 val radio: RadioButton = findViewById<RadioButton>(checkedId)
                 Toast.makeText(applicationContext, "On checked change : ${radio.text}", Toast.LENGTH_LONG).show()
         }
@@ -62,14 +61,14 @@ class MainActivity : AppCompatActivity() {
         btnRATE.setOnClickListener{
             val intent = Intent(this, RateActivity::class.java )
 
-            this.startActivityForResult( intent, IntentID2.ID_RATE.value )
+            this.startActivityForResult( intent, IntentID.ID_RATE.value )
         }
 
         btnRecycle.transformationMethod = null
         btnRecycle.setOnClickListener{
             val intent = Intent(this, RecycleActivity::class.java )
 
-            this.startActivityForResult( intent, IntentID2.ID_RECYCLE.value )
+            this.startActivityForResult( intent, IntentID.ID_RECYCLE.value )
         }
 
         // https://stackoverflow.com/questions/26958909/why-is-my-button-text-forced-to-all-caps-on-lollipop
@@ -77,55 +76,55 @@ class MainActivity : AppCompatActivity() {
         btnANIME.transformationMethod = null
         btnANIME.setOnClickListener{
             val intent = Intent(this, AnimeActivity::class.java )
-            this.startActivityForResult( intent, IntentID2.ID_ANIME.value )
+            this.startActivityForResult( intent, IntentID.ID_ANIME.value )
         }
 
         btnSEEK.transformationMethod = null
         btnSEEK.setOnClickListener {
             val intent = Intent(this, SeekActivity::class.java )
-            this.startActivityForResult( intent, IntentID2.ID_SEEK.value )
+            this.startActivityForResult( intent, IntentID.ID_SEEK.value )
         }
 
         btnCM.transformationMethod = null
         btnCM.setOnClickListener {
             val intent = Intent(this, ContextMenuActivity::class.java )
-            this.startActivityForResult( intent, IntentID2.ID_CONTEXT_MENU.value )
+            this.startActivityForResult( intent, IntentID.ID_CONTEXT_MENU.value )
         }
 
         btnTemperature.transformationMethod = null
         btnTemperature.setOnClickListener {
             val intent = Intent(this, TemperatureActivity::class.java )
-            this.startActivityForResult( intent, IntentID2.ID_TEMPERATURE.value )
+            this.startActivityForResult( intent, IntentID.ID_TEMPERATURE.value )
         }
 
         btnSTOPWATCH.transformationMethod = null
         btnSTOPWATCH.setOnClickListener {
             val intent = Intent(this, StopWatchActivity::class.java )
-            this.startActivityForResult( intent, IntentID2.ID_STOP_WATCH.value )
+            this.startActivityForResult( intent, IntentID.ID_STOP_WATCH.value )
         }
 
         btnCustomAction.transformationMethod = null
         btnCustomAction.setOnClickListener {
             val intent = Intent(this, CustomActionBarActivity::class.java )
-            this.startActivityForResult( intent, IntentID2.ID_CUSTOM_ACTION.value )
+            this.startActivityForResult( intent, IntentID.ID_CUSTOM_ACTION.value )
         }
 
         btnDICE.transformationMethod = null
         btnDICE.setOnClickListener {
             val intent = Intent(this, DiceRollerActivity::class.java )
-            this.startActivityForResult( intent, IntentID2.ID_DICE.value )
+            this.startActivityForResult( intent, IntentID.ID_DICE.value )
         }
 
         btnLargeBmp.transformationMethod = null
         btnLargeBmp.setOnClickListener {
             val intent = Intent(this, LargeBmpActivity::class.java )
-            this.startActivityForResult( intent, IntentID2.ID_LARGE_BMP.value )
+            this.startActivityForResult( intent, IntentID.ID_LARGE_BMP.value )
         }
 
         btnTrafficLight.transformationMethod = null
         btnTrafficLight.setOnClickListener {
             val intent = Intent(this, TrafficLightActivity::class.java )
-            this.startActivityForResult( intent, IntentID2.ID_TRAFFIC_LIGHT.value )
+            this.startActivityForResult( intent, IntentID.ID_TRAFFIC_LIGHT.value )
         }
 
         // http://tekeye.uk/android/examples/email-contact-form-in-app
@@ -145,24 +144,29 @@ class MainActivity : AppCompatActivity() {
         btnFibonnaci.transformationMethod = null
         btnFibonnaci.setOnClickListener {
             val intent = Intent(this, FibonnaciActivity::class.java )
-            this.startActivityForResult( intent, IntentID2.ID_FIBONNACI.value )
+            this.startActivityForResult( intent, IntentID.ID_FIBONNACI.value )
         }
 
         btnScanBarcode.transformationMethod = null
         btnScanBarcode.setOnClickListener {
             val intent = Intent(this, ScanBarcodeActivity::class.java )
-            this.startActivityForResult( intent, IntentID2.ID_SCAN_BARCODE.value )
+            this.startActivityForResult( intent, IntentID.ID_SCAN_BARCODE.value )
         }
 
         btnWebSearch.transformationMethod = null
         btnWebSearch.setOnClickListener {
             val intent = Intent(this, WebSearchActivity::class.java )
-            this.startActivityForResult( intent, IntentID2.ID_WEB_SEARCH.value )
+            this.startActivityForResult( intent, IntentID.ID_WEB_SEARCH.value )
         }
 
         btnPinch.transformationMethod = null
         btnPinch.setOnClickListener {
             val intent = Intent( this, PinchActivity::class.java )
+            this.startActivity( intent )
+        }
+
+        btnSensorTemperature.setOnClickListener {
+            val intent = Intent( this, SensorTemperatureActivity::class.java )
             this.startActivity( intent )
         }
     }
@@ -199,25 +203,6 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             else ->  super.onOptionsItemSelected(item)
-        }
-    }
-
-
-
-
-    class HttpGetTask: AsyncTask<URL, Unit, String>() {
-
-        override fun doInBackground(vararg params: URL?): String {
-            Log.d("b1", "XXXXXXX")
-            val httpGet = HttpGet()
-            val strGet = httpGet.doGet(params[0]!!)
-            Log.d("b1", strGet)
-            return strGet
-        }
-
-        override fun onPostExecute(result: String?) {
-            Log.d("b2",result)
-            super.onPostExecute(result)
         }
     }
 

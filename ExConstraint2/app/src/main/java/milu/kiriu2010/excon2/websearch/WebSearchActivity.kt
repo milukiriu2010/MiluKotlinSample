@@ -14,12 +14,21 @@ class WebSearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_search)
+
+        ivSearchFor.setOnClickListener { _ ->
+            val strSearchFor = etSearchFor.text.toString()
+            val intent = Intent(Intent.ACTION_WEB_SEARCH)
+            intent.putExtra(SearchManager.QUERY, strSearchFor)
+            startActivity(intent)
+        }
     }
 
+    /*
     fun onClick(view: View) {
         val strSearchFor = etSearchFor.text.toString()
         val intent = Intent(Intent.ACTION_WEB_SEARCH)
         intent.putExtra(SearchManager.QUERY, strSearchFor)
         startActivity(intent)
     }
+    */
 }

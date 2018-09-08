@@ -47,6 +47,7 @@ class AlarmClockActivity : AppCompatActivity(),
 
         if ( intent?.getBooleanExtra("onReceive",false) == true ) {
             // スリープ中でもダイアログが表示されるようにする
+            @Suppress("DEPRECATION")
             when {
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ->
                     window.addFlags(FLAG_TURN_SCREEN_ON or FLAG_SHOW_WHEN_LOCKED)

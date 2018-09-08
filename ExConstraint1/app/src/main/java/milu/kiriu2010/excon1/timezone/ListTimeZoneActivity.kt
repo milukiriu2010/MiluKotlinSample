@@ -20,7 +20,7 @@ class ListTimeZoneActivity : AppCompatActivity() {
 
         timeZoneList.adapter = adapter
 
-        timeZoneList.setOnItemClickListener { parent, view, position, id ->
+        timeZoneList.setOnItemClickListener { _, _, position, _ ->
             Toast.makeText( this, adapter.getItem(position), Toast.LENGTH_LONG ).show()
         }
     }

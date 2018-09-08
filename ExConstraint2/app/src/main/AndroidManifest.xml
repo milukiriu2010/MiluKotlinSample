@@ -39,7 +39,8 @@
         <activity android:name=".scan.ScanBarcodeActivity" />
         <activity android:name=".websearch.WebSearchActivity" />
         <activity android:name=".HelloActivity" />
-        <activity android:name=".pinch.PinchActivity"></activity>
+        <activity android:name=".pinch.PinchActivity" />
+        <activity android:name=".sensortemp.SensorTemperatureActivity"></activity>
     </application>
 
 </manifest>

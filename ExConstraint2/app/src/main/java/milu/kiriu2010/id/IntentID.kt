@@ -1,6 +1,6 @@
-package milu.kiriu2010.excon2
+package milu.kiriu2010.id
 
-enum class IntentID2( val value: Int ) {
+enum class IntentID(val value: Int ) {
     ID_RECYCLE(1),
     ID_RATE(2),
     ID_ANIME(3),
@@ -16,5 +16,6 @@ enum class IntentID2( val value: Int ) {
     ID_SCAN_BARCODE(13),
     ID_SCAN_BARCODE_REQUEST(14),
     ID_WEB_SEARCH(15),
-    ID_PINCH(16)
+    ID_PINCH(16),
+    ID_SENSOR_TEMPERATURE(17)
 }

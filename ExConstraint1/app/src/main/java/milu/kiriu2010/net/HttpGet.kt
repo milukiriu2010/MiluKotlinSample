@@ -14,7 +14,7 @@ class HttpGet {
         var con: HttpURLConnection? = null
 
         try{
-            con = url?.openConnection() as HttpURLConnection
+            con = url.openConnection() as? HttpURLConnection ?: throw RuntimeException("cast error HttpURLConnection")
             con.connect()
 
             val status = con.getResponseCode()

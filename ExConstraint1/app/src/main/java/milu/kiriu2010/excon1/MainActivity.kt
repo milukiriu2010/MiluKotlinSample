@@ -158,6 +158,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        /*
         when ( requestCode ){
             IntentID.ID_USER_ADD.value  -> ""
             IntentID.ID_IMAGE.value      -> ""
@@ -168,6 +169,7 @@ class MainActivity : AppCompatActivity() {
             IntentID.ID_TIMEZONE.value  -> ""
             IntentID.ID_TIMEZONE_RV.value  -> ""
         }
+        */
         //if ( resultCode == Activity.RESULT_OK )
         super.onActivityResult(requestCode, resultCode, data)
     }
