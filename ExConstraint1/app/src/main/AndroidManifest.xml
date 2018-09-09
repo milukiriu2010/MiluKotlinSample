@@ -45,15 +45,18 @@
         <activity android:name=".counter.CounterActivity" />
         <activity android:name=".memo.MemoActivity" />
         <activity android:name=".accball.AccBallActivity" />
-        <activity android:name=".SlideShowActivity" />
+        <activity android:name=".slide.SlideShowActivity" />
         <activity
             android:name=".countdown.CountDownActivity"
             android:theme="@style/AppThemeOrange" />
         <activity
             android:name=".saintropez.SaintTropezActivity"
             android:theme="@style/AppTheme.AppThemeSaintTropez" />
-        <activity android:name=".alarm.AlarmClockActivity"></activity>
-        <receiver android:name=".alarm.AlarmBroadcastReceiver"/>
+        <activity android:name=".alarm.AlarmClockActivity" />
+
+        <receiver android:name=".alarm.AlarmBroadcastReceiver" />
+
+        <activity android:name=".notify.NotifyActivity"></activity>
     </application>
 
 </manifest>

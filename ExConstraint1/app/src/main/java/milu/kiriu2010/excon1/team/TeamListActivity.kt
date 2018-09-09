@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter
 import milu.kiriu2010.abc.Team
 import milu.kiriu2010.abc.TeamBaseBall
 import milu.kiriu2010.abc.TeamSoccer
-import milu.kiriu2010.excon1.IntentID
+import milu.kiriu2010.id.IntentID
 import milu.kiriu2010.excon1.R
 import kotlinx.android.synthetic.main.activity_team_list.*
 

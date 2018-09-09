@@ -21,11 +21,14 @@ import milu.kiriu2010.excon1.file.XMLActivity
 import milu.kiriu2010.excon1.http.HttpActivity
 import milu.kiriu2010.excon1.image.ImageActivity
 import milu.kiriu2010.excon1.memo.MemoActivity
+import milu.kiriu2010.excon1.notify.NotifyActivity
 import milu.kiriu2010.excon1.saintropez.SaintTropezActivity
+import milu.kiriu2010.excon1.slide.SlideShowActivity
 import milu.kiriu2010.excon1.team.TeamListActivity
 import milu.kiriu2010.excon1.team.UserAddActivity
 import milu.kiriu2010.excon1.timezone.ListTimeZoneActivity
 import milu.kiriu2010.excon1.timezone.RecycleTimeZoneActivity
+import milu.kiriu2010.id.IntentID
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -154,6 +157,12 @@ class MainActivity : AppCompatActivity() {
         btnAlarmClock.setOnClickListener {
             val intent = Intent( this, AlarmClockActivity::class.java )
             startActivityForResult( intent, IntentID.ID_ALARM_CLOCK.value )
+        }
+
+        // 通知
+        btnNotify.setOnClickListener {
+            val intent = Intent( this, NotifyActivity::class.java )
+            startActivityForResult( intent, IntentID.ID_NOTIFY.value )
         }
     }
 

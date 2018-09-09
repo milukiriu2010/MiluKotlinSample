@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1
+package milu.kiriu2010.excon1.slide
 
 import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_slide_show.*
+import milu.kiriu2010.excon1.R
 import kotlin.concurrent.timer
 
 class SlideShowActivity : AppCompatActivity() {
@@ -86,7 +87,7 @@ class SlideShowActivity : AppCompatActivity() {
             }
         }
 
-        player = MediaPlayer.create(this, R.raw.getdown )
+        player = MediaPlayer.create(this, R.raw.getdown)
         player.isLooping = true
     }
 

@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1
+package milu.kiriu2010.id
 
 enum class IntentID( val value: Int ) {
     ID_USER_ADD(1),
@@ -19,5 +19,6 @@ enum class IntentID( val value: Int ) {
     ID_SLIDE(16),
     ID_COUNT_DOWN(17),
     ID_SAINT_TROPEZ(18),
-    ID_ALARM_CLOCK(19)
+    ID_ALARM_CLOCK(19),
+    ID_NOTIFY(20)
 }

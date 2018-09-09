@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import milu.kiriu2010.excon1.IntentID
+import milu.kiriu2010.id.IntentID
 import milu.kiriu2010.excon1.R
 import milu.kiriu2010.excon1.timezone.TimeZoneAdapter
 import milu.kiriu2010.excon1.timezone.TimeZoneSelectActivity

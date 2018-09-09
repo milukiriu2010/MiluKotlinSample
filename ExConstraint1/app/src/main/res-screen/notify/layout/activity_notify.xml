@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".notify.NotifyActivity">
+
+    <TextView
+        android:id="@+id/labelTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:text="通知タイトル"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/dataTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="たいとる"
+        app:layout_constraintBottom_toBottomOf="@+id/labelTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/labelTitle"
+        app:layout_constraintTop_toTopOf="@+id/labelTitle" />
+
+    <TextView
+        android:id="@+id/labelContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="通知内容"
+        app:layout_constraintEnd_toEndOf="@+id/labelTitle"
+        app:layout_constraintStart_toEndOf="@+id/labelTitle"
+        app:layout_constraintStart_toStartOf="@+id/labelTitle"
+        app:layout_constraintTop_toBottomOf="@+id/labelTitle" />
+
+    <EditText
+        android:id="@+id/dataContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="えへへ"
+        app:layout_constraintBottom_toBottomOf="@+id/labelContent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/labelContent"
+        app:layout_constraintTop_toTopOf="@+id/labelContent" />
+
+    <TextView
+        android:id="@+id/labelDelay"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="〇秒後通知"
+        app:layout_constraintEnd_toEndOf="@+id/labelContent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/labelContent"
+        app:layout_constraintTop_toBottomOf="@+id/labelContent" />
+
+    <EditText
+        android:id="@+id/dataDelay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="numberSigned"
+        android:text="10"
+        app:layout_constraintBottom_toBottomOf="@+id/labelDelay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/labelDelay"
+        app:layout_constraintTop_toTopOf="@+id/labelDelay" />
+
+    <Button
+        android:id="@+id/btnNotify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="通知"
+        app:layout_constraintStart_toStartOf="@+id/labelDelay"
+        app:layout_constraintTop_toBottomOf="@+id/labelDelay" />
+
+</android.support.constraint.ConstraintLayout>
