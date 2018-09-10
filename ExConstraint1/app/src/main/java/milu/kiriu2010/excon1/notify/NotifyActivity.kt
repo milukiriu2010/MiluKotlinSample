@@ -5,11 +5,13 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.NotificationCompat
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_notify.*
 import milu.kiriu2010.excon1.R
 import milu.kiriu2010.id.NotificationChannelID
@@ -52,6 +54,8 @@ class NotifyActivity : AppCompatActivity() {
 
     // 通知を実施
     private fun sendNotify() {
+        Log.d( javaClass.simpleName, "sendNotify")
+
         // 通知タップ時に開かれる画面へのインテント
         val intent = Intent(this, NotifyActivity::class.java)
         // ペンディングインテントに詰める
@@ -59,6 +63,34 @@ class NotifyActivity : AppCompatActivity() {
 
         // NotificationCompat.Builderオブジェクトを生成
         val builder = NotificationCompat.Builder(this,NotificationChannelID.ID_NEW_ARTICLE.id)
+
+        when (radioGroupNotificationStyle.checkedRadioButtonId) {
+            // BigPictureStyleによる通知
+            R.id.radioButtonPicture -> {
+                NotificationCompat.BigPictureStyle(builder)
+                        .bigPicture(BitmapFactory.decodeResource(resources,R.drawable.cat))
+                        .setBigContentTitle("BigPictureStyle")
+                        .setSummaryText("BigPictureStyleの表示例")
+            }
+            // BigTextStyleによる通知
+            R.id.radioButtonText -> {
+                NotificationCompat.BigTextStyle(builder)
+                        .bigText("abcde\nfghij\nklmno\n")
+                        .setBigContentTitle("BigTextStyle")
+                        .setSummaryText("BigTextStyleの表示例")
+            }
+            // InboxStyleによる通知
+            R.id.radioButtonInbox -> {
+                NotificationCompat.InboxStyle(builder)
+                        .setBigContentTitle("本日の予定")
+                        .addLine("  7:00 起床")
+                        .addLine(" 8:30 出勤")
+                        .addLine("12:00 ランチ")
+                        .setSummaryText("3件の予定があります")
+            }
+            // ProgressBarによる通知
+            // https://qiita.com/naoi/items/eb9b72ef1668957a60be
+        }
 
         // 通知の設定を行い、Notificationオブジェクトを生成する
         val notification = builder.setSmallIcon(android.R.drawable.ic_media_play)

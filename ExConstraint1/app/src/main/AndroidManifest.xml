@@ -56,7 +56,12 @@
 
         <receiver android:name=".alarm.AlarmBroadcastReceiver" />
 
-        <activity android:name=".notify.NotifyActivity"></activity>
+        <activity android:name=".notify.NotifyActivity" />
+
+        <service
+            android:name=".notify.ForegroundService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

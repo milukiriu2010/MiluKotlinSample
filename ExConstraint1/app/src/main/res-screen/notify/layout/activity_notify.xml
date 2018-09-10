@@ -77,13 +77,81 @@
         app:layout_constraintStart_toEndOf="@+id/labelDelay"
         app:layout_constraintTop_toTopOf="@+id/labelDelay" />
 
-    <Button
-        android:id="@+id/btnNotify"
+    <RadioGroup
+        android:id="@+id/radioGroupNotificationStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="48dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelDelay">
+
+        <RadioButton
+            android:id="@+id/radioButtonNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Normal" />
+
+        <RadioButton
+            android:id="@+id/radioButtonPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Picture" />
+
+        <RadioButton
+            android:id="@+id/radioButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Text" />
+
+        <RadioButton
+            android:id="@+id/radioButtonInbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Inbox"
+            tools:layout_editor_absoluteX="45dp"
+            tools:layout_editor_absoluteY="310dp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Progress" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnNotify"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="通知"
-        app:layout_constraintStart_toStartOf="@+id/labelDelay"
-        app:layout_constraintTop_toBottomOf="@+id/labelDelay" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupNotificationStyle" />
+
+    <Button
+        android:id="@+id/btnNotify"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="68dp"
+        android:text="startServiceによる開始"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupNotificationStyle" />
 
 </android.support.constraint.ConstraintLayout>
