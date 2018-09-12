@@ -35,11 +35,13 @@
 
     <Button
         android:id="@+id/btnRATE"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/BTN_RATE"
         app:layout_constraintBottom_toTopOf="@+id/btnTemperature"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toEndOf="@+id/btnANIME"
         app:layout_constraintTop_toTopOf="@+id/btnANIME"
         app:layout_constraintVertical_bias="1.0" />
@@ -75,11 +77,13 @@
 
     <Button
         android:id="@+id/btnCM"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/BTN_CM"
         app:layout_constraintBottom_toTopOf="@+id/btnWebSearch"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/btnCustomAction"
         app:layout_constraintTop_toTopOf="@+id/btnSTOPWATCH"
         app:layout_constraintVertical_bias="1.0" />
@@ -95,13 +99,15 @@
 
     <Button
         android:id="@+id/btnSTOPWATCH"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/BTN_STOP_WATCH"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btnDICE"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toEndOf="@+id/btnANIME"
         app:layout_constraintTop_toTopOf="@+id/btnTemperature"
         app:layout_constraintVertical_bias="1.0" />
@@ -110,11 +116,12 @@
         android:id="@+id/btnCustomAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="8dp"
         android:text="@string/BTN_CUSTOM_ACTION"
         app:layout_constraintBottom_toTopOf="@+id/btnSTOPWATCH"
-        app:layout_constraintStart_toEndOf="@+id/btnRATE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/btnRATE"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -129,11 +136,13 @@
 
     <Button
         android:id="@+id/btnLargeBmp"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/BTN_LARGE_BMP"
         app:layout_constraintBottom_toBottomOf="@+id/btnEMAIL"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/btnFibonnaci"
         app:layout_constraintTop_toBottomOf="@+id/btnScanBarcode"
         app:layout_constraintVertical_bias="1.0" />
@@ -176,11 +185,13 @@
 
     <Button
         android:id="@+id/btnFibonnaci"
-        android:layout_width="wrap_content"
-        android:layout_height="51dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="Fibonnaci"
         app:layout_constraintBottom_toBottomOf="@+id/btnScanBarcode"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/btnWebSearch"
         app:layout_constraintTop_toTopOf="@+id/btnScanBarcode"
         app:layout_constraintVertical_bias="0.727" />
@@ -195,11 +206,13 @@
 
     <Button
         android:id="@+id/btnWebSearch"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="WebSearch"
         app:layout_constraintBottom_toTopOf="@+id/btnScanBarcode"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/btnSTOPWATCH"
         app:layout_constraintTop_toTopOf="@+id/btnDICE"
         app:layout_constraintVertical_bias="1.0" />
@@ -214,12 +227,35 @@
 
     <Button
         android:id="@+id/btnSensorTemperature"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="温度センサ"
         app:layout_constraintBottom_toTopOf="@+id/btnPinch"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toEndOf="@+id/btnEMAIL"
         app:layout_constraintTop_toBottomOf="@+id/btnEMAIL"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnSensorLight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:text="照度センサ"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPinch"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnSensorTemperature"
+        app:layout_constraintTop_toTopOf="@+id/btnPinch"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="211dp" />
 
 </android.support.constraint.ConstraintLayout>

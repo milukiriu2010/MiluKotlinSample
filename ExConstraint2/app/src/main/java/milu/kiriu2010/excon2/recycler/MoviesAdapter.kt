@@ -38,4 +38,9 @@ class MoviesAdapter(val moviesList: MutableList<Movie>, val context: Context) : 
     override  fun getItemCount(): Int {
         return this.moviesList.size
     }
+
+    fun removeAt(pos: Int) {
+        this.moviesList.removeAt(pos)
+        notifyItemRemoved(pos)
+    }
 }

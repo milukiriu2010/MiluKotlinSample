@@ -25,6 +25,7 @@ import milu.kiriu2010.excon2.temperature.TemperatureActivity
 import milu.kiriu2010.excon2.traffic.TrafficLightActivity
 import milu.kiriu2010.excon2.websearch.WebSearchActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import milu.kiriu2010.excon2.sensorlight.SensorLightActivity
 import milu.kiriu2010.excon2.sensortemp.SensorTemperatureActivity
 import milu.kiriu2010.id.IntentID
 
@@ -165,9 +166,16 @@ class MainActivity : AppCompatActivity() {
             this.startActivity( intent )
         }
 
+        // 温度センサ
         btnSensorTemperature.setOnClickListener {
             val intent = Intent( this, SensorTemperatureActivity::class.java )
             this.startActivity( intent )
+        }
+
+        // 照度センサ
+        btnSensorLight.setOnClickListener {
+            val intent = Intent( this, SensorLightActivity::class.java)
+            this.startActivity(intent)
         }
     }
 

@@ -40,7 +40,8 @@
         <activity android:name=".websearch.WebSearchActivity" />
         <activity android:name=".HelloActivity" />
         <activity android:name=".pinch.PinchActivity" />
-        <activity android:name=".sensortemp.SensorTemperatureActivity"></activity>
+        <activity android:name=".sensortemp.SensorTemperatureActivity" />
+        <activity android:name=".sensorlight.SensorLightActivity"></activity>
     </application>
 
 </manifest>

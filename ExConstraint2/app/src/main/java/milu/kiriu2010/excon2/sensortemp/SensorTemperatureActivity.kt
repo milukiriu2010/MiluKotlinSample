@@ -8,6 +8,8 @@ import android.hardware.SensorManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_sensor_temperature.*
@@ -22,6 +24,8 @@ class SensorTemperatureActivity : AppCompatActivity()
     var ambientTemperature: Float = 0.0f
     // 湿度
     var humidity: Float = 0.0f
+    // 気圧
+    var pressure: Float = 0.0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +56,7 @@ class SensorTemperatureActivity : AppCompatActivity()
         // 温度センサなし
         else {
             notFoundLst.add("温度センサ")
+            dataTemperature.text = "×"
         }
 
         // 湿度センサ
@@ -63,6 +68,19 @@ class SensorTemperatureActivity : AppCompatActivity()
         // 湿度センサなし
         else {
             notFoundLst.add("湿度センサ")
+            dataHumidity.text = "×"
+        }
+
+        // 圧力センサ
+        var sensorPressure: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE)
+        // 圧力センサあり
+        if ( sensorPressure != null ) {
+            sensorManager.registerListener(this, sensorPressure, SensorManager.SENSOR_DELAY_GAME)
+        }
+        // 圧力センサなし
+        else {
+            notFoundLst.add("圧力センサ")
+            dataPressure.text = "×"
         }
 
         if ( notFoundLst.size > 0 ) {
@@ -96,6 +114,16 @@ class SensorTemperatureActivity : AppCompatActivity()
                 ambientTemperature = event.values[0]
                 dataTemperature.text = ambientTemperature.toString()
             }
+            // 湿度センサ
+            Sensor.TYPE_RELATIVE_HUMIDITY -> {
+                humidity = event.values[0]
+                dataHumidity.text = humidity.toString()
+            }
+            // 圧力センサ
+            Sensor.TYPE_PRESSURE -> {
+                pressure = event.values[0]
+                dataPressure.text = pressure.toString()
+            }
             // その他のセンサ
         }
     }
@@ -116,12 +144,25 @@ class SensorTemperatureActivity : AppCompatActivity()
     private fun checkSensors() {
         val sensors = sensorManager.getSensorList(Sensor.TYPE_ALL)
 
-        val sb = StringBuilder()
-        var cnt = 0
-        sensors.forEach {
-            val str = String.format( "%d: %s: %s\n", cnt++, it.type , it.name )
-            sb.append(str)
-        }
-        dataSensorLst.text = sb.toString()
+        // リサイクラ・ビュー上にセンサ一覧を縦に並べる
+        val layoutManager = LinearLayoutManager( this, LinearLayoutManager.VERTICAL, false )
+        recyclerViewMovie.layoutManager = layoutManager
+
+        // 可変ではないので、java.lang.UnsupportedOperationException が発生する
+        //sensors.sortBy{ it.stringType }
+        //sensors.sortWith(Comparator({ a,b -> b.stringType.compareTo(a.stringType)}))
+
+        // ソートするために可変リストに格納しなおす
+        val sensorLst = mutableListOf<Sensor>()
+        sensors.forEach { sensorLst.add(it) }
+        sensorLst.sortBy { it.stringType }
+
+        // センサ一覧を表示するためのアダプタを設定
+        val adapter = SensorAdapter( this , sensorLst )
+        recyclerViewMovie.adapter = adapter
+
+        // 区切り線を入れる
+        val itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL )
+        recyclerViewMovie.addItemDecoration(itemDecoration)
     }
 }

@@ -24,8 +24,8 @@ class PinchActivity : AppCompatActivity() {
                     scale *= it.scaleFactor
                     imageViewHyottoko.scaleX = scale
                     imageViewHyottoko.scaleY = scale
-                    textView.scaleX = scale
-                    textView.scaleY = scale
+                    textViewMovie.scaleX = scale
+                    textViewMovie.scaleY = scale
                 }
 
                 return true

@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
+import android.view.View
+import kotlinx.android.synthetic.main.activity_recycle.*
 import milu.kiriu2010.abc.Movie
 import milu.kiriu2010.excon2.R
-import kotlinx.android.synthetic.main.activity_recycle.*
 
 // https://www.androidhive.info/2016/01/android-working-with-recycler-view/
 class RecycleActivity : AppCompatActivity() {
@@ -19,13 +21,39 @@ class RecycleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycle)
 
-        //recyclerView = findViewById(R.id.recycler_view) As RecyclerView
+        textViewMovie.visibility = View.GONE
 
         this.mAdapter = MoviesAdapter(this.movieList, this)
         val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
-        recycler_view.layoutManager = mLayoutManager
-        recycler_view.itemAnimator = DefaultItemAnimator()
-        recycler_view.adapter = this.mAdapter
+        recyclerViewMovie.layoutManager = mLayoutManager
+        recyclerViewMovie.itemAnimator = DefaultItemAnimator()
+        recyclerViewMovie.adapter = this.mAdapter
+
+        val swipeHandler = object: SwipeToDeleteCallback(this, mAdapter) {
+            /*
+            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+                val fromPos = viewHolder.adapterPosition
+                val toPos = target.adapterPosition
+                mAdapter.notifyItemMoved(fromPos,toPos)
+                return true
+            }
+            */
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val adapter = recyclerViewMovie.adapter as MoviesAdapter
+                val pos = viewHolder.adapterPosition
+                adapter.removeAt(pos)
+
+                // 表示アイテム数が０になったら、"データがない"旨を表示
+                if ( adapter.moviesList.size == 0 ) {
+                    textViewMovie.visibility = View.VISIBLE
+                    recyclerViewMovie.visibility = View.GONE
+                }
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(recyclerViewMovie)
 
         this.prepareMovieData()
     }
@@ -48,6 +76,7 @@ class RecycleActivity : AppCompatActivity() {
         movieList.add(Movie("Goldfinger", "Action & Adventure", "1965"))
         movieList.add(Movie("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014"))
 
+        // リストに変更があったことをアダプタに知らせる
         this.mAdapter.notifyDataSetChanged()
     }
 }

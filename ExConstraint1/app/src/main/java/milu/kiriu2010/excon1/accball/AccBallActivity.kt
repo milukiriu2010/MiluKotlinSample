@@ -30,9 +30,9 @@ class AccBallActivity : AppCompatActivity(), SensorEventListener, SurfaceHolder.
     private var ballX: Float = 0f
     // ボールの現在のy座標
     private var ballY: Float = 0f
-    // ボールのx方向への加速度
+    // ボールのx方向への速度
     private var vx: Float = 0f
-    // ボールのy方向への加速度
+    // ボールのy方向への速度
     private var vy: Float = 0f
     // 前回時間の保持
     private var time: Long = 0L
@@ -71,20 +71,33 @@ class AccBallActivity : AppCompatActivity(), SensorEventListener, SurfaceHolder.
 
         if ( time == 0L ) time = System.currentTimeMillis()
         if ( event.sensor.type == Sensor.TYPE_ACCELEROMETER ) {
+            textView.text = """
+                |x = ${event.values[0]}
+                |y = ${event.values[1]}
+                |z = ${event.values[2]}
+                """.trimMargin("|")
+
+            // x,y方向の加速度
             val x = -event.values[0]
             val y = event.values[1]
 
+            // 前回計測との差分時間(秒)
             var t = (System.currentTimeMillis() - time).toFloat()
             time = System.currentTimeMillis()
             t /= 1000.0f
 
+            // 差分時間における移動距離(v*t+1/2a*t^2)
             val dx = vx*t + x*t*t/2.0f
             val dy = vy*t + y*t*t/2.0f
+            // 移動後のボールの位置
+            // dx,dyがメートルなので、ピクセル単位に変換
             ballX += dx*coef
             ballY += dy*coef
+            // 次の移動距離を計算するときの初期速度を設定
             vx += x*t
             vy += y*t
 
+            // 壁にぶつかると反対方向に反射し、速度を2/3にする
             if ( ballX - radius < 0 && vx < 0 ) {
                 vx = -vx/1.5f
                 ballX = radius
