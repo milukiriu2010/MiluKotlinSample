@@ -8,7 +8,6 @@ import android.hardware.SensorManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import kotlinx.android.synthetic.main.activity_sensor_light.*
 import milu.kiriu2010.excon2.R
 
@@ -76,7 +75,7 @@ class SensorLightActivity : AppCompatActivity()
         //   LIGHT_CLOUDY          100.0       2
         //   LIGHT_FULLMOON          0.25     -0.602
         //   LIGHT_NO_MOON           0.0010   -3
-        viewLight.lux = light
+        viewLight.lux = if ( light > 0 ){ light }else{ 0.0010f }
         viewLight.movePos()
         // 再描画
         viewLight.invalidate()

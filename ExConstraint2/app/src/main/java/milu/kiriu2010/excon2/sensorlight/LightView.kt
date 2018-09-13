@@ -79,7 +79,7 @@ class LightView: View {
     override fun onDraw(canvas: Canvas?) {
         //super.onDraw(canvas)
         // 描画クリア
-        canvas?.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
+        //canvas?.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
 
         // バックグラウンドを白く塗りつぶす
         canvas?.drawColor(Color.WHITE)
@@ -89,7 +89,6 @@ class LightView: View {
 
         canvas?.drawPath( pos, posPaint )
 
-        Log.d( javaClass.simpleName, pos.toString() )
     }
 
     fun movePos() {
@@ -101,7 +100,12 @@ class LightView: View {
         // 一番弱い照度が対数で-3
         val luxPos =  ( 5 - luxNow )/8 * scaleHeight + scaleMarginT
 
+        Log.d( javaClass.simpleName, "luxNow={$luxNow}luxPos=${luxPos}" )
+
         // スケール位置
+        // 1回リセットしないと、
+        // すべてのパスが保たれて、複数の三角形が表示されてしまう
+        pos.reset()
         // 左
         pos.moveTo( posMarginL, luxPos)
         // 右上
