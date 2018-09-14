@@ -10,6 +10,7 @@ import java.net.*
 // =======================================
 // ver 0.0.1 2018.08.28  no cache
 // ver 0.0.2 2018.09.03  GET parameter
+// ver 0.0.3 2018.09.14  redirect
 // ---------------------------------------
 // =======================================
 abstract class MyURLConAbs: Cloneable {
@@ -21,16 +22,17 @@ abstract class MyURLConAbs: Cloneable {
     var connected = false
 
     // 送信ヘッダ
-    val headerMap = mutableMapOf<String,String>()
+    val sendHeaderMap = mutableMapOf<String,String>()
     // 送信データ
-    val dataMap = mutableMapOf<String,String>()
+    val sendDataMap = mutableMapOf<String,String>()
 
     // HTTP受信コード
     var responseCode = -1
     // HTTPレスポンス結果
-    //   OK => true
-    //   NG => false
-    var responseOK = false
+    var responseOK = RESPONSE_OK.NG
+
+    // 受信ヘッダ
+    val responseHeaderMap = mutableMapOf<String,MutableList<String>>()
 
     // 受信バッファ
     val responseBuffer = StringBuffer();
@@ -41,15 +43,21 @@ abstract class MyURLConAbs: Cloneable {
         NO
     }
 
+    // レスポンス結果
+    enum class RESPONSE_OK {
+        OK,
+        NG,
+        REDIRECT
+    }
 
     // 送信ヘッダ追加
-    fun addHeader( k: String, v: String ) {
-        headerMap.put(k,v)
+    fun addSendHeader(k: String, v: String ) {
+        sendHeaderMap.put(k,v)
     }
 
     // 送信データ追加
-    fun addData( k: String, v: String ) {
-        dataMap.put(k,v)
+    fun addSendData(k: String, v: String ) {
+        sendDataMap.put(k,v)
     }
 
     // -----------------------------
@@ -58,7 +66,7 @@ abstract class MyURLConAbs: Cloneable {
     // "受信バッファ"
     fun clear() {
         this.responseCode = -1
-        this.responseOK = false
+        this.responseOK = RESPONSE_OK.OK
         this.responseBuffer.delete( 0, this.responseBuffer.length )
     }
 
@@ -76,7 +84,7 @@ abstract class MyURLConAbs: Cloneable {
                 if ( hasGetParam == HAS_GET_PARAM.YES ) {
                     val strURL = url.toString()
                     val getData = StringBuilder()
-                    this.dataMap.forEach{ k, v ->
+                    this.sendDataMap.forEach{ k, v ->
                         if ( getData.length != 0 ) {
                             getData.append("&")
                         }
@@ -108,7 +116,7 @@ abstract class MyURLConAbs: Cloneable {
         clear()
 
         // 送信するHTTPヘッダをセットする
-        headerMap.forEach { k, v->
+        sendHeaderMap.forEach { k, v->
             con.setRequestProperty(k,v)
         }
 
@@ -121,7 +129,6 @@ abstract class MyURLConAbs: Cloneable {
         // HttpURLConnectionである必要がある
         // -------------------------------------
         con.setRequestMethod("GET")
-
 
         // -------------------------------------
         // 接続
@@ -149,7 +156,19 @@ abstract class MyURLConAbs: Cloneable {
         // -------------------------------------
         // 全ヘッダ取得
         // -------------------------------------
-        val responseHeaderMap = con.headerFields
+        //responseHeaderMap = con.headerFields
+        responseHeaderMap.clear()
+        con.headerFields.forEach { k, v ->
+            if ( k != null ) {
+                responseHeaderMap.put(k, v)
+            }
+            else {
+                Log.d( javaClass.simpleName, "headerFields:k[${k}]")
+                v.forEach {
+                    Log.d( javaClass.simpleName, "headerFields:k[${k}]v[$it]")
+                }
+            }
+        }
         responseHeaderMap.forEach{ k,v ->
             Log.d( javaClass.simpleName, "responseHeaderMap:k[${k}]")
             v.forEach {
@@ -166,11 +185,15 @@ abstract class MyURLConAbs: Cloneable {
         // から取得するらしい
         // -------------------------------------
         val isr = if ( this.responseCode in 200..299 ) {
-            this.responseOK = true
+            this.responseOK = RESPONSE_OK.OK
             InputStreamReader( con.inputStream, "UTF-8" )
         }
+        else if ( this.responseCode in 301..302 ) {
+            this.responseOK = RESPONSE_OK.REDIRECT
+            return
+        }
         else {
-            this.responseOK = false
+            this.responseOK = RESPONSE_OK.NG
             InputStreamReader( con.errorStream, "UTF-8" )
         }
 
@@ -186,7 +209,7 @@ abstract class MyURLConAbs: Cloneable {
         // chunkedでも動作する？
         // https://grokonez.com/android/kotlin-http-call-with-asynctask-example-android
         val br = BufferedReader(isr)
-        var line: String? = null
+        var line: String?
         do {
             line = br.readLine()
             if ( line != null ) {
@@ -210,7 +233,7 @@ abstract class MyURLConAbs: Cloneable {
         con.doOutput = true
 
         // 送信するHTTPヘッダをセットする
-        headerMap.forEach { k, v->
+        sendHeaderMap.forEach { k, v->
             con.setRequestProperty(k,v)
         }
 
@@ -218,19 +241,19 @@ abstract class MyURLConAbs: Cloneable {
         // POSTするデータを生成
         // ---------------------------------------------------------
         val postData = StringBuilder()
-        val contentType = this.headerMap.get("Content-type") ?: ""
+        val contentType = this.sendHeaderMap.get("Content-type") ?: ""
 
         // ---------------------------------------------------------
         // Content-typeがjsonの場合、そのままPOSTする
         // Content-typeがjson以外の場合、key=val形式のデータを生成する
         // ---------------------------------------------------------
         if ( contentType.contains("application/json")) {
-            this.dataMap.forEach{ _, v ->
+            this.sendDataMap.forEach{ _, v ->
                 postData.append(v)
             }
         }
         else {
-            this.dataMap.forEach{ k, v ->
+            this.sendDataMap.forEach{ k, v ->
                 if ( postData.length != 0 ) {
                     postData.append("&")
                 }
@@ -290,7 +313,19 @@ abstract class MyURLConAbs: Cloneable {
         // -------------------------------------
         // 全ヘッダ取得
         // -------------------------------------
-        val responseHeaderMap = con.headerFields
+        //responseHeaderMap = con.headerFields
+        responseHeaderMap.clear()
+        con.headerFields.forEach { k, v ->
+            if ( k != null ) {
+                responseHeaderMap.put(k, v)
+            }
+            else {
+                Log.d( javaClass.simpleName, "headerFields:k[${k}]")
+                v.forEach {
+                    Log.d( javaClass.simpleName, "headerFields:k[${k}]v[$it]")
+                }
+            }
+        }
         responseHeaderMap.forEach{ k,v ->
             Log.d( javaClass.simpleName, "responseHeaderMap:k[${k}]")
             v.forEach {
@@ -307,11 +342,11 @@ abstract class MyURLConAbs: Cloneable {
         // から取得するらしい
         // -------------------------------------
         val isr = if ( this.responseCode in 200..299 ) {
-            this.responseOK = true
+            this.responseOK = RESPONSE_OK.OK
             InputStreamReader( con.inputStream, "UTF-8" )
         }
         else {
-            this.responseOK = false
+            this.responseOK = RESPONSE_OK.NG
             InputStreamReader( con.errorStream, "UTF-8" )
         }
 

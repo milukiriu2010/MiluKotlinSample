@@ -48,7 +48,7 @@ data class Article( val title: String, val link: String, val pubDate: Date ): Pa
 }
 
 // RSSを表現するデータクラス
-data class Rss( val title: String, val pubDate: Date, val articles: MutableList<Article> ): Parcelable {
+data class Rss( var title: String = "", var pubDate: Date = Date(), val articles: MutableList<Article> = mutableListOf() ): Parcelable {
     constructor(parcel: Parcel) : this(
             // title
             parcel.readString()  ?: "",

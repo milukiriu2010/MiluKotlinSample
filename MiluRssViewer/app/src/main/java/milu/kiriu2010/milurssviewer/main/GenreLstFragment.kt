@@ -76,46 +76,14 @@ class GenreLstFragment: Fragment() {
     private fun loadGenreData(): MutableList<GenreData> {
         val genreLst: MutableList<GenreData> = mutableListOf<GenreData>()
 
-        genreLst.add( GenreData( "2ch", 1 ))
-        genreLst.add( GenreData( "豆知識", 2 ))
-        genreLst.add( GenreData( "ニュース", 3))
-        genreLst.add( GenreData( "天気", 4))
-        genreLst.add( GenreData( "IT", 5 ) )
+        genreLst.add( GenreData( 1,"2ch", 1 ))
+        genreLst.add( GenreData( 2,"豆知識", 2 ))
+        genreLst.add( GenreData( 3,"ニュース", 3))
+        genreLst.add( GenreData( 4,"天気", 4))
+        genreLst.add( GenreData( 5,"IT", 5 ) )
+        genreLst.add( GenreData( 6,"スポーツ", 6 ) )
 
         return genreLst
     }
 
-    class GenreLstAdapter(context: Context,
-            // ジャンル一覧
-            private val genreDataLst: MutableList<GenreData> = mutableListOf<GenreData>(),
-            // アイテムをクリックすると呼ばれる
-            private val onItemClick: (GenreData) -> Unit )
-        : RecyclerView.Adapter<GenreLstAdapter.GenreViewHolder>() {
-
-        private val inflater = LayoutInflater.from(context)
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreViewHolder {
-            val view = inflater.inflate(R.layout.list_row_genre, parent, false )
-            val viewHolder = GenreViewHolder(view)
-
-            view.setOnClickListener {
-                val pos = viewHolder.adapterPosition
-                val genreData = genreDataLst[pos]
-                onItemClick(genreData)
-            }
-
-            return viewHolder
-        }
-
-        override fun getItemCount(): Int = genreDataLst.size
-
-        override fun onBindViewHolder(holder: GenreViewHolder, position: Int) {
-            val genreData = genreDataLst[position]
-            holder.labelGenre.text = genreData.genre
-        }
-
-        class GenreViewHolder(view: View): RecyclerView.ViewHolder(view) {
-            val labelGenre = view.findViewById<TextView>(R.id.labelGenre)
-        }
-    }
 }

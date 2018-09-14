@@ -12,6 +12,7 @@ import javax.xml.xpath.XPathConstants
 import javax.xml.xpath.XPathExpressionException
 import javax.xml.xpath.XPathFactory
 
+// 2018.09.14 evaluateでNodeが見つからない場合nullを返却するように変更
 class MyXMLParse {
     @Throws(ParserConfigurationException::class, IOException::class, SAXException::class)
     fun str2doc(strXML: String): Document {
@@ -25,13 +26,13 @@ class MyXMLParse {
     }
 
     @Throws(XPathExpressionException::class)
-    fun searchNode(node: Node, strPath: String): Node {
+    fun searchNode(node: Node, strPath: String): Node? {
         // https://stackoverflow.com/questions/18576711/how-to-search-for-a-specific-element-in-an-xml-using-a-scanner-in-java?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
         val xPathFactory = XPathFactory.newInstance()
         val xPath = xPathFactory.newXPath()
         val xPathExpr = xPath.compile(strPath)
 
-        return xPathExpr.evaluate(node, XPathConstants.NODE) as Node
+        return xPathExpr.evaluate(node, XPathConstants.NODE) as? Node ?: null
     }
 
     @Throws(XPathExpressionException::class)

@@ -25,10 +25,8 @@ class URLLstActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_urllst)
-        Log.d( javaClass.simpleName, "" )
+        Log.d( javaClass.simpleName, "====================================" )
         Log.d( javaClass.simpleName, "onCreate" )
-        Log.d( javaClass.simpleName, "========================" )
-
 
         // レイアウトからドロワーを探す
         //   Portrait  => ドロワーあり
@@ -58,12 +56,36 @@ class URLLstActivity : AppCompatActivity(),
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d( javaClass.simpleName, "onDestroy" )
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d( javaClass.simpleName, "onStart" )
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d( javaClass.simpleName, "onStop" )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d( javaClass.simpleName, "onResume" )
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d( javaClass.simpleName, "onPause" )
+    }
+
     // アクティビティの生成が終わった後に呼ばれる
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        Log.d( javaClass.simpleName, "" )
-        Log.d( javaClass.simpleName, "onPostCreate" )
         Log.d( javaClass.simpleName, "========================" )
+        Log.d( javaClass.simpleName, "onPostCreate" )
         // ドロワーのトグルの状態を同期する
         drawerToggle?.syncState()
     }

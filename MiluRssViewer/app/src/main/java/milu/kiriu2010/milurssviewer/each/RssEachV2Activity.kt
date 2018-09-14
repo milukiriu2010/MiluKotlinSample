@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.LoaderManager
 import android.support.v4.content.Loader
 import android.util.Log
+import android.view.MenuItem
 import milu.kiriu2010.entity.Rss
 import milu.kiriu2010.entity.URLData
 import milu.kiriu2010.gui.common.ExceptionFragment
@@ -25,16 +26,16 @@ class RssEachV2Activity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Asy
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rss_each_v2)
 
-        Log.d( javaClass.simpleName, "" )
         Log.d( javaClass.simpleName, "orCreate" )
-        Log.d( javaClass.simpleName, "====================================" )
+
+        // 戻るボタンをアクションバーに表示
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // 前画面より、この画面で表示するRSSのURL情報が送られてくる
         val urlData = intent.getParcelableExtra<URLData>(IntentID.KEY_RSS_EACH.id)
 
-        Log.d( javaClass.simpleName, "" )
-        Log.d( javaClass.simpleName, "urlData[" + urlData.url.toString() + "]" )
         Log.d( javaClass.simpleName, "====================================" )
+        Log.d( javaClass.simpleName, "urlData[" + urlData.url.toString() + "]" )
 
         // ローダに渡すURL情報の箱を生成
         val bundle = Bundle()
@@ -42,6 +43,51 @@ class RssEachV2Activity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Asy
 
         // RSSを取得するためのローダを初期化する
         supportLoaderManager.initLoader(LoaderID.ID_RSS_GET.id, bundle, this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d( javaClass.simpleName, "onDestroy" )
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d( javaClass.simpleName, "onStart" )
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d( javaClass.simpleName, "onStop" )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d( javaClass.simpleName, "onResume" )
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d( javaClass.simpleName, "onPause" )
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            // 前の画面へ戻る
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    // "戻る"ボタンを押すと
+    // デフォルトの動きは
+    // フラグメントが削除されるだけなので
+    // アクティビティを強制的に終了するようにする
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     // LoaderManager.LoaderCallbacks
@@ -115,8 +161,6 @@ class RssEachV2Activity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Asy
     // LoaderManager.LoaderCallbacks
     // ローダがリセットされたときに呼ばれる
     override fun onLoaderReset(loader: Loader<AsyncResult<Rss>>) {
-        Log.d(javaClass.simpleName, "" )
         Log.d(javaClass.simpleName, "onLoadReset" )
-        Log.d(javaClass.simpleName, "==============" )
     }
 }

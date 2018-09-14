@@ -83,7 +83,7 @@ class ExceptionFragment: Fragment()
         // XMLからエラー情報を表示するビューを生成
         val view = inflater.inflate( R.layout.fragment_exception, container, false )
 
-        val ctx = context ?: return view
+        if ( context == null ) return view
 
         // エラーメッセージを表示
         val editMsg = view.findViewById<EditText>(R.id.editMsg)
@@ -112,16 +112,9 @@ class ExceptionFragment: Fragment()
         })
 
         // TouchイベントをScaleListenerに渡す
-        view.setOnTouchListener { v, motionEvent ->
+        view.setOnTouchListener { _, motionEvent ->
             Log.d( javaClass.simpleName, "MotionEvent[${motionEvent.action}]")
             detector.onTouchEvent(motionEvent)
-            /*
-            when (motionEvent.action) {
-                MotionEvent.ACTION_MOVE -> {
-                    detector.onTouchEvent(motionEvent)
-                }
-            }
-            */
 
             true
         }

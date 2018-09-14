@@ -3,9 +3,11 @@ package milu.kiriu2010.entity
 import android.os.Parcel
 import android.os.Parcelable
 
-data class GenreData(val genre: String, val pos: Int = -1 ): Parcelable {
+data class GenreData(var id: Int = -1, var genre: String = "", var pos: Int = -1 ): Parcelable {
 
     constructor(parcel: Parcel) : this(
+            // id
+            parcel.readInt(),
             // genre
             parcel.readString() ?: "",
             // pos
@@ -14,6 +16,7 @@ data class GenreData(val genre: String, val pos: Int = -1 ): Parcelable {
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.let {
+            it.writeInt(id)
             it.writeString( genre )
             it.writeValue( pos )
         }

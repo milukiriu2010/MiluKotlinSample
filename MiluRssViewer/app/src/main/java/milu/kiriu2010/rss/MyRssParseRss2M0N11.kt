@@ -3,6 +3,8 @@ package milu.kiriu2010.rss
 import android.util.Log
 import milu.kiriu2010.entity.Article
 import milu.kiriu2010.entity.Rss
+import org.w3c.dom.Node
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,18 +30,27 @@ class MyRssParseRss2M0N11: MyRssParseRssAbs() {
         // RSSのtitleを取得
         // -------------------------------------------------------
         val titleNode = myXMLParse.searchNode( xmlRoot, "/rss/channel/title/text()")
-        Log.d( javaClass.simpleName, "title[${titleNode.nodeValue}]")
+        Log.d( javaClass.simpleName, "title[${titleNode?.nodeValue}]")
+
+        // RSS1.0の日付書式である、ISO8601+RFC3339をDate型に変換するためのオブジェクト
+        // 2018-08-28-28T19:00:00+09:00
+        val formatterRFC3339 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz", Locale.US)
+        // RSS2.0の日付書式である、RFC1123をDate型に変換するためのオブジェクト
+        // Fri, 24 Aug 2018 07:10:00 +0900
+        val formatterRFC1123 = SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US)
+
 
         // -------------------------------------------------------
         // RSSのpubDate(dc:date)を取得
         // -------------------------------------------------------
-        val pubDateNode = myXMLParse.searchNode( xmlRoot, "/rss/channel/*[name()='dc:date']/text()")
-        Log.d( javaClass.simpleName, "pubDate[$pubDateNode.nodeValue]")
-        // RSS1.0の日付書式である、ISO8601+RFC3339をDate型に変換するためのオブジェクト
-        // 2018-08-28-28T19:00:00+09:00
-        val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz", Locale.US)
-        // RSSのpubDateをDate型に変換
-        val pubDate = formatter.parse(pubDateNode.nodeValue)
+        var pubDate = Date()
+        // "ライフハッカー"の場合、"pubDate","dc:date"共にない
+        val pubDateNode: Node? = myXMLParse.searchNode( xmlRoot, "/rss/channel/*[name()='dc:date']/text()")
+        pubDateNode?.let {
+            Log.d( javaClass.simpleName, "pubDate[$it.nodeValue]")
+            // RSSのpubDateをDate型に変換
+            pubDate = formatterRFC3339.parse(it.nodeValue)
+        }
 
         // -------------------------------------------------------
         // RSSフィード内の記事の一覧
@@ -68,17 +79,33 @@ class MyRssParseRss2M0N11: MyRssParseRssAbs() {
             // -------------------------------------------------------
             // 記事のpubDate(dc:date)を取得
             // -------------------------------------------------------
-            val itemPubDateNode = myXMLParse.searchNode( itemNode, "./*[name()='dc:date']/text()" )
+            var itemPubDateNode = myXMLParse.searchNode( itemNode, "./*[name()='dc:date']/text()" )
+            // "ライフハッカー"はpubDateを使ってる
+            if ( itemPubDateNode == null ) {
+                itemPubDateNode = myXMLParse.searchNode( itemNode, "./pubDate/text()" )
+            }
             Log.d( javaClass.simpleName, "=============================================")
-            Log.d( javaClass.simpleName, "itemTitle[${itemTitleNode.nodeValue}]")
-            Log.d( javaClass.simpleName, "itemLink[${itemLinkNode.nodeValue}]")
-            Log.d( javaClass.simpleName, "itemPubDate[${itemPubDateNode.nodeValue}]")
+            Log.d( javaClass.simpleName, "itemTitle[${itemTitleNode?.nodeValue}]")
+            Log.d( javaClass.simpleName, "itemLink[${itemLinkNode?.nodeValue}]")
+            Log.d( javaClass.simpleName, "itemPubDate[${itemPubDateNode?.nodeValue}]")
             Log.d( javaClass.simpleName, "=============================================")
+            var itemPubDate = Date()
+            try {
+                itemPubDate = formatterRFC3339.parse(itemPubDateNode?.nodeValue)
+            }
+            catch ( parseEx1: ParseException) {
+                try {
+                    itemPubDate = formatterRFC1123.parse(itemPubDateNode?.nodeValue)
+                }
+                catch ( parseEx2: ParseException ) {
+
+                }
+            }
 
             val article = Article(
-                    itemTitleNode.nodeValue,
-                    itemLinkNode.nodeValue,
-                    formatter.parse(itemPubDateNode.nodeValue)
+                    itemTitleNode!!.nodeValue,
+                    itemLinkNode!!.nodeValue,
+                    itemPubDate
             )
 
             articles.add(article)
@@ -86,7 +113,7 @@ class MyRssParseRss2M0N11: MyRssParseRssAbs() {
 
         // RSSオブジェクトを生成
         val rss = Rss(
-                titleNode.nodeValue,
+                titleNode!!.nodeValue,
                 pubDate,
                 articles
         )

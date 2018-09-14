@@ -31,7 +31,7 @@ class URLLstFragment: Fragment() {
     // URL一覧フラグメントを生成
     // ---------------------------------------------------------
     companion object {
-        fun newInstance( genreData: GenreData = GenreData( "2ch" ) ): Fragment {
+        fun newInstance( genreData: GenreData = GenreData( 1, "2ch" ) ): Fragment {
             val fragmentURLLst = URLLstFragment()
 
             // URL一覧フラグメントに渡すデータをセット
@@ -48,10 +48,7 @@ class URLLstFragment: Fragment() {
     // ---------------------------------------------------------
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-
-        Log.d( javaClass.simpleName, "" )
         Log.d( javaClass.simpleName, "onAttach" )
-        Log.d( javaClass.simpleName, "========" )
 
         // アクティビティがコールバックを実装していなかったら例外を投げる
         if ( context !is OnURLSelectListener ) {
@@ -59,21 +56,30 @@ class URLLstFragment: Fragment() {
         }
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        Log.d(javaClass.simpleName, "onDetach")
+    }
+
     // ---------------------------------------------------------
     // 呼び出し時に渡される引数から指定されたジャンルを取り出す
     // ---------------------------------------------------------
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(javaClass.simpleName, "onCreate")
 
         val args = this.arguments ?: return
-        this.genreData = args.getParcelable(BundleID.ID_GENRE.id)
+        this.genreData = args.getParcelable(BundleID.ID_GENRE.id) ?: GenreData()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(javaClass.simpleName, "onDestroy")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
-        Log.d( javaClass.simpleName, "" )
         Log.d( javaClass.simpleName, "onCreateView" )
-        Log.d( javaClass.simpleName, "============" )
 
         // XMLからURL一覧を表示するビューを生成
         val view = inflater.inflate( R.layout.fragment_rss_urllst, container, false )
@@ -102,79 +108,70 @@ class URLLstFragment: Fragment() {
         return view
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d(javaClass.simpleName, "onDestroyView")
+    }
+
     private fun loadURLData(): MutableList<URLData> {
         val urlLst: MutableList<URLData> = mutableListOf<URLData>()
 
         // RSS 1.0
-        urlLst.add( URLData( "2ch", "痛いニュース(ﾉ∀`)", URL("http://blog.livedoor.jp/dqnplus/index.rdf")) )
+        // 2ch
+        urlLst.add( URLData( 1, 1, "痛いニュース(ﾉ∀`)", URL("http://blog.livedoor.jp/dqnplus/index.rdf")) )
         // RSS 1.0
-        urlLst.add( URLData( "2ch", "【2ch】ニュー速クオリティ", URL("http://news4vip.livedoor.biz/index.rdf")) )
+        // 2ch
+        urlLst.add( URLData( 2, 1, "【2ch】ニュー速クオリティ", URL("http://news4vip.livedoor.biz/index.rdf")) )
         // RSS 1.0
-        urlLst.add( URLData( "2ch", "ハムスター速報", URL("http://hamusoku.com/index.rdf")) )
+        // 2ch
+        urlLst.add( URLData( 3, 1, "ハムスター速報", URL("http://hamusoku.com/index.rdf")) )
         // RSS 1.0
-        urlLst.add( URLData( "2ch", "ニュー速VIPブログ(`･ω･´)", URL("http://blog.livedoor.jp/insidears/index.rdf")) )
+        // 2ch
+        urlLst.add( URLData( 4, 1, "ニュー速VIPブログ(`･ω･´)", URL("http://blog.livedoor.jp/insidears/index.rdf")) )
         // RSS 2.0
-        urlLst.add( URLData("豆知識", "ライフハッカー", URL("http://feeds.lifehacker.jp/rss/lifehacker/index.xml")) )
+        // 豆知識
+        urlLst.add( URLData(5,2, "ライフハッカー", URL("http://feeds.lifehacker.jp/rss/lifehacker/index.xml")) )
+        // 上のURLだと301が返される
+        // こっちが現在のURL
+        //urlLst.add( URLData(5,2, "ライフハッカー", URL("https://www.lifehacker.jp/feed/index.xml")) )
         // RSS 2.0
-        urlLst.add( URLData("豆知識", "ロケットニュース", URL("http://feeds.rocketnews24.com/rocketnews24")) )
+        // 豆知識
+        urlLst.add( URLData( 6,2, "ロケットニュース", URL("http://feeds.rocketnews24.com/rocketnews24")) )
         // RSS 2.0
-        urlLst.add( URLData( "ニュース", "Yahoo(主要)", URL("https://news.yahoo.co.jp/pickup/rss.xml")) )
+        // ニュース
+        urlLst.add( URLData( 7,3, "Yahoo(主要)", URL("https://news.yahoo.co.jp/pickup/rss.xml")) )
         // RSS 2.0
-        urlLst.add( URLData( "天気", "Yahoo(東京)", URL("https://rss-weather.yahoo.co.jp/rss/days/4410.xml")) )
+        // 天気
+        urlLst.add( URLData( 8,4, "Yahoo(東京)", URL("https://rss-weather.yahoo.co.jp/rss/days/4410.xml")) )
         // RSS 2.0
-        urlLst.add( URLData( "IT", "ビジネスIT+IT HotTopics", URL("https://www.sbbit.jp/rss/HotTopics.rss")) )
+        // IT
+        urlLst.add( URLData( 9,5, "ビジネスIT+IT HotTopics", URL("https://www.sbbit.jp/rss/HotTopics.rss")) )
         // RSS 2.0
-        urlLst.add( URLData( "IT", "＠IT Smart & Socialフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_smart.xml")) )
+        // IT
+        urlLst.add( URLData( 10,5, "＠IT Smart & Socialフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_smart.xml")) )
         // RSS 2.0
-        urlLst.add( URLData( "IT", "＠IT HTML5 + UXフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_ux.xml")) )
+        // IT
+        urlLst.add( URLData( 11,5, "＠IT HTML5 + UXフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_ux.xml")) )
         // RSS 2.0
-        urlLst.add( URLData( "IT", "＠IT Coding Edgeフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_coding.xml")) )
+        // IT
+        urlLst.add( URLData( 12, 5, "＠IT Coding Edgeフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_coding.xml")) )
         // RSS 2.0
-        urlLst.add( URLData( "IT", "＠IT Java Agileフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_java.xml")) )
+        // IT
+        urlLst.add( URLData( 13, 5, "＠IT Java Agileフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_java.xml")) )
         // RSS 2.0
-        urlLst.add( URLData( "IT", "＠IT Database Expertフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_db.xml")) )
+        // IT
+        urlLst.add( URLData( 14, 5, "＠IT Database Expertフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_db.xml")) )
         // RSS 2.0
-        urlLst.add( URLData( "IT", "＠IT Linux＆OSSフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_linux.xml")) )
+        // IT
+        urlLst.add( URLData( 15, 5, "＠IT Linux＆OSSフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_linux.xml")) )
         // RSS 2.0+1.1?
-        urlLst.add( URLData( "IT", "GIGAZINE", URL("https://gigazine.net/news/rss_2.0/")) )
+        // IT
+        urlLst.add( URLData( 16, 5, "GIGAZINE", URL("https://gigazine.net/news/rss_2.0/")) )
 
-        return urlLst.filter { urlData -> urlData.genre.equals(genreData.genre) }.toMutableList()
+        return urlLst.filter { urlData -> urlData.genreId.equals(genreData.id) }.toMutableList()
 
         //return urlLst
     }
 
-    class URLLstAdapter(context: Context,
-                        // URL一覧
-            private val urlDataLst: MutableList<URLData> = mutableListOf<URLData>(),
-                        // アイテムをクリックすると呼ばれる
-            private val onItemClick: (URLData) -> Unit )
-        : RecyclerView.Adapter<URLLstAdapter.URLViewHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): URLViewHolder {
-            val view = inflater.inflate(R.layout.list_row_url, parent, false )
-            val viewHolder = URLViewHolder(view)
 
-            view.setOnClickListener {
-                val pos = viewHolder.adapterPosition
-                val urlData = urlDataLst[pos]
-                onItemClick(urlData)
-            }
-
-            return viewHolder
-        }
-
-        override fun getItemCount(): Int = urlDataLst.size
-
-        override fun onBindViewHolder(holder: URLViewHolder, position: Int) {
-            val urlData = urlDataLst[position]
-            holder.labelTitle.text = urlData.title
-            holder.labelURL.text = urlData.url.toString()
-        }
-
-        private val inflater = LayoutInflater.from(context)
-
-        class URLViewHolder(view: View): RecyclerView.ViewHolder(view) {
-            val labelTitle = view.findViewById<TextView>(R.id.labelTitle)
-            val labelURL  = view.findViewById<TextView>(R.id.labelURL)
-        }
-    }
 }

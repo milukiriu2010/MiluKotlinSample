@@ -50,7 +50,7 @@ object MyRssParseFactory {
         val version: String? = attrMap["version"]
         val xmlnsDC: String? = attrMap["xmlns:dc"]
 
-        var myRssParseAbs: MyRssParseRssAbs? = null
+        var myRssParseAbs: MyRssParseRssAbs?
 
         myRssParseAbs =
             when ( version ) {
