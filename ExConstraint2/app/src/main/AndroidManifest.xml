@@ -24,7 +24,7 @@
         <activity
             android:name=".rate.RateActivity"
             android:theme="@style/CustomTheme" />
-        <activity android:name=".anime.AnimeActivity" />
+        <activity android:name=".animescale.AnimeScaleActivity" />
         <activity android:name=".seek.SeekActivity" />
         <activity android:name=".contextmenu.ContextMenuActivity" />
         <activity android:name=".temperature.TemperatureActivity" />
@@ -38,10 +38,11 @@
         <activity android:name=".fibonnaci.FibonnaciActivity" />
         <activity android:name=".scan.ScanBarcodeActivity" />
         <activity android:name=".websearch.WebSearchActivity" />
-        <activity android:name=".HelloActivity" />
         <activity android:name=".pinch.PinchActivity" />
         <activity android:name=".sensortemp.SensorTemperatureActivity" />
-        <activity android:name=".sensorlight.SensorLightActivity"></activity>
+        <activity android:name=".sensorlight.SensorLightActivity" />
+        <activity android:name=".animemove.AnimeMoveActivity" />
+        <activity android:name=".canvas.CanvasActivity"></activity>
     </application>
 
 </manifest>

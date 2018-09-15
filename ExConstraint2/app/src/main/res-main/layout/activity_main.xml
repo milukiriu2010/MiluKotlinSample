@@ -5,6 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/btnCanvas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Canvas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPinch" />
+
     <RadioGroup
         android:id="@+id/gender"
         android:layout_width="wrap_content"
@@ -20,16 +28,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@drawable/female"
-            android:text="@string/LABEL_FEMALE"></RadioButton>
+            android:text="female"></RadioButton>
 
         <RadioButton
             android:id="@+id/male"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@drawable/male"
-            android:checked="true"
 
-            android:text="@string/LABEL_MALE"></RadioButton>
+            android:checked="true"></RadioButton>
 
     </RadioGroup>
 
@@ -37,35 +44,30 @@
         android:id="@+id/btnRATE"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
         android:text="@string/BTN_RATE"
-        app:layout_constraintBottom_toTopOf="@+id/btnTemperature"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toEndOf="@+id/btnANIME"
-        app:layout_constraintTop_toTopOf="@+id/btnANIME"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintEnd_toEndOf="@+id/btnTrafficLight"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnTrafficLight"
+        app:layout_constraintTop_toBottomOf="@+id/btnTrafficLight" />
 
     <Button
         android:id="@+id/btnRecycle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="@string/BTN_RECYCLE"
-        app:layout_constraintBottom_toTopOf="@+id/btnFibonnaci"
+        app:layout_constraintEnd_toEndOf="@+id/btnCM"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btnCM"
-        app:layout_constraintTop_toTopOf="@+id/btnWebSearch"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCM" />
 
     <Button
         android:id="@+id/btnANIME"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/BTN_ANIME"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gender" />
+        android:text="Anime Scale"
+        app:layout_constraintEnd_toEndOf="@+id/btnRATE"
+        app:layout_constraintStart_toStartOf="@+id/btnRATE"
+        app:layout_constraintTop_toBottomOf="@+id/btnRATE" />
 
     <Button
         android:id="@+id/btnSEEK"
@@ -78,37 +80,33 @@
     <Button
         android:id="@+id/btnCM"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="49dp"
         android:text="@string/BTN_CM"
-        app:layout_constraintBottom_toTopOf="@+id/btnWebSearch"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnCustomAction"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btnCustomAction"
-        app:layout_constraintTop_toTopOf="@+id/btnSTOPWATCH"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCustomAction" />
 
     <Button
         android:id="@+id/btnTemperature"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/BTN_TEMPERATURE"
-        app:layout_constraintStart_toEndOf="@+id/btnANIME"
-        app:layout_constraintStart_toStartOf="@+id/btnANIME"
-        app:layout_constraintTop_toBottomOf="@+id/btnANIME" />
+        app:layout_constraintTop_toBottomOf="@+id/gender" />
 
     <Button
         android:id="@+id/btnSTOPWATCH"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
         android:text="@string/BTN_STOP_WATCH"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btnDICE"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toEndOf="@+id/btnANIME"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/btnTemperature"
         app:layout_constraintTop_toTopOf="@+id/btnTemperature"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -117,13 +115,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
         android:text="@string/BTN_CUSTOM_ACTION"
-        app:layout_constraintBottom_toTopOf="@+id/btnSTOPWATCH"
+        app:layout_constraintBottom_toTopOf="@+id/btnWebSearch"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/btnRATE"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="@+id/btnSTOPWATCH" />
 
     <Button
         android:id="@+id/btnDICE"
@@ -139,7 +137,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
         android:text="@string/BTN_LARGE_BMP"
         app:layout_constraintBottom_toBottomOf="@+id/btnEMAIL"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -166,14 +163,12 @@
 
     <Button
         android:id="@+id/btnTrafficLight"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="@string/BTN_TRAFFIC_LIGHT"
-        app:layout_constraintBottom_toTopOf="@+id/btnLargeBmp"
+        app:layout_constraintEnd_toEndOf="@+id/btnRecycle"
         app:layout_constraintStart_toStartOf="@+id/btnRecycle"
-        app:layout_constraintTop_toBottomOf="@+id/btnWebSearch"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRecycle" />
 
     <Button
         android:id="@+id/btnEMAIL"
@@ -188,7 +183,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
         android:text="Fibonnaci"
         app:layout_constraintBottom_toBottomOf="@+id/btnScanBarcode"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -207,12 +201,12 @@
     <Button
         android:id="@+id/btnWebSearch"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
         android:text="WebSearch"
         app:layout_constraintBottom_toTopOf="@+id/btnScanBarcode"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btnSTOPWATCH"
         app:layout_constraintTop_toTopOf="@+id/btnDICE"
         app:layout_constraintVertical_bias="1.0" />
@@ -250,6 +244,15 @@
         app:layout_constraintStart_toStartOf="@+id/btnSensorTemperature"
         app:layout_constraintTop_toTopOf="@+id/btnPinch"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnAnimeMove"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Anime Move"
+        app:layout_constraintEnd_toEndOf="@+id/btnANIME"
+        app:layout_constraintStart_toStartOf="@+id/btnANIME"
+        app:layout_constraintTop_toBottomOf="@+id/btnANIME" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"

@@ -5,13 +5,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.customtabs.CustomTabsIntent
 import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.*
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import milu.kiriu2010.entity.Article
 import milu.kiriu2010.entity.Rss
@@ -20,6 +16,7 @@ import milu.kiriu2010.milurssviewer.R
 import java.text.SimpleDateFormat
 
 class RssEachFragment: Fragment() {
+    // RSSコンテンツを表示するリサイクラービュー
     private lateinit var recyclerView: RecyclerView
 
     // RSSコンテンツ
@@ -103,10 +100,13 @@ class RssEachFragment: Fragment() {
         }
         recyclerView.adapter = adapter
 
+        // StaggeredGridLayoutManagerの場合は、区切り線はじゃま
+        /*
         // 区切り線を入れる
         // https://qiita.com/morimonn/items/035b1d85fec56e64f3e1
         val itemDecoration = DividerItemDecoration( ctx, DividerItemDecoration.VERTICAL  or DividerItemDecoration.HORIZONTAL )
         recyclerView.addItemDecoration(itemDecoration)
+        */
 
         return view
     }
@@ -114,5 +114,45 @@ class RssEachFragment: Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         Log.d(javaClass.simpleName, "onDestroyView")
+    }
+
+    // onCreateViewの後,onStartの前に呼ばれる
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        Log.d(javaClass.simpleName, "onActivityCreated")
+        // オプションメニューを表示する
+        setHasOptionsMenu(true)
+    }
+
+    // オプションメニューを表示
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.menu_rss_each, menu)
+
+        // デフォルトチェックを入れたいがうまく動かない
+        //val menuItemGrid = menu?.findItem(R.id.menuItemGrid)
+        //menuItemGrid?.isCheckable = true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        return when (item?.itemId) {
+            R.id.menuItemLinear -> {
+                item.isChecked = true
+                recyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false)
+                true
+            }
+            R.id.menuItemGrid -> {
+                item.isChecked = true
+                recyclerView.layoutManager = GridLayoutManager(context,2)
+                true
+            }
+            R.id.menuItemStaggered -> {
+                item.isChecked = true
+                recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

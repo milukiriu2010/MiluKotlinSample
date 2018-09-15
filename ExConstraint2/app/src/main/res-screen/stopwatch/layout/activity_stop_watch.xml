@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnSTART"
+        android:id="@+id/btnStart"
         android:layout_width="116dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -40,8 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/BTN_STOP"
-        app:layout_constraintStart_toEndOf="@+id/btnSTART"
-        app:layout_constraintTop_toTopOf="@+id/btnSTART" />
+        app:layout_constraintStart_toEndOf="@+id/btnStart"
+        app:layout_constraintTop_toTopOf="@+id/btnStart" />
 
     <Button
         android:id="@+id/btnRESET"

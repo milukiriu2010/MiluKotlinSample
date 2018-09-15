@@ -24,18 +24,22 @@ class StopWatchActivity : AppCompatActivity() {
                 this@StopWatchActivity.timeToText(timeValue)?.let {
                     txtTIME.text = it
                 }
+                // 1秒後に再び、自分自身(Runnable)を呼び出す
                 handler.postDelayed(this,1000)
             }
         }
 
-        btnSTART.setOnClickListener {
+        // ストップウォッチ開始
+        btnStart.setOnClickListener {
             handler.post(runnable)
         }
 
+        // ストップウォッチ停止
         btnSTOP.setOnClickListener {
             handler.removeCallbacks(runnable)
         }
 
+        // ストップウォッチーリセット
         btnRESET.setOnClickListener {
             handler.removeCallbacks(runnable)
             timeValue = 0

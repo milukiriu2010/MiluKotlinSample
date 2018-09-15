@@ -2,11 +2,8 @@
     <string name="app_name">ExCon2</string>
     <string name="BTN_GET">Get</string>
     <string name="BTN_DOM">DOM</string>
-    <string name="LABEL_FEMALE">female</string>
-    <string name="LABEL_MALE">male</string>
     <string name="BTN_RECYCLE">Recycler</string>
     <string name="BTN_RATE">Rating Bar</string>
-    <string name="BTN_ANIME">Anime</string>
     <string name="BTN_START">START</string>
     <string name="BTN_SEEK">Seek</string>
     <string name="BTN_CM">Context Menu</string>
@@ -27,6 +24,4 @@
     <string name="BTN_DICE">Dice</string>
     <string name="BTN_LARGE_BMP">Large Bmp</string>
     <string name="BTN_TRAFFIC_LIGHT">Traffic</string>
-
-    <string name="hello_world">Hello World</string>
 </resources>

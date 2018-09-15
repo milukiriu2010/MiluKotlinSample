@@ -144,29 +144,32 @@ class URLLstFragment: Fragment() {
         // 天気
         urlLst.add( URLData( 8,4, "Yahoo(東京)", URL("https://rss-weather.yahoo.co.jp/rss/days/4410.xml")) )
         // RSS 2.0
-        // IT
-        urlLst.add( URLData( 9,5, "ビジネスIT+IT HotTopics", URL("https://www.sbbit.jp/rss/HotTopics.rss")) )
+        // 天気
+        urlLst.add( URLData( 9,4, "BBC(Manchester)", URL("https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123")) )
         // RSS 2.0
         // IT
-        urlLst.add( URLData( 10,5, "＠IT Smart & Socialフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_smart.xml")) )
+        urlLst.add( URLData( 10,5, "ビジネスIT+IT HotTopics", URL("https://www.sbbit.jp/rss/HotTopics.rss")) )
         // RSS 2.0
         // IT
-        urlLst.add( URLData( 11,5, "＠IT HTML5 + UXフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_ux.xml")) )
+        urlLst.add( URLData( 11,5, "＠IT Smart & Socialフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_smart.xml")) )
         // RSS 2.0
         // IT
-        urlLst.add( URLData( 12, 5, "＠IT Coding Edgeフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_coding.xml")) )
+        urlLst.add( URLData( 12,5, "＠IT HTML5 + UXフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_ux.xml")) )
         // RSS 2.0
         // IT
-        urlLst.add( URLData( 13, 5, "＠IT Java Agileフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_java.xml")) )
+        urlLst.add( URLData( 13, 5, "＠IT Coding Edgeフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_coding.xml")) )
         // RSS 2.0
         // IT
-        urlLst.add( URLData( 14, 5, "＠IT Database Expertフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_db.xml")) )
+        urlLst.add( URLData( 14, 5, "＠IT Java Agileフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_java.xml")) )
         // RSS 2.0
         // IT
-        urlLst.add( URLData( 15, 5, "＠IT Linux＆OSSフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_linux.xml")) )
+        urlLst.add( URLData( 15, 5, "＠IT Database Expertフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_db.xml")) )
+        // RSS 2.0
+        // IT
+        urlLst.add( URLData( 16, 5, "＠IT Linux＆OSSフォーラム 最新記事一覧", URL("https://rss.itmedia.co.jp/rss/2.0/ait_linux.xml")) )
         // RSS 2.0+1.1?
         // IT
-        urlLst.add( URLData( 16, 5, "GIGAZINE", URL("https://gigazine.net/news/rss_2.0/")) )
+        urlLst.add( URLData( 17, 5, "GIGAZINE", URL("https://gigazine.net/news/rss_2.0/")) )
 
         return urlLst.filter { urlData -> urlData.genreId.equals(genreData.id) }.toMutableList()
 

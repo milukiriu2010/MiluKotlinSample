@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon2.anime
+package milu.kiriu2010.excon2.animescale
 
 import android.view.animation.Interpolator
 

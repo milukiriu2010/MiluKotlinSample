@@ -3,6 +3,7 @@ package milu.kiriu2010.rss
 import android.util.Log
 import milu.kiriu2010.entity.Article
 import milu.kiriu2010.entity.Rss
+import milu.kiriu2010.tool.MyTool
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -36,7 +37,7 @@ class MyRssParseRss1M0: MyRssParseRssAbs() {
         //Log.d( javaClass.simpleName, "pubDate[$pubDateNode.nodeValue]")
         // RSS1.0の日付書式である、ISO8601+RFC3339をDate型に変換するためのオブジェクト
         // 2018-08-28-28T19:00:00+09:00
-        val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz", Locale.US)
+        //val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz", Locale.US)
         //// RSSのpubDateをDate型に変換
         //val pubDate = formatter.parse(pubDateNode.nodeValue)
         val pubDate = Date()
@@ -78,7 +79,7 @@ class MyRssParseRss1M0: MyRssParseRssAbs() {
             val article = Article(
                     itemTitleNode!!.nodeValue,
                     itemLinkNode!!.nodeValue,
-                    formatter.parse(itemPubDateNode?.nodeValue)
+                    MyTool.rfc3339date(itemPubDateNode!!.nodeValue)
             )
 
             articles.add(article)

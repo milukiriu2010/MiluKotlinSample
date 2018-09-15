@@ -1,16 +1,19 @@
-package milu.kiriu2010.excon2.anime
+package milu.kiriu2010.excon2.animescale
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.animation.*
 import android.widget.ArrayAdapter
 import milu.kiriu2010.excon2.R
-import kotlinx.android.synthetic.main.activity_anime.*
+import kotlinx.android.synthetic.main.activity_anime_scale.*
 
-class AnimeActivity : AppCompatActivity() {
+class AnimeScaleActivity : AppCompatActivity() {
 
     var factor = 0.5f
+
+    var repeat = 2
 
     // レイアウトサイズ
     var lw = -1
@@ -22,27 +25,13 @@ class AnimeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_anime)
+        setContentView(R.layout.activity_anime_scale)
 
-        /*
-        btnSTART.setOnClickListener {
-            val scale = ScaleAnimation(
-                    1.0f,
-                    10.0f,
-                    1.0f,
-                    10.0f,
-                    it.width.toFloat()/2,
-                    it.height.toFloat()/2
-            )
-            // アニメーションを行う時間を設定
-            scale.duration = 1000;
-            // アニメーションを繰り返す回数を設定
-            scale.interpolator = CycleInterpolator(0.5f)
-            // アニメーションのスタート
-            it.startAnimation(scale)
-
+        // アクションバーの設定を行う
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            //setHomeButtonEnabled(true)
         }
-        */
 
         // 補完スピナーに補完一覧を設定
         spinnerInterpolator.adapter = ArrayAdapter.createFromResource(this, R.array.interpolators, android.R.layout.simple_spinner_item )
@@ -57,9 +46,14 @@ class AnimeActivity : AppCompatActivity() {
         numPickerB1.minValue = 0
         numPickerB1.value    = ((factor*10)%10).toInt()
 
+        // リピート回数を設定
+        numPickerRepeat.maxValue = 2
+        numPickerRepeat.minValue = 0
+        numPickerRepeat.value    = repeat
+
 
         // STARTボタンをクリックすると、アニメーションを開始する
-        btnSTART.setOnClickListener {
+        btnStart.setOnClickListener {
             val scale = ScaleAnimation(
                     1.0f,
                     4.0f,
@@ -93,6 +87,8 @@ class AnimeActivity : AppCompatActivity() {
                 "HesitateInterpolator" -> HesitateInterpolator()
                 else -> LinearInterpolator()
             }
+            // リピート回数を設定
+            scale.repeatCount = numPickerRepeat.value
             // アニメーションが終わっても元の表示に戻らないようにする
             scale.fillAfter = true
             // アニメーションのスタート
@@ -107,5 +103,17 @@ class AnimeActivity : AppCompatActivity() {
 
         lw = layoutTop.width
         lh = layoutTop.height
+    }
+
+    // アクションバーのアイコンがタップされると呼ばれる
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            // 前画面に戻る
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 }

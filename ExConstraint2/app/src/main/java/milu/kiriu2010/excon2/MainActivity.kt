@@ -9,7 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.RadioButton
 import android.widget.Toast
-import milu.kiriu2010.excon2.anime.AnimeActivity
+import milu.kiriu2010.excon2.animescale.AnimeScaleActivity
 import milu.kiriu2010.excon2.contextmenu.ContextMenuActivity
 import milu.kiriu2010.excon2.customactionbar.CustomActionBarActivity
 import milu.kiriu2010.excon2.dice.DiceRollerActivity
@@ -25,6 +25,9 @@ import milu.kiriu2010.excon2.temperature.TemperatureActivity
 import milu.kiriu2010.excon2.traffic.TrafficLightActivity
 import milu.kiriu2010.excon2.websearch.WebSearchActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import milu.kiriu2010.excon2.animemove.AnimeMoveActivity
+import milu.kiriu2010.excon2.canvas.CanvasActivity
+import milu.kiriu2010.excon2.canvas.CanvasBasicView
 import milu.kiriu2010.excon2.sensorlight.SensorLightActivity
 import milu.kiriu2010.excon2.sensortemp.SensorTemperatureActivity
 import milu.kiriu2010.id.IntentID
@@ -76,8 +79,14 @@ class MainActivity : AppCompatActivity() {
         // large => small caps
         btnANIME.transformationMethod = null
         btnANIME.setOnClickListener{
-            val intent = Intent(this, AnimeActivity::class.java )
+            val intent = Intent(this, AnimeScaleActivity::class.java )
             this.startActivityForResult( intent, IntentID.ID_ANIME.value )
+        }
+
+        btnAnimeMove.transformationMethod = null
+        btnAnimeMove.setOnClickListener {
+            val intent = Intent( this, AnimeMoveActivity::class.java )
+            this.startActivity(intent)
         }
 
         btnSEEK.transformationMethod = null
@@ -160,10 +169,18 @@ class MainActivity : AppCompatActivity() {
             this.startActivityForResult( intent, IntentID.ID_WEB_SEARCH.value )
         }
 
+        // ピンチ　イン・アウト
         btnPinch.transformationMethod = null
         btnPinch.setOnClickListener {
             val intent = Intent( this, PinchActivity::class.java )
             this.startActivity( intent )
+        }
+
+        // キャンバス
+        btnCanvas.transformationMethod = null
+        btnCanvas.setOnClickListener {
+            val intent = Intent(this,CanvasActivity::class.java)
+            this.startActivity(intent)
         }
 
         // 温度センサ

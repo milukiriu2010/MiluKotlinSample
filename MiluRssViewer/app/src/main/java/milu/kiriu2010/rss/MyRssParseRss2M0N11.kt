@@ -3,6 +3,7 @@ package milu.kiriu2010.rss
 import android.util.Log
 import milu.kiriu2010.entity.Article
 import milu.kiriu2010.entity.Rss
+import milu.kiriu2010.tool.MyTool
 import org.w3c.dom.Node
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -33,12 +34,12 @@ class MyRssParseRss2M0N11: MyRssParseRssAbs() {
         Log.d( javaClass.simpleName, "title[${titleNode?.nodeValue}]")
 
         // RSS1.0の日付書式である、ISO8601+RFC3339をDate型に変換するためのオブジェクト
-        // 2018-08-28-28T19:00:00+09:00
-        val formatterRFC3339 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz", Locale.US)
+        // 2018-08-28T19:00:00+09:00
+        // 2018-09-14T21:46:00Z
+        //val formatterRFC3339 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz", Locale.US)
         // RSS2.0の日付書式である、RFC1123をDate型に変換するためのオブジェクト
         // Fri, 24 Aug 2018 07:10:00 +0900
         val formatterRFC1123 = SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US)
-
 
         // -------------------------------------------------------
         // RSSのpubDate(dc:date)を取得
@@ -49,7 +50,8 @@ class MyRssParseRss2M0N11: MyRssParseRssAbs() {
         pubDateNode?.let {
             Log.d( javaClass.simpleName, "pubDate[$it.nodeValue]")
             // RSSのpubDateをDate型に変換
-            pubDate = formatterRFC3339.parse(it.nodeValue)
+            //pubDate = formatterRFC3339.parse(it.nodeValue)
+            pubDate = MyTool.rfc3339date(it.nodeValue)
         }
 
         // -------------------------------------------------------
@@ -91,7 +93,8 @@ class MyRssParseRss2M0N11: MyRssParseRssAbs() {
             Log.d( javaClass.simpleName, "=============================================")
             var itemPubDate = Date()
             try {
-                itemPubDate = formatterRFC3339.parse(itemPubDateNode?.nodeValue)
+                //itemPubDate = formatterRFC3339.parse(itemPubDateNode?.nodeValue)
+                itemPubDate = MyTool.rfc3339date(itemPubDateNode!!.nodeValue)
             }
             catch ( parseEx1: ParseException) {
                 try {
