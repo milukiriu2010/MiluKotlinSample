@@ -30,6 +30,7 @@ import milu.kiriu2010.excon2.canvas.CanvasActivity
 import milu.kiriu2010.excon2.canvas.CanvasBasicView
 import milu.kiriu2010.excon2.sensorlight.SensorLightActivity
 import milu.kiriu2010.excon2.sensortemp.SensorTemperatureActivity
+import milu.kiriu2010.excon2.tabbed.TabbedActivity
 import milu.kiriu2010.id.IntentID
 
 class MainActivity : AppCompatActivity() {
@@ -180,6 +181,13 @@ class MainActivity : AppCompatActivity() {
         btnCanvas.transformationMethod = null
         btnCanvas.setOnClickListener {
             val intent = Intent(this,CanvasActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        // Tabbed
+        btnTabbed.transformationMethod = null
+        btnTabbed.setOnClickListener {
+            val intent = Intent(this,TabbedActivity::class.java)
             this.startActivity(intent)
         }
 

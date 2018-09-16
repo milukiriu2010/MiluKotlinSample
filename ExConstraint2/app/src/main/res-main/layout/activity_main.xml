@@ -5,14 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnCanvas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Canvas"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPinch" />
-
     <RadioGroup
         android:id="@+id/gender"
         android:layout_width="wrap_content"
@@ -149,6 +141,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:background="@drawable/layer_frame1"
+        android:textColor="@android:color/white"
         app:layout_constraintStart_toEndOf="@+id/gender"
         app:layout_constraintTop_toTopOf="@+id/gender"
         tools:text="TRUE" />
@@ -157,6 +151,8 @@
         android:id="@+id/tvBuildConf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/layer_frame2"
+        android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="@+id/tvAppInfo"
         app:layout_constraintTop_toBottomOf="@+id/tvAppInfo"
         tools:text="TRUE" />
@@ -253,6 +249,22 @@
         app:layout_constraintEnd_toEndOf="@+id/btnANIME"
         app:layout_constraintStart_toStartOf="@+id/btnANIME"
         app:layout_constraintTop_toBottomOf="@+id/btnANIME" />
+
+    <Button
+        android:id="@+id/btnCanvas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Canvas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPinch" />
+
+    <Button
+        android:id="@+id/btnTabbed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tabbed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCanvas" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"

@@ -26,7 +26,8 @@ class SeekActivity : AppCompatActivity(), OnSeekBarChangeListener {
         val green = seekBarGreen.progress
         val blue  = seekBarBlue.progress
 
-        ivColor.setColorFilter( Color.rgb(red,green,blue), PorterDuff.Mode.LIGHTEN )    }
+        ivColor.setColorFilter( Color.rgb(red,green,blue), PorterDuff.Mode.LIGHTEN )
+    }
 
     // OnSeekBarChangeListener
     override fun onStartTrackingTouch(p0: SeekBar?) {

@@ -7,16 +7,11 @@
     tools:context=".canvas.CanvasActivity">
 
     <milu.kiriu2010.excon2.canvas.CanvasBasicView
-        android:id="@+id/canvasBasicBiew"
+        android:id="@+id/canvasBasicView1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintBottom_toTopOf="@+id/seekBarX"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,7 +27,6 @@
         app:layout_constraintBottom_toTopOf="@+id/seekBarY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
     <SeekBar
         android:id="@+id/seekBarY"
         android:layout_width="0dp"
@@ -46,4 +40,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
