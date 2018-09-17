@@ -35,6 +35,33 @@ class NotifyActivity : AppCompatActivity() {
             // 10秒後に通知を実施
             handler.postDelayed(NotifyHandler(),1000 * dataDelay.text.toString().toLong() )
         }
+
+        // "startServiceによる開始"ボタンをクリック
+        btnNotifyStartService.setOnClickListener {
+            val intent = Intent(this,ForegroundService::class.java)
+            if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ) {
+                // minSdkVersion >= 26
+                startForegroundService(intent)
+            }
+            else {
+                // minSdkVersion < 26
+                startService(intent)
+            }
+        }
+
+        // "Download"ボタンをクリック
+        btnNotifyDownload.transformationMethod = null
+        btnNotifyDownload.setOnClickListener {
+            val intent = Intent(this,DownloadService::class.java)
+            if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ) {
+                // minSdkVersion >= 26
+                startForegroundService(intent)
+            }
+            else {
+                // minSdkVersion < 26
+                startService(intent)
+            }
+        }
     }
 
     // 通知チャネルの作成

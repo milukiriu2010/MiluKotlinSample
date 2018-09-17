@@ -142,16 +142,29 @@
         app:layout_constraintTop_toBottomOf="@+id/radioGroupNotificationStyle" />
 
     <Button
-        android:id="@+id/btnNotify"
+        android:id="@+id/btnNotifyStartService"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="8dp"
         android:text="startServiceによる開始"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.833"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupNotificationStyle" />
+        app:layout_constraintTop_toBottomOf="@+id/btnNotify" />
+
+    <Button
+        android:id="@+id/btnNotifyDownload"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Download"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnNotifyStartService" />
 
 </android.support.constraint.ConstraintLayout>

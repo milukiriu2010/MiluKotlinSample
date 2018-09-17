@@ -61,6 +61,10 @@
         <service
             android:name=".notify.ForegroundService"
             android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".notify.DownloadService"
+            android:enabled="true"
             android:exported="true"></service>
     </application>
 
