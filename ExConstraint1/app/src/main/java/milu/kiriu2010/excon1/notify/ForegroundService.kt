@@ -11,7 +11,7 @@ import android.support.annotation.RequiresApi
 import android.support.v4.app.NotificationCompat
 import milu.kiriu2010.excon1.R
 import milu.kiriu2010.id.NotificationChannelID
-import milu.kiriu2010.id.NotifyID
+import milu.kiriu2010.id.NotificationID
 
 // https://qiita.com/naoi/items/03e76d10948fe0d45597
 class ForegroundService : Service() {
@@ -73,9 +73,9 @@ class ForegroundService : Service() {
         // 通知を表示する
         // ActivityでstartForegoundServiceを呼んでから
         // 5秒以内にstartForegroundを呼び出さないとANRになるらしい
-        startForeground(NotifyID.ID_FOREGROUND.id, notification)
+        startForeground(NotificationID.ID_FOREGROUND.id, notification)
         // こっちでも呼べる
-        //manager.notify(NotifyID.ID_FOREGROUND.id, notification)
+        //manager.notify(NotificationID.ID_FOREGROUND.id, notification)
 
         // サービスがシステムによって強制的に終了させられた場合のふるまいを指定
         // ------------------------------------------------------------------------

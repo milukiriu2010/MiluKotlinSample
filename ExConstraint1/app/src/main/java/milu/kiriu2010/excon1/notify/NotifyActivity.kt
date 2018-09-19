@@ -10,17 +10,19 @@ import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.support.annotation.RequiresApi
 import android.support.v4.app.NotificationCompat
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_notify.*
 import milu.kiriu2010.excon1.R
 import milu.kiriu2010.id.NotificationChannelID
 import milu.kiriu2010.id.NotificationRequestCode
-import milu.kiriu2010.id.NotifyID
+import milu.kiriu2010.id.NotificationID
 
 class NotifyActivity : AppCompatActivity() {
     private lateinit var notificationManager: NotificationManager
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notify)
@@ -61,6 +63,32 @@ class NotifyActivity : AppCompatActivity() {
                 // minSdkVersion < 26
                 startService(intent)
             }
+        }
+
+        // "IntentService開始"ボタンをクリック
+        btnNotifyIntentStart.transformationMethod = null
+        btnNotifyIntentStart.setOnClickListener {
+            /*
+            val intent = Intent(this,MyIntentService::class.java)
+            if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ) {
+                // minSdkVersion >= 26
+                startForegroundService(intent)
+            }
+            else {
+                // minSdkVersion < 26
+                startService(intent)
+            }
+            */
+            MyIntentService.startActionFoo(this,"a", "b")
+        }
+
+        // "IntentService終了"ボタンをクリック
+        btnNotifyIntentStop.transformationMethod = null
+        btnNotifyIntentStop.setOnClickListener {
+            // うまく動いてない
+            val intent = Intent(this,MyIntentService::class.java)
+            stopService(intent)
+            //MyIntentService.startActionFoo(this,"a", "b")
         }
     }
 
@@ -127,7 +155,7 @@ class NotifyActivity : AppCompatActivity() {
                 .setContentIntent(pendingIntent)
                 .build()
         // 通知を行う
-        notificationManager.notify(NotifyID.ID_NEW_ARTICLE.id, notification)
+        notificationManager.notify(NotificationID.ID_NEW_ARTICLE.id, notification)
     }
 
     // 〇秒後に通知を発行するときに用いる

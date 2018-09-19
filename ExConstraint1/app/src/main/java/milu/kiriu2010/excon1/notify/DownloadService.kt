@@ -11,7 +11,7 @@ import android.support.v4.app.NotificationCompat
 import android.util.Log
 import milu.kiriu2010.excon1.R
 import milu.kiriu2010.id.NotificationChannelID
-import milu.kiriu2010.id.NotifyID
+import milu.kiriu2010.id.NotificationID
 import java.io.File
 import com.github.kittinunf.fuel.httpDownload
 
@@ -54,9 +54,9 @@ class DownloadService : Service() {
 
         // Notification Managerを使用する場合の記述方法は下記の通り
         // android.app.RemoteServiceException: Context.startForegroundService() did not then call Service.startForeground():
-        //manager.notify(NotifyID.ID_DOWNLOAD.id,builder.build())
+        //manager.notify(NotificationID.ID_DOWNLOAD.id,builder.build())
 
-        startForeground(NotifyID.ID_DOWNLOAD.id, builder.build())
+        startForeground(NotificationID.ID_DOWNLOAD.id, builder.build())
         url.httpDownload()
                 .destination { response, url ->
                     // /data/user/0/milu.kiriu2010.excon1/cache/MiluDBViewer3192732266843548202.zip
@@ -71,8 +71,8 @@ class DownloadService : Service() {
                     builder.setProgress(100, total.toInt(), false)
                     builder.setContentText("%1$.1f%%".format(total))
                     // Notification Managerを使用する場合の記述方法は下記の通り
-                    //manager.notify(NotifyID.ID_DOWNLOAD.id,builder.build())
-                    startForeground(NotifyID.ID_DOWNLOAD.id, builder.build())
+                    //manager.notify(NotificationID.ID_DOWNLOAD.id,builder.build())
+                    startForeground(NotificationID.ID_DOWNLOAD.id, builder.build())
                 }
                 .response { request, response, result ->
                     Log.d( javaClass.simpleName, "request[$request]response[$response]result[$result]")
@@ -88,7 +88,7 @@ class DownloadService : Service() {
                                 setContentText("tomcatのダウンロードが完了しました。")
                                 setSmallIcon(R.drawable.ic_home_black_24dp)
                             }.build()
-                    manager.notify(NotifyID.ID_DOWNLOAD.id, completeNotification)
+                    manager.notify(NotificationID.ID_DOWNLOAD.id, completeNotification)
                 }
 
         return START_STICKY

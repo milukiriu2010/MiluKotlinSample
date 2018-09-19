@@ -6,5 +6,7 @@ enum class NotificationChannelID(val id: String) {
     // ForegoundServiceで作成している通知チャネル
     ID_FOREGROUND("casareal_foreground"),
     // ダウンロードで作成している通知チャネル
-    ID_DOWNLOAD("download")
+    ID_DOWNLOAD("download"),
+    // MyIntentServiceで作成している通知チャネル
+    ID_MY_INTENTSERVICE("my_intent")
 }

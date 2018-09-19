@@ -163,8 +163,33 @@
         android:layout_marginTop="8dp"
         android:text="Download"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnNotifyStartService" />
+
+    <Button
+        android:id="@+id/btnNotifyIntentStart"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="IntentService開始"
+        app:layout_constraintEnd_toStartOf="@+id/btnNotifyIntentStop"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnNotifyDownload" />
+
+    <Button
+        android:id="@+id/btnNotifyIntentStop"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="IntentService停止"
+        app:layout_constraintBottom_toBottomOf="@+id/btnNotifyIntentStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnNotifyIntentStart"
+        app:layout_constraintTop_toTopOf="@+id/btnNotifyIntentStart" />
 
 </android.support.constraint.ConstraintLayout>

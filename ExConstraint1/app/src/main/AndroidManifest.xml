@@ -65,7 +65,10 @@
         <service
             android:name=".notify.DownloadService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+        <service
+            android:name=".notify.MyIntentService"
+            android:exported="false"></service>
     </application>
 
 </manifest>
