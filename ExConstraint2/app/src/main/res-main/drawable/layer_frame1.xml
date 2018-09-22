@@ -4,14 +4,14 @@
     <item>
         <!-- shape:rectangle(=四角形) -->
         <shape android:shape="rectangle">
-            <!-- item②に対して2dp内側に入る。 -->
             <padding
                 android:bottom="2dp"
-                android:left="10dp"
+                android:left="2dp"
                 android:right="2dp"
                 android:top="2dp" />
             <!-- 色:パープル -->
             <solid android:color="#8e44ad" />
+            <!-- solid android:color="#1abc9c" /  -->
         </shape>
     </item>
 
@@ -19,7 +19,7 @@
     <item>
         <!-- shape:rectangle(=四角形) -->
         <shape android:shape="rectangle">
-            <!-- item③に対して2dp内側に入る。 -->
+            <!-- item①に対して2dp内側に入る。 -->
             <padding
                 android:bottom="2dp"
                 android:left="2dp"
@@ -33,6 +33,7 @@
     <!-- item③ -->
     <item>
         <!-- shape:rectangle(=四角形) -->
+        <!-- item②に対して2dp内側に入る。 -->
         <shape android:shape="rectangle">
             <!-- 色:パープル -->
             <solid android:color="#9b59b6" />

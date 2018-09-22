@@ -28,6 +28,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import milu.kiriu2010.excon2.animemove.AnimeMoveActivity
 import milu.kiriu2010.excon2.canvas.CanvasActivity
 import milu.kiriu2010.excon2.canvas.CanvasBasicView
+import milu.kiriu2010.excon2.navibottom.BottomNaviActivity
+import milu.kiriu2010.excon2.navidrawer.NaviDrawerActivity
 import milu.kiriu2010.excon2.sensorlight.SensorLightActivity
 import milu.kiriu2010.excon2.sensortemp.SensorTemperatureActivity
 import milu.kiriu2010.excon2.tabbed.TabbedActivity
@@ -188,6 +190,20 @@ class MainActivity : AppCompatActivity() {
         btnTabbed.transformationMethod = null
         btnTabbed.setOnClickListener {
             val intent = Intent(this,TabbedActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        // Bottom Navigation
+        btnBottomNavi.transformationMethod = null
+        btnBottomNavi.setOnClickListener {
+            val intent = Intent( this, BottomNaviActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        // Navigation Drawer
+        btnNaviDrawer.transformationMethod = null
+        btnNaviDrawer.setOnClickListener {
+            val intent = Intent( this, NaviDrawerActivity::class.java)
             this.startActivity(intent)
         }
 

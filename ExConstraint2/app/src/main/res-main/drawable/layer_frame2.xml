@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- item① -->
+    <!-- 左上を白っぽく -->
     <item>
         <shape>
             <corners android:radius="8dp"/>
-            <padding android:left="5dp" android:top="5dp"/>
+            <padding android:left="3dp" android:top="3dp"/>
             <solid android:color="#FFC0C0C0"/>
         </shape>
     </item>
+    <!-- item② -->
+    <!-- 右下を黒っぽく -->
     <item>
         <shape>
             <corners android:radius="8dp"/>
-            <padding android:right="5dp" android:bottom="5dp"/>
+            <padding android:right="3dp" android:bottom="3dp"/>
             <solid android:color="#FF404040"/>
         </shape>
     </item>
+    <!-- item③ -->
+    <!-- 中を灰色っぽく -->
     <item>
         <shape>
             <corners android:radius="10dp"/>

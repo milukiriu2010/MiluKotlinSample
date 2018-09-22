@@ -45,7 +45,13 @@
         <activity android:name=".canvas.CanvasActivity" />
         <activity
             android:name=".tabbed.TabbedActivity"
-            android:label="@string/title_activity_tabbed"></activity>
+            android:label="@string/title_activity_tabbed" />
+        <activity
+            android:name=".navibottom.BottomNaviActivity"
+            android:label="@string/title_activity_bottom_navi" />
+        <activity
+            android:name=".navidrawer.NaviDrawerActivity"
+            android:label="@string/title_activity_navi_drawer"></activity>
     </application>
 
 </manifest>
