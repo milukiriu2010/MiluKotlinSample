@@ -32,6 +32,7 @@ import milu.kiriu2010.excon2.navibottom.BottomNaviActivity
 import milu.kiriu2010.excon2.navidrawer.NaviDrawerActivity
 import milu.kiriu2010.excon2.sensorlight.SensorLightActivity
 import milu.kiriu2010.excon2.sensortemp.SensorTemperatureActivity
+import milu.kiriu2010.excon2.setting.SettingsActivity
 import milu.kiriu2010.excon2.tabbed.TabbedActivity
 import milu.kiriu2010.id.IntentID
 
@@ -204,6 +205,13 @@ class MainActivity : AppCompatActivity() {
         btnNaviDrawer.transformationMethod = null
         btnNaviDrawer.setOnClickListener {
             val intent = Intent( this, NaviDrawerActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        // 設定
+        btnSetting.transformationMethod = null
+        btnSetting.setOnClickListener {
+            val intent = Intent( this, SettingsActivity::class.java)
             this.startActivity(intent)
         }
 

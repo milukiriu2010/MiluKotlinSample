@@ -8,6 +8,9 @@
         android:title="TOP"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/menuItemDraw1"
+        android:title="Draw1" />
+    <item
         android:id="@+id/menuItemScheduler"
         android:title="Schedule" />
     <item

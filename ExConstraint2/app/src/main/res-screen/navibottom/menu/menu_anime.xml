@@ -4,6 +4,16 @@
     tools:context="milu.kiriu2010.excon2.navibottom.BottomNaviActivity">
 
     <item
+        android:id="@+id/anime_06_cycloid"
+        android:orderInCategory="100"
+        android:title="サイクロイド"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/anime_5_eight"
+        android:orderInCategory="100"
+        android:title="８の字"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/anime_4_rotate"
         android:orderInCategory="100"
         android:title="回転"

@@ -73,6 +73,24 @@ class BottomNaviActivity : AppCompatActivity() {
                 finish()
                 true
             }
+            // サイクロイド
+            R.id.anime_06_cycloid -> {
+                if ( supportFragmentManager.findFragmentByTag("Anime06Cycloid") == null ) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Anime06CycloidFragment.newInstance(), "Anime06Cycloid")
+                            .commit()
+                }
+                true
+            }
+            // 8の字
+            R.id.anime_5_eight -> {
+                if ( supportFragmentManager.findFragmentByTag("Anime5Eight") == null ) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Anime5EightFragment.newInstance(), "Anime5Eight")
+                            .commit()
+                }
+                true
+            }
             // "回転"
             R.id.anime_4_rotate -> {
                 if ( supportFragmentManager.findFragmentByTag("Anime4Rotate") == null ) {

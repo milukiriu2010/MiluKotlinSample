@@ -1,7 +1,8 @@
 package milu.kiriu2010.excon2.navibottom
 
-
 import android.animation.Animator
+import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -17,11 +18,15 @@ import kotlin.math.sin
 
 /**
  * A simple [Fragment] subclass.
- * Use the [NotificationFragment.newInstance] factory method to
+ * Activities that contain this fragment must implement the
+ * [Anime06CycloidFragment.OnFragmentInteractionListener] interface
+ * to handle interaction events.
+ * Use the [Anime06CycloidFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class NotificationFragment : Fragment() {
+class Anime06CycloidFragment : Fragment() {
+
     private lateinit var imageView: ImageView
 
     private var isCalculated = false
@@ -35,7 +40,8 @@ class NotificationFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_notification, container, false)
+        val view = inflater.inflate(R.layout.fragment_anime06_cycloid, container, false)
+
 
         // 画像をレイアウトに配置
         imageView = ImageView(context)
@@ -48,8 +54,8 @@ class NotificationFragment : Fragment() {
         // エミュレータ(1038x1542) => ButtonNavigationあり
         // 64x64 => 168x168
         view.viewTreeObserver.addOnGlobalLayoutListener {
-            if ( isCalculated == true ) return@addOnGlobalLayoutListener
-            Log.d( javaClass.simpleName, "W:w[${view.width}]h[${view.height}]/I:w[${imageView.width}]h[${imageView.height}]")
+            if (isCalculated == true) return@addOnGlobalLayoutListener
+            Log.d(javaClass.simpleName, "W:w[${view.width}]h[${view.height}]/I:w[${imageView.width}]h[${imageView.height}]")
 
             // レイアウト幅・高さ
             val lw = view.width.toFloat()
@@ -62,64 +68,53 @@ class NotificationFragment : Fragment() {
             val radius = 100.0f
 
             // 中心
-            val centerX = lw/2 - iw/2
-            val centerY = lh/2 - ih/2
-
-            // 縦横真ん中に表示
-            /*
-            imageView.x = lw/2 - iw/2
-            imageView.y = lh/2 - ih/2
-            */
-            /*
-            imageView.translationX = lw/2 - iw/2
-            imageView.translationY = lh/2 - ih/2
-            */
+            val centerX = lw/2 - iw/2 - (radius * ( 2* PI - sin(2* PI) ).toFloat())/2
+            val centerY = lh / 2 - ih / 2
 
             // 回転角度(Y軸)
             val angleY = 10.0f
             // 回転角度(Z軸)
             var angleZ = 10.0f
+            // 回転角度(Z軸)差分
+            var angleZd = 10.0f
 
-            imageView.x = centerX+(radius* cos(0.0)).toFloat()
-            imageView.y = centerY+(radius* sin(0.0)).toFloat()
+            // 縦横真ん中からサイクロイド曲線の半分左にずらして表示
+            imageView.x = centerX + (radius * cos(0.0)).toFloat()
+            imageView.y = centerY + (radius * sin(0.0)).toFloat()
+
+            // サイクロイド曲線
+            // x = a * ( b - sin(b) )
+            // y = a * ( 1 - cos(b) )
 
             // 画像の幅分横に移動
             val duration = 100L
             val animator = imageView.animate()
                     .setDuration(duration)
-                    .x(centerX+(radius* cos(angleZ/180* PI)).toFloat())
-                    .y(centerY+(radius* sin(angleZ/180* PI)).toFloat())
-            /*
-            .x(centerX)
-            .xBy((radius*cos(angleZ*PI)).toFloat())
-            .y(centerY)
-            .yBy((radius*sin(angleZ*PI)).toFloat())
-            */
-            //.rotationBy(angle)
-            //.rotationXBy(angle)
-            //.rotationYBy(angleY)
+                    .x(centerX + (radius * ( angleZ/180* PI - sin(angleZ/180* PI) ).toFloat()) )
+                    .y(centerY + (radius * ( 1 - cos(angleZ/180* PI)).toFloat()) )
+                    .rotationYBy(angleY)
             // リピートする
-            animator.setListener( object: Animator.AnimatorListener {
+            animator.setListener(object : Animator.AnimatorListener {
                 override fun onAnimationRepeat(animation: Animator?) {
                 }
 
                 override fun onAnimationEnd(animation: Animator?) {
-                    Log.d( javaClass.simpleName, "onAnimationEnd")
-                    angleZ += 10
+                    Log.d(javaClass.simpleName, "onAnimationEnd")
+                    if ( angleZ >= 0 && angleZ <= 360 && angleZd > 0) {
+                    }
+                    else if ( angleZ >= 360 && angleZd > 0) {
+                        angleZd = -10.0f
+                    }
+                    else if ( angleZ <= 0 && angleZd < 0) {
+                        angleZd = 10.0f
+                    }
+                    angleZ += angleZd
 
                     imageView.animate()
                             .setDuration(duration)
-                            .x(centerX+(radius* cos(angleZ/180* PI)).toFloat())
-                            .y(centerY+(radius* sin(angleZ/180* PI)).toFloat())
-                    /*
-                    .x(centerX)
-                    .xBy((radius*cos(angleZ*PI)).toFloat())
-                    .y(centerY)
-                    .yBy((radius*sin(angleZ*PI)).toFloat())
-                    */
-                    //.rotationBy(angle)
-                    //.rotationXBy(angle)
-                    //.rotationYBy(angleY)
+                            .x(centerX + (radius * ( angleZ/180* PI - sin(angleZ/180* PI) ).toFloat()) )
+                            .y(centerY + (radius * ( 1 - cos(angleZ/180* PI)).toFloat()) )
+                            .rotationYBy(angleY)
                 }
 
                 override fun onAnimationCancel(animation: Animator?) {
@@ -127,25 +122,23 @@ class NotificationFragment : Fragment() {
 
                 override fun onAnimationStart(animation: Animator?) {
                 }
-
             })
         }
 
         return view
     }
 
-
     companion object {
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment NotificationFragment.
+         * @return A new instance of fragment Anime06CycloidFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                NotificationFragment().apply {
+                Anime06CycloidFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

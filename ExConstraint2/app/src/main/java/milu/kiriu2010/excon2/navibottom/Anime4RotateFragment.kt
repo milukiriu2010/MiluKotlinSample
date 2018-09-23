@@ -12,6 +12,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 
 import milu.kiriu2010.excon2.R
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
 
 /**
  * A simple [Fragment] subclass.
@@ -50,8 +53,8 @@ class Anime4RotateFragment : Fragment() {
         // エミュレータ(1038x1542) => ButtonNavigationあり
         // 64x64 => 168x168
         view.viewTreeObserver.addOnGlobalLayoutListener {
-            if ( isCalculated == true ) return@addOnGlobalLayoutListener
-            Log.d( javaClass.simpleName, "W:w[${view.width}]h[${view.height}]/I:w[${imageView.width}]h[${imageView.height}]")
+            if (isCalculated == true) return@addOnGlobalLayoutListener
+            Log.d(javaClass.simpleName, "W:w[${view.width}]h[${view.height}]/I:w[${imageView.width}]h[${imageView.height}]")
 
             // レイアウト幅・高さ
             val lw = view.width.toFloat()
@@ -60,37 +63,49 @@ class Anime4RotateFragment : Fragment() {
             val iw = imageView.width.toFloat()
             val ih = imageView.height.toFloat()
 
-            // 縦横真ん中に表示
-            /*
-            imageView.x = lw/2 - iw/2
-            imageView.y = lh/2 - ih/2
-            */
-            imageView.translationX = lw/2 - iw/2
-            imageView.translationY = lh/2 - ih/2
+            // 半径
+            val radius = 200.0f
 
-            // 回転角度
-            val angle = 10.0f
+            // 中心
+            val centerX = lw / 2 - iw / 2
+            val centerY = lh / 2 - ih / 2
+
+            // 回転角度(Y軸)
+            val angleY = 10.0f
+            // 回転角度(Z軸)
+            var angleZ = 10.0f
+            // 回転角度(Z軸)差分
+            var angleZd = 10.0f
+
+            // 縦横真ん中から半径分右にずらして表示
+            imageView.x = centerX + (radius * cos(0.0)).toFloat()
+            imageView.y = centerY + (radius * sin(0.0)).toFloat()
 
             // 画像の幅分横に移動
             val duration = 100L
             val animator = imageView.animate()
                     .setDuration(duration)
-                    .rotationBy(angle)
-                    .rotationXBy(angle)
-                    .rotationYBy(angle)
+                    .x(centerX + (radius * cos(angleZ / 180 * PI)).toFloat())
+                    .y(centerY + (radius * sin(angleZ / 180 * PI)).toFloat())
+                    //.rotationBy(angle)
+                    //.rotationXBy(angle)
+                    .rotationYBy(angleY)
             // リピートする
-            animator.setListener( object: Animator.AnimatorListener {
+            animator.setListener(object : Animator.AnimatorListener {
                 override fun onAnimationRepeat(animation: Animator?) {
                 }
 
                 override fun onAnimationEnd(animation: Animator?) {
-                    Log.d( javaClass.simpleName, "onAnimationEnd")
+                    Log.d(javaClass.simpleName, "onAnimationEnd")
+                    angleZ += angleZd
 
                     imageView.animate()
                             .setDuration(duration)
-                            .rotationBy(angle)
-                            .rotationXBy(angle)
-                            .rotationYBy(angle)
+                            .x(centerX + (radius * cos(angleZ / 180 * PI)).toFloat())
+                            .y(centerY + (radius * sin(angleZ / 180 * PI)).toFloat())
+                            //.rotationBy(angle)
+                            //.rotationXBy(angle)
+                            .rotationYBy(angleY)
                 }
 
                 override fun onAnimationCancel(animation: Animator?) {
@@ -98,7 +113,6 @@ class Anime4RotateFragment : Fragment() {
 
                 override fun onAnimationStart(animation: Animator?) {
                 }
-
             })
         }
 
