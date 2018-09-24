@@ -15,14 +15,26 @@
     <item
         android:state_pressed="true">
         <shape android:shape="oval">
-            <solid android:color="#1abc9c"/>
+            <!-- darkturquoise -->
+            <!-- lightseagreen(20b2aa) -->
+            <gradient
+                android:angle="135"
+                android:startColor="#00ced1"
+                android:endColor="#ffffff"
+                android:type="linear"/>
         </shape>
     </item>
     <!-- 通常状態 -->
     <item
         android:state_pressed="false">
         <shape android:shape="oval">
-            <solid android:color="#21ffd3"/>
+            <!-- turquoise -->
+            <!-- mediumturquoise(48d1cc) -->
+            <gradient
+                android:angle="315"
+                android:startColor="#40e0d0"
+                android:endColor="#ffffff"
+                android:type="linear"/>
         </shape>
     </item>
 </selector>

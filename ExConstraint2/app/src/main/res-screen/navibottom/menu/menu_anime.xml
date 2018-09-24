@@ -4,6 +4,11 @@
     tools:context="milu.kiriu2010.excon2.navibottom.BottomNaviActivity">
 
     <item
+        android:id="@+id/anime_07_asteroid"
+        android:orderInCategory="100"
+        android:title="アステロイド"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/anime_06_cycloid"
         android:orderInCategory="100"
         android:title="サイクロイド"

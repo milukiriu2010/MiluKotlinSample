@@ -62,33 +62,33 @@ class HomeFragment : Fragment() {
             val ih = imageView.height.toFloat()
 
             // 半径
-            val radius = 100.0f
+            val radius = 300.0f
 
             // 中心
-            val centerX = lw/2 - iw/2 - (radius * ( 2*PI - sin(2*PI) ).toFloat())/2
+            val centerX = lw/2 - iw/2
             val centerY = lh / 2 - ih / 2
 
             // 回転角度(Y軸)
             val angleY = 10.0f
             // 回転角度(Z軸)
-            var angleZ = 10.0f
+            var angleZ = 0.0f
             // 回転角度(Z軸)差分
             var angleZd = 10.0f
 
-            // 縦横真ん中からサイクロイド曲線の半分左にずらして表示
-            imageView.x = centerX + (radius * cos(0.0)).toFloat()
-            imageView.y = centerY + (radius * sin(0.0)).toFloat()
+            // 縦横真ん中からアステロイド曲線の左端にずらして表示
+            imageView.x = centerX + (radius * cos(0.0) * cos(0.0) * cos(0.0)).toFloat()
+            imageView.y = centerY + (radius * sin(0.0) * sin(0.0) * sin(0.0)).toFloat()
 
-            // サイクロイド曲線
-            // x = a * ( b - sin(b) )
-            // y = a * ( 1 - cos(b) )
+            // アステロイド曲線
+            // x = a * cos(b) * cos(b) * cos(b)
+            // y = a * sin(b) * sin(b) * sin(b)
 
             // 画像の幅分横に移動
             val duration = 100L
             val animator = imageView.animate()
                     .setDuration(duration)
-                    .x(centerX + (radius * ( angleZ/180*PI - sin(angleZ/180*PI) ).toFloat()) )
-                    .y(centerY + (radius * ( 1 - cos(angleZ/180*PI)).toFloat()) )
+                    .x(centerX + (radius * cos(angleZ/180*PI) * cos(angleZ/180*PI) * cos(angleZ/180*PI) ).toFloat())
+                    .y(centerY + (radius * sin(angleZ/180*PI) * sin(angleZ/180*PI) * sin(angleZ/180*PI) ).toFloat())
                     .rotationYBy(angleY)
             // リピートする
             animator.setListener(object : Animator.AnimatorListener {
@@ -97,20 +97,13 @@ class HomeFragment : Fragment() {
 
                 override fun onAnimationEnd(animation: Animator?) {
                     Log.d(javaClass.simpleName, "onAnimationEnd")
-                    if ( angleZ >= 0 && angleZ <= 360 && angleZd > 0) {
-                    }
-                    else if ( angleZ >= 360 && angleZd > 0) {
-                        angleZd = -10.0f
-                    }
-                    else if ( angleZ <= 0 && angleZd < 0) {
-                        angleZd = 10.0f
-                    }
                     angleZ += angleZd
+                    angleZ %= 360
 
                     imageView.animate()
                             .setDuration(duration)
-                            .x(centerX + (radius * ( angleZ/180*PI - sin(angleZ/180*PI) ).toFloat()) )
-                            .y(centerY + (radius * ( 1 - cos(angleZ/180*PI)).toFloat()) )
+                            .x(centerX + (radius * cos(angleZ/180*PI) * cos(angleZ/180*PI) * cos(angleZ/180*PI) ).toFloat())
+                            .y(centerY + (radius * sin(angleZ/180*PI) * sin(angleZ/180*PI) * sin(angleZ/180*PI) ).toFloat())
                             .rotationYBy(angleY)
                 }
 

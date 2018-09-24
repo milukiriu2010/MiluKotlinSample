@@ -73,6 +73,15 @@ class BottomNaviActivity : AppCompatActivity() {
                 finish()
                 true
             }
+            // アステロイド
+            R.id.anime_07_asteroid -> {
+                if ( supportFragmentManager.findFragmentByTag("Anime07Asteroid") == null ) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Anime07AsteroidFragment.newInstance(), "Anime07Asteroid")
+                            .commit()
+                }
+                true
+            }
             // サイクロイド
             R.id.anime_06_cycloid -> {
                 if ( supportFragmentManager.findFragmentByTag("Anime06Cycloid") == null ) {

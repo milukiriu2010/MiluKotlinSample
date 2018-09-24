@@ -94,6 +94,7 @@
         android:id="@+id/btnSTOPWATCH"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_chocolate"
         android:text="@string/BTN_STOP_WATCH"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textStyle="bold"
