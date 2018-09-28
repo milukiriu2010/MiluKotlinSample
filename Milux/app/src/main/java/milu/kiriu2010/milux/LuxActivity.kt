@@ -72,13 +72,13 @@ class LuxActivity : AppCompatActivity()
 
         /*
         for ( i in 0 until luxPagerAdapter!!.count ) {
-            val fragment = luxPagerAdapter?.getItem(i) as? NewValListener ?: continue
+            val fragment = luxPagerAdapter?.getItem(i) as? NewVal01Listener ?: continue
 
             fragment.onUpdate(lux)
         }
         */
 
-        if ( fragment is NewValListener ) {
+        if ( fragment is NewVal01Listener ) {
             fragment.onUpdate(lux)
         }
 

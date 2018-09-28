@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.*
 import android.widget.TextView
+import milu.kiriu2010.milux.entity.LuxData
+import milu.kiriu2010.util.LimitedArrayList
 import kotlin.math.log
 
 /**
@@ -19,7 +21,7 @@ import kotlin.math.log
  */
 class Lux01OverViewFragment : Fragment()
         , SurfaceHolder.Callback
-        , NewValListener
+        , NewVal01Listener
         , OrientationListener{
 
     // 照度
@@ -33,6 +35,9 @@ class Lux01OverViewFragment : Fragment()
     // 照度の強さを表示するビューの幅・高さ
     private var ow = 0f
     private var oh = 0f
+
+    // 照度値をlog10したときのMAX値
+    private val luxLog10Max = 5f
 
     // バックグラウンドに使うペイント
     private val paintBackground = Paint().apply {
@@ -106,16 +111,16 @@ class Lux01OverViewFragment : Fragment()
     override fun surfaceCreated(holder: SurfaceHolder?) {
     }
 
-    // NewValListener
+    // NewVal01Listener
     // 新しい照度を設定
     override fun onUpdate(lux: Float) {
-        Log.d( javaClass.simpleName, "lux[$lux]")
-
+        //Log.d( javaClass.simpleName, "lux[$lux]")
+        //if ( lux == this.lux ) return
         this.lux = lux
 
         // 照度の数値を表示
         if (this::dataLux.isInitialized) {
-            Log.d( javaClass.simpleName, "dataLux already initialized")
+            //Log.d( javaClass.simpleName, "dataLux already initialized")
             dataLux.text = this.lux.toString()
         }
 
@@ -124,6 +129,11 @@ class Lux01OverViewFragment : Fragment()
             drawCanvas()
         }
 
+    }
+
+    // NewVal01Listener
+    // 照度値の配列を渡す
+    override fun onUpdate( luxLst: LimitedArrayList<LuxData>) {
     }
 
     // 照度の強さを描画
@@ -135,7 +145,7 @@ class Lux01OverViewFragment : Fragment()
             return
         }
 
-        Log.d( javaClass.simpleName, "drawCanvas:w[$ow]h[$oh]")
+        //Log.d( javaClass.simpleName, "drawCanvas:w[$ow]h[$oh]")
 
         // 座標移動するため、初期位置を保存する
         canvas.save()
@@ -148,14 +158,14 @@ class Lux01OverViewFragment : Fragment()
         canvas.drawRect(frame, paintFrame)
 
         // 各フレームの高さ
-        val fh = oh/8
+        val fh = oh/luxLog10Max
         // 各フレームを描画
         val baseLine = Path()
         baseLine.moveTo(0f, 0f)
         baseLine.lineTo( ow, 0f)
         // 閉じると点線じゃなくなる？
         //baseLine.close()
-        for ( i in 1 until 8 ) {
+        for ( i in 1 until luxLog10Max.toInt() ) {
             canvas.translate( 0f, fh.toFloat())
             canvas.drawPath(baseLine,paintLineBase)
         }
@@ -163,9 +173,12 @@ class Lux01OverViewFragment : Fragment()
         // 座標位置を初期値に戻す
         canvas.restore()
 
+        // 座標移動するため、初期位置を保存する
+        canvas.save()
+
         // ---------------------------------------------------------------------------
         // 太陽を描画
-        //   120000.0:5.079
+        //   10000以上
         // https://illustimage.com/?id=1743
         // ---------------------------------------------------------------------------
         val bmpSun = BitmapFactory.decodeResource(resources,R.drawable.a_sun)
@@ -177,27 +190,59 @@ class Lux01OverViewFragment : Fragment()
 
         // ---------------------------------------------------------------------------
         // 日の出を描画
-        //   400.0:2.602
+        //   1000以上
         // https://icon-icons.com/ja/%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3/%E3%82%B5%E3%83%B3%E3%83%A9%E3%82%A4%E3%82%BA/98976
         // ---------------------------------------------------------------------------
         val bmpSunRise = BitmapFactory.decodeResource(resources,R.drawable.a_sunrise)
         // 描画元の矩形イメージ
         val srcSunrise = Rect(0,0,bmpSunRise.width,bmpSunRise.height)
         // 描画先の矩形イメージ
-        val dstSunrise = Rect( (ow-fh).toInt(), 2*fh.toInt(), ow.toInt(), 3*fh.toInt())
+        val dstSunrise = Rect( (ow-fh).toInt(), 0, ow.toInt(), fh.toInt())
+        canvas.translate( 0f, fh )
         canvas.drawBitmap(bmpSunRise, srcSunrise, dstSunrise, paintBackground)
 
         // ---------------------------------------------------------------------------
+        // 雲を描画
+        //   100以上
+        // http://illustrationfree.seesaa.net/article/208791337.html
+        // ---------------------------------------------------------------------------
+        val bmpCloudy = BitmapFactory.decodeResource(resources,R.drawable.a_cloudy)
+        // 描画元の矩形イメージ
+        val srcCloudy = Rect(0,0,bmpCloudy.width,bmpCloudy.height)
+        // 描画先の矩形イメージ
+        val dstCloudy = Rect( (ow-fh).toInt(), 0, ow.toInt(), fh.toInt())
+        canvas.translate( 0f, fh )
+        canvas.drawBitmap(bmpCloudy, srcCloudy, dstCloudy, paintBackground)
+
+        // ---------------------------------------------------------------------------
         // 月を描画
-        //   0.25:-0.602
+        //   10以上
+        // http://freebies-db.com/free-illustration-tsuki-usagi.html
         // https://illustrain.com/?p=21515
         // ---------------------------------------------------------------------------
         val bmpMoon = BitmapFactory.decodeResource(resources,R.drawable.a_moon)
         // 描画元の矩形イメージ
         val srcMoon = Rect(0,0,bmpMoon.width,bmpMoon.height)
         // 描画先の矩形イメージ
-        val dstMoon = Rect( (ow-fh).toInt(), 5*fh.toInt(), ow.toInt(), 6*fh.toInt())
+        val dstMoon = Rect( (ow-fh).toInt(), 0, ow.toInt(), fh.toInt())
+        canvas.translate( 0f, fh )
         canvas.drawBitmap(bmpMoon, srcMoon, dstMoon, paintBackground)
+
+        // ---------------------------------------------------------------------------
+        // 星を描画
+        //   1以上
+        // https://illustimage.com/?id=1744
+        // ---------------------------------------------------------------------------
+        val bmpStar = BitmapFactory.decodeResource(resources,R.drawable.a_star)
+        // 描画元の矩形イメージ
+        val srcStar = Rect(0,0,bmpStar.width,bmpStar.height)
+        // 描画先の矩形イメージ
+        val dstStar = Rect( (ow-fh).toInt(), 0, ow.toInt(), fh.toInt())
+        canvas.translate( 0f, fh )
+        canvas.drawBitmap(bmpStar, srcStar, dstStar, paintBackground)
+
+        // 座標位置を初期値に戻す
+        canvas.restore()
 
         // http://seesaawiki.jp/w/moonlight_aska/d/%be%c8%c5%d9%a5%bb%a5%f3%a5%b5%a1%bc%a4%ce%c3%cd%a4%f2%bc%e8%c6%c0%a4%b9%a4%eb
         // ----------------------------------------------------------------------
@@ -212,15 +257,17 @@ class Lux01OverViewFragment : Fragment()
         //   LIGHT_FULLMOON          0.25     -0.602
         //   LIGHT_NO_MOON           0.0010   -3
         // ----------------------------------------------------------------------
+        // ただし、計測しても1未満は表示されることはない
+        // ----------------------------------------------------------------------
         // 照度をlog対数表示するため、補正する
         val luxC = when {
-            ( lux < LIGHT_NO_MOON ) -> 0f
-            ( log(lux,10f) > 5 ) -> 8f
-            else -> log(lux,10f)+3f
+            ( lux < 1f ) -> 0f
+            ( log(lux,10f) > luxLog10Max ) -> luxLog10Max
+            else -> log(lux,10f)
         }
 
         // 照度の位置を描画
-        val luxH = oh * (8-luxC)/8
+        val luxH = oh * (luxLog10Max-luxC)/luxLog10Max
         canvas.drawLine(0f, luxH, ow, luxH, paintLineLux )
 
         overView.holder.unlockCanvasAndPost(canvas)
