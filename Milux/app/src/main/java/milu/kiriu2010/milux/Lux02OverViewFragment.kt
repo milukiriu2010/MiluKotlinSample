@@ -219,12 +219,19 @@ class Lux02OverViewFragment : Fragment()
         val boundsTime = Rect()
         for ( i in divX downTo 0 ) {
             canvas.drawPath(timeLine,paintLineBase)
-            // 文字を詰めすぎるとみにくいので1つ置きに時刻を表示
-            if ( ( luxLst.size > (i*limit/divX) ) && ( i%2 == 0 ) ) {
+            // バッファを超えてアクセスするとExceptionが発生するので
+            // チェックしている
+            if ( (i*limit/divX) < luxLst.size ) {
                 val date = luxLst[(i*limit/divX)].t
                 val strTime = timeFmt.format(date)
                 paintTime.getTextBounds( strTime, 0, strTime.length, boundsTime )
-                canvas.drawText( strTime, -boundsTime.width()/2f, oh-mh/2, paintTime )
+                // 文字を詰めすぎるとみにくいので1つ置きに時刻を表示
+                if ( i%2 == 0 ) {
+                    canvas.drawText(strTime, -boundsTime.width()/2f, oh - mh/2, paintTime)
+                }
+                else {
+                    canvas.drawText(strTime, -boundsTime.width()/2f, oh, paintTime)
+                }
                 Log.d( javaClass.simpleName, "i[$i]luxLst.size[${luxLst.size}]time[$strTime]")
             }
             canvas.translate( (frame.width()/divX).toFloat(), 0f)
@@ -239,6 +246,8 @@ class Lux02OverViewFragment : Fragment()
         // ------------------------------------------------------------------------
         // 照度スケールのダッシュ線を描画
         // ------------------------------------------------------------------------
+        // 一番上に単位を描画
+        canvas.drawText( "(x ${(10f.pow(luxMaxLog10)).toInt()})", mw, mh/2, paintTime )
         val luxScaleLine = Path()
         luxScaleLine.moveTo( mw, 0f)
         luxScaleLine.lineTo( ow-mw, 0f)
@@ -255,11 +264,12 @@ class Lux02OverViewFragment : Fragment()
             }
         }
         // 一番下に単位を描画
-        canvas.drawText( "(x ${(10f.pow(luxMaxLog10)).toInt()})", 10f, mh/2, paintTime )
+        //canvas.drawText( "(x ${(10f.pow(luxMaxLog10)).toInt()})", 10f, mh/2, paintTime )
 
         // 座標位置を初期値に戻す
         canvas.restore()
 
+        // ---------------------------------
         // 照度値を描画
         // ---------------------------------
         // 幅(ow-2*mw)
