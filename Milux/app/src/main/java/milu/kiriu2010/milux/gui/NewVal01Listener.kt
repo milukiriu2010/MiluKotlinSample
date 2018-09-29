@@ -1,4 +1,4 @@
-package milu.kiriu2010.milux
+package milu.kiriu2010.milux.gui
 
 import milu.kiriu2010.milux.entity.LuxData
 import milu.kiriu2010.util.LimitedArrayList

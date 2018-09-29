@@ -1,4 +1,4 @@
-package milu.kiriu2010.milux
+package milu.kiriu2010.milux.gui
 
 import android.content.Context
 import android.hardware.Sensor
@@ -7,6 +7,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import milu.kiriu2010.milux.R
 
 class LuxActivity : AppCompatActivity()
         , SensorEventListener {
@@ -78,7 +79,7 @@ class LuxActivity : AppCompatActivity()
         }
         */
 
-        if ( fragment is NewVal01Listener ) {
+        if ( fragment is NewVal01Listener) {
             fragment.onUpdate(lux)
         }
 

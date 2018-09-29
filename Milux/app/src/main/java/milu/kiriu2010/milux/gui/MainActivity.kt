@@ -1,4 +1,4 @@
-package milu.kiriu2010.milux
+package milu.kiriu2010.milux.gui
 
 import android.content.Context
 import android.hardware.Sensor
@@ -7,22 +7,21 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.support.v7.app.AppCompatActivity
 
-import android.support.v4.view.ViewPager
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_main.*
+import milu.kiriu2010.milux.R
 import milu.kiriu2010.milux.conf.AppConf
 import milu.kiriu2010.milux.entity.LuxData
 import milu.kiriu2010.util.LimitedArrayList
 import java.util.Date
-import kotlin.concurrent.timer
 
 class MainActivity : AppCompatActivity()
-        , SensorEventListener {
+        , SensorEventListener
+        , ResetListener {
 
     // アプリ設定
     val appConf = AppConf()
@@ -35,7 +34,6 @@ class MainActivity : AppCompatActivity()
      * may be best to switch to a
      * [android.support.v4.app.FragmentStatePagerAdapter].
      */
-    //private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
     private var luxPagerAdapter: LuxPagerAdapter? = null
 
     // 照度センサの値
@@ -83,6 +81,7 @@ class MainActivity : AppCompatActivity()
 
 
         // 1秒ごとに照度値をバッファに蓄える
+        // なんかうまく動かない
         /*
         timer( period = 1000 ) {
             handler.post {
@@ -91,8 +90,6 @@ class MainActivity : AppCompatActivity()
             }
         }
         */
-
-
     }
 
     // センサーの監視を開始する
@@ -138,12 +135,13 @@ class MainActivity : AppCompatActivity()
             tick = true
             luxData = LuxData(now,lux)
             luxLst.add(0, luxData)
-            Log.d(javaClass.simpleName,"luxLst.size[${luxLst.size}]")
+            //Log.d(javaClass.simpleName,"luxLst.size[${luxLst.size}]")
         }
 
         // 登録されている表示ビュー全てに新しい値を伝える
         for ( i in 0 until luxPagerAdapter!!.count ) {
-            val fragment = luxPagerAdapter?.getItem(i) as? NewVal01Listener ?: continue
+            val fragment = luxPagerAdapter?.getItem(i) as? NewVal01Listener
+                    ?: continue
 
             fragment.onUpdate(lux)
             if ( tick == true ) {
@@ -151,6 +149,26 @@ class MainActivity : AppCompatActivity()
             }
         }
 
+    }
+
+    // ResetListener
+    // メンバ変数を初期化する
+    override fun OnReset() {
+        //Log.d( javaClass.simpleName, "OnReset")
+        // 照度センサの値
+        luxData = LuxData()
+
+        // 時刻ごとの照度値リスト
+        // 1分間データを保持
+        luxLst.clear()
+
+        // 登録されている表示ビュー全てをリセット
+        for ( i in 0 until luxPagerAdapter!!.count ) {
+            val fragment = luxPagerAdapter?.getItem(i) as? ResetListener
+                    ?: continue
+
+            fragment.OnReset()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -163,10 +181,9 @@ class MainActivity : AppCompatActivity()
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        val id = item.itemId
-
-        if (id == R.id.action_settings) {
-            return true
+        when (item.itemId) {
+            // リセットボタン
+            R.id.action_reset -> OnReset()
         }
 
         return super.onOptionsItemSelected(item)

@@ -1,4 +1,4 @@
-package milu.kiriu2010.milux
+package milu.kiriu2010.milux.gui
 
 
 import android.content.pm.ActivityInfo
@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.*
 import android.widget.TextView
+import milu.kiriu2010.milux.R
 import milu.kiriu2010.milux.entity.LuxData
 import milu.kiriu2010.util.LimitedArrayList
 import java.text.SimpleDateFormat
@@ -24,7 +25,9 @@ import kotlin.math.pow
 class Lux02OverViewFragment : Fragment()
         , SurfaceHolder.Callback
         , NewVal01Listener
-        , OrientationListener {
+        , OrientationListener
+        , ResetListener {
+
     // 現在の照度
     private var lux: Float = 0f
 
@@ -146,7 +149,7 @@ class Lux02OverViewFragment : Fragment()
         // 照度の数値を表示
         if (this::dataLux.isInitialized) {
             //Log.d( javaClass.simpleName, "dataLux already initialized")
-            dataLux.text = this.lux.toString()
+            dataLux.text = "%.1f lx".format(this.lux)
         }
     }
 
@@ -162,7 +165,7 @@ class Lux02OverViewFragment : Fragment()
         } ?: 10f
         // 照度最低値は0とする
         luxMin = luxLst.minBy { it.lux }?.lux ?: 0f
-        Log.d( javaClass.simpleName, "max[$luxMax]min[$luxMin]")
+        //Log.d( javaClass.simpleName, "max[$luxMax]min[$luxMin]")
 
         // 照度の強さ⇔時刻をグラフ化
         if (this::overView.isInitialized) {
@@ -175,7 +178,7 @@ class Lux02OverViewFragment : Fragment()
         val canvas = overView.holder.lockCanvas()
         if (canvas == null) {
             Log.d( javaClass.simpleName, "canvas is null")
-            overView.holder.unlockCanvasAndPost(canvas)
+            //overView.holder.unlockCanvasAndPost(canvas)
             return
         }
 
@@ -193,7 +196,7 @@ class Lux02OverViewFragment : Fragment()
         // 8631.6 => 9000
         // -------------------------------------------
         val gmax = ((luxMax / 10f.pow(luxMaxLog10)).toInt()+1)*10f.pow(luxMaxLog10)
-        Log.d( javaClass.simpleName, "gmax[$gmax]luxMaxLog10[$luxMaxLog10]luxMax[$luxMax]")
+        //Log.d( javaClass.simpleName, "gmax[$gmax]luxMaxLog10[$luxMaxLog10]luxMax[$luxMax]")
 
         // バックグラウンドを塗りつぶす
         val background = Rect( 0, 0, ow.toInt(), oh.toInt())
@@ -232,7 +235,7 @@ class Lux02OverViewFragment : Fragment()
                 else {
                     canvas.drawText(strTime, -boundsTime.width()/2f, oh, paintTime)
                 }
-                Log.d( javaClass.simpleName, "i[$i]luxLst.size[${luxLst.size}]time[$strTime]")
+                //Log.d( javaClass.simpleName, "i[$i]luxLst.size[${luxLst.size}]time[$strTime]")
             }
             canvas.translate( (frame.width()/divX).toFloat(), 0f)
         }
@@ -302,6 +305,19 @@ class Lux02OverViewFragment : Fragment()
     // OrientationListener
     override fun onActivityOrientation(): Int {
         return ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+    }
+
+    // ResetListener
+    // メンバ変数を初期化する
+    override fun OnReset() {
+        //Log.d( javaClass.simpleName, "OnReset")
+        // 現在の照度
+        lux = 0f
+
+        // 照度MAX値
+        luxMax = 10f
+        // 照度MIN値
+        luxMin = 0f
     }
 
     companion object {

@@ -1,4 +1,4 @@
-package milu.kiriu2010.milux
+package milu.kiriu2010.milux.gui
 
 interface OrientationListener {
     // アクティビティの方向を返す
