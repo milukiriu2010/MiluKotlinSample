@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.*
 import android.widget.TextView
+import milu.kiriu2010.milux.LuxApplication
 import milu.kiriu2010.milux.R
 import milu.kiriu2010.milux.entity.LuxData
 import milu.kiriu2010.util.LimitedArrayList
@@ -182,9 +183,15 @@ class Lux02OverViewFragment : Fragment()
             return
         }
 
+        // アプリ設定を取得
+        val appl = context?.applicationContext as? LuxApplication
+        val appConf = appl?.appConf
+
         // 照度値サンプリング数の上限数-1
         // 見つからない場合10としている
-        val limit = (activity as MainActivity)?.appConf.limit-1 ?: 10
+        var limit = appConf?.limit?.let {
+            it - 1
+        } ?: 10
 
         // 照度MAX値からグラフ表示に使うMAX値を計算
         val luxMaxLog10 = log10(luxMax).toInt()

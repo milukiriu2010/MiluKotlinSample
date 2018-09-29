@@ -15,7 +15,8 @@ class LuxPagerAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm) {
     private val pageCnt = 3
 
     override fun getItem(pos: Int): Fragment {
-        return when (pos%pageCnt) {
+        //return when (pos%pageCnt) {
+        return when (pos) {
             0 -> {
                 if ( !this::lux01OverViewFragment.isInitialized ) {
                     lux01OverViewFragment = Lux01OverViewFragment()

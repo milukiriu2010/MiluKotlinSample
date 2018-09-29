@@ -13,6 +13,7 @@ import android.view.Menu
 import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_main.*
+import milu.kiriu2010.milux.LuxApplication
 import milu.kiriu2010.milux.R
 import milu.kiriu2010.milux.conf.AppConf
 import milu.kiriu2010.milux.entity.LuxData
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity()
         , ResetListener {
 
     // アプリ設定
-    val appConf = AppConf()
+    private lateinit var appConf: AppConf
 
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
@@ -40,8 +41,8 @@ class MainActivity : AppCompatActivity()
     private var luxData = LuxData()
 
     // 時刻ごとの照度値リスト
-    // 1分間データを保持
-    private val luxLst = LimitedArrayList<LuxData>(appConf.limit, appConf.limit)
+    //private val luxLst = LimitedArrayList<LuxData>(appConf.limit, appConf.limit)
+    private lateinit var luxLst: LimitedArrayList<LuxData>
 
     // タイマーで呼び出されるハンドラー
     //private val handler = Handler()
@@ -51,6 +52,13 @@ class MainActivity : AppCompatActivity()
         setContentView(R.layout.activity_main)
 
         //setSupportActionBar(toolbar)
+
+        // アプリ設定
+        val appl = application as LuxApplication
+        appConf = appl.appConf
+
+        // 時刻ごとの照度値リスト
+        luxLst = LimitedArrayList<LuxData>(appConf.limit, appConf.limit)
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -102,7 +110,6 @@ class MainActivity : AppCompatActivity()
         // 照度センサあり
         if ( sensorLight != null ) {
             sensorManager.registerListener(this, sensorLight, SensorManager.SENSOR_DELAY_NORMAL)
-
         }
         // 照度センサなし
         else {

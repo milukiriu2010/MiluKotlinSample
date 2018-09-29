@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import milu.kiriu2010.milux.LuxApplication
 
 import milu.kiriu2010.milux.R
 import milu.kiriu2010.milux.entity.LuxData
@@ -65,7 +66,8 @@ class Lux03OverViewFragment : Fragment()
         // 照度値を表示するアダプタにデータを追加し、更新を通知する
         if (this::adapter.isInitialized) {
             // アプリ設定を取得
-            val appConf = (activity as? MainActivity)?.appConf ?: return
+            val appl = context?.applicationContext as? LuxApplication
+            val appConf = appl?.appConf ?: return
             // アダプタに格納されているデータ数
             var cnt = adapter.itemCount
 
