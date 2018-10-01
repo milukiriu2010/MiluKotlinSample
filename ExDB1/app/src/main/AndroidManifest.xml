@@ -22,7 +22,10 @@
             android:label="@string/title_activity_scheduler"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".sqlite.SQLiteOpenHelperActivity" />
-        <activity android:name=".scheduler.ScheduleEditActivity"></activity>
+        <activity android:name=".scheduler.ScheduleEditActivity" />
+        <activity
+            android:name=".animeobj.AnimeObjActivity"
+            android:label="@string/title_activity_anime_obj"></activity>
     </application>
 
 </manifest>

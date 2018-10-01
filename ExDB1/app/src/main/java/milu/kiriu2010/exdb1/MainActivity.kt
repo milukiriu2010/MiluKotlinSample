@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import kotlinx.android.synthetic.main.activity_main.*
+import milu.kiriu2010.exdb1.animeobj.AnimeObjActivity
 import milu.kiriu2010.exdb1.draw.Draw1Fragment
 import milu.kiriu2010.exdb1.scheduler.SchedulerActivity
 import milu.kiriu2010.exdb1.sqlite.SQLiteOpenHelperActivity
@@ -14,6 +16,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // オブジェクトのアニメーションを表示するページへ遷移
+        btnAnimeObj.transformationMethod = null
+        btnAnimeObj.setOnClickListener {
+            val intent = Intent(this,AnimeObjActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     // ------------------------------------------------------
