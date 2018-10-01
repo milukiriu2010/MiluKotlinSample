@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="milu.kiriu2010.exdb1.canvas.CanvasActivity">
+
+    <item
+        android:id="@+id/canvas_01_lr"
+        android:orderInCategory="100"
+        android:title="左→右"
+        app:showAsAction="never" />
+</menu>

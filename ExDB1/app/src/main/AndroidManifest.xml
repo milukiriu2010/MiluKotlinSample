@@ -25,7 +25,13 @@
         <activity android:name=".scheduler.ScheduleEditActivity" />
         <activity
             android:name=".animeobj.AnimeObjActivity"
-            android:label="@string/title_activity_anime_obj"></activity>
+            android:label="@string/title_activity_anime_obj" />
+        <activity
+            android:name=".draw.DrawActivity"
+            android:label="@string/title_activity_draw" />
+        <activity
+            android:name=".canvas.CanvasActivity"
+            android:label="@string/title_activity_canvas"></activity>
     </application>
 
 </manifest>

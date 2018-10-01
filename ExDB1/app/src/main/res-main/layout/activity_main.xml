@@ -94,6 +94,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 -->
+
     <Button
         android:id="@+id/btnAnimeObj"
         android:layout_width="wrap_content"
@@ -102,9 +103,28 @@
         android:layout_marginTop="8dp"
         android:text="Object Anime"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnDraw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Draw"
+        app:layout_constraintBottom_toBottomOf="@+id/btnAnimeObj"
+        app:layout_constraintStart_toEndOf="@+id/btnAnimeObj"
+        app:layout_constraintTop_toTopOf="@+id/btnAnimeObj" />
+
+    <Button
+        android:id="@+id/btnCanvas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Canvas"
+        app:layout_constraintBottom_toBottomOf="@+id/btnDraw"
+        app:layout_constraintStart_toEndOf="@+id/btnDraw"
+        app:layout_constraintTop_toTopOf="@+id/btnDraw" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"

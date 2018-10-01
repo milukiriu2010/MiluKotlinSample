@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="milu.kiriu2010.excon2.navibottom.BottomNaviActivity">
+    tools:context="milu.kiriu2010.exdb1.animeobj.AnimeObjActivity">
 
     <item
         android:id="@+id/anime_08_cardioid"

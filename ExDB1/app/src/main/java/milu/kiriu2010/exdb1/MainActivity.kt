@@ -7,7 +7,9 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import milu.kiriu2010.exdb1.animeobj.AnimeObjActivity
-import milu.kiriu2010.exdb1.draw.Draw1Fragment
+import milu.kiriu2010.exdb1.canvas.CanvasActivity
+import milu.kiriu2010.exdb1.draw.Draw01Fragment
+import milu.kiriu2010.exdb1.draw.DrawActivity
 import milu.kiriu2010.exdb1.scheduler.SchedulerActivity
 import milu.kiriu2010.exdb1.sqlite.SQLiteOpenHelperActivity
 
@@ -21,6 +23,19 @@ class MainActivity : AppCompatActivity() {
         btnAnimeObj.transformationMethod = null
         btnAnimeObj.setOnClickListener {
             val intent = Intent(this,AnimeObjActivity::class.java)
+            startActivity(intent)
+        }
+
+        // shapeを用いたサンプルを表示するページへ遷移
+        btnDraw.setOnClickListener {
+            val intent = Intent(this, DrawActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Canvas上のオブジェクトのアニメーションを表示するページへ遷移
+        btnCanvas.transformationMethod = null
+        btnCanvas.setOnClickListener {
+            val intent = Intent(this, CanvasActivity::class.java)
             startActivity(intent)
         }
     }
@@ -44,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             // ----------------------------------------------------
             R.id.menuItemDraw1 -> {
                 supportFragmentManager.beginTransaction()
-                        .replace(R.id.frameDraw, Draw1Fragment.newInstance())
+                        .replace(R.id.frameDraw, Draw01Fragment.newInstance())
                         .commit()
             }
             // ----------------------------------------------------
