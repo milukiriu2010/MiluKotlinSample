@@ -36,18 +36,34 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //implementation 'com.android.support:appcompat-v7:28.0.0-rc01'
     //implementation 'com.android.support:appcompat-v7:28.0.0-alpha3'
-    implementation 'com.android.support:appcompat-v7:28.0.0-alpha1'
+    //implementation 'com.android.support:appcompat-v7:28.0.0-alpha1'
+    implementation 'com.android.support:appcompat-v7:28.0.0-rc02'
     //implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     //implementation 'com.android.support:design:28.0.0-rc01'
     //implementation 'com.android.support:design:28.0.0-alpha3'
-    implementation 'com.android.support:design:28.0.0-alpha1'
+    //implementation 'com.android.support:design:28.0.0-alpha1'
+    implementation 'com.android.support:design:28.0.0-rc02'
     //implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:support-v4:28.0.0-rc02'
-    implementation 'com.android.support:support-vector-drawable:28.+'
+    //implementation 'com.android.support:support-vector-drawable:28.+'
+    implementation 'com.android.support:support-vector-drawable:28.0.0-rc02'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation "org.jetbrains.anko:anko-common:$anko_version"
     implementation "io.realm:android-adapters:2.1.1"
+}
+
+configurations.all {
+// https://stackoverflow.com/questions/51797374/failed-to-find-style-bottomnavigationstyle-in-current-theme
+// Failed to find style 'bottomNavigationStyle' in current theme対策
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == "com.android.support") {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion "27.+"
+            }
+        }
+    }
 }

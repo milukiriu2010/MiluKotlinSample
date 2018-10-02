@@ -21,17 +21,17 @@ class CanvasActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
+                if (supportFragmentManager.findFragmentByTag("Dashboard") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, CanvasHomeFragment.newInstance(), "Home")
+                            .replace(R.id.frameLayout, CanvasDashboardFragment.newInstance(), "Dashboard")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
+                if (supportFragmentManager.findFragmentByTag("Notification") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, CanvasHomeFragment.newInstance(), "Home")
+                            .replace(R.id.frameLayout, CanvasNotificationFragment.newInstance(), "Notification")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
@@ -72,6 +72,15 @@ class CanvasActivity : AppCompatActivity() {
         // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+        // バルーン
+            R.id.canvas_09_baloon -> {
+                if ( supportFragmentManager.findFragmentByTag("Canvas09Balloon") == null ) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Canvas09BalloonFragment.newInstance(), "Canvas09Ballon")
+                            .commit()
+                }
                 true
             }
         // "左→右"

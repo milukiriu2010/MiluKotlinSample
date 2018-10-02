@@ -16,13 +16,12 @@ import kotlin.concurrent.timer
 
 /**
  * A simple [Fragment] subclass.
- * Use the [CanvasHomeFragment.newInstance] factory method to
+ * Use the [CanvasDashboardFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class CanvasHomeFragment : Fragment()
-    , SurfaceHolder.Callback {
-
+class CanvasDashboardFragment : Fragment()
+        , SurfaceHolder.Callback {
     // 描画に使うサーフェースビュー
     private lateinit var surfaceViewCanvas: SurfaceView
 
@@ -37,29 +36,15 @@ class CanvasHomeFragment : Fragment()
     private val il = PVector()
 
     // 画像の移動速度
-    //private val iv = PVector(10f,1f)
-    private val iv = PVector()
+    private val iv = PVector(10f,1f)
 
     // 画像の移動加速度
-    //private val ia = PVector(0.3f,0.1f)
-    private val ia = PVector()
-
-    // タッチ中かどうか
-    private var touched = false
-
-    // タッチ位置のリスト
-    //private val tl = PVector()
-    private var tlLst = mutableListOf<PVector>()
+    private val ia = PVector(1f,0.1f)
 
     // 画像に使うペイント
     private val paintImage = Paint().apply {
         color = Color.BLACK
         //style = Paint.Style.STROKE
-    }
-    // タッチに使うペイント
-    private val paintTouch = Paint().apply {
-        color = Color.BLACK
-        strokeWidth = 50f
     }
 
     // 描画に使うハンドラ
@@ -74,37 +59,10 @@ class CanvasHomeFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_canvas_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_canvas_dashboard, container, false)
 
         // サーフェースビューを取得
         surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
-
-        surfaceViewCanvas.setOnTouchListener { v, event ->
-            Log.d(javaClass.simpleName, "touch.x[${event.x}]touch.y[${event.y}]")
-
-            // タッチしているかどうかを取得
-            touched = when (event.action) {
-                MotionEvent.ACTION_DOWN -> true
-                MotionEvent.ACTION_MOVE -> true
-                MotionEvent.ACTION_UP -> false
-                MotionEvent.ACTION_CANCEL -> false
-                MotionEvent.ACTION_OUTSIDE -> false
-                else -> false
-            }
-
-            // タッチ位置を保存
-            if ( touched ) {
-                val tl = PVector()
-                tl.x = event.x
-                tl.y = event.y
-                tlLst.add(tl)
-                if (tlLst.size > 30) {
-                    tlLst.removeAt(0)
-                }
-            }
-
-            true
-        }
 
         val holder = surfaceViewCanvas.holder
         holder.addCallback(this)
@@ -115,15 +73,9 @@ class CanvasHomeFragment : Fragment()
         // 10ミリ秒ごとに描画
         timer( period = 100 ) {
             handler.post {
-                // 加速度をランダムに決定
-                val ta = PVector().random2D()
-                // random2Dは単位ベクトル化されているので倍数計算する
-                ta.mult((0..10).shuffled().first().toFloat() )
-                ia.set(ta)
-
                 // 速度に加速度を加算する
                 // 速度にリミットを設けている
-                iv.add(ia,20f)
+                iv.add(ia,100f)
                 // 移動
                 il.add(iv)
                 // 右端調整
@@ -134,6 +86,7 @@ class CanvasHomeFragment : Fragment()
 
         return view
     }
+
 
     // 描画
     private fun drawCanvas() {
@@ -146,11 +99,6 @@ class CanvasHomeFragment : Fragment()
 
         // 画像を描画
         canvas.drawBitmap(bmp, il.x, il.y, paintImage)
-
-        // タッチ箇所を描画
-        tlLst.forEach {
-            canvas.drawPoint(it.x,it.y,paintTouch)
-        }
 
         surfaceViewCanvas.holder.unlockCanvasAndPost(canvas)
     }
@@ -165,7 +113,7 @@ class CanvasHomeFragment : Fragment()
 
         // 画像を描画する位置の初期値
         // 横：左端　縦：中央(画像の高さ分引き算)
-        il.x = sw/2 - bmp.width/2
+        il.x = 0f
         il.y = sh/2 - bmp.height/2
         // 画像の移動領域
         il.x1 = -bmp.width.toFloat()
@@ -187,12 +135,12 @@ class CanvasHomeFragment : Fragment()
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment HomeFragment.
+         * @return A new instance of fragment CanvasDashboardFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                CanvasHomeFragment().apply {
+                CanvasDashboardFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

@@ -1,6 +1,5 @@
 package milu.kiriu2010.exdb1.canvas
 
-
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -16,12 +15,15 @@ import kotlin.concurrent.timer
 
 /**
  * A simple [Fragment] subclass.
- * Use the [CanvasHomeFragment.newInstance] factory method to
+ * Activities that contain this fragment must implement the
+ * [Canvas09BaloonFragment.OnFragmentInteractionListener] interface
+ * to handle interaction events.
+ * Use the [Canvas09BaloonFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class CanvasHomeFragment : Fragment()
-    , SurfaceHolder.Callback {
+class Canvas09BalloonFragment : Fragment()
+        , SurfaceHolder.Callback {
 
     // 描画に使うサーフェースビュー
     private lateinit var surfaceViewCanvas: SurfaceView
@@ -44,22 +46,10 @@ class CanvasHomeFragment : Fragment()
     //private val ia = PVector(0.3f,0.1f)
     private val ia = PVector()
 
-    // タッチ中かどうか
-    private var touched = false
-
-    // タッチ位置のリスト
-    //private val tl = PVector()
-    private var tlLst = mutableListOf<PVector>()
-
     // 画像に使うペイント
     private val paintImage = Paint().apply {
         color = Color.BLACK
         //style = Paint.Style.STROKE
-    }
-    // タッチに使うペイント
-    private val paintTouch = Paint().apply {
-        color = Color.BLACK
-        strokeWidth = 50f
     }
 
     // 描画に使うハンドラ
@@ -74,37 +64,10 @@ class CanvasHomeFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_canvas_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_canvas09_balloon, container, false)
 
         // サーフェースビューを取得
         surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
-
-        surfaceViewCanvas.setOnTouchListener { v, event ->
-            Log.d(javaClass.simpleName, "touch.x[${event.x}]touch.y[${event.y}]")
-
-            // タッチしているかどうかを取得
-            touched = when (event.action) {
-                MotionEvent.ACTION_DOWN -> true
-                MotionEvent.ACTION_MOVE -> true
-                MotionEvent.ACTION_UP -> false
-                MotionEvent.ACTION_CANCEL -> false
-                MotionEvent.ACTION_OUTSIDE -> false
-                else -> false
-            }
-
-            // タッチ位置を保存
-            if ( touched ) {
-                val tl = PVector()
-                tl.x = event.x
-                tl.y = event.y
-                tlLst.add(tl)
-                if (tlLst.size > 30) {
-                    tlLst.removeAt(0)
-                }
-            }
-
-            true
-        }
 
         val holder = surfaceViewCanvas.holder
         holder.addCallback(this)
@@ -147,11 +110,6 @@ class CanvasHomeFragment : Fragment()
         // 画像を描画
         canvas.drawBitmap(bmp, il.x, il.y, paintImage)
 
-        // タッチ箇所を描画
-        tlLst.forEach {
-            canvas.drawPoint(it.x,it.y,paintTouch)
-        }
-
         surfaceViewCanvas.holder.unlockCanvasAndPost(canvas)
     }
 
@@ -187,12 +145,12 @@ class CanvasHomeFragment : Fragment()
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment HomeFragment.
+         * @return A new instance of fragment Canvas09BaloonFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                CanvasHomeFragment().apply {
+                Canvas09BalloonFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

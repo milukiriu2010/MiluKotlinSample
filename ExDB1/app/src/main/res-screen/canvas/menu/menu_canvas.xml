@@ -4,6 +4,11 @@
     tools:context="milu.kiriu2010.exdb1.canvas.CanvasActivity">
 
     <item
+        android:id="@+id/canvas_09_baloon"
+        android:orderInCategory="100"
+        android:title="バルーン"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/canvas_01_lr"
         android:orderInCategory="100"
         android:title="左→右"
