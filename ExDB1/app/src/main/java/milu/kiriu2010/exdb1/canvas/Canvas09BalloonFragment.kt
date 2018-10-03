@@ -54,6 +54,8 @@ class Canvas09BalloonFragment : Fragment()
 
     // 描画に使うハンドラ
     val handler = Handler()
+    // 描画に使うスレッド
+    private lateinit var runnable: Runnable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +77,7 @@ class Canvas09BalloonFragment : Fragment()
         // 描画する画像
         bmp = BitmapFactory.decodeResource(resources,R.drawable.male)
 
+        /*
         // 10ミリ秒ごとに描画
         timer( period = 100 ) {
             handler.post {
@@ -94,6 +97,26 @@ class Canvas09BalloonFragment : Fragment()
                 drawCanvas()
             }
         }
+        */
+
+        runnable = Runnable {
+            // 加速度をランダムに決定
+            val ta = PVector().random2D()
+            // random2Dは単位ベクトル化されているので倍数計算する
+            ta.mult((0..10).shuffled().first().toFloat() )
+            ia.set(ta)
+
+            // 速度に加速度を加算する
+            // 速度にリミットを設けている
+            iv.add(ia,20f)
+            // 移動
+            il.add(iv)
+            // 右端調整
+            il.checkEdge()
+            drawCanvas()
+            handler.postDelayed( runnable, 50)
+        }
+        handler.post(runnable)
 
         return view
     }

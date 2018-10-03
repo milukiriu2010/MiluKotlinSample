@@ -25,31 +25,58 @@ data class PVector(
     }
 
     // 移動(加算)
-    fun add(dx: Float, dy: Float) {
+    fun add(dx: Float, dy: Float): PVector {
         x += dx
         y += dy
+
+        return this
     }
 
     // 移動(加算)
-    fun add( dv: PVector ) {
+    fun add( dv: PVector ): PVector {
         x += dv.x
         y += dv.y
+
+        return this
     }
 
     // 移動(加算)
     // 移動量のリミッターつき
-    fun add(dv: PVector, limit: Float) {
+    fun add(dv: PVector, limit: Float): PVector {
         val ax = x+dv.x
         val ay = y+dv.y
-        if ( sqrt(ax*ax+ay*ay) > limit ) return
+        if ( sqrt(ax*ax+ay*ay) > limit ) return this
         x = ax
         y = ay
+
+        return this
     }
 
-    // 移動(倍数)
-    fun mult(d: Float) {
+    // 移動(減算)
+    fun sub(dv: PVector): PVector {
+        x -= dv.x
+        y -= dv.y
+
+        return this
+    }
+
+    // 移動(乗算)
+    fun mult(d: Float): PVector {
         x *= d
         y *= d
+
+        return this
+    }
+
+    // 移動(徐算)
+    fun div(d: Float): PVector {
+        if ( d == 0.0f ) {
+        }
+        else {
+            x /= d
+            y /= d
+        }
+        return this
     }
 
     // ベクトルの大きさ

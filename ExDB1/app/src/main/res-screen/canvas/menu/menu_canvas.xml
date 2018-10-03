@@ -4,6 +4,16 @@
     tools:context="milu.kiriu2010.exdb1.canvas.CanvasActivity">
 
     <item
+        android:id="@+id/canvas_11_accel_touch_multi"
+        android:orderInCategory="100"
+        android:title="タッチ方向加速(複数)"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/canvas_10_accel_touch"
+        android:orderInCategory="100"
+        android:title="タッチ方向加速"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/canvas_09_baloon"
         android:orderInCategory="100"
         android:title="バルーン"

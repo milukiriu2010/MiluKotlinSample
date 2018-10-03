@@ -4,6 +4,11 @@
     tools:context="milu.kiriu2010.exdb1.animeobj.AnimeObjActivity">
 
     <item
+        android:id="@+id/anime_09_bernoulli"
+        android:orderInCategory="100"
+        android:title="ベルヌーイ"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/anime_08_cardioid"
         android:orderInCategory="100"
         android:title="カージオイド"

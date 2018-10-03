@@ -12,15 +12,14 @@ import android.util.Log
 import android.view.*
 
 import milu.kiriu2010.exdb1.R
-import kotlin.concurrent.timer
 
 /**
  * A simple [Fragment] subclass.
- * Use the [Canvas01LRFragment.newInstance] factory method to
+ * Use the [Canvas11AccelTouchMultiFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class Canvas01LRFragment : Fragment()
+class Canvas11AccelTouchMultiFragment : Fragment()
         , SurfaceHolder.Callback {
 
     // 描画に使うサーフェースビュー
@@ -32,20 +31,25 @@ class Canvas01LRFragment : Fragment()
 
     // 描画する画像
     private lateinit var bmp: Bitmap
+    // 画像リスト
+    private val mvLst = mutableListOf<Mover>()
 
-    // 画像を描画する位置
-    private val il = PVector()
+    // タッチ中かどうか
+    private var touched = false
 
-    // 画像の移動速度
-    private val iv = PVector(10f,1f)
-
-    // 画像の移動加速度
-    private val ia = PVector(1f,0.1f)
+    // タッチ位置のリスト
+    //private val tl = PVector()
+    private var tlLst = mutableListOf<PVector>()
 
     // 画像に使うペイント
     private val paintImage = Paint().apply {
         color = Color.BLACK
         //style = Paint.Style.STROKE
+    }
+    // タッチに使うペイント
+    private val paintTouch = Paint().apply {
+        color = Color.BLACK
+        strokeWidth = 50f
     }
 
     // 描画に使うハンドラ
@@ -67,10 +71,38 @@ class Canvas01LRFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_canvas01_lr, container, false)
+        val view = inflater.inflate(R.layout.fragment_canvas11_accel_touch_multi, container, false)
+
 
         // サーフェースビューを取得
         surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
+
+        surfaceViewCanvas.setOnTouchListener { v, event ->
+            Log.d(javaClass.simpleName, "touch.x[${event.x}]touch.y[${event.y}]")
+
+            // タッチしているかどうかを取得
+            touched = when (event.action) {
+                MotionEvent.ACTION_DOWN -> true
+                MotionEvent.ACTION_MOVE -> true
+                MotionEvent.ACTION_UP -> false
+                MotionEvent.ACTION_CANCEL -> false
+                MotionEvent.ACTION_OUTSIDE -> false
+                else -> false
+            }
+
+            // タッチ位置を保存
+            if ( touched ) {
+                val tl = PVector()
+                tl.x = event.x
+                tl.y = event.y
+                tlLst.add(tl)
+                if (tlLst.size > 30) {
+                    tlLst.removeAt(0)
+                }
+            }
+
+            true
+        }
 
         val holder = surfaceViewCanvas.holder
         holder.addCallback(this)
@@ -78,35 +110,21 @@ class Canvas01LRFragment : Fragment()
         // 描画する画像
         bmp = BitmapFactory.decodeResource(resources,R.drawable.male)
 
-        // 50ミリ秒ごとに描画
-        /*
-        timer( period = 50 ) {
-            handler.post {
-                // 速度に加速度を加算する
-                // 速度にリミットを設けている
-                iv.add(ia,100f)
-                // 移動
-                il.add(iv)
-                // 右端調整
-                il.checkEdge()
-                // 右端調整
-                il.checkEdge()
-                drawCanvas()
-            }
-        }
-        */
+        // 画像リスト作成
+        (0..20).forEach { mvLst.add(Mover()) }
 
-        // 50ミリ秒ごとに描画
         runnable = Runnable {
-            // 速度に加速度を加算する
-            // 速度にリミットを設けている
-            iv.add(ia,100f)
-            // 移動
-            il.add(iv)
-            // 右端調整
-            il.checkEdge()
-            // 右端調整
-            il.checkEdge()
+            mvLst.forEach {
+                // 画面タッチ位置
+                val tl = if (tlLst.size > 0 ) {
+                    tlLst[tlLst.size-1]
+                }
+                else {
+                    PVector()
+                }
+                it.update( touched, tl)
+            }
+
             drawCanvas()
             handler.postDelayed( runnable, 50)
         }
@@ -114,7 +132,6 @@ class Canvas01LRFragment : Fragment()
 
         return view
     }
-
 
     // 描画
     private fun drawCanvas() {
@@ -126,7 +143,14 @@ class Canvas01LRFragment : Fragment()
         canvas.drawColor(Color.WHITE)
 
         // 画像を描画
-        canvas.drawBitmap(bmp, il.x, il.y, paintImage)
+        mvLst.forEach {
+            canvas.drawBitmap(bmp, it.il.x, it.il.y, paintImage)
+        }
+
+        // タッチ箇所を描画
+        tlLst.forEach {
+            canvas.drawPoint(it.x,it.y,paintTouch)
+        }
 
         surfaceViewCanvas.holder.unlockCanvasAndPost(canvas)
     }
@@ -141,13 +165,15 @@ class Canvas01LRFragment : Fragment()
 
         // 画像を描画する位置の初期値
         // 横：左端　縦：中央(画像の高さ分引き算)
-        il.x = 0f
-        il.y = sh/2 - bmp.height/2
-        // 画像の移動領域
-        il.x1 = -bmp.width.toFloat()
-        il.x2 = sw
-        il.y1 = -bmp.height.toFloat()
-        il.y2 = sh
+        mvLst.forEach {
+            it.il.x = sw/2 - bmp.width/2
+            it.il.y = sh/2 - bmp.height/2
+            // 画像の移動領域
+            it.il.x1 = -bmp.width.toFloat()
+            it.il.x2 = sw
+            it.il.y1 = -bmp.height.toFloat()
+            it.il.y2 = sh
+        }
     }
 
     // SurfaceHolder.Callback
@@ -163,12 +189,12 @@ class Canvas01LRFragment : Fragment()
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment Canvas01LRFragment.
+         * @return A new instance of fragment Canvas11AccelTouchMultiFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                Canvas01LRFragment().apply {
+                Canvas11AccelTouchMultiFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

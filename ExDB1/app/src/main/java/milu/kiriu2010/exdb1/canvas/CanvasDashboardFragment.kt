@@ -41,19 +41,36 @@ class CanvasDashboardFragment : Fragment()
     // 画像の移動加速度
     private val ia = PVector(1f,0.1f)
 
+    // タッチ中かどうか
+    private var touched = false
+
+    // タッチ位置のリスト
+    private var tlLst = mutableListOf<PVector>()
+
     // 画像に使うペイント
     private val paintImage = Paint().apply {
         color = Color.BLACK
         //style = Paint.Style.STROKE
     }
+    // タッチに使うペイント
+    private val paintTouch = Paint().apply {
+        color = Color.BLACK
+        strokeWidth = 50f
+    }
 
     // 描画に使うハンドラ
     val handler = Handler()
+    // 描画に使うスレッド
+    private lateinit var runnable: Runnable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
         }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacks(runnable)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -64,25 +81,76 @@ class CanvasDashboardFragment : Fragment()
         // サーフェースビューを取得
         surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
 
+        surfaceViewCanvas.setOnTouchListener { v, event ->
+            Log.d(javaClass.simpleName, "touch.x[${event.x}]touch.y[${event.y}]")
+
+            // タッチしているかどうかを取得
+            touched = when (event.action) {
+                MotionEvent.ACTION_DOWN -> true
+                MotionEvent.ACTION_MOVE -> true
+                MotionEvent.ACTION_UP -> false
+                MotionEvent.ACTION_CANCEL -> false
+                MotionEvent.ACTION_OUTSIDE -> false
+                else -> false
+            }
+
+            // タッチ位置を保存
+            if ( touched ) {
+                val tl = PVector()
+                tl.x = event.x
+                tl.y = event.y
+                tlLst.add(tl)
+                if (tlLst.size > 30) {
+                    tlLst.removeAt(0)
+                }
+            }
+
+            true
+        }
+
         val holder = surfaceViewCanvas.holder
         holder.addCallback(this)
 
         // 描画する画像
         bmp = BitmapFactory.decodeResource(resources,R.drawable.male)
 
-        // 10ミリ秒ごとに描画
-        timer( period = 100 ) {
-            handler.post {
-                // 速度に加速度を加算する
-                // 速度にリミットを設けている
-                iv.add(ia,100f)
-                // 移動
-                il.add(iv)
-                // 右端調整
-                il.checkEdge()
-                drawCanvas()
+        runnable = Runnable {
+            // 画面タッチされていないときは
+            // 加速度をランダムに決定
+            if ( touched == false ) {
+                val ta = PVector().random2D()
+                // random2Dは単位ベクトル化されているので倍数計算する
+                ta.mult((0..10).shuffled().first().toFloat() )
+                ia.set(ta)
             }
+            // 画面タッチしているときは
+            // 現在位置とタッチ位置を元に加速度を決定
+            else {
+                // 画面タッチ位置
+                val tl = tlLst[tlLst.size-1]
+                // 次の加速度
+                val dir = PVector().set(tl)
+                // "画面タッチ位置"－"現在位置"
+                dir.sub(il)
+                // 単位ベクトル化
+                dir.normalize()
+                // スケール
+                //dir.mult((0..10).shuffled().first().toFloat())
+                dir.mult(5f)
+                ia.set(dir)
+            }
+
+            // 速度に加速度を加算する
+            // 速度にリミットを設けている
+            iv.add(ia,20f)
+            // 移動
+            il.add(iv)
+            // 右端調整
+            il.checkEdge()
+            drawCanvas()
+            handler.postDelayed( runnable, 50)
         }
+        handler.post(runnable)
 
         return view
     }

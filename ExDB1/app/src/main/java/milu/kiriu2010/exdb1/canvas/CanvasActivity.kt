@@ -74,6 +74,24 @@ class CanvasActivity : AppCompatActivity() {
                 finish()
                 true
             }
+        // タッチ方向加速(複数)
+            R.id.canvas_11_accel_touch_multi -> {
+                if ( supportFragmentManager.findFragmentByTag("Canvas11AccelTouchMulti") == null ) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Canvas11AccelTouchMultiFragment.newInstance(), "Canvas11AccelTouchMulti")
+                            .commit()
+                }
+                true
+            }
+        // タッチ方向加速
+            R.id.canvas_10_accel_touch -> {
+                if ( supportFragmentManager.findFragmentByTag("Canvas10AccelTouch") == null ) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Canvas10AccelTouchFragment.newInstance(), "Canvas10AccelTouch")
+                            .commit()
+                }
+                true
+            }
         // バルーン
             R.id.canvas_09_baloon -> {
                 if ( supportFragmentManager.findFragmentByTag("Canvas09Balloon") == null ) {

@@ -74,6 +74,15 @@ class AnimeObjActivity : AppCompatActivity() {
                 finish()
                 true
             }
+        // ベルヌーイ
+            R.id.anime_09_bernoulli -> {
+                if ( supportFragmentManager.findFragmentByTag("Anime09Bernoulli") == null ) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Anime09BernoulliFragment.newInstance(), "Anime09Bernoulli")
+                            .commit()
+                }
+                true
+            }
         // カージオイド
             R.id.anime_08_cardioid -> {
                 if ( supportFragmentManager.findFragmentByTag("Anime08Cardioid") == null ) {

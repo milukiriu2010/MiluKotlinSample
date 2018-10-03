@@ -3,7 +3,6 @@ package milu.kiriu2010.exdb1.animeobj
 
 import android.animation.Animator
 import android.os.Bundle
-import android.os.Handler
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,16 +18,15 @@ import kotlin.math.sin
 
 /**
  * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
+ * Use the [Anime09BernoulliFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class HomeFragment : Fragment() {
+class Anime09BernoulliFragment : Fragment() {
 
     private lateinit var imageView: ImageView
 
     private var isCalculated = false
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +37,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_anime09_bernoulli, container, false)
 
         // 画像をレイアウトに配置
         imageView = ImageView(context)
@@ -89,8 +87,8 @@ class HomeFragment : Fragment() {
             val duration = 100L
             val animator = imageView.animate()
                     .setDuration(duration)
-                    .x(centerX + (radius * exp(b*angleZ/180*PI) * cos(angleZ/180*PI)).toFloat())
-                    .y(centerY + (radius * exp(b*angleZ/180*PI) * sin(angleZ/180*PI)).toFloat())
+                    .x(centerX + (radius * exp(b*angleZ/180* PI) * cos(angleZ/180* PI)).toFloat())
+                    .y(centerY + (radius * exp(b*angleZ/180* PI) * sin(angleZ/180* PI)).toFloat())
                     .rotationYBy(angleY)
             // リピートする
             animator.setListener(object : Animator.AnimatorListener {
@@ -110,8 +108,8 @@ class HomeFragment : Fragment() {
 
                     imageView.animate()
                             .setDuration(duration)
-                            .x(centerX + (radius * exp(b*angleZ/180*PI) * cos(angleZ/180*PI)).toFloat())
-                            .y(centerY + (radius * exp(b*angleZ/180*PI) * sin(angleZ/180*PI)).toFloat())
+                            .x(centerX + (radius * exp(b*angleZ/180* PI) * cos(angleZ/180* PI)).toFloat())
+                            .y(centerY + (radius * exp(b*angleZ/180* PI) * sin(angleZ/180* PI)).toFloat())
                             .rotationYBy(angleY)
                 }
 
@@ -132,12 +130,12 @@ class HomeFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment HomeFragment.
+         * @return A new instance of fragment Anime09BernoulliFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                HomeFragment().apply {
+                Anime09BernoulliFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }
