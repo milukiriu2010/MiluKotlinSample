@@ -28,6 +28,24 @@ class Anime09BernoulliFragment : Fragment() {
 
     private var isCalculated = false
 
+    // 半径
+    private val radius = 2.0f
+    private var b = 0.2f
+
+    // 中心
+    private var centerX = 0.0f
+    private var centerY = 0.0f
+
+    // 回転角度(Y軸)
+    private val angleY = 10.0f
+    // 回転角度(Z軸)
+    private var angleZ = 0.0f
+    // 回転角度(Z軸)差分
+    private var angleZd = 10.0f
+
+    // アニメーションする時間
+    val duration = 100L
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -41,7 +59,7 @@ class Anime09BernoulliFragment : Fragment() {
 
         // 画像をレイアウトに配置
         imageView = ImageView(context)
-        imageView.setImageResource(R.drawable.male)
+        imageView.setImageResource(R.drawable.a_male)
         imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)
         (view as ViewGroup)?.addView(imageView)
 
@@ -61,19 +79,19 @@ class Anime09BernoulliFragment : Fragment() {
             val ih = imageView.height.toFloat()
 
             // 半径
-            val radius = 2.0f
-            var b = 0.2f
+            //val radius = 2.0f
+            //var b = 0.2f
 
             // 中心
-            val centerX = lw/2 - iw/2
-            val centerY = lh / 2 - ih / 2
+            centerX = lw/2 - iw/2
+            centerY = lh / 2 - ih / 2
 
             // 回転角度(Y軸)
-            val angleY = 10.0f
+            //val angleY = 10.0f
             // 回転角度(Z軸)
-            var angleZ = 0.0f
+            //var angleZ = 0.0f
             // 回転角度(Z軸)差分
-            var angleZd = 10.0f
+            //var angleZd = 10.0f
 
             // 縦横真ん中を初期表示位置とする
             imageView.x = centerX + (radius * exp(0.0) * cos(0.0)).toFloat()
@@ -84,7 +102,7 @@ class Anime09BernoulliFragment : Fragment() {
             // y = a * exp(b) * sin(b)
 
             // 画像の幅分横に移動
-            val duration = 100L
+            //val duration = 100L
             val animator = imageView.animate()
                     .setDuration(duration)
                     .x(centerX + (radius * exp(b*angleZ/180* PI) * cos(angleZ/180* PI)).toFloat())
@@ -96,21 +114,7 @@ class Anime09BernoulliFragment : Fragment() {
                 }
 
                 override fun onAnimationEnd(animation: Animator?) {
-                    Log.d(javaClass.simpleName, "onAnimationEnd")
-                    angleZ += angleZd
-                    //angleZ %= 1800
-                    // 5回転したら逆回し
-                    // と思ったが、うまくいかない
-                    if ( angleZ.toInt()%1800 == 0 ) {
-                        angleZd = -1 * angleZd
-                        b = -1 * b
-                    }
-
-                    imageView.animate()
-                            .setDuration(duration)
-                            .x(centerX + (radius * exp(b*angleZ/180* PI) * cos(angleZ/180* PI)).toFloat())
-                            .y(centerY + (radius * exp(b*angleZ/180* PI) * sin(angleZ/180* PI)).toFloat())
-                            .rotationYBy(angleY)
+                    moveNext()
                 }
 
                 override fun onAnimationCancel(animation: Animator?) {
@@ -124,6 +128,21 @@ class Anime09BernoulliFragment : Fragment() {
         return view
     }
 
+    private fun moveNext() {
+        angleZ += angleZd
+        // 5回転したら逆回し
+        if ( angleZ.toInt()%1800 == 0 ) {
+            angleZd = -1 * angleZd
+        }
+
+        Log.d(javaClass.simpleName, "moveNext:x[${imageView.x}]y[${imageView.y}]angleZ[$angleZ]angleZd[$angleZd]")
+
+        imageView.animate()
+                .setDuration(duration)
+                .x(centerX + (radius * exp(b*angleZ/180*PI) * cos(angleZ/180*PI)).toFloat())
+                .y(centerY + (radius * exp(b*angleZ/180*PI) * sin(angleZ/180*PI)).toFloat())
+                .rotationYBy(angleY)
+    }
 
     companion object {
         /**

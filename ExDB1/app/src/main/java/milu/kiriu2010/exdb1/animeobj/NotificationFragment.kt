@@ -39,7 +39,7 @@ class NotificationFragment : Fragment() {
 
         // 画像をレイアウトに配置
         imageView = ImageView(context)
-        imageView.setImageResource(R.drawable.male)
+        imageView.setImageResource(R.drawable.a_male)
         imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)
         (view as ViewGroup)?.addView(imageView)
 

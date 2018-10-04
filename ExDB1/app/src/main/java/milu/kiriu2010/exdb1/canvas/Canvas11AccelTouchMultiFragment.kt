@@ -108,7 +108,7 @@ class Canvas11AccelTouchMultiFragment : Fragment()
         holder.addCallback(this)
 
         // 描画する画像
-        bmp = BitmapFactory.decodeResource(resources,R.drawable.male)
+        bmp = BitmapFactory.decodeResource(resources,R.drawable.a_male)
 
         // 画像リスト作成
         (0..20).forEach { mvLst.add(Mover()) }
@@ -122,7 +122,7 @@ class Canvas11AccelTouchMultiFragment : Fragment()
                 else {
                     PVector()
                 }
-                it.update( touched, tl)
+                it.moveBallon( touched, tl)
             }
 
             drawCanvas()

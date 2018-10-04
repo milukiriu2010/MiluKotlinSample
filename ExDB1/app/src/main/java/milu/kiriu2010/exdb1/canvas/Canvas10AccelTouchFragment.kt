@@ -117,7 +117,7 @@ class Canvas10AccelTouchFragment : Fragment()
         holder.addCallback(this)
 
         // 描画する画像
-        bmp = BitmapFactory.decodeResource(resources,R.drawable.male)
+        bmp = BitmapFactory.decodeResource(resources,R.drawable.a_male)
 
         runnable = Runnable {
             // 画面タッチされていないときは

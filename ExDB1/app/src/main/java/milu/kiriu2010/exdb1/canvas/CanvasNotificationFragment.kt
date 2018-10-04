@@ -12,7 +12,6 @@ import android.util.Log
 import android.view.*
 
 import milu.kiriu2010.exdb1.R
-import kotlin.concurrent.timer
 
 /**
  * A simple [Fragment] subclass.
@@ -116,7 +115,7 @@ class CanvasNotificationFragment : Fragment()
         holder.addCallback(this)
 
         // 描画する画像
-        bmp = BitmapFactory.decodeResource(resources,R.drawable.male)
+        bmp = BitmapFactory.decodeResource(resources,R.drawable.a_male)
 
         // 10ミリ秒ごとに描画
         /*

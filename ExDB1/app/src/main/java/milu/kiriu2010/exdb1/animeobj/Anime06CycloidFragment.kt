@@ -1,8 +1,6 @@
 package milu.kiriu2010.exdb1.animeobj
 
 import android.animation.Animator
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -45,7 +43,7 @@ class Anime06CycloidFragment : Fragment() {
 
         // 画像をレイアウトに配置
         imageView = ImageView(context)
-        imageView.setImageResource(R.drawable.male)
+        imageView.setImageResource(R.drawable.a_male)
         imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)
         (view as ViewGroup)?.addView(imageView)
 

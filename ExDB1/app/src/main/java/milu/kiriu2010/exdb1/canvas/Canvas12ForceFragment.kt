@@ -1,10 +1,7 @@
 package milu.kiriu2010.exdb1.canvas
 
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.graphics.Paint
+import android.graphics.*
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
@@ -15,11 +12,11 @@ import milu.kiriu2010.exdb1.R
 
 /**
  * A simple [Fragment] subclass.
- * Use the [CanvasDashboardFragment.newInstance] factory method to
+ * Use the [Canvas12ForceFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class CanvasDashboardFragment : Fragment()
+class Canvas12ForceFragment : Fragment()
         , SurfaceHolder.Callback {
     // 描画に使うサーフェースビュー
     private lateinit var surfaceViewCanvas: SurfaceView
@@ -31,19 +28,14 @@ class CanvasDashboardFragment : Fragment()
     // 描画する画像
     private lateinit var bmp: Bitmap
 
-    // 画像を描画する位置
-    private val il = PVector()
-
-    // 画像の移動速度
-    private val iv = PVector(10f,1f)
-
-    // 画像の移動加速度
-    private val ia = PVector(1f,0.1f)
+    // 画像リスト
+    private val mvLst = mutableListOf<Mover>()
 
     // タッチ中かどうか
     private var touched = false
 
     // タッチ位置のリスト
+    //private val tl = PVector()
     private var tlLst = mutableListOf<PVector>()
 
     // 画像に使うペイント
@@ -67,6 +59,7 @@ class CanvasDashboardFragment : Fragment()
         arguments?.let {
         }
     }
+
     override fun onDestroy() {
         super.onDestroy()
         handler.removeCallbacks(runnable)
@@ -75,7 +68,7 @@ class CanvasDashboardFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_canvas_dashboard, container, false)
+        val view = inflater.inflate(R.layout.fragment_canvas12_force, container, false)
 
         // サーフェースビューを取得
         surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
@@ -113,39 +106,31 @@ class CanvasDashboardFragment : Fragment()
         // 描画する画像
         bmp = BitmapFactory.decodeResource(resources,R.drawable.a_male)
 
+        // 画像リスト作成
+        (0..20).forEach {
+            // 質量をランダムに変える
+            // 0.2～2.0
+            val mover = Mover( mass = (1..10).shuffled().first()/5f )
+            mvLst.add(mover)
+        }
+
+        // 力(風)
+        val wind = PVector(1f, 0f)
+        // 力(重力)
+        val gravity = PVector( 0f, 5f )
+
+        // 力を加える
+        mvLst.forEach {
+            it.applyForce(wind)
+            it.applyForce(gravity)
+        }
+
         runnable = Runnable {
-            // 画面タッチされていないときは
-            // 加速度をランダムに決定
-            if ( touched == false ) {
-                val ta = PVector().random2D()
-                // random2Dは単位ベクトル化されているので倍数計算する
-                ta.mult((0..10).shuffled().first().toFloat() )
-                ia.set(ta)
-            }
-            // 画面タッチしているときは
-            // 現在位置とタッチ位置を元に加速度を決定
-            else {
-                // 画面タッチ位置
-                val tl = tlLst[tlLst.size-1]
-                // 次の加速度
-                val dir = PVector().set(tl)
-                // "画面タッチ位置"－"現在位置"
-                dir.sub(il)
-                // 単位ベクトル化
-                dir.normalize()
-                // スケール
-                //dir.mult((0..10).shuffled().first().toFloat())
-                dir.mult(5f)
-                ia.set(dir)
+            mvLst.forEach {
+                // 移動
+                it.moveReflect()
             }
 
-            // 速度に加速度を加算する
-            // 速度にリミットを設けている
-            iv.add(ia,20f)
-            // 移動
-            il.add(iv)
-            // 右端調整
-            il.checkEdge()
             drawCanvas()
             handler.postDelayed( runnable, 50)
         }
@@ -165,7 +150,24 @@ class CanvasDashboardFragment : Fragment()
         canvas.drawColor(Color.WHITE)
 
         // 画像を描画
-        canvas.drawBitmap(bmp, il.x, il.y, paintImage)
+        mvLst.forEach {
+            // 元画像の大きさ
+            val src = Rect(it.il.x.toInt(),
+                    it.il.y.toInt(),
+                    it.il.x.toInt()+bmp.width,
+                    it.il.y.toInt()+bmp.height)
+            // 元画像を質量によって大きさを変える
+            val dst = Rect(it.il.x.toInt(),
+                    it.il.y.toInt(),
+                    it.il.x.toInt()+(bmp.width*it.mass).toInt(),
+                    it.il.y.toInt()+(bmp.height*it.mass).toInt())
+            canvas.drawBitmap(bmp, null, dst, paintImage)
+        }
+
+        // タッチ箇所を描画
+        tlLst.forEach {
+            canvas.drawPoint(it.x,it.y,paintTouch)
+        }
 
         surfaceViewCanvas.holder.unlockCanvasAndPost(canvas)
     }
@@ -180,13 +182,17 @@ class CanvasDashboardFragment : Fragment()
 
         // 画像を描画する位置の初期値
         // 横：左端　縦：中央(画像の高さ分引き算)
-        il.x = 0f
-        il.y = sh/2 - bmp.height/2
-        // 画像の移動領域
-        il.x1 = -bmp.width.toFloat()
-        il.x2 = sw
-        il.y1 = -bmp.height.toFloat()
-        il.y2 = sh
+        mvLst.forEach {
+            //it.il.x = sw/2 - bmp.width/2
+            //it.il.y = sh/2 - bmp.height/2
+            it.il.x = bmp.width/2f
+            it.il.y = bmp.height/2f
+            // 画像の移動領域
+            it.il.x1 = -bmp.width.toFloat()
+            it.il.x2 = sw-bmp.width.toFloat()
+            it.il.y1 = -bmp.height.toFloat()
+            it.il.y2 = sh-bmp.height.toFloat()
+        }
     }
 
     // SurfaceHolder.Callback
@@ -202,12 +208,12 @@ class CanvasDashboardFragment : Fragment()
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment CanvasDashboardFragment.
+         * @return A new instance of fragment Canvas12ForceFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                CanvasDashboardFragment().apply {
+                Canvas12ForceFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

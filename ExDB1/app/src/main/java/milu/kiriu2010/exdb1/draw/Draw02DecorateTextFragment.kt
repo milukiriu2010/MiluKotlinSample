@@ -6,18 +6,16 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import milu.kiriu2010.exdb1.R
 
 /**
  * A simple [Fragment] subclass.
- * Use the [Draw01Fragment.newInstance] factory method to
+ * Use the [Draw02DecorateTextFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class Draw01Fragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class Draw02DecorateTextFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +25,12 @@ class Draw01Fragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_draw01,container,false)
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_draw02_decorate_text, container, false)
+
+
+
+
 
         return view
     }
@@ -38,12 +41,12 @@ class Draw01Fragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment Draw01Fragment.
+         * @return A new instance of fragment Draw02DecorateTextFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                Draw01Fragment().apply {
+                Draw02DecorateTextFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

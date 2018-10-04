@@ -74,6 +74,15 @@ class CanvasActivity : AppCompatActivity() {
                 finish()
                 true
             }
+        // 力
+            R.id.canvas_12_force -> {
+                if ( supportFragmentManager.findFragmentByTag("Canvas12Force") == null ) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Canvas12ForceFragment.newInstance(), "Canvas12Force")
+                            .commit()
+                }
+                true
+            }
         // タッチ方向加速(複数)
             R.id.canvas_11_accel_touch_multi -> {
                 if ( supportFragmentManager.findFragmentByTag("Canvas11AccelTouchMulti") == null ) {
