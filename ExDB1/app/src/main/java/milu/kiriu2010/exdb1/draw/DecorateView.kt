@@ -2,24 +2,24 @@ package milu.kiriu2010.exdb1.draw
 
 import android.content.Context
 import android.graphics.*
-import android.os.Build
 import android.os.Handler
-import android.support.annotation.RequiresApi
 import android.util.AttributeSet
 import android.util.Log
-import android.widget.TextView
+import android.view.View
 
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-class DecorateTextView
+class DecorateView
     @JvmOverloads
     constructor(
             context: Context?,
             attrs: AttributeSet? = null,
-            defStyleAttr: Int = 0,
-            defStyleRes: Int = 0
-    )
-    : TextView(context, attrs, defStyleAttr, defStyleRes) {
+            defStyleAttr: Int = 0)
+    : View(context, attrs, defStyleAttr) {
+
+    // 表示するテキスト
+    var text: String = ""
+    // テキスト表示位置
+    var textX = 0f
+    var textY = 0f
 
     // マーカの長さ
     var markLen = 100f
@@ -35,8 +35,6 @@ class DecorateTextView
     var markDir = 0
     // マーカの移動スピード
     var markVelocity = 10f
-    // マーカがアニメーション中かどうか
-    var animated = true
 
     // テキスト描画に使うペイント
     val paintText = Paint().apply {
@@ -70,20 +68,7 @@ class DecorateTextView
         super.onSizeChanged(w, h, oldw, oldh)
 
         Log.d( javaClass.simpleName, "onSizeChanged")
-        kickRunnable(animated)
-    }
-
-    override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
-        markHandler.removeCallbacks(markRunnable)
-    }
-
-    fun kickRunnable( animated: Boolean = true ) {
-        this.animated = animated
-        //if ( this::markRunnable.isInitialized == false ) {
-            val w = width
-            val h = height
-
+        if ( this::markRunnable.isInitialized == false ) {
             markRunnable = Runnable {
                 // リセットしないと前回描いた線と今回描く線がつながってしまう。
                 markPath.reset()
@@ -187,18 +172,16 @@ class DecorateTextView
                         markPoint.y = 0f
                     }
                 }
-
-                // 描画する
                 invalidate()
-
-                // アニメーション中であれば、
-                // 描画スレッドをキックする
-                if ( animated ) {
-                    markHandler.postDelayed(markRunnable, 50)
-                }
+                markHandler.postDelayed(markRunnable, 50)
             }
             markHandler.post(markRunnable)
-        //}
+        }
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        markHandler.removeCallbacks(markRunnable)
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -213,6 +196,15 @@ class DecorateTextView
 
     // モード0出描画する
     private fun drawMode0(canvas: Canvas) {
+        //canvas.drawText( text, textX, textY, paintText)
+
+        // テキスト描画領域の大きさを取得
+        val textBounds = Rect()
+        paintText.getTextBounds( text, 0, text.length, textBounds )
+
+        // テキストを描画
+        canvas.drawText(text, textX, textY+textBounds.height(), paintText)
+
         // 枠の大きさを取得
         val frameBounds = Rect(0,0,width,height)
 
@@ -220,7 +212,6 @@ class DecorateTextView
         canvas.drawRect(frameBounds,paintFrame)
 
         // マーカを描画
-        if ( animated ) canvas.drawPath(markPath,paintMark)
+        canvas.drawPath(markPath,paintMark)
     }
-
 }

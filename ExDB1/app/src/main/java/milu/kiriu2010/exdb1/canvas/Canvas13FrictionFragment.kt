@@ -12,12 +12,13 @@ import milu.kiriu2010.exdb1.R
 
 /**
  * A simple [Fragment] subclass.
- * Use the [Canvas12ForceFragment.newInstance] factory method to
+ * Use the [Canvas13FrictionFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class Canvas12ForceFragment : Fragment()
+class Canvas13FrictionFragment : Fragment()
         , SurfaceHolder.Callback {
+
     // 描画に使うサーフェースビュー
     private lateinit var surfaceViewCanvas: SurfaceView
 
@@ -53,7 +54,6 @@ class Canvas12ForceFragment : Fragment()
     val handler = Handler()
     // 描画に使うスレッド
     private lateinit var runnable: Runnable
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -68,7 +68,8 @@ class Canvas12ForceFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_canvas12_force, container, false)
+        val view = inflater.inflate(R.layout.fragment_canvas13_friction, container, false)
+
 
         // サーフェースビューを取得
         surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
@@ -119,6 +120,14 @@ class Canvas12ForceFragment : Fragment()
         val wind = PVector(1f, 0f)
         // 力(重力)
         val gravity = PVector( 0f, 5f )
+        // 摩擦係数
+        val c = 0.5f
+        //val c = 0.1f
+        //val c = 0.8f
+        //val c = 0.05f
+        //val c = 0.01f
+        // 力(摩擦)
+        var friction = PVector( 0.2f, 1f )
 
         // 力を加える
         mvLst.forEach {
@@ -128,11 +137,22 @@ class Canvas12ForceFragment : Fragment()
 
         runnable = Runnable {
             mvLst.forEach {
+                // 力(摩擦)
+                val fric = PVector().set( it.iv )
+                fric.mult(-1f)
+                fric.normalize()
+                fric.mult(c)
+
+                it.ia.set( fric )
+                it.applyForce(wind)
+                it.applyForce(gravity)
+
                 // 移動
                 it.moveReflect()
             }
 
             drawCanvas()
+
             handler.postDelayed( runnable, 50)
         }
         handler.post(runnable)
@@ -166,9 +186,9 @@ class Canvas12ForceFragment : Fragment()
         }
 
         // タッチ箇所を描画
-        tlLst.forEach {
-            canvas.drawPoint(it.x,it.y,paintTouch)
-        }
+        //tlLst.forEach {
+        //    canvas.drawPoint(it.x,it.y,paintTouch)
+        //}
 
         surfaceViewCanvas.holder.unlockCanvasAndPost(canvas)
     }
@@ -184,8 +204,6 @@ class Canvas12ForceFragment : Fragment()
         // 画像を描画する位置の初期値
         // 横：左端　縦：中央(画像の高さ分引き算)
         mvLst.forEach {
-            //it.il.x = sw/2 - bmp.width/2
-            //it.il.y = sh/2 - bmp.height/2
             it.il.x = bmp.width/2f
             it.il.y = bmp.height/2f
             // 画像の移動領域
@@ -209,12 +227,12 @@ class Canvas12ForceFragment : Fragment()
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment Canvas12ForceFragment.
+         * @return A new instance of fragment Canvas13FrictionFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                Canvas12ForceFragment().apply {
+                Canvas13FrictionFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

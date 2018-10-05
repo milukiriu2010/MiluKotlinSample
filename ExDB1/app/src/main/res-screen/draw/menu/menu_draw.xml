@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/draw_02"
+        android:title="枠アニメ" />
+    <item
         android:id="@+id/draw_01"
-        android:title="Draw01" />
+        android:title="影付き" />
 </menu>

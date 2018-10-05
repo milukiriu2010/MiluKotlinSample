@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 
 import milu.kiriu2010.exdb1.R
 
@@ -18,7 +19,7 @@ import milu.kiriu2010.exdb1.R
 class DrawHomeFragment : Fragment() {
 
     // 飾りつけされたテキストビュー
-    private lateinit var decorateTextView1: DecorateTextView
+    private lateinit var decorateView1: DecorateView
     private lateinit var decorateTextView2: DecorateTextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,11 +34,26 @@ class DrawHomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_draw_home, container, false)
 
         // 飾りつけされたテキストビュー
-        decorateTextView1 = view.findViewById(R.id.decrateTextView1)
-        decorateTextView1.text = "あいうえお"
+        decorateView1 = view.findViewById(R.id.decrateView1)
+        decorateView1.text = "あいうえお"
 
         decorateTextView2 = view.findViewById(R.id.decrateTextView2)
         decorateTextView2.text = "かきくけこ"
+
+        // アニメON/OFF
+        val btnOnOff = view.findViewById<Button>(R.id.btnOnOff)
+        btnOnOff.text = "OFF"
+        btnOnOff.setOnClickListener {
+
+            btnOnOff.text = if ( btnOnOff.text == "OFF" ) {
+                decorateTextView2.kickRunnable(false)
+                "ON"
+            }
+            else {
+                decorateTextView2.kickRunnable(true)
+                "OFF"
+            }
+        }
 
         return view
     }

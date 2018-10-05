@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import kotlinx.android.synthetic.main.fragment_draw_home.*
 
 import milu.kiriu2010.exdb1.R
 
@@ -16,6 +18,10 @@ import milu.kiriu2010.exdb1.R
  *
  */
 class Draw02DecorateTextFragment : Fragment() {
+
+    // 飾りつけされたテキストビュー
+    private lateinit var decorateView1: DecorateView
+    private lateinit var decorateTextView2: DecorateTextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +34,27 @@ class Draw02DecorateTextFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_draw02_decorate_text, container, false)
 
+        // 飾りつけされたテキストビュー
+        decorateView1 = view.findViewById(R.id.decrateView1)
+        decorateView1.text = "あいうえお"
 
+        decorateTextView2 = view.findViewById(R.id.decrateTextView2)
+        decorateTextView2.text = "かきくけこ"
 
+        // アニメON/OFF
+        val btnOnOff = view.findViewById<Button>(R.id.btnOnOff)
+        btnOnOff.text = "OFF"
+        btnOnOff.setOnClickListener {
 
+            btnOnOff.text = if ( btnOnOff.text == "OFF" ) {
+                decorateTextView2.kickRunnable(false)
+                "ON"
+            }
+            else {
+                decorateTextView2.kickRunnable(true)
+                "OFF"
+            }
+        }
 
         return view
     }

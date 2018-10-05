@@ -108,10 +108,11 @@ class CanvasHomeFragment : Fragment()
         bmp = BitmapFactory.decodeResource(resources,R.drawable.a_male)
 
         // 画像リスト作成
-        (0..20).forEach {
+        (1..15).reversed().forEach {
             // 質量をランダムに変える
             // 0.2～2.0
-            val mover = Mover( mass = (1..10).shuffled().first()/5f )
+            //val mover = Mover( mass = (1..10).shuffled().first()/5f )
+            val mover = Mover( mass = it.toFloat()/5f )
             mvLst.add(mover)
         }
 
@@ -119,6 +120,14 @@ class CanvasHomeFragment : Fragment()
         val wind = PVector(1f, 0f)
         // 力(重力)
         val gravity = PVector( 0f, 5f )
+        // 摩擦係数
+        val c = 0.5f
+        //val c = 0.1f
+        //val c = 0.8f
+        //val c = 0.05f
+        //val c = 0.01f
+        // 力(摩擦)
+        var friction = PVector( 0.2f, 1f )
 
         // 力を加える
         mvLst.forEach {
@@ -128,21 +137,22 @@ class CanvasHomeFragment : Fragment()
 
         runnable = Runnable {
             mvLst.forEach {
-                /*
-                // 画面タッチ位置
-                val tl = if (tlLst.size > 0 ) {
-                    tlLst[tlLst.size-1]
-                }
-                else {
-                    PVector()
-                }
-                it.update( touched, tl)
-                */
+                // 力(摩擦)
+                val fric = PVector().set( it.iv )
+                fric.mult(-1f)
+                fric.normalize()
+                fric.mult(c)
+
+                it.ia.set( fric )
+                it.applyForce(wind)
+                it.applyForce(gravity)
+
                 // 移動
                 it.moveReflect()
             }
 
             drawCanvas()
+
             handler.postDelayed( runnable, 50)
         }
         handler.post(runnable)
@@ -161,27 +171,18 @@ class CanvasHomeFragment : Fragment()
 
         // 画像を描画
         mvLst.forEach {
-            // 元画像の大きさ
-            val src = Rect(it.il.x.toInt(),
-                    it.il.y.toInt(),
-                    it.il.x.toInt()+bmp.width,
-                    it.il.y.toInt()+bmp.height)
             // 元画像を質量によって大きさを変える
             val dst = Rect(it.il.x.toInt(),
                     it.il.y.toInt(),
                     it.il.x.toInt()+(bmp.width*it.mass).toInt(),
                     it.il.y.toInt()+(bmp.height*it.mass).toInt())
-            //canvas.drawBitmap(bmp, null, src, paintImage)
             canvas.drawBitmap(bmp, null, dst, paintImage)
-            //canvas.drawBitmap(bmp, src, src, paintImage)
-            //canvas.drawBitmap(bmp, src, dst, paintImage)
-            //canvas.drawBitmap(bmp, it.il.x, it.il.y, paintImage)
         }
 
         // タッチ箇所を描画
-        tlLst.forEach {
-            canvas.drawPoint(it.x,it.y,paintTouch)
-        }
+        //tlLst.forEach {
+        //    canvas.drawPoint(it.x,it.y,paintTouch)
+        //}
 
         surfaceViewCanvas.holder.unlockCanvasAndPost(canvas)
     }
@@ -197,15 +198,13 @@ class CanvasHomeFragment : Fragment()
         // 画像を描画する位置の初期値
         // 横：左端　縦：中央(画像の高さ分引き算)
         mvLst.forEach {
-            //it.il.x = sw/2 - bmp.width/2
-            //it.il.y = sh/2 - bmp.height/2
             it.il.x = bmp.width/2f
             it.il.y = bmp.height/2f
             // 画像の移動領域
-            it.il.x1 = -bmp.width.toFloat()
-            it.il.x2 = sw-bmp.width.toFloat()
-            it.il.y1 = -bmp.height.toFloat()
-            it.il.y2 = sh-bmp.height.toFloat()
+            it.il.x1 = -bmp.width.toFloat()*it.mass
+            it.il.x2 = sw-bmp.width.toFloat()*it.mass
+            it.il.y1 = -bmp.height.toFloat()*it.mass
+            it.il.y2 = sh-bmp.height.toFloat()*it.mass
         }
     }
 

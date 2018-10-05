@@ -75,9 +75,14 @@ class DrawActivity : AppCompatActivity() {
                 finish()
                 true
             }
-        // ----------------------------------------------------
-        // "Draw01"をクリックすると、Draw01画面を表示
-        // ----------------------------------------------------
+        // 枠アニメ
+            R.id.draw_02 -> {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, Draw02DecorateTextFragment.newInstance())
+                        .commit()
+                true
+            }
+        // 影付き
             R.id.draw_01 -> {
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.frameLayout, Draw01Fragment.newInstance())

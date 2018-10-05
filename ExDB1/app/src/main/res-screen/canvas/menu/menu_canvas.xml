@@ -4,6 +4,11 @@
     tools:context="milu.kiriu2010.exdb1.canvas.CanvasActivity">
 
     <item
+        android:id="@+id/canvas_13_friction"
+        android:orderInCategory="100"
+        android:title="摩擦"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/canvas_12_force"
         android:orderInCategory="100"
         android:title="力"

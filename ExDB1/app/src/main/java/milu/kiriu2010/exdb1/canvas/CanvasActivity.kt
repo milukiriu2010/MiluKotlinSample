@@ -74,6 +74,15 @@ class CanvasActivity : AppCompatActivity() {
                 finish()
                 true
             }
+        // 摩擦
+            R.id.canvas_13_friction -> {
+                if ( supportFragmentManager.findFragmentByTag("Canvas13Friction") == null ) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Canvas13FrictionFragment.newInstance(), "Canvas13Friction")
+                            .commit()
+                }
+                true
+            }
         // 力
             R.id.canvas_12_force -> {
                 if ( supportFragmentManager.findFragmentByTag("Canvas12Force") == null ) {
