@@ -19,6 +19,8 @@ import milu.kiriu2010.excon1.file.FileRecycleActivity
 import milu.kiriu2010.excon1.file.JsonActivity
 import milu.kiriu2010.excon1.file.XMLActivity
 import milu.kiriu2010.excon1.gaction.GactionActivity
+import milu.kiriu2010.excon1.glabyrinth.GlabyrinthActivity
+import milu.kiriu2010.excon1.gshooting.GshootingActivity
 import milu.kiriu2010.excon1.http.HttpActivity
 import milu.kiriu2010.excon1.image.ImageActivity
 import milu.kiriu2010.excon1.memo.MemoActivity
@@ -169,6 +171,18 @@ class MainActivity : AppCompatActivity() {
         // アクション
         btnGaction.setOnClickListener {
             val intent = Intent( this, GactionActivity::class.java )
+            startActivity(intent)
+        }
+
+        // シューティング
+        btnGshooting.setOnClickListener {
+            val intent = Intent( this, GshootingActivity::class.java )
+            startActivity(intent)
+        }
+
+        // 迷路
+        btnGlabyrinth.setOnClickListener {
+            val intent = Intent( this, GlabyrinthActivity::class.java )
             startActivity(intent)
         }
     }

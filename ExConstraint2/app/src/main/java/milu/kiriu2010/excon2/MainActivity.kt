@@ -31,6 +31,9 @@ import milu.kiriu2010.excon2.canvas.CanvasBasicView
 import milu.kiriu2010.excon2.navibottom.BottomNaviActivity
 import milu.kiriu2010.excon2.navidrawer.NaviDrawerActivity
 import milu.kiriu2010.excon2.sensorlight.SensorLightActivity
+import milu.kiriu2010.excon2.sensorori.SensorOriActivity
+import milu.kiriu2010.excon2.sensorprox.SensorProxActivity
+import milu.kiriu2010.excon2.sensorstep.SensorStepActivity
 import milu.kiriu2010.excon2.sensortemp.SensorTemperatureActivity
 import milu.kiriu2010.excon2.setting.SettingsActivity
 import milu.kiriu2010.excon2.tabbed.TabbedActivity
@@ -224,6 +227,24 @@ class MainActivity : AppCompatActivity() {
         // 照度センサ
         btnSensorLight.setOnClickListener {
             val intent = Intent( this, SensorLightActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        // 歩行センサ
+        btnSensorStep.setOnClickListener {
+            val intent = Intent( this, SensorStepActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        // 近接センサ
+        btnSensorProx.setOnClickListener {
+            val intent = Intent( this, SensorProxActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        // 傾きセンサ
+        btnSensorOri.setOnClickListener {
+            val intent = Intent( this, SensorOriActivity::class.java)
             this.startActivity(intent)
         }
     }

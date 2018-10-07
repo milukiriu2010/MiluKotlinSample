@@ -253,6 +253,7 @@
         android:layout_height="wrap_content"
         android:text="Canvas"
         app:layout_constraintEnd_toStartOf="@+id/btnSensorLight"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btnPinch"
         app:layout_constraintTop_toBottomOf="@+id/btnPinch" />
 
@@ -298,5 +299,35 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="211dp" />
+
+    <Button
+        android:id="@+id/btnSensorStep"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="歩行センサ"
+        app:layout_constraintBottom_toTopOf="@+id/btnTabbed"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/btnSensorLight"
+        app:layout_constraintTop_toTopOf="@+id/btnCanvas" />
+
+    <Button
+        android:id="@+id/btnSensorProx"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="近接センサ"
+        app:layout_constraintBottom_toTopOf="@+id/btnSetting"
+        app:layout_constraintEnd_toEndOf="@+id/btnSensorStep"
+        app:layout_constraintStart_toStartOf="@+id/btnSensorStep"
+        app:layout_constraintTop_toTopOf="@+id/btnTabbed" />
+
+    <Button
+        android:id="@+id/btnSensorOri"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="傾きセンサ"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSetting"
+        app:layout_constraintEnd_toEndOf="@+id/btnSensorProx"
+        app:layout_constraintStart_toStartOf="@+id/btnSensorProx"
+        app:layout_constraintTop_toTopOf="@+id/btnSetting" />
 
 </android.support.constraint.ConstraintLayout>
