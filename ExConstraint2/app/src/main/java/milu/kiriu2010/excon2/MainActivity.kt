@@ -37,6 +37,7 @@ import milu.kiriu2010.excon2.sensorstep.SensorStepActivity
 import milu.kiriu2010.excon2.sensortemp.SensorTemperatureActivity
 import milu.kiriu2010.excon2.setting.SettingsActivity
 import milu.kiriu2010.excon2.tabbed.TabbedActivity
+import milu.kiriu2010.excon2.text2speech.Text2SpeechActivity
 import milu.kiriu2010.id.IntentID
 
 class MainActivity : AppCompatActivity() {
@@ -108,10 +109,10 @@ class MainActivity : AppCompatActivity() {
             this.startActivityForResult( intent, IntentID.ID_CONTEXT_MENU.value )
         }
 
-        btnTemperature.transformationMethod = null
-        btnTemperature.setOnClickListener {
-            val intent = Intent(this, TemperatureActivity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_TEMPERATURE.value )
+        btnText2Speech.transformationMethod = null
+        btnText2Speech.setOnClickListener {
+            val intent = Intent(this, Text2SpeechActivity::class.java )
+            this.startActivity( intent )
         }
 
         btnSTOPWATCH.transformationMethod = null
@@ -264,6 +265,11 @@ class MainActivity : AppCompatActivity() {
     // -------------------------------------------------------------------
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when(item?.itemId) {
+            R.id.menuCF -> {
+                val intent = Intent(this, TemperatureActivity::class.java )
+                this.startActivityForResult( intent, IntentID.ID_TEMPERATURE.value )
+                true
+            }
             R.id.menuADD    -> {
                 Toast.makeText(this,"Add is clicked",Toast.LENGTH_LONG).show()
                 true

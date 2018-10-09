@@ -75,18 +75,18 @@
         android:layout_height="49dp"
         android:text="@string/BTN_CM"
         app:layout_constraintEnd_toEndOf="@+id/btnCustomAction"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/btnCustomAction"
         app:layout_constraintTop_toBottomOf="@+id/btnCustomAction" />
 
     <Button
-        android:id="@+id/btnTemperature"
+        android:id="@+id/btnText2Speech"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/button_oval"
-        android:text="@string/BTN_TEMPERATURE"
+        android:text="読上げ"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gender" />
 
@@ -94,6 +94,7 @@
         android:id="@+id/btnSTOPWATCH"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/button_chocolate"
         android:text="@string/BTN_STOP_WATCH"
         android:textAppearance="@style/TextAppearance.AppCompat"
@@ -101,8 +102,8 @@
         app:layout_constraintBottom_toTopOf="@+id/btnDICE"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnTemperature"
-        app:layout_constraintTop_toTopOf="@+id/btnTemperature"
+        app:layout_constraintStart_toEndOf="@+id/btnText2Speech"
+        app:layout_constraintTop_toTopOf="@+id/btnText2Speech"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
@@ -120,11 +121,12 @@
         android:id="@+id/btnDICE"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:background="@drawable/button_black"
         android:text="@string/BTN_DICE"
-        app:layout_constraintStart_toEndOf="@+id/btnTemperature"
-        app:layout_constraintStart_toStartOf="@+id/btnTemperature"
-        app:layout_constraintTop_toBottomOf="@+id/btnTemperature" />
+        app:layout_constraintEnd_toEndOf="@+id/btnText2Speech"
+        app:layout_constraintStart_toStartOf="@+id/btnText2Speech"
+        app:layout_constraintTop_toBottomOf="@+id/btnText2Speech" />
 
     <Button
         android:id="@+id/btnLargeBmp"
@@ -172,6 +174,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email"
+        app:layout_constraintEnd_toEndOf="@+id/btnScanBarcode"
         app:layout_constraintStart_toStartOf="@+id/btnScanBarcode"
         app:layout_constraintTop_toBottomOf="@+id/btnScanBarcode" />
 
@@ -191,6 +194,7 @@
         android:layout_width="86dp"
         android:layout_height="wrap_content"
         android:text="Scan"
+        app:layout_constraintEnd_toEndOf="@+id/btnDICE"
         app:layout_constraintStart_toStartOf="@+id/btnDICE"
         app:layout_constraintTop_toBottomOf="@+id/btnDICE" />
 
