@@ -41,14 +41,17 @@ class DecorateConstraintLayout
     // 枠描画に使うペイント
     val paintFrame = Paint().apply {
         color = Color.GRAY
-        strokeWidth = 20f
+        strokeWidth = 10f
         style = Paint.Style.STROKE
     }
     // マーカ描画に使うペイント
     val paintMark = Paint().apply {
         color = Color.RED
-        strokeWidth = 50f
-        style = Paint.Style.STROKE
+        strokeWidth = 20f
+        // 角にきても、線を描く
+        //style = Paint.Style.STROKE
+        // 角にくると、角を塗りつぶすように描く
+        style = Paint.Style.FILL_AND_STROKE
     }
 
     // デコレーションのモード
@@ -58,6 +61,12 @@ class DecorateConstraintLayout
     private val markHandler = Handler()
     // マーカを移動するためのスレッド
     private lateinit var markRunnable: Runnable
+
+    init {
+        // レイアウトでonDrawを呼び出すために
+        // このメソッドをキックすることが必要
+        setWillNotDraw(false)
+    }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
@@ -169,7 +178,8 @@ class DecorateConstraintLayout
                         markPoint.y = 0f
                     }
                 }
-                invalidate()
+                //invalidate()
+                postInvalidate()
                 markHandler.postDelayed(markRunnable, 50)
             }
             markHandler.post(markRunnable)
@@ -182,6 +192,7 @@ class DecorateConstraintLayout
     }
 
     override fun onDraw(canvas: Canvas?) {
+        //Log.d( javaClass.simpleName, "onDraw")
         super.onDraw(canvas)
 
         if ( canvas == null ) return
@@ -193,7 +204,7 @@ class DecorateConstraintLayout
 
     // モード0出描画する
     private fun drawMode0(canvas: Canvas) {
-        Log.d( javaClass.simpleName, "onDraw:w[$width]h[$height]")
+        //Log.d( javaClass.simpleName, "drawMode0:w[$width]h[$height]")
 
         // 枠の大きさを取得
         val frameBounds = Rect(0,0,width,height)

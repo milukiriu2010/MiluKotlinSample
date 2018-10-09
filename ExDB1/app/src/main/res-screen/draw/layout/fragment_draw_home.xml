@@ -34,6 +34,20 @@
         app:layout_constraintTop_toBottomOf="@+id/decrateView1"
         tools:text="かきくけこ" />
 
+    <milu.kiriu2010.exdb1.draw.DecorateTextView
+        android:id="@+id/decrateTextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:padding="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/decrateTextView2"
+        tools:text="さしすせそ" />
+
     <Button
         android:id="@+id/btnOnOff"
         android:layout_width="wrap_content"

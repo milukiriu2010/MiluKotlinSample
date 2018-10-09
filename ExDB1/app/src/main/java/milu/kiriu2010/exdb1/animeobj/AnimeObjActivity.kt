@@ -74,6 +74,15 @@ class AnimeObjActivity : AppCompatActivity() {
                 finish()
                 true
             }
+        // リサージュ
+            R.id.anime_10_lissajous -> {
+                if ( supportFragmentManager.findFragmentByTag("Anime10Lissajous") == null ) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Anime10LissajousFragment.newInstance(), "Anime10Lissajous")
+                            .commit()
+                }
+                true
+            }
         // ベルヌーイ
             R.id.anime_09_bernoulli -> {
                 if ( supportFragmentManager.findFragmentByTag("Anime09Bernoulli") == null ) {

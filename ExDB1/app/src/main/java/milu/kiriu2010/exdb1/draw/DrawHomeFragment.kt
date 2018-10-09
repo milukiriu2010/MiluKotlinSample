@@ -21,6 +21,7 @@ class DrawHomeFragment : Fragment() {
     // 飾りつけされたテキストビュー
     private lateinit var decorateView1: DecorateView
     private lateinit var decorateTextView2: DecorateTextView
+    private lateinit var decorateTextView3: DecorateTextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +41,10 @@ class DrawHomeFragment : Fragment() {
         decorateTextView2 = view.findViewById(R.id.decrateTextView2)
         decorateTextView2.text = "かきくけこ"
 
+        decorateTextView3 = view.findViewById(R.id.decrateTextView3)
+        decorateTextView3.text = "さしすせそ"
+        decorateTextView3.mode = 1
+
         // アニメON/OFF
         val btnOnOff = view.findViewById<Button>(R.id.btnOnOff)
         btnOnOff.text = "OFF"
@@ -47,10 +52,12 @@ class DrawHomeFragment : Fragment() {
 
             btnOnOff.text = if ( btnOnOff.text == "OFF" ) {
                 decorateTextView2.kickRunnable(false)
+                decorateTextView3.kickRunnable(false)
                 "ON"
             }
             else {
                 decorateTextView2.kickRunnable(true)
+                decorateTextView3.kickRunnable(true)
                 "OFF"
             }
         }

@@ -74,6 +74,15 @@ class CanvasActivity : AppCompatActivity() {
                 finish()
                 true
             }
+        // 液体
+            R.id.canvas_14_liquid -> {
+                if ( supportFragmentManager.findFragmentByTag("Canvas14Liquid") == null ) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Canvas14LiquidFragment.newInstance(), "Canvas14Liquid")
+                            .commit()
+                }
+                true
+            }
         // 摩擦
             R.id.canvas_13_friction -> {
                 if ( supportFragmentManager.findFragmentByTag("Canvas13Friction") == null ) {

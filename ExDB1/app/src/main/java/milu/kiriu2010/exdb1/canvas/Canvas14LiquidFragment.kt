@@ -12,12 +12,12 @@ import milu.kiriu2010.exdb1.R
 
 /**
  * A simple [Fragment] subclass.
- * Use the [CanvasHomeFragment.newInstance] factory method to
+ * Use the [Canvas14LiquidFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class CanvasHomeFragment : Fragment()
-    , SurfaceHolder.Callback {
+class Canvas14LiquidFragment : Fragment()
+        , SurfaceHolder.Callback {
 
     // 描画に使うサーフェースビュー
     private lateinit var surfaceViewCanvas: SurfaceView
@@ -63,6 +63,7 @@ class CanvasHomeFragment : Fragment()
     // 描画に使うスレッド
     private lateinit var runnable: Runnable
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -77,7 +78,8 @@ class CanvasHomeFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_canvas_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_canvas14_liquid, container, false)
+
 
         // サーフェースビューを取得
         surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
@@ -124,39 +126,16 @@ class CanvasHomeFragment : Fragment()
             mvLst.add(mover)
         }
 
-        // 力(風)
-        val wind = PVector(1f, 0f)
         // 力(重力)
         val gravity = PVector( 0f, 5f )
-        // 摩擦係数
-        val c = 0.5f
-        //val c = 0.1f
-        //val c = 0.8f
-        //val c = 0.05f
-        //val c = 0.01f
-        // 力(摩擦)
-        var friction = PVector( 0.2f, 1f )
 
         // 力を加える
         mvLst.forEach {
-            //it.applyForce(wind)
             it.applyForce(gravity)
         }
 
         runnable = Runnable {
             mvLst.forEach {
-                /*
-                // 力(摩擦)
-                val fric = PVector().set( it.iv )
-                fric.mult(-1f)
-                fric.normalize()
-                fric.mult(c)
-
-                it.ia.set( fric )
-
-                it.applyForce(wind)
-                */
-
                 // 液体の中にいた場合、
                 // 物体に加わる力を
                 // "drag+重力"を合わせて再計算
@@ -222,6 +201,7 @@ class CanvasHomeFragment : Fragment()
         // 横：左端　縦：中央(画像の高さ分引き算)
         var i = 0f
         mvLst.forEach {
+            // 横の初期位置をずらす
             it.il.x = bmp.width/2f + (i++)*100f
             it.il.y = bmp.height/2f
             // 画像の移動領域
@@ -247,17 +227,18 @@ class CanvasHomeFragment : Fragment()
     override fun surfaceCreated(holder: SurfaceHolder?) {
     }
 
+
     companion object {
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment HomeFragment.
+         * @return A new instance of fragment Canvas14LiquidFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                CanvasHomeFragment().apply {
+                Canvas14LiquidFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

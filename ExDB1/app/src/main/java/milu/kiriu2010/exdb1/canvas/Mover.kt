@@ -1,5 +1,10 @@
 package milu.kiriu2010.exdb1.canvas
 
+import android.util.Log
+
+// -----------------------------------------
+// 物体(画像)
+// -----------------------------------------
 data class Mover(
         // 画像を描画する位置
         val il: PVector = PVector(),
@@ -22,7 +27,7 @@ data class Mover(
         // -------------------------------------------
         // 端に到達したら、反射する
         // -------------------------------------------
-        fun checkReflect() {
+        private fun checkReflect() {
                 // -------------------------------
                 // 右端を超えていたら、
                 // 位置を右端
@@ -116,5 +121,44 @@ data class Mover(
                 il.checkEdge()
         }
 
+        // -------------------------------------------------
+        // 物体が液体の中にいるかどうか
+        // 全体が包まれると"液体の中"と判定している
+        // 一部が包まれているだけだと"液体の外"と判定している
+        //   true  => 液体の中
+        //   false => 液体の外
+        // -------------------------------------------------
+        fun isInside(l: Liquid): Boolean {
+                if ( (il.x > l.x) and
+                        (il.x < l.x + l.w) and
+                        (il.y > l.y) and
+                        (il.y< l.y + l.h) ){
+                        return true
+                }
+                else {
+                        return false
+                }
+        }
+
+        // -------------------------------------------------
+        // 液体の中を通過するときの抵抗
+        // -------------------------------------------------
+        fun drag(l: Liquid) {
+                // "物体の速度"の大きさ
+                val speed = iv.mag()
+                // 抵抗の大きさ
+                val dragMag = l.c * speed * speed
+
+                // 抵抗の力を計算
+                val drag = PVector().set(iv)
+                drag.mult(-1f)
+                drag.normalize()
+                drag.mult(dragMag)
+
+                Log.d(javaClass.simpleName, "mass[{${mass}}]il.x[${il.x}]drag.x[${drag.x}]drag.y[${drag.y}]")
+
+                // 抵抗の力を加える
+                applyForce(drag)
+        }
 
 }
