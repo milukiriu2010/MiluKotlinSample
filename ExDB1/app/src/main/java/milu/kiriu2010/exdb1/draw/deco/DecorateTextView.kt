@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.draw
+package milu.kiriu2010.exdb1.draw.deco
 
 import android.content.Context
 import android.graphics.*
@@ -8,7 +8,6 @@ import android.support.annotation.RequiresApi
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.TextView
-import org.jetbrains.anko.withAlpha
 
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -127,6 +126,7 @@ class DecorateTextView
         when (mode) {
             0 -> kickRunnable0(animated)
             1 -> kickRunnable1(animated)
+            2 -> kickRunnable2(animated)
         }
     }
 
@@ -270,23 +270,166 @@ class DecorateTextView
 
         markRunnable = Runnable {
 
+            // ネオン効果
+            markRectPos += markVelocity
+            // マーカ(長方形)の座標位置が
+            // 移動可能範囲を超えたら初期値に戻す
+            if ( markRectPos >= markRectMoveLen ) {
+                markRectPos = 0f
+            }
+
             // 描画する
             invalidate()
 
             // アニメーション中であれば、
             // 描画スレッドをキックする
             if ( animated ) {
-                markRectPos += markVelocity
-                // マーカ(長方形)の座標位置が
-                // 移動可能範囲を超えたら初期値に戻す
-                if ( markRectPos >= markRectMoveLen ) {
-                    markRectPos = 0f
-                }
                 markHandler.postDelayed(markRunnable, 50)
             }
         }
         markHandler.post(markRunnable)
     }
+
+    // マーカは枠をなぞるように移動する
+    private fun kickRunnable2( animated: Boolean = true ) {
+        this.animated = animated
+
+        val w = width
+        val h = height
+        val rectw = (w/markRectSplitCnt).toFloat()
+        markRectMoveLen = rectw * 2f
+        if ( markRectLst.size == 0 ) {
+            // 白で塗りつぶす
+            markRectLst.add(RectF(-rectw, 0f, 0f, h.toFloat()))
+            // 赤で塗りつぶす
+            markRectLst.add(RectF(0f, 0f, rectw, h.toFloat()))
+        }
+
+        markRunnable = Runnable {
+            // リセットしないと前回描いた線と今回描く線がつながってしまう。
+            markPath.reset()
+            // 左⇒右
+            if ( markDir == 0 ) {
+                markPoint.x += markVelocity
+                markPath.moveTo(markPoint.x,markPoint.y)
+                // マーカの右端がビューの右端に達していない場合
+                // "マーカの左端"～"マーカの右端"を描画
+                if (markPoint.x+markLen < w.toFloat()) {
+                    markPath.lineTo(markPoint.x+markLen, markPoint.y)
+                }
+                // マーカの右端がビューの右端に達している場合
+                // (1) "マーカの左端"～"ビューの右端"を描画
+                // (2) "ビューの右上角"～"ビューの右端残り"を描画
+                else {
+                    markPath.lineTo(w.toFloat(), markPoint.y)
+                    markPath.lineTo(w.toFloat(),markLen-(w.toFloat()-markPoint.x))
+                }
+
+                // マーカの始点が右上角に到達したらマーカの移動方向を"上⇒下"に変更する
+                // マーカの始点は、ビューの右上角に合わせる
+                if (markPoint.x >= w.toFloat()) {
+                    markDir = 1
+                    markPoint.x = w.toFloat()
+                    markPoint.y = 0f
+                }
+            }
+            // 上⇒下
+            else if ( markDir == 1 ) {
+                markPoint.y += markVelocity
+                markPath.moveTo(markPoint.x,markPoint.y)
+                // マーカの下端がビューの下端に達していない場合
+                // "マーカの上端"～"マーカの下端"を描画
+                if (markPoint.y+markLen < h.toFloat()) {
+                    markPath.lineTo(markPoint.x, markPoint.y+markLen)
+                }
+                // マーカの下端がビューの下端に達している場合
+                // (1) "マーカの下端"～"ビューの下端"を描画
+                // (2) "ビューの左下角"～"ビューの下端残り"を描画
+                else {
+                    markPath.lineTo(markPoint.x, h.toFloat())
+                    markPath.lineTo(w.toFloat()-(markLen-(h.toFloat()-markPoint.y)), h.toFloat())
+                }
+
+                // マーカの始点が右下角に到達したらマーカの移動方向を"右⇒左"に変更する
+                // マーカの始点は、ビューの右下角に合わせる
+                if (markPoint.y >= h.toFloat()) {
+                    markDir = 2
+                    markPoint.x = w.toFloat()
+                    markPoint.y = h.toFloat()
+                }
+            }
+            // 右⇒左
+            else if ( markDir == 2 ) {
+                markPoint.x -= markVelocity
+                markPath.moveTo(markPoint.x,markPoint.y)
+                // マーカの左端がビューの左端に達していない場合
+                // "マーカの右端"～"マーカの左端"を描画
+                if (markPoint.x-markLen > 0) {
+                    markPath.lineTo(markPoint.x-markLen, markPoint.y)
+                }
+                // マーカの左端がビューの左端に達している場合
+                // (1) "マーカの左端"～"ビューの左端"を描画
+                // (2) "ビューの左下角"～"ビューの左端残り"を描画
+                else {
+                    markPath.lineTo(0f, h.toFloat())
+                    markPath.lineTo(0f,h.toFloat()-(markLen-markPoint.x))
+                }
+
+                // マーカの始点が右上角に到達したらマーカの移動方向を"上⇒下"に変更する
+                // マーカの始点は、ビューの右上角に合わせる
+                if (markPoint.x <= 0) {
+                    markDir = 3
+                    markPoint.x = 0f
+                    markPoint.y = h.toFloat()
+                }
+            }
+            // 下⇒上
+            else if ( markDir == 3 ) {
+                markPoint.y -= markVelocity
+                markPath.moveTo(markPoint.x,markPoint.y)
+                // マーカの上端がビューの上端に達していない場合
+                // "マーカの下端"～"マーカの上端"を描画
+                if (markPoint.y-markLen > 0) {
+                    markPath.lineTo(markPoint.x, markPoint.y-markLen)
+                }
+                // マーカの上端がビューの上端に達している場合
+                // (1) "マーカの下端"～"ビューの上端"を描画
+                // (2) "ビューの右上角"～"ビューの右端残り"を描画
+                else {
+                    markPath.lineTo(markPoint.x, 0f)
+                    markPath.lineTo(markLen-markPoint.y,0f)
+                }
+
+                // マーカの始点が右上角に到達したらマーカの移動方向を"左⇒右"に変更する
+                // マーカの始点は、ビューの右上角に合わせる
+                if (markPoint.y <= 0) {
+                    markDir = 0
+                    markPoint.x = 0f
+                    markPoint.y = 0f
+                }
+            }
+
+            // ネオン効果
+            markRectPos += markVelocity
+            // マーカ(長方形)の座標位置が
+            // 移動可能範囲を超えたら初期値に戻す
+            if ( markRectPos >= markRectMoveLen ) {
+                markRectPos = 0f
+            }
+
+
+            // 描画する
+            invalidate()
+
+            // アニメーション中であれば、
+            // 描画スレッドをキックする
+            if ( animated ) {
+                markHandler.postDelayed(markRunnable, 50)
+            }
+        }
+        markHandler.post(markRunnable)
+    }
+
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
@@ -296,6 +439,7 @@ class DecorateTextView
         when (mode) {
             0 -> drawMode0(canvas)
             1 -> drawMode1(canvas)
+            2 -> drawMode2(canvas)
         }
     }
 
@@ -306,7 +450,7 @@ class DecorateTextView
         val frameBounds = Rect(0,0,width,height)
 
         // 枠を描画
-        canvas.drawRect(frameBounds,paintMarkBackground)
+        //canvas.drawRect(frameBounds,paintMarkBackground)
         canvas.drawRect(frameBounds,paintFrame)
 
         // マーカを描画
@@ -314,13 +458,13 @@ class DecorateTextView
     }
 
     // モード1の描画する
+    // ネオンっぽい感じ
     private fun drawMode1(canvas: Canvas) {
         // 枠の大きさを取得
         val frameBounds = Rect(0,0,width,height)
 
         // 枠を描画
         canvas.drawRect(frameBounds,paintFrame)
-
 
         // マーカを描画
         if ( animated ) {
@@ -348,6 +492,52 @@ class DecorateTextView
 
             // 座標位置を戻す
             canvas.restore()
+        }
+    }
+
+
+    // モード2の描画する
+    // マーカは枠をなぞるように移動する
+    // ＋
+    // ネオンっぽい感じ
+    private fun drawMode2(canvas: Canvas) {
+        // 枠の大きさを取得
+        val frameBounds = Rect(0,0,width,height)
+
+        // 枠を描画
+        //canvas.drawRect(frameBounds,paintMarkBackground)
+        canvas.drawRect(frameBounds,paintFrame)
+
+        // マーカを描画
+        if ( animated ) {
+            // 座標位置を保存
+            canvas.save()
+
+            // 描画したマーカ(長方形)の数
+            var drawCnt = 0
+            // 座標位置を移動する
+            canvas.translate(markRectPos,0f)
+            do {
+                for ( i in 0 until markRectLst.size ) {
+                    val paintFill = when (i%2) {
+                        0 -> paintMarkFill1
+                        1 -> paintMarkFill2
+                        else -> paintMarkFill1
+                    }
+                    canvas.drawRect( markRectLst[i], paintFill )
+                }
+                // "描画したマーカ(長方形)の数"をインクリメントする
+                drawCnt += markRectLst.size
+                // 次の座標位置に移動する
+                canvas.translate(markRectMoveLen/2*markRectLst.size,0f)
+            } while ( drawCnt < markRectSplitCnt )
+
+            // 座標位置を戻す
+            canvas.restore()
+
+            // Pathを後に描かないと
+            // なぜかバックグラウンドが塗りつぶされてしまう。
+            canvas.drawPath(markPath,paintMark)
         }
     }
 

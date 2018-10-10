@@ -74,6 +74,15 @@ class CanvasActivity : AppCompatActivity() {
                 finish()
                 true
             }
+        // 引力
+            R.id.canvas_15_attract -> {
+                if ( supportFragmentManager.findFragmentByTag("Canvas15Attract") == null ) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Canvas15AttractFragment.newInstance(), "Canvas15Attract")
+                            .commit()
+                }
+                true
+            }
         // 液体
             R.id.canvas_14_liquid -> {
                 if ( supportFragmentManager.findFragmentByTag("Canvas14Liquid") == null ) {

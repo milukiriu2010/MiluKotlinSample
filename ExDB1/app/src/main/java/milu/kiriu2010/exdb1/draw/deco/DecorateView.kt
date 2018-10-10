@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.draw
+package milu.kiriu2010.exdb1.draw.deco
 
 import android.content.Context
 import android.graphics.*

@@ -16,6 +16,9 @@ data class PVector(
         var y1: Float = 0f,
         var y2: Float = 0f) {
 
+    constructor( pv: PVector ): this( pv.x, pv.y, pv.x1, pv.x2, pv.y1, pv.y2 ) {
+    }
+
     // 移動
     fun set( pv: PVector ): PVector {
         x = pv.x
@@ -76,6 +79,47 @@ data class PVector(
             x /= d
             y /= d
         }
+        return this
+    }
+
+    // "ベクトルの大きさ"の最大リミットを指定
+    fun limitMax(limit: Float): PVector {
+        if ( limit < 0f ) {
+            throw Exception("limit should be > 0.")
+        }
+        val mag = mag()
+
+        if ( mag == 0f ) {
+        }
+        else if ( mag > limit ) {
+            x = x*limit/mag
+            y = y*limit/mag
+        }
+        return this
+    }
+
+    // "ベクトルの大きさ"の最小リミットを指定
+    fun limitMin(limit: Float): PVector {
+        if ( limit < 0f ) {
+            throw Exception("limit should be > 0.")
+        }
+        val mag = mag()
+        if ( mag == 0f ) {
+        }
+        else if ( mag < limit ) {
+            x = x*limit/mag
+            y = y*limit/mag
+        }
+        return this
+    }
+
+    // "ベクトルの大きさ"の範囲を指定
+    fun contain( magMin: Float, magMax: Float ): PVector {
+        if ( magMin > magMax ) {
+            throw Exception("magMax should be grater than magMin.")
+        }
+        limitMax(magMax)
+        limitMin(magMin)
         return this
     }
 

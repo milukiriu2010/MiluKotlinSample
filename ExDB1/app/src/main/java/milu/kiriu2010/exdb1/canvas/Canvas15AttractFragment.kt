@@ -12,12 +12,12 @@ import milu.kiriu2010.exdb1.R
 
 /**
  * A simple [Fragment] subclass.
- * Use the [CanvasHomeFragment.newInstance] factory method to
+ * Use the [Canvas15AttractFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class CanvasHomeFragment : Fragment()
-    , SurfaceHolder.Callback {
+class Canvas15AttractFragment : Fragment()
+        , SurfaceHolder.Callback {
 
     // 描画に使うサーフェースビュー
     private lateinit var surfaceViewCanvas: SurfaceView
@@ -74,7 +74,8 @@ class CanvasHomeFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_canvas_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_canvas15_attract, container, false)
+
 
         // サーフェースビューを取得
         surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
@@ -134,7 +135,7 @@ class CanvasHomeFragment : Fragment()
             mvLst.forEach {
 
                 // 引力を加える
-                val force = attract.attract(it,5f,50f)
+                val force = attract.attract(it,5f,25f)
                 // 一旦加速度をクリアする
                 it.ia.set( PVector() )
                 it.applyForce(force)
@@ -244,12 +245,12 @@ class CanvasHomeFragment : Fragment()
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment HomeFragment.
+         * @return A new instance of fragment Canvas15AttractFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                CanvasHomeFragment().apply {
+                Canvas15AttractFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

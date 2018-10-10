@@ -70,15 +70,15 @@ data class Mover(
         // -------------------------------------------------
         // 通常の移動(反射付き)
         // -------------------------------------------------
-        fun moveReflect() {
+        fun moveReflect(limit: Float = 200f, isReflect: Boolean = true ) {
                 // 速度に加速度を加算する
                 // 速度にリミットを設けている
                 // 質量が軽いほどリミット値を大きくしている
-                iv.add(ia,200f/mass)
+                iv.add(ia,limit/mass)
                 // 移動
                 il.add(iv)
                 // 反射チェック
-                checkReflect()
+                if ( isReflect ) checkReflect()
         }
 
         // -------------------------------------------------

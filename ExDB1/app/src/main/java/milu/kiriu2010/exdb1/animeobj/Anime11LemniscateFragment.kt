@@ -13,16 +13,15 @@ import android.widget.ImageView
 import milu.kiriu2010.exdb1.R
 import kotlin.math.PI
 import kotlin.math.cos
-import kotlin.math.exp
 import kotlin.math.sin
 
 /**
  * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
+ * Use the [Anime11LemniscateFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class HomeFragment : Fragment() {
+class Anime11LemniscateFragment : Fragment() {
 
     private lateinit var imageView: ImageView
 
@@ -30,8 +29,6 @@ class HomeFragment : Fragment() {
 
     // 半径
     private val radius = 300.0f
-    private var a = 3.0f
-    private var b = 4.0f
 
     // 中心
     private var centerX = 0.0f
@@ -57,7 +54,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_anime11_lemniscate, container, false)
 
         // 画像をレイアウトに配置
         imageView = ImageView(context)
@@ -96,8 +93,8 @@ class HomeFragment : Fragment() {
             //val duration = 100L
             val animator = imageView.animate()
                     .setDuration(duration)
-                    .x(centerX + (radius * cos(angleZ/180*PI)/(1f+sin(angleZ/180*PI)*sin(angleZ/180*PI))).toFloat())
-                    .y(centerY + (radius * sin(angleZ/180*PI) * cos(angleZ/180*PI)/(1f+sin(angleZ/180*PI)*sin(angleZ/180*PI))).toFloat())
+                    .x(centerX + (radius * cos(angleZ/180* PI) /(1f+ sin(angleZ/180* PI) * sin(angleZ/180* PI))).toFloat())
+                    .y(centerY + (radius * sin(angleZ/180* PI) * cos(angleZ/180* PI) /(1f+ sin(angleZ/180* PI) * sin(angleZ/180* PI))).toFloat())
                     .rotationYBy(angleY)
             // リピートする
             animator.setListener(object : Animator.AnimatorListener {
@@ -143,12 +140,12 @@ class HomeFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment HomeFragment.
+         * @return A new instance of fragment Anime11LemniscateFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                HomeFragment().apply {
+                Anime11LemniscateFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

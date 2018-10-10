@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import android.widget.Button
 
 import milu.kiriu2010.exdb1.R
+import milu.kiriu2010.exdb1.draw.deco.Deco03ConstraintLayout
+import milu.kiriu2010.exdb1.draw.deco.DecorateTextView
+import milu.kiriu2010.exdb1.draw.deco.DecorateView
 
 /**
  * A simple [Fragment] subclass.
@@ -18,10 +21,13 @@ import milu.kiriu2010.exdb1.R
  */
 class DrawHomeFragment : Fragment() {
 
+    // レイアウト
+    private lateinit var rootLayout: Deco03ConstraintLayout
     // 飾りつけされたテキストビュー
     private lateinit var decorateView1: DecorateView
     private lateinit var decorateTextView2: DecorateTextView
     private lateinit var decorateTextView3: DecorateTextView
+    private lateinit var decorateTextView4: DecorateTextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +40,8 @@ class DrawHomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_draw_home, container, false)
 
+        rootLayout = view.findViewById(R.id.rootLayout)
+
         // 飾りつけされたテキストビュー
         decorateView1 = view.findViewById(R.id.decrateView1)
         decorateView1.text = "あいうえお"
@@ -45,19 +53,27 @@ class DrawHomeFragment : Fragment() {
         decorateTextView3.text = "さしすせそ"
         decorateTextView3.mode = 1
 
+        decorateTextView4 = view.findViewById(R.id.decrateTextView4)
+        decorateTextView4.text = "たちつてと"
+        decorateTextView4.mode = 2
+
         // アニメON/OFF
         val btnOnOff = view.findViewById<Button>(R.id.btnOnOff)
         btnOnOff.text = "OFF"
         btnOnOff.setOnClickListener {
 
             btnOnOff.text = if ( btnOnOff.text == "OFF" ) {
+                rootLayout.kickRunnable(false)
                 decorateTextView2.kickRunnable(false)
                 decorateTextView3.kickRunnable(false)
+                decorateTextView4.kickRunnable(false)
                 "ON"
             }
             else {
+                rootLayout.kickRunnable(true)
                 decorateTextView2.kickRunnable(true)
                 decorateTextView3.kickRunnable(true)
+                decorateTextView4.kickRunnable(true)
                 "OFF"
             }
         }

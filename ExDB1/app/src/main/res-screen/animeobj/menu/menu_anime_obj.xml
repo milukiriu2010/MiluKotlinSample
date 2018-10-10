@@ -4,6 +4,11 @@
     tools:context="milu.kiriu2010.exdb1.animeobj.AnimeObjActivity">
 
     <item
+        android:id="@+id/anime_11_lemniscate"
+        android:orderInCategory="100"
+        android:title="レムニスケート"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/anime_10_lissajous"
         android:orderInCategory="100"
         android:title="リサージュ"
