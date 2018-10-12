@@ -1,4 +1,0 @@
-#Sat Sep 29 17:36:30 JST 2018
-base.0=F\:\\mykotlin\\MiluKotlinSample.git\\Milux\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\10
-path.0=classes.dex
-renamed.0=classes.dex
