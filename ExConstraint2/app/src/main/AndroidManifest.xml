@@ -59,7 +59,8 @@
         <activity android:name=".sensorstep.SensorStepActivity" />
         <activity android:name=".sensorprox.SensorProxActivity" />
         <activity android:name=".sensorori.SensorOriActivity" />
-        <activity android:name=".text2speech.Text2SpeechActivity"></activity>
+        <activity android:name=".text2speech.Text2SpeechActivity" />
+        <activity android:name=".voiceinput.VoiceInputActivity"></activity>
     </application>
 
 </manifest>

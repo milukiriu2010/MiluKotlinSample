@@ -27,7 +27,6 @@ import milu.kiriu2010.excon2.websearch.WebSearchActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import milu.kiriu2010.excon2.animemove.AnimeMoveActivity
 import milu.kiriu2010.excon2.canvas.CanvasActivity
-import milu.kiriu2010.excon2.canvas.CanvasBasicView
 import milu.kiriu2010.excon2.navibottom.BottomNaviActivity
 import milu.kiriu2010.excon2.navidrawer.NaviDrawerActivity
 import milu.kiriu2010.excon2.sensorlight.SensorLightActivity
@@ -38,6 +37,7 @@ import milu.kiriu2010.excon2.sensortemp.SensorTemperatureActivity
 import milu.kiriu2010.excon2.setting.SettingsActivity
 import milu.kiriu2010.excon2.tabbed.TabbedActivity
 import milu.kiriu2010.excon2.text2speech.Text2SpeechActivity
+import milu.kiriu2010.excon2.voiceinput.VoiceInputActivity
 import milu.kiriu2010.id.IntentID
 
 class MainActivity : AppCompatActivity() {
@@ -109,6 +109,7 @@ class MainActivity : AppCompatActivity() {
             this.startActivityForResult( intent, IntentID.ID_CONTEXT_MENU.value )
         }
 
+        // テキスト→音声変換
         btnText2Speech.transformationMethod = null
         btnText2Speech.setOnClickListener {
             val intent = Intent(this, Text2SpeechActivity::class.java )
@@ -145,18 +146,11 @@ class MainActivity : AppCompatActivity() {
             this.startActivityForResult( intent, IntentID.ID_TRAFFIC_LIGHT.value )
         }
 
-        // http://tekeye.uk/android/examples/email-contact-form-in-app
-        btnEMAIL.transformationMethod = null
-        btnEMAIL.setOnClickListener {
-            val strTo = "milu.kiriu2010@gmail.com"
-            val strSub = "test"
-            val strMsg = "ExConstraint2"
-            val mail = Intent(Intent.ACTION_SEND)
-            mail.putExtra(Intent.EXTRA_EMAIL,arrayOf<String>(strTo))
-            mail.putExtra(Intent.EXTRA_SUBJECT,strSub)
-            mail.putExtra(Intent.EXTRA_TEXT,strMsg)
-            mail.setType("message/rfc822")
-            startActivity(Intent.createChooser(mail,"Send email via:"))
+        // 音声入力
+        btnVoiceInput.transformationMethod = null
+        btnVoiceInput.setOnClickListener {
+            val intent = Intent(this, VoiceInputActivity::class.java)
+            this.startActivity(intent)
         }
 
         btnFibonnaci.transformationMethod = null
@@ -265,13 +259,24 @@ class MainActivity : AppCompatActivity() {
     // -------------------------------------------------------------------
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when(item?.itemId) {
+            // 温度(C<=>F)
             R.id.menuCF -> {
                 val intent = Intent(this, TemperatureActivity::class.java )
                 this.startActivityForResult( intent, IntentID.ID_TEMPERATURE.value )
                 true
             }
-            R.id.menuADD    -> {
-                Toast.makeText(this,"Add is clicked",Toast.LENGTH_LONG).show()
+            // メール送信
+            // http://tekeye.uk/android/examples/email-contact-form-in-app
+            R.id.menuEMAIL    -> {
+                val strTo = "milu.kiriu2010@gmail.com"
+                val strSub = "test"
+                val strMsg = "ExConstraint2"
+                val mail = Intent(Intent.ACTION_SEND)
+                mail.putExtra(Intent.EXTRA_EMAIL,arrayOf<String>(strTo))
+                mail.putExtra(Intent.EXTRA_SUBJECT,strSub)
+                mail.putExtra(Intent.EXTRA_TEXT,strMsg)
+                mail.setType("message/rfc822")
+                startActivity(Intent.createChooser(mail,"Send email via:"))
                 true
             }
             R.id.menuRESET  -> {

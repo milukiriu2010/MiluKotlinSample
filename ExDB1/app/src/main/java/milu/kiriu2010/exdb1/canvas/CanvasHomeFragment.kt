@@ -9,6 +9,8 @@ import android.util.Log
 import android.view.*
 
 import milu.kiriu2010.exdb1.R
+import kotlin.math.PI
+import kotlin.math.cos
 
 /**
  * A simple [Fragment] subclass.
@@ -32,27 +34,16 @@ class CanvasHomeFragment : Fragment()
     // 画像リスト
     private val mvLst = mutableListOf<Mover>()
 
-    // 質量の大きい星の画像
-    private lateinit var bmpG: Bitmap
+    // 回転角度
+    private var angleY = 180.0f
 
-    // 質量の大きい星
-    private val attract = Attractor()
-
-    // タッチ中かどうか
-    private var touched = false
-
-    // タッチ位置のリスト
-    private var tlLst = mutableListOf<PVector>()
+    // 回転角度(刻み)
+    private var angleYd = 10.0f
 
     // 画像に使うペイント
     private val paintImage = Paint().apply {
         color = Color.BLACK
         //style = Paint.Style.STROKE
-    }
-    // タッチに使うペイント
-    private val paintTouch = Paint().apply {
-        color = Color.BLACK
-        strokeWidth = 50f
     }
 
     // 描画に使うハンドラ
@@ -79,39 +70,8 @@ class CanvasHomeFragment : Fragment()
         // サーフェースビューを取得
         surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
 
-        surfaceViewCanvas.setOnTouchListener { v, event ->
-            Log.d(javaClass.simpleName, "touch.x[${event.x}]touch.y[${event.y}]")
-
-            // タッチしているかどうかを取得
-            touched = when (event.action) {
-                MotionEvent.ACTION_DOWN -> true
-                MotionEvent.ACTION_MOVE -> true
-                MotionEvent.ACTION_UP -> false
-                MotionEvent.ACTION_CANCEL -> false
-                MotionEvent.ACTION_OUTSIDE -> false
-                else -> false
-            }
-
-            // タッチ位置を保存
-            if ( touched ) {
-                val tl = PVector()
-                tl.x = event.x
-                tl.y = event.y
-                tlLst.add(tl)
-                if (tlLst.size > 30) {
-                    tlLst.removeAt(0)
-                }
-            }
-
-            true
-        }
-
         val holder = surfaceViewCanvas.holder
         holder.addCallback(this)
-
-        // 質量の大きい星の画像
-        bmpG = BitmapFactory.decodeResource(resources,R.drawable.a_female)
-
 
         // 描画する画像
         bmp = BitmapFactory.decodeResource(resources,R.drawable.a_male)
@@ -122,28 +82,18 @@ class CanvasHomeFragment : Fragment()
             mvLst.add(mover)
         }
 
-        // 力(重力)
-        val gravity = PVector( 0f, 5f )
-
-        // 力を加える
-        mvLst.forEach {
-            //it.applyForce(gravity)
-        }
-
         runnable = Runnable {
             mvLst.forEach {
-
-                // 引力を加える
-                val force = attract.attract(it,5f,50f)
-                // 一旦加速度をクリアする
-                it.ia.set( PVector() )
-                it.applyForce(force)
-
-                // 移動
-                it.moveReflect(50f, false)
+                // 物体の半径
+                val r = it.w/2f
+                it.il.x = it.cl.x + (r * cos(angleY/180* PI)).toFloat()
             }
 
             drawCanvas()
+
+            // 回転する
+            angleY += angleYd
+            angleY = angleY%360
 
             handler.postDelayed( runnable, 50)
         }
@@ -161,27 +111,15 @@ class CanvasHomeFragment : Fragment()
         // バックグラウンドを描画
         canvas.drawColor(Color.WHITE)
 
-        // 質量の大きい星を描画
-        val dstG = RectF(attract.il.x-(bmpG.width*attract.mass/2f),
-                attract.il.y-(bmpG.height*attract.mass/2f),
-                attract.il.x+(bmpG.width*attract.mass/2f),
-                attract.il.y+(bmpG.height*attract.mass/2f))
-        canvas.drawBitmap(bmpG, null, dstG, paintImage)
-
         // 画像を描画
         mvLst.forEach {
             // 元画像を質量によって大きさを変える
-            val dst = RectF(it.il.x-(bmp.width*it.mass/2f),
-                    it.il.y-(bmp.height*it.mass/2f),
-                    it.il.x+(bmp.width*it.mass/2f),
-                    it.il.y+(bmp.height*it.mass/2f))
+            val dst = RectF(it.il.x-it.w/2f,
+                    it.il.y-it.h/2f,
+                    it.il.x+it.w/2f,
+                    it.il.y+it.h/2f)
             canvas.drawBitmap(bmp, null, dst, paintImage)
         }
-
-        // タッチ箇所を描画
-        //tlLst.forEach {
-        //    canvas.drawPoint(it.x,it.y,paintTouch)
-        //}
 
         surfaceViewCanvas.holder.unlockCanvasAndPost(canvas)
     }
@@ -194,35 +132,17 @@ class CanvasHomeFragment : Fragment()
         sw = width.toFloat()
         sh = height.toFloat()
 
-        /*
-        // 質量が大きい星の位置の初期値
-        attract.il.x = sw/2f - bmpG.width.toFloat()*attract.mass/2f
-        attract.il.y = sh/2f - bmpG.height.toFloat()*attract.mass/2f
-
-        // 画像を描画する位置の初期値
+        // 物体を描画する位置の初期値
         // 横：左端　縦：中央(画像の高さ分引き算)
         var i = 0f
         mvLst.forEach {
-            it.il.x = bmp.width/2f + (i++)*100f
-            it.il.y = bmp.height/2f
-            // 画像の移動領域
-            it.il.x1 = -bmp.width.toFloat()*it.mass
-            it.il.x2 = sw-bmp.width.toFloat()*it.mass
-            it.il.y1 = -bmp.height.toFloat()*it.mass
-            it.il.y2 = sh-bmp.height.toFloat()*it.mass
-        }
-        */
-        // 質量が大きい星の位置の初期値
-        attract.il.x = sw/2f
-        attract.il.y = sh/2f
-
-        // 画像を描画する位置の初期値
-        // 横：左端　縦：中央(画像の高さ分引き算)
-        var i = 0f
-        mvLst.forEach {
-            it.il.x = bmp.width/2f + (i++)*100f
-            it.il.y = bmp.height/2f
-            // 画像の移動領域
+            // 物体の位置
+            it.il.x = bmp.width/2f + (1..5).shuffled().first().toFloat()*150f
+            it.il.y = bmp.height/2f+ (1..5).shuffled().first().toFloat()*150f
+            // 物体の幅・高さ
+            it.w = bmp.width.toFloat()*it.mass
+            it.h = bmp.height.toFloat()*it.mass
+            // 物体の移動領域
             it.il.x1 = -bmp.width.toFloat()*it.mass
             it.il.x2 = sw-bmp.width.toFloat()*it.mass
             it.il.y1 = -bmp.height.toFloat()*it.mass

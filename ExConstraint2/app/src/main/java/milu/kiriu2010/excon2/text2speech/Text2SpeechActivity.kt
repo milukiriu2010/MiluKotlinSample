@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.support.v7.app.AlertDialog
-import android.text.SpannableString
 import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_text2_speech.*
 import milu.kiriu2010.excon2.R
