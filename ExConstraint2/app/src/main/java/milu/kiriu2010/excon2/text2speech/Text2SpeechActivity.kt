@@ -41,14 +41,14 @@ class Text2SpeechActivity : AppCompatActivity()
             if (tts.setPitch(pitch) == TextToSpeech.ERROR) {
                 AlertDialog.Builder(this)
                         .setTitle("エラー")
-                        .setMessage("pitchエラー")
+                        .setMessage("pitchエラー(%.1f)".format(pitch))
                         .setPositiveButton("OK",null)
                         .show()
             }
             if (tts.setSpeechRate(rate) == TextToSpeech.ERROR) {
                 AlertDialog.Builder(this)
                         .setTitle("エラー")
-                        .setMessage("rateエラー")
+                        .setMessage("rateエラー(%.1f)".format(rate))
                         .setPositiveButton("OK",null)
                         .show()
             }
@@ -106,8 +106,8 @@ class Text2SpeechActivity : AppCompatActivity()
     }
 
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-        pitch = (seekBarPitch.progress/5).toFloat()
-        rate = (seekBarRate.progress/5).toFloat()
+        pitch = seekBarPitch.progress.toFloat()/5f
+        rate = seekBarRate.progress.toFloat()/5f
     }
 
     override fun onStartTrackingTouch(seekBar: SeekBar?) {
