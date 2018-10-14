@@ -66,8 +66,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/BTN_SEEK"
-        app:layout_constraintStart_toStartOf="@+id/btnEMAIL"
-        app:layout_constraintTop_toBottomOf="@+id/btnEMAIL" />
+        app:layout_constraintStart_toStartOf="@+id/btnVoiceInput"
+        app:layout_constraintTop_toBottomOf="@+id/btnVoiceInput" />
 
     <Button
         android:id="@+id/btnCM"
@@ -133,7 +133,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/BTN_LARGE_BMP"
-        app:layout_constraintBottom_toBottomOf="@+id/btnEMAIL"
+        app:layout_constraintBottom_toBottomOf="@+id/btnVoiceInput"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/btnFibonnaci"
         app:layout_constraintTop_toBottomOf="@+id/btnScanBarcode"
@@ -170,10 +170,11 @@
         app:layout_constraintTop_toBottomOf="@+id/btnRecycle" />
 
     <Button
-        android:id="@+id/btnEMAIL"
+        android:id="@+id/btnVoiceInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email"
+        android:layout_marginTop="4dp"
+        android:text="音声入力"
         app:layout_constraintEnd_toEndOf="@+id/btnScanBarcode"
         app:layout_constraintStart_toStartOf="@+id/btnScanBarcode"
         app:layout_constraintTop_toBottomOf="@+id/btnScanBarcode" />
@@ -225,8 +226,8 @@
         android:text="温度センサ"
         app:layout_constraintBottom_toTopOf="@+id/btnPinch"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toEndOf="@+id/btnEMAIL"
-        app:layout_constraintTop_toBottomOf="@+id/btnEMAIL"
+        app:layout_constraintStart_toEndOf="@+id/btnVoiceInput"
+        app:layout_constraintTop_toBottomOf="@+id/btnVoiceInput"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button

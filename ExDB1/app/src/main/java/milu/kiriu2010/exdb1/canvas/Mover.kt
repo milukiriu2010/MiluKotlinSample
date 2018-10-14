@@ -12,8 +12,25 @@ data class Mover(
         val iv: PVector = PVector(),
         // 画像の移動加速度
         val ia: PVector = PVector(),
-        //   重さ(mass)
-        var mass: Float = 1f) {
+        // 重さ(mass)
+        var mass: Float = 1f
+        ) {
+
+    // 物体の幅
+    var w: Float = 0f
+        set(value) {
+            field = value
+            cl.x = il.x + value/2f
+        }
+    // 物体の高さ
+    var h: Float = 0f
+        set(value) {
+            field = value
+            cl.y = il.y + value/2f
+        }
+
+    // 物体の中心位置
+    var cl: PVector = PVector()
 
         // 力を加える。すなわち、加速度を与える。
         // 「力=重さ×加速度」

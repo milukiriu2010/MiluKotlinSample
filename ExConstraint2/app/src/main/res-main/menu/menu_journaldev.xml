@@ -11,10 +11,9 @@
         android:title="C/F"
         app:showAsAction="never" />
     <item
-        android:id="@+id/menuADD"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="@string/MENU_ADD"
-        app:showAsAction="always" />
+        android:id="@+id/menuEMAIL"
+        android:title="e-mail"
+        app:showAsAction="never" />
     <item
         android:id="@+id/menuRESET"
         android:icon="@android:drawable/ic_menu_revert"
