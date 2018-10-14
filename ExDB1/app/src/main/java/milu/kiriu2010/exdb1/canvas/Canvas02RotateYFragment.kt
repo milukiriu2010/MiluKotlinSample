@@ -9,19 +9,15 @@ import android.util.Log
 import android.view.*
 
 import milu.kiriu2010.exdb1.R
-import kotlin.math.PI
-import kotlin.math.abs
-import kotlin.math.cos
 
 /**
  * A simple [Fragment] subclass.
- * Use the [CanvasHomeFragment.newInstance] factory method to
+ * Use the [Canvas02RotateYFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class CanvasHomeFragment : Fragment()
-    , SurfaceHolder.Callback {
-
+class Canvas02RotateYFragment : Fragment()
+        , SurfaceHolder.Callback {
     // 描画に使うサーフェースビュー
     private lateinit var surfaceViewCanvas: SurfaceView
 
@@ -60,7 +56,7 @@ class CanvasHomeFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_canvas_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_canvas02_rotate_y, container, false)
 
         // サーフェースビューを取得
         surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
@@ -85,22 +81,11 @@ class CanvasHomeFragment : Fragment()
 
         runnable = Runnable {
             mvLst.forEach {
-                /*
-                // 物体の半径
-                val r = it.w/2f
-                it.il.x = it.cl.x + (r * cos(angleY/180* PI)).toFloat()
-                */
                 // 回転する
                 it.rotateByCenter()
             }
 
             drawCanvas()
-
-            /*
-            // 回転する
-            angleY += angleYd
-            angleY = angleY%360
-            */
 
             handler.postDelayed( runnable, 50)
         }
@@ -108,6 +93,7 @@ class CanvasHomeFragment : Fragment()
 
         return view
     }
+
 
     // 描画
     private fun drawCanvas() {
@@ -120,22 +106,6 @@ class CanvasHomeFragment : Fragment()
 
         // 画像を描画
         mvLst.forEachIndexed { index, mover ->
-            /*
-            // 元画像を質量によって大きさを変える
-            val dst = RectF(it.il.x-it.w/2f,
-                    it.il.y-it.h/2f,
-                    it.il.x+it.w/2f,
-                    it.il.y+it.h/2f)
-            canvas.drawBitmap(bmp, null, dst, paintImage)
-            */
-            /*
-            val dst = RectF(it.il.x,
-                    it.il.y,
-                    it.il.x+it.widthByRotate(),
-                    it.il.y+it.heightByRotate())
-            canvas.drawBitmap(bmp, null, dst, paintImage)
-            */
-
             val tmpX = mover.il.x
             val tmpY = mover.il.y
             val tmpW = mover.widthByRotate()
@@ -152,7 +122,6 @@ class CanvasHomeFragment : Fragment()
                 matrix.preScale( 1f, -1f )
                 //if ( index == 0 ) Log.d(javaClass.simpleName, "T<=>B")
             }
-            //val tmpB = Bitmap.createBitmap(bmp, 0,0, abs(tmpW).toInt(), abs(tmpH).toInt(), matrix, false)
             val tmpB = Bitmap.createBitmap(bmp, 0,0, bmp.width, bmp.height, matrix, false)
             val dst = if ( (tmpW >= 0) and (tmpH >= 0) ) {
                 RectF(tmpX,tmpY,tmpX+tmpW,tmpY+tmpH)
@@ -213,12 +182,12 @@ class CanvasHomeFragment : Fragment()
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment HomeFragment.
+         * @return A new instance of fragment Canvas02RotateYFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                CanvasHomeFragment().apply {
+                Canvas02RotateYFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

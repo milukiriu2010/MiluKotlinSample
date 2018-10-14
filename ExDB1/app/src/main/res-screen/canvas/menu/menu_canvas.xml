@@ -39,6 +39,11 @@
         android:title="バルーン"
         app:showAsAction="never" />
     <item
+        android:id="@+id/canvas_02_rotatey"
+        android:orderInCategory="100"
+        android:title="回転(Y軸)"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/canvas_01_lr"
         android:orderInCategory="100"
         android:title="左→右"

@@ -137,6 +137,15 @@ class CanvasActivity : AppCompatActivity() {
                 }
                 true
             }
+            // "回転(Y軸)"
+            R.id.canvas_02_rotatey -> {
+                if ( supportFragmentManager.findFragmentByTag("Canvas02RotateY") == null ) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Canvas02RotateYFragment.newInstance(), "Canvas02RotateY")
+                            .commit()
+                }
+                true
+            }
         // "左→右"
             R.id.canvas_01_lr -> {
                 if ( supportFragmentManager.findFragmentByTag("Canvas01LR") == null ) {
