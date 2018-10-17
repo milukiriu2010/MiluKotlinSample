@@ -29,9 +29,8 @@ class HomeFragment : Fragment() {
     private var isCalculated = false
 
     // 半径
-    private val radius = 300.0f
-    private var a = 3.0f
-    private var b = 4.0f
+    private val radius = 10.0f
+
 
     // 中心
     private var centerX = 0.0f
@@ -85,19 +84,19 @@ class HomeFragment : Fragment() {
             centerY = lh / 2 - ih / 2
 
             // 縦横真ん中を初期表示位置とする
-            imageView.x = centerX + radius
-            imageView.y = centerY
+            imageView.x = centerX + radius * ( cos(angleZ/180*PI) + (angleZ/180*PI) * sin(angleZ/180*PI) ).toFloat()
+            imageView.y = centerY + radius * ( sin(angleZ/180*PI) - (angleZ/180*PI) * cos(angleZ/180*PI) ).toFloat()
 
-            // レムにスケート曲線
-            // x = r * cos(t)/(1+sin(t)^2)
-            // y = r * sin(t)cos(t)/(1+sin(t)^2)
+            // インボリュート曲線
+            // x = r * ( cos(t) + t*sin(t) )
+            // y = r * ( sin(t) - t*cos(t) )
 
             // 画像の幅分横に移動
             //val duration = 100L
             val animator = imageView.animate()
                     .setDuration(duration)
-                    .x(centerX + (radius * cos(angleZ/180*PI)/(1f+sin(angleZ/180*PI)*sin(angleZ/180*PI))).toFloat())
-                    .y(centerY + (radius * sin(angleZ/180*PI) * cos(angleZ/180*PI)/(1f+sin(angleZ/180*PI)*sin(angleZ/180*PI))).toFloat())
+                    .x(centerX + radius * ( cos(angleZ/180*PI) + (angleZ/180*PI) * sin(angleZ/180*PI) ).toFloat())
+                    .y(centerY + radius * ( sin(angleZ/180*PI) - (angleZ/180*PI) * cos(angleZ/180*PI) ).toFloat())
                     .rotationYBy(angleY)
             // リピートする
             animator.setListener(object : Animator.AnimatorListener {
@@ -121,20 +120,18 @@ class HomeFragment : Fragment() {
 
     private fun moveNext() {
         angleZ += angleZd
-        /*
         // 5回転したら逆回し
         if ( angleZ.toInt()%1800 == 0 ) {
             angleZd = -1 * angleZd
         }
-        */
-        angleZ %= 360
+        //angleZ %= 360
 
         Log.d(javaClass.simpleName, "moveNext:x[${imageView.x}]y[${imageView.y}]angleZ[$angleZ]angleZd[$angleZd]")
 
         imageView.animate()
                 .setDuration(duration)
-                .x(centerX + (radius * cos(angleZ/180*PI)/(1f+sin(angleZ/180*PI)*sin(angleZ/180*PI))).toFloat())
-                .y(centerY + (radius * sin(angleZ/180*PI) * cos(angleZ/180*PI)/(1f+sin(angleZ/180*PI)*sin(angleZ/180*PI))).toFloat())
+                .x(centerX + radius * ( cos(angleZ/180*PI) + (angleZ/180*PI) * sin(angleZ/180*PI) ).toFloat())
+                .y(centerY + radius * ( sin(angleZ/180*PI) - (angleZ/180*PI) * cos(angleZ/180*PI) ).toFloat())
                 .rotationYBy(angleY)
     }
 

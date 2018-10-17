@@ -74,7 +74,16 @@ class AnimeObjActivity : AppCompatActivity() {
                 finish()
                 true
             }
-        // レムにスケート
+        // インボリュート
+            R.id.anime_12_involute -> {
+                if ( supportFragmentManager.findFragmentByTag("Anime12Involute") == null ) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Anime12InvoluteFragment.newInstance(), "Anime12Involute")
+                            .commit()
+                }
+                true
+            }
+        // レムニスケート
             R.id.anime_11_lemniscate -> {
                 if ( supportFragmentManager.findFragmentByTag("Anime11Lemniscate") == null ) {
                     supportFragmentManager.beginTransaction()

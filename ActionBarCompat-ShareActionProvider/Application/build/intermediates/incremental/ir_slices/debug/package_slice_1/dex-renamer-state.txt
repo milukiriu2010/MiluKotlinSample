@@ -1,4 +1,4 @@
-#Sun Jun 10 14:09:59 JST 2018
-base.0=C\:\\mykotlin\\MiluKotlinSample\\ActionBarCompat-ShareActionProvider\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\1
+#Tue Oct 16 08:34:16 JST 2018
+base.0=C\:\\mykotlin\\MiluKotlinSample\\ActionBarCompat-ShareActionProvider\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\17
 path.0=classes.dex
 renamed.0=classes.dex
