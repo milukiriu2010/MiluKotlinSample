@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.draw.deco
+package milu.kiriu2010.gui.decorate
 
 import android.content.Context
 import android.graphics.*
@@ -7,13 +7,14 @@ import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.util.Log
 
+// 2018.10.13 clear markRectLst in kickRunnable
 class Deco03ConstraintLayout
-    @JvmOverloads
-    constructor(
-            context: Context?,
-            attrs: AttributeSet? = null,
-            defStyleAttr: Int = 0
-    )
+@JvmOverloads
+constructor(
+        context: Context?,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
+)
     : ConstraintLayout(context, attrs, defStyleAttr){
 
     // ---------------------------------------------
@@ -142,25 +143,14 @@ class Deco03ConstraintLayout
         val rectw = (w/markRectSplitCnt).toFloat()
         // マーカ(長方形)の移動可能な範囲を求める
         markRectMoveLen = rectw * 2f
-        //markRectMoveLen = rectw
-        if ( markRectLst.size == 0 ) {
-            /*
-            // 濃い色で塗りつぶす
-            markRectLst.add(RectF(-rectw*3f, 0f, -rectw*2f, h.toFloat()))
-            // 薄い色で塗りつぶす
-            markRectLst.add(RectF(-rectw*2f, 0f, -rectw, h.toFloat()))
-            */
-            /*
-            // 濃い色で塗りつぶす
-            markRectLst.add(RectF(-rectw, 0f, 0f, h.toFloat()))
-            // 薄い色で塗りつぶす
-            markRectLst.add(RectF(0f, 0f, rectw, h.toFloat()))
-            */
-            // 濃い色で塗りつぶす
-            markRectLst.add(RectF(-rectw*2f, 0f, -rectw, h.toFloat()))
-            // 薄い色で塗りつぶす
-            markRectLst.add(RectF(-rectw, 0f, 0f, h.toFloat()))
-        }
+
+        // レイアウトのサイズが変わったとき呼び出されるので
+        // マーカ(長方形)リストをクリアする
+        markRectLst.clear()
+        // 濃い色で塗りつぶす
+        markRectLst.add(RectF(-rectw*2f, 0f, -rectw, h.toFloat()))
+        // 薄い色で塗りつぶす
+        markRectLst.add(RectF(-rectw, 0f, 0f, h.toFloat()))
 
         markRunnable = Runnable {
             //Log.d( javaClass.simpleName, "runnable")
@@ -360,9 +350,9 @@ class Deco03ConstraintLayout
         do {
             for ( i in 0 until markRectLst.size ) {
                 val paintFill = when (i%2) {
-                    // 濃い
+                // 濃い
                     0 -> paintMarkFill1
-                    // 薄い
+                // 薄い
                     1 -> paintMarkFill2
                     else -> paintMarkFill1
                 }
@@ -373,7 +363,7 @@ class Deco03ConstraintLayout
             // 次の座標位置に移動する
             canvas.translate(markRectMoveLen/2*markRectLst.size,0f)
             //canvas.translate(markRectMoveLen*markRectLst.size,0f)
-        //} while ( drawCnt < markRectSplitCnt )
+            //} while ( drawCnt < markRectSplitCnt )
         } while ( drawCnt < (markRectSplitCnt+2) )
 
         // 座標位置を戻す

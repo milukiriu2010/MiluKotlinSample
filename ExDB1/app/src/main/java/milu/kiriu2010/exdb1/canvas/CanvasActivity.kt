@@ -137,7 +137,16 @@ class CanvasActivity : AppCompatActivity() {
                 }
                 true
             }
-            // "回転(Y軸)"
+        // "画像(シェーダ)"
+            R.id.canvas_03_bmp_shader -> {
+                if ( supportFragmentManager.findFragmentByTag("Canvas03BmpShader") == null ) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Canvas03BmpShaderFragment.newInstance(), "Canvas03BmpShader")
+                            .commit()
+                }
+                true
+            }
+        // "回転(Y軸)"
             R.id.canvas_02_rotatey -> {
                 if ( supportFragmentManager.findFragmentByTag("Canvas02RotateY") == null ) {
                     supportFragmentManager.beginTransaction()

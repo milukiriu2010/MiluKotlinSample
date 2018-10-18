@@ -3,26 +3,22 @@ package milu.kiriu2010.exdb1.canvas
 
 import android.graphics.*
 import android.os.Bundle
-import android.os.Handler
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.*
 import android.widget.ImageButton
-import kotlinx.android.synthetic.main.fragment_canvas_home.*
 
 import milu.kiriu2010.exdb1.R
-import kotlin.math.PI
-import kotlin.math.abs
-import kotlin.math.cos
 
 /**
  * A simple [Fragment] subclass.
- * Use the [CanvasHomeFragment.newInstance] factory method to
+ * Use the [Canvas03BmpShaderFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class CanvasHomeFragment : Fragment()
-    , SurfaceHolder.Callback {
+class Canvas03BmpShaderFragment : Fragment()
+        , SurfaceHolder.Callback {
+
 
     // 描画に使うサーフェースビュー
     private lateinit var surfaceViewCanvas: SurfaceView
@@ -52,33 +48,16 @@ class CanvasHomeFragment : Fragment()
         flags = Paint.DITHER_FLAG
     }
 
-
-    // 画像に使うペイント
-    private val paintImage = Paint().apply {
-        color = Color.BLACK
-        //style = Paint.Style.STROKE
-    }
-
-    // 描画に使うハンドラ
-    val handler = Handler()
-    // 描画に使うスレッド
-    private lateinit var runnable: Runnable
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        //handler.removeCallbacks(runnable)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_canvas_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_canvas03_bmp_shader, container, false)
 
         // サーフェースビューを取得
         surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
@@ -129,6 +108,7 @@ class CanvasHomeFragment : Fragment()
 
         return view
     }
+
 
     // クリックした画像ボタンによって描画内容を変更
     private fun changeDrawPaint( drawableId: Int ) {
@@ -181,9 +161,16 @@ class CanvasHomeFragment : Fragment()
     }
 
     companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @return A new instance of fragment Canvas03BmpShaderFragment.
+         */
+        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                CanvasHomeFragment().apply {
+                Canvas03BmpShaderFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

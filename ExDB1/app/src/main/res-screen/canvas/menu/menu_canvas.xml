@@ -39,6 +39,11 @@
         android:title="バルーン"
         app:showAsAction="never" />
     <item
+        android:id="@+id/canvas_03_bmp_shader"
+        android:orderInCategory="100"
+        android:title="画像(シェーダ)"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/canvas_02_rotatey"
         android:orderInCategory="100"
         android:title="回転(Y軸)"

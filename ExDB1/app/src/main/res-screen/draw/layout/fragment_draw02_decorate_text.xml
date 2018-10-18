@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<milu.kiriu2010.exdb1.draw.deco.Deco03ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<milu.kiriu2010.gui.decorate.Deco03ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <milu.kiriu2010.exdb1.draw.deco.DecorateView
+    <milu.kiriu2010.gui.decorate.DecorateView
         android:id="@+id/decrateView1"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <milu.kiriu2010.exdb1.draw.deco.DecorateTextView
+    <milu.kiriu2010.gui.decorate.DecorateTextView
         android:id="@+id/decrateTextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/decrateView1"
         tools:text="かきくけこ" />
 
-    <milu.kiriu2010.exdb1.draw.deco.DecorateTextView
+    <milu.kiriu2010.gui.decorate.DecorateTextView
         android:id="@+id/decrateTextView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/decrateTextView2"
         tools:text="さしすせそ" />
 
-    <milu.kiriu2010.exdb1.draw.deco.DecorateTextView
+    <milu.kiriu2010.gui.decorate.DecorateTextView
         android:id="@+id/decrateTextView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -73,4 +73,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-</milu.kiriu2010.exdb1.draw.deco.Deco03ConstraintLayout>
+</milu.kiriu2010.gui.decorate.Deco03ConstraintLayout>

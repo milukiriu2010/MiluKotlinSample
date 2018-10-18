@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import android.widget.Button
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.draw.deco.Deco03ConstraintLayout
-import milu.kiriu2010.exdb1.draw.deco.DecorateTextView
-import milu.kiriu2010.exdb1.draw.deco.DecorateView
+import milu.kiriu2010.gui.decorate.Deco03ConstraintLayout
+import milu.kiriu2010.gui.decorate.DecorateTextView
+import milu.kiriu2010.gui.decorate.DecorateView
 
 /**
  * A simple [Fragment] subclass.

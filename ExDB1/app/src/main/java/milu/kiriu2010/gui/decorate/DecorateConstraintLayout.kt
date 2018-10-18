@@ -1,25 +1,20 @@
-package milu.kiriu2010.exdb1.draw.deco
+package milu.kiriu2010.gui.decorate
 
 import android.content.Context
 import android.graphics.*
 import android.os.Handler
+import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.util.Log
-import android.view.View
 
-class DecorateView
+class DecorateConstraintLayout
     @JvmOverloads
     constructor(
             context: Context?,
             attrs: AttributeSet? = null,
-            defStyleAttr: Int = 0)
-    : View(context, attrs, defStyleAttr) {
-
-    // 表示するテキスト
-    var text: String = ""
-    // テキスト表示位置
-    var textX = 0f
-    var textY = 0f
+            defStyleAttr: Int = 0
+    )
+    : ConstraintLayout(context, attrs, defStyleAttr){
 
     // マーカの長さ
     var markLen = 100f
@@ -53,7 +48,10 @@ class DecorateView
     val paintMark = Paint().apply {
         color = Color.RED
         strokeWidth = 20f
-        style = Paint.Style.STROKE
+        // 角にきても、線を描く
+        //style = Paint.Style.STROKE
+        // 角にくると、角を塗りつぶすように描く
+        style = Paint.Style.FILL_AND_STROKE
     }
 
     // デコレーションのモード
@@ -64,12 +62,20 @@ class DecorateView
     // マーカを移動するためのスレッド
     private lateinit var markRunnable: Runnable
 
+    init {
+        // レイアウトでonDrawを呼び出すために
+        // このメソッドをキックすることが必要
+        setWillNotDraw(false)
+    }
+
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
 
         Log.d( javaClass.simpleName, "onSizeChanged")
         if ( this::markRunnable.isInitialized == false ) {
             markRunnable = Runnable {
+                Log.d( javaClass.simpleName, "runnable")
+
                 // リセットしないと前回描いた線と今回描く線がつながってしまう。
                 markPath.reset()
                 // 左⇒右
@@ -172,7 +178,8 @@ class DecorateView
                         markPoint.y = 0f
                     }
                 }
-                invalidate()
+                //invalidate()
+                postInvalidate()
                 markHandler.postDelayed(markRunnable, 50)
             }
             markHandler.post(markRunnable)
@@ -185,6 +192,7 @@ class DecorateView
     }
 
     override fun onDraw(canvas: Canvas?) {
+        //Log.d( javaClass.simpleName, "onDraw")
         super.onDraw(canvas)
 
         if ( canvas == null ) return
@@ -196,14 +204,7 @@ class DecorateView
 
     // モード0出描画する
     private fun drawMode0(canvas: Canvas) {
-        //canvas.drawText( text, textX, textY, paintText)
-
-        // テキスト描画領域の大きさを取得
-        val textBounds = Rect()
-        paintText.getTextBounds( text, 0, text.length, textBounds )
-
-        // テキストを描画
-        canvas.drawText(text, textX, textY+textBounds.height(), paintText)
+        //Log.d( javaClass.simpleName, "drawMode0:w[$width]h[$height]")
 
         // 枠の大きさを取得
         val frameBounds = Rect(0,0,width,height)
@@ -213,5 +214,7 @@ class DecorateView
 
         // マーカを描画
         canvas.drawPath(markPath,paintMark)
+
+        canvas.drawLine(0f,0f, width.toFloat(), height.toFloat(), paintFrame )
     }
 }
