@@ -1,30 +1,29 @@
 package milu.kiriu2010.exdb1.canvas
 
 
-import android.graphics.*
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Path
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.*
-import android.widget.ImageButton
 import android.widget.SeekBar
-import kotlinx.android.synthetic.main.fragment_canvas_home.*
 
 import milu.kiriu2010.exdb1.R
 import kotlin.math.PI
-import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.sin
 
 /**
  * A simple [Fragment] subclass.
- * Use the [CanvasHomeFragment.newInstance] factory method to
+ * Use the [Canvas04PolygonFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class CanvasHomeFragment : Fragment()
-    , SurfaceHolder.Callback {
+class Canvas04PolygonFragment : Fragment()
+        , SurfaceHolder.Callback {
 
     // 描画に使うサーフェースビュー
     private lateinit var surfaceViewCanvas: SurfaceView
@@ -74,15 +73,10 @@ class CanvasHomeFragment : Fragment()
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        //handler.removeCallbacks(runnable)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_canvas_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_canvas04_polygon, container, false)
 
         // サーフェースビューを取得
         surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
@@ -105,6 +99,7 @@ class CanvasHomeFragment : Fragment()
 
         return view
     }
+
 
     private fun changeSides( sides: Int ) {
         Log.d( javaClass.simpleName, "sides[$sides]")
@@ -159,9 +154,10 @@ class CanvasHomeFragment : Fragment()
     }
 
     companion object {
+        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                CanvasHomeFragment().apply {
+                Canvas04PolygonFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

@@ -1,17 +1,20 @@
 package milu.kiriu2010.exdb1.draw
 
 
+import android.graphics.drawable.Animatable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.decorate.Deco03ConstraintLayout
 import milu.kiriu2010.gui.decorate.DecorateTextView
 import milu.kiriu2010.gui.decorate.DecorateView
+import milu.kiriu2010.gui.decorate.PolygonLapsDrawable
 
 /**
  * A simple [Fragment] subclass.
@@ -20,14 +23,6 @@ import milu.kiriu2010.gui.decorate.DecorateView
  *
  */
 class DrawHomeFragment : Fragment() {
-
-    // レイアウト
-    private lateinit var rootLayout: Deco03ConstraintLayout
-    // 飾りつけされたテキストビュー
-    private lateinit var decorateView1: DecorateView
-    private lateinit var decorateTextView2: DecorateTextView
-    private lateinit var decorateTextView3: DecorateTextView
-    private lateinit var decorateTextView4: DecorateTextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,42 +35,11 @@ class DrawHomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_draw_home, container, false)
 
-        rootLayout = view.findViewById(R.id.rootLayout)
-
-        // 飾りつけされたテキストビュー
-        decorateView1 = view.findViewById(R.id.decrateView1)
-        decorateView1.text = "あいうえお"
-
-        decorateTextView2 = view.findViewById(R.id.decrateTextView2)
-        decorateTextView2.text = "かきくけこ"
-
-        decorateTextView3 = view.findViewById(R.id.decrateTextView3)
-        decorateTextView3.text = "さしすせそ"
-        decorateTextView3.mode = 1
-
-        decorateTextView4 = view.findViewById(R.id.decrateTextView4)
-        decorateTextView4.text = "たちつてと"
-        decorateTextView4.mode = 2
-
-        // アニメON/OFF
-        val btnOnOff = view.findViewById<Button>(R.id.btnOnOff)
-        btnOnOff.text = "OFF"
-        btnOnOff.setOnClickListener {
-
-            btnOnOff.text = if ( btnOnOff.text == "OFF" ) {
-                rootLayout.kickRunnable(false)
-                decorateTextView2.kickRunnable(false)
-                decorateTextView3.kickRunnable(false)
-                decorateTextView4.kickRunnable(false)
-                "ON"
-            }
-            else {
-                rootLayout.kickRunnable(true)
-                decorateTextView2.kickRunnable(true)
-                decorateTextView3.kickRunnable(true)
-                decorateTextView4.kickRunnable(true)
-                "OFF"
-            }
+        val imageView = view.findViewById<ImageView>(R.id.imageView)
+        imageView.setImageDrawable(PolygonLapsDrawable())
+        val avd = imageView.drawable
+        if ( avd is Animatable ) {
+            avd.start()
         }
 
         return view
@@ -83,13 +47,6 @@ class DrawHomeFragment : Fragment() {
 
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
                 DrawHomeFragment().apply {

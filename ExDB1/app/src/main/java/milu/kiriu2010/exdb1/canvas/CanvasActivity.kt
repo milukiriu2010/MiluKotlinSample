@@ -137,6 +137,15 @@ class CanvasActivity : AppCompatActivity() {
                 }
                 true
             }
+        // "多角形"
+            R.id.canvas_04_polygon -> {
+                if ( supportFragmentManager.findFragmentByTag("Canvas04Polygon") == null ) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Canvas04PolygonFragment.newInstance(), "Canvas04Polygon")
+                            .commit()
+                }
+                true
+            }
         // "画像(シェーダ)"
             R.id.canvas_03_bmp_shader -> {
                 if ( supportFragmentManager.findFragmentByTag("Canvas03BmpShader") == null ) {
