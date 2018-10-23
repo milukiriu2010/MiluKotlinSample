@@ -3,6 +3,7 @@ package milu.kiriu2010.exdb1.draw
 
 import android.graphics.drawable.Animatable
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +25,11 @@ import milu.kiriu2010.gui.decorate.PolygonLapsDrawable
  */
 class DrawHomeFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    val handler = Handler()
+
+    private lateinit var runnable: Runnable
+
+            override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
         }
@@ -36,11 +41,31 @@ class DrawHomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_draw_home, container, false)
 
         val imageView = view.findViewById<ImageView>(R.id.imageView)
-        imageView.setImageDrawable(PolygonLapsDrawable())
-        val avd = imageView.drawable
-        if ( avd is Animatable ) {
-            avd.start()
+        val polygonLapsDrawable = PolygonLapsDrawable()
+        imageView.setImageDrawable(polygonLapsDrawable)
+
+        val dv = 0.01f
+        /*
+        runnable = Runnable {
+            if ( polygonLapsDrawable.dotProgress >= 1.0f ) {
+                polygonLapsDrawable.dotProgress = 0f
+            }
+            else {
+                polygonLapsDrawable.dotProgress += dv
+            }
+            handler.postDelayed(runnable, 100)
         }
+        */
+        runnable = Runnable {
+            if ( polygonLapsDrawable.progress >= 1.0f ) {
+                polygonLapsDrawable.progress = 0f
+            }
+            else {
+                polygonLapsDrawable.progress += dv
+            }
+            handler.postDelayed(runnable, 100)
+        }
+        handler.post(runnable)
 
         return view
     }

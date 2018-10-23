@@ -67,11 +67,15 @@ class PolygonLapsDrawable : Drawable() {
         style = FILL
     }
 
+    // 黒ペンに小さい円
     private val pathDot = Path().apply {
+        // CW:時計回り
         addCircle(0f, 0f, 8f, Path.Direction.CW)
     }
 
     override fun draw(canvas: Canvas) {
+
+        // 多角形を描く
         polygons.forEach { polygon ->
             linePaint.color = polygon.color
             if (progress < 1f) {
@@ -82,9 +86,17 @@ class PolygonLapsDrawable : Drawable() {
             }
             canvas.drawPath(polygon.path, linePaint)
         }
+
+        // ドットを描く
         // loop separately to ensure the dots are on top
         polygons.forEach { polygon ->
             val phase = polygon.initialPhase + dotProgress * polygon.length * polygon.laps
+            // ---------------------------------------------
+            // pathDot: 黒ペンに小さい円
+            // polygon.length: スペース？
+            // phase: オフセット？
+            // TRANSLATE: 平行移動？
+            // ---------------------------------------------
             dotPaint.pathEffect = PathDashPathEffect(pathDot, polygon.length, phase, TRANSLATE)
             canvas.drawPath(polygon.path, dotPaint)
         }
