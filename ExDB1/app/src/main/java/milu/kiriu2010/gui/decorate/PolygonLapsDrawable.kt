@@ -18,6 +18,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.util.FloatProperty
+import android.util.Log
 import java.lang.Math.PI
 
 class PolygonLapsDrawable : Drawable() {
@@ -67,7 +68,7 @@ class PolygonLapsDrawable : Drawable() {
         style = FILL
     }
 
-    // 黒ペンに小さい円
+    // 黒ペンに小さい円のパス
     private val pathDot = Path().apply {
         // CW:時計回り
         addCircle(0f, 0f, 8f, Path.Direction.CW)
@@ -79,8 +80,27 @@ class PolygonLapsDrawable : Drawable() {
         polygons.forEach { polygon ->
             linePaint.color = polygon.color
             if (progress < 1f) {
+                // 第１引数 => OFF
+                // 第２引数 => ON
+                // 第３引数 => OFF
+                // --------------------------------
+                // 三角形
+                // 0.0 => 0.0, 467.65,    0.0, 389.7
+                // 0.5 => 0.0,       ,       , 389.7
+                // 1.0 => 0.0,   0.0 , 467.65, 389.7
+                // --------------------------------
+                // 六角形
+                // 0.0 => 0.0, 888.0,   0.0, 814.0
+                // 0.5 => 0.0,      ,      , 814.0
+                // 1.0 => 0.0,   0.0, 888.0, 814.0
+                // --------------------------------
                 val progressEffect = DashPathEffect(
-                        floatArrayOf(0f, (1f - progress) * polygon.length, progress * polygon.length, 0f),
+                        floatArrayOf(0f,
+                                // 後半(これによりPathとは逆回り(右回り)で描いてるようにみえる)
+                                (1f - progress) * polygon.length,
+                                // 前半
+                                progress * polygon.length,
+                                0f),
                         polygon.initialPhase)
                 linePaint.pathEffect = ComposePathEffect(progressEffect, cornerEffect)
             }
@@ -90,11 +110,28 @@ class PolygonLapsDrawable : Drawable() {
         // ドットを描く
         // loop separately to ensure the dots are on top
         polygons.forEach { polygon ->
+            // --------------------------------------
+            // 下辺ど真ん中を
+            // "初期の描画オフセット位置"とするっぽい
+            // polygon.length * polygon.lapsは
+            // ドットの移動距離
+            // --------------------------------------
+            // 三角形
+            //   0.0 => 389.71+0.0*467.65*14
+            //   0.5 => 389.71+0.5*467.65*14
+            //   1.0 => 389.71+1.0*467.65*14
+            // --------------------------------------
+            // 六角形
+            //   0.0 => 814.0+0.0*888.0*11
+            //   0.5 => 814.0+0.5*888.0*11
+            //   1.0 => 814.0+1.0*888.0*11
             val phase = polygon.initialPhase + dotProgress * polygon.length * polygon.laps
             // ---------------------------------------------
-            // pathDot: 黒ペンに小さい円
-            // polygon.length: スペース？
-            // phase: オフセット？
+            // スタンプを押す
+            // ---------------------------------------------
+            // pathDot: スタンプに使う黒ペンに小さい円
+            // polygon.length: スタンプ間のスペース？
+            // phase: 最初のスタンプ位置のオフセット？
             // TRANSLATE: 平行移動？
             // ---------------------------------------------
             dotPaint.pathEffect = PathDashPathEffect(pathDot, polygon.length, phase, TRANSLATE)
@@ -120,21 +157,43 @@ class PolygonLapsDrawable : Drawable() {
 
     private class Polygon(val sides: Int, val color: Int, radius: Float, val laps: Int) {
         val path = createPath(sides, radius)
+        // 多角形で使われている全体のパスの長さ？
+        //   三角形 => 467.65(=90*sqrt(3)*3)
+        //   四角形 => 599.62(=106*sqrt(2)*4)
+        //   五角形 => 752.36
+        //   六角形 => 888.00(=148*6)
         val length by lazy(LazyThreadSafetyMode.NONE) {
             pathMeasure.setPath(path, false)
+            Log.d( javaClass.simpleName, "sides[$sides]length[${pathMeasure.length}]")
             pathMeasure.length
         }
+        // 三角形 => (1-(1/(2*3)))*467.65 = 389.71
+        // 四角形 => (1-(1/(2*4)))*599.62 = 524.67
+        // 六角形 => (1-(1/(2*6)))*888    = 814
         val initialPhase by lazy(LazyThreadSafetyMode.NONE) {
+            Log.d( javaClass.simpleName, "sides[$sides]initialPhase[${(1f - (1f / (2 * sides))) * length}]")
+
             (1f - (1f / (2 * sides))) * length
         }
 
         private fun createPath(sides: Int, radius: Float): Path {
             val path = Path()
+            // 三角形 120
+            // 四角形  90
+            // 五角形  72
+            // 六角形  60
             val angle = 2.0 * PI / sides
+            // 三角形 90+60
+            // 四角形 90+45
+            // 五角形 90+36
+            // 六角形 90+30
             val startAngle = PI / 2.0 + Math.toRadians(360.0 / (2 * sides))
+            // 下ちょい左を描画スタート地点とするっぽい
             path.moveTo(
                     cx + (radius * Math.cos(startAngle)).toFloat(),
                     cy + (radius * Math.sin(startAngle)).toFloat())
+            // 左回りに描いていく
+            //for (i in 1 until 6) {
             for (i in 1 until sides) {
                 path.lineTo(
                         cx + (radius * Math.cos(startAngle - angle * i)).toFloat(),
@@ -156,6 +215,7 @@ class PolygonLapsDrawable : Drawable() {
     @RequiresApi(Build.VERSION_CODES.N)
     object PROGRESS : FloatProperty<PolygonLapsDrawable>("progress") {
         override fun setValue(drawable: PolygonLapsDrawable, progress: Float) {
+            //Log.d( javaClass.simpleName, "progress[$progress]")
             drawable.progress = progress
         }
 

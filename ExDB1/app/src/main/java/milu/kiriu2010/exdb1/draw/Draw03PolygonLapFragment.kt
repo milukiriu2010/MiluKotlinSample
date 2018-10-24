@@ -2,9 +2,7 @@ package milu.kiriu2010.exdb1.draw
 
 
 import android.animation.ObjectAnimator
-import android.animation.ValueAnimator.INFINITE
-import android.animation.ValueAnimator.RESTART
-import android.graphics.drawable.Animatable
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
@@ -12,24 +10,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.RadioGroup
-import kotlinx.android.synthetic.main.fragment_draw_home.*
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.decorate.Deco03ConstraintLayout
-import milu.kiriu2010.gui.decorate.DecorateTextView
-import milu.kiriu2010.gui.decorate.DecorateView
 import milu.kiriu2010.gui.decorate.PolygonLapsDrawable
 
 /**
  * A simple [Fragment] subclass.
- * Use the [DrawHomeFragment.newInstance] factory method to
+ * Use the [Draw03PolygonLapFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class DrawHomeFragment : Fragment() {
+class Draw03PolygonLapFragment : Fragment() {
 
     val handler = Handler()
 
@@ -46,7 +39,7 @@ class DrawHomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_draw_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_draw03_polygon_lap, container, false)
 
         val imageView = view.findViewById<ImageView>(R.id.imageView)
         val polygonLapsDrawable = PolygonLapsDrawable()
@@ -117,8 +110,8 @@ class DrawHomeFragment : Fragment() {
             objectAnimator.apply {
                 duration = 4000L
                 interpolator = LinearInterpolator()
-                repeatCount = INFINITE
-                repeatMode = RESTART
+                repeatCount = ValueAnimator.INFINITE
+                repeatMode = ValueAnimator.RESTART
             }.start()
         }
 
@@ -129,7 +122,7 @@ class DrawHomeFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                DrawHomeFragment().apply {
+                Draw03PolygonLapFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

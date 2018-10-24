@@ -75,6 +75,13 @@ class DrawActivity : AppCompatActivity() {
                 finish()
                 true
             }
+        // ポリゴンラップ
+            R.id.draw_03_polygon_lap -> {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, Draw03PolygonLapFragment.newInstance())
+                        .commit()
+                true
+            }
         // 枠アニメ
             R.id.draw_02 -> {
                 supportFragmentManager.beginTransaction()
