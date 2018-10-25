@@ -27,6 +27,7 @@ import milu.kiriu2010.excon2.websearch.WebSearchActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import milu.kiriu2010.excon2.animemove.AnimeMoveActivity
 import milu.kiriu2010.excon2.canvas.CanvasActivity
+import milu.kiriu2010.excon2.excel.ExcelActivity
 import milu.kiriu2010.excon2.navibottom.BottomNaviActivity
 import milu.kiriu2010.excon2.navidrawer.NaviDrawerActivity
 import milu.kiriu2010.excon2.sensorlight.SensorLightActivity
@@ -97,12 +98,14 @@ class MainActivity : AppCompatActivity() {
             this.startActivity(intent)
         }
 
-        btnSEEK.transformationMethod = null
-        btnSEEK.setOnClickListener {
-            val intent = Intent(this, SeekActivity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_SEEK.value )
+        // エクセル－アップロード
+        btnExcel.transformationMethod = null
+        btnExcel.setOnClickListener {
+            val intent = Intent(this, ExcelActivity::class.java )
+            this.startActivity( intent )
         }
 
+        // コンテキストメニュー
         btnCM.transformationMethod = null
         btnCM.setOnClickListener {
             val intent = Intent(this, ContextMenuActivity::class.java )
@@ -283,8 +286,10 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this,"Reset is clicked",Toast.LENGTH_SHORT).show()
                 true
             }
-            R.id.menuABOUT  -> {
-                Toast.makeText(this,"About is clicked",Toast.LENGTH_LONG).show()
+            // Seekバー
+            R.id.menuSEEK  -> {
+                val intent = Intent(this, SeekActivity::class.java )
+                this.startActivityForResult( intent, IntentID.ID_SEEK.value )
                 true
             }
             R.id.menuEXIT   -> {

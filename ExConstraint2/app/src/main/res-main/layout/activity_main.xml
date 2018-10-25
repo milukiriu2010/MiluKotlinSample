@@ -62,10 +62,10 @@
         app:layout_constraintTop_toBottomOf="@+id/btnRATE" />
 
     <Button
-        android:id="@+id/btnSEEK"
+        android:id="@+id/btnExcel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/BTN_SEEK"
+        android:text="Excel"
         app:layout_constraintStart_toStartOf="@+id/btnVoiceInput"
         app:layout_constraintTop_toBottomOf="@+id/btnVoiceInput" />
 
@@ -216,8 +216,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pinch"
-        app:layout_constraintStart_toStartOf="@+id/btnSEEK"
-        app:layout_constraintTop_toBottomOf="@+id/btnSEEK" />
+        app:layout_constraintStart_toStartOf="@+id/btnExcel"
+        app:layout_constraintTop_toBottomOf="@+id/btnExcel" />
 
     <Button
         android:id="@+id/btnSensorTemperature"

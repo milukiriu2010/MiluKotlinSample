@@ -20,9 +20,8 @@
         android:title="@string/MENU_RESET"
         app:showAsAction="always|withText" />
     <item
-        android:id="@+id/menuABOUT"
-        android:icon="@android:drawable/ic_dialog_info"
-        android:title="@string/MENU_ABOUT"
+        android:id="@+id/menuSEEK"
+        android:title="Seek"
         app:showAsAction="never"></item>
     <item
         android:id="@+id/menuEXIT"
