@@ -5,10 +5,8 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.RecognizerIntent
-import android.speech.RecognizerResultsIntent
 import android.util.Log
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_voice_input.*
 import milu.kiriu2010.excon2.R
 import java.lang.StringBuilder

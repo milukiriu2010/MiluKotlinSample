@@ -6,20 +6,18 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_excel.*
 import milu.kiriu2010.excon2.R
+import milu.kiriu2010.excon2.R.id.btnUpload
 import org.apache.poi.xssf.streaming.SXSSFWorkbook
 import java.io.FileNotFoundException
 import java.io.IOException
-import org.apache.poi.ss.util.CellUtil.setFont
-import org.apache.poi.ss.util.CellUtil.setVerticalAlignment
-import org.apache.poi.hwpf.converter.WordToFoUtils.setBorder
 import org.apache.poi.hssf.util.HSSFColor
 import org.apache.poi.ss.usermodel.*
 import org.apache.poi.ss.util.CellRangeAddress
-import org.apache.poi.hssf.record.aggregates.RowRecordsAggregate.createRow
 import org.apache.poi.xssf.streaming.SXSSFSheet
-import org.apache.poi.hssf.record.aggregates.RowRecordsAggregate.createRow
 import java.io.File
+import java.lang.StringBuilder
 import java.util.*
+import kotlin.math.log
 
 
 class ExcelActivity : AppCompatActivity() {
@@ -35,14 +33,15 @@ class ExcelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_excel)
 
-        // Excelファイル保存先ファイル名
-        file = File(this.filesDir, "out.xlsx")
-
-        // Excelファイル作成
-        createExcel()
-
         // アップロード
         btnUpload.setOnClickListener {
+
+            // Excelファイル保存先ファイル名
+            file = File(this.filesDir, "out.xlsx")
+
+            // Excelファイル作成
+            createExcel()
+
             val intent = Intent().apply {
                 action = Intent.ACTION_SEND
                 type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -50,9 +49,21 @@ class ExcelActivity : AppCompatActivity() {
                 putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+file.path))
                 startActivity(intent)
             }
-
-
         }
+
+        // 数値計算
+        val sb = StringBuilder()
+        // sinの計算
+        val angleArray = intArrayOf(0,30,45,60,90,120,135,150,180)
+        angleArray.forEach {
+            sb.append( "sin(%d)=%.7f\n".format(it,Math.sin(Math.toRadians(it.toDouble()))) )
+        }
+        // log2の計算
+        val logArray = intArrayOf(2,4,8,16)
+        logArray.forEach {
+            sb.append( "log2(%d)=%.7f\n".format(it,log(it.toDouble(),2.0)) )
+        }
+        textViewMath.setText(sb.toString())
     }
 
     @Throws(FileNotFoundException::class,IOException::class)
