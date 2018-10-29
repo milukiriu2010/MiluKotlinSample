@@ -75,6 +75,13 @@ class DrawActivity : AppCompatActivity() {
                 finish()
                 true
             }
+        // コッホ雪片
+            R.id.draw_04_koch_snowflake -> {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, Draw04SnowFlakeFragment.newInstance())
+                        .commit()
+                true
+            }
         // ポリゴンラップ
             R.id.draw_03_polygon_lap -> {
                 supportFragmentManager.beginTransaction()

@@ -18,10 +18,7 @@ import android.widget.RadioGroup
 import kotlinx.android.synthetic.main.fragment_draw_home.*
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.decorate.Deco03ConstraintLayout
-import milu.kiriu2010.gui.decorate.DecorateTextView
-import milu.kiriu2010.gui.decorate.DecorateView
-import milu.kiriu2010.gui.decorate.PolygonLapsDrawable
+import milu.kiriu2010.gui.decorate.*
 
 /**
  * A simple [Fragment] subclass.
@@ -43,28 +40,32 @@ class DrawHomeFragment : Fragment() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_draw_home, container, false)
 
         val imageView = view.findViewById<ImageView>(R.id.imageView)
-        val polygonLapsDrawable = PolygonLapsDrawable()
-        imageView.setImageDrawable(polygonLapsDrawable)
+        val kochSnowFlakeDrawable = KochSnowFlakeDrawable()
+        imageView.setImageDrawable(kochSnowFlakeDrawable)
+
+        var repeat = 0
+        runnable = Runnable {
+
+            kochSnowFlakeDrawable.divideKochPath()
+            kochSnowFlakeDrawable.invalidateSelf()
+            if ( repeat < 3 ) {
+                repeat++
+                handler.postDelayed(runnable,1000)
+            }
+        }
+        handler.postDelayed(runnable,1000)
 
         val dv = 0.01f
-        /* ドットを動かす
-        runnable = Runnable {
-            if ( polygonLapsDrawable.dotProgress >= 1.0f ) {
-                polygonLapsDrawable.dotProgress = 0f
-            }
-            else {
-                polygonLapsDrawable.dotProgress += dv
-            }
-            handler.postDelayed(runnable, 100)
-        }
-        handler.post(runnable)
-        */
         /* 多角形を一辺ずつ描く
         runnable = Runnable {
             if ( polygonLapsDrawable.progress >= 1.0f ) {
@@ -95,32 +96,6 @@ class DrawHomeFragment : Fragment() {
             repeatMode = RESTART
         }.start()
         */
-
-        val radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup)
-        radioGroup.setOnCheckedChangeListener { group, checkedId ->
-            if ( this::objectAnimator.isInitialized ) {
-                objectAnimator.cancel()
-            }
-
-            objectAnimator = when (checkedId) {
-                R.id.rbtnLine -> {
-                    ObjectAnimator.ofFloat(polygonLapsDrawable, PolygonLapsDrawable.PROGRESS, 0f,1f)
-                }
-                else -> {
-                    // ドットのアニメーション時は、ライン全体が描かれるようにする
-                    // と、思ったけど、そうは問屋が卸さないらしい。
-                    polygonLapsDrawable.progress = 1.0f
-                    ObjectAnimator.ofFloat(polygonLapsDrawable, PolygonLapsDrawable.DOT_PROGRESS, 0f,1f)
-                }
-            }
-
-            objectAnimator.apply {
-                duration = 4000L
-                interpolator = LinearInterpolator()
-                repeatCount = INFINITE
-                repeatMode = RESTART
-            }.start()
-        }
 
         return view
     }

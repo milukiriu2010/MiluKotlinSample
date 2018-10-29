@@ -100,15 +100,15 @@ class Canvas04PolygonFragment : Fragment()
         return view
     }
 
-
     private fun changeSides( sides: Int ) {
-        Log.d( javaClass.simpleName, "sides[$sides]")
+        var sides2 = sides + 3
+        Log.d( javaClass.simpleName, "sides[$sides2]")
         drawPath.reset()
-        val angle = 2.0 * PI / sides
+        val angle = 2.0 * PI / sides2
         drawPath.moveTo(
                 sw/2 + (radius * cos(0.0)).toFloat(),
                 sh/2 + (radius * sin(0.0)).toFloat() )
-        for ( i in 1 until sides ) {
+        for ( i in 1 until sides2 ) {
             drawPath.lineTo(
                     sw/2 + (radius * cos(angle*i)).toFloat(),
                     sh/2 + (radius * sin(angle*i)).toFloat() )
