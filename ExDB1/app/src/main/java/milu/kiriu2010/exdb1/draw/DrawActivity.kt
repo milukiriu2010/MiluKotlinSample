@@ -75,6 +75,13 @@ class DrawActivity : AppCompatActivity() {
                 finish()
                 true
             }
+        // コッホ雪片ラップ
+            R.id.draw_05_koch_snowflake_lap -> {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, Draw05SnowFlakeLapFragment.newInstance())
+                        .commit()
+                true
+            }
         // コッホ雪片
             R.id.draw_04_koch_snowflake -> {
                 supportFragmentManager.beginTransaction()
