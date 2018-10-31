@@ -15,54 +15,57 @@
         android:roundIcon="@drawable/dado3d"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".BossActivity"
+            android:theme="@style/Theme.ChildTranslucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".recycler.RecycleActivity" />
+        <activity android:name=".screen1.MainActivity">
+        </activity>
+        <activity android:name="milu.kiriu2010.excon2.screen1.recycler.RecycleActivity" />
         <activity
-            android:name=".rate.RateActivity"
+            android:name="milu.kiriu2010.excon2.screen1.rate.RateActivity"
             android:theme="@style/CustomTheme" />
-        <activity android:name=".animescale.AnimeScaleActivity" />
-        <activity android:name=".seek.SeekActivity" />
-        <activity android:name=".contextmenu.ContextMenuActivity" />
-        <activity android:name=".temperature.TemperatureActivity" />
-        <activity android:name=".stopwatch.StopWatchActivity" />
+        <activity android:name="milu.kiriu2010.excon2.screen1.animescale.AnimeScaleActivity" />
+        <activity android:name=".screen1.seek.SeekActivity" />
+        <activity android:name="milu.kiriu2010.excon2.screen1.contextmenu.ContextMenuActivity" />
+        <activity android:name=".screen1.temperature.TemperatureActivity" />
+        <activity android:name=".screen1.stopwatch.StopWatchActivity" />
         <activity
-            android:name=".customactionbar.CustomActionBarActivity"
+            android:name="milu.kiriu2010.excon2.screen1.customactionbar.CustomActionBarActivity"
             android:theme="@style/CustomTheme" />
-        <activity android:name=".dice.DiceRollerActivity" />
-        <activity android:name=".largebmp.LargeBmpActivity" />
-        <activity android:name=".traffic.TrafficLightActivity" />
-        <activity android:name=".fibonnaci.FibonnaciActivity" />
-        <activity android:name=".scan.ScanBarcodeActivity" />
-        <activity android:name=".websearch.WebSearchActivity" />
-        <activity android:name=".pinch.PinchActivity" />
-        <activity android:name=".sensortemp.SensorTemperatureActivity" />
-        <activity android:name=".sensorlight.SensorLightActivity" />
-        <activity android:name=".animemove.AnimeMoveActivity" />
-        <activity android:name=".canvas.CanvasActivity" />
+        <activity android:name="milu.kiriu2010.excon2.screen1.dice.DiceRollerActivity" />
+        <activity android:name="milu.kiriu2010.excon2.screen1.largebmp.LargeBmpActivity" />
+        <activity android:name=".screen1.traffic.TrafficLightActivity" />
+        <activity android:name="milu.kiriu2010.excon2.screen1.fibonnaci.FibonnaciActivity" />
+        <activity android:name="milu.kiriu2010.excon2.screen1.scan.ScanBarcodeActivity" />
+        <activity android:name=".screen1.websearch.WebSearchActivity" />
+        <activity android:name="milu.kiriu2010.excon2.screen1.pinch.PinchActivity" />
+        <activity android:name=".screen1.sensortemp.SensorTemperatureActivity" />
+        <activity android:name=".screen1.sensorlight.SensorLightActivity" />
+        <activity android:name="milu.kiriu2010.excon2.screen1.animemove.AnimeMoveActivity" />
+        <activity android:name="milu.kiriu2010.excon2.screen1.canvas.CanvasActivity" />
         <activity
-            android:name=".tabbed.TabbedActivity"
+            android:name=".screen1.tabbed.TabbedActivity"
             android:label="@string/title_activity_tabbed" />
         <activity
-            android:name=".navibottom.BottomNaviActivity"
+            android:name="milu.kiriu2010.excon2.screen1.navibottom.BottomNaviActivity"
             android:label="@string/title_activity_bottom_navi" />
         <activity
-            android:name=".navidrawer.NaviDrawerActivity"
+            android:name="milu.kiriu2010.excon2.screen1.navidrawer.NaviDrawerActivity"
             android:label="@string/title_activity_navi_drawer" />
         <activity
-            android:name=".setting.SettingsActivity"
+            android:name=".screen1.setting.SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".sensorstep.SensorStepActivity" />
-        <activity android:name=".sensorprox.SensorProxActivity" />
-        <activity android:name=".sensorori.SensorOriActivity" />
-        <activity android:name=".text2speech.Text2SpeechActivity" />
-        <activity android:name=".voiceinput.VoiceInputActivity" />
-        <activity android:name=".excel.ExcelActivity"></activity>
+        <activity android:name=".screen1.sensorstep.SensorStepActivity" />
+        <activity android:name=".screen1.sensorprox.SensorProxActivity" />
+        <activity android:name=".screen1.sensorori.SensorOriActivity" />
+        <activity android:name=".screen1.text2speech.Text2SpeechActivity" />
+        <activity android:name=".screen1.voiceinput.VoiceInputActivity" />
+        <activity android:name="milu.kiriu2010.excon2.screen1.excel.ExcelActivity" />
     </application>
 
 </manifest>

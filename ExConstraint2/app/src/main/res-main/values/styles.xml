@@ -16,4 +16,13 @@
         <item name="contentInsetEnd">0dp</item>
     </style>
 
+
+    <!-- 背景を半透明 -->
+    <drawable name="bossback">#4400ff00</drawable>
+    <!-- style name="Theme.ChildTranslucent" parent="android:style/Theme.Translucent" -->
+    <style name="Theme.ChildTranslucent" parent="AppTheme">
+    　　<item name="android:windowBackground">@drawable/bossback</item>
+    　　<item name="android:windowNoTitle">true</item>
+    </style>
+
 </resources>

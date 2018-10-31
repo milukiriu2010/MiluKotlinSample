@@ -23,7 +23,7 @@ android {
     sourceSets {
         main {
             res.srcDirs += 'src/main/res-main'
-            file('src/main/res-screen')
+            file('src/main/res-screen1')
                     .listFiles()
                     .each { res.srcDirs += it.path }
         }
