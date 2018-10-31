@@ -1,0 +1,13 @@
+<resources>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="title_conf">configuration view</string>
+    <string name="checkbox_title">チェックボックスによる</string>
+    <string name="checkbox_summary">ON/OFFによる設定を行い,設定情報を記録する</string>
+    <string name="edittext_title">エディットテキストによる設定</string>
+    <string name="edittext_summary">テキストによる設定を行い,設定情報を記録する</string>
+    <string name="list_title">リストによる設定</string>
+    <string name="list_summary">項目による設定を行い,設定情報を記録する</string>
+    <string name="ringtone_title">着信音設定</string>
+    <string name="ringtone_summary">着信音による設定を行い,設定情報を記録する</string>
+</resources>

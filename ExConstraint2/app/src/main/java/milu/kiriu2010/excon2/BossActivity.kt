@@ -18,5 +18,12 @@ class BossActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
+        // メイン画面2を表示
+        btnMain2.transformationMethod = null
+        btnMain2.setOnClickListener {
+            val intent = Intent(this, Main2Activity::class.java)
+            startActivity(intent)
+        }
     }
 }
