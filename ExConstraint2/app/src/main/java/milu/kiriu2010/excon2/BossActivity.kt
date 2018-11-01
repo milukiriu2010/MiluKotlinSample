@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_boss.*
 import milu.kiriu2010.excon2.screen1.MainActivity
+import milu.kiriu2010.excon2.screen2.Main2Activity
 
 class BossActivity : AppCompatActivity() {
 
