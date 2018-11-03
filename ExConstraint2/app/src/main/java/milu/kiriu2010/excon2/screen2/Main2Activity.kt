@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main2.*
 import milu.kiriu2010.excon2.R
+import milu.kiriu2010.excon2.screen2.camera.CameraActivity
+import milu.kiriu2010.excon2.screen2.cameraparam.CameraParamActivity
 import milu.kiriu2010.excon2.screen2.conf.ConfActivity
 import milu.kiriu2010.excon2.screen2.gallery2.Gallery2Activity
 
@@ -33,6 +35,18 @@ class Main2Activity : AppCompatActivity() {
         // ギャラリー表示２
         btnGallery2.setOnClickListener {
             val intent = Intent(this, Gallery2Activity::class.java)
+            startActivity(intent)
+        }
+
+        // カメラ起動
+        btnCamera.setOnClickListener {
+            val intent = Intent(this, CameraActivity::class.java)
+            startActivity(intent)
+        }
+
+        // カメラ２
+        btnCameraParam.setOnClickListener {
+            val intent = Intent(this, CameraParamActivity::class.java)
             startActivity(intent)
         }
     }
