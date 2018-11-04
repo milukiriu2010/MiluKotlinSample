@@ -1,5 +1,6 @@
 package milu.kiriu2010.excon2.screen2.cameraparam
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CaptureRequest
@@ -15,14 +16,17 @@ import android.view.TextureView
 import android.hardware.camera2.CameraManager
 import android.app.Activity
 import android.content.Context
+import android.content.pm.PackageManager
 import android.media.ImageReader
 import android.os.Handler
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.Surface
 import java.util.*
 
 
 class Camera2StateMachine {
+    private lateinit var context: Context
     private var mCameraManager: CameraManager? = null
 
     private var mCameraDevice: CameraDevice? = null
@@ -44,14 +48,11 @@ class Camera2StateMachine {
                 if (mState != null) mState!!.onSurfaceTextureAvailable(width, height)
             }
 
-            override fun onSurfaceTextureSizeChanged(texture: SurfaceTexture, width: Int, height: Int) {
-                // TODO: ratation changed.
-            }
-
             override fun onSurfaceTextureDestroyed(texture: SurfaceTexture): Boolean {
                 return true
             }
 
+            override fun onSurfaceTextureSizeChanged(texture: SurfaceTexture, width: Int, height: Int) {}
             override fun onSurfaceTextureUpdated(texture: SurfaceTexture) {}
         }
 
@@ -94,7 +95,7 @@ class Camera2StateMachine {
             }
         }
 
-        @SuppressLint("MissingPermission")
+        // @SuppressLint("MissingPermission")
         @Throws(CameraAccessException::class)
         override fun enter() {
             val cameraId = Camera2Util.getCameraId(mCameraManager!!, CameraCharacteristics.LENS_FACING_BACK)
@@ -106,7 +107,9 @@ class Camera2StateMachine {
             mTextureView!!.setPreviewSize(previewSize.getHeight(), previewSize.getWidth())
 
             // suppresslint(missingpermission)
-            mCameraManager!!.openCamera(cameraId, mStateCallback, mHandler)
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                mCameraManager!!.openCamera(cameraId, mStateCallback, mHandler)
+            }
             Log.d(TAG, "openCamera:$cameraId")
         }
 
@@ -285,6 +288,7 @@ class Camera2StateMachine {
     }
 
     fun open(activity: Activity, textureView: AutoFitTextureView) {
+        context = activity
         if (mState != null) throw IllegalStateException("Alrady started state=" + mState!!)
         mTextureView = textureView
         mCameraManager = activity.getSystemService(Context.CAMERA_SERVICE) as CameraManager

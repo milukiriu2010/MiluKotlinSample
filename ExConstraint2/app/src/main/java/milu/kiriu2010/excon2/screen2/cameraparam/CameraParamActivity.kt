@@ -1,6 +1,8 @@
 package milu.kiriu2010.excon2.screen2.cameraparam
 
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
@@ -10,7 +12,8 @@ import milu.kiriu2010.excon2.R
 import android.graphics.BitmapFactory
 import android.media.ImageReader
 import android.media.ImageReader.OnImageAvailableListener
-
+import android.support.v4.content.ContextCompat
+import android.widget.Toast
 
 
 // http://blog.kotemaru.org/2015/05/23/android-camera2-sample.html
@@ -22,9 +25,43 @@ class CameraParamActivity : AppCompatActivity() {
         setContentView(R.layout.activity_camera_param)
     }
 
+    // カメラのパーミッションをチェックする
+    private fun checkPermission() {
+        // パーミッションを確認し,
+        // 許可されている場合
+        if (ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            mCamera2.open(this, textureView )
+        }
+        // 許可されていない場合、
+        // パーミッションを要求
+        else {
+            requestPermissions(arrayOf(Manifest.permission.CAMERA),1)
+        }
+    }
+
+    // エラーを表示
+    private fun showErrorMessage() {
+        Toast.makeText(this,"カメラ起動できません", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        //super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        // 許可
+        if ( permissions.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED ) {
+            // パーミッションが付与されたらカメラを起動
+            checkPermission()
+        }
+        // 不許可
+        else {
+
+            showErrorMessage()
+        }
+    }
+
     override fun onResume() {
         super.onResume()
-        mCamera2.open(this, textureView )
+        //mCamera2.open(this, textureView )
+        checkPermission()
     }
 
     override fun onPause() {
@@ -52,8 +89,8 @@ class CameraParamActivity : AppCompatActivity() {
                 image.close()
 
                 imageView.setImageBitmap(bitmap)
-                imageView.setVisibility(View.VISIBLE)
-                textureView.setVisibility(View.INVISIBLE)
+                //imageView.setVisibility(View.VISIBLE)
+                //textureView.setVisibility(View.INVISIBLE)
             }
         })
     }
