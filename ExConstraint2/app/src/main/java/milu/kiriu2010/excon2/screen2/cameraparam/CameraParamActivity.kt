@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.activity_camera_param.*
 import milu.kiriu2010.excon2.R
 import android.graphics.BitmapFactory
 import android.media.ImageReader
-import android.media.ImageReader.OnImageAvailableListener
 import android.support.v4.content.ContextCompat
 import android.widget.Toast
 

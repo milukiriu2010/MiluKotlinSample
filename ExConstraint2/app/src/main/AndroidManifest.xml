@@ -6,9 +6,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-　　<uses-feature android:name="android.hardware.camere"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
+    　　
+    <uses-feature android:name="android.hardware.camere" />
 
     <!-- android:roundIcon="@mipmap/ic_launcher_round" -->
     <application
@@ -73,7 +74,8 @@
         <activity android:name=".screen2.Main2Activity" />
         <activity android:name=".screen2.gallery2.Gallery2Activity" />
         <activity android:name=".screen2.camera.CameraActivity" />
-        <activity android:name=".screen2.cameraparam.CameraParamActivity"></activity>
+        <activity android:name=".screen2.cameraparam.CameraParamActivity" />
+        <activity android:name=".screen2.dragdrop.DragDropActivity"></activity>
     </application>
 
 </manifest>
