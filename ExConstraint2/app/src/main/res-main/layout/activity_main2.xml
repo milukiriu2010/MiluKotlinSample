@@ -72,4 +72,15 @@
         android:textAllCaps="false"
         app:layout_constraintStart_toEndOf="@+id/btnCameraParam"
         app:layout_constraintTop_toBottomOf="@+id/btnGallery" />
+
+    <Button
+        android:id="@+id/btnBearing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Bearing"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toEndOf="@+id/btnDragDrop"
+        app:layout_constraintTop_toBottomOf="@+id/btnGallery2" />
 </android.support.constraint.ConstraintLayout>

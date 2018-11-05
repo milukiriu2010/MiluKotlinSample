@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main2.*
 import milu.kiriu2010.excon2.R
+import milu.kiriu2010.excon2.screen2.bearing.BearingActivity
 import milu.kiriu2010.excon2.screen2.camera.CameraActivity
 import milu.kiriu2010.excon2.screen2.cameraparam.CameraParamActivity
 import milu.kiriu2010.excon2.screen2.conf.ConfActivity
@@ -56,5 +57,12 @@ class Main2Activity : AppCompatActivity() {
             val intent = Intent(this, DragDropActivity::class.java)
             startActivity(intent)
         }
+
+        // Bearing
+        btnBearing.setOnClickListener {
+            val intent = Intent(this, BearingActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }
