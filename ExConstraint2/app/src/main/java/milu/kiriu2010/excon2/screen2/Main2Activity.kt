@@ -8,6 +8,7 @@ import milu.kiriu2010.excon2.R
 import milu.kiriu2010.excon2.screen2.bearing.BearingActivity
 import milu.kiriu2010.excon2.screen2.camera.CameraActivity
 import milu.kiriu2010.excon2.screen2.cameraparam.CameraParamActivity
+import milu.kiriu2010.excon2.screen2.compass.CompassActivity
 import milu.kiriu2010.excon2.screen2.conf.ConfActivity
 import milu.kiriu2010.excon2.screen2.dragdrop.DragDropActivity
 import milu.kiriu2010.excon2.screen2.gallery2.Gallery2Activity
@@ -61,6 +62,12 @@ class Main2Activity : AppCompatActivity() {
         // Bearing
         btnBearing.setOnClickListener {
             val intent = Intent(this, BearingActivity::class.java)
+            startActivity(intent)
+        }
+
+        // コンパス
+        btnCompass.setOnClickListener {
+            val intent = Intent(this, CompassActivity::class.java)
             startActivity(intent)
         }
 

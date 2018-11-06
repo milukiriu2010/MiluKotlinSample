@@ -43,6 +43,7 @@
         android:id="@+id/btnCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="Camera"
@@ -83,4 +84,16 @@
         android:textAllCaps="false"
         app:layout_constraintStart_toEndOf="@+id/btnDragDrop"
         app:layout_constraintTop_toBottomOf="@+id/btnGallery2" />
+
+    <Button
+        android:id="@+id/btnCompass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="コンパス"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnBearing"
+        app:layout_constraintTop_toBottomOf="@+id/btnCamera" />
 </android.support.constraint.ConstraintLayout>
