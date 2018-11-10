@@ -96,4 +96,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnBearing"
         app:layout_constraintTop_toBottomOf="@+id/btnCamera" />
+
+    <Button
+        android:id="@+id/btnServiceLst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="SrvLst"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCameraParam" />
+
+    <Button
+        android:id="@+id/btnRingtone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="11dp"
+        android:text="着信音"
+        app:layout_constraintStart_toEndOf="@+id/btnServiceLst"
+        app:layout_constraintTop_toBottomOf="@+id/btnDragDrop" />
 </android.support.constraint.ConstraintLayout>

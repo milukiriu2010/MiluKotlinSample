@@ -81,7 +81,9 @@
         <activity android:name=".screen2.cameraparam.CameraParamActivity" />
         <activity android:name=".screen2.dragdrop.DragDropActivity" />
         <activity android:name=".screen2.bearing.BearingActivity" />
-        <activity android:name=".screen2.compass.CompassActivity"></activity>
+        <activity android:name=".screen2.compass.CompassActivity" />
+        <activity android:name=".screen2.servicelst.ServiceLstActivity" />
+        <activity android:name=".screen2.ringtone.RingtoneActivity"></activity>
     </application>
 
 </manifest>

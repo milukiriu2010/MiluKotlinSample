@@ -1,6 +1,7 @@
 package milu.kiriu2010.excon2.screen2
 
 import android.content.Intent
+import android.media.Ringtone
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main2.*
@@ -12,6 +13,8 @@ import milu.kiriu2010.excon2.screen2.compass.CompassActivity
 import milu.kiriu2010.excon2.screen2.conf.ConfActivity
 import milu.kiriu2010.excon2.screen2.dragdrop.DragDropActivity
 import milu.kiriu2010.excon2.screen2.gallery2.Gallery2Activity
+import milu.kiriu2010.excon2.screen2.ringtone.RingtoneActivity
+import milu.kiriu2010.excon2.screen2.servicelst.ServiceLstActivity
 
 class Main2Activity : AppCompatActivity() {
 
@@ -68,6 +71,18 @@ class Main2Activity : AppCompatActivity() {
         // コンパス
         btnCompass.setOnClickListener {
             val intent = Intent(this, CompassActivity::class.java)
+            startActivity(intent)
+        }
+
+        // サービス一覧
+        btnServiceLst.setOnClickListener {
+            val intent = Intent(this, ServiceLstActivity::class.java)
+            startActivity(intent)
+        }
+
+        // 着信音
+        btnRingtone.setOnClickListener {
+            val intent = Intent(this, RingtoneActivity::class.java)
             startActivity(intent)
         }
 
