@@ -146,9 +146,13 @@ class KochSnowFlakeDrawable: Drawable() {
     }
 
     override fun draw(canvas: Canvas) {
+        // コッホ雪片
         canvas.drawPath(kochPath,linePaint)
 
+        // 中心点
         canvas.drawPoint( 500f, 500f, dotPaint )
+        // 中心点から半径100の距離のところに
+        // 0,30,60度の位置に点を描画
         (0..2).forEach {
             canvas.drawPoint(
                     500f+100f*cos(it.toFloat()*30f*PI/180f).toFloat(),
