@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/draw_06_koch_tree"
+        android:title="コッホツリー" />
+    <item
         android:id="@+id/draw_05_koch_snowflake_lap"
         android:title="コッホ雪片ラップ" />
     <item

@@ -75,6 +75,13 @@ class DrawActivity : AppCompatActivity() {
                 finish()
                 true
             }
+            // コッホツリー
+            R.id.draw_06_koch_tree -> {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, Draw06KochTreeFragment.newInstance())
+                        .commit()
+                true
+            }
         // コッホ雪片ラップ
             R.id.draw_05_koch_snowflake_lap -> {
                 supportFragmentManager.beginTransaction()
