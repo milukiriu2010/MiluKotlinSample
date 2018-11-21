@@ -18,9 +18,7 @@ import milu.kiriu2010.gui.decorate.*
 
 class DrawHomeFragment : Fragment() {
 
-    val handler = Handler()
-
-    private lateinit var runnable: Runnable
+    private lateinit var objectAnimator: ObjectAnimator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,21 +36,34 @@ class DrawHomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_draw_home, container, false)
 
         val imageView = view.findViewById<ImageView>(R.id.imageView)
-        val kochTreeDrawable = KochTreeDrawable()
-        imageView.setImageDrawable(kochTreeDrawable)
+        val kochTreeLapDrawable = KochTreeLapDrawable()
+        imageView.setImageDrawable(kochTreeLapDrawable)
 
-        var repeat = 0
-        runnable = Runnable {
-
-            kochTreeDrawable.divideKochPath()
-            kochTreeDrawable.invalidateSelf()
-            if ( repeat < 8 ) {
-                repeat++
-                handler.postDelayed(runnable,1000)
+        val radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup)
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            if (this::objectAnimator.isInitialized) {
+                objectAnimator.cancel()
             }
-        }
-        handler.postDelayed(runnable,1000)
 
+            objectAnimator = when (checkedId) {
+                R.id.rbtnLine -> {
+                    ObjectAnimator.ofFloat(kochTreeLapDrawable, KochTreeLapDrawable.PROGRESS,0f,1f)
+                }
+                else -> {
+                    // ドットのアニメーション時は、ライン全体が描かれるようにする
+                    // と、思ったけど、そうは問屋が卸さないらしい。
+                    kochTreeLapDrawable.progress = 1.0f
+                    ObjectAnimator.ofFloat(kochTreeLapDrawable, KochTreeLapDrawable.DOT_PROGRESS,0f,1f)
+                }
+            }
+
+            objectAnimator.apply {
+                duration = 4000L
+                interpolator = LinearInterpolator()
+                repeatCount = ValueAnimator.INFINITE
+                repeatMode = ValueAnimator.RESTART
+            }.start()
+        }
 
         return view
     }
