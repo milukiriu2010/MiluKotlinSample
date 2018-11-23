@@ -53,7 +53,7 @@ class DrawHomeFragment : Fragment() {
                     // ドットのアニメーション時は、ライン全体が描かれるようにする
                     // と、思ったけど、そうは問屋が卸さないらしい。
                     kochTreeLapDrawable.progress = 1.0f
-                    ObjectAnimator.ofFloat(kochTreeLapDrawable, KochTreeLapDrawable.DOT_PROGRESS,0f,1f)
+                    ObjectAnimator.ofFloat(kochTreeLapDrawable, KochTreeLapDrawable.DOT_PROGRESS,1f,0f)
                 }
             }
 

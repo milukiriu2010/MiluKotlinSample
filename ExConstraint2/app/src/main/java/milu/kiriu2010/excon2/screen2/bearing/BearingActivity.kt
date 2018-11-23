@@ -35,6 +35,7 @@ class BearingActivity : AppCompatActivity()
     private var geomagnetic = FloatArray(AXIS_NUM)
     private var orientation = FloatArray(AXIS_NUM)
     private val attitude = FloatArray(AXIS_NUM)
+    private var light = FloatArray(1)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +67,13 @@ class BearingActivity : AppCompatActivity()
         if (sensorOri != null) {
             sensorManager.registerListener(this, sensorOri, SensorManager.SENSOR_DELAY_UI)
         }
+
+        // 光センサ
+        var sensorLight: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+        // 光センサあり
+        if (sensorLight != null) {
+            sensorManager.registerListener(this, sensorLight, SensorManager.SENSOR_DELAY_UI)
+        }
     }
 
     override fun onPause() {
@@ -81,6 +89,7 @@ class BearingActivity : AppCompatActivity()
             Sensor.TYPE_ACCELEROMETER -> gravity = event.values.clone()
             Sensor.TYPE_MAGNETIC_FIELD -> geomagnetic = event.values.clone()
             Sensor.TYPE_ORIENTATION -> orientation = event.values.clone()
+            Sensor.TYPE_LIGHT -> light = event.values.clone()
             else -> return
         }
 
@@ -111,7 +120,9 @@ class BearingActivity : AppCompatActivity()
                 "\n\n 4) 地磁気センサ" +
                 "\n  　　Ⅹ:" + "%3.1f".format(geomagnetic[0]) +
                 "\n  　　Ｙ:" + "%3.1f".format(geomagnetic[1]) +
-                "\n  　　Ｚ:" + "%3.1f".format(geomagnetic[2])
+                "\n  　　Ｚ:" + "%3.1f".format(geomagnetic[2]) +
+                "\n\n 5) 光センサ" +
+                "\n  　　Ⅹ:" + "%3.1f".format(light[0])
 
         dataBearing.text = str
     }
