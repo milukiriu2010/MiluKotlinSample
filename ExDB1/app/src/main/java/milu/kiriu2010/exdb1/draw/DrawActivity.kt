@@ -75,6 +75,13 @@ class DrawActivity : AppCompatActivity() {
                 finish()
                 true
             }
+            // マンデルブロ
+            R.id.draw_08_mandelbrot -> {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, Draw08MandelBrotFragment.newInstance())
+                        .commit()
+                true
+            }
             // コッホツリーラップ
             R.id.draw_07_koch_tree_lap -> {
                 supportFragmentManager.beginTransaction()
