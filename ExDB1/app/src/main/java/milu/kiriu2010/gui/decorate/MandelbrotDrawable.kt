@@ -58,6 +58,23 @@ class MandelbrotDrawable: Drawable() {
     override fun getIntrinsicHeight() = n+margin*2
 
     init {
+        // ---------------------------------------
+        // xc   = -0.5
+        // yc   =  0.0
+        // size =  2.0
+        // n = 512
+        // i = 0-511
+        // j = 0-511
+        // ---------------------------------------
+        // x0 = -1.5 ～ 0.5
+        // y0 = -1.0 ～ 1.0
+        // ---------------------------------------
+        // z0 = -1.5-1.0i ～ 0.5+1.0i
+        // ---------------------------------------
+        // -1.0 + 1.0i は発散しないので、
+        // x0 = -1.5 ～ 1.5ぐらいがいいかも
+        // y0 = -1.5 ～ 1.5ぐらいがいいかも
+        // ---------------------------------------
         (0  until n).forEach { i ->
             val colorLst = mutableListOf<Color>()
 
@@ -79,6 +96,7 @@ class MandelbrotDrawable: Drawable() {
     private fun mandelbrot(z0: Complex, max: Int): Int {
         var z = z0
         (0 until max).forEach { t ->
+            // 絶対値が2を超える場合は、発散するとみなす。
             if (z.abs() > 2.0) return t
             z = z.times(z).plus(z0)
         }
@@ -88,8 +106,8 @@ class MandelbrotDrawable: Drawable() {
     companion object {
         private const val n = 512
         // 反復最大回数
+        // 色は、RGB(255,255,255)なので、255を最大の反復回数としている
         private const val iterationMax = 255
-        //private const val iterationMax = 100
         // Plots the size-by-size region of the Mandelbrot set, centered on (xc, yc)
         private const val xc = -0.5
         private const val yc = 0.0

@@ -86,7 +86,6 @@ class KochSnowFlakeDrawable: Drawable() {
             //   = (B-A)/2*2/sqrt(3)
             val aeLen = sqrt((b.first-a.first)*(b.first-a.first)+(b.second-a.second)*(b.second-a.second))/sqrt(3f)
             // "A-B"の角度(degree)
-            //val abAngle = atan(-(b.second-a.second)/(b.first-a.first) )*180f/ PI
             val abAngle = when {
                 // BがAより右下
                 (b.second >= a.second) and (b.first >= a.first) -> {

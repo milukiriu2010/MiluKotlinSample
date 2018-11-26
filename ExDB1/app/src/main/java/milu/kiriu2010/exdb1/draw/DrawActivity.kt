@@ -75,6 +75,13 @@ class DrawActivity : AppCompatActivity() {
                 finish()
                 true
             }
+            // ドラゴン曲線
+            R.id.draw_09_dragoncurv -> {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, Draw09DragonCurvFragment.newInstance())
+                        .commit()
+                true
+            }
             // マンデルブロ
             R.id.draw_08_mandelbrot -> {
                 supportFragmentManager.beginTransaction()
