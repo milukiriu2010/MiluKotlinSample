@@ -31,6 +31,7 @@ class DragonCurvDrawable: Drawable() {
     }
 
     private val dotPaint = Paint().apply {
+        color = Color.RED
         style = Paint.Style.STROKE
         strokeWidth = 10f
     }
@@ -143,8 +144,14 @@ class DragonCurvDrawable: Drawable() {
     }
 
     override fun draw(canvas: Canvas) {
-        // コッホ雪片
+        // ドラゴン曲線を描く
         canvas.drawPath(kochPath,linePaint)
+
+        // ドラゴン曲線の両端上に赤点を描画
+        val kochFirst = kochLst[0]
+        canvas.drawPoint(kochFirst.first,kochFirst.second,dotPaint)
+        val kochLast = kochLst[kochLst.size-1]
+        canvas.drawPoint(kochLast.first,kochLast.second,dotPaint)
     }
 
     override fun setAlpha(alpha: Int) {

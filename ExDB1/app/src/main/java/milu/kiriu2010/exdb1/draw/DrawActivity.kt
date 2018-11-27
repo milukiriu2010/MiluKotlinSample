@@ -22,9 +22,9 @@ class DrawActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
+                if (supportFragmentManager.findFragmentByTag("Navi") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, DrawHomeFragment.newInstance(), "Home")
+                            .replace(R.id.frameLayout, DrawNaviFragment.newInstance(), "Navi")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
