@@ -14,6 +14,7 @@ import android.widget.TextView
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.decorate.Mandelbrot2Drawable
+import milu.kiriu2010.gui.decorate.Mandelbrot3Drawable
 import milu.kiriu2010.gui.decorate.MandelbrotDrawable
 
 class Draw08MandelBrotFragment : Fragment() {
@@ -35,7 +36,7 @@ class Draw08MandelBrotFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_draw08_mandel_brot, container, false)
 
         val imageView = view.findViewById<ImageView>(R.id.imageView)
-        val drawable = Mandelbrot2Drawable()
+        val drawable = Mandelbrot3Drawable()
         imageView.setImageDrawable(drawable)
 
         val dataRepeat = view.findViewById<TextView>(R.id.dataRepeat)
@@ -44,13 +45,13 @@ class Draw08MandelBrotFragment : Fragment() {
         runnable = Runnable {
             drawable.scanImagenary(repeat)
             drawable.invalidateSelf()
-            if ( repeat < Mandelbrot2Drawable.n ) {
+            if ( repeat < Mandelbrot3Drawable.n ) {
                 repeat++
                 dataRepeat.setText(repeat.toString())
-                handler.postDelayed(runnable,100)
+                handler.postDelayed(runnable,10)
             }
         }
-        handler.postDelayed(runnable,100)
+        handler.postDelayed(runnable,10)
 
         return view
     }

@@ -30,9 +30,9 @@ class DrawActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
+                if (supportFragmentManager.findFragmentByTag("Notify") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, DrawHomeFragment.newInstance(), "Home")
+                            .replace(R.id.frameLayout, DrawNotifyFragment.newInstance(), "Notify")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
@@ -73,6 +73,13 @@ class DrawActivity : AppCompatActivity() {
         // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // ジュリア集合
+            R.id.draw_10_juliaset -> {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, Draw10JuliaSetFragment.newInstance())
+                        .commit()
                 true
             }
             // ドラゴン曲線
