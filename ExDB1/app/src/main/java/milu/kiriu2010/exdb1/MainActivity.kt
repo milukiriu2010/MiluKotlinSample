@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import milu.kiriu2010.exdb1.animeobj.AnimeObjActivity
+import milu.kiriu2010.exdb1.basic.BasicActivity
 import milu.kiriu2010.exdb1.canvas.CanvasActivity
 import milu.kiriu2010.exdb1.draw.Draw01Fragment
 import milu.kiriu2010.exdb1.draw.DrawActivity
@@ -38,6 +39,13 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, CanvasActivity::class.java)
             startActivity(intent)
         }
+
+        // 描画基本ページへ遷移
+        btnBasic.transformationMethod = null
+        btnBasic.setOnClickListener {
+            val intent = Intent(this, BasicActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     // ------------------------------------------------------
@@ -54,14 +62,6 @@ class MainActivity : AppCompatActivity() {
     // -----------------------------------------------
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            // ----------------------------------------------------
-            // "Draw1"をクリックすると、Draw1画面を表示
-            // ----------------------------------------------------
-            R.id.menuItemDraw1 -> {
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.frameDraw, Draw01Fragment.newInstance())
-                        .commit()
-            }
             // ----------------------------------------------------
             // "Scheduler"をクリックすると、スケジューラ画面へ遷移
             // ----------------------------------------------------

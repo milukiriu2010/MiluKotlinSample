@@ -31,7 +31,10 @@
             android:label="@string/title_activity_draw" />
         <activity
             android:name=".canvas.CanvasActivity"
-            android:label="@string/title_activity_canvas"></activity>
+            android:label="@string/title_activity_canvas" />
+        <activity
+            android:name=".basic.BasicActivity"
+            android:label="@string/title_activity_basic"></activity>
     </application>
 
 </manifest>
