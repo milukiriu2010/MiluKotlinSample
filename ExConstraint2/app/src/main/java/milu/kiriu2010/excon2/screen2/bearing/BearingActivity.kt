@@ -36,6 +36,7 @@ class BearingActivity : AppCompatActivity()
     private var orientation = FloatArray(AXIS_NUM)
     private val attitude = FloatArray(AXIS_NUM)
     private var light = FloatArray(1)
+    private var gyro = FloatArray(AXIS_NUM)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +75,13 @@ class BearingActivity : AppCompatActivity()
         if (sensorLight != null) {
             sensorManager.registerListener(this, sensorLight, SensorManager.SENSOR_DELAY_UI)
         }
+
+        // ジャイロセンサ
+        var sensorGyro: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+        // ジャイロセンサあり
+        if (sensorGyro != null) {
+            sensorManager.registerListener(this, sensorGyro, SensorManager.SENSOR_DELAY_UI)
+        }
     }
 
     override fun onPause() {
@@ -90,6 +98,7 @@ class BearingActivity : AppCompatActivity()
             Sensor.TYPE_MAGNETIC_FIELD -> geomagnetic = event.values.clone()
             Sensor.TYPE_ORIENTATION -> orientation = event.values.clone()
             Sensor.TYPE_LIGHT -> light = event.values.clone()
+            Sensor.TYPE_GYROSCOPE -> gyro = event.values.clone()
             else -> return
         }
 
@@ -109,6 +118,8 @@ class BearingActivity : AppCompatActivity()
                 "\n  方位角:" + "%3.1f".format(Math.toDegrees(attitude[0].toDouble())) +
                 "\n  傾斜角:" + "%3.1f".format(Math.toDegrees(attitude[1].toDouble())) +
                 "\n  回転角:" + "%3.1f".format(Math.toDegrees(attitude[2].toDouble())) +
+                "\n\n 5) 光センサ" +
+                "\n  　　Ⅹ:" + "%3.1f".format(light[0]) +
                 "\n\n 2) 傾きセンサ" +
                 "\n  方位角:" + "%3.1f".format( if (orientation[0] > 180.0) orientation[0]-360.0 else orientation[0] ) +
                 "\n  傾斜角:" + "%3.1f".format(orientation[1]) +
@@ -121,8 +132,10 @@ class BearingActivity : AppCompatActivity()
                 "\n  　　Ⅹ:" + "%3.1f".format(geomagnetic[0]) +
                 "\n  　　Ｙ:" + "%3.1f".format(geomagnetic[1]) +
                 "\n  　　Ｚ:" + "%3.1f".format(geomagnetic[2]) +
-                "\n\n 5) 光センサ" +
-                "\n  　　Ⅹ:" + "%3.1f".format(light[0])
+                "\n\n 6) ジャイロセンサ" +
+                "\n  　　Ⅹ:" + "%f".format(gyro[0]) +
+                "\n  　　Ｙ:" + "%f".format(gyro[1]) +
+                "\n  　　Ｚ:" + "%f".format(gyro[2])
 
         dataBearing.text = str
     }
