@@ -16,22 +16,13 @@ import milu.kiriu2010.math.Complex
 // -------------------------------------------------------------
 class Mandelbrot3Drawable: Drawable() {
 
-    private val cornerEffect = CornerPathEffect(8f)
-
     private val linePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE
         strokeWidth = 1f
-        //pathEffect = cornerEffect
-    }
-
-    private val dotPaint = Paint().apply {
-        style = Paint.Style.STROKE
-        strokeWidth = 10f
     }
 
     // マンデルブロ集合を描画
     private val imageBitmap = Bitmap.createBitmap(n+ margin*2,n+ margin+2,Bitmap.Config.ARGB_8888)
-
 
     // プロットするカラー
     // n x nの配列

@@ -9,8 +9,9 @@ import android.view.*
 
 import milu.kiriu2010.exdb1.R
 
-class BasicHomeFragment : Fragment()
+class BasicNaviFragment : Fragment()
         , SurfaceHolder.Callback {
+
 
     // 描画に使うサーフェースビュー
     private lateinit var surfaceViewCanvas: SurfaceView
@@ -43,7 +44,8 @@ class BasicHomeFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_basic_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_basic_navi, container, false)
+
 
         // サーフェースビューを取得
         surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
@@ -59,6 +61,7 @@ class BasicHomeFragment : Fragment()
         return view
     }
 
+
     // 描画
     private fun drawCanvas() {
         val canvas = surfaceViewCanvas.holder.lockCanvas()
@@ -67,28 +70,9 @@ class BasicHomeFragment : Fragment()
         // バックグラウンドを描画
         canvas.drawColor(Color.WHITE)
 
-
-        // --------------------------------------------------------------------
-        // PathDashPathEffectで使うパス
-        // --------------------------------------------------------------------
-
-        // パス円
-        val pathCircle = Path()
-        // CCW => 反時計回り
-        pathCircle.addCircle(10f,10f,10f,Path.Direction.CCW)
-
-        // 円弧
-        val pathArc = Path()
-        pathArc.addArc(RectF(0f,0f,20f,20f),0f,180f)
-
-        // 四角
-        val pathRect = Path()
-        pathRect.addRect(RectF(0f,0f,20f,20f),Path.Direction.CCW)
-
-        // --------------------------------------------------------------------
-        // 通常の実線
-        // --------------------------------------------------------------------
         var n = 1f
+
+        // 実線
         canvas.drawLine(marginW,n*marginH,sw-marginW,n*marginH,linePaint)
 
         // --------------------------------------------------------------------
@@ -123,66 +107,48 @@ class BasicHomeFragment : Fragment()
         // PathDashPathEffectのサンプル
         // --------------------------------------------------------------------
 
+        // パス円
+        val pathCircle = Path()
+        // CCW => 反時計回り
+        pathCircle.addCircle(10f,10f,10f, Path.Direction.CCW)
+
+        // 円弧
+        val pathArc = Path()
+        pathArc.addArc(RectF(0f,0f,20f,20f),0f,180f)
+
+        // 四角
+        val pathRect = Path()
+        pathRect.addRect(RectF(0f,0f,20f,20f), Path.Direction.CCW)
+
         // 50ごと,位相0 円線
-        val pathDashPathEffect1 = PathDashPathEffect(pathCircle,50f,0f,PathDashPathEffect.Style.ROTATE)
+        val pathDashPathEffect1 = PathDashPathEffect(pathCircle,50f,0f, PathDashPathEffect.Style.ROTATE)
         linePaint.setPathEffect(pathDashPathEffect1)
         n = 6f
         canvas.drawLine(marginW,n*marginH,sw-marginW,n*marginH,linePaint)
 
         // 100ごと,位相0 円線
-        val pathDashPathEffect2 = PathDashPathEffect(pathCircle,100f,0f,PathDashPathEffect.Style.ROTATE)
+        val pathDashPathEffect2 = PathDashPathEffect(pathCircle,100f,0f, PathDashPathEffect.Style.ROTATE)
         linePaint.setPathEffect(pathDashPathEffect2)
         n = 7f
         canvas.drawLine(marginW,n*marginH,sw-marginW,n*marginH,linePaint)
 
         // 100ごと,位相-10 円線(右に10ずれる)
-        val pathDashPathEffect3 = PathDashPathEffect(pathCircle,100f,-10f,PathDashPathEffect.Style.ROTATE)
+        val pathDashPathEffect3 = PathDashPathEffect(pathCircle,100f,-10f, PathDashPathEffect.Style.ROTATE)
         linePaint.setPathEffect(pathDashPathEffect3)
         n = 8f
         canvas.drawLine(marginW,n*marginH,sw-marginW,n*marginH,linePaint)
 
         // 100ごと,位相-10 円弧線(右に10ずれる)
-        val pathDashPathEffect4 = PathDashPathEffect(pathArc,100f,-10f,PathDashPathEffect.Style.ROTATE)
+        val pathDashPathEffect4 = PathDashPathEffect(pathArc,100f,-10f, PathDashPathEffect.Style.ROTATE)
         linePaint.setPathEffect(pathDashPathEffect4)
         n = 9f
         canvas.drawLine(marginW,n*marginH,sw-marginW,n*marginH,linePaint)
 
         // 100ごと,位相-10 四角線(右に10ずれる)
-        val pathDashPathEffect5 = PathDashPathEffect(pathRect,100f,-10f,PathDashPathEffect.Style.ROTATE)
+        val pathDashPathEffect5 = PathDashPathEffect(pathRect,100f,-10f, PathDashPathEffect.Style.ROTATE)
         linePaint.setPathEffect(pathDashPathEffect5)
         n = 10f
         canvas.drawLine(marginW,n*marginH,sw-marginW,n*marginH,linePaint)
-
-        // --------------------------------------------------------------------
-        // DiscretePathEffectのサンプル
-        // --------------------------------------------------------------------
-
-        val discretePathEffect1 = DiscretePathEffect(0f,0f)
-        linePaint.setPathEffect(discretePathEffect1)
-        n = 11f
-        canvas.drawLine(marginW,n*marginH,sw-marginW,n*marginH,linePaint)
-
-        val discretePathEffect2 = DiscretePathEffect(50f,0f)
-        linePaint.setPathEffect(discretePathEffect2)
-        n = 12f
-        canvas.drawLine(marginW,n*marginH,sw-marginW,n*marginH,linePaint)
-
-        val discretePathEffect3 = DiscretePathEffect(50f,25f)
-        linePaint.setPathEffect(discretePathEffect3)
-        n = 13f
-        canvas.drawLine(marginW,n*marginH,sw-marginW,n*marginH,linePaint)
-
-        val discretePathEffect4 = DiscretePathEffect(50f,50f)
-        linePaint.setPathEffect(discretePathEffect4)
-        n = 14f
-        canvas.drawLine(marginW,n*marginH,sw-marginW,n*marginH,linePaint)
-
-        val discretePathEffect5 = DiscretePathEffect(50f,100f)
-        linePaint.setPathEffect(discretePathEffect5)
-        n = 15f
-        canvas.drawLine(marginW,n*marginH,sw-marginW,n*marginH,linePaint)
-
-
 
         // --------------------------------------------------------------------
 
@@ -204,7 +170,7 @@ class BasicHomeFragment : Fragment()
     companion object {
         @JvmStatic
         fun newInstance() =
-                BasicHomeFragment().apply {
+                BasicNaviFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }
