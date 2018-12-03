@@ -75,6 +75,13 @@ class DrawActivity : AppCompatActivity() {
                 finish()
                 true
             }
+            // シェルピンスキー・カーペット
+            R.id.draw_11_sierpin_ski_carpet -> {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, Draw11SierpinSkiCarpetFragment.newInstance())
+                        .commit()
+                true
+            }
             // ジュリア集合
             R.id.draw_10_juliaset -> {
                 supportFragmentManager.beginTransaction()

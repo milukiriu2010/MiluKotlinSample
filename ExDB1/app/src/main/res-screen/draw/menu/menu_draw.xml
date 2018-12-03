@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/draw_11_sierpin_ski_carpet"
+        android:title="シェルピンスキー・カーペット" />
+    <item
         android:id="@+id/draw_10_juliaset"
         android:title="ジュリア集合" />
     <item
