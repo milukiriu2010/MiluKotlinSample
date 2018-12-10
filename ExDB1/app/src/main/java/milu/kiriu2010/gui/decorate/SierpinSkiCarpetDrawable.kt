@@ -25,12 +25,14 @@ class SierpinSkiCarpetDrawable: Drawable() {
         strokeWidth = 1f
     }
 
+    // 白部分
     private val linePaintW = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.WHITE
         style = Paint.Style.FILL_AND_STROKE
         strokeWidth = 1f
     }
 
+    // 黒部分
     private val linePaintB = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.BLACK
         style = Paint.Style.FILL_AND_STROKE

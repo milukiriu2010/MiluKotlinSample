@@ -75,6 +75,13 @@ class DrawActivity : AppCompatActivity() {
                 finish()
                 true
             }
+            // シェルピンスキー三角形
+            R.id.draw_12_sierpin_ski_triangle -> {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, Draw12SierpinSkiTriangleFragment.newInstance())
+                        .commit()
+                true
+            }
             // シェルピンスキー・カーペット
             R.id.draw_11_sierpin_ski_carpet -> {
                 supportFragmentManager.beginTransaction()
