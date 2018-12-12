@@ -43,7 +43,7 @@ class DrawHomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_draw_home, container, false)
 
         val imageView = view.findViewById<ImageView>(R.id.imageView)
-        val drawable = SierpinSkiTriangleDrawable()
+        val drawable = HirbertCurvDrawable()
         imageView.setImageDrawable(drawable)
 
         val dataRepeat = view.findViewById<TextView>(R.id.dataRepeat)

@@ -4,7 +4,7 @@ import android.graphics.*
 import android.graphics.drawable.Drawable
 import java.io.ByteArrayOutputStream
 
-class SierpinSkiTriangleDrawable: Drawable() {
+class HirbertCurvDrawable: Drawable() {
 
     // 枠
     private val linePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -24,33 +24,42 @@ class SierpinSkiTriangleDrawable: Drawable() {
     // 黒部分
     private val linePaintB = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.BLACK
-        style = Paint.Style.FILL_AND_STROKE
-        strokeWidth = 1f
+        style = Paint.Style.STROKE
+        strokeWidth = 10f
     }
 
-    // シェルピンスキー三角形をビットマップに描画
+    // ヒルベルト曲線をビットマップに描画
     private val imageBitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
 
     init {
+        /*
         val canvas = Canvas(imageBitmap)
-        // 一面黒く塗りつぶす
-        canvas.drawRect(Rect(0,0, size, size),linePaintB)
-        // 右下を白く塗りつぶす
+        // 一面白く塗りつぶす
+        canvas.drawRect(Rect(0,0, size, size),linePaintW)
+        // 左・下・右に線を描く
         val path = Path()
-        path.moveTo(size.toFloat(),0f)
-        path.lineTo(0f, size.toFloat())
-        path.lineTo(size.toFloat(),size.toFloat())
-        path.close()
-        canvas.drawPath(path,linePaintW)
-        // 黒枠
-        canvas.drawRect(Rect(0,0, size, size),linePaint)
+        path.moveTo(shift.toFloat(),shift.toFloat())
+        path.lineTo(shift.toFloat(), (size-shift).toFloat())
+        path.lineTo((size-shift).toFloat(),(size-shift).toFloat())
+        path.lineTo((size-shift).toFloat(),shift.toFloat())
+        canvas.drawPath(path,linePaintB)
+        */
+        val canvas = Canvas(imageBitmap)
+        // 一面白く塗りつぶす
+        canvas.drawRect(Rect(0,0, size, size),linePaintW)
+        // 左・下・右に線を描く
+        val path = Path()
+        path.moveTo((size/4).toFloat(),(size/4).toFloat())
+        path.lineTo((size/4).toFloat(), (size*3/4).toFloat())
+        path.lineTo((size*3/4).toFloat(),(size*3/4).toFloat())
+        path.lineTo((size*3/4).toFloat(),(size/4).toFloat())
+        canvas.drawPath(path,linePaintB)
     }
 
     override fun draw(canvas: Canvas) {
         canvas.drawBitmap(imageBitmap,Rect(0,0, size, size),
                 Rect(margin, margin, margin + size, margin + size),
-                linePaint)
-    }
+                linePaint)    }
 
     override fun setAlpha(alpha: Int) {
         linePaint.alpha = alpha
@@ -76,18 +85,29 @@ class SierpinSkiTriangleDrawable: Drawable() {
 
         val canvas = Canvas(imageBitmap)
         // 左上
-        canvas.drawBitmap(tmpBitmap,Rect(0,0,size,size),
+        val matLU = Matrix()
+        matLU.postRotate(270f)
+        val tmpBitmapLU = Bitmap.createBitmap(tmpBitmap,0,0,size,size,matLU,true)
+        canvas.drawBitmap(tmpBitmapLU,Rect(0,0,size,size),
                 Rect(0,0,size/2,size/2),linePaint)
-        // 右上
-        canvas.drawBitmap(tmpBitmap,Rect(0,0,size,size),
-                Rect(size/2,0,size,size/2),linePaint)
         // 左下
         canvas.drawBitmap(tmpBitmap,Rect(0,0,size,size),
                 Rect(0,size/2,size/2,size),linePaint)
+        // 右下
+        canvas.drawBitmap(tmpBitmap,Rect(0,0,size,size),
+                Rect(size/2,size/2,size,size),linePaint)
+        // 右上
+        val matRU = Matrix()
+        matRU.postRotate(90f)
+        val tmpBitmapRU = Bitmap.createBitmap(tmpBitmap,0,0,size,size,matRU,true)
+        canvas.drawBitmap(tmpBitmapRU,Rect(0,0,size,size),
+                Rect(size/2,0,size,size/2),linePaint)
     }
+
 
     companion object {
         private const val size: Int = 800
         private const val margin: Int = 50
+        private const val shift: Int = 20
     }
 }
