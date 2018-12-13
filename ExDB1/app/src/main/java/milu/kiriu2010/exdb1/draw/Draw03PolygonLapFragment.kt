@@ -14,7 +14,7 @@ import android.widget.ImageView
 import android.widget.RadioGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.decorate.PolygonLapsDrawable
+import milu.kiriu2010.gui.fractal.PolygonLapsDrawable
 
 /**
  * A simple [Fragment] subclass.

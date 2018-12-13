@@ -1,8 +1,6 @@
 package milu.kiriu2010.exdb1.draw
 
 
-import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -11,13 +9,11 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.LinearInterpolator
 import android.widget.ImageView
-import android.widget.RadioGroup
 import android.widget.TextView
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.decorate.*
+import milu.kiriu2010.gui.fractal.HirbertCurvDrawable
 
 class DrawHomeFragment : Fragment() {
 
@@ -52,7 +48,7 @@ class DrawHomeFragment : Fragment() {
         runnable = Runnable {
             drawable.proc()
             drawable.invalidateSelf()
-            if ( repeat < 6 ) {
+            if ( repeat < 3 ) {
                 repeat++
                 dataRepeat.setText(repeat.toString())
                 handler.postDelayed(runnable,1000)

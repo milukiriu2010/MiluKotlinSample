@@ -1,4 +1,4 @@
-package milu.kiriu2010.gui.decorate
+package milu.kiriu2010.gui.fractal
 
 import android.graphics.*
 import android.graphics.drawable.Drawable

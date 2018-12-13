@@ -1,4 +1,4 @@
-package milu.kiriu2010.gui.decorate
+package milu.kiriu2010.gui.fractal
 
 import android.graphics.*
 import android.graphics.drawable.Drawable
@@ -39,7 +39,7 @@ class SierpinSkiTriangleDrawable: Drawable() {
         val path = Path()
         path.moveTo(size.toFloat(),0f)
         path.lineTo(0f, size.toFloat())
-        path.lineTo(size.toFloat(),size.toFloat())
+        path.lineTo(size.toFloat(), size.toFloat())
         path.close()
         canvas.drawPath(path,linePaintW)
         // 黒枠
@@ -76,14 +76,14 @@ class SierpinSkiTriangleDrawable: Drawable() {
 
         val canvas = Canvas(imageBitmap)
         // 左上
-        canvas.drawBitmap(tmpBitmap,Rect(0,0,size,size),
-                Rect(0,0,size/2,size/2),linePaint)
+        canvas.drawBitmap(tmpBitmap,Rect(0,0, size, size),
+                Rect(0,0, size /2, size /2),linePaint)
         // 右上
-        canvas.drawBitmap(tmpBitmap,Rect(0,0,size,size),
-                Rect(size/2,0,size,size/2),linePaint)
+        canvas.drawBitmap(tmpBitmap,Rect(0,0, size, size),
+                Rect(size /2,0, size, size /2),linePaint)
         // 左下
-        canvas.drawBitmap(tmpBitmap,Rect(0,0,size,size),
-                Rect(0,size/2,size/2,size),linePaint)
+        canvas.drawBitmap(tmpBitmap,Rect(0,0, size, size),
+                Rect(0, size /2, size /2, size),linePaint)
     }
 
     companion object {

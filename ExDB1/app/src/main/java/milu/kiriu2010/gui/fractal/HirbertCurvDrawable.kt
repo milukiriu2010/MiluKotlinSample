@@ -1,4 +1,4 @@
-package milu.kiriu2010.gui.decorate
+package milu.kiriu2010.gui.fractal
 
 import android.graphics.*
 import android.graphics.drawable.Drawable
@@ -49,10 +49,10 @@ class HirbertCurvDrawable: Drawable() {
         canvas.drawRect(Rect(0,0, size, size),linePaintW)
         // 左・下・右に線を描く
         val path = Path()
-        path.moveTo((size/4).toFloat(),(size/4).toFloat())
-        path.lineTo((size/4).toFloat(), (size*3/4).toFloat())
-        path.lineTo((size*3/4).toFloat(),(size*3/4).toFloat())
-        path.lineTo((size*3/4).toFloat(),(size/4).toFloat())
+        path.moveTo((size /4).toFloat(),(size /4).toFloat())
+        path.lineTo((size /4).toFloat(), (size *3/4).toFloat())
+        path.lineTo((size *3/4).toFloat(),(size *3/4).toFloat())
+        path.lineTo((size *3/4).toFloat(),(size /4).toFloat())
         canvas.drawPath(path,linePaintB)
     }
 
@@ -87,21 +87,21 @@ class HirbertCurvDrawable: Drawable() {
         // 左上
         val matLU = Matrix()
         matLU.postRotate(270f)
-        val tmpBitmapLU = Bitmap.createBitmap(tmpBitmap,0,0,size,size,matLU,true)
-        canvas.drawBitmap(tmpBitmapLU,Rect(0,0,size,size),
-                Rect(0,0,size/2,size/2),linePaint)
+        val tmpBitmapLU = Bitmap.createBitmap(tmpBitmap,0,0, size, size,matLU,true)
+        canvas.drawBitmap(tmpBitmapLU,Rect(0,0, size, size),
+                Rect(0,0, size /2, size /2),linePaint)
         // 左下
-        canvas.drawBitmap(tmpBitmap,Rect(0,0,size,size),
-                Rect(0,size/2,size/2,size),linePaint)
+        canvas.drawBitmap(tmpBitmap,Rect(0,0, size, size),
+                Rect(0, size /2, size /2, size),linePaint)
         // 右下
-        canvas.drawBitmap(tmpBitmap,Rect(0,0,size,size),
-                Rect(size/2,size/2,size,size),linePaint)
+        canvas.drawBitmap(tmpBitmap,Rect(0,0, size, size),
+                Rect(size /2, size /2, size, size),linePaint)
         // 右上
         val matRU = Matrix()
         matRU.postRotate(90f)
-        val tmpBitmapRU = Bitmap.createBitmap(tmpBitmap,0,0,size,size,matRU,true)
-        canvas.drawBitmap(tmpBitmapRU,Rect(0,0,size,size),
-                Rect(size/2,0,size,size/2),linePaint)
+        val tmpBitmapRU = Bitmap.createBitmap(tmpBitmap,0,0, size, size,matRU,true)
+        canvas.drawBitmap(tmpBitmapRU,Rect(0,0, size, size),
+                Rect(size /2,0, size, size /2),linePaint)
     }
 
 

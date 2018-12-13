@@ -1,9 +1,7 @@
-package milu.kiriu2010.gui.decorate
+package milu.kiriu2010.gui.fractal
 
 import android.graphics.*
 import android.graphics.drawable.Drawable
-import android.os.Build
-import android.support.annotation.RequiresApi
 import milu.kiriu2010.math.Complex
 
 // マンデルブロ集合
@@ -22,7 +20,7 @@ class Mandelbrot3Drawable: Drawable() {
     }
 
     // マンデルブロ集合を描画
-    private val imageBitmap = Bitmap.createBitmap(n+ margin*2,n+ margin+2,Bitmap.Config.ARGB_8888)
+    private val imageBitmap = Bitmap.createBitmap(n + margin *2, n + margin +2,Bitmap.Config.ARGB_8888)
 
     // プロットするカラー
     // n x nの配列
@@ -53,9 +51,9 @@ class Mandelbrot3Drawable: Drawable() {
         linePaint.colorFilter = colorFilter
     }
 
-    override fun getIntrinsicWidth() = n+ margin*2
+    override fun getIntrinsicWidth() = n + margin *2
 
-    override fun getIntrinsicHeight() = n+ margin*2
+    override fun getIntrinsicHeight() = n + margin *2
 
     fun scanImagenary(posX: Int){
         // ---------------------------------------
@@ -76,7 +74,7 @@ class Mandelbrot3Drawable: Drawable() {
         // y0 = -1.5 ～ 1.5ぐらいがいいかも
         // ---------------------------------------
         val canvas = Canvas(imageBitmap)
-        val dv = size/n.toDouble()
+        val dv = size / n.toDouble()
         (0..n).forEach { j ->
             // 実数部
             val x0 = -1.5 + dv*posX.toDouble()
@@ -87,7 +85,7 @@ class Mandelbrot3Drawable: Drawable() {
             val color = Color.rgb(gray,gray,gray)
             //plotLst[posX][j] = color
             linePaint.color = color
-            canvas.drawPoint((posX+margin).toFloat(),(j+margin).toFloat(),linePaint)
+            canvas.drawPoint((posX+ margin).toFloat(),(j+ margin).toFloat(),linePaint)
         }
 
     }

@@ -1,8 +1,7 @@
-package milu.kiriu2010.gui.decorate
+package milu.kiriu2010.gui.fractal
 
 import android.graphics.*
 import android.graphics.drawable.Drawable
-import android.util.Log
 import java.io.ByteArrayOutputStream
 
 // シェルピンスキー・カーペット
@@ -47,9 +46,9 @@ class SierpinSkiCarpetDrawable: Drawable() {
     init {
         val canvas = Canvas(imageBitmap)
         // 一面黒く塗りつぶす
-        canvas.drawRect(Rect(0,0,size,size),linePaintB)
+        canvas.drawRect(Rect(0,0, size, size),linePaintB)
         // 真ん中を白く塗りつぶす
-        canvas.drawRect(Rect(size/3,size/3,size*2/3, size*2/3),linePaintW)
+        canvas.drawRect(Rect(size /3, size /3, size *2/3, size *2/3),linePaintW)
     }
 
     override fun draw(canvas: Canvas) {
@@ -77,8 +76,8 @@ class SierpinSkiCarpetDrawable: Drawable() {
             }
         }
         */
-        canvas.drawBitmap(imageBitmap,Rect(0,0,size,size),
-                Rect(margin,margin,margin+size,margin+size),
+        canvas.drawBitmap(imageBitmap,Rect(0,0, size, size),
+                Rect(margin, margin, margin + size, margin + size),
                 linePaint)
     }
 
@@ -92,9 +91,9 @@ class SierpinSkiCarpetDrawable: Drawable() {
         linePaint.colorFilter = colorFilter
     }
 
-    override fun getIntrinsicWidth() = size+margin*2
+    override fun getIntrinsicWidth() = size + margin *2
 
-    override fun getIntrinsicHeight() = size+margin*2
+    override fun getIntrinsicHeight() = size + margin *2
 
     // 処理
     // ------------------------------------
@@ -146,29 +145,29 @@ class SierpinSkiCarpetDrawable: Drawable() {
 
         val canvas = Canvas(imageBitmap)
         // 左上
-        canvas.drawBitmap(tmpBitmap,Rect(0,0,size,size),
-                Rect(0,0,size/3,size/3),linePaint)
+        canvas.drawBitmap(tmpBitmap,Rect(0,0, size, size),
+                Rect(0,0, size /3, size /3),linePaint)
         // 真ん中上
-        canvas.drawBitmap(tmpBitmap,Rect(0,0,size,size),
-                Rect(size/3,0,size*2/3,size/3),linePaint)
+        canvas.drawBitmap(tmpBitmap,Rect(0,0, size, size),
+                Rect(size /3,0, size *2/3, size /3),linePaint)
         // 右上
-        canvas.drawBitmap(tmpBitmap,Rect(0,0,size,size),
-                Rect(size*2/3,0,size,size/3),linePaint)
+        canvas.drawBitmap(tmpBitmap,Rect(0,0, size, size),
+                Rect(size *2/3,0, size, size /3),linePaint)
         // 左中
-        canvas.drawBitmap(tmpBitmap,Rect(0,0,size,size),
-                Rect(0,size/3,size/3,size*2/3),linePaint)
+        canvas.drawBitmap(tmpBitmap,Rect(0,0, size, size),
+                Rect(0, size /3, size /3, size *2/3),linePaint)
         // 右中
-        canvas.drawBitmap(tmpBitmap,Rect(0,0,size,size),
-                Rect(size*2/3,size/3,size,size*2/3),linePaint)
+        canvas.drawBitmap(tmpBitmap,Rect(0,0, size, size),
+                Rect(size *2/3, size /3, size, size *2/3),linePaint)
         // 左下
-        canvas.drawBitmap(tmpBitmap,Rect(0,0,size,size),
-                Rect(0,size*2/3,size/3,size),linePaint)
+        canvas.drawBitmap(tmpBitmap,Rect(0,0, size, size),
+                Rect(0, size *2/3, size /3, size),linePaint)
         // 真ん中下
-        canvas.drawBitmap(tmpBitmap,Rect(0,0,size,size),
-                Rect(size/3,size*2/3,size*2/3,size),linePaint)
+        canvas.drawBitmap(tmpBitmap,Rect(0,0, size, size),
+                Rect(size /3, size *2/3, size *2/3, size),linePaint)
         // 右下
-        canvas.drawBitmap(tmpBitmap,Rect(0,0,size,size),
-                Rect(size*2/3,size*2/3,size,size),linePaint)
+        canvas.drawBitmap(tmpBitmap,Rect(0,0, size, size),
+                Rect(size *2/3, size *2/3, size, size),linePaint)
     }
 
     companion object {

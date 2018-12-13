@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.annotation.RequiresApi
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +13,13 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.decorate.DragonCurvDrawable
-import milu.kiriu2010.gui.decorate.Mandelbrot2Drawable
-import milu.kiriu2010.gui.decorate.MandelbrotDrawable
+import milu.kiriu2010.gui.fractal.HirbertCurvDrawable
 
 class DrawNaviFragment : Fragment() {
+
+    val handler = Handler()
+
+    private lateinit var runnable: Runnable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,13 +34,22 @@ class DrawNaviFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_draw_navi, container, false)
 
         val imageView = view.findViewById<ImageView>(R.id.imageView)
-        val drawable = MandelbrotDrawable()
+        val drawable = HirbertCurvDrawable()
         imageView.setImageDrawable(drawable)
 
-        // フラグメントの大きさを図る
-        view.viewTreeObserver.addOnGlobalLayoutListener {
-            Log.d(javaClass.simpleName, "w[${view.measuredWidth}]h[${view.measuredHeight}]" )
+        val dataRepeat = view.findViewById<TextView>(R.id.dataRepeat)
+
+        var repeat = 0
+        runnable = Runnable {
+            drawable.proc()
+            drawable.invalidateSelf()
+            if ( repeat < 2 ) {
+                repeat++
+                dataRepeat.setText(repeat.toString())
+                handler.postDelayed(runnable,1000)
+            }
         }
+        handler.postDelayed(runnable,1000)
 
         return view
     }

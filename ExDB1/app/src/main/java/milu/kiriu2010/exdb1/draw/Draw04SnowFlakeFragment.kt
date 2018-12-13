@@ -11,8 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.decorate.KochSnowFlakeDrawable
-import org.w3c.dom.Text
+import milu.kiriu2010.gui.fractal.KochSnowFlakeDrawable
 
 class Draw04SnowFlakeFragment : Fragment() {
 

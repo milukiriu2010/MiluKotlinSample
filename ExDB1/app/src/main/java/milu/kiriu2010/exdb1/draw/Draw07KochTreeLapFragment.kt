@@ -13,7 +13,7 @@ import android.widget.ImageView
 import android.widget.RadioGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.decorate.KochTreeLapDrawable
+import milu.kiriu2010.gui.fractal.KochTreeLapDrawable
 
 class Draw07KochTreeLapFragment : Fragment() {
 

@@ -13,7 +13,7 @@ import android.widget.ImageView
 import android.widget.RadioGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.decorate.KochSnowFlakeLapDrawable
+import milu.kiriu2010.gui.fractal.KochSnowFlakeLapDrawable
 
 class Draw05SnowFlakeLapFragment : Fragment() {
 

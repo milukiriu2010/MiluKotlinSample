@@ -1,7 +1,9 @@
-package milu.kiriu2010.gui.decorate
+package milu.kiriu2010.gui.fractal
 
 import android.graphics.*
 import android.graphics.drawable.Drawable
+import android.os.Build
+import android.support.annotation.RequiresApi
 import milu.kiriu2010.math.Complex
 
 // マンデルブロ集合
@@ -12,7 +14,8 @@ import milu.kiriu2010.math.Complex
 // Z0 = 0
 // n=>無限大で発散しないという条件を満たす複素数c全体が作る集合
 // -------------------------------------------------------------
-class JuliaSetDrawable: Drawable() {
+@RequiresApi(Build.VERSION_CODES.O)
+class MandelbrotDrawable: Drawable() {
 
     private val cornerEffect = CornerPathEffect(8f)
 
@@ -27,12 +30,17 @@ class JuliaSetDrawable: Drawable() {
         strokeWidth = 10f
     }
 
-    // マンデルブロ集合を描画
-    private val imageBitmap = Bitmap.createBitmap(n+ margin*2,n+ margin+2,Bitmap.Config.ARGB_8888)
+    // プロットするカラー
+    // n x n
+    private val plotLst: MutableList<MutableList<Color>> = mutableListOf()
 
     override fun draw(canvas: Canvas) {
-        linePaint.color = Color.BLACK
-        canvas.drawBitmap(imageBitmap, margin.toFloat(), margin.toFloat(), linePaint)
+        plotLst.forEachIndexed { x, colorLst ->
+            colorLst.forEachIndexed { y, color ->
+                linePaint.color = color.toArgb()
+                canvas.drawPoint(x.toFloat()+ margin.toFloat(),y.toFloat()+ margin.toFloat(),linePaint)
+            }
+        }
     }
 
     override fun setAlpha(alpha: Int) {
@@ -45,11 +53,11 @@ class JuliaSetDrawable: Drawable() {
         linePaint.colorFilter = colorFilter
     }
 
-    override fun getIntrinsicWidth() = n+ margin*2
+    override fun getIntrinsicWidth() = n + margin *2
 
-    override fun getIntrinsicHeight() = n+ margin*2
+    override fun getIntrinsicHeight() = n + margin *2
 
-    fun scanImagenary(posX: Int){
+    init {
         // ---------------------------------------
         // xc   = -0.5
         // yc   =  0.0
@@ -67,40 +75,43 @@ class JuliaSetDrawable: Drawable() {
         // x0 = -1.5 ～ 1.5ぐらいがいいかも
         // y0 = -1.5 ～ 1.5ぐらいがいいかも
         // ---------------------------------------
-        val canvas = Canvas(imageBitmap)
-        val dv = size/n.toDouble()
-        (0..n).forEach { j ->
-            // 実数部
-            val x0 = -1.5 + dv*posX.toDouble()
-            // 虚数部
-            val y0 = -1.5 + dv*j.toDouble()
-            val z0 = Complex(x0,y0)
-            val gray = (iterationMax - juliaSet(z0, iterationMax))*255/ iterationMax
-            val color = Color.rgb(gray,gray,gray)
-            linePaint.color = color
-            canvas.drawPoint((posX+margin).toFloat(),(j+margin).toFloat(),linePaint)
-        }
+        (0  until n).forEach { i ->
+            val colorLst = mutableListOf<Color>()
 
+            (0 until n).forEach { j ->
+                // 実数部
+                val x0 = xc - size /2.0 + size *i.toDouble()/ n
+                // 虚数部
+                val y0 = yc - size /2.0 + size *j.toDouble()/ n
+                val z0 = Complex(x0,y0)
+                val gray = iterationMax - mandelbrot(z0, iterationMax)
+                val color = Color.valueOf(gray.toFloat(),gray.toFloat(),gray.toFloat())
+                colorLst.add(color)
+            }
+
+            plotLst.add(colorLst)
+        }
     }
 
-    private fun juliaSet(z0: Complex, max: Int): Int {
+    private fun mandelbrot(z0: Complex, max: Int): Int {
         var z = z0
         (0 until max).forEach { t ->
-            z = z.times(z).plus(c)
             // 絶対値が2を超える場合は、発散するとみなす。
             if (z.abs() > 2.0) return t
+            z = z.times(z).plus(z0)
         }
         return max
     }
 
     companion object {
-        public const val n = 1000
+        private const val n = 512
         // 反復最大回数
         // 色は、RGB(255,255,255)なので、255を最大の反復回数としている
-        //private const val iterationMax = 255
-        private const val iterationMax = 100
-        private const val size = 3.0
+        private const val iterationMax = 255
+        // Plots the size-by-size region of the Mandelbrot set, centered on (xc, yc)
+        private const val xc = -0.5
+        private const val yc = 0.0
+        private const val size = 2.0
         private const val margin = 50
-        private val c = Complex(-0.7,0.27015)
     }
 }

@@ -11,7 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.decorate.DragonCurvDrawable
+import milu.kiriu2010.gui.fractal.DragonCurvDrawable
 
 class Draw09DragonCurvFragment : Fragment() {
 

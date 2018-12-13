@@ -13,9 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.decorate.Mandelbrot2Drawable
-import milu.kiriu2010.gui.decorate.Mandelbrot3Drawable
-import milu.kiriu2010.gui.decorate.MandelbrotDrawable
+import milu.kiriu2010.gui.fractal.Mandelbrot3Drawable
 
 class Draw08MandelBrotFragment : Fragment() {
 

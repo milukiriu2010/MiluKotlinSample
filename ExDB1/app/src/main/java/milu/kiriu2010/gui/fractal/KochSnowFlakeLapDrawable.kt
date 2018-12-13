@@ -1,4 +1,4 @@
-package milu.kiriu2010.gui.decorate
+package milu.kiriu2010.gui.fractal
 
 import android.graphics.*
 import android.graphics.drawable.Drawable
@@ -63,11 +63,11 @@ class KochSnowFlakeLapDrawable: Drawable() {
     }
 
     private val snowflakes = listOf(
-            SnowFlake(0xffe84c65.toInt(), 80f,5),
-            SnowFlake(0xffd554d9.toInt(), 160f,4),
-            SnowFlake(0xffaf6eee.toInt(), 240f,3),
-            SnowFlake(0xff4a4ae6.toInt(), 320f,2),
-            SnowFlake(0xff4294e7.toInt(), 400f,1)
+            SnowFlake(0xffe84c65.toInt(), 80f, 5),
+            SnowFlake(0xffd554d9.toInt(), 160f, 4),
+            SnowFlake(0xffaf6eee.toInt(), 240f, 3),
+            SnowFlake(0xff4a4ae6.toInt(), 320f, 2),
+            SnowFlake(0xff4294e7.toInt(), 400f, 1)
     )
 
     override fun draw(canvas: Canvas) {
@@ -146,8 +146,8 @@ class KochSnowFlakeLapDrawable: Drawable() {
             val y3 = cy + radius*2/sqrt(3f)
 
             // 三角形の頂点を初期設定
-            kochLst.add( Pair(cy-radius,y1) )
-            kochLst.add( Pair(cy+radius,y1) )
+            kochLst.add( Pair(cy -radius,y1) )
+            kochLst.add( Pair(cy +radius,y1) )
             kochLst.add( Pair(cy,y3) )
 
             // コッホ曲線を分割する(3回実施)

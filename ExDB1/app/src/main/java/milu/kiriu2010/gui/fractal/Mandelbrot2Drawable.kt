@@ -1,9 +1,7 @@
-package milu.kiriu2010.gui.decorate
+package milu.kiriu2010.gui.fractal
 
 import android.graphics.*
 import android.graphics.drawable.Drawable
-import android.os.Build
-import android.support.annotation.RequiresApi
 import milu.kiriu2010.math.Complex
 
 // マンデルブロ集合
@@ -33,13 +31,13 @@ class Mandelbrot2Drawable: Drawable() {
     // n x n
     //private val plotLst: MutableList<MutableList<Int>> = mutableListOf()
     //private val plotLst = Array(n+1,{ arrayOf<Int>(n+1)})
-    private val plotLst = Array(n+1,{Array(n+1,{0})})
+    private val plotLst = Array(n +1,{Array(n +1,{0})})
 
     override fun draw(canvas: Canvas) {
         plotLst.forEachIndexed { x, colorLst ->
             colorLst.forEachIndexed { y, color ->
                 linePaint.color = color
-                canvas.drawPoint((x+margin).toFloat(),(y+margin).toFloat(),linePaint)
+                canvas.drawPoint((x+ margin).toFloat(),(y+ margin).toFloat(),linePaint)
             }
         }
     }
@@ -54,9 +52,9 @@ class Mandelbrot2Drawable: Drawable() {
         linePaint.colorFilter = colorFilter
     }
 
-    override fun getIntrinsicWidth() = n+ margin*2
+    override fun getIntrinsicWidth() = n + margin *2
 
-    override fun getIntrinsicHeight() = n+ margin*2
+    override fun getIntrinsicHeight() = n + margin *2
 
     fun scanImagenary(posX: Int){
         // ---------------------------------------
@@ -92,7 +90,7 @@ class Mandelbrot2Drawable: Drawable() {
 
         plotLst.add(colorLst)
         */
-        val dv = size/n.toDouble()
+        val dv = size / n.toDouble()
         (0..n).forEach { j ->
             // 実数部
             val x0 = -1.5 + dv*posX.toDouble()
