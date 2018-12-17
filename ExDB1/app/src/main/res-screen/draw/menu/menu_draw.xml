@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/draw_13_takagi_curve"
+        android:title="高木曲線" />
+    <item
         android:id="@+id/draw_12_sierpin_ski_triangle"
         android:title="シェルピンスキー三角形" />
     <item

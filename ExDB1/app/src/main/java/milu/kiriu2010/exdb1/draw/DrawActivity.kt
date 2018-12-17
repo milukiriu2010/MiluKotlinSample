@@ -75,6 +75,13 @@ class DrawActivity : AppCompatActivity() {
                 finish()
                 true
             }
+            // 高木曲線
+            R.id.draw_13_takagi_curve -> {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, Draw13TakagiCurveFragment.newInstance())
+                        .commit()
+                true
+            }
             // シェルピンスキー三角形
             R.id.draw_12_sierpin_ski_triangle -> {
                 supportFragmentManager.beginTransaction()
