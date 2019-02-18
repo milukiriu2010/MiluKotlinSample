@@ -11,6 +11,7 @@ import milu.kiriu2010.exdb1.basic.BasicActivity
 import milu.kiriu2010.exdb1.canvas.CanvasActivity
 import milu.kiriu2010.exdb1.draw.Draw01Fragment
 import milu.kiriu2010.exdb1.draw.DrawActivity
+import milu.kiriu2010.exdb1.opengl.OpenGLActivity
 import milu.kiriu2010.exdb1.scheduler.SchedulerActivity
 import milu.kiriu2010.exdb1.sqlite.SQLiteOpenHelperActivity
 
@@ -44,6 +45,13 @@ class MainActivity : AppCompatActivity() {
         btnBasic.transformationMethod = null
         btnBasic.setOnClickListener {
             val intent = Intent(this, BasicActivity::class.java)
+            startActivity(intent)
+        }
+
+        // 描画OpenGLページへ遷移
+        btnOpenGL.transformationMethod = null
+        btnOpenGL.setOnClickListener {
+            val intent = Intent(this, OpenGLActivity::class.java)
             startActivity(intent)
         }
     }

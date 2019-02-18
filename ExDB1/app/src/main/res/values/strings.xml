@@ -7,4 +7,5 @@
     <string name="hello_blank_fragment">Hello World!!</string>
     <string name="title_activity_canvas">CanvasActivity</string>
     <string name="title_activity_basic">BasicActivity</string>
+    <string name="title_activity_open_gl">OpenGLActivity</string>
 </resources>

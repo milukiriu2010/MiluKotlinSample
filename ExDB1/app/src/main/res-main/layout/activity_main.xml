@@ -138,4 +138,15 @@
         app:layout_constraintStart_toEndOf="@+id/btnCanvas"
         app:layout_constraintTop_toTopOf="@+id/btnCanvas" />
 
+    <Button
+        android:id="@+id/btnOpenGL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="OpenGL"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="@+id/btnAnimeObj"
+        app:layout_constraintStart_toStartOf="@+id/btnAnimeObj"
+        app:layout_constraintTop_toBottomOf="@+id/btnAnimeObj" />
+
 </android.support.constraint.ConstraintLayout>
