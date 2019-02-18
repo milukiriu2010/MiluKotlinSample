@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl
+package milu.kiriu2010.exdb1.opengl.cube01
 
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -6,7 +6,7 @@ import java.nio.FloatBuffer
 import javax.microedition.khronos.opengles.GL10
 
 
-class MyCube {
+class MyCube01 {
 
     private val mVertexBuffer: FloatBuffer
 
@@ -14,17 +14,35 @@ class MyCube {
 
         val vertices = floatArrayOf(
             // 前
-            -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f,
+            -0.5f, -0.5f, 0.5f,
+             0.5f, -0.5f, 0.5f,
+            -0.5f,  0.5f, 0.5f,
+             0.5f,  0.5f, 0.5f,
             // 後
-            -0.5f, -0.5f, -0.5f, 0.5f, -0.5f, -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f,
+            -0.5f, -0.5f, -0.5f,
+             0.5f, -0.5f, -0.5f,
+            -0.5f,  0.5f, -0.5f,
+             0.5f,  0.5f, -0.5f,
             // 左
-            -0.5f, -0.5f, 0.5f, -0.5f, -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f, -0.5f,
+            -0.5f, -0.5f,  0.5f,
+            -0.5f, -0.5f, -0.5f,
+            -0.5f,  0.5f,  0.5f,
+            -0.5f,  0.5f, -0.5f,
             // 右
-            0.5f, -0.5f, 0.5f, 0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, -0.5f,
+            0.5f, -0.5f,  0.5f,
+            0.5f, -0.5f, -0.5f,
+            0.5f,  0.5f,  0.5f,
+            0.5f,  0.5f, -0.5f,
             // 上
-            -0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f,
+            -0.5f, 0.5f,  0.5f,
+             0.5f, 0.5f,  0.5f,
+            -0.5f, 0.5f, -0.5f,
+             0.5f, 0.5f, -0.5f,
             // 底
-            -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f, -0.5f, -0.5f, -0.5f, 0.5f, -0.5f, -0.5f
+            -0.5f, -0.5f,  0.5f,
+             0.5f, -0.5f,  0.5f,
+            -0.5f, -0.5f, -0.5f,
+             0.5f, -0.5f, -0.5f
         )
 
         val vbb = ByteBuffer.allocateDirect(vertices.size * 4)

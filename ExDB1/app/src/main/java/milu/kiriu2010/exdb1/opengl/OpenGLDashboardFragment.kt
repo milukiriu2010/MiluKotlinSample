@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.triangle01.MyTriangle01Renderer
+import milu.kiriu2010.exdb1.opengl.cube01.MyCube01Renderer
 
-class OpenGLHomeFragment : Fragment() {
+class OpenGLDashboardFragment : Fragment() {
 
     private lateinit var myGL01View: MyGL01View
 
@@ -22,10 +22,10 @@ class OpenGLHomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_dashboard, container, false)
 
         myGL01View = view.findViewById<MyGL01View>(R.id.myGLView)
-        myGL01View.setRenderer(MyTriangle01Renderer())
+        myGL01View.setRenderer(MyCube01Renderer())
 
         return view
     }
@@ -43,7 +43,7 @@ class OpenGLHomeFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                OpenGLHomeFragment().apply {
+                OpenGLDashboardFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

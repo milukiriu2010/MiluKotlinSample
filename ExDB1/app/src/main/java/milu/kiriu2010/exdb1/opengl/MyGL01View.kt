@@ -4,12 +4,18 @@ import android.content.Context
 import android.opengl.GLSurfaceView
 import android.util.AttributeSet
 
-class MyGLView: GLSurfaceView {
+class MyGL01View: GLSurfaceView {
 
-    private val myRenderer = MyRenderer()
+    //private val myRenderer = MyCube01Renderer()
 
     constructor(ctx: Context): super(ctx) {
+        /*
         setRenderer(myRenderer)
+        // 何かあった場合だけ描画するモード
+        //this.renderMode = RENDERMODE_WHEN_DIRTY
+        // 再描画
+        //this.requestRender()
+        */
     }
 
     /* @JvmOverloads */
@@ -17,6 +23,8 @@ class MyGLView: GLSurfaceView {
             ctx: Context,
             attrs: AttributeSet? = null)
             : super(ctx, attrs) {
+        /*
         setRenderer(myRenderer)
+        */
     }
 }
