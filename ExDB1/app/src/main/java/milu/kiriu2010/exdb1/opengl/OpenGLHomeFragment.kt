@@ -11,7 +11,7 @@ import milu.kiriu2010.exdb1.opengl.triangle01.MyTriangle01Renderer
 
 class OpenGLHomeFragment : Fragment() {
 
-    private lateinit var myGL01View: MyGL01View
+    private lateinit var myGL02View: MyGL02View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,20 +24,20 @@ class OpenGLHomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_open_gl_home, container, false)
 
-        myGL01View = view.findViewById<MyGL01View>(R.id.myGLView)
-        myGL01View.setRenderer(MyTriangle01Renderer())
+        myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
+        myGL02View.setRenderer(MyTriangle01Renderer())
 
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        myGL01View.onResume()
+        myGL02View.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        myGL01View.onPause()
+        myGL02View.onPause()
     }
 
     companion object {

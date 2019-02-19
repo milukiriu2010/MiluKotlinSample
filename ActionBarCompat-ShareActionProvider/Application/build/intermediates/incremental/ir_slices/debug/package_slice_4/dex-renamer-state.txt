@@ -1,4 +1,0 @@
-#Tue Oct 16 08:34:16 JST 2018
-base.0=C\:\\mykotlin\\MiluKotlinSample\\ActionBarCompat-ShareActionProvider\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\20
-path.0=classes.dex
-renamed.0=classes.dex

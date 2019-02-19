@@ -24,7 +24,7 @@ class OpenGLDashboardFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_open_gl_dashboard, container, false)
 
-        myGL01View = view.findViewById<MyGL01View>(R.id.myGLView)
+        myGL01View = view.findViewById<MyGL01View>(R.id.myGL01View)
         myGL01View.setRenderer(MyCube01Renderer())
 
         return view
