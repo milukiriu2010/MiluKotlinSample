@@ -6,15 +6,18 @@ import java.nio.ByteOrder
 import java.nio.FloatBuffer
 import java.nio.ShortBuffer
 
-// number of coordinates per vertex in this array
-var squareCoords = floatArrayOf(
-        -0.5f,  0.5f, 0.0f,      // top left
-        -0.5f, -0.5f, 0.0f,      // bottom left
-        0.5f, -0.5f, 0.0f,      // bottom right
-        0.5f,  0.5f, 0.0f       // top right
-)
 
+// https://android.googlesource.com/platform/development/+/master/samples/OpenGL/HelloOpenGLES20/src/com/example/android/opengl/Square.java
 class MySquare01 {
+    // number of coordinates per vertex in this array
+    val COORDS_PER_VERTEX = 3
+    // number of coordinates per vertex in this array
+    var squareCoords = floatArrayOf(
+            -0.5f,  0.5f, 0.0f,      // top left
+            -0.5f, -0.5f, 0.0f,      // bottom left
+            0.5f, -0.5f, 0.0f,      // bottom right
+            0.5f,  0.5f, 0.0f       // top right
+    )
 
     // Set color with red, green, blue and alpha (opacity) values
     val color = floatArrayOf(1f, 1f, 0f, 1.0f)
@@ -46,22 +49,39 @@ class MySquare01 {
 
     private var mPositionHandle: Int = 0
     private var mColorHandle: Int = 0
+    private var mMVPMatrixHandle: Int = 0
 
     private val vertexCount: Int = squareCoords.size / COORDS_PER_VERTEX
     private val vertexStride: Int = COORDS_PER_VERTEX * 4 // 4 bytes per vertex
 
+    // -----------------------------------------------------------------
+    // * uMVPMatrix
+    // * vPosition
+    //
+    // This matrix member variable provides a hook to manipulate
+    // the coordinates of the objects that use this vertex shader
+    // -----------------------------------------------------------------
+    // the matrix must be included as a modifier of gl_Position
+    // Note that the uMVPMatrix factor *must be first* in order
+    // for the matrix multiplication product to be correct.
+    // -----------------------------------------------------------------
     private val vertexShaderCode =
-            "attribute vec4 vPosition;" +
-                    "void main() {" +
-                    "  gl_Position = vPosition;" +
-                    "}"
+            """
+            uniform   mat4 uMVPMatrix;
+            attribute vec4 vPosition;
+            void main() {
+                gl_Position = uMVPMatrix * vPosition;
+            }
+            """.trimIndent()
 
     private val fragmentShaderCode =
-            "precision mediump float;" +
-                    "uniform vec4 vColor;" +
-                    "void main() {" +
-                    "  gl_FragColor = vColor;" +
-                    "}"
+            """
+            precision mediump float;
+            uniform vec4 vColor;
+            void main() {
+              gl_FragColor = vColor;
+            }
+            """.trimIndent()
 
     private var mProgram: Int = 0
 
@@ -95,7 +115,7 @@ class MySquare01 {
     }
 
 
-    fun draw() {
+    fun draw(mvpMatrix: FloatArray) {
         // Add program to OpenGL ES environment
         GLES20.glUseProgram(mProgram)
 
@@ -114,20 +134,26 @@ class MySquare01 {
                     vertexStride,
                     vertexBuffer
             )
-
-            // get handle to fragment shader's vColor member
-            mColorHandle = GLES20.glGetUniformLocation(mProgram, "vColor").also { colorHandle ->
-
-                // Set color for drawing the triangle
-                GLES20.glUniform4fv(colorHandle, 1, color, 0)
-            }
-
-            // Draw the triangle
-            GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, vertexCount)
-
-            // Disable vertex array
-            GLES20.glDisableVertexAttribArray(it)
         }
-    }
 
+        // get handle to fragment shader's vColor member
+        mColorHandle = GLES20.glGetUniformLocation(mProgram, "vColor").also {
+            // Set color for drawing the triangle
+            GLES20.glUniform4fv(it, 1, color, 0)
+        }
+
+        // Get handle to shape's transformation matrix
+        mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram,"uMVPMatrix").also {
+            // Apply the projection and view transformation
+            GLES20.glUniformMatrix4fv(it, 1, false, mvpMatrix, 0)
+
+        }
+
+        // Draw the square
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES, drawOrder.size,
+                GLES20.GL_UNSIGNED_SHORT, drawListBuffer)
+
+        // Disable vertex array
+        GLES20.glDisableVertexAttribArray(mPositionHandle)
+    }
 }

@@ -5,17 +5,17 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
 
-// number of coordinates per vertex in this array
-const val COORDS_PER_VERTEX = 3
-var triangleCoords = floatArrayOf(     // in counterclockwise order:
-        0.0f, 0.622008459f, 0.0f,      // top
-        -0.5f, -0.311004243f, 0.0f,    // bottom left
-        0.5f, -0.311004243f, 0.0f      // bottom right
-)
 
 
 // https://developer.android.com/training/graphics/opengl/shapes
 class MyTriangle01 {
+    // number of coordinates per vertex in this array
+    val COORDS_PER_VERTEX = 3
+    var triangleCoords = floatArrayOf(     // in counterclockwise order:
+            0.0f, 0.622008459f, 0.0f,      // top
+            -0.5f, -0.311004243f, 0.0f,    // bottom left
+            0.5f, -0.311004243f, 0.0f      // bottom right
+    )
 
     // Set color with red, green, blue and alpha (opacity) values
     val color = floatArrayOf(0.63671875f, 0.76953125f, 0.22265625f, 1.0f)
@@ -37,22 +37,39 @@ class MyTriangle01 {
 
     private var mPositionHandle: Int = 0
     private var mColorHandle: Int = 0
+    private var mMVPMatrixHandle: Int = 0
 
     private val vertexCount: Int = triangleCoords.size / COORDS_PER_VERTEX
     private val vertexStride: Int = COORDS_PER_VERTEX * 4 // 4 bytes per vertex
 
+    // -----------------------------------------------------------------
+    // * uMVPMatrix
+    // * vPosition
+    //
+    // This matrix member variable provides a hook to manipulate
+    // the coordinates of the objects that use this vertex shader
+    // -----------------------------------------------------------------
+    // the matrix must be included as a modifier of gl_Position
+    // Note that the uMVPMatrix factor *must be first* in order
+    // for the matrix multiplication product to be correct.
+    // -----------------------------------------------------------------
     private val vertexShaderCode =
-            "attribute vec4 vPosition;" +
-            "void main() {" +
-            "  gl_Position = vPosition;" +
-            "}"
+            """
+            uniform   mat4 uMVPMatrix;
+            attribute vec4 vPosition;
+            void main() {
+                gl_Position = uMVPMatrix * vPosition;
+            }
+            """.trimIndent()
 
     private val fragmentShaderCode =
-            "precision mediump float;" +
-            "uniform vec4 vColor;" +
-            "void main() {" +
-            "  gl_FragColor = vColor;" +
-            "}"
+            """
+            precision mediump float;
+            uniform vec4 vColor;
+            void main() {
+              gl_FragColor = vColor;
+            }
+            """.trimIndent()
 
     private var mProgram: Int = 0
 
@@ -85,7 +102,7 @@ class MyTriangle01 {
         }
     }
 
-    fun draw() {
+    fun draw(mvpMatrix: FloatArray) {
         // Add program to OpenGL ES environment
         GLES20.glUseProgram(mProgram)
 
@@ -104,19 +121,25 @@ class MyTriangle01 {
                     vertexStride,
                     vertexBuffer
             )
-
-            // get handle to fragment shader's vColor member
-            mColorHandle = GLES20.glGetUniformLocation(mProgram, "vColor").also { colorHandle ->
-
-                // Set color for drawing the triangle
-                GLES20.glUniform4fv(colorHandle, 1, color, 0)
-            }
-
-            // Draw the triangle
-            GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, vertexCount)
-
-            // Disable vertex array
-            GLES20.glDisableVertexAttribArray(it)
         }
+
+        // get handle to fragment shader's vColor member
+        mColorHandle = GLES20.glGetUniformLocation(mProgram, "vColor").also { colorHandle ->
+            // Set color for drawing the triangle
+            GLES20.glUniform4fv(colorHandle, 1, color, 0)
+        }
+
+
+        // get handle to shape's transformation matrix
+        mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix").also { mvpMatrixHandle ->
+            // Apply the projection and view transformation
+            GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, mvpMatrix, 0)
+        }
+
+        // Draw the triangle
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, vertexCount)
+
+        // Disable vertex array
+        GLES20.glDisableVertexAttribArray(mPositionHandle)
     }
 }
