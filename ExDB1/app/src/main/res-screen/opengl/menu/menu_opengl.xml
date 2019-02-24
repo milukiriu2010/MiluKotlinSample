@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/opengl_02_triangle_color"
+        android:title="三角形(色)" />
+    <item
+        android:id="@+id/opengl_01_triangle_square"
+        android:title="三角形＋正方形" />
+</menu>

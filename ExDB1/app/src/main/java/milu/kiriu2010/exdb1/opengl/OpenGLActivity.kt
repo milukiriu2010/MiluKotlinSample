@@ -7,6 +7,8 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_open_gl.*
 import milu.kiriu2010.exdb1.R
+import milu.kiriu2010.exdb1.opengl.triangle01.Triangle01Fragment
+import milu.kiriu2010.exdb1.opengl.triangle02.Triangle02Fragment
 
 class OpenGLActivity : AppCompatActivity() {
 
@@ -61,7 +63,7 @@ class OpenGLActivity : AppCompatActivity() {
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_basic, menu)
+        menuInflater.inflate(R.menu.menu_opengl, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -71,6 +73,24 @@ class OpenGLActivity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 三角形(色)
+            R.id.opengl_02_triangle_color -> {
+                if (supportFragmentManager.findFragmentByTag("Triangle02") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Triangle02Fragment.newInstance(), "Triangle02")
+                            .commit()
+                }
+                true
+            }
+            // 三角形＋正方形
+            R.id.opengl_01_triangle_square -> {
+                if (supportFragmentManager.findFragmentByTag("Triangle01") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Triangle01Fragment.newInstance(), "Triangle01")
+                            .commit()
+                }
                 true
             }
             else -> return super.onOptionsItemSelected(item)
