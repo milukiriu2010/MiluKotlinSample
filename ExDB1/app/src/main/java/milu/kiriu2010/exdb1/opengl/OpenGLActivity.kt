@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_open_gl.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.triangle01.Triangle01Fragment
 import milu.kiriu2010.exdb1.opengl.triangle02.Triangle02Fragment
+import milu.kiriu2010.exdb1.opengl.triangle03.Triangle03Fragment
 
 class OpenGLActivity : AppCompatActivity() {
 
@@ -73,6 +74,15 @@ class OpenGLActivity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 三角形(色+回転)
+            R.id.opengl_03_triangle_color -> {
+                if (supportFragmentManager.findFragmentByTag("Triangle03") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Triangle03Fragment.newInstance(), "Triangle03")
+                            .commit()
+                }
                 true
             }
             // 三角形(色)

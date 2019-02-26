@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl
+package milu.kiriu2010.exdb1.opengl.triangle03
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,11 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
+import milu.kiriu2010.exdb1.opengl.MyGL02View
 import milu.kiriu2010.exdb1.opengl.triangle01.MyTriangle01Renderer
-import milu.kiriu2010.exdb1.opengl.triangle02.MyTriangle02Renderer
-import milu.kiriu2010.exdb1.opengl.triangle03.MyTriangle03Renderer
 
-class OpenGLHomeFragment : Fragment() {
+class Triangle03Fragment : Fragment() {
 
     private lateinit var myGL02View: MyGL02View
 
@@ -27,9 +26,7 @@ class OpenGLHomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_gl_home, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        //myGL02View.setRenderer(MyTriangle01Renderer())
-        myGL02View.setRenderer(MyTriangle02Renderer())
-        //myGL02View.setRenderer(MyTriangle03Renderer())
+        myGL02View.setRenderer(MyTriangle03Renderer())
 
         return view
     }
@@ -47,7 +44,7 @@ class OpenGLHomeFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                OpenGLHomeFragment().apply {
+                Triangle03Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

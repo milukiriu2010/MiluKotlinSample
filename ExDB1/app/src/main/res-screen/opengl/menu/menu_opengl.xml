@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_03_triangle_color"
+        android:title="三角形(色+回転)" />
+    <item
         android:id="@+id/opengl_02_triangle_color"
         android:title="三角形(色)" />
     <item

@@ -2,6 +2,7 @@ package milu.kiriu2010.exdb1.opengl.triangle02
 
 import android.opengl.GLES20
 import milu.kiriu2010.exdb1.opengl.MyGLCheck
+import java.lang.RuntimeException
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
@@ -128,6 +129,15 @@ class MyTriangle02 {
             // add the source code to the shader and compile it
             GLES20.glShaderSource(shader, shaderCode)
             GLES20.glCompileShader(shader)
+
+            // コンパイル結果のチェック
+            val compileStatus = IntArray(1)
+            GLES20.glGetShaderiv(shader, GLES20.GL_COMPILE_STATUS, compileStatus,0)
+            if ( compileStatus[0] == 0 ) {
+                // コンパイル失敗
+                GLES20.glDeleteShader(shader)
+                throw RuntimeException("Compile Error:"+shaderCode)
+            }
         }
     }
 
