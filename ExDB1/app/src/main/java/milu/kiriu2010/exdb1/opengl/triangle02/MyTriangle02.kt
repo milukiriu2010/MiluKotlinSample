@@ -16,10 +16,18 @@ class MyTriangle02 {
     // 頂点の位置情報を格納する配列
     // 反時計回り
     val vertex_position = floatArrayOf(
-         -0.5f, -0.25f, 0f,    // top
-         0.5f, -0.25f, 0f,    // bottom left
-        0f, 0.559016994f, 0f     // bottom right
+         -0.5f, -0.25f, 0f,    // bottom left
+         0.5f, -0.25f, 0f,    // bottom right
+        0f, 0.559016994f, 0f     // top
     )
+    /*
+    val vertex_position = floatArrayOf(
+            -0.5f, -0.25f, 0f,    // bottom left
+            0f, 0.559016994f, 0f,     // top
+            0.5f, -0.25f, 0f    // bottom right
+    )
+    */
+
     // attribute(色)の要素数
     val COORDS_PER_COLOR = 4
     // 頂点の色情報を格納する配列
