@@ -88,6 +88,17 @@ class MyTriangle01 {
 
             // creates OpenGL ES program executables
             GLES20.glLinkProgram(it)
+
+            /*
+            // リンク結果のチェック
+            val linkStatus = IntArray(1)
+            GLES20.glGetProgramiv(mProgram,GLES20.GL_LINK_STATUS,linkStatus,0)
+            if (linkStatus[0] == 0) {
+                // リンク失敗
+                GLES20.glDeleteProgram(mProgram)
+                throw RuntimeException("Error creating program.")
+            }
+            */
         }
     }
 

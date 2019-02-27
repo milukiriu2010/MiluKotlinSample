@@ -16,9 +16,9 @@ class MyTriangle02 {
     // 頂点の位置情報を格納する配列
     // 反時計回り
     val vertex_position = floatArrayOf(
-         0f, 1f, 0f,    // top
-         1f, 0f, 0f,    // bottom left
-        -1f, 0f, 0f     // bottom right
+         -0.5f, -0.25f, 0f,    // top
+         0.5f, -0.25f, 0f,    // bottom left
+        0f, 0.559016994f, 0f     // bottom right
     )
     // attribute(色)の要素数
     val COORDS_PER_COLOR = 4
@@ -80,20 +80,20 @@ class MyTriangle02 {
     // -----------------------------------------------------------------
     private val vertexShaderCode =
             """
-            attribute vec3 position;
-            attribute vec4 color;
-            uniform   mat4 mvpMatrix;
+            uniform   mat4 u_MVPMatrix;
+            attribute vec3 a_Position;
+            attribute vec4 a_Color;
             varying   vec4 vColor;
             void main() {
-                vColor = color;
-                gl_Position = mvpMatrix * vec4(position, 1.0);
+                vColor = a_Color;
+                gl_Position = u_MVPMatrix * vec4(a_Position,1.0);
             }
             """.trimIndent()
 
     private val fragmentShaderCode =
             """
             precision mediump float;
-            uniform   vec4 vColor;
+            varying   vec4 vColor;
             void main() {
               gl_FragColor = vColor;
             }
@@ -116,8 +116,23 @@ class MyTriangle02 {
             // add the fragment shader to program
             GLES20.glAttachShader(it, fragmentShader)
 
+            // attributeのindexを設定
+            GLES20.glBindAttribLocation(mProgram,0,"a_Position")
+            GLES20.glBindAttribLocation(mProgram,1,"a_Color")
+
             // creates OpenGL ES program executables
             GLES20.glLinkProgram(it)
+
+            /*
+            // リンク結果のチェック
+            val linkStatus = IntArray(1)
+            GLES20.glGetProgramiv(mProgram,GLES20.GL_LINK_STATUS,linkStatus,0)
+            if (linkStatus[0] == 0) {
+                // リンク失敗
+                GLES20.glDeleteProgram(mProgram)
+                throw RuntimeException("Error creating program.")
+            }
+            */
         }
     }
 
@@ -145,11 +160,9 @@ class MyTriangle02 {
         // Add program to OpenGL ES environment
         GLES20.glUseProgram(mProgram)
 
+        positionBuffer.position(0)
         // get handle to vertex shader's vPosition member
-        mPositionHandle = GLES20.glGetAttribLocation(mProgram, "position").also {
-
-            // Enable a handle to the triangle vertices
-            GLES20.glEnableVertexAttribArray(it)
+        mPositionHandle = GLES20.glGetAttribLocation(mProgram, "a_Position").also {
 
             // Prepare the triangle coordinate data
             GLES20.glVertexAttribPointer(
@@ -160,15 +173,15 @@ class MyTriangle02 {
                     COORDS_PER_POSITION * 4,
                     positionBuffer
             )
-        }
 
-        // get handle to fragment shader's vColor member
-        mColorHandle = GLES20.glGetUniformLocation(mProgram, "color").also {
-            /*
-            // Set color for drawing the triangle
-            GLES20.glUniform4fv(colorHandle, 1, color, 0)
-            */
+            // Enable a handle to the triangle vertices
             GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLCheck.checkGlError("mPositionHandle")
+
+        colorBuffer.position(0)
+        // get handle to fragment shader's vColor member
+        mColorHandle = GLES20.glGetAttribLocation(mProgram, "a_Color").also {
             GLES20.glVertexAttribPointer(
                     it,
                     COORDS_PER_COLOR,
@@ -177,11 +190,12 @@ class MyTriangle02 {
                     COORDS_PER_COLOR * 4,
                     colorBuffer
             )
+            GLES20.glEnableVertexAttribArray(it)
         }
         MyGLCheck.checkGlError("mColorHandle")
 
         // get handle to shape's transformation matrix
-        mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "mvpMatrix").also { mvpMatrixHandle ->
+        mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "u_MVPMatrix").also { mvpMatrixHandle ->
             // Apply the projection and view transformation
             GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, mvpMatrix, 0)
         }

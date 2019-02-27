@@ -40,8 +40,8 @@ class MyTriangle01Renderer: GLSurfaceView.Renderer {
         // Create a rotation for the triangle
         // Use the following code to generate constant rotation.
         // Leave this code out when using TouchEvents.
-        //val time = SystemClock.uptimeMillis() % 4000L;
-        //mAngle = 0.090f * time.toFloat();
+        val time = SystemClock.uptimeMillis() % 4000L;
+        mAngle = 0.090f * time.toFloat();
         Matrix.setRotateM(mRotationMatrix, 0, mAngle, 0f, 0f, 1.0f)
 
         // Combine the rotation matrix with the projection and camera view
@@ -50,7 +50,7 @@ class MyTriangle01Renderer: GLSurfaceView.Renderer {
         Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0)
 
         // Draw triangle
-        mTriangle.draw(mMVPMatrix)
+        mTriangle.draw(scratch)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
