@@ -8,6 +8,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_open_gl.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.cube01.OpenGL10Fragment
+import milu.kiriu2010.exdb1.opengl.square01.Square01Fragment
 import milu.kiriu2010.exdb1.opengl.triangle01.Triangle01Fragment
 import milu.kiriu2010.exdb1.opengl.triangle02.Triangle02Fragment
 import milu.kiriu2010.exdb1.opengl.triangle03.Triangle03Fragment
@@ -77,6 +78,15 @@ class OpenGLActivity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 四角形
+            R.id.opengl_06_square -> {
+                if (supportFragmentManager.findFragmentByTag("Square01") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Square01Fragment.newInstance(), "Square01")
+                            .commit()
+                }
                 true
             }
             // 三角形(拡大・縮小)

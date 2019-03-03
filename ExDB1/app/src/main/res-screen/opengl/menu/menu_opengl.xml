@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_06_square"
+        android:title="四角形" />
+    <item
         android:id="@+id/opengl_05_triangle_scale"
         android:title="三角形(拡大・縮小)" />
     <item
