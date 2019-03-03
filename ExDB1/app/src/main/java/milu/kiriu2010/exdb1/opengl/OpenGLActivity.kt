@@ -7,9 +7,12 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_open_gl.*
 import milu.kiriu2010.exdb1.R
+import milu.kiriu2010.exdb1.opengl.cube01.OpenGL10Fragment
 import milu.kiriu2010.exdb1.opengl.triangle01.Triangle01Fragment
 import milu.kiriu2010.exdb1.opengl.triangle02.Triangle02Fragment
 import milu.kiriu2010.exdb1.opengl.triangle03.Triangle03Fragment
+import milu.kiriu2010.exdb1.opengl.triangle04.Triangle04Fragment
+import milu.kiriu2010.exdb1.opengl.triangle05.Triangle05Fragment
 
 class OpenGLActivity : AppCompatActivity() {
 
@@ -76,6 +79,24 @@ class OpenGLActivity : AppCompatActivity() {
                 finish()
                 true
             }
+            // 三角形(拡大・縮小)
+            R.id.opengl_05_triangle_scale -> {
+                if (supportFragmentManager.findFragmentByTag("Triangle05") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Triangle05Fragment.newInstance(), "Triangle05")
+                            .commit()
+                }
+                true
+            }
+            // 三角形(分身)
+            R.id.opengl_04_triangle_copy -> {
+                if (supportFragmentManager.findFragmentByTag("Triangle04") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Triangle04Fragment.newInstance(), "Triangle04")
+                            .commit()
+                }
+                true
+            }
             // 三角形(色+回転)
             R.id.opengl_03_triangle_color -> {
                 if (supportFragmentManager.findFragmentByTag("Triangle03") == null) {
@@ -99,6 +120,15 @@ class OpenGLActivity : AppCompatActivity() {
                 if (supportFragmentManager.findFragmentByTag("Triangle01") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Triangle01Fragment.newInstance(), "Triangle01")
+                            .commit()
+                }
+                true
+            }
+            // OpenGL 1.0
+            R.id.opengl_00_opengl10 -> {
+                if (supportFragmentManager.findFragmentByTag("OpenGL1.0") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, OpenGL10Fragment.newInstance(), "OpenGL1.0")
                             .commit()
                 }
                 true

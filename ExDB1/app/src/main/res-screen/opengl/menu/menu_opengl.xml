@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_05_triangle_scale"
+        android:title="三角形(拡大・縮小)" />
+    <item
+        android:id="@+id/opengl_04_triangle_copy"
+        android:title="三角形(分身)" />
+    <item
         android:id="@+id/opengl_03_triangle_color"
         android:title="三角形(色+回転)" />
     <item
@@ -10,4 +16,7 @@
     <item
         android:id="@+id/opengl_01_triangle_square"
         android:title="三角形＋正方形" />
+    <item
+        android:id="@+id/opengl_00_opengl10"
+        android:title="OpenGL1.0" />
 </menu>
