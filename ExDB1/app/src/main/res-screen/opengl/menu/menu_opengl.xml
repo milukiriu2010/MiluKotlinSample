@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_07_square_cull"
+        android:title="四角形(カリング)" />
+    <item
         android:id="@+id/opengl_06_square"
         android:title="四角形" />
     <item

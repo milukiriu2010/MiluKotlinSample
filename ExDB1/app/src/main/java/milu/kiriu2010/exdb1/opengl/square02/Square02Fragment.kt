@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl
+package milu.kiriu2010.exdb1.opengl.square02
 
 import android.opengl.GLES20
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Switch
 
 import milu.kiriu2010.exdb1.R
+import milu.kiriu2010.exdb1.opengl.MyGL02View
 import milu.kiriu2010.exdb1.opengl.square01.MySquare01Renderer
 import milu.kiriu2010.exdb1.opengl.square02.MySquare02Renderer
 import milu.kiriu2010.exdb1.opengl.triangle01.MyTriangle01Renderer
@@ -18,7 +19,7 @@ import milu.kiriu2010.exdb1.opengl.triangle04.MyTriangle04Renderer
 import milu.kiriu2010.exdb1.opengl.triangle05.MyTriangle05Renderer
 import javax.microedition.khronos.opengles.GL10
 
-class OpenGLHomeFragment : Fragment() {
+class Square02Fragment : Fragment() {
 
     private lateinit var myGL02View: MyGL02View
 
@@ -37,15 +38,9 @@ class OpenGLHomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_square02, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        //myGL02View.setRenderer(MyTriangle01Renderer())
-        //myGL02View.setRenderer(MyTriangle02Renderer())
-        //myGL02View.setRenderer(MyTriangle03Renderer())
-        //myGL02View.setRenderer(MyTriangle04Renderer())
-        //myGL02View.setRenderer(MyTriangle05Renderer())
-        //myGL02View.setRenderer(MySquare01Renderer())
         var renderer = MySquare02Renderer()
         myGL02View.setRenderer(renderer)
 
@@ -80,7 +75,7 @@ class OpenGLHomeFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                OpenGLHomeFragment().apply {
+                Square02Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

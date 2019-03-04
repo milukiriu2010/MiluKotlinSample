@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_open_gl.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.cube01.OpenGL10Fragment
 import milu.kiriu2010.exdb1.opengl.square01.Square01Fragment
+import milu.kiriu2010.exdb1.opengl.square02.Square02Fragment
 import milu.kiriu2010.exdb1.opengl.triangle01.Triangle01Fragment
 import milu.kiriu2010.exdb1.opengl.triangle02.Triangle02Fragment
 import milu.kiriu2010.exdb1.opengl.triangle03.Triangle03Fragment
@@ -78,6 +79,15 @@ class OpenGLActivity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 四角形(カリング)
+            R.id.opengl_07_square_cull -> {
+                if (supportFragmentManager.findFragmentByTag("Square02") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Square02Fragment.newInstance(), "Square02")
+                            .commit()
+                }
                 true
             }
             // 四角形
