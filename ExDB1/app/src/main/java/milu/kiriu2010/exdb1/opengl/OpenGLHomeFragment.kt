@@ -1,6 +1,5 @@
 package milu.kiriu2010.exdb1.opengl
 
-import android.opengl.GLES20
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -9,24 +8,11 @@ import android.view.ViewGroup
 import android.widget.Switch
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.square01.MySquare01Renderer
-import milu.kiriu2010.exdb1.opengl.square02.MySquare02Renderer
-import milu.kiriu2010.exdb1.opengl.triangle01.MyTriangle01Renderer
-import milu.kiriu2010.exdb1.opengl.triangle02.MyTriangle02Renderer
-import milu.kiriu2010.exdb1.opengl.triangle03.MyTriangle03Renderer
-import milu.kiriu2010.exdb1.opengl.triangle04.MyTriangle04Renderer
-import milu.kiriu2010.exdb1.opengl.triangle05.MyTriangle05Renderer
-import javax.microedition.khronos.opengles.GL10
+import milu.kiriu2010.exdb1.opengl.square02.MyTorus01Renderer
 
 class OpenGLHomeFragment : Fragment() {
 
     private lateinit var myGL02View: MyGL02View
-
-    private lateinit var switchCulling: Switch
-
-    private lateinit var switchFront: Switch
-
-    private lateinit var switchDepth: Switch
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,23 +32,7 @@ class OpenGLHomeFragment : Fragment() {
         //myGL02View.setRenderer(MyTriangle04Renderer())
         //myGL02View.setRenderer(MyTriangle05Renderer())
         //myGL02View.setRenderer(MySquare01Renderer())
-        var renderer = MySquare02Renderer()
-        myGL02View.setRenderer(renderer)
-
-        switchCulling = view.findViewById(R.id.switchCulling)
-        switchCulling.setOnCheckedChangeListener { buttonView, isChecked ->
-            renderer.culling = isChecked
-        }
-
-        switchFront = view.findViewById(R.id.switchFront)
-        switchFront.setOnCheckedChangeListener { buttonView, isChecked ->
-            renderer.frontFace = isChecked
-        }
-
-        switchDepth = view.findViewById(R.id.switchDepth)
-        switchDepth.setOnCheckedChangeListener { buttonView, isChecked ->
-            renderer.depthTest = isChecked
-        }
+        myGL02View.setRenderer(MyTorus01Renderer())
 
         return view
     }

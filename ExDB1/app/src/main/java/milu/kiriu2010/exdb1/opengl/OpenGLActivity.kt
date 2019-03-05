@@ -10,6 +10,7 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.cube01.OpenGL10Fragment
 import milu.kiriu2010.exdb1.opengl.square01.Square01Fragment
 import milu.kiriu2010.exdb1.opengl.square02.Square02Fragment
+import milu.kiriu2010.exdb1.opengl.torus01.Torus01Fragment
 import milu.kiriu2010.exdb1.opengl.triangle01.Triangle01Fragment
 import milu.kiriu2010.exdb1.opengl.triangle02.Triangle02Fragment
 import milu.kiriu2010.exdb1.opengl.triangle03.Triangle03Fragment
@@ -79,6 +80,15 @@ class OpenGLActivity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // トーラス
+            R.id.opengl_08_torus -> {
+                if (supportFragmentManager.findFragmentByTag("Torus01") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Torus01Fragment.newInstance(), "Torus01")
+                            .commit()
+                }
                 true
             }
             // 四角形(カリング)
