@@ -9,6 +9,7 @@ import android.widget.Switch
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.square02.MyTorus01Renderer
+import milu.kiriu2010.exdb1.opengl.square02.MyTorus02Renderer
 
 class OpenGLHomeFragment : Fragment() {
 
@@ -32,7 +33,8 @@ class OpenGLHomeFragment : Fragment() {
         //myGL02View.setRenderer(MyTriangle04Renderer())
         //myGL02View.setRenderer(MyTriangle05Renderer())
         //myGL02View.setRenderer(MySquare01Renderer())
-        myGL02View.setRenderer(MyTorus01Renderer())
+        //myGL02View.setRenderer(MyTorus01Renderer())
+        myGL02View.setRenderer(MyTorus02Renderer())
 
         return view
     }
