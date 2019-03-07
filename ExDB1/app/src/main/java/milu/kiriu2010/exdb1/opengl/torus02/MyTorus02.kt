@@ -36,6 +36,8 @@ class MyTorus02 {
     private var mNormalHandle: Int = 0
     private var mColorHandle: Int = 0
     private var mMVPMatrixHandle: Int = 0
+    private var mInvMatrixHandle: Int = 0
+    private var mLightDirectionHandle: Int = 0
 
     // -----------------------------------------------------------------
     // * uMVPMatrix
@@ -58,7 +60,7 @@ class MyTorus02 {
             uniform   vec3 u_lightDirection;
             varying   vec4 vColor;
             void main() {
-                vec3 invLight = normalize(u_invMatrix * vec4(u_lightDirection,0.0)).xyz
+                vec3 invLight = normalize(u_invMatrix * vec4(u_lightDirection,0.0)).xyz;
                 float diffuse = clamp(dot(a_Normal,invLight),0.1,1.0);
                 vColor = a_Color * vec4(vec3(diffuse),1.0);
                 gl_Position = u_MVPMatrix * vec4(a_Position,1.0);
@@ -276,7 +278,7 @@ class MyTorus02 {
         }
     }
 
-    fun draw(mvpMatrix: FloatArray) {
+    fun draw(mvpMatrix: FloatArray,invMatrix: FloatArray,lightDirectionMatrix: FloatArray) {
         // Add program to OpenGL ES environment
         GLES20.glUseProgram(mProgram)
 
@@ -340,6 +342,15 @@ class MyTorus02 {
 
         }
         MyGLCheck.checkGlError("mMVPMatrixHandle")
+
+        mInvMatrixHandle = GLES20.glGetUniformLocation(mProgram,"u_invMatrix").also { invMatrixHandle ->
+            GLES20.glUniformMatrix4fv(invMatrixHandle,1,false,invMatrix,0)
+        }
+        MyGLCheck.checkGlError("mInvMatrixHandle")
+
+        mLightDirectionHandle = GLES20.glGetUniformLocation(mProgram,"u_lightDirection").also { lightDirectionHandle ->
+            GLES20.glUniform3fv(lightDirectionHandle,1,lightDirectionMatrix,0)
+        }
 
         // トーラス描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, idx.toArray().size,

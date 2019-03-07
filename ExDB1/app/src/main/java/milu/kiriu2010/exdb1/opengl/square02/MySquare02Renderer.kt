@@ -15,7 +15,7 @@ import kotlin.math.sin
 // https://android.keicode.com/basics/opengl-drawing-basic-shapes.php
 // https://developer.android.com/training/graphics/opengl/draw
 class MySquare02Renderer: GLSurfaceView.Renderer {
-    private lateinit var mSquare: MyTorus01
+    private lateinit var mSquare: MySquare02
 
     // mMVPMatrix is an abbreviation for "Model View Projection Matrix"
     private val mMVPMatrix = FloatArray(16)
@@ -123,6 +123,6 @@ class MySquare02Renderer: GLSurfaceView.Renderer {
                 0f, 1.0f, 0.0f)
 
         // initialize a triangle
-        mSquare = MyTorus01()
+        mSquare = MySquare02()
     }
 }
