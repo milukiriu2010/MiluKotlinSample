@@ -171,105 +171,27 @@ class MyTorus05 {
             GLES20.glAttachShader(it, fragmentShader)
 
             // attributeのindexを設定
-            GLES20.glBindAttribLocation(mProgram,0,"a_Position")
-            GLES20.glBindAttribLocation(mProgram,1,"a_Normal")
-            GLES20.glBindAttribLocation(mProgram,2,"a_Color")
+            GLES20.glBindAttribLocation(it,0,"a_Position")
+            GLES20.glBindAttribLocation(it,1,"a_Normal")
+            GLES20.glBindAttribLocation(it,2,"a_Color")
 
             // creates OpenGL ES program executables
             GLES20.glLinkProgram(it)
 
-            /*
             // リンク結果のチェック
             val linkStatus = IntArray(1)
-            GLES20.glGetProgramiv(mProgram,GLES20.GL_LINK_STATUS,linkStatus,0)
+            GLES20.glGetProgramiv(it,GLES20.GL_LINK_STATUS,linkStatus,0)
             if (linkStatus[0] == 0) {
+                MyGLCheck.printProgramInfoLog(it)
                 // リンク失敗
-                GLES20.glDeleteProgram(mProgram)
+                GLES20.glDeleteProgram(it)
                 throw RuntimeException("Error creating program.")
             }
-            */
+
+            // Add program to OpenGL ES environment
+            // シェーダプログラムを適用する
+            GLES20.glUseProgram(it)
         }
-    }
-
-    // ----------------------------------------------------------------------
-    // 第一引数はパイプを形成する円をいくつの頂点で表現するのかを指定します。
-    // 大きな数値を指定すればパイプの断面が円形に近づきますが、
-    // 逆に小さな数値を指定すればパイプの断面はカクカクになっていきます。
-    // ----------------------------------------------------------------------
-    // 第二引数はパイプをどれくらい分割するのかを指定します。
-    // この数値を大きくすると、トーラスは滑らかな輪を形成するようになり、
-    // 小さな数値を指定すればカクカクの輪になります。
-    // ----------------------------------------------------------------------
-    // 第三引数は生成されるパイプそのものの半径です。
-    // ----------------------------------------------------------------------
-    // 第四引数が原点からパイプの中心までの距離になります。
-    // ----------------------------------------------------------------------
-    private fun createPath(row: Int, column: Int, irad: Float, orad: Float) {
-        pos.clear()
-        nor.clear()
-        col.clear()
-        idx.clear()
-
-        (0..row).forEach { i ->
-            var r = PI.toFloat() *2f/row.toFloat()*i.toFloat()
-            var rr = cos(r)
-            var ry = sin(r)
-            (0..column).forEach { ii ->
-                val tr = PI.toFloat() *2f/column.toFloat()*ii.toFloat()
-                val tx = (rr*irad+orad)*cos(tr)
-                val ty = ry*irad
-                val tz = (rr*irad+orad)*sin(tr)
-                val rx = rr * cos(tr)
-                val rz = rr * sin(tr)
-                pos.addAll(arrayListOf<Float>(tx,ty,tz))
-                nor.addAll(arrayListOf<Float>(rx,ry,rz))
-                val tc = hsva(360/column*ii,1f,1f,1f)
-                col.addAll(arrayListOf<Float>(tc[0],tc[1],tc[2],tc[3]))
-            }
-
-            (0 until row).forEach { i ->
-                (0 until column).forEach { ii ->
-                    val r = (column+1)*i+ii
-                    idx.addAll(arrayListOf<Int>(r,r+column+1,r+1))
-                    idx.addAll(arrayListOf<Int>(r+column+1,r+column+2,r+1))
-                }
-            }
-        }
-    }
-
-    // ---------------------------------------------------------
-    // HSVカラー取得用関数
-    // ---------------------------------------------------------
-    // HSV では、色相は 0 ～ 360 の範囲に収まっている必要がありますが、
-    // それ以上に大きな数値を指定しても計算が破綻しないように関数内で処理しています。
-    // また、彩度や明度に不正な値が指定されている場合には正しい値を返しませんので注意しましょう。
-    // 彩度・明度・透明度はいずれも 0 ～ 1 の範囲で指定してください
-    // ---------------------------------------------------------
-    // h: 色相(0-360)
-    // s: 彩度(0.0-1.0)
-    // v: 明度(0.0-1.0)
-    // a: 透明度(0.0-1.0)
-    // ---------------------------------------------------------
-    private fun hsva(h: Int, s: Float, v: Float, a: Float): ArrayList<Float> {
-        val color = arrayListOf<Float>()
-        if ( (s > 1f) or (v > 1f) or (a > 1f) ) return color
-
-        val th = h%360
-        val i = floor(th.toFloat()/60f)
-        val f = th.toFloat()/60f - i
-        val m = v*(1f-s)
-        val n = v*(1f-s*f)
-        val k = v*(1-s*(1-f))
-        if ( ((s>0f) === false) and ((s<0f) === false) ) {
-            color.addAll(arrayListOf<Float>(v,v,v,a))
-        }
-        else {
-            var r = arrayListOf<Float>(v,n,m,m,k,v)
-            var g = arrayListOf<Float>(k,v,v,n,m,m)
-            var b = arrayListOf<Float>(m,m,k,v,v,n)
-            color.addAll(arrayListOf<Float>(r[i.toInt()],g[i.toInt()],b[i.toInt()],a))
-        }
-        return color
     }
 
     fun loadShader(type: Int, shaderCode: String): Int {
@@ -298,9 +220,6 @@ class MyTorus05 {
              ambientColorMatrix: FloatArray,
              eyeDirection: FloatArray
     ) {
-        // Add program to OpenGL ES environment
-        GLES20.glUseProgram(mProgram)
-
         positionBuffer.position(0)
         // get handle to vertex shader's vPosition member
         mPositionHandle = GLES20.glGetAttribLocation(mProgram, "a_Position").also {
@@ -387,4 +306,85 @@ class MyTorus05 {
         //GLES20.glDisableVertexAttribArray(mPositionHandle)
     }
 
+
+    // ----------------------------------------------------------------------
+    // 第一引数はパイプを形成する円をいくつの頂点で表現するのかを指定します。
+    // 大きな数値を指定すればパイプの断面が円形に近づきますが、
+    // 逆に小さな数値を指定すればパイプの断面はカクカクになっていきます。
+    // ----------------------------------------------------------------------
+    // 第二引数はパイプをどれくらい分割するのかを指定します。
+    // この数値を大きくすると、トーラスは滑らかな輪を形成するようになり、
+    // 小さな数値を指定すればカクカクの輪になります。
+    // ----------------------------------------------------------------------
+    // 第三引数は生成されるパイプそのものの半径です。
+    // ----------------------------------------------------------------------
+    // 第四引数が原点からパイプの中心までの距離になります。
+    // ----------------------------------------------------------------------
+    private fun createPath(row: Int, column: Int, irad: Float, orad: Float) {
+        pos.clear()
+        nor.clear()
+        col.clear()
+        idx.clear()
+
+        (0..row).forEach { i ->
+            var r = PI.toFloat() *2f/row.toFloat()*i.toFloat()
+            var rr = cos(r)
+            var ry = sin(r)
+            (0..column).forEach { ii ->
+                val tr = PI.toFloat() *2f/column.toFloat()*ii.toFloat()
+                val tx = (rr*irad+orad)*cos(tr)
+                val ty = ry*irad
+                val tz = (rr*irad+orad)*sin(tr)
+                val rx = rr * cos(tr)
+                val rz = rr * sin(tr)
+                pos.addAll(arrayListOf<Float>(tx,ty,tz))
+                nor.addAll(arrayListOf<Float>(rx,ry,rz))
+                val tc = hsva(360/column*ii,1f,1f,1f)
+                col.addAll(arrayListOf<Float>(tc[0],tc[1],tc[2],tc[3]))
+            }
+
+            (0 until row).forEach { i ->
+                (0 until column).forEach { ii ->
+                    val r = (column+1)*i+ii
+                    idx.addAll(arrayListOf<Int>(r,r+column+1,r+1))
+                    idx.addAll(arrayListOf<Int>(r+column+1,r+column+2,r+1))
+                }
+            }
+        }
+    }
+
+    // ---------------------------------------------------------
+    // HSVカラー取得用関数
+    // ---------------------------------------------------------
+    // HSV では、色相は 0 ～ 360 の範囲に収まっている必要がありますが、
+    // それ以上に大きな数値を指定しても計算が破綻しないように関数内で処理しています。
+    // また、彩度や明度に不正な値が指定されている場合には正しい値を返しませんので注意しましょう。
+    // 彩度・明度・透明度はいずれも 0 ～ 1 の範囲で指定してください
+    // ---------------------------------------------------------
+    // h: 色相(0-360)
+    // s: 彩度(0.0-1.0)
+    // v: 明度(0.0-1.0)
+    // a: 透明度(0.0-1.0)
+    // ---------------------------------------------------------
+    private fun hsva(h: Int, s: Float, v: Float, a: Float): ArrayList<Float> {
+        val color = arrayListOf<Float>()
+        if ( (s > 1f) or (v > 1f) or (a > 1f) ) return color
+
+        val th = h%360
+        val i = floor(th.toFloat()/60f)
+        val f = th.toFloat()/60f - i
+        val m = v*(1f-s)
+        val n = v*(1f-s*f)
+        val k = v*(1-s*(1-f))
+        if ( ((s>0f) === false) and ((s<0f) === false) ) {
+            color.addAll(arrayListOf<Float>(v,v,v,a))
+        }
+        else {
+            var r = arrayListOf<Float>(v,n,m,m,k,v)
+            var g = arrayListOf<Float>(k,v,v,n,m,m)
+            var b = arrayListOf<Float>(m,m,k,v,v,n)
+            color.addAll(arrayListOf<Float>(r[i.toInt()],g[i.toInt()],b[i.toInt()],a))
+        }
+        return color
+    }
 }

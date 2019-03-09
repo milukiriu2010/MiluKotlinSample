@@ -124,23 +124,26 @@ class MyTriangle02 {
             // add the fragment shader to program
             GLES20.glAttachShader(it, fragmentShader)
 
+            // シェーダオブジェクトを削除
+            GLES20.glDeleteShader(vertexShader)
+            GLES20.glDeleteShader(fragmentShader)
+
             // attributeのindexを設定
-            GLES20.glBindAttribLocation(mProgram,0,"a_Position")
-            GLES20.glBindAttribLocation(mProgram,1,"a_Color")
+            GLES20.glBindAttribLocation(it,0,"a_Position")
+            GLES20.glBindAttribLocation(it,1,"a_Color")
 
             // creates OpenGL ES program executables
             GLES20.glLinkProgram(it)
 
-            /*
             // リンク結果のチェック
             val linkStatus = IntArray(1)
-            GLES20.glGetProgramiv(mProgram,GLES20.GL_LINK_STATUS,linkStatus,0)
+            GLES20.glGetProgramiv(it,GLES20.GL_LINK_STATUS,linkStatus,0)
+            MyGLCheck.printProgramInfoLog(it)
             if (linkStatus[0] == 0) {
                 // リンク失敗
-                GLES20.glDeleteProgram(mProgram)
+                GLES20.glDeleteProgram(it)
                 throw RuntimeException("Error creating program.")
             }
-            */
         }
     }
 
