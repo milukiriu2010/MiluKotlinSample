@@ -11,14 +11,14 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 // ---------------------------------------------------
-// 平行光源によるライティング
+// 環境光によるライティング
 // ---------------------------------------------------
-// https://wgld.org/d/webgl/w021.html
+// https://wgld.org/d/webgl/w022.html
 // https://android.googlesource.com/platform/development/+/master/samples/OpenGL/HelloOpenGLES20/src/com/example/android/opengl/MyGLRenderer.java
 // https://android.keicode.com/basics/opengl-drawing-basic-shapes.php
 // https://developer.android.com/training/graphics/opengl/draw
-class MyTorus02Renderer: GLSurfaceView.Renderer {
-    private lateinit var mTorus: MyTorus02
+class MyTorus03Renderer: GLSurfaceView.Renderer {
+    private lateinit var mTorus: MyTorus03
 
     // mMVPMatrix is an abbreviation for "Model View Projection Matrix"
     private val mMVPMatrix = FloatArray(16)
@@ -26,6 +26,8 @@ class MyTorus02Renderer: GLSurfaceView.Renderer {
     private val mInvMatrix = FloatArray(16)
     // 平行光源の向き
     private val mLightDirectionMatrix = floatArrayOf(-0.5f,0.5f,0.5f)
+    // 環境光の色
+    private val mAmbientColorMatrix = floatArrayOf(0.1f,0.1f,0.1f,1.0f)
     private val mProjectionMatrix = FloatArray(16)
     private val mViewMatrix = FloatArray(16)
     private val mModelMatrix = FloatArray(16)
@@ -57,7 +59,7 @@ class MyTorus02Renderer: GLSurfaceView.Renderer {
         Matrix.invertM(mInvMatrix,0,mModelMatrix,0)
 
         // １つ目のモデル描画
-        mTorus.draw(mMVPMatrix,mInvMatrix,mLightDirectionMatrix)
+        mTorus.draw(mMVPMatrix,mInvMatrix,mLightDirectionMatrix,mAmbientColorMatrix)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -92,6 +94,6 @@ class MyTorus02Renderer: GLSurfaceView.Renderer {
                 0f, 1.0f, 0.0f)
 
         // initialize a triangle
-        mTorus = MyTorus02()
+        mTorus = MyTorus03()
     }
 }

@@ -12,6 +12,7 @@ import milu.kiriu2010.exdb1.opengl.square01.Square01Fragment
 import milu.kiriu2010.exdb1.opengl.square02.Square02Fragment
 import milu.kiriu2010.exdb1.opengl.torus01.Torus01Fragment
 import milu.kiriu2010.exdb1.opengl.torus02.Torus02Fragment
+import milu.kiriu2010.exdb1.opengl.torus03.Torus03Fragment
 import milu.kiriu2010.exdb1.opengl.triangle01.Triangle01Fragment
 import milu.kiriu2010.exdb1.opengl.triangle02.Triangle02Fragment
 import milu.kiriu2010.exdb1.opengl.triangle03.Triangle03Fragment
@@ -81,6 +82,15 @@ class OpenGLActivity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // トーラス(環境光)
+            R.id.opengl_10_torus -> {
+                if (supportFragmentManager.findFragmentByTag("Torus03") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Torus03Fragment.newInstance(), "Torus03")
+                            .commit()
+                }
                 true
             }
             // トーラス(平行光)

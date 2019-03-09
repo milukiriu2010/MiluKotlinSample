@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_10_torus"
+        android:title="トーラス(環境光)" />
+    <item
         android:id="@+id/opengl_09_torus"
         android:title="トーラス(平行光)" />
     <item
