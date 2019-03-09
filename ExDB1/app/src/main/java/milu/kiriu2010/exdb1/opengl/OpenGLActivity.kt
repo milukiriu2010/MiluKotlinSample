@@ -13,6 +13,8 @@ import milu.kiriu2010.exdb1.opengl.square02.Square02Fragment
 import milu.kiriu2010.exdb1.opengl.torus01.Torus01Fragment
 import milu.kiriu2010.exdb1.opengl.torus02.Torus02Fragment
 import milu.kiriu2010.exdb1.opengl.torus03.Torus03Fragment
+import milu.kiriu2010.exdb1.opengl.torus04.Torus04Fragment
+import milu.kiriu2010.exdb1.opengl.torus05.Torus05Fragment
 import milu.kiriu2010.exdb1.opengl.triangle01.Triangle01Fragment
 import milu.kiriu2010.exdb1.opengl.triangle02.Triangle02Fragment
 import milu.kiriu2010.exdb1.opengl.triangle03.Triangle03Fragment
@@ -82,6 +84,24 @@ class OpenGLActivity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // トーラス(フォンシェーディング)
+            R.id.opengl_12_torus -> {
+                if (supportFragmentManager.findFragmentByTag("Torus05") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Torus05Fragment.newInstance(), "Torus05")
+                            .commit()
+                }
+                true
+            }
+            // トーラス(反射光)
+            R.id.opengl_11_torus -> {
+                if (supportFragmentManager.findFragmentByTag("Torus04") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Torus04Fragment.newInstance(), "Torus04")
+                            .commit()
+                }
                 true
             }
             // トーラス(環境光)

@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_12_torus"
+        android:title="トーラス(フォンシェーディング)" />
+    <item
+        android:id="@+id/opengl_11_torus"
+        android:title="トーラス(反射光)" />
+    <item
         android:id="@+id/opengl_10_torus"
         android:title="トーラス(環境光)" />
     <item
