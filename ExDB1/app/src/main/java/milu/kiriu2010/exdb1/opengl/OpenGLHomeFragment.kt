@@ -36,7 +36,8 @@ class OpenGLHomeFragment : Fragment() {
         //myGL02View.setRenderer(MyTorus02Renderer())
         //myGL02View.setRenderer(MyTorus03Renderer())
         //myGL02View.setRenderer(MyTorus04Renderer())
-        myGL02View.setRenderer(MyTorus05Renderer())
+        //myGL02View.setRenderer(MyTorus05Renderer())
+        myGL02View.setRenderer(MyTorus06Renderer())
 
         return view
     }
