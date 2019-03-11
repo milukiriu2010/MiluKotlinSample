@@ -18,8 +18,8 @@ import milu.kiriu2010.exdb1.opengl.torus05.Torus05Fragment
 import milu.kiriu2010.exdb1.opengl.triangle01.Triangle01Fragment
 import milu.kiriu2010.exdb1.opengl.triangle02.Triangle02Fragment
 import milu.kiriu2010.exdb1.opengl.triangle03.Triangle03Fragment
-import milu.kiriu2010.exdb1.opengl.triangle04.Triangle04Fragment
-import milu.kiriu2010.exdb1.opengl.triangle05.Triangle05Fragment
+import milu.kiriu2010.exdb1.opengl.w023.Triangle04Fragment
+import milu.kiriu2010.exdb1.opengl.w024.Triangle05Fragment
 
 class OpenGLActivity : AppCompatActivity() {
 
@@ -87,7 +87,7 @@ class OpenGLActivity : AppCompatActivity() {
                 true
             }
             // トーラス(フォンシェーディング)
-            R.id.opengl_12_torus -> {
+            R.id.opengl_w024 -> {
                 if (supportFragmentManager.findFragmentByTag("Torus05") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Torus05Fragment.newInstance(), "Torus05")
@@ -96,7 +96,7 @@ class OpenGLActivity : AppCompatActivity() {
                 true
             }
             // トーラス(反射光)
-            R.id.opengl_11_torus -> {
+            R.id.opengl_w023 -> {
                 if (supportFragmentManager.findFragmentByTag("Torus04") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Torus04Fragment.newInstance(), "Torus04")

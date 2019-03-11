@@ -80,7 +80,7 @@ class MyTorus06 {
             uniform   vec3 u_lightPosition;
             uniform   vec3 u_eyeDirection;
             uniform   vec4 u_ambientColor;
-            varing    vec3 vPosition;
+            varying   vec3 vPosition;
             varying   vec3 vNormal;
             varying   vec4 vColor;
 
@@ -164,8 +164,10 @@ class MyTorus06 {
 
         // 頂点シェーダを生成
         val vertexShader: Int = loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode)
+        MyGLCheck.printShaderInfoLog(vertexShader)
         // フラグメントシェーダを生成
         val fragmentShader: Int = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode)
+        MyGLCheck.printShaderInfoLog(fragmentShader)
 
         // プログラムオブジェクトの生成とリンク
         mProgram = GLES20.glCreateProgram().also {

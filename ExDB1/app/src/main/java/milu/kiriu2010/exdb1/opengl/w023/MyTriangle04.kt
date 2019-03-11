@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl.triangle05
+package milu.kiriu2010.exdb1.opengl.w023
 
 import android.opengl.GLES20
 import milu.kiriu2010.exdb1.opengl.MyGLCheck
@@ -10,15 +10,15 @@ import java.nio.FloatBuffer
 
 
 // https://developer.android.com/training/graphics/opengl/shapes
-class MyTriangle05 {
+class MyTriangle04 {
     // attribute(頂点)の要素数
     val COORDS_PER_POSITION = 3
     // 頂点の位置情報を格納する配列
     // 反時計回り
     val vertex_position = floatArrayOf(
-          0f, 1f, 0f,   // top
-          1f, 0f, 0f,   // bottom left
-         -1f, 0f, 0f    // bottom right
+         -0.5f, -0.25f, 0f,    // bottom left
+         0.5f, -0.25f, 0f,    // bottom right
+        0f, 0.559016994f, 0f     // top
     )
 
     // attribute(色)の要素数

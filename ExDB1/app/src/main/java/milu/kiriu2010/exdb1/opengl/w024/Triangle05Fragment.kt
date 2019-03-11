@@ -1,6 +1,5 @@
-package milu.kiriu2010.exdb1.opengl.triangle05
+package milu.kiriu2010.exdb1.opengl.w024
 
-import android.opengl.GLSurfaceView
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
-import milu.kiriu2010.exdb1.opengl.triangle01.MyTriangle01Renderer
 
 class Triangle05Fragment : Fragment() {
 
