@@ -96,7 +96,7 @@ class MyTorus06 {
             }
             """.trimIndent()
 
-    private var mProgram: Int = 0
+    var mProgram: Int = 0
 
     val pos = arrayListOf<Float>()
     val nor = arrayListOf<Float>()

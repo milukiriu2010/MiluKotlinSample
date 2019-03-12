@@ -6,6 +6,7 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import android.os.SystemClock
+import milu.kiriu2010.exdb1.opengl.w025.MySphere06
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -19,6 +20,7 @@ import kotlin.math.sin
 // https://developer.android.com/training/graphics/opengl/draw
 class MyTorus06Renderer: GLSurfaceView.Renderer {
     private lateinit var mTorus: MyTorus06
+    private lateinit var mSphere: MySphere06
 
     // mMVPMatrix is an abbreviation for "Model View Projection Matrix"
     private val mMVPMatrix = FloatArray(16)
@@ -54,14 +56,6 @@ class MyTorus06Renderer: GLSurfaceView.Renderer {
         val ty = sin(rad) * 3.5f
         val tz = sin(rad) * 3.5f
 
-        // １つ目のモデルを回転する
-        //Matrix.setIdentityM(mModelMatrix,0)
-        //Matrix.rotateM(mModelMatrix,0,angleInDegrees,0f,1f,1f)
-        //// モデル×ビュー×プロジェクション(１つ目のモデル)
-        //Matrix.multiplyMM(mMVPMatrix,0,tmpMatrix,0,mModelMatrix,0)
-        //// モデル座標行列から逆行列を生成
-        //Matrix.invertM(mInvMatrix,0,mModelMatrix,0)
-
         // モデル座標返還行列の生成
         Matrix.setIdentityM(mModelMatrix,0)
         Matrix.translateM(mModelMatrix,0,tx,-ty,-tz)
@@ -76,6 +70,24 @@ class MyTorus06Renderer: GLSurfaceView.Renderer {
                 mLightPositionMatrix,
                 mAmbientColorMatrix,
                 mEyeDirection)
+
+        // モデル座標返還行列の生成
+        Matrix.setIdentityM(mModelMatrix,0)
+        Matrix.translateM(mModelMatrix,0,-tx,ty,tz)
+        //Matrix.rotateM(mModelMatrix,0,angleInDegrees,0f,1f,1f)
+        Matrix.multiplyMM(mMVPMatrix,0,tmpMatrix,0,mModelMatrix,0)
+        Matrix.invertM(mInvMatrix,0,mModelMatrix,0)
+
+        // 球体描画
+        mSphere.draw(mTorus.mProgram,
+                mMVPMatrix,
+                mModelMatrix,
+                mInvMatrix,
+                mLightPositionMatrix,
+                mAmbientColorMatrix,
+                mEyeDirection)
+
+
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -111,5 +123,6 @@ class MyTorus06Renderer: GLSurfaceView.Renderer {
 
         // initialize a triangle
         mTorus = MyTorus06()
+        mSphere = MySphere06()
     }
 }

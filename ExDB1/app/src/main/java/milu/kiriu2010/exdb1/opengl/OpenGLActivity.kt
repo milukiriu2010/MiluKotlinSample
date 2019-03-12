@@ -20,6 +20,7 @@ import milu.kiriu2010.exdb1.opengl.w015.Triangle02Fragment
 import milu.kiriu2010.exdb1.opengl.begin02.Triangle03Fragment
 import milu.kiriu2010.exdb1.opengl.w016.Triangle04Fragment
 import milu.kiriu2010.exdb1.opengl.w017.Triangle05Fragment
+import milu.kiriu2010.exdb1.opengl.w025.Torus06Fragment
 
 class OpenGLActivity : AppCompatActivity() {
 
@@ -84,6 +85,15 @@ class OpenGLActivity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 点光源
+            R.id.opengl_w025 -> {
+                if (supportFragmentManager.findFragmentByTag("Torus06") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Torus06Fragment.newInstance(), "Torus06")
+                            .commit()
+                }
                 true
             }
             // フォンシェーディング
