@@ -16,8 +16,8 @@ import milu.kiriu2010.exdb1.opengl.torus03.Torus03Fragment
 import milu.kiriu2010.exdb1.opengl.torus04.Torus04Fragment
 import milu.kiriu2010.exdb1.opengl.torus05.Torus05Fragment
 import milu.kiriu2010.exdb1.opengl.triangle01.Triangle01Fragment
-import milu.kiriu2010.exdb1.opengl.triangle02.Triangle02Fragment
-import milu.kiriu2010.exdb1.opengl.triangle03.Triangle03Fragment
+import milu.kiriu2010.exdb1.opengl.w021.Triangle02Fragment
+import milu.kiriu2010.exdb1.opengl.w022.Triangle03Fragment
 import milu.kiriu2010.exdb1.opengl.w023.Triangle04Fragment
 import milu.kiriu2010.exdb1.opengl.w024.Triangle05Fragment
 
@@ -86,7 +86,7 @@ class OpenGLActivity : AppCompatActivity() {
                 finish()
                 true
             }
-            // トーラス(フォンシェーディング)
+            // フォンシェーディング
             R.id.opengl_w024 -> {
                 if (supportFragmentManager.findFragmentByTag("Torus05") == null) {
                     supportFragmentManager.beginTransaction()
@@ -95,7 +95,7 @@ class OpenGLActivity : AppCompatActivity() {
                 }
                 true
             }
-            // トーラス(反射光)
+            // 反射光
             R.id.opengl_w023 -> {
                 if (supportFragmentManager.findFragmentByTag("Torus04") == null) {
                     supportFragmentManager.beginTransaction()
@@ -104,8 +104,8 @@ class OpenGLActivity : AppCompatActivity() {
                 }
                 true
             }
-            // トーラス(環境光)
-            R.id.opengl_10_torus -> {
+            // 環境光
+            R.id.opengl_w022 -> {
                 if (supportFragmentManager.findFragmentByTag("Torus03") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Torus03Fragment.newInstance(), "Torus03")
@@ -113,8 +113,8 @@ class OpenGLActivity : AppCompatActivity() {
                 }
                 true
             }
-            // トーラス(平行光)
-            R.id.opengl_09_torus -> {
+            // 平行光源
+            R.id.opengl_w021 -> {
                 if (supportFragmentManager.findFragmentByTag("Torus02") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Torus02Fragment.newInstance(), "Torus02")
