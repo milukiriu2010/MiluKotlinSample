@@ -1,20 +1,16 @@
-package milu.kiriu2010.exdb1.opengl.torus04
+package milu.kiriu2010.exdb1.opengl.w022
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
-import milu.kiriu2010.exdb1.opengl.square02.MyTorus01Renderer
-import milu.kiriu2010.exdb1.opengl.square02.MyTorus02Renderer
-import milu.kiriu2010.exdb1.opengl.square02.MyTorus03Renderer
-import milu.kiriu2010.exdb1.opengl.square02.MyTorus04Renderer
+import milu.kiriu2010.exdb1.opengl.w019.MyTorus03Renderer
 
-class Torus04Fragment : Fragment() {
+class Torus03Fragment : Fragment() {
 
     private lateinit var myGL02View: MyGL02View
 
@@ -38,8 +34,7 @@ class Torus04Fragment : Fragment() {
         //myGL02View.setRenderer(MySquare01Renderer())
         //myGL02View.setRenderer(MyTorus01Renderer())
         //myGL02View.setRenderer(MyTorus02Renderer())
-        //myGL02View.setRenderer(MyTorus03Renderer())
-        myGL02View.setRenderer(MyTorus04Renderer())
+        myGL02View.setRenderer(MyTorus03Renderer())
 
         return view
     }
@@ -57,7 +52,7 @@ class Torus04Fragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                Torus04Fragment().apply {
+                Torus03Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

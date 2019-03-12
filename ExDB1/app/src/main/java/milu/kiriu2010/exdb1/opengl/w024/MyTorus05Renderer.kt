@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl.square02
+package milu.kiriu2010.exdb1.opengl.w019
 
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
@@ -6,20 +6,19 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import android.os.SystemClock
-import android.util.Log
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
 // ---------------------------------------------------
-// 反射光によるライティング
-// ----------------------------------------
-// https://wgld.org/d/webgl/w023.html
+// フォンシェーディング
+// ---------------------------------------------------
+// https://wgld.org/d/webgl/w024.html
 // https://android.googlesource.com/platform/development/+/master/samples/OpenGL/HelloOpenGLES20/src/com/example/android/opengl/MyGLRenderer.java
 // https://android.keicode.com/basics/opengl-drawing-basic-shapes.php
 // https://developer.android.com/training/graphics/opengl/draw
-class MyTorus04Renderer: GLSurfaceView.Renderer {
-    private lateinit var mTorus: MyTorus04
+class MyTorus05Renderer: GLSurfaceView.Renderer {
+    private lateinit var mTorus: MyTorus05
 
     // mMVPMatrix is an abbreviation for "Model View Projection Matrix"
     private val mMVPMatrix = FloatArray(16)
@@ -104,6 +103,6 @@ class MyTorus04Renderer: GLSurfaceView.Renderer {
                 0f, 1.0f, 0.0f)
 
         // initialize a triangle
-        mTorus = MyTorus04()
+        mTorus = MyTorus05()
     }
 }

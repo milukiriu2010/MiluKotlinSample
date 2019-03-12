@@ -5,10 +5,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.square02.*
+import milu.kiriu2010.exdb1.opengl.w019.*
 
 class OpenGLHomeFragment : Fragment() {
 

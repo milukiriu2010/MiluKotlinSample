@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl.cube01
+package milu.kiriu2010.exdb1.opengl.begin00
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,7 +8,6 @@ import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL01View
-import milu.kiriu2010.exdb1.opengl.cube01.MyCube01Renderer
 
 class OpenGL10Fragment : Fragment() {
 

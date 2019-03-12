@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl.square02
+package milu.kiriu2010.exdb1.opengl.w019
 
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
@@ -11,14 +11,14 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 // ---------------------------------------------------
-// 環境光によるライティング
-// ---------------------------------------------------
-// https://wgld.org/d/webgl/w022.html
+// 反射光によるライティング
+// ----------------------------------------
+// https://wgld.org/d/webgl/w023.html
 // https://android.googlesource.com/platform/development/+/master/samples/OpenGL/HelloOpenGLES20/src/com/example/android/opengl/MyGLRenderer.java
 // https://android.keicode.com/basics/opengl-drawing-basic-shapes.php
 // https://developer.android.com/training/graphics/opengl/draw
-class MyTorus03Renderer: GLSurfaceView.Renderer {
-    private lateinit var mTorus: MyTorus03
+class MyTorus04Renderer: GLSurfaceView.Renderer {
+    private lateinit var mTorus: MyTorus04
 
     // mMVPMatrix is an abbreviation for "Model View Projection Matrix"
     private val mMVPMatrix = FloatArray(16)
@@ -28,6 +28,8 @@ class MyTorus03Renderer: GLSurfaceView.Renderer {
     private val mLightDirectionMatrix = floatArrayOf(-0.5f,0.5f,0.5f)
     // 環境光の色
     private val mAmbientColorMatrix = floatArrayOf(0.1f,0.1f,0.1f,1.0f)
+    // 視点ベクトル
+    private val mEyeDirection = floatArrayOf(0f,0f,20f)
     private val mProjectionMatrix = FloatArray(16)
     private val mViewMatrix = FloatArray(16)
     private val mModelMatrix = FloatArray(16)
@@ -44,13 +46,16 @@ class MyTorus03Renderer: GLSurfaceView.Renderer {
         // 経過秒から回転角度を求める(10秒/周)
         val time = SystemClock.uptimeMillis() % 10000L
         val angleInDegrees = 360.0f / 10000.0f * time.toInt()
+        //Log.d(javaClass.simpleName,"angle[$angleInDegrees]")
 
         val y = cos(angleInDegrees*PI.toFloat()/180f)
         val z = sin(angleInDegrees*PI.toFloat()/180f)
 
         // １つ目のモデルを回転する
         Matrix.setIdentityM(mModelMatrix,0)
-        Matrix.rotateM(mModelMatrix,0,angleInDegrees,0f,y,z)
+        //Matrix.rotateM(mModelMatrix,0,angleInDegrees,0f,y,z)
+        //Matrix.rotateM(mModelMatrix,0,angleInDegrees,0f,1f,1f)
+        Matrix.rotateM(mModelMatrix,0,angleInDegrees,0f,1f,1f)
 
         // モデル×ビュー×プロジェクション(１つ目のモデル)
         Matrix.multiplyMM(mMVPMatrix,0,tmpMatrix,0,mModelMatrix,0)
@@ -59,7 +64,11 @@ class MyTorus03Renderer: GLSurfaceView.Renderer {
         Matrix.invertM(mInvMatrix,0,mModelMatrix,0)
 
         // １つ目のモデル描画
-        mTorus.draw(mMVPMatrix,mInvMatrix,mLightDirectionMatrix,mAmbientColorMatrix)
+        mTorus.draw(mMVPMatrix,
+                mInvMatrix,
+                mLightDirectionMatrix,
+                mAmbientColorMatrix,
+                mEyeDirection)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -94,6 +103,6 @@ class MyTorus03Renderer: GLSurfaceView.Renderer {
                 0f, 1.0f, 0.0f)
 
         // initialize a triangle
-        mTorus = MyTorus03()
+        mTorus = MyTorus04()
     }
 }

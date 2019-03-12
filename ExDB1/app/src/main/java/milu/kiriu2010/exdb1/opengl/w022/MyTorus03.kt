@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl.square02
+package milu.kiriu2010.exdb1.opengl.w019
 
 import android.opengl.GLES20
 import milu.kiriu2010.exdb1.opengl.MyGLCheck
@@ -10,10 +10,10 @@ import kotlin.math.floor
 import kotlin.math.sin
 
 // ----------------------------------------
-// 反射光によるライティング
+// 環境光によるライティング
 // ----------------------------------------
-// https://wgld.org/d/webgl/w023.html
-class MyTorus04 {
+// https://wgld.org/d/webgl/w022.html
+class MyTorus03 {
     // attribute(頂点)の要素数
     val COORDS_PER_POSITION = 3
     // attribute(法線)の要素数
@@ -40,7 +40,6 @@ class MyTorus04 {
     private var mMVPMatrixHandle: Int = 0
     private var mInvMatrixHandle: Int = 0
     private var mLightDirectionHandle: Int = 0
-    private var mEyeDirectionHandle: Int = 0
     private var mAmbientColorHandle: Int = 0
 
     // -----------------------------------------------------------------
@@ -62,17 +61,12 @@ class MyTorus04 {
             uniform   mat4 u_MVPMatrix;
             uniform   mat4 u_invMatrix;
             uniform   vec3 u_lightDirection;
-            uniform   vec3 u_eyeDirection;
             uniform   vec4 u_ambientColor;
             varying   vec4 vColor;
             void main() {
-                vec3  invLight = normalize(u_invMatrix * vec4(u_lightDirection,0.0)).xyz;
-                vec3  invEye   = normalize(u_invMatrix * vec4(u_eyeDirection,0.0)).xyz;
-                vec3  halfLE   = normalize(invLight + invEye);
-                float diffuse  = clamp(dot(a_Normal,invLight),0.0,1.0);
-                float specular = pow(clamp(dot(a_Normal,halfLE),0.0,1.0), 50.0);
-                vec4  light    = a_Color * vec4(vec3(diffuse),1.0) + vec4(vec3(specular),1.0);
-                vColor = light + u_ambientColor;
+                vec3 invLight = normalize(u_invMatrix * vec4(u_lightDirection,0.0)).xyz;
+                float diffuse = clamp(dot(a_Normal,invLight),0.1,1.0);
+                vColor = a_Color * vec4(vec3(diffuse),1.0) + u_ambientColor;
                 gl_Position = u_MVPMatrix * vec4(a_Position,1.0);
             }
             """.trimIndent()
@@ -291,8 +285,7 @@ class MyTorus04 {
     fun draw(mvpMatrix: FloatArray,
              invMatrix: FloatArray,
              lightDirectionMatrix: FloatArray,
-             ambientColorMatrix: FloatArray,
-             eyeDirection: FloatArray
+             ambientColorMatrix: FloatArray
     ) {
         // Add program to OpenGL ES environment
         GLES20.glUseProgram(mProgram)
@@ -365,10 +358,6 @@ class MyTorus04 {
 
         mLightDirectionHandle = GLES20.glGetUniformLocation(mProgram,"u_lightDirection").also { lightDirectionHandle ->
             GLES20.glUniform3fv(lightDirectionHandle,1,lightDirectionMatrix,0)
-        }
-
-        mEyeDirectionHandle = GLES20.glGetUniformLocation(mProgram,"u_eyeDirection").also { eyeDirectionHandle ->
-            GLES20.glUniform3fv(eyeDirectionHandle,1,eyeDirection,0)
         }
 
         mAmbientColorHandle = GLES20.glGetUniformLocation(mProgram,"u_ambientColor").also { ambientColorHandle ->

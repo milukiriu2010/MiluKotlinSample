@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl.cube01
+package milu.kiriu2010.exdb1.opengl.begin00
 
 import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.cube01.MyCube01Renderer
+import milu.kiriu2010.exdb1.opengl.begin00.MyCube01Renderer
 
 class OpenGLDashboardFragment : Fragment() {
 

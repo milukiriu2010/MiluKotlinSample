@@ -7,14 +7,14 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_open_gl.*
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.cube01.OpenGL10Fragment
+import milu.kiriu2010.exdb1.opengl.begin00.OpenGL10Fragment
 import milu.kiriu2010.exdb1.opengl.w018.Square01Fragment
-import milu.kiriu2010.exdb1.opengl.square02.Square02Fragment
+import milu.kiriu2010.exdb1.opengl.w019.Square02Fragment
 import milu.kiriu2010.exdb1.opengl.w020.Torus01Fragment
 import milu.kiriu2010.exdb1.opengl.w021.Torus02Fragment
-import milu.kiriu2010.exdb1.opengl.torus03.Torus03Fragment
-import milu.kiriu2010.exdb1.opengl.torus04.Torus04Fragment
-import milu.kiriu2010.exdb1.opengl.torus05.Torus05Fragment
+import milu.kiriu2010.exdb1.opengl.w022.Torus03Fragment
+import milu.kiriu2010.exdb1.opengl.w023.Torus04Fragment
+import milu.kiriu2010.exdb1.opengl.w024.Torus05Fragment
 import milu.kiriu2010.exdb1.opengl.begin01.Triangle01Fragment
 import milu.kiriu2010.exdb1.opengl.w015.Triangle02Fragment
 import milu.kiriu2010.exdb1.opengl.begin02.Triangle03Fragment
@@ -195,7 +195,7 @@ class OpenGLActivity : AppCompatActivity() {
                 true
             }
             // OpenGL 1.0
-            R.id.opengl_00_opengl10 -> {
+            R.id.opengl_begin00 -> {
                 if (supportFragmentManager.findFragmentByTag("OpenGL1.0") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, OpenGL10Fragment.newInstance(), "OpenGL1.0")

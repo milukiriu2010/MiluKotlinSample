@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl.square02
+package milu.kiriu2010.exdb1.opengl.w019
 
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
@@ -10,7 +10,7 @@ import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
-// https://wgld.org/d/webgl/w018.html
+// https://wgld.org/d/webgl/w019.html
 // https://android.googlesource.com/platform/development/+/master/samples/OpenGL/HelloOpenGLES20/src/com/example/android/opengl/MyGLRenderer.java
 // https://android.keicode.com/basics/opengl-drawing-basic-shapes.php
 // https://developer.android.com/training/graphics/opengl/draw

@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl.square02
+package milu.kiriu2010.exdb1.opengl.w019
 
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
@@ -42,7 +42,7 @@ class MyTorus01Renderer: GLSurfaceView.Renderer {
 
         // １つ目のモデルを回転する
         Matrix.setIdentityM(mModelMatrix,0)
-        Matrix.rotateM(mModelMatrix,0,angleInDegrees,0f,y,z)
+        Matrix.rotateM(mModelMatrix,0,angleInDegrees,0f,1f,1f)
 
         // モデル×ビュー×プロジェクション(１つ目のモデル)
         Matrix.multiplyMM(mMVPMatrix,0,tmpMatrix,0,mModelMatrix,0)

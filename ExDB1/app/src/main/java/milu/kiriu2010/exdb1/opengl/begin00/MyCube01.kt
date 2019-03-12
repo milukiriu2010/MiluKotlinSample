@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl.cube01
+package milu.kiriu2010.exdb1.opengl.begin00
 
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
