@@ -8,18 +8,18 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_open_gl.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.cube01.OpenGL10Fragment
-import milu.kiriu2010.exdb1.opengl.square01.Square01Fragment
+import milu.kiriu2010.exdb1.opengl.w018.Square01Fragment
 import milu.kiriu2010.exdb1.opengl.square02.Square02Fragment
-import milu.kiriu2010.exdb1.opengl.torus01.Torus01Fragment
-import milu.kiriu2010.exdb1.opengl.torus02.Torus02Fragment
+import milu.kiriu2010.exdb1.opengl.w020.Torus01Fragment
+import milu.kiriu2010.exdb1.opengl.w021.Torus02Fragment
 import milu.kiriu2010.exdb1.opengl.torus03.Torus03Fragment
 import milu.kiriu2010.exdb1.opengl.torus04.Torus04Fragment
 import milu.kiriu2010.exdb1.opengl.torus05.Torus05Fragment
-import milu.kiriu2010.exdb1.opengl.triangle01.Triangle01Fragment
-import milu.kiriu2010.exdb1.opengl.w021.Triangle02Fragment
-import milu.kiriu2010.exdb1.opengl.w022.Triangle03Fragment
-import milu.kiriu2010.exdb1.opengl.w023.Triangle04Fragment
-import milu.kiriu2010.exdb1.opengl.w024.Triangle05Fragment
+import milu.kiriu2010.exdb1.opengl.begin01.Triangle01Fragment
+import milu.kiriu2010.exdb1.opengl.w015.Triangle02Fragment
+import milu.kiriu2010.exdb1.opengl.begin02.Triangle03Fragment
+import milu.kiriu2010.exdb1.opengl.w016.Triangle04Fragment
+import milu.kiriu2010.exdb1.opengl.w017.Triangle05Fragment
 
 class OpenGLActivity : AppCompatActivity() {
 
@@ -123,7 +123,7 @@ class OpenGLActivity : AppCompatActivity() {
                 true
             }
             // トーラス
-            R.id.opengl_08_torus -> {
+            R.id.opengl_w020 -> {
                 if (supportFragmentManager.findFragmentByTag("Torus01") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Torus01Fragment.newInstance(), "Torus01")
@@ -131,8 +131,8 @@ class OpenGLActivity : AppCompatActivity() {
                 }
                 true
             }
-            // 四角形(カリング)
-            R.id.opengl_07_square_cull -> {
+            // カリングと深度テスト
+            R.id.opengl_w019 -> {
                 if (supportFragmentManager.findFragmentByTag("Square02") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Square02Fragment.newInstance(), "Square02")
@@ -140,8 +140,8 @@ class OpenGLActivity : AppCompatActivity() {
                 }
                 true
             }
-            // 四角形
-            R.id.opengl_06_square -> {
+            // w018_インデックスバッファ
+            R.id.opengl_w018 -> {
                 if (supportFragmentManager.findFragmentByTag("Square01") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Square01Fragment.newInstance(), "Square01")
@@ -149,8 +149,8 @@ class OpenGLActivity : AppCompatActivity() {
                 }
                 true
             }
-            // 三角形(拡大・縮小)
-            R.id.opengl_05_triangle_scale -> {
+            // w17_移動・回転・拡大/縮小
+            R.id.opengl_w017 -> {
                 if (supportFragmentManager.findFragmentByTag("Triangle05") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Triangle05Fragment.newInstance(), "Triangle05")
@@ -158,8 +158,8 @@ class OpenGLActivity : AppCompatActivity() {
                 }
                 true
             }
-            // 三角形(分身)
-            R.id.opengl_04_triangle_copy -> {
+            // w016_複数モデルレンダリング
+            R.id.opengl_w016 -> {
                 if (supportFragmentManager.findFragmentByTag("Triangle04") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Triangle04Fragment.newInstance(), "Triangle04")
@@ -167,17 +167,8 @@ class OpenGLActivity : AppCompatActivity() {
                 }
                 true
             }
-            // 三角形(色+回転)
-            R.id.opengl_03_triangle_color -> {
-                if (supportFragmentManager.findFragmentByTag("Triangle03") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Triangle03Fragment.newInstance(), "Triangle03")
-                            .commit()
-                }
-                true
-            }
-            // 三角形(色)
-            R.id.opengl_02_triangle_color -> {
+            // w015_ポリゴンに色を塗る
+            R.id.opengl_w015 -> {
                 if (supportFragmentManager.findFragmentByTag("Triangle02") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Triangle02Fragment.newInstance(), "Triangle02")
@@ -185,8 +176,17 @@ class OpenGLActivity : AppCompatActivity() {
                 }
                 true
             }
-            // 三角形＋正方形
-            R.id.opengl_01_triangle_square -> {
+            // 初めて_三角形(色+回転)
+            R.id.opengl_begin02 -> {
+                if (supportFragmentManager.findFragmentByTag("Triangle03") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Triangle03Fragment.newInstance(), "Triangle03")
+                            .commit()
+                }
+                true
+            }
+            // 初めて_三角形＋正方形
+            R.id.opengl_begin01 -> {
                 if (supportFragmentManager.findFragmentByTag("Triangle01") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Triangle01Fragment.newInstance(), "Triangle01")

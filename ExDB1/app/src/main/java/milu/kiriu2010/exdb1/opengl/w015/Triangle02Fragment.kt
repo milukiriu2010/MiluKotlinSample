@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl.w024
+package milu.kiriu2010.exdb1.opengl.w015
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
 
-class Triangle05Fragment : Fragment() {
+class Triangle02Fragment : Fragment() {
 
     private lateinit var myGL02View: MyGL02View
 
@@ -22,10 +22,10 @@ class Triangle05Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_navi, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        myGL02View.setRenderer(MyTriangle05Renderer())
+        myGL02View.setRenderer(MyTriangle02Renderer())
 
         return view
     }
@@ -43,7 +43,7 @@ class Triangle05Fragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                Triangle05Fragment().apply {
+                Triangle02Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

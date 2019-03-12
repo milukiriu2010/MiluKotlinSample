@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl.w022
+package milu.kiriu2010.exdb1.opengl.begin02
 
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView

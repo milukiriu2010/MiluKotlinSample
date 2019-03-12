@@ -14,29 +14,29 @@
         android:id="@+id/opengl_w021"
         android:title="w021_平行光源" />
     <item
-        android:id="@+id/opengl_08_torus"
-        android:title="トーラス" />
+        android:id="@+id/opengl_w020"
+        android:title="w020_トーラス" />
     <item
-        android:id="@+id/opengl_07_square_cull"
-        android:title="四角形(カリング)" />
+        android:id="@+id/opengl_w019"
+        android:title="w019_カリングと深度テスト" />
     <item
-        android:id="@+id/opengl_06_square"
-        android:title="四角形" />
+        android:id="@+id/opengl_w018"
+        android:title="w018_インデックスバッファ" />
     <item
-        android:id="@+id/opengl_05_triangle_scale"
-        android:title="三角形(拡大・縮小)" />
+        android:id="@+id/opengl_w017"
+        android:title="w017_移動・回転・拡大/縮小" />
     <item
-        android:id="@+id/opengl_04_triangle_copy"
-        android:title="三角形(分身)" />
+        android:id="@+id/opengl_w016"
+        android:title="w016_複数モデルレンダリング" />
     <item
-        android:id="@+id/opengl_03_triangle_color"
-        android:title="三角形(色+回転)" />
+        android:id="@+id/opengl_w015"
+        android:title="w015_ポリゴンに色を塗る" />
     <item
-        android:id="@+id/opengl_02_triangle_color"
-        android:title="三角形(色)" />
+        android:id="@+id/opengl_begin02"
+        android:title="初めて_三角形(色+回転)" />
     <item
-        android:id="@+id/opengl_01_triangle_square"
-        android:title="三角形＋正方形" />
+        android:id="@+id/opengl_begin01"
+        android:title="初めて_三角形＋正方形" />
     <item
         android:id="@+id/opengl_00_opengl10"
         android:title="OpenGL1.0" />

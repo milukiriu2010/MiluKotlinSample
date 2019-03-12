@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl.w023
+package milu.kiriu2010.exdb1.opengl.w016
 
 import android.opengl.GLES20
 import milu.kiriu2010.exdb1.opengl.MyGLCheck

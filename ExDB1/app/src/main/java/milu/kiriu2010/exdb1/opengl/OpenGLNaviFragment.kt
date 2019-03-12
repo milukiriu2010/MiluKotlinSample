@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.w021.MyTriangle02Renderer
+import milu.kiriu2010.exdb1.opengl.w015.MyTriangle02Renderer
 
 class OpenGLNaviFragment : Fragment() {
 

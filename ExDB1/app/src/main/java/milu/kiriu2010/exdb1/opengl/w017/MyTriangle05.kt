@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl.w021
+package milu.kiriu2010.exdb1.opengl.w017
 
 import android.opengl.GLES20
 import milu.kiriu2010.exdb1.opengl.MyGLCheck
@@ -10,23 +10,16 @@ import java.nio.FloatBuffer
 
 
 // https://developer.android.com/training/graphics/opengl/shapes
-class MyTriangle02 {
+class MyTriangle05 {
     // attribute(頂点)の要素数
     val COORDS_PER_POSITION = 3
     // 頂点の位置情報を格納する配列
     // 反時計回り
     val vertex_position = floatArrayOf(
-         -0.5f, -0.25f, 0f,    // bottom left
-         0.5f, -0.25f, 0f,    // bottom right
-        0f, 0.559016994f, 0f     // top
+          0f, 1f, 0f,   // top
+          1f, 0f, 0f,   // bottom left
+         -1f, 0f, 0f    // bottom right
     )
-    /*
-    val vertex_position = floatArrayOf(
-            -0.5f, -0.25f, 0f,    // bottom left
-            0f, 0.559016994f, 0f,     // top
-            0.5f, -0.25f, 0f    // bottom right
-    )
-    */
 
     // attribute(色)の要素数
     val COORDS_PER_COLOR = 4
@@ -69,11 +62,6 @@ class MyTriangle02 {
     private var mPositionHandle: Int = 0
     private var mColorHandle: Int = 0
     private var mMVPMatrixHandle: Int = 0
-
-    /*
-    private val vertexCount: Int = vertex_position.size / COORDS_PER_POSITION
-    private val vertexStride: Int = COORDS_PER_POSITION * 4 // 4 bytes per vertex
-    */
 
     // -----------------------------------------------------------------
     // * uMVPMatrix
@@ -124,26 +112,23 @@ class MyTriangle02 {
             // add the fragment shader to program
             GLES20.glAttachShader(it, fragmentShader)
 
-            // シェーダオブジェクトを削除
-            GLES20.glDeleteShader(vertexShader)
-            GLES20.glDeleteShader(fragmentShader)
-
             // attributeのindexを設定
-            GLES20.glBindAttribLocation(it,0,"a_Position")
-            GLES20.glBindAttribLocation(it,1,"a_Color")
+            GLES20.glBindAttribLocation(mProgram,0,"a_Position")
+            GLES20.glBindAttribLocation(mProgram,1,"a_Color")
 
             // creates OpenGL ES program executables
             GLES20.glLinkProgram(it)
 
+            /*
             // リンク結果のチェック
             val linkStatus = IntArray(1)
-            GLES20.glGetProgramiv(it,GLES20.GL_LINK_STATUS,linkStatus,0)
-            MyGLCheck.printProgramInfoLog(it)
+            GLES20.glGetProgramiv(mProgram,GLES20.GL_LINK_STATUS,linkStatus,0)
             if (linkStatus[0] == 0) {
                 // リンク失敗
-                GLES20.glDeleteProgram(it)
+                GLES20.glDeleteProgram(mProgram)
                 throw RuntimeException("Error creating program.")
             }
+            */
         }
     }
 

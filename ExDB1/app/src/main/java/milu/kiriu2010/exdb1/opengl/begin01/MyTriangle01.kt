@@ -1,57 +1,45 @@
-package milu.kiriu2010.exdb1.opengl.triangle01
+package milu.kiriu2010.exdb1.opengl.begin01
 
 import android.opengl.GLES20
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
-import java.nio.ShortBuffer
 
 
-// https://android.googlesource.com/platform/development/+/master/samples/OpenGL/HelloOpenGLES20/src/com/example/android/opengl/Square.java
-class MySquare01 {
+
+// https://developer.android.com/training/graphics/opengl/shapes
+class MyTriangle01 {
     // number of coordinates per vertex in this array
     val COORDS_PER_VERTEX = 3
-    // number of coordinates per vertex in this array
-    var squareCoords = floatArrayOf(
-            -0.5f,  0.5f, 0.0f,      // top left
-            -0.5f, -0.5f, 0.0f,      // bottom left
-            0.5f, -0.5f, 0.0f,      // bottom right
-            0.5f,  0.5f, 0.0f       // top right
+    var triangleCoords = floatArrayOf(     // in counterclockwise order:
+            0.0f, 0.622008459f, 0.0f,      // top
+            -0.5f, -0.311004243f, 0.0f,    // bottom left
+            0.5f, -0.311004243f, 0.0f      // bottom right
     )
 
     // Set color with red, green, blue and alpha (opacity) values
-    val color = floatArrayOf(1f, 1f, 0f, 1.0f)
+    val color = floatArrayOf(0.63671875f, 0.76953125f, 0.22265625f, 1.0f)
 
-    private val drawOrder = shortArrayOf(0, 1, 2, 0, 2, 3) // order to draw vertices
-
-    // initialize vertex byte buffer for shape coordinates
-    private val vertexBuffer: FloatBuffer =
-    // (# of coordinate values * 4 bytes per float)
-            ByteBuffer.allocateDirect(squareCoords.size * 4).run {
+    private var vertexBuffer: FloatBuffer =
+            // (number of coordinate values * 4 bytes per float)
+            ByteBuffer.allocateDirect(triangleCoords.size * 4).run {
+                // use the device hardware's native byte order
                 order(ByteOrder.nativeOrder())
+
+                // create a floating point buffer from the ByteBuffer
                 asFloatBuffer().apply {
-                    put(squareCoords)
+                    // add the coordinates to the FloatBuffer
+                    put(triangleCoords)
+                    // set the buffer to read the first coordinate
                     position(0)
                 }
             }
-
-    // initialize byte buffer for the draw list
-    private val drawListBuffer: ShortBuffer =
-    // (# of coordinate values * 2 bytes per short)
-            ByteBuffer.allocateDirect(drawOrder.size * 2).run {
-                order(ByteOrder.nativeOrder())
-                asShortBuffer().apply {
-                    put(drawOrder)
-                    position(0)
-                }
-            }
-
 
     private var mPositionHandle: Int = 0
     private var mColorHandle: Int = 0
     private var mMVPMatrixHandle: Int = 0
 
-    private val vertexCount: Int = squareCoords.size / COORDS_PER_VERTEX
+    private val vertexCount: Int = triangleCoords.size / COORDS_PER_VERTEX
     private val vertexStride: Int = COORDS_PER_VERTEX * 4 // 4 bytes per vertex
 
     // -----------------------------------------------------------------
@@ -100,6 +88,17 @@ class MySquare01 {
 
             // creates OpenGL ES program executables
             GLES20.glLinkProgram(it)
+
+            /*
+            // リンク結果のチェック
+            val linkStatus = IntArray(1)
+            GLES20.glGetProgramiv(mProgram,GLES20.GL_LINK_STATUS,linkStatus,0)
+            if (linkStatus[0] == 0) {
+                // リンク失敗
+                GLES20.glDeleteProgram(mProgram)
+                throw RuntimeException("Error creating program.")
+            }
+            */
         }
     }
 
@@ -113,7 +112,6 @@ class MySquare01 {
             GLES20.glCompileShader(shader)
         }
     }
-
 
     fun draw(mvpMatrix: FloatArray) {
         // Add program to OpenGL ES environment
@@ -137,21 +135,20 @@ class MySquare01 {
         }
 
         // get handle to fragment shader's vColor member
-        mColorHandle = GLES20.glGetUniformLocation(mProgram, "vColor").also {
+        mColorHandle = GLES20.glGetUniformLocation(mProgram, "vColor").also { colorHandle ->
             // Set color for drawing the triangle
-            GLES20.glUniform4fv(it, 1, color, 0)
+            GLES20.glUniform4fv(colorHandle, 1, color, 0)
         }
 
-        // Get handle to shape's transformation matrix
-        mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram,"uMVPMatrix").also {
+
+        // get handle to shape's transformation matrix
+        mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix").also { mvpMatrixHandle ->
             // Apply the projection and view transformation
-            GLES20.glUniformMatrix4fv(it, 1, false, mvpMatrix, 0)
-
+            GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, mvpMatrix, 0)
         }
 
-        // Draw the square
-        GLES20.glDrawElements(GLES20.GL_TRIANGLES, drawOrder.size,
-                GLES20.GL_UNSIGNED_SHORT, drawListBuffer)
+        // Draw the triangle
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, vertexCount)
 
         // Disable vertex array
         GLES20.glDisableVertexAttribArray(mPositionHandle)

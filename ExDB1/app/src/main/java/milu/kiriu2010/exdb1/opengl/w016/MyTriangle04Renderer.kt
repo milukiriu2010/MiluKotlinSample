@@ -1,21 +1,17 @@
-package milu.kiriu2010.exdb1.opengl.w024
+package milu.kiriu2010.exdb1.opengl.w016
 
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
-import android.os.SystemClock
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
 
-// https://wgld.org/d/webgl/w015.html
+// https://wgld.org/d/webgl/w016.html
 // https://android.googlesource.com/platform/development/+/master/samples/OpenGL/HelloOpenGLES20/src/com/example/android/opengl/MyGLRenderer.java
 // https://android.keicode.com/basics/opengl-drawing-basic-shapes.php
 // https://developer.android.com/training/graphics/opengl/draw
-class MyTriangle05Renderer: GLSurfaceView.Renderer {
-    private lateinit var mTriangle: MyTriangle05
+class MyTriangle04Renderer: GLSurfaceView.Renderer {
+    private lateinit var mTriangle: MyTriangle04
 
     // mMVPMatrix is an abbreviation for "Model View Projection Matrix"
     private val mMVPMatrix = FloatArray(16)
@@ -34,23 +30,13 @@ class MyTriangle05Renderer: GLSurfaceView.Renderer {
         // ビュー×プロジェクション座標変換行列
         Matrix.multiplyMM(tmpMatrix,0,mProjectionMatrix,0,mViewMatrix,0)
 
-        // プリミティブをアニメーション
-        // 経過秒から回転角度を求める(10秒/周)
-        val time = SystemClock.uptimeMillis() % 10000L
-        val angleInDegrees = 360.0f / 10000.0f * time.toInt()
-        val angleRad = angleInDegrees * PI.toFloat() /180f
-
-        val x = cos(angleRad)
-        val y = sin(angleRad)
-
         // ---------------------------------------------------
         // １つ目のモデル
-        // (0,1,0)を中心にZ軸と並行に回転する
         // ---------------------------------------------------
 
         // １つ目のモデルを移動する
         Matrix.setIdentityM(mModelMatrix,0)
-        Matrix.translateM(mModelMatrix,0,x,y+1f,0f)
+        Matrix.translateM(mModelMatrix,0,1.5f,0f,0f)
 
         // モデル×ビュー×プロジェクション(１つ目のモデル)
         Matrix.multiplyMM(mMVPMatrix,0,tmpMatrix,0,mModelMatrix,0)
@@ -59,37 +45,17 @@ class MyTriangle05Renderer: GLSurfaceView.Renderer {
 
         // ---------------------------------------------------
         // ２つ目のモデル
-        // Y軸を中心に回転する
         // ---------------------------------------------------
 
         // ２つ目のモデルを移動するためのモデル座標変換行列
         Matrix.setIdentityM(mModelMatrix,0)
-        Matrix.translateM(mModelMatrix,0,1f,-1f,0f)
-        Matrix.rotateM(mModelMatrix,0,angleInDegrees,0f,1f,0f)
+        Matrix.translateM(mModelMatrix,0,-1.5f,0f,0f)
 
         // モデル×ビュー×プロジェクション(２つ目のモデル)
         Matrix.multiplyMM(mMVPMatrix,0,tmpMatrix,0,mModelMatrix,0)
 
         // ２つ目のモデル描画
         mTriangle.draw(mMVPMatrix)
-
-        // ---------------------------------------------------
-        // ３つ目のモデル
-        // 拡大縮小する
-        // ---------------------------------------------------
-        val s = sin(angleRad) + 1f
-
-        // ３つ目のモデルを移動するためのモデル座標変換行列
-        Matrix.setIdentityM(mModelMatrix,0)
-        Matrix.translateM(mModelMatrix,0,-1f,-1f,0f)
-        Matrix.scaleM(mModelMatrix,0,s,s,0f)
-
-        // モデル×ビュー×プロジェクション(３つ目のモデル)
-        Matrix.multiplyMM(mMVPMatrix,0,tmpMatrix,0,mModelMatrix,0)
-
-        // ３つ目のモデル描画
-        mTriangle.draw(mMVPMatrix)
-
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -115,11 +81,11 @@ class MyTriangle05Renderer: GLSurfaceView.Renderer {
 
         // カメラの位置
         Matrix.setLookAtM(mViewMatrix, 0,
-                0f, 0f, 5f,
+                0f, 0f, 3f,
                 0f, 0f, 0f,
                 0f, 1.0f, 0.0f)
 
         // initialize a triangle
-        mTriangle = MyTriangle05()
+        mTriangle = MyTriangle04()
     }
 }
