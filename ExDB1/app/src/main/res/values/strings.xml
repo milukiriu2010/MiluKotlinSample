@@ -8,4 +8,5 @@
     <string name="title_activity_canvas">CanvasActivity</string>
     <string name="title_activity_basic">BasicActivity</string>
     <string name="title_activity_open_gl">OpenGLActivity</string>
+    <string name="title_activity_open_gl02">OpenGL02Activity</string>
 </resources>

@@ -9,9 +9,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import milu.kiriu2010.exdb1.animeobj.AnimeObjActivity
 import milu.kiriu2010.exdb1.basic.BasicActivity
 import milu.kiriu2010.exdb1.canvas.CanvasActivity
-import milu.kiriu2010.exdb1.draw.Draw01Fragment
 import milu.kiriu2010.exdb1.draw.DrawActivity
-import milu.kiriu2010.exdb1.opengl.OpenGLActivity
+import milu.kiriu2010.exdb1.opengl01.OpenGLActivity
+import milu.kiriu2010.exdb1.opengl02.OpenGL02Activity
 import milu.kiriu2010.exdb1.scheduler.SchedulerActivity
 import milu.kiriu2010.exdb1.sqlite.SQLiteOpenHelperActivity
 
@@ -49,9 +49,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         // 描画OpenGLページへ遷移
-        btnOpenGL.transformationMethod = null
-        btnOpenGL.setOnClickListener {
+        btnOpenGL01.transformationMethod = null
+        btnOpenGL01.setOnClickListener {
             val intent = Intent(this, OpenGLActivity::class.java)
+            startActivity(intent)
+        }
+
+
+        // 描画OpenGL02ページへ遷移
+        btnOpenGL02.transformationMethod = null
+        btnOpenGL02.setOnClickListener {
+            val intent = Intent(this, OpenGL02Activity::class.java)
             startActivity(intent)
         }
     }

@@ -139,7 +139,7 @@
         app:layout_constraintTop_toTopOf="@+id/btnCanvas" />
 
     <Button
-        android:id="@+id/btnOpenGL"
+        android:id="@+id/btnOpenGL01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -148,5 +148,16 @@
         app:layout_constraintEnd_toEndOf="@+id/btnAnimeObj"
         app:layout_constraintStart_toStartOf="@+id/btnAnimeObj"
         app:layout_constraintTop_toBottomOf="@+id/btnAnimeObj" />
+
+    <Button
+        android:id="@+id/btnOpenGL02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="OpenGL02"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/btnOpenGL01"
+        app:layout_constraintStart_toEndOf="@+id/btnOpenGL01"
+        app:layout_constraintTop_toTopOf="@+id/btnOpenGL01" />
 
 </android.support.constraint.ConstraintLayout>
