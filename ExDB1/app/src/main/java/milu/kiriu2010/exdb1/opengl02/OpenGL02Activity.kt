@@ -24,7 +24,7 @@ class OpenGL02Activity : AppCompatActivity() {
             R.id.navigation_dashboard -> {
                 if (supportFragmentManager.findFragmentByTag("Dashboard") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, OpenGL02HomeFragment.newInstance(), "Dashboard")
+                            .replace(R.id.frameLayout, OpenGL02DashFragment.newInstance(), "Dashboard")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
