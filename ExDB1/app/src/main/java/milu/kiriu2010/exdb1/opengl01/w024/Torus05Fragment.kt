@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl01.MyGL02View
+import milu.kiriu2010.exdb1.opengl.MyGL02View
 import milu.kiriu2010.exdb1.opengl01.w019.*
 
 class Torus05Fragment : Fragment() {

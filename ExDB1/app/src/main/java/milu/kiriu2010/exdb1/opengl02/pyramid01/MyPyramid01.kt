@@ -1,79 +1,39 @@
 package milu.kiriu2010.exdb1.opengl02.pyramid01
 
 import android.opengl.GLES20
-import milu.kiriu2010.exdb1.opengl01.MyGLCheck
+import milu.kiriu2010.exdb1.opengl.MyGLCheck
 import java.lang.RuntimeException
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
-
+import java.nio.IntBuffer
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
 
 
 // https://wgld.org/d/webgl/w026.html
 class MyPyramid01 {
     // attribute(頂点)の要素数
     val COORDS_PER_POSITION = 3
-    // 頂点の位置情報を格納する配列
-    // 反時計回り
-    val vertex_position = floatArrayOf(
-         -0.5f, -0.25f, 0f,    // bottom left
-         0.5f, -0.25f, 0f,    // bottom right
-        0f, 0.559016994f, 0f     // top
-    )
-    /*
-    val vertex_position = floatArrayOf(
-            -0.5f, -0.25f, 0f,    // bottom left
-            0f, 0.559016994f, 0f,     // top
-            0.5f, -0.25f, 0f    // bottom right
-    )
-    */
-
+    // attribute(法線)の要素数
+    val COORDS_PER_NORMAL = 3
     // attribute(色)の要素数
     val COORDS_PER_COLOR = 4
-    // 頂点の色情報を格納する配列
-    val vertex_color = floatArrayOf(
-        1f, 0f, 0f, 1f,
-        0f, 1f, 0f, 1f,
-        0f, 0f, 1f, 1f
-    )
 
-    private var positionBuffer: FloatBuffer =
-            // (number of coordinate values * 4 bytes per float)
-            ByteBuffer.allocateDirect(vertex_position.size * 4).run {
-                // use the device hardware's native byte order
-                order(ByteOrder.nativeOrder())
+    // 頂点バッファ
+    private lateinit var positionBuffer: FloatBuffer
+    // 法線バッファ
+    private lateinit var normalBuffer: FloatBuffer
+    // 色バッファ
+    private lateinit var colorBuffer: FloatBuffer
+    // 描画インデックス
+    private lateinit var drawListBuffer: IntBuffer
 
-                // create a floating point buffer from the ByteBuffer
-                asFloatBuffer().apply {
-                    // add the coordinates to the FloatBuffer
-                    put(vertex_position)
-                    // set the buffer to read the first coordinate
-                    position(0)
-                }
-            }
-
-
-    private var colorBuffer: FloatBuffer =
-            ByteBuffer.allocateDirect(vertex_color.size * 4).run {
-                // use the device hardware's native byte order
-                order(ByteOrder.nativeOrder())
-
-                // create a floating point buffer from the ByteBuffer
-                asFloatBuffer().apply {
-                    // add the coordinates to the FloatBuffer
-                    put(vertex_color)
-                    // set the buffer to read the first coordinate
-                    position(0)
-                }
-            }
-    private var mPositionHandle: Int = 0
-    private var mColorHandle: Int = 0
-    private var mMVPMatrixHandle: Int = 0
-
-    /*
-    private val vertexCount: Int = vertex_position.size / COORDS_PER_POSITION
-    private val vertexStride: Int = COORDS_PER_POSITION * 4 // 4 bytes per vertex
-    */
+    val pos = arrayListOf<Float>()
+    val nor = arrayListOf<Float>()
+    val col = arrayListOf<Float>()
+    val idx = arrayListOf<Int>()
 
     // -----------------------------------------------------------------
     // * uMVPMatrix
@@ -88,12 +48,18 @@ class MyPyramid01 {
     // -----------------------------------------------------------------
     private val vertexShaderCode =
             """
-            uniform   mat4 u_MVPMatrix;
             attribute vec3 a_Position;
+            attribute vec3 a_Normal;
             attribute vec4 a_Color;
+            uniform   mat4 u_MVPMatrix;
+            uniform   mat4 u_mMatrix;
+            varying   vec3 vPosition;
+            varying   vec3 vNormal;
             varying   vec4 vColor;
             void main() {
-                vColor = a_Color;
+                vPosition   = (u_mMatrix * vec4(a_Position,1.0)).xyz;
+                vNormal     = a_Normal;
+                vColor      = a_Color;
                 gl_Position = u_MVPMatrix * vec4(a_Position,1.0);
             }
             """.trimIndent()
@@ -101,15 +67,162 @@ class MyPyramid01 {
     private val fragmentShaderCode =
             """
             precision mediump float;
+            uniform   mat4 u_invMatrix;
+            uniform   vec3 u_lightPosition;
+            uniform   vec3 u_eyeDirection;
+            uniform   vec4 u_ambientColor;
+            varying   vec3 vPosition;
+            varying   vec3 vNormal;
             varying   vec4 vColor;
+
             void main() {
-              gl_FragColor = vColor;
+                vec3  lightVec  = u_lightPosition - vPosition;
+                vec3  invLight  = normalize(u_invMatrix * vec4(lightVec, 0.0)).xyz;
+                vec3  invEye    = normalize(u_invMatrix * vec4(u_eyeDirection, 0.0)).xyz;
+                vec3  halfLE    = normalize(invLight + invEye);
+                float diffuse   = clamp(dot(vNormal, invLight), 0.1, 1.0) + 0.2;
+                float specular  = pow(clamp(dot(vNormal,halfLE), 0.0, 1.0), 50.0);
+                vec4  destColor = vColor * vec4(vec3(diffuse),1.0) + vec4(vec3(specular),1.0) + u_ambientColor;
+                gl_FragColor    = destColor;
             }
             """.trimIndent()
 
     private var mProgram: Int = 0
 
     init {
+        val c1 = cos(2f*PI/3f).toFloat()
+        val c2 = cos(4f*PI/3f).toFloat()
+        val s1 = sin(2f*PI/3f).toFloat()
+        val s2 = sin(4f*PI/3f).toFloat()
+
+        // 最初の３点は、底面を下からみる⇒トップ
+        pos.addAll(arrayListOf(1f,0f,0f))
+        pos.addAll(arrayListOf<Float>(c1,0f,s1))
+        pos.addAll(arrayListOf<Float>(c2,0f,s2))
+        pos.addAll(arrayListOf(0f,1f,0f))
+
+        // 色
+        (0 until 4).forEach {
+            col.addAll(arrayListOf<Float>(1f,0f,0f,1f))
+        }
+
+        // 法線
+        nor.addAll(arrayListOf(0f,-1f,0f))
+        nor.addAll(arrayListOf(1f,1f,1f))
+        nor.addAll(arrayListOf(-1f,1f,0f))
+        nor.addAll(arrayListOf(1f,1f,-1f))
+
+
+        // インデックス
+        // 底面
+        idx.addAll(arrayListOf<Int>(0,1,2))
+        // 横１
+        idx.addAll(arrayListOf<Int>(0,3,1))
+        // 横２
+        idx.addAll(arrayListOf<Int>(1,3,2))
+        // 横３
+        idx.addAll(arrayListOf<Int>(2,3,1))
+
+
+        /*
+        // 頂点バッファ
+        // 最初の３点は、底面を下からみる⇒トップ
+        pos.addAll(arrayListOf(1f,0f,0f))
+        pos.addAll(arrayListOf<Float>(c1,0f,s1))
+        pos.addAll(arrayListOf<Float>(c2,0f,s2))
+        // 横１
+        pos.addAll(arrayListOf(1f,0f,0f))
+        pos.addAll(arrayListOf<Float>(c1,0f,s1))
+        pos.addAll(arrayListOf(0f,1f,0f))
+        // 横２
+        pos.addAll(arrayListOf<Float>(c1,0f,s1))
+        pos.addAll(arrayListOf<Float>(c2,0f,s2))
+        pos.addAll(arrayListOf(0f,1f,0f))
+        // 横３
+        pos.addAll(arrayListOf<Float>(c2,0f,s2))
+        pos.addAll(arrayListOf(1f,0f,0f))
+        pos.addAll(arrayListOf(0f,1f,0f))
+
+        // 色
+        (0 until 12).forEach {
+            col.addAll(arrayListOf<Float>(1f,0f,0f,1f))
+        }
+        */
+
+
+
+
+
+        // 頂点バッファ
+        positionBuffer =
+                ByteBuffer.allocateDirect(pos.toArray().size * 4).run {
+                    // use the device hardware's native byte order
+                    order(ByteOrder.nativeOrder())
+
+                    // create a floating point buffer from the ByteBuffer
+                    asFloatBuffer().apply {
+                        // add the coordinates to the FloatBuffer
+                        put(pos.toFloatArray())
+                        // set the buffer to read the first coordinate
+                        position(0)
+                    }
+                }
+
+        // 法線バッファ
+        normalBuffer =
+                ByteBuffer.allocateDirect(nor.toArray().size * 4).run {
+                    // use the device hardware's native byte order
+                    order(ByteOrder.nativeOrder())
+
+                    // create a floating point buffer from the ByteBuffer
+                    asFloatBuffer().apply {
+                        // add the coordinates to the FloatBuffer
+                        put(nor.toFloatArray())
+                        // set the buffer to read the first coordinate
+                        position(0)
+                    }
+                }
+
+        // 色バッファ
+        colorBuffer =
+                ByteBuffer.allocateDirect(col.toArray().size * 4).run {
+                    // use the device hardware's native byte order
+                    order(ByteOrder.nativeOrder())
+
+                    // create a floating point buffer from the ByteBuffer
+                    asFloatBuffer().apply {
+                        // add the coordinates to the FloatBuffer
+                        put(col.toFloatArray())
+                        // set the buffer to read the first coordinate
+                        position(0)
+                    }
+                }
+
+        // 法線バッファ
+        normalBuffer =
+                ByteBuffer.allocateDirect(nor.toArray().size * 4).run {
+                    // use the device hardware's native byte order
+                    order(ByteOrder.nativeOrder())
+
+                    // create a floating point buffer from the ByteBuffer
+                    asFloatBuffer().apply {
+                        // add the coordinates to the FloatBuffer
+                        put(nor.toFloatArray())
+                        // set the buffer to read the first coordinate
+                        position(0)
+                    }
+                }
+
+        // インデックスバッファ
+        drawListBuffer =
+                ByteBuffer.allocateDirect(idx.toArray().size * 4).run {
+                    order(ByteOrder.nativeOrder())
+                    asIntBuffer().apply {
+                        put(idx.toIntArray())
+                        position(0)
+                    }
+                }
+
         // 頂点シェーダを生成
         val vertexShader: Int = loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode)
         // フラグメントシェーダを生成
@@ -120,9 +233,11 @@ class MyPyramid01 {
 
             // add the vertex shader to program
             GLES20.glAttachShader(it, vertexShader)
+            MyGLCheck.printShaderInfoLog(vertexShader)
 
             // add the fragment shader to program
             GLES20.glAttachShader(it, fragmentShader)
+            MyGLCheck.printShaderInfoLog(fragmentShader)
 
             // シェーダオブジェクトを削除
             GLES20.glDeleteShader(vertexShader)
@@ -138,12 +253,16 @@ class MyPyramid01 {
             // リンク結果のチェック
             val linkStatus = IntArray(1)
             GLES20.glGetProgramiv(it,GLES20.GL_LINK_STATUS,linkStatus,0)
-            MyGLCheck.printProgramInfoLog(it)
             if (linkStatus[0] == 0) {
+                MyGLCheck.printProgramInfoLog(it)
                 // リンク失敗
                 GLES20.glDeleteProgram(it)
                 throw RuntimeException("Error creating program.")
             }
+
+            // Add program to OpenGL ES environment
+            // シェーダプログラムを適用する
+            GLES20.glUseProgram(it)
         }
     }
 
@@ -167,13 +286,16 @@ class MyPyramid01 {
         }
     }
 
-    fun draw(mvpMatrix: FloatArray) {
-        // Add program to OpenGL ES environment
-        GLES20.glUseProgram(mProgram)
+    fun draw(mvpMatrix: FloatArray,
+             modelMatrix: FloatArray,
+             invMatrix: FloatArray,
+             lightPositionMatrix: FloatArray,
+             ambientColorMatrix: FloatArray,
+             eyeDirection: FloatArray) {
 
         positionBuffer.position(0)
         // get handle to vertex shader's vPosition member
-        mPositionHandle = GLES20.glGetAttribLocation(mProgram, "a_Position").also {
+        GLES20.glGetAttribLocation(mProgram, "a_Position").also {
 
             // Prepare the triangle coordinate data
             GLES20.glVertexAttribPointer(
@@ -190,9 +312,27 @@ class MyPyramid01 {
         }
         MyGLCheck.checkGlError("mPositionHandle")
 
+        normalBuffer.position(0)
+        GLES20.glGetAttribLocation(mProgram, "a_Normal").also {
+
+            // Prepare the triangle coordinate data
+            GLES20.glVertexAttribPointer(
+                    it,
+                    COORDS_PER_NORMAL,
+                    GLES20.GL_FLOAT,
+                    false,
+                    COORDS_PER_NORMAL * 4,
+                    normalBuffer
+            )
+
+            // Enable a handle to the triangle vertices
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLCheck.checkGlError("mNormalHandle")
+
         colorBuffer.position(0)
         // get handle to fragment shader's vColor member
-        mColorHandle = GLES20.glGetAttribLocation(mProgram, "a_Color").also {
+        GLES20.glGetAttribLocation(mProgram, "a_Color").also {
             GLES20.glVertexAttribPointer(
                     it,
                     COORDS_PER_COLOR,
@@ -206,24 +346,38 @@ class MyPyramid01 {
         MyGLCheck.checkGlError("mColorHandle")
 
         // get handle to shape's transformation matrix
-        mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "u_MVPMatrix").also { mvpMatrixHandle ->
+        GLES20.glGetUniformLocation(mProgram, "u_MVPMatrix").also { mvpMatrixHandle ->
             // Apply the projection and view transformation
             GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, mvpMatrix, 0)
         }
         MyGLCheck.checkGlError("mMVPMatrixHandle")
 
-        // 三角形描画
-        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 3)
+        GLES20.glGetUniformLocation(mProgram, "u_mMatrix").also { modelMatrixHandle ->
+            // Apply the projection and view transformation
+            GLES20.glUniformMatrix4fv(modelMatrixHandle, 1, false, modelMatrix, 0)
 
-        // Disable vertex array
-        GLES20.glDisableVertexAttribArray(mPositionHandle)
-    }
+        }
+        MyGLCheck.checkGlError("mModelMatrixHandle")
 
-    /*
-    // VBOを生成する
-    private fun createVBO(data: FloatArray) {
-        // バッファオブジェクトの生成
-        val vbo = GLES20.cre
+        GLES20.glGetUniformLocation(mProgram,"u_invMatrix").also { invMatrixHandle ->
+            GLES20.glUniformMatrix4fv(invMatrixHandle,1,false,invMatrix,0)
+        }
+        MyGLCheck.checkGlError("mInvMatrixHandle")
+
+        GLES20.glGetUniformLocation(mProgram,"u_lightPosition").also { lightPositionHandle ->
+            GLES20.glUniform3fv(lightPositionHandle,1,lightPositionMatrix,0)
+        }
+
+        GLES20.glGetUniformLocation(mProgram,"u_eyeDirection").also { eyeDirectionHandle ->
+            GLES20.glUniform3fv(eyeDirectionHandle,1,eyeDirection,0)
+        }
+
+        GLES20.glGetUniformLocation(mProgram,"u_ambientColor").also { ambientColorHandle ->
+            GLES20.glUniform4fv(ambientColorHandle,1,ambientColorMatrix,0)
+        }
+
+        // ピラミッド描画
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES, idx.toArray().size,
+                GLES20.GL_UNSIGNED_INT, drawListBuffer)
     }
-    */
 }

@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl01.w015.MyTriangle02Renderer
+import milu.kiriu2010.exdb1.opengl.MyGL02View
+import milu.kiriu2010.exdb1.opengl01.w019.*
 
-class OpenGLNaviFragment : Fragment() {
+class OpenGL01HomeFragment : Fragment() {
 
     private lateinit var myGL02View: MyGL02View
 
@@ -22,12 +23,21 @@ class OpenGLNaviFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl_navi, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_home, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
         //myGL02View.setRenderer(MyTriangle01Renderer())
-        myGL02View.setRenderer(MyTriangle02Renderer())
+        //myGL02View.setRenderer(MyTriangle02Renderer())
         //myGL02View.setRenderer(MyTriangle03Renderer())
+        //myGL02View.setRenderer(MyTriangle04Renderer())
+        //myGL02View.setRenderer(MyTriangle05Renderer())
+        //myGL02View.setRenderer(MySquare01Renderer())
+        //myGL02View.setRenderer(MyTorus01Renderer())
+        //myGL02View.setRenderer(MyTorus02Renderer())
+        //myGL02View.setRenderer(MyTorus03Renderer())
+        //myGL02View.setRenderer(MyTorus04Renderer())
+        //myGL02View.setRenderer(MyTorus05Renderer())
+        myGL02View.setRenderer(MyTorus06Renderer())
 
         return view
     }
@@ -45,7 +55,7 @@ class OpenGLNaviFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                OpenGLNaviFragment().apply {
+                OpenGL01HomeFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

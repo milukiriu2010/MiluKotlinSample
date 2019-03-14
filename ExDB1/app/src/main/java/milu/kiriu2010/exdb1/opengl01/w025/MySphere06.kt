@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl01.w025
 
 import android.opengl.GLES20
-import milu.kiriu2010.exdb1.opengl01.MyGLCheck
+import milu.kiriu2010.exdb1.opengl.MyGLCheck
 import milu.kiriu2010.gui.basic.MyColor
 import java.nio.ByteBuffer
 import java.nio.ByteOrder

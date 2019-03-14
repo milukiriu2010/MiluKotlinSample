@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:keepScreenOn="true"
-    tools:context=".opengl01.OpenGLActivity">
+    tools:context=".opengl01.OpenGL01Activity">
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

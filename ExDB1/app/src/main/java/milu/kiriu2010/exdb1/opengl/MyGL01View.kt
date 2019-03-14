@@ -1,11 +1,10 @@
-package milu.kiriu2010.exdb1.opengl01
+package milu.kiriu2010.exdb1.opengl
 
 import android.content.Context
 import android.opengl.GLSurfaceView
 import android.util.AttributeSet
-import android.util.Log
 
-class MyGL02View: GLSurfaceView {
+class MyGL01View: GLSurfaceView {
 
     //private val myRenderer = MyCube01Renderer()
 
@@ -27,11 +26,5 @@ class MyGL02View: GLSurfaceView {
         /*
         setRenderer(myRenderer)
         */
-    }
-
-    init {
-        // Create an OpenGL ES 2.0 context
-        setEGLContextClientVersion(2)
-        Log.d(javaClass.simpleName,"setEGLContextClient(2)")
     }
 }

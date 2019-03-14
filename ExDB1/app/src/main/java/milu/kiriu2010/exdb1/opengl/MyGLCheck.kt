@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl01
+package milu.kiriu2010.exdb1.opengl
 
 import android.opengl.GLES20
 import android.util.Log

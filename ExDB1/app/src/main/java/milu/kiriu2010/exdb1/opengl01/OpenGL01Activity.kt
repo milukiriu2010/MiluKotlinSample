@@ -22,14 +22,14 @@ import milu.kiriu2010.exdb1.opengl01.w016.Triangle04Fragment
 import milu.kiriu2010.exdb1.opengl01.w017.Triangle05Fragment
 import milu.kiriu2010.exdb1.opengl01.w025.Torus06Fragment
 
-class OpenGLActivity : AppCompatActivity() {
+class OpenGL01Activity : AppCompatActivity() {
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
                 if (supportFragmentManager.findFragmentByTag("Home") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, OpenGLHomeFragment.newInstance(), "Home")
+                            .replace(R.id.frameLayout, OpenGL01HomeFragment.newInstance(), "Home")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
@@ -37,7 +37,7 @@ class OpenGLActivity : AppCompatActivity() {
             R.id.navigation_dashboard -> {
                 if (supportFragmentManager.findFragmentByTag("Dashboard") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, OpenGLDashboardFragment.newInstance(), "Dashboard")
+                            .replace(R.id.frameLayout, OpenGL01DashboardFragment.newInstance(), "Dashboard")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
@@ -45,7 +45,7 @@ class OpenGLActivity : AppCompatActivity() {
             R.id.navigation_notifications -> {
                 if (supportFragmentManager.findFragmentByTag("Navi") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, OpenGLNaviFragment.newInstance(), "Home")
+                            .replace(R.id.frameLayout, OpenGL01NaviFragment.newInstance(), "Home")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
@@ -62,7 +62,7 @@ class OpenGLActivity : AppCompatActivity() {
 
         if (supportFragmentManager.findFragmentByTag("Home") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, OpenGLHomeFragment.newInstance(), "Home")
+                    .replace(R.id.frameLayout, OpenGL01HomeFragment.newInstance(), "Home")
                     .commit()
         }
 
@@ -74,7 +74,7 @@ class OpenGLActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_opengl, menu)
+        menuInflater.inflate(R.menu.menu_opengl01, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

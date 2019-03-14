@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl01.MyGL01View
+import milu.kiriu2010.exdb1.opengl.MyGL01View
 
 class OpenGL10Fragment : Fragment() {
 

@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl01.w019
 
 import android.opengl.GLES20
-import milu.kiriu2010.exdb1.opengl01.MyGLCheck
+import milu.kiriu2010.exdb1.opengl.MyGLCheck
 import java.lang.RuntimeException
 import java.nio.*
 import kotlin.math.PI
@@ -14,43 +14,15 @@ import kotlin.math.sin
 class MyTorus01 {
     // attribute(頂点)の要素数
     val COORDS_PER_POSITION = 3
-    /*
-    // 頂点の位置情報を格納する配列
-    // 反時計回り
-    val vertex_position = floatArrayOf(
-          0f, 1f, 0f,    // top
-          1f, 0f, 0f,    // bottom left
-         -1f, 0f, 0f,    // bottom right
-          0f,-1f, 0f
-    )
-    */
 
     // attribute(色)の要素数
     val COORDS_PER_COLOR = 4
-    /*
-    // 頂点の色情報を格納する配列
-    val vertex_color = floatArrayOf(
-        1f, 0f, 0f, 1f,
-        0f, 1f, 0f, 1f,
-        0f, 0f, 1f, 1f,
-        1f, 1f, 1f, 1f
-    )
-    */
-
-    /*
-    // 頂点のインデックスを格納する配列
-    val drawOrder = shortArrayOf(
-        0,1,2,
-        1,2,3
-    )
-    */
 
     // 頂点バッファ
     private lateinit var positionBuffer: FloatBuffer
 
     // 色バッファ
     private lateinit var colorBuffer: FloatBuffer
-
 
     // initialize byte buffer for the draw list
     private lateinit var drawListBuffer: IntBuffer

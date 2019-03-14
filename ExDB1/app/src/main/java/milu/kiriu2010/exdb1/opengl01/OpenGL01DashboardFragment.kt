@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
+import milu.kiriu2010.exdb1.opengl.MyGL01View
 import milu.kiriu2010.exdb1.opengl01.begin00.MyCube01Renderer
 
-class OpenGLDashboardFragment : Fragment() {
+class OpenGL01DashboardFragment : Fragment() {
 
     private lateinit var myGL01View: MyGL01View
 
@@ -43,7 +44,7 @@ class OpenGLDashboardFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                OpenGLDashboardFragment().apply {
+                OpenGL01DashboardFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }
