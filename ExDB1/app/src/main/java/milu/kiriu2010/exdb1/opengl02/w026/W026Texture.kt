@@ -214,7 +214,7 @@ class W026Texture {
     }
 
     fun draw(mvpMatrix: FloatArray,
-             textureMatrix: FloatArray
+             texture: Int
     ) {
         positionBuffer.position(0)
         // get handle to vertex shader's vPosition member
@@ -233,7 +233,7 @@ class W026Texture {
             // Enable a handle to the triangle vertices
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLCheck.checkGlError("mPositionHandle")
+        MyGLCheck.checkGlError("a_Position")
 
         colorBuffer.position(0)
         // get handle to fragment shader's vColor member
@@ -248,7 +248,7 @@ class W026Texture {
             )
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLCheck.checkGlError("mColorHandle")
+        MyGLCheck.checkGlError("a_Color")
 
         textureBuffer.position(0)
         GLES20.glGetAttribLocation(mProgram, "a_TextureCoord").also {
@@ -266,7 +266,7 @@ class W026Texture {
             // Enable a handle to the triangle vertices
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLCheck.checkGlError("mNormalHandle")
+        MyGLCheck.checkGlError("a_TextureCoord")
 
 
         // get handle to shape's transformation matrix
@@ -275,14 +275,13 @@ class W026Texture {
             GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, mvpMatrix, 0)
 
         }
-        MyGLCheck.checkGlError("mMVPMatrixHandle")
+        MyGLCheck.checkGlError("u_mvpMatrix")
 
         GLES20.glGetUniformLocation(mProgram, "texture").also { textureMatrixHandle ->
             // Apply the projection and view transformation
-            GLES20.glUniformMatrix4fv(textureMatrixHandle, 1, false, textureMatrix, 0)
-
+            GLES20.glUniform1i(textureMatrixHandle, texture)
         }
-        MyGLCheck.checkGlError("mTextureMatrixHandle")
+        MyGLCheck.checkGlError("texture")
 
         // テクスチャ
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, idx.toArray().size,

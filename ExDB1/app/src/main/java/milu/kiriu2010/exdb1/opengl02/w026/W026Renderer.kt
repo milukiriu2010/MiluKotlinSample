@@ -1,12 +1,16 @@
 package milu.kiriu2010.exdb1.opengl01.w019
 
+import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
+import android.opengl.GLUtils
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import android.os.SystemClock
 import milu.kiriu2010.exdb1.opengl01.w025.MySphere06
+import java.lang.RuntimeException
+import java.nio.ByteBuffer
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -18,6 +22,8 @@ import kotlin.math.sin
 // ---------------------------------------------------
 class W026Renderer: GLSurfaceView.Renderer {
     private lateinit var drawObj: W026Texture
+
+    lateinit var bmp: Bitmap
 
     // mMVPMatrix is an abbreviation for "Model View Projection Matrix"
     private val mMVPMatrix = FloatArray(16)
@@ -41,19 +47,13 @@ class W026Renderer: GLSurfaceView.Renderer {
         val angleInDegrees = 360.0f / 10000.0f * time.toInt()
         val rad = angleInDegrees*PI.toFloat()/180f
 
-        val tx = cos(rad) * 3.5f
-        val ty = sin(rad) * 3.5f
-        val tz = sin(rad) * 3.5f
-
         // モデル座標返還行列の生成
         Matrix.setIdentityM(mModelMatrix,0)
-        Matrix.translateM(mModelMatrix,0,tx,-ty,-tz)
-        Matrix.rotateM(mModelMatrix,0,angleInDegrees,0f,1f,1f)
+        Matrix.rotateM(mModelMatrix,0,angleInDegrees,0f,1f,0f)
         Matrix.multiplyMM(mMVPMatrix,0,tmpMatrix,0,mModelMatrix,0)
-        Matrix.invertM(mInvMatrix,0,mModelMatrix,0)
 
         // １つ目のモデル描画
-        drawObj.draw(mMVPMatrix, floatArrayOf())
+        drawObj.draw(mMVPMatrix, 0)
 
     }
 
@@ -66,6 +66,8 @@ class W026Renderer: GLSurfaceView.Renderer {
     }
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
+        drawObj = W026Texture()
+
         // canvasを初期化する色を設定する
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
 
@@ -79,13 +81,50 @@ class W026Renderer: GLSurfaceView.Renderer {
         // 有効にするテクスチャユニットを指定
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
 
+        val textures = IntArray(1)
+        // テクスチャ作成し、idをtextures[0]に保存
+        GLES20.glGenTextures(1,textures,0)
+
+        // テクスチャ0にtextures[0]に保存
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[0])
+
+        // 縮小時の補完設定
+        //GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
+        // 拡大時の補完設定
+        //GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
+
+        // bmpをテクスチャ0に設定
+        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D,0,bmp,0)
+        bmp.recycle()
+        /*
+        val bytes = bmp.byteCount
+        val buffer: ByteBuffer = ByteBuffer.allocate(bytes)
+        bmp.copyPixelsToBuffer(buffer)
+        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,
+                GLES20.GL_RGBA, GLES20.GL_RGBA,
+                GLES20.GL_UNSIGNED_BYTE)
+                */
+        if (textures[0] == 0) {
+            throw RuntimeException("Error loading texture.")
+        }
+
+        // ミップマップを生成
+        //GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D)
+
+        /*
+        // gl変数textureに0を設定
+        GLES20.glGetUniformLocation(drawObj.mProgram,"texture").also {
+            GLES20.glUniform1i(it,0)
+        }
+        */
+
+
         // カメラの位置
         Matrix.setLookAtM(mViewMatrix, 0,
                 0f, 2f, 5f,
                 0f, 0f, 0f,
                 0f, 1.0f, 0.0f)
 
-        drawObj = W026Texture()
     }
 
 }

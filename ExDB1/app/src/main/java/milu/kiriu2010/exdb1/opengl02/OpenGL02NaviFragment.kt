@@ -12,11 +12,10 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl02.pyramid01.MyPyramid01Renderer
 import milu.kiriu2010.exdb1.opengl.W026View
 import milu.kiriu2010.exdb1.opengl01.w019.W026Renderer
-import milu.kiriu2010.exdb1.opengl02.labo01.TestGLView
 
-class OpenGL02HomeFragment : Fragment() {
+class OpenGL02NaviFragment : Fragment() {
 
-    private lateinit var testGLView: TestGLView
+    private lateinit var w026View: W026View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,35 +26,33 @@ class OpenGL02HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl02_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl02_navi, container, false)
 
-        testGLView = view.findViewById<TestGLView>(R.id.testGLView)
-        /*
+        w026View = view.findViewById<W026View>(R.id.w026View)
         val drawable = ResourcesCompat.getDrawable(resources,R.drawable.texture,null)
         // drawableからbitmapへ変換
         val bmp = (drawable as BitmapDrawable).bitmap
         val render = W026Renderer()
         render.bmp = bmp
         w026View.setRenderer(render)
-        */
 
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        testGLView.onResume()
+        w026View.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        testGLView.onPause()
+        w026View.onPause()
     }
 
     companion object {
         @JvmStatic
         fun newInstance() =
-                OpenGL02HomeFragment().apply {
+                OpenGL02NaviFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

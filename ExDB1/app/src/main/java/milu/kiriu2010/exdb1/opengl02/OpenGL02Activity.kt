@@ -32,7 +32,7 @@ class OpenGL02Activity : AppCompatActivity() {
             R.id.navigation_notifications -> {
                 if (supportFragmentManager.findFragmentByTag("Navi") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, OpenGL02HomeFragment.newInstance(), "Navi")
+                            .replace(R.id.frameLayout, OpenGL02NaviFragment.newInstance(), "Navi")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
