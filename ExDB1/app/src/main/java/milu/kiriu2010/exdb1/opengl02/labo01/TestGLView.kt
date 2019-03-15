@@ -11,10 +11,12 @@ import android.R.attr.order
 import java.nio.ByteBuffer.allocateDirect
 import android.opengl.GLUtils
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.util.AttributeSet
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
+import kotlinx.android.synthetic.main.fragment_open_gl02_home.view.*
 
 
 class TestGLView : GLSurfaceView, GLSurfaceView.Renderer {

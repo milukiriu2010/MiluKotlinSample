@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl02
+package milu.kiriu2010.exdb1.opengl02.w026
 
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
@@ -15,7 +15,7 @@ import milu.kiriu2010.exdb1.opengl02.pyramid01.MyPyramid01Renderer
 import milu.kiriu2010.exdb1.opengl.W026View
 import milu.kiriu2010.exdb1.opengl01.w019.W026Renderer
 
-class OpenGL02HomeFragment : Fragment() {
+class W026Fragment : Fragment() {
 
     private lateinit var w026View: W026View
 
@@ -57,7 +57,7 @@ class OpenGL02HomeFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                OpenGL02HomeFragment().apply {
+                W026Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

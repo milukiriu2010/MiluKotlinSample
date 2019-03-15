@@ -7,7 +7,10 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_open_gl02.*
 import milu.kiriu2010.exdb1.R
+import milu.kiriu2010.exdb1.opengl02.labo01.TestGLFragment
+import milu.kiriu2010.exdb1.opengl02.labo01.TestGLView
 import milu.kiriu2010.exdb1.opengl02.pyramid01.Pyramid01Fragment
+import milu.kiriu2010.exdb1.opengl02.w026.W026Fragment
 
 class OpenGL02Activity : AppCompatActivity() {
 
@@ -72,6 +75,23 @@ class OpenGL02Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // w026_テクスチャ
+            R.id.opengl_w026 -> {
+                if (supportFragmentManager.findFragmentByTag("w026") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W026Fragment.newInstance(), "w026")
+                            .commit()
+                }
+                true
+            }            // labo01_テクスチャ
+            R.id.opengl_labo01 -> {
+                if (supportFragmentManager.findFragmentByTag("Labo01") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, TestGLFragment.newInstance(), "Labo01")
+                            .commit()
+                }
                 true
             }
             // ピラミッド(点光源)

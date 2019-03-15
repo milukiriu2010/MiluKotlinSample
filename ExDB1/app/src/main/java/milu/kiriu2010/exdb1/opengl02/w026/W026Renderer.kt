@@ -89,13 +89,14 @@ class W026Renderer: GLSurfaceView.Renderer {
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[0])
 
         // 縮小時の補完設定
-        //GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
         // 拡大時の補完設定
-        //GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
 
         // bmpをテクスチャ0に設定
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D,0,bmp,0)
         bmp.recycle()
+
         /*
         val bytes = bmp.byteCount
         val buffer: ByteBuffer = ByteBuffer.allocate(bytes)
