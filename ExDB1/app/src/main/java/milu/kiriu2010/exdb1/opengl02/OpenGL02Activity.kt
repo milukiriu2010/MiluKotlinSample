@@ -11,6 +11,7 @@ import milu.kiriu2010.exdb1.opengl02.labo01.TestGLFragment
 import milu.kiriu2010.exdb1.opengl02.labo01.TestGLView
 import milu.kiriu2010.exdb1.opengl02.pyramid01.Pyramid01Fragment
 import milu.kiriu2010.exdb1.opengl02.w026.W026Fragment
+import milu.kiriu2010.exdb1.opengl02.w027.W027Fragment
 
 class OpenGL02Activity : AppCompatActivity() {
 
@@ -77,6 +78,15 @@ class OpenGL02Activity : AppCompatActivity() {
                 finish()
                 true
             }
+            // w027_マルチテクスチャ
+            R.id.opengl_w027 -> {
+                if (supportFragmentManager.findFragmentByTag("w027") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W027Fragment.newInstance(), "w027")
+                            .commit()
+                }
+                true
+            }
             // w026_テクスチャ
             R.id.opengl_w026 -> {
                 if (supportFragmentManager.findFragmentByTag("w026") == null) {
@@ -85,7 +95,8 @@ class OpenGL02Activity : AppCompatActivity() {
                             .commit()
                 }
                 true
-            }            // labo01_テクスチャ
+            }
+            // labo01_テクスチャ
             R.id.opengl_labo01 -> {
                 if (supportFragmentManager.findFragmentByTag("Labo01") == null) {
                     supportFragmentManager.beginTransaction()

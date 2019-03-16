@@ -1,19 +1,12 @@
 package milu.kiriu2010.exdb1.opengl02.labo01
 
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.content.res.ResourcesCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl02.pyramid01.MyPyramid01Renderer
-import milu.kiriu2010.exdb1.opengl.W026View
-import milu.kiriu2010.exdb1.opengl01.w019.W026Renderer
-import milu.kiriu2010.exdb1.opengl02.labo01.TestGLView
 
 class TestGLFragment : Fragment() {
 

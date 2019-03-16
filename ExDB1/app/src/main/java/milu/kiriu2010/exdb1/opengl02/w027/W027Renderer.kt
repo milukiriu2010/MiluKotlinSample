@@ -8,6 +8,7 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import android.os.SystemClock
+import milu.kiriu2010.exdb1.opengl.MyGLCheck
 import milu.kiriu2010.exdb1.opengl01.w025.MySphere06
 import java.lang.RuntimeException
 import java.nio.ByteBuffer
@@ -20,10 +21,10 @@ import kotlin.math.sin
 // ---------------------------------------------------
 // https://wgld.org/d/webgl/w026.html
 // ---------------------------------------------------
-class W026Renderer: GLSurfaceView.Renderer {
-    private lateinit var drawObj: W026Texture
+class W027Renderer: GLSurfaceView.Renderer {
+    private lateinit var drawObj: W027Texture
 
-    lateinit var bmp: Bitmap
+    val bmpArray = arrayListOf<Bitmap>()
 
     // mMVPMatrix is an abbreviation for "Model View Projection Matrix"
     private val mMVPMatrix = FloatArray(16)
@@ -53,7 +54,7 @@ class W026Renderer: GLSurfaceView.Renderer {
         Matrix.multiplyMM(mMVPMatrix,0,tmpMatrix,0,mModelMatrix,0)
 
         // １つ目のモデル描画
-        drawObj.draw(mMVPMatrix, 0)
+        drawObj.draw(mMVPMatrix, 0,1)
 
     }
 
@@ -66,7 +67,7 @@ class W026Renderer: GLSurfaceView.Renderer {
     }
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
-        drawObj = W026Texture()
+        drawObj = W027Texture()
 
         // canvasを初期化する色を設定する
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
@@ -81,43 +82,57 @@ class W026Renderer: GLSurfaceView.Renderer {
         // 有効にするテクスチャユニットを指定
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
 
-        val textures = IntArray(1)
+        val textures = IntArray(2)
         // テクスチャ作成し、idをtextures[0]に保存
-        GLES20.glGenTextures(1,textures,0)
+        GLES20.glGenTextures(2,textures,0)
+        //GLES20.glGenTextures(1,textures,1)
+        MyGLCheck.checkGlError("glGenTextures")
 
         // テクスチャ0にtextures[0]に保存
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[0])
-
-        // bmpをテクスチャ0に設定
-        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D,0,bmp,0)
-        bmp.recycle()
-
-        /*
-        val bytes = bmp.byteCount
-        val buffer: ByteBuffer = ByteBuffer.allocate(bytes)
-        bmp.copyPixelsToBuffer(buffer)
-        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,
-                GLES20.GL_RGBA, GLES20.GL_RGBA,
-                GLES20.GL_UNSIGNED_BYTE)
-                */
-        if (textures[0] == 0) {
-            throw RuntimeException("Error loading texture.")
-        }
+        MyGLCheck.checkGlError("glBindTexture")
 
         // 縮小時の補完設定
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
         // 拡大時の補完設定
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
 
-        // ミップマップを生成
-        //GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_CLAMP_TO_EDGE)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_CLAMP_TO_EDGE)
 
-        /*
-        // gl変数textureに0を設定
-        GLES20.glGetUniformLocation(drawObj.mProgram,"texture").also {
-            GLES20.glUniform1i(it,0)
+        // bmpをテクスチャ0に設定
+        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D,0,bmpArray[0],0)
+        MyGLCheck.checkGlError("texImage2D")
+
+        bmpArray[0].recycle()
+        if (textures[0] == 0) {
+            throw RuntimeException("Error loading texture0.")
         }
-        */
+
+        // ---------------------------------------------------------
+        // ここで呼び出さないといけないっぽい
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE1)
+
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[1])
+        MyGLCheck.checkGlError("glBindTexture")
+
+        // 縮小時の補完設定
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
+        // 拡大時の補完設定
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
+
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_CLAMP_TO_EDGE)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_CLAMP_TO_EDGE)
+
+        // bmpをテクスチャ0に設定
+        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D,0,bmpArray[1],0)
+        MyGLCheck.checkGlError("texImage2D")
+
+        bmpArray[1].recycle()
+        if (textures[1] == 0) {
+            throw RuntimeException("Error loading texture1.")
+        }
+
 
 
         // カメラの位置

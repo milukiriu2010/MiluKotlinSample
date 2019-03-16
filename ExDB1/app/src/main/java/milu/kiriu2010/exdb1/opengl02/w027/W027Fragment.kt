@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl02
+package milu.kiriu2010.exdb1.opengl02.w027
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -12,7 +12,7 @@ import milu.kiriu2010.exdb1.opengl.TextureView
 import milu.kiriu2010.exdb1.opengl01.w019.W026Renderer
 import milu.kiriu2010.exdb1.opengl01.w019.W027Renderer
 
-class OpenGL02HomeFragment : Fragment() {
+class W027Fragment : Fragment() {
 
     private lateinit var textureView: TextureView
 
@@ -51,7 +51,7 @@ class OpenGL02HomeFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                OpenGL02HomeFragment().apply {
+                W027Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

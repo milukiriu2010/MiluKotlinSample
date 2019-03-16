@@ -8,7 +8,7 @@ import android.support.v4.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.util.Log
 
-class W026View: GLSurfaceView {
+class TextureView: GLSurfaceView {
     constructor(ctx: Context): super(ctx) {
     }
 
