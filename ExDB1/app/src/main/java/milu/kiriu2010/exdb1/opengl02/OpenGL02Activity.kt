@@ -12,6 +12,7 @@ import milu.kiriu2010.exdb1.opengl02.labo01.TestGLView
 import milu.kiriu2010.exdb1.opengl02.pyramid01.Pyramid01Fragment
 import milu.kiriu2010.exdb1.opengl02.w026.W026Fragment
 import milu.kiriu2010.exdb1.opengl02.w027.W027Fragment
+import milu.kiriu2010.exdb1.opengl02.w028.W028Fragment
 
 class OpenGL02Activity : AppCompatActivity() {
 
@@ -76,6 +77,15 @@ class OpenGL02Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // w028_テクスチャパラメータ
+            R.id.opengl_w028 -> {
+                if (supportFragmentManager.findFragmentByTag("w028") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W028Fragment.newInstance(), "w028")
+                            .commit()
+                }
                 true
             }
             // w027_マルチテクスチャ
