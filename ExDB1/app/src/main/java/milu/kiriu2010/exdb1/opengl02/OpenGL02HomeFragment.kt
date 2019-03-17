@@ -11,6 +11,7 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.TextureView
 import milu.kiriu2010.exdb1.opengl01.w019.W026Renderer
 import milu.kiriu2010.exdb1.opengl01.w019.W027Renderer
+import milu.kiriu2010.exdb1.opengl01.w019.W028Renderer
 
 class OpenGL02HomeFragment : Fragment() {
 
@@ -29,8 +30,8 @@ class OpenGL02HomeFragment : Fragment() {
 
         textureView = view.findViewById<TextureView>(R.id.textureView)
         val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture0)
-        val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.texture1)
-        val render = W027Renderer()
+        val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.texture1_1)
+        val render = W028Renderer()
         render.bmpArray.add(bmp0)
         render.bmpArray.add(bmp1)
         textureView.setRenderer(render)

@@ -19,9 +19,9 @@ import kotlin.math.sin
 // ---------------------------------------------------
 // テクスチャ
 // ---------------------------------------------------
-// https://wgld.org/d/webgl/w027.html
+// https://wgld.org/d/webgl/w026.html
 // ---------------------------------------------------
-class W027Renderer: GLSurfaceView.Renderer {
+class W028Renderer: GLSurfaceView.Renderer {
     private lateinit var drawObj: W027Texture
 
     val bmpArray = arrayListOf<Bitmap>()
@@ -46,8 +46,8 @@ class W027Renderer: GLSurfaceView.Renderer {
         // 経過秒から回転角度を求める(10秒/周)
         val time = SystemClock.uptimeMillis() % 10000L
         val angleInDegrees = 360.0f / 10000.0f * time.toInt()
-        val rad = angleInDegrees*PI.toFloat()/180f
 
+        /*
         // モデル座標返還行列の生成
         Matrix.setIdentityM(mModelMatrix,0)
         Matrix.rotateM(mModelMatrix,0,angleInDegrees,0f,1f,0f)
@@ -55,6 +55,20 @@ class W027Renderer: GLSurfaceView.Renderer {
 
         // １つ目のモデル描画
         drawObj.draw(mMVPMatrix, 0,1)
+        */
+
+        // -----------------------------------------------
+        // １つ目
+        // -----------------------------------------------
+        // 縮小時の補完設定
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST)
+        // 拡大時の補完設定
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_NEAREST)
+
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
+        render(angleInDegrees, floatArrayOf(0f,0f,0f))
+        //render(angleInDegrees, floatArrayOf(-6.25f,2f,0f))
 
     }
 
@@ -137,10 +151,21 @@ class W027Renderer: GLSurfaceView.Renderer {
 
         // カメラの位置
         Matrix.setLookAtM(mViewMatrix, 0,
-                0f, 2f, 5f,
+                0f, 0f, 12f,
                 0f, 0f, 0f,
                 0f, 1.0f, 0.0f)
 
+    }
+
+    private fun render(angleInDegrees: Float, trans: FloatArray) {
+        // モデル座標返還行列の生成
+        Matrix.setIdentityM(mModelMatrix,0)
+        Matrix.translateM(mModelMatrix,0,trans[0],trans[1],trans[2])
+        Matrix.rotateM(mModelMatrix,0,angleInDegrees,0f,1f,0f)
+        Matrix.multiplyMM(mMVPMatrix,0,tmpMatrix,0,mModelMatrix,0)
+
+        // uniform変数の登録と描画
+        drawObj.draw(mMVPMatrix,0,1)
     }
 
 }
