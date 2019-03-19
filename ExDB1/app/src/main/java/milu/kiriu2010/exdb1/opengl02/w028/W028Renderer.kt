@@ -8,13 +8,8 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import android.os.SystemClock
-import milu.kiriu2010.exdb1.opengl.MyGLCheck
-import milu.kiriu2010.exdb1.opengl01.w025.MySphere06
+import milu.kiriu2010.exdb1.opengl.MyGLFunc
 import java.lang.RuntimeException
-import java.nio.ByteBuffer
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
 
 // ---------------------------------------------------
 // テクスチャ
@@ -163,11 +158,11 @@ class W028Renderer: GLSurfaceView.Renderer {
         // テクスチャ作成し、idをtextures[0]に保存
         GLES20.glGenTextures(2,textures,0)
         //GLES20.glGenTextures(1,textures,1)
-        MyGLCheck.checkGlError("glGenTextures")
+        MyGLFunc.checkGlError("glGenTextures")
 
         // テクスチャ0にtextures[0]に保存
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[0])
-        MyGLCheck.checkGlError("glBindTexture")
+        MyGLFunc.checkGlError("glBindTexture")
 
         // 縮小時の補完設定
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
@@ -179,7 +174,7 @@ class W028Renderer: GLSurfaceView.Renderer {
 
         // bmpをテクスチャ0に設定
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D,0,bmpArray[0],0)
-        MyGLCheck.checkGlError("texImage2D")
+        MyGLFunc.checkGlError("texImage2D")
 
         bmpArray[0].recycle()
         if (textures[0] == 0) {
@@ -191,7 +186,7 @@ class W028Renderer: GLSurfaceView.Renderer {
         GLES20.glActiveTexture(GLES20.GL_TEXTURE1)
 
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[1])
-        MyGLCheck.checkGlError("glBindTexture")
+        MyGLFunc.checkGlError("glBindTexture")
 
         // 縮小時の補完設定
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
@@ -203,7 +198,7 @@ class W028Renderer: GLSurfaceView.Renderer {
 
         // bmpをテクスチャ0に設定
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D,0,bmpArray[1],0)
-        MyGLCheck.checkGlError("texImage2D")
+        MyGLFunc.checkGlError("texImage2D")
 
         bmpArray[1].recycle()
         if (textures[1] == 0) {

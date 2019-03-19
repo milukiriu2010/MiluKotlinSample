@@ -49,7 +49,7 @@ class MyPyramid01Renderer: GLSurfaceView.Renderer {
         val ty = sin(rad) * 2.5f
         val tz = sin(rad) * 2.5f
 
-        // モデル座標返還行列の生成
+        // モデル座標変換行列の生成
         Matrix.setIdentityM(mModelMatrix,0)
         Matrix.translateM(mModelMatrix,0,tx,-ty,-tz)
         Matrix.rotateM(mModelMatrix,0,angleInDegrees,0f,1f,1f)

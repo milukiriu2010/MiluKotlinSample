@@ -102,6 +102,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Anime"
+        app:layout_constraintEnd_toStartOf="@+id/btnDraw"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -109,10 +111,11 @@
         android:id="@+id/btnDraw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:text="Draw"
         app:layout_constraintBottom_toBottomOf="@+id/btnAnimeObj"
+        app:layout_constraintEnd_toStartOf="@+id/btnCanvas"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnAnimeObj"
         app:layout_constraintTop_toTopOf="@+id/btnAnimeObj" />
 
@@ -121,8 +124,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="Canvas"
         app:layout_constraintBottom_toBottomOf="@+id/btnDraw"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnDraw"
         app:layout_constraintTop_toTopOf="@+id/btnDraw" />
 
@@ -131,33 +137,49 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:text="Basic"
-        app:layout_constraintBottom_toBottomOf="@+id/btnCanvas"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnCanvas"
-        app:layout_constraintTop_toTopOf="@+id/btnCanvas" />
+        app:layout_constraintEnd_toStartOf="@+id/btnOpenGL01"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAnimeObj" />
 
     <Button
         android:id="@+id/btnOpenGL01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="OpenGL"
+        android:layout_marginStart="8dp"
+        android:text="OpenGL01"
         android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="@+id/btnAnimeObj"
-        app:layout_constraintStart_toStartOf="@+id/btnAnimeObj"
-        app:layout_constraintTop_toBottomOf="@+id/btnAnimeObj" />
+        app:layout_constraintBottom_toBottomOf="@+id/btnBasic"
+        app:layout_constraintEnd_toStartOf="@+id/btnOpenGL02"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnBasic"
+        app:layout_constraintTop_toTopOf="@+id/btnBasic" />
 
     <Button
         android:id="@+id/btnOpenGL02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="8dp"
         android:text="OpenGL02"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="@+id/btnOpenGL01"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnOpenGL01"
-        app:layout_constraintTop_toTopOf="@+id/btnOpenGL01" />
+        app:layout_constraintTop_toTopOf="@+id/btnOpenGL01"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnMGL01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:text="MGL01"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBasic" />
 
 </android.support.constraint.ConstraintLayout>

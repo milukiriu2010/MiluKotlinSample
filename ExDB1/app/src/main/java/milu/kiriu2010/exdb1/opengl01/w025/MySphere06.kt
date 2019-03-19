@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl01.w025
 
 import android.opengl.GLES20
-import milu.kiriu2010.exdb1.opengl.MyGLCheck
+import milu.kiriu2010.exdb1.opengl.MyGLFunc
 import milu.kiriu2010.gui.basic.MyColor
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -164,7 +164,7 @@ class MySphere06 {
             // Enable a handle to the triangle vertices
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLCheck.checkGlError("mPositionHandle")
+        MyGLFunc.checkGlError("mPositionHandle")
 
         normalBuffer.position(0)
         GLES20.glGetAttribLocation(mProgram, "a_Normal").also {
@@ -182,7 +182,7 @@ class MySphere06 {
             // Enable a handle to the triangle vertices
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLCheck.checkGlError("mNormalHandle")
+        MyGLFunc.checkGlError("mNormalHandle")
 
 
         colorBuffer.position(0)
@@ -198,7 +198,7 @@ class MySphere06 {
             )
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLCheck.checkGlError("mColorHandle")
+        MyGLFunc.checkGlError("mColorHandle")
 
         // get handle to shape's transformation matrix
         GLES20.glGetUniformLocation(mProgram, "u_MVPMatrix").also { mvpMatrixHandle ->
@@ -206,19 +206,19 @@ class MySphere06 {
             GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, mvpMatrix, 0)
 
         }
-        MyGLCheck.checkGlError("mMVPMatrixHandle")
+        MyGLFunc.checkGlError("mMVPMatrixHandle")
 
         GLES20.glGetUniformLocation(mProgram, "u_mMatrix").also { modelMatrixHandle ->
             // Apply the projection and view transformation
             GLES20.glUniformMatrix4fv(modelMatrixHandle, 1, false, modelMatrix, 0)
 
         }
-        MyGLCheck.checkGlError("mModelMatrixHandle")
+        MyGLFunc.checkGlError("mModelMatrixHandle")
 
         GLES20.glGetUniformLocation(mProgram,"u_invMatrix").also { invMatrixHandle ->
             GLES20.glUniformMatrix4fv(invMatrixHandle,1,false,invMatrix,0)
         }
-        MyGLCheck.checkGlError("mInvMatrixHandle")
+        MyGLFunc.checkGlError("mInvMatrixHandle")
 
         // 光関係は、２回呼び出さなくてよい？
 

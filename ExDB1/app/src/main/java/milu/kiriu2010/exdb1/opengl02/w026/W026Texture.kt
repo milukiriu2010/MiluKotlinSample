@@ -1,13 +1,9 @@
 package milu.kiriu2010.exdb1.opengl01.w019
 
 import android.opengl.GLES20
-import milu.kiriu2010.exdb1.opengl.MyGLCheck
+import milu.kiriu2010.exdb1.opengl.MyGLFunc
 import java.lang.RuntimeException
 import java.nio.*
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.floor
-import kotlin.math.sin
 
 // ----------------------------------------
 // テクスチャ
@@ -155,10 +151,10 @@ class W026Texture {
 
         // 頂点シェーダを生成
         val vertexShader: Int = loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode)
-        MyGLCheck.printShaderInfoLog(vertexShader)
+        MyGLFunc.printShaderInfoLog(vertexShader)
         // フラグメントシェーダを生成
         val fragmentShader: Int = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode)
-        MyGLCheck.printShaderInfoLog(fragmentShader)
+        MyGLFunc.printShaderInfoLog(fragmentShader)
 
         // プログラムオブジェクトの生成とリンク
         mProgram = GLES20.glCreateProgram().also {
@@ -181,7 +177,7 @@ class W026Texture {
             val linkStatus = IntArray(1)
             GLES20.glGetProgramiv(it,GLES20.GL_LINK_STATUS,linkStatus,0)
             if (linkStatus[0] == 0) {
-                MyGLCheck.printProgramInfoLog(it)
+                MyGLFunc.printProgramInfoLog(it)
                 // リンク失敗
                 GLES20.glDeleteProgram(it)
                 throw RuntimeException("Error creating program.")
@@ -233,7 +229,7 @@ class W026Texture {
             // Enable a handle to the triangle vertices
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLCheck.checkGlError("a_Position")
+        MyGLFunc.checkGlError("a_Position")
 
         colorBuffer.position(0)
         // get handle to fragment shader's vColor member
@@ -248,7 +244,7 @@ class W026Texture {
             )
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLCheck.checkGlError("a_Color")
+        MyGLFunc.checkGlError("a_Color")
 
         textureBuffer.position(0)
         GLES20.glGetAttribLocation(mProgram, "a_TextureCoord").also {
@@ -266,7 +262,7 @@ class W026Texture {
             // Enable a handle to the triangle vertices
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLCheck.checkGlError("a_TextureCoord")
+        MyGLFunc.checkGlError("a_TextureCoord")
 
 
         // get handle to shape's transformation matrix
@@ -275,13 +271,13 @@ class W026Texture {
             GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, mvpMatrix, 0)
 
         }
-        MyGLCheck.checkGlError("u_mvpMatrix")
+        MyGLFunc.checkGlError("u_mvpMatrix")
 
         GLES20.glGetUniformLocation(mProgram, "texture").also { textureMatrixHandle ->
             // Apply the projection and view transformation
             GLES20.glUniform1i(textureMatrixHandle, texture)
         }
-        MyGLCheck.checkGlError("texture")
+        MyGLFunc.checkGlError("texture")
 
         // テクスチャ
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, idx.toArray().size,

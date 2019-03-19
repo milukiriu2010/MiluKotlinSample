@@ -9,4 +9,5 @@
     <string name="title_activity_basic">BasicActivity</string>
     <string name="title_activity_open_gl">OpenGLActivity</string>
     <string name="title_activity_open_gl02">OpenGL02Activity</string>
+    <string name="title_activity_mgl01">Mgl01Activity</string>
 </resources>

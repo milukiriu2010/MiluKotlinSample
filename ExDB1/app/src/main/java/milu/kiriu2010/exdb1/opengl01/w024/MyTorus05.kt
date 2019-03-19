@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl01.w019
 
 import android.opengl.GLES20
-import milu.kiriu2010.exdb1.opengl.MyGLCheck
+import milu.kiriu2010.exdb1.opengl.MyGLFunc
 import java.lang.RuntimeException
 import java.nio.*
 import kotlin.math.PI
@@ -182,7 +182,7 @@ class MyTorus05 {
             val linkStatus = IntArray(1)
             GLES20.glGetProgramiv(it,GLES20.GL_LINK_STATUS,linkStatus,0)
             if (linkStatus[0] == 0) {
-                MyGLCheck.printProgramInfoLog(it)
+                MyGLFunc.printProgramInfoLog(it)
                 // リンク失敗
                 GLES20.glDeleteProgram(it)
                 throw RuntimeException("Error creating program.")
@@ -237,7 +237,7 @@ class MyTorus05 {
             // Enable a handle to the triangle vertices
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLCheck.checkGlError("mPositionHandle")
+        MyGLFunc.checkGlError("mPositionHandle")
 
         normalBuffer.position(0)
         mNormalHandle = GLES20.glGetAttribLocation(mProgram, "a_Normal").also {
@@ -255,7 +255,7 @@ class MyTorus05 {
             // Enable a handle to the triangle vertices
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLCheck.checkGlError("mNormalHandle")
+        MyGLFunc.checkGlError("mNormalHandle")
 
 
         colorBuffer.position(0)
@@ -271,7 +271,7 @@ class MyTorus05 {
             )
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLCheck.checkGlError("mColorHandle")
+        MyGLFunc.checkGlError("mColorHandle")
 
         // get handle to shape's transformation matrix
         mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "u_MVPMatrix").also { mvpMatrixHandle ->
@@ -279,12 +279,12 @@ class MyTorus05 {
             GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, mvpMatrix, 0)
 
         }
-        MyGLCheck.checkGlError("mMVPMatrixHandle")
+        MyGLFunc.checkGlError("mMVPMatrixHandle")
 
         mInvMatrixHandle = GLES20.glGetUniformLocation(mProgram,"u_invMatrix").also { invMatrixHandle ->
             GLES20.glUniformMatrix4fv(invMatrixHandle,1,false,invMatrix,0)
         }
-        MyGLCheck.checkGlError("mInvMatrixHandle")
+        MyGLFunc.checkGlError("mInvMatrixHandle")
 
         mLightDirectionHandle = GLES20.glGetUniformLocation(mProgram,"u_lightDirection").also { lightDirectionHandle ->
             GLES20.glUniform3fv(lightDirectionHandle,1,lightDirectionMatrix,0)

@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl01.w018
 
 import android.opengl.GLES20
-import milu.kiriu2010.exdb1.opengl.MyGLCheck
+import milu.kiriu2010.exdb1.opengl.MyGLFunc
 import java.lang.RuntimeException
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -195,7 +195,7 @@ class MySquare01 {
             // Enable a handle to the triangle vertices
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLCheck.checkGlError("mPositionHandle")
+        MyGLFunc.checkGlError("mPositionHandle")
 
         colorBuffer.position(0)
         // get handle to fragment shader's vColor member
@@ -210,14 +210,14 @@ class MySquare01 {
             )
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLCheck.checkGlError("mColorHandle")
+        MyGLFunc.checkGlError("mColorHandle")
 
         // get handle to shape's transformation matrix
         mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "u_MVPMatrix").also { mvpMatrixHandle ->
             // Apply the projection and view transformation
             GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, mvpMatrix, 0)
         }
-        MyGLCheck.checkGlError("mMVPMatrixHandle")
+        MyGLFunc.checkGlError("mMVPMatrixHandle")
 
         // 四角形描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, drawOrder.size,
