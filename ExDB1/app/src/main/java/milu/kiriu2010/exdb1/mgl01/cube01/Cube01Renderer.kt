@@ -34,9 +34,19 @@ class Cube01Renderer: GLSurfaceView.Renderer {
         val time = SystemClock.uptimeMillis()%10000L
         val angle = 360f/10000f * time.toInt()
 
+        // モデルを単位行列にする
+        Matrix.setIdentityM(matM,0)
+        // モデルを"Y軸"を中心に回転する
+        //Matrix.rotateM(matM,0,angle,0f,1f,0f)
+        // モデルを"Y軸45度/Z軸45度"を中心に回転する
+        //Matrix.rotateM(matM,0,angle,0f,1f,1f)
+        // モデルを"X軸45度Y軸45度/Z軸45度"を中心に回転する
+        Matrix.rotateM(matM,0,angle,1f,1f,1f)
         // モデル×ビュー×プロジェクション
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
 
+        // モデルを描画
+        drawObj.draw(matMVP)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -54,9 +64,14 @@ class Cube01Renderer: GLSurfaceView.Renderer {
         // canvasを初期化する際の深度を設定する
         GLES20.glClearDepthf(1f)
 
+        // カリングと深度テストを有効にする
+        GLES20.glEnable(GLES20.GL_DEPTH_TEST)
+        GLES20.glDepthFunc(GLES20.GL_LEQUAL)
+        //GLES20.glEnable(GLES20.GL_CULL_FACE)
+
         // カメラの位置
         Matrix.setLookAtM(matV, 0,
-                0f, 0f, 10f,
+                0f, 0f, 5f,
                 0f, 0f, 0f,
                 0f, 1.0f, 0.0f)
 
