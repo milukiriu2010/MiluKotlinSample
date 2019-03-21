@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.mgl01.cube01
+package milu.kiriu2010.exdb1.mgl01.cube02
 
 import android.opengl.GLES20
 import milu.kiriu2010.exdb1.opengl.MyGLFunc
@@ -9,8 +9,9 @@ import java.nio.ByteOrder
 import java.nio.FloatBuffer
 import java.nio.ShortBuffer
 
+// 平行光源
 // https://doc.qt.io/qt-5/qtopengl-cube-example.html
-class Cube01Model {
+class Cube02Model {
 
     // プログラムハンドル
     var programHandle: Int = 0
@@ -19,13 +20,20 @@ class Cube01Model {
     private val scv =
             """
             attribute vec3 a_Position;
+            attribute vec3 a_Normal;
             attribute vec4 a_Color;
             uniform   mat4 u_matMVP;
+            uniform   mat4 u_matINV;
+            uniform   vec3 u_vecLight;
             varying   vec4 v_Color;
 
             void main() {
-                v_Color     = a_Color;
-                gl_Position = u_matMVP * vec4(a_Position,1.0);
+                // 光の逆ベクトル
+                vec3  invLight = normalize(u_matINV * vec4(u_vecLight,0.0)).xyz;
+                // 拡散度("頂点の法線ベクトル"と"光の逆ベクトル"の内積をとり、0.1～1.0の値を返す？
+                float diffuse  = clamp(dot(a_Normal,invLight), 0.2, 1.0);
+                v_Color        = a_Color * vec4(vec3(diffuse), 1.0);
+                gl_Position    = u_matMVP * vec4(a_Position,1.0);
             }
             """.trimIndent()
 
@@ -42,6 +50,8 @@ class Cube01Model {
 
     // 頂点バッファ
     private lateinit var bufPos: FloatBuffer
+    // 法線バッファ
+    private lateinit var bufNor: FloatBuffer
     // 色バッファ
     private lateinit var bufCol: FloatBuffer
     // インデックスバッファ
@@ -49,6 +59,8 @@ class Cube01Model {
 
     // 頂点データ
     private val datPos = arrayListOf<Float>()
+    // 法線データ
+    private val datNor = arrayListOf<Float>()
     // 色データ
     private val datCol = arrayListOf<Float>()
     // インデックスデータ
@@ -61,7 +73,7 @@ class Cube01Model {
         val sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
 
         // プログラムオブジェクトの生成とリンク
-        programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Color") )
+        programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Normal","a_Color") )
 
         // 頂点データ(正面)
         datPos.addAll(arrayListOf(-1f,-1f,1f))  // v0
@@ -88,6 +100,33 @@ class Cube01Model {
         datPos.addAll(arrayListOf(1f,1f,1f))    // v21,v6,v3
         datPos.addAll(arrayListOf(-1f,1f,-1f))   // v22,v14,v11
         datPos.addAll(arrayListOf(1f,1f,-1f))   // v23,v10,v7
+
+
+        // 法線データ(正面)
+        (0..3).forEach {
+            // (v1-v0) x (v2-v0)
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 3*1, 3*2, 3*0 ) )
+        }
+        (4..7).forEach {
+            // (v5-v4) x (v6-v4)
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 3*5, 3*6, 3*4 ) )
+        }
+        (8..11).forEach {
+            // (v9-v8) x (v10-v8)
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 3*9, 3*10, 3*8 ) )
+        }
+        (12..15).forEach {
+            // (v13-v12) x (v14-v12)
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 3*13, 3*14, 3*12 ) )
+        }
+        (16..19).forEach {
+            // (v18-v16) x (v17-v16)
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 3*17, 3*18, 3*16 ) )
+        }
+        (20..23).forEach {
+            // (v21-v20) x (v22-v20)
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 3*21, 3*22, 3*20 ) )
+        }
 
         // 色データ(正面)
         (0..3).forEach {
@@ -134,6 +173,16 @@ class Cube01Model {
             }
         }
 
+        // 法線バッファ
+        bufNor = ByteBuffer.allocateDirect(datNor.toArray().size * 4).run {
+            order(ByteOrder.nativeOrder())
+
+            asFloatBuffer().apply {
+                put(datNor.toFloatArray())
+                position(0)
+            }
+        }
+
         // 色バッファ
         bufCol = ByteBuffer.allocateDirect(datCol.toArray().size * 4).run {
             order(ByteOrder.nativeOrder())
@@ -155,9 +204,9 @@ class Cube01Model {
         }
     }
 
-    fun draw(matMVP: FloatArray) {
+    fun draw(matMVP: FloatArray, matI: FloatArray, vecLight: FloatArray) {
 
-        // 頂点
+        // attribute(頂点)
         bufPos.position(0)
         GLES20.glGetAttribLocation(programHandle,"a_Position").also {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, bufPos)
@@ -165,7 +214,15 @@ class Cube01Model {
         }
         MyGLFunc.checkGlError("a_Position")
 
-        // 色
+        // attribute(法線)
+        bufNor.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Normal").also {
+            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, bufNor)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLFunc.checkGlError("a_Normal")
+
+        // attribute(色)
         bufCol.position(0)
         GLES20.glGetAttribLocation(programHandle,"a_Color").also {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 4*4, bufCol)
@@ -173,10 +230,19 @@ class Cube01Model {
         }
         MyGLFunc.checkGlError("a_Color")
 
-        // モデル×ビュー×プロジェクション
+        // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
+        // uniform(逆行列)
+        GLES20.glGetUniformLocation(programHandle,"u_matINV").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matI,0)
+        }
+        // uniform(平行光源)
+        GLES20.glGetUniformLocation(programHandle,"u_vecLight").also {
+            GLES20.glUniform3fv(it,1,vecLight,0)
+        }
+
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, datIdx.size, GLES20.GL_UNSIGNED_SHORT, bufIdx)

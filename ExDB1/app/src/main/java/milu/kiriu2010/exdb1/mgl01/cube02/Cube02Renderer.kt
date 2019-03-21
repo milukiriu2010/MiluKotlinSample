@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.mgl01.cube01
+package milu.kiriu2010.exdb1.mgl01.cube02
 
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
@@ -10,12 +10,15 @@ import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
-class Cube01Renderer: GLSurfaceView.Renderer {
+// 平行光源
+class Cube02Renderer: GLSurfaceView.Renderer {
     // 描画オブジェクト
-    private lateinit var drawObj: Cube01Model
+    private lateinit var drawObj: Cube02Model
 
     // モデル変換行列
     private val matM = FloatArray(16)
+    // モデル変換行列の逆行列
+    private val matI = FloatArray(16)
     // ビュー変換行列
     private val matV = FloatArray(16)
     // プロジェクション変換行列
@@ -24,6 +27,8 @@ class Cube01Renderer: GLSurfaceView.Renderer {
     private val matMVP = FloatArray(16)
     // テンポラリ行列
     private val matT = FloatArray(16)
+    // 平行光源の向き
+    private val vecLight = floatArrayOf(0f,0f,2f)
 
     // 回転角度
     private var angle = 0
@@ -55,8 +60,11 @@ class Cube01Renderer: GLSurfaceView.Renderer {
         // モデル×ビュー×プロジェクション
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
 
+        // モデル座標変換行列から逆行列を生成
+        Matrix.invertM(matI,0,matM,0)
+
         // モデルを描画
-        drawObj.draw(matMVP)
+        drawObj.draw(matMVP,matI,vecLight)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -85,6 +93,6 @@ class Cube01Renderer: GLSurfaceView.Renderer {
                 0f, 0f, 0f,
                 0f, 1.0f, 0.0f)
 
-        drawObj = Cube01Model()
+        drawObj = Cube02Model()
     }
 }
