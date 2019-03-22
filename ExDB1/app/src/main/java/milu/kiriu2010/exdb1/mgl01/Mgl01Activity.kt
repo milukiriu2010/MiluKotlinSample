@@ -11,6 +11,7 @@ import milu.kiriu2010.exdb1.mgl01.cube01.Cube01Fragment
 import milu.kiriu2010.exdb1.mgl01.cube02.Cube02Fragment
 import milu.kiriu2010.exdb1.mgl01.cube03.Cube03Fragment
 import milu.kiriu2010.exdb1.mgl01.cube04.Cube04Fragment
+import milu.kiriu2010.exdb1.mgl01.cube05.Cube05Fragment
 
 class Mgl01Activity : AppCompatActivity() {
 
@@ -77,7 +78,17 @@ class Mgl01Activity : AppCompatActivity() {
                 finish()
                 true
             }
-            // 反射光
+            // 立方体(フォンシェーディング)
+            R.id.mgl01_cube05 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("cube05") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Cube05Fragment.newInstance(), "cube05")
+                            .commit()
+                }
+                true
+            }
+            // 立方体(反射光)
             R.id.mgl01_cube04 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("cube04") == null) {
@@ -87,7 +98,7 @@ class Mgl01Activity : AppCompatActivity() {
                 }
                 true
             }
-            // 環境光
+            // 立方体(環境光)
             R.id.mgl01_cube03 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("cube03") == null) {
@@ -97,7 +108,7 @@ class Mgl01Activity : AppCompatActivity() {
                 }
                 true
             }
-            // 平行光源
+            // 立方体(平行光源)
             R.id.mgl01_cube02 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("cube02") == null) {
