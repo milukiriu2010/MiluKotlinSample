@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_mgl01.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.mgl01.cube01.Cube01Fragment
 import milu.kiriu2010.exdb1.mgl01.cube02.Cube02Fragment
+import milu.kiriu2010.exdb1.mgl01.cube03.Cube03Fragment
 
 class Mgl01Activity : AppCompatActivity() {
 
@@ -75,10 +76,20 @@ class Mgl01Activity : AppCompatActivity() {
                 finish()
                 true
             }
+            // 環境光
+            R.id.mgl01_cube03 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("cube03") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Cube03Fragment.newInstance(), "cube03")
+                            .commit()
+                }
+                true
+            }
             // 平行光源
             R.id.mgl01_cube02 -> {
                 supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("cube01") == null) {
+                if (supportFragmentManager.findFragmentByTag("cube02") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Cube02Fragment.newInstance(), "cube02")
                             .commit()

@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.mgl01
+package milu.kiriu2010.exdb1.mgl01.cube03
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,13 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.mgl01.cube01.Cube01Renderer
-import milu.kiriu2010.exdb1.mgl01.cube02.Cube02Renderer
-import milu.kiriu2010.exdb1.mgl01.cube03.Cube03Renderer
 import milu.kiriu2010.exdb1.opengl.MyGL02View
 
 
-class MGL01HomeFragment : Fragment() {
+class Cube03Fragment : Fragment() {
 
     private lateinit var myGL02View: MyGL02View
 
@@ -29,8 +26,6 @@ class MGL01HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_mgl_home, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        //myGL02View.setRenderer(Cube01Renderer())
-        //myGL02View.setRenderer(Cube02Renderer())
         myGL02View.setRenderer(Cube03Renderer())
 
         return view
@@ -49,7 +44,7 @@ class MGL01HomeFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                MGL01HomeFragment().apply {
+                Cube03Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }
