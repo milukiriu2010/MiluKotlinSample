@@ -10,6 +10,7 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.mgl01.cube01.Cube01Fragment
 import milu.kiriu2010.exdb1.mgl01.cube02.Cube02Fragment
 import milu.kiriu2010.exdb1.mgl01.cube03.Cube03Fragment
+import milu.kiriu2010.exdb1.mgl01.cube04.Cube04Fragment
 
 class Mgl01Activity : AppCompatActivity() {
 
@@ -74,6 +75,16 @@ class Mgl01Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 反射光
+            R.id.mgl01_cube04 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("cube04") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Cube04Fragment.newInstance(), "cube04")
+                            .commit()
+                }
                 true
             }
             // 環境光
