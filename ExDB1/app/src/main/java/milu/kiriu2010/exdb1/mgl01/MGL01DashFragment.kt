@@ -2,9 +2,7 @@ package milu.kiriu2010.exdb1.mgl01
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 
@@ -14,11 +12,10 @@ import milu.kiriu2010.exdb1.mgl01.cube02.Cube02Renderer
 import milu.kiriu2010.exdb1.mgl01.cube03.Cube03Renderer
 import milu.kiriu2010.exdb1.mgl01.cube04.Cube04Renderer
 import milu.kiriu2010.exdb1.mgl01.cube05.Cube05Renderer
-import milu.kiriu2010.exdb1.mgl01.cube06.Cube06Renderer
 import milu.kiriu2010.exdb1.opengl.MyGL02View
 
 
-class MGL01HomeFragment : Fragment() {
+class MGL01DashFragment : Fragment() {
 
     private lateinit var myGL02View: MyGL02View
 
@@ -31,33 +28,14 @@ class MGL01HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_mgl_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_mgl_dash, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
         //myGL02View.setRenderer(Cube01Renderer())
         //myGL02View.setRenderer(Cube02Renderer())
         //myGL02View.setRenderer(Cube03Renderer())
         //myGL02View.setRenderer(Cube04Renderer())
-        //myGL02View.setRenderer(Cube05Renderer())
-        val render = Cube06Renderer()
-        myGL02View.setRenderer(render)
-        myGL02View.setOnTouchListener { v, event ->
-            when (event.action) {
-                MotionEvent.ACTION_UP -> {
-                    render.rotateSwitch = false
-                }
-                MotionEvent.ACTION_DOWN -> {
-                    Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
-                    Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
-                    render.rotateSwitch = true
-                }
-                MotionEvent.ACTION_MOVE -> {
-                }
-                else -> {
-                }
-            }
-            true
-        }
+        myGL02View.setRenderer(Cube05Renderer())
 
         return view
     }
@@ -75,7 +53,7 @@ class MGL01HomeFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                MGL01HomeFragment().apply {
+                MGL01DashFragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.mgl01
+package milu.kiriu2010.exdb1.mgl01.cube06
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -18,7 +18,7 @@ import milu.kiriu2010.exdb1.mgl01.cube06.Cube06Renderer
 import milu.kiriu2010.exdb1.opengl.MyGL02View
 
 
-class MGL01HomeFragment : Fragment() {
+class Cube06Fragment : Fragment() {
 
     private lateinit var myGL02View: MyGL02View
 
@@ -75,7 +75,7 @@ class MGL01HomeFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                MGL01HomeFragment().apply {
+                Cube06Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

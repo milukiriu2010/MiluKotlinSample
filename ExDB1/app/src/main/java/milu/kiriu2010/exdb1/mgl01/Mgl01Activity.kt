@@ -12,12 +12,14 @@ import milu.kiriu2010.exdb1.mgl01.cube02.Cube02Fragment
 import milu.kiriu2010.exdb1.mgl01.cube03.Cube03Fragment
 import milu.kiriu2010.exdb1.mgl01.cube04.Cube04Fragment
 import milu.kiriu2010.exdb1.mgl01.cube05.Cube05Fragment
+import milu.kiriu2010.exdb1.mgl01.cube06.Cube06Fragment
 
 class Mgl01Activity : AppCompatActivity() {
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Home") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, MGL01HomeFragment.newInstance(), "Home")
@@ -26,14 +28,16 @@ class Mgl01Activity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("Dash") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, MGL01HomeFragment.newInstance(), "Home")
+                            .replace(R.id.frameLayout, MGL01DashFragment.newInstance(), "Dash")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Home") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, MGL01HomeFragment.newInstance(), "Home")
@@ -76,6 +80,16 @@ class Mgl01Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 立方体(点光源)
+            R.id.mgl01_cube06 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("cube06") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Cube06Fragment.newInstance(), "cube06")
+                            .commit()
+                }
                 true
             }
             // 立方体(フォンシェーディング)

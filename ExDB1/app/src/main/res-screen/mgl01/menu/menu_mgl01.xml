@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/mgl01_cube06"
+        android:title="立方体(点光源)" />
+    <item
         android:id="@+id/mgl01_cube05"
         android:title="立方体(フォンシェーディング)" />
     <item
