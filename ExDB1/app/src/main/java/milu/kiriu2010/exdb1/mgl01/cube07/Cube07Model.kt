@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.mgl01.cube06
+package milu.kiriu2010.exdb1.mgl01.cube07
 
 import android.opengl.GLES20
 import milu.kiriu2010.exdb1.opengl.MyGLFunc
@@ -9,9 +9,9 @@ import java.nio.ByteOrder
 import java.nio.FloatBuffer
 import java.nio.ShortBuffer
 
-// 点光源
+// クォータニオン
 // https://doc.qt.io/qt-5/qtopengl-cube-example.html
-class Cube06Model {
+class Cube07Model {
 
     // プログラムハンドル
     var programHandle: Int = 0

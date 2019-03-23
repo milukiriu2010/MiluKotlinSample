@@ -1,5 +1,6 @@
 package milu.kiriu2010.gui.basic
 
+import milu.kiriu2010.math.MyMathUtil
 import kotlin.math.sqrt
 
 // https://wgld.org/d/webgl/w032.html
@@ -66,5 +67,46 @@ data class MyQuaternion(
         return this
     }
 
+    companion object {
+        fun rotate( angle: Float, axis: FloatArray ): MyQuaternion {
+            val qtn = MyQuaternion()
+            var sq = sqrt(axis[0]*axis[0]+axis[1]*axis[1]+axis[2]*axis[2])
+            if (sq == 0f) {
+                qtn.q[0] = 0f
+                qtn.q[1] = 0f
+                qtn.q[2] = 0f
+                qtn.q[3] = 0f
+            }
+            else {
+                var a = axis[0]
+                var b = axis[1]
+                var c = axis[2]
+                if ( sq != 1f ) {
+                    sq = 1f/sq
+                    a *= sq
+                    b *= sq
+                    c *= sq
+                }
+                var sin = MyMathUtil.sinf(angle/2f)
+                qtn.q[0] = a * sin
+                qtn.q[1] = b * sin
+                qtn.q[2] = c * sin
+                qtn.q[3] = MyMathUtil.cosf(angle/2f)
+            }
+
+            return qtn
+        }
+
+        fun toVecIII(vec: FloatArray, qtn: MyQuaternion): FloatArray {
+            var qp = MyQuaternion(floatArrayOf(vec[0],vec[1],vec[2],0f))
+            var qr = MyQuaternion(floatArrayOf(qtn.q[0],qtn.q[1],qtn.q[2],qtn.q[3]))
+            qr.inverse()
+            var qq = MyQuaternion(floatArrayOf(qr.q[0],qr.q[1],qr.q[2],qr.q[3]))
+                    .multiply(qp)
+            var qs = MyQuaternion(floatArrayOf(qq.q[0],qq.q[1],qq.q[2],qq.q[3]))
+                    .multiply(qtn)
+            return floatArrayOf(qs.q[0],qs.q[1],qs.q[2])
+        }
+    }
 
 }

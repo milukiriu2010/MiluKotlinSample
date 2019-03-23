@@ -13,6 +13,7 @@ import milu.kiriu2010.exdb1.mgl01.cube03.Cube03Fragment
 import milu.kiriu2010.exdb1.mgl01.cube04.Cube04Fragment
 import milu.kiriu2010.exdb1.mgl01.cube05.Cube05Fragment
 import milu.kiriu2010.exdb1.mgl01.cube06.Cube06Fragment
+import milu.kiriu2010.exdb1.mgl01.cube07.Cube07Fragment
 
 class Mgl01Activity : AppCompatActivity() {
 
@@ -80,6 +81,16 @@ class Mgl01Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 立方体(クォータニオン)
+            R.id.mgl01_cube07 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("cube07") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Cube07Fragment.newInstance(), "cube07")
+                            .commit()
+                }
                 true
             }
             // 立方体(点光源)
