@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".opengl02.OpenGL02HomeFragment">
+    tools:context=".opengl03.OpenGL03HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <milu.kiriu2010.exdb1.opengl02.labo01.TestGLView
-        android:id="@+id/testGLView"
+    <milu.kiriu2010.exdb1.opengl.MyGL02View
+        android:id="@+id/myGL02ViewA03"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"

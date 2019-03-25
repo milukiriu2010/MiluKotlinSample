@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".opengl01.OpenGL01HomeFragment">
+    tools:context=".opengl02.OpenGL02HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

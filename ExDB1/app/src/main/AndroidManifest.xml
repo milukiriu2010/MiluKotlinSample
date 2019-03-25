@@ -50,7 +50,10 @@
             android:label="@string/title_activity_open_gl02" />
         <activity
             android:name=".mgl01.Mgl01Activity"
-            android:label="@string/title_activity_mgl01"></activity>
+            android:label="@string/title_activity_mgl01" />
+        <activity
+            android:name=".opengl03.OpenGL03Activity"
+            android:label="@string/title_activity_open_gl03"></activity>
     </application>
 
 </manifest>

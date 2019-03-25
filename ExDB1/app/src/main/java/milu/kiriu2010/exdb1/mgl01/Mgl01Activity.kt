@@ -74,7 +74,6 @@ class Mgl01Activity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-
     // アクションバーのアイコンがタップされると呼ばれる
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {

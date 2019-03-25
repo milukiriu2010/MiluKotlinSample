@@ -10,4 +10,5 @@
     <string name="title_activity_open_gl">OpenGLActivity</string>
     <string name="title_activity_open_gl02">OpenGL02Activity</string>
     <string name="title_activity_mgl01">Mgl01Activity</string>
+    <string name="title_activity_open_gl03">OpenGL03Activity</string>
 </resources>
