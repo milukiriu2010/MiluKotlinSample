@@ -67,6 +67,44 @@ data class MyQuaternion(
         return this
     }
 
+    fun toMatIV(): FloatArray {
+        var x = q[0]
+        var y = q[1]
+        var z = q[2]
+        var w = q[3]
+        var x2 = x+x
+        var y2 = y+y
+        var z2 = z+z
+        var xx = x*x2
+        var xy = x*y2
+        var xz = x*z2
+        var yy = y*y2
+        var yz = y*z2
+        var zz = z*z2
+        var wx = w*x2
+        var wy = w*y2
+        var wz = w*z2
+
+        return floatArrayOf(
+                1f-(yy+zz), // 0
+                xy-wz,      // 1
+                xz+wy,      // 2
+                0f,         // 3
+                xy+wz,      // 4
+                1-(xx+zz),  // 5
+                yz-wx,      // 6
+                0f,         // 7
+                xz-wy,      // 8
+                yz+wx,      // 9
+                1-(xx+yy),  // 10
+                0f,         // 11
+                0f,         // 12
+                0f,         // 13
+                0f,         // 14
+                1f          // 15
+        )
+    }
+
     companion object {
         fun rotate( angle: Float, axis: FloatArray ): MyQuaternion {
             val qtn = MyQuaternion()

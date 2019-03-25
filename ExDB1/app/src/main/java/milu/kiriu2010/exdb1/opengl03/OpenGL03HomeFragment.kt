@@ -12,6 +12,7 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
 import milu.kiriu2010.exdb1.opengl01.w019.*
 import milu.kiriu2010.exdb1.opengl03.w032.W032Renderer
+import milu.kiriu2010.exdb1.opengl03.w033.W033Renderer
 
 class OpenGL03HomeFragment : Fragment() {
 
@@ -29,7 +30,7 @@ class OpenGL03HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_gl03_home, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02ViewA03)
-        val render = W032Renderer()
+        val render = W033Renderer()
         myGL02View.setRenderer(render)
         myGL02View.setOnTouchListener { v, event ->
             when (event.action) {
@@ -40,8 +41,10 @@ class OpenGL03HomeFragment : Fragment() {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
                     Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
                     render.rotateSwitch = true
+                    render.receiveTouch(event,myGL02View.width,myGL02View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
+                    render.receiveTouch(event,myGL02View.width,myGL02View.height)
                 }
                 else -> {
                 }
