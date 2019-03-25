@@ -32,7 +32,7 @@ class MGL01HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_mgl_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_mgl01_home, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
         //myGL02View.setRenderer(Cube01Renderer())

@@ -10,7 +10,6 @@ import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
-import milu.kiriu2010.exdb1.opengl01.w019.*
 import milu.kiriu2010.exdb1.opengl03.w032.W032Renderer
 import milu.kiriu2010.exdb1.opengl03.w033.W033Renderer
 

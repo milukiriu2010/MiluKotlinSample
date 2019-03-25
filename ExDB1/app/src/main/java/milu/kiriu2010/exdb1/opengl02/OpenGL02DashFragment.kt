@@ -1,5 +1,6 @@
 package milu.kiriu2010.exdb1.opengl02
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -8,11 +9,12 @@ import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
-import milu.kiriu2010.exdb1.opengl02.pyramid01.MyPyramid01Renderer
+import milu.kiriu2010.exdb1.opengl.TextureView
+import milu.kiriu2010.exdb1.opengl01.w019.W027Renderer
 
 class OpenGL02DashFragment : Fragment() {
 
-    private lateinit var myGL02View: MyGL02View
+    private lateinit var textureView: TextureView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,22 +25,28 @@ class OpenGL02DashFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl02_home, container, false)
 
-        myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        myGL02View.setRenderer(MyPyramid01Renderer())
+        textureView = view.findViewById<TextureView>(R.id.textureView)
+        val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture0)
+        val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.texture1_1)
+        val render = W027Renderer()
+        render.bmpArray.add(bmp0)
+        render.bmpArray.add(bmp1)
+        textureView.setRenderer(render)
+
 
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        myGL02View.onResume()
+        textureView.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        myGL02View.onPause()
+        textureView.onPause()
     }
 
     companion object {

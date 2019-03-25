@@ -4,6 +4,7 @@ import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import android.opengl.Matrix
 import android.os.SystemClock
+import android.util.Log
 import android.view.MotionEvent
 import milu.kiriu2010.gui.basic.MyQuaternion
 import javax.microedition.khronos.egl.EGLConfig
@@ -70,6 +71,7 @@ class W033Renderer: GLSurfaceView.Renderer {
 
         // クォータニオンを行列に適用する
         val matQ = xQuaternion.toMatIV()
+        //Log.d(javaClass.simpleName,"0[${matQ[0]}}1[${matQ[1]}}2[${matQ[2]}}3[${matQ[3]}}")
 
         // ビュー×プロジェクション
         Matrix.multiplyMM(matT,0,matP,0,matV,0)
@@ -126,10 +128,13 @@ class W033Renderer: GLSurfaceView.Renderer {
 
     fun receiveTouch(ev: MotionEvent, w: Int, h: Int ) {
         var wh = 1f/ sqrt((w*w+h*h).toFloat())
+        // canvasの中心点からみたタッチ点の相対位置
         var x = ev.x - w.toFloat()*0.5f
         var y = ev.y - h.toFloat()*0.5f
         var sq = sqrt(x*x+y*y)
-        var r = sq*2f*PI.toFloat()*wh
+        //var r = sq*2f*PI.toFloat()*wh
+        // 回転角
+        var r = sq*wh*360f
         if (sq != 1f) {
             sq = 1f/sq
             x *= sq
