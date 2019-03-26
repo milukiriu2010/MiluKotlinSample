@@ -1,6 +1,9 @@
 package milu.kiriu2010.gui.basic
 
 import milu.kiriu2010.math.MyMathUtil
+import kotlin.math.abs
+import kotlin.math.acos
+import kotlin.math.sin
 import kotlin.math.sqrt
 
 // https://wgld.org/d/webgl/w032.html
@@ -144,6 +147,39 @@ data class MyQuaternion(
             var qs = MyQuaternion(floatArrayOf(qq.q[0],qq.q[1],qq.q[2],qq.q[3]))
                     .multiply(qtn)
             return floatArrayOf(qs.q[0],qs.q[1],qs.q[2])
+        }
+
+        // 球面線形補間
+        fun slerp(qtn1: MyQuaternion,qtn2: MyQuaternion,ktime: Float): MyQuaternion {
+            var ht = qtn1.q[0]*qtn2.q[0] + qtn1.q[1]*qtn2.q[1] + qtn1.q[2]*qtn2.q[2] + qtn1.q[3]*qtn2.q[3]
+            var hs = 1f - ht*ht
+            var qtn0 = MyQuaternion()
+            if ( hs <= 0f ) {
+                qtn0.q[0] = qtn1.q[0]
+                qtn0.q[1] = qtn1.q[1]
+                qtn0.q[2] = qtn1.q[2]
+                qtn0.q[3] = qtn1.q[3]
+            }
+            else {
+                hs = sqrt(hs)
+                if ( abs(hs) < 0.001 ) {
+                    qtn0.q[0] = qtn1.q[0]*0.5f + qtn2.q[0]*0.5f
+                    qtn0.q[1] = qtn1.q[1]*0.5f + qtn2.q[1]*0.5f
+                    qtn0.q[2] = qtn1.q[2]*0.5f + qtn2.q[2]*0.5f
+                    qtn0.q[3] = qtn1.q[3]*0.5f + qtn2.q[3]*0.5f
+                }
+                else {
+                    var ph = acos(ht)
+                    var pt = ph * ktime
+                    var t0 = sin(ph-pt)/hs
+                    var t1 = sin(pt)/hs
+                    qtn0.q[0] = qtn1.q[0]*t0 + qtn2.q[0]*t1
+                    qtn0.q[1] = qtn1.q[1]*t0 + qtn2.q[1]*t1
+                    qtn0.q[2] = qtn1.q[2]*t0 + qtn2.q[2]*t1
+                    qtn0.q[3] = qtn1.q[3]*t0 + qtn2.q[3]*t1
+                }
+            }
+            return qtn0
         }
     }
 

@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/opengl_w034"
-        android:title="w033_クォータニオン(球面線形補間)" />
+        android:title="w034_クォータニオン(球面線形補間)" />
     <item
         android:id="@+id/opengl_w033"
         android:title="w033_クォータニオン(タッチで回転)" />

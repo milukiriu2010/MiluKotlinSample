@@ -41,14 +41,11 @@ class W034Renderer: GLSurfaceView.Renderer {
     // 点光源の位置
     private val vecLight = floatArrayOf(15f,10f,15f)
     // 環境光の色
-    private val vecAmbientColor = floatArrayOf(0.1f,0.1f,0.1f,1f)
+    //private val vecAmbientColor = floatArrayOf(0.1f,0.1f,0.1f,1f)
     // カメラの座標
-    private val vecEye = floatArrayOf(0f,0f,10f)
+    private val vecEye = floatArrayOf(0f,0f,20f)
     // カメラの上方向を表すベクトル
     private val vecEyeUp = floatArrayOf(0f,1f,0f)
-
-    // クォータニオン
-    private var xQuaternion = MyQuaternion().identity()
 
     // X軸
     private var xaxis = floatArrayOf(1f,0f,0f)
@@ -59,12 +56,17 @@ class W034Renderer: GLSurfaceView.Renderer {
 
     // 回転スイッチ
     var rotateSwitch = false
-    // タッチしたとき発生するイベント
-    //var event: MotionEvent? = null
+
+    // 経過時間係数
+    var ktimeNow = 5f
+    var ktimeMax = 10f
 
     override fun onDrawFrame(gl: GL10?) {
         // canvasを初期化
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
+
+        // ビュー×プロジェクション
+        Matrix.multiplyMM(matT,0,matP,0,matV,0)
 
         // 回転角度
         angle1 =(angle1+5)%360
@@ -72,26 +74,32 @@ class W034Renderer: GLSurfaceView.Renderer {
         val t1 = angle1.toFloat()
         val t2 = angle2.toFloat()
 
-        // クォータニオンを行列に適用する
-        val matQ = xQuaternion.toMatIV()
-        //Log.d(javaClass.simpleName,"0[${matQ[0]}}1[${matQ[1]}}2[${matQ[2]}}3[${matQ[3]}}")
-
-        // ビュー×プロジェクション
-        Matrix.multiplyMM(matT,0,matP,0,matV,0)
+        // 回転クォータニオンの生成
+        var aQuaternion = MyQuaternion.rotate(t1, floatArrayOf(1f,0f,0f))
+        var bQuaternion = MyQuaternion.rotate(t1, floatArrayOf(0f,1f,0f))
+        var sQuaternion = MyQuaternion.slerp(aQuaternion,bQuaternion,ktimeNow/ktimeMax)
 
 
+        // モデル描画
+        draw(aQuaternion, floatArrayOf(0.5f,0f,0f,1f))
+        draw(bQuaternion, floatArrayOf(0f,0.5f,0f,1f))
+        draw(sQuaternion, floatArrayOf(0f,0f,0.5f,1f))
+
+    }
+
+    // ------------------------------------
+    // モデル描画
+    // ------------------------------------
+    // vecAmbientColor: 環境光の色
+    private fun draw(qtn: MyQuaternion, vecAmbientColor: FloatArray) {
+        // モデル座標変換行列の生成
+        var matQ = qtn.toMatIV()
         // モデルを単位行列にする
         Matrix.setIdentityM(matM,0)
         Matrix.multiplyMM(matM,0,matQ,0,matM,0)
-        // モデルを"Y軸"を中心に回転する
-        Matrix.rotateM(matM, 0, t1, 0f, 1f, 0f)
-        // モデルを"Y軸45度/Z軸45度"を中心に回転する
-        //Matrix.rotateM(matM,0,angle,0f,1f,1f)
-        // モデルを"X軸45度Y軸45度/Z軸45度"を中心に回転する
-        //Matrix.rotateM(matM,0,t1,1f,1f,1f)
+        Matrix.translateM(matM,0,0f,0f,-5f)
         // モデル×ビュー×プロジェクション
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-
         // モデル座標変換行列から逆行列を生成
         Matrix.invertM(matI,0,matM,0)
 
@@ -147,6 +155,6 @@ class W034Renderer: GLSurfaceView.Renderer {
             x *= sq
             y *= sq
         }
-        xQuaternion = MyQuaternion.rotate(r, floatArrayOf(y,x,0f))
+        //xQuaternion = MyQuaternion.rotate(r, floatArrayOf(y,x,0f))
     }
 }

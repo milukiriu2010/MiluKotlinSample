@@ -38,7 +38,8 @@ class W034Model {
     init {
         // トーラスの頂点データを生成
         //createPath(32,32,0.5f,1.5f, floatArrayOf(0.75f,0.25f,0.25f,1f))
-        createPath(32,32,0.5f,1.5f)
+        //createPath(32,32,0.5f,1.5f)
+        createPath(32,32,0.5f,1.5f, floatArrayOf(0.5f,0.5f,0.5f,1f))
 
         // 頂点バッファ
         bufPos = ByteBuffer.allocateDirect(datPos.toArray().size * 4).run {

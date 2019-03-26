@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
+import kotlinx.android.synthetic.main.fragment_open_gl03_w034.view.*
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
@@ -14,6 +16,8 @@ import milu.kiriu2010.exdb1.opengl.MyGL02View
 class W034Fragment : Fragment() {
 
     private lateinit var myGL02View: MyGL02View
+
+    private lateinit var seekBarW034: SeekBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +28,7 @@ class W034Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl03_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl03_w034, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02ViewA03)
         val render = W034Renderer()
@@ -48,6 +52,23 @@ class W034Fragment : Fragment() {
             }
             true
         }
+
+        seekBarW034 = view.findViewById<SeekBar>(R.id.seekBarW034)
+        seekBarW034.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                render.ktimeNow = seekBarW034.progress.toFloat()
+                render.ktimeMax = seekBarW034.max.toFloat()
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                render.ktimeNow = seekBarW034.progress.toFloat()
+                render.ktimeMax = seekBarW034.max.toFloat()
+            }
+
+        });
 
 
         return view
