@@ -10,6 +10,10 @@ class MyMathUtil {
         // -----------------------------------------------------------
         // 外積２
         // -----------------------------------------------------------
+        // id1: ベクトルA
+        // id2: ベクトルB
+        // id3: ベクトルA,Bの原点
+        // -----------------------------------------------------------
         fun crossProduct3Dv2( dat: ArrayList<Float>, id1: Int, id2: Int, id3: Int ): ArrayList<Float> {
             if ( dat.size < 6 ) {
                 throw RuntimeException("dat.size is short.")

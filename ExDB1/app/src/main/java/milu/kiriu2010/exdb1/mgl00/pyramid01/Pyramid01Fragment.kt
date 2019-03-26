@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl02.pyramid01
+package milu.kiriu2010.exdb1.mgl00.pyramid01
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -25,7 +25,7 @@ class Pyramid01Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_gl_home, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        myGL02View.setRenderer(MyPyramid01Renderer())
+        myGL02View.setRenderer(Pyramid01Renderer())
 
         return view
     }

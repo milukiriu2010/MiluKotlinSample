@@ -8,8 +8,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_open_gl02.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl02.labo01.TestGLFragment
-import milu.kiriu2010.exdb1.opengl02.labo01.TestGLView
-import milu.kiriu2010.exdb1.opengl02.pyramid01.Pyramid01Fragment
+import milu.kiriu2010.exdb1.mgl00.pyramid01.Pyramid01Fragment
 import milu.kiriu2010.exdb1.opengl02.w026.W026Fragment
 import milu.kiriu2010.exdb1.opengl02.w027.W027Fragment
 import milu.kiriu2010.exdb1.opengl02.w028.W028Fragment
@@ -111,15 +110,6 @@ class OpenGL02Activity : AppCompatActivity() {
                 if (supportFragmentManager.findFragmentByTag("Labo01") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, TestGLFragment.newInstance(), "Labo01")
-                            .commit()
-                }
-                true
-            }
-            // ピラミッド(点光源)
-            R.id.opengl_pyramid01 -> {
-                if (supportFragmentManager.findFragmentByTag("Pyramid01") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Pyramid01Fragment.newInstance(), "Pyramid01")
                             .commit()
                 }
                 true
