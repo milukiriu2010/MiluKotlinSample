@@ -8,6 +8,8 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_open_gl03.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl03.w032.W032Fragment
+import milu.kiriu2010.exdb1.opengl03.w033.W033Fragment
+import milu.kiriu2010.exdb1.opengl03.w034.W034Fragment
 
 class OpenGL03Activity : AppCompatActivity() {
 
@@ -75,6 +77,24 @@ class OpenGL03Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // クォータニオン(球面線形補間)
+            R.id.opengl_w034 -> {
+                if (supportFragmentManager.findFragmentByTag("w034") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W034Fragment.newInstance(), "w034")
+                            .commit()
+                }
+                true
+            }
+            // クォータニオン(タッチで回転)
+            R.id.opengl_w033 -> {
+                if (supportFragmentManager.findFragmentByTag("w033") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W033Fragment.newInstance(), "w033")
+                            .commit()
+                }
                 true
             }
             // クォータニオン

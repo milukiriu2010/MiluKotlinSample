@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w034"
+        android:title="w033_クォータニオン(球面線形補間)" />
+    <item
+        android:id="@+id/opengl_w033"
+        android:title="w033_クォータニオン(タッチで回転)" />
+    <item
         android:id="@+id/opengl_w032"
         android:title="w032_クォータニオン" />
 </menu>
