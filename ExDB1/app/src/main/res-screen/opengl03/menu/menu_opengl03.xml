@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w035"
+        android:title="w035_クォータニオン(ビルボード)" />
+    <item
         android:id="@+id/opengl_w034"
         android:title="w034_クォータニオン(球面線形補間)" />
     <item

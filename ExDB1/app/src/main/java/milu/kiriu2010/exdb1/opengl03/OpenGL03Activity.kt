@@ -10,6 +10,7 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl03.w032.W032Fragment
 import milu.kiriu2010.exdb1.opengl03.w033.W033Fragment
 import milu.kiriu2010.exdb1.opengl03.w034.W034Fragment
+import milu.kiriu2010.exdb1.opengl03.w035.W035Fragment
 
 class OpenGL03Activity : AppCompatActivity() {
 
@@ -77,6 +78,15 @@ class OpenGL03Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // クォータニオン(ビルボード)
+            R.id.opengl_w035 -> {
+                if (supportFragmentManager.findFragmentByTag("w035") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W035Fragment.newInstance(), "w035")
+                            .commit()
+                }
                 true
             }
             // クォータニオン(球面線形補間)
