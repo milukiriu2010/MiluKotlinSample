@@ -6,8 +6,6 @@ import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.*
 import android.widget.Switch
-import kotlinx.android.synthetic.main.fragment_open_gl03_w034.view.*
-import kotlinx.android.synthetic.main.fragment_open_gl03_w035.view.*
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.TextureView
@@ -29,7 +27,7 @@ class W035Fragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_open_gl03_w035, container, false)
 
-        textureView = view.findViewById<TextureView>(R.id.textureViewW035)
+        textureView = view.findViewById(R.id.textureViewW035)
         val render = W035Renderer()
         val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w035_0)
         val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.texture_w035_1)
@@ -45,8 +43,10 @@ class W035Fragment : Fragment() {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
                     Log.d(javaClass.simpleName,"vw[${textureView.width}]vh[${textureView.height}]")
                     render.rotateSwitch = true
+                    render.receiveTouch(event,textureView.width,textureView.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
+                    render.receiveTouch(event,textureView.width,textureView.height)
                 }
                 else -> {
                 }
@@ -56,7 +56,7 @@ class W035Fragment : Fragment() {
 
         switch = view.findViewById(R.id.switchW035)
         switch.setOnCheckedChangeListener { buttonView, isChecked ->
-
+            render.isBillBoard = isChecked
         }
 
         return view

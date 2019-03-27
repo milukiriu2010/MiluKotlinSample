@@ -45,12 +45,16 @@ class W035Renderer: GLSurfaceView.Renderer {
     // 環境光の色
     //private val vecAmbientColor = floatArrayOf(0.1f,0.1f,0.1f,1f)
     // カメラの座標
-    private val vecEye = floatArrayOf(0f,0f,20f)
+    private val vecEye = floatArrayOf(0f,5f,10f)
     // カメラの上方向を表すベクトル
     private val vecEyeUp = floatArrayOf(0f,1f,0f)
+    // 原点のベクトル
+    private val vecCenter = floatArrayOf(0f,0f,0f)
 
     // ビットマップ配列
     val bmpArray = arrayListOf<Bitmap>()
+    // ビットマップリサイクル配列
+    val bmpRecycleDoneArray = arrayListOf<Boolean>(false,false)
 
     // テクスチャ配列
     val textures = IntArray(2)
@@ -62,76 +66,71 @@ class W035Renderer: GLSurfaceView.Renderer {
     // 回転スイッチ
     var rotateSwitch = false
 
-    // 経過時間係数
-    var ktimeNow = 5f
-    var ktimeMax = 10f
+    // クォータニオン
+    var xQuaternion = MyQuaternion().identity()
+
+    // ビルボード(有効/無効)
+    var isBillBoard = false
+
 
     override fun onDrawFrame(gl: GL10?) {
         // canvasを初期化
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
+        // クォータニオンを行列に適用
+        var matQ = xQuaternion.toMatIV()
+
+        // カメラの位置
+        // ビュー座標変換行列
+        Matrix.setLookAtM(matV, 0,
+                vecEye[0], vecEye[1], vecEye[2],
+                vecCenter[0], vecCenter[1], vecCenter[2],
+                vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
+        // ビルボード用のビュー座標変換行列
+        Matrix.setLookAtM(matI, 0,
+                vecCenter[0], vecCenter[1], vecCenter[2],
+                vecEye[0], vecEye[1], vecEye[2],
+                vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
+        // ビュー座標変換行列にクォータニオンの回転を適用
+        Matrix.multiplyMM(matV,0,matV,0,matQ,0)
+        Matrix.multiplyMM(matI,0,matI,0,matQ,0)
+
+        // ビルボード用ビュー行列の逆行列を取得
+        Matrix.invertM(matI,0,matI,0)
+
         // ビュー×プロジェクション
+        Matrix.perspectiveM(matP,0,60f,ratio,0.1f,100f)
         Matrix.multiplyMM(matT,0,matP,0,matV,0)
 
-        // 回転角度
-        angle1 =(angle1+5)%360
-        angle2 =(angle2+2)%360
-        val t1 = angle1.toFloat()
-        val t2 = angle2.toFloat()
+        // フロア用テクスチャをバインド
+        drawObj.activateTexture(1,textures,bmpArray[1],bmpRecycleDoneArray[1])
+        bmpRecycleDoneArray[1] = true
 
-        // モデルを単位行列にする
+        // フロアのレンダリング
         Matrix.setIdentityM(matM,0)
-        Matrix.rotateM(matM,0,t1,0f,1f,0f)
-        // モデル×ビュー×プロジェクション
+        Matrix.rotateM(matM,0,90f,1f,0f,0f)
+        Matrix.scaleM(matM,0,3f,3f,1f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-
-        // モデル描画
-        drawObj.draw(programHandle,matMVP,0)
         drawObj.draw(programHandle,matMVP,1)
 
+        // ビルボード用テクスチャをバインド
+        drawObj.activateTexture(0,textures,bmpArray[0],bmpRecycleDoneArray[0])
+        bmpRecycleDoneArray[0] = true
 
-        /*
-        // 回転クォータニオンの生成
-        var aQuaternion = MyQuaternion.rotate(t1, floatArrayOf(1f,0f,0f))
-        var bQuaternion = MyQuaternion.rotate(t1, floatArrayOf(0f,1f,0f))
-        var sQuaternion = MyQuaternion.slerp(aQuaternion,bQuaternion,ktimeNow/ktimeMax)
-
-
-        // モデル描画
-        draw(aQuaternion, floatArrayOf(0.5f,0f,0f,1f))
-        draw(bQuaternion, floatArrayOf(0f,0.5f,0f,1f))
-        draw(sQuaternion, floatArrayOf(0f,0f,0.5f,1f))
-        */
-    }
-
-    /*
-    // ------------------------------------
-    // モデル描画
-    // ------------------------------------
-    // vecAmbientColor: 環境光の色
-    private fun draw(qtn: MyQuaternion, vecAmbientColor: FloatArray) {
-        // モデル座標変換行列の生成
-        var matQ = qtn.toMatIV()
-        // モデルを単位行列にする
+        // ビルボードのレンダリング
         Matrix.setIdentityM(matM,0)
-        Matrix.multiplyMM(matM,0,matQ,0,matM,0)
-        Matrix.translateM(matM,0,0f,0f,-5f)
-        // モデル×ビュー×プロジェクション
+        Matrix.translateM(matM,0,0f,1f,0f)
+        if (isBillBoard) {
+            Matrix.multiplyMM(matM,0,matM,0,matI,0)
+        }
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-        // モデル座標変換行列から逆行列を生成
-        Matrix.invertM(matI,0,matM,0)
-
-        // モデルを描画
-        drawObj.draw(programHandle,matMVP,matM,matI,vecLight,vecEye,vecAmbientColor)
+        drawObj.draw(programHandle,matMVP,0)
     }
-    */
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
         GLES20.glViewport(0, 0, width, height)
 
         ratio = width.toFloat()/height.toFloat()
-
-        Matrix.perspectiveM(matP,0,60f,ratio,0.1f,100f)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
@@ -145,6 +144,10 @@ class W035Renderer: GLSurfaceView.Renderer {
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
         //GLES20.glEnable(GLES20.GL_CULL_FACE)
+        GLES20.glEnable(GLES20.GL_BLEND)
+
+        // ブレンドファクター
+        GLES20.glBlendFuncSeparate(GLES20.GL_SRC_ALPHA,GLES20.GL_ONE_MINUS_SRC_ALPHA,GLES20.GL_ONE,GLES20.GL_ONE)
 
         // シェーダプログラム登録
         programHandle = W035Shader().loadShader()
@@ -156,14 +159,26 @@ class W035Renderer: GLSurfaceView.Renderer {
         // モデル生成
         drawObj = W035Model()
 
+        /*
         drawObj.activateTexture(0,textures,bmpArray[0])
         drawObj.activateTexture(1,textures,bmpArray[1])
+        */
 
-        // カメラの位置
-        Matrix.setLookAtM(matV, 0,
-                vecEye[0], vecEye[1], vecEye[2],
-                0f, 0f, 0f,
-                vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
+        // ----------------------------------
+        // 単位行列化
+        // ----------------------------------
+        // モデル変換行列
+        Matrix.setIdentityM(matM,0)
+        // モデル変換行列の逆行列
+        Matrix.setIdentityM(matI,0)
+        // ビュー変換行列
+        Matrix.setIdentityM(matV,0)
+        // プロジェクション変換行列
+        Matrix.setIdentityM(matP,0)
+        // モデル・ビュー・プロジェクション行列
+        Matrix.setIdentityM(matMVP,0)
+        // テンポラリ行列
+        Matrix.setIdentityM(matT,0)
     }
 
     fun receiveTouch(ev: MotionEvent, w: Int, h: Int ) {
@@ -180,6 +195,6 @@ class W035Renderer: GLSurfaceView.Renderer {
             x *= sq
             y *= sq
         }
-        //xQuaternion = MyQuaternion.rotate(r, floatArrayOf(y,x,0f))
+        xQuaternion = MyQuaternion.rotate(r, floatArrayOf(y,x,0f))
     }
 }

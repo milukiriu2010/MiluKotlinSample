@@ -144,7 +144,7 @@ class W035Model {
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, datIdx.size, GLES20.GL_UNSIGNED_SHORT, bufIdx)
     }
 
-    fun activateTexture(id: Int, textures: IntArray, bmp: Bitmap) {
+    fun activateTexture(id: Int, textures: IntArray, bmp: Bitmap,doRecycle: Boolean) {
         // 有効にするテクスチャユニットを指定
         when (id) {
             0 -> GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
@@ -167,7 +167,7 @@ class W035Model {
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D,0,bmp,0)
         MyGLFunc.checkGlError("texImage2D")
 
-        bmp.recycle()
+        //if ( doRecycle ) bmp.recycle()
 
         if (textures[id] == 0) {
             throw RuntimeException("Error loading texture[${id}]")
