@@ -68,10 +68,8 @@ class W026Renderer: GLSurfaceView.Renderer {
         Matrix.rotateM(matM,0,t1,0f,1f,0f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
 
-
         // モデル描画
         drawObj.draw(programHandle,matMVP, 0)
-
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -105,6 +103,7 @@ class W026Renderer: GLSurfaceView.Renderer {
         // テクスチャをバインド
         drawObj.activateTexture(0,textures,bmpArray[0])
 
+        // カメラの位置
         Matrix.setLookAtM(matV, 0,
                 vecEye[0], vecEye[1], vecEye[2],
                 vecCenter[0], vecCenter[1], vecCenter[2],

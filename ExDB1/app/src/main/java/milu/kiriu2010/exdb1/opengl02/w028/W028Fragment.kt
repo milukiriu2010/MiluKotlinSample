@@ -29,8 +29,8 @@ class W028Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_gl02_home, container, false)
 
         textureView = view.findViewById<TextureView>(R.id.textureView)
-        val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture0)
-        val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.texture1_1)
+        val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w027_0)
+        val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.texture_w028_1)
         val render = W028Renderer()
         render.bmpArray.add(bmp0)
         render.bmpArray.add(bmp1)

@@ -10,8 +10,8 @@ import java.nio.*
 // ----------------------------------------
 // テクスチャ
 // ----------------------------------------
-// https://wgld.org/d/webgl/w026.html
-class W026Model {
+// https://wgld.org/d/webgl/w027.html
+class W027Model {
     // 頂点バッファ
     private lateinit var bufPos: FloatBuffer
     // 色バッファ
@@ -52,6 +52,7 @@ class W026Model {
         datIdx.addAll(arrayListOf(0,1,2))
         datIdx.addAll(arrayListOf(3,2,1))
 
+
         // 頂点バッファ
         bufPos = ByteBuffer.allocateDirect(datPos.toArray().size * 4).run {
             order(ByteOrder.nativeOrder())
@@ -90,12 +91,12 @@ class W026Model {
                 put(datIdx.toShortArray())
                 position(0)
             }
-        }
-    }
+        }    }
 
     fun draw(programHandle: Int,
              matMVP: FloatArray,
-             texture: Int
+             u_Texture0: Int,
+             u_Texture1: Int
     ) {
         // attribute(頂点)
         bufPos.position(0)
@@ -121,22 +122,28 @@ class W026Model {
         }
         MyGLFunc.checkGlError("a_TextureCoord")
 
-
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
         MyGLFunc.checkGlError("u_matMVP")
 
-        // uniform(テクスチャ)
-        GLES20.glGetUniformLocation(programHandle,"u_Texture").also {
-            GLES20.glUniform1i(it,texture)
+        // uniform(テクスチャ0)
+        GLES20.glGetUniformLocation(programHandle, "u_Texture0").also {
+            GLES20.glUniform1i(it, u_Texture0)
         }
-        MyGLFunc.checkGlError("u_Texture")
+        MyGLFunc.checkGlError("u_Texture0")
+
+        // uniform(テクスチャ1)
+        GLES20.glGetUniformLocation(programHandle, "u_Texture1").also {
+            GLES20.glUniform1i(it, u_Texture1)
+        }
+        MyGLFunc.checkGlError("u_Texture1")
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, datIdx.size, GLES20.GL_UNSIGNED_SHORT, bufIdx)
     }
+
 
     fun activateTexture(id: Int, textures: IntArray, bmp: Bitmap, doRecycle: Boolean = false) {
         // 有効にするテクスチャユニットを指定

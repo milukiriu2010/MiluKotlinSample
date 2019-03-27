@@ -9,6 +9,7 @@ import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import android.os.SystemClock
 import milu.kiriu2010.exdb1.opengl.MyGLFunc
+import milu.kiriu2010.exdb1.opengl02.w027.W027Shader
 import java.lang.RuntimeException
 import kotlin.math.PI
 
@@ -18,40 +19,62 @@ import kotlin.math.PI
 // https://wgld.org/d/webgl/w027.html
 // ---------------------------------------------------
 class W027Renderer: GLSurfaceView.Renderer {
-    private lateinit var drawObj: W027Texture
+    // 描画オブジェクト
+    private lateinit var drawObj: W027Model
 
+    // プログラムハンドル
+    private var programHandle: Int = 0
+
+    // モデル変換行列
+    private val matM = FloatArray(16)
+    // ビュー変換行列
+    private val matV = FloatArray(16)
+    // プロジェクション変換行列
+    private val matP = FloatArray(16)
+    // モデル・ビュー・プロジェクション行列
+    private val matMVP = FloatArray(16)
+    // テンポラリ行列
+    private val matT = FloatArray(16)
+    // カメラの座標
+    private val vecEye = floatArrayOf(0f,2f,5f)
+    // カメラの上方向を表すベクトル
+    private val vecEyeUp = floatArrayOf(0f,1f,0f)
+    // 原点のベクトル
+    private val vecCenter = floatArrayOf(0f,0f,0f)
+
+    // ビットマップ配列
     val bmpArray = arrayListOf<Bitmap>()
 
-    // mMVPMatrix is an abbreviation for "Model View Projection Matrix"
-    private val mMVPMatrix = FloatArray(16)
-    private val tmpMatrix = FloatArray(16)
-    private val mInvMatrix = FloatArray(16)
-    private val mProjectionMatrix = FloatArray(16)
-    private val mViewMatrix = FloatArray(16)
-    private val mModelMatrix = FloatArray(16)
+    // テクスチャ配列
+    val textures = IntArray(2)
+
+    // 回転角度
+    private var angle1 = 0
 
     override fun onDrawFrame(gl: GL10) {
 
         // canvasを初期化
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
+        // 回転角度
+        angle1 =(angle1+5)%360
+        val t1 = angle1.toFloat()
+
         // ビュー×プロジェクション座標変換行列
-        Matrix.multiplyMM(tmpMatrix,0,mProjectionMatrix,0,mViewMatrix,0)
+        Matrix.multiplyMM(matT,0,matP,0,matV,0)
 
-        // プリミティブをアニメーション
-        // 経過秒から回転角度を求める(10秒/周)
-        val time = SystemClock.uptimeMillis() % 10000L
-        val angleInDegrees = 360.0f / 10000.0f * time.toInt()
-        val rad = angleInDegrees*PI.toFloat()/180f
+        // モデル座標変換行列の生成
+        Matrix.setIdentityM(matM,0)
+        Matrix.rotateM(matM,0,t1,0f,1f,0f)
+        Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
 
-        // モデル座標返還行列の生成
-        Matrix.setIdentityM(mModelMatrix,0)
-        Matrix.rotateM(mModelMatrix,0,angleInDegrees,0f,1f,0f)
-        Matrix.multiplyMM(mMVPMatrix,0,tmpMatrix,0,mModelMatrix,0)
+        // テクスチャ0をバインド
+        drawObj.activateTexture(0,textures,bmpArray[0])
+        // テクスチャ1をバインド
+        drawObj.activateTexture(1,textures,bmpArray[1])
 
-        // １つ目のモデル描画
-        drawObj.draw(mMVPMatrix, 0,1)
-
+        // モデル描画
+        drawObj.draw(programHandle,matMVP, 0,1)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -59,12 +82,10 @@ class W027Renderer: GLSurfaceView.Renderer {
 
         val ratio = width.toFloat()/height.toFloat()
 
-        Matrix.perspectiveM(mProjectionMatrix,0,45f,ratio,0.1f,100f)
+        Matrix.perspectiveM(matP,0,45f,ratio,0.1f,100f)
     }
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
-        drawObj = W027Texture()
-
         // canvasを初期化する色を設定する
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
 
@@ -75,67 +96,21 @@ class W027Renderer: GLSurfaceView.Renderer {
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
 
-        // 有効にするテクスチャユニットを指定
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
+        // シェーダプログラム登録
+        programHandle = W027Shader().loadShader()
 
-        val textures = IntArray(2)
-        // テクスチャ作成し、idをtextures[0]に保存
+        // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(2,textures,0)
-        //GLES20.glGenTextures(1,textures,1)
         MyGLFunc.checkGlError("glGenTextures")
 
-        // テクスチャ0にtextures[0]に保存
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[0])
-        MyGLFunc.checkGlError("glBindTexture")
-
-        // 縮小時の補完設定
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
-        // 拡大時の補完設定
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
-
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_CLAMP_TO_EDGE)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_CLAMP_TO_EDGE)
-
-        // bmpをテクスチャ0に設定
-        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D,0,bmpArray[0],0)
-        MyGLFunc.checkGlError("texImage2D")
-
-        bmpArray[0].recycle()
-        if (textures[0] == 0) {
-            throw RuntimeException("Error loading texture0.")
-        }
-
-        // ---------------------------------------------------------
-        // ここで呼び出さないといけないっぽい
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE1)
-
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[1])
-        MyGLFunc.checkGlError("glBindTexture")
-
-        // 縮小時の補完設定
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
-        // 拡大時の補完設定
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
-
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_CLAMP_TO_EDGE)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_CLAMP_TO_EDGE)
-
-        // bmpをテクスチャ0に設定
-        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D,0,bmpArray[1],0)
-        MyGLFunc.checkGlError("texImage2D")
-
-        bmpArray[1].recycle()
-        if (textures[1] == 0) {
-            throw RuntimeException("Error loading texture1.")
-        }
-
-
+        // モデル生成
+        drawObj = W027Model()
 
         // カメラの位置
-        Matrix.setLookAtM(mViewMatrix, 0,
-                0f, 2f, 5f,
-                0f, 0f, 0f,
-                0f, 1.0f, 0.0f)
+        Matrix.setLookAtM(matV, 0,
+                vecEye[0], vecEye[1], vecEye[2],
+                vecCenter[0], vecCenter[1], vecCenter[2],
+                vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
 
     }
 

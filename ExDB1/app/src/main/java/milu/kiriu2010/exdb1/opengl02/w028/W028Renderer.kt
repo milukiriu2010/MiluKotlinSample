@@ -17,7 +17,7 @@ import java.lang.RuntimeException
 // https://wgld.org/d/webgl/w026.html
 // ---------------------------------------------------
 class W028Renderer: GLSurfaceView.Renderer {
-    private lateinit var drawObj: W027Texture
+    private lateinit var drawObj: W028Texture
 
     val bmpArray = arrayListOf<Bitmap>()
 
@@ -139,7 +139,7 @@ class W028Renderer: GLSurfaceView.Renderer {
     }
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
-        drawObj = W027Texture()
+        drawObj = W028Texture()
 
         // canvasを初期化する色を設定する
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
