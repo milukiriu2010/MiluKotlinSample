@@ -59,10 +59,6 @@ class W035Renderer: GLSurfaceView.Renderer {
     // テクスチャ配列
     val textures = IntArray(2)
 
-    // 回転角度
-    private var angle1 = 0
-    private var angle2 = 0
-
     // 回転スイッチ
     var rotateSwitch = false
 
