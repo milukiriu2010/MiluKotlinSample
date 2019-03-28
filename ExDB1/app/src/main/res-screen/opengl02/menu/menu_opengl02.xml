@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w029"
+        android:title="w029_アルファブレンディング" />
+    <item
         android:id="@+id/opengl_w028"
         android:title="w028_テクスチャパラメータ" />
     <item

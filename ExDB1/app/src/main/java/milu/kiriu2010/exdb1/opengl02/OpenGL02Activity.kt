@@ -12,6 +12,7 @@ import milu.kiriu2010.exdb1.mgl00.pyramid01.Pyramid01Fragment
 import milu.kiriu2010.exdb1.opengl02.w026.W026Fragment
 import milu.kiriu2010.exdb1.opengl02.w027.W027Fragment
 import milu.kiriu2010.exdb1.opengl02.w028.W028Fragment
+import milu.kiriu2010.exdb1.opengl02.w029.W029Fragment
 
 class OpenGL02Activity : AppCompatActivity() {
 
@@ -76,6 +77,15 @@ class OpenGL02Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // w029_アルファブレンディング
+            R.id.opengl_w029 -> {
+                if (supportFragmentManager.findFragmentByTag("w029") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W029Fragment.newInstance(), "w029")
+                            .commit()
+                }
                 true
             }
             // w028_テクスチャパラメータ
