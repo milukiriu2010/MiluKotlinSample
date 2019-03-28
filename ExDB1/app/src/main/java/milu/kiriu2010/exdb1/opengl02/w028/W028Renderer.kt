@@ -8,6 +8,7 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import android.os.SystemClock
+import android.view.MotionEvent
 import milu.kiriu2010.exdb1.opengl.MyGLFunc
 import milu.kiriu2010.exdb1.opengl02.w028.W028Shader
 import java.lang.RuntimeException
@@ -35,7 +36,7 @@ class W028Renderer: GLSurfaceView.Renderer {
     // テンポラリ行列
     private val matT = FloatArray(16)
     // カメラの座標
-    private val vecEye = floatArrayOf(0f,0f,15f)
+    private val vecEye = floatArrayOf(0f,0f,8f)
     // カメラの上方向を表すベクトル
     private val vecEyeUp = floatArrayOf(0f,1f,0f)
     // 原点のベクトル
@@ -46,6 +47,9 @@ class W028Renderer: GLSurfaceView.Renderer {
 
     // テクスチャ配列
     val textures = IntArray(2)
+
+    // 回転スイッチ
+    var rotateSwitch = false
 
     // 回転角度
     private var angle1 = 0
@@ -127,7 +131,7 @@ class W028Renderer: GLSurfaceView.Renderer {
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_NEAREST)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
-                render(t1, floatArrayOf(-2f,6f,0f))
+                render(t1, floatArrayOf(-3f,3f,0f))
             }
             2 -> {
                 // -----------------------------------------------
@@ -139,7 +143,7 @@ class W028Renderer: GLSurfaceView.Renderer {
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
-                render(t1, floatArrayOf(-2f,3f,0f))
+                render(t1, floatArrayOf(-3f,0f,0f))
             }
             3 -> {
                 // -----------------------------------------------
@@ -151,7 +155,7 @@ class W028Renderer: GLSurfaceView.Renderer {
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
-                render(t1, floatArrayOf(-2f,0f,0f))
+                render(t1, floatArrayOf(-3f,-3f,0f))
             }
             4 -> {
                 // -----------------------------------------------
@@ -163,7 +167,7 @@ class W028Renderer: GLSurfaceView.Renderer {
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
-                render(t1, floatArrayOf(-2f,-3f,0f))
+                render(t1, floatArrayOf(0f,3f,0f))
             }
             5 -> {
                 // -----------------------------------------------
@@ -175,7 +179,7 @@ class W028Renderer: GLSurfaceView.Renderer {
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
-                render(t1, floatArrayOf(-2f,-6f,0f))
+                render(t1, floatArrayOf(0f,0f,0f))
             }
             6 -> {
                 // -----------------------------------------------
@@ -187,7 +191,7 @@ class W028Renderer: GLSurfaceView.Renderer {
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
-                render(t1, floatArrayOf(2f,6f,0f))
+                render(t1, floatArrayOf(0f,-3f,0f))
             }
             7 -> {
                 // -----------------------------------------------
@@ -195,7 +199,7 @@ class W028Renderer: GLSurfaceView.Renderer {
                 // -----------------------------------------------
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
-                render(t1, floatArrayOf(2f,3f,0f))
+                render(t1, floatArrayOf(3f,3f,0f))
             }
             8 -> {
                 // -----------------------------------------------
@@ -203,7 +207,7 @@ class W028Renderer: GLSurfaceView.Renderer {
                 // -----------------------------------------------
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_MIRRORED_REPEAT)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_MIRRORED_REPEAT)
-                render(t1, floatArrayOf(2f,0f,0f))
+                render(t1, floatArrayOf(3f,0f,0f))
             }
             9 -> {
                 // -----------------------------------------------
@@ -211,22 +215,25 @@ class W028Renderer: GLSurfaceView.Renderer {
                 // -----------------------------------------------
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_CLAMP_TO_EDGE)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_CLAMP_TO_EDGE)
-                render(t1, floatArrayOf(2f,-3f,0f))
+                render(t1, floatArrayOf(3f,-3f,0f))
             }
         }
-
-
     }
 
     private fun render(angleInDegrees: Float, trans: FloatArray) {
         // モデル座標変換行列の生成
         Matrix.setIdentityM(matM,0)
         Matrix.translateM(matM,0,trans[0],trans[1],trans[2])
-        Matrix.rotateM(matM,0,angleInDegrees,0f,1f,0f)
+        if ( rotateSwitch == true ) {
+            Matrix.rotateM(matM,0,angleInDegrees,0f,1f,0f)
+        }
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
 
         // uniform変数の登録と描画
         drawObj.draw(programHandle, matMVP,0,1)
     }
 
+    fun receiveTouch(ev: MotionEvent, w: Int, h: Int ) {
+
+    }
 }

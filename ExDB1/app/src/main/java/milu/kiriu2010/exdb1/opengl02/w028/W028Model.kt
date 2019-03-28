@@ -152,7 +152,7 @@ class W028Model {
             1 -> GLES20.glActiveTexture(GLES20.GL_TEXTURE1)
         }
 
-        //
+        // テクスチャをバインドする
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[id])
         MyGLFunc.checkGlError("glBindTexture")
 
@@ -170,6 +170,9 @@ class W028Model {
 
         // ミップマップを生成
         GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D)
+
+        // テクスチャのバインドを無効化
+        //GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, null)
 
         //if ( doRecycle ) bmp.recycle()
 
