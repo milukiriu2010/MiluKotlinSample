@@ -11,7 +11,7 @@ import java.nio.*
 // テクスチャ
 // ----------------------------------------
 // https://wgld.org/d/webgl/w027.html
-class W027Model {
+class W028Model {
     // 頂点バッファ
     private lateinit var bufPos: FloatBuffer
     // 色バッファ
@@ -43,14 +43,15 @@ class W027Model {
         }
 
         // テクスチャコードデータ
-        datTxc.addAll(arrayListOf(0f,0f))
-        datTxc.addAll(arrayListOf(1f,0f))
-        datTxc.addAll(arrayListOf(0f,1f))
-        datTxc.addAll(arrayListOf(1f,1f))
+        datTxc.addAll(arrayListOf(-0.75f,-0.75f))
+        datTxc.addAll(arrayListOf(1.75f,-0.75f))
+        datTxc.addAll(arrayListOf(-0.75f,1.75f))
+        datTxc.addAll(arrayListOf(1.75f,1.75f))
 
         // インデックスデータ
         datIdx.addAll(arrayListOf(0,1,2))
         datIdx.addAll(arrayListOf(3,2,1))
+
 
         // 頂点バッファ
         bufPos = ByteBuffer.allocateDirect(datPos.toArray().size * 4).run {
@@ -144,7 +145,6 @@ class W027Model {
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, datIdx.size, GLES20.GL_UNSIGNED_SHORT, bufIdx)
     }
 
-
     fun activateTexture(id: Int, textures: IntArray, bmp: Bitmap, doRecycle: Boolean = false) {
         // 有効にするテクスチャユニットを指定
         when (id) {
@@ -167,6 +167,9 @@ class W027Model {
         // ビットマップをテクスチャに設定
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bmp, 0)
         MyGLFunc.checkGlError("texImage2D")
+
+        // ミップマップを生成
+        GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D)
 
         //if ( doRecycle ) bmp.recycle()
 
