@@ -54,30 +54,61 @@ class W029Renderer: GLSurfaceView.Renderer {
     // 回転角度
     private var angle1 = 0
 
+    // ブレンドタイプ
+    var blendType = 0
+
+    // アルファ成分
+    var vertexAplha = 0.5f
+
     override fun onDrawFrame(gl: GL10) {
 
         // canvasを初期化
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // 回転角度
-        angle1 =(angle1+5)%360
+        angle1 =(angle1+1)%360
         val t1 = angle1.toFloat()
 
         // ビュー×プロジェクション座標変換行列
         Matrix.multiplyMM(matT,0,matP,0,matV,0)
 
+        // ブレンドタイプ
+        when (blendType) {
+            0 -> GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA)
+            1 -> GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE)
+        }
+
         // テクスチャ0をバインド
         drawObj.activateTexture(0,textures,bmpArray[0])
 
-        renderMap(1,t1)
-        renderMap(2,t1)
-        renderMap(3,t1)
-        renderMap(4,t1)
-        renderMap(5,t1)
-        renderMap(6,t1)
-        renderMap(7,t1)
-        renderMap(8,t1)
-        renderMap(9,t1)
+        // ブレンディングを無効にする
+        GLES20.glDisable(GLES20.GL_BLEND)
+
+        // モデル座標変換行列の生成
+        Matrix.setIdentityM(matM,0)
+        Matrix.translateM(matM,0,0.25f,0.25f,-0.25f)
+        Matrix.rotateM(matM,0,t1,0f,1f,0f)
+        Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
+
+        // uniform変数の登録と描画
+        drawObj.draw(programHandle, matMVP,1f,0,1)
+
+        // ----------------------------------------------------------------------
+
+        // テクスチャのバインドを解除
+        //GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, -1)
+
+        // ブレンディングを有効にする
+        GLES20.glEnable(GLES20.GL_BLEND)
+
+        // モデル座標変換行列の生成
+        Matrix.setIdentityM(matM,0)
+        Matrix.translateM(matM,0,-0.25f,-0.25f,0.25f)
+        Matrix.rotateM(matM,0,t1,0f,0f,1f)
+        Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
+
+        // uniform変数の登録と描画
+        drawObj.draw(programHandle, matMVP,vertexAplha,0,0)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -90,7 +121,7 @@ class W029Renderer: GLSurfaceView.Renderer {
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
         // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
+        GLES20.glClearColor(0.0f, 0.75f, 0.75f, 1.0f)
 
         // canvasを初期化する際の深度を設定する
         GLES20.glClearDepthf(1f)
@@ -114,121 +145,6 @@ class W029Renderer: GLSurfaceView.Renderer {
                 vecEye[0], vecEye[1], vecEye[2],
                 vecCenter[0], vecCenter[1], vecCenter[2],
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
-    }
-
-    private fun renderMap(id: Int, t1: Float) {
-
-        when ( id ) {
-            1 -> {
-                // -----------------------------------------------
-                // １つ目
-                // -----------------------------------------------
-                // 縮小時の補完設定
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST)
-                // 拡大時の補完設定
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_NEAREST)
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
-                render(t1, floatArrayOf(-3f,3f,0f))
-            }
-            2 -> {
-                // -----------------------------------------------
-                // ２つ目
-                // -----------------------------------------------
-                // 縮小時の補完設定
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
-                // 拡大時の補完設定
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
-                render(t1, floatArrayOf(-3f,0f,0f))
-            }
-            3 -> {
-                // -----------------------------------------------
-                // ３つ目
-                // -----------------------------------------------
-                // 縮小時の補完設定
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST_MIPMAP_NEAREST)
-                // 拡大時の補完設定
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
-                render(t1, floatArrayOf(-3f,-3f,0f))
-            }
-            4 -> {
-                // -----------------------------------------------
-                // ４つ目
-                // -----------------------------------------------
-                // 縮小時の補完設定
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST_MIPMAP_LINEAR)
-                // 拡大時の補完設定
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
-                render(t1, floatArrayOf(0f,3f,0f))
-            }
-            5 -> {
-                // -----------------------------------------------
-                // ５つ目
-                // -----------------------------------------------
-                // 縮小時の補完設定
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR_MIPMAP_NEAREST)
-                // 拡大時の補完設定
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
-                render(t1, floatArrayOf(0f,0f,0f))
-            }
-            6 -> {
-                // -----------------------------------------------
-                // ６つ目
-                // -----------------------------------------------
-                // 縮小時の補完設定
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR_MIPMAP_LINEAR)
-                // 拡大時の補完設定
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
-                render(t1, floatArrayOf(0f,-3f,0f))
-            }
-            7 -> {
-                // -----------------------------------------------
-                // ７つ目
-                // -----------------------------------------------
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
-                render(t1, floatArrayOf(3f,3f,0f))
-            }
-            8 -> {
-                // -----------------------------------------------
-                // ８つ目
-                // -----------------------------------------------
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_MIRRORED_REPEAT)
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_MIRRORED_REPEAT)
-                render(t1, floatArrayOf(3f,0f,0f))
-            }
-            9 -> {
-                // -----------------------------------------------
-                // ９つ目
-                // -----------------------------------------------
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_CLAMP_TO_EDGE)
-                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_CLAMP_TO_EDGE)
-                render(t1, floatArrayOf(3f,-3f,0f))
-            }
-        }
-    }
-
-    private fun render(angleInDegrees: Float, trans: FloatArray) {
-        // モデル座標変換行列の生成
-        Matrix.setIdentityM(matM,0)
-        Matrix.translateM(matM,0,trans[0],trans[1],trans[2])
-        if ( rotateSwitch == true ) {
-            Matrix.rotateM(matM,0,angleInDegrees,0f,1f,0f)
-        }
-        Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-
-        // uniform変数の登録と描画
-        drawObj.draw(programHandle, matMVP,0,1)
     }
 
     fun receiveTouch(ev: MotionEvent, w: Int, h: Int ) {

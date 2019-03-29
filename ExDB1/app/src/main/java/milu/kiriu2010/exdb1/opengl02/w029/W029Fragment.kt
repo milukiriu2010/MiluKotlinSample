@@ -8,6 +8,10 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.SeekBar
+import kotlinx.android.synthetic.main.fragment_open_gl02_w029.*
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.TextureView
@@ -55,6 +59,36 @@ class W029Fragment : Fragment() {
             }
             true
         }
+
+
+        // ブレンドタイプ
+        val radioGroupW029 = view.findViewById<RadioGroup>(R.id.radioGroupW029)
+        val btnW029Transparency = view.findViewById<RadioButton>(R.id.btnW029TransParency)
+        val btnW029Add = view.findViewById<RadioButton>(R.id.btnW029Add)
+        radioGroupW029.check(btnW029Transparency.id)
+        render.blendType = 0
+        radioGroupW029.setOnCheckedChangeListener { group, checkedId ->
+            render.blendType = when (checkedId) {
+                btnW029Transparency.id -> 0
+                btnW029Add.id -> 1
+                else -> -1
+            }
+        }
+
+        // アルファ成分
+        val seekBarW029 = view.findViewById<SeekBar>(R.id.seekBarW029)
+        seekBarW029.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                render.vertexAplha = seekBarW029.progress.toFloat()/seekBarW029.max.toFloat()
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                render.vertexAplha = seekBarW029.progress.toFloat()/seekBarW029.max.toFloat()
+            }
+        })
 
         return view
     }

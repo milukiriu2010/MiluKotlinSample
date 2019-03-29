@@ -8,9 +8,9 @@ import java.lang.RuntimeException
 import java.nio.*
 
 // ----------------------------------------
-// テクスチャ
+// アルファブレンディング
 // ----------------------------------------
-// https://wgld.org/d/webgl/w027.html
+// https://wgld.org/d/webgl/w029.html
 class W029Model {
     // 頂点バッファ
     private lateinit var bufPos: FloatBuffer
@@ -97,8 +97,9 @@ class W029Model {
 
     fun draw(programHandle: Int,
              matMVP: FloatArray,
+             u_vertexAlpha: Float,
              u_Texture0: Int,
-             u_Texture1: Int
+             u_useTexture: Int
     ) {
         // attribute(頂点)
         bufPos.position(0)
@@ -130,17 +131,24 @@ class W029Model {
         }
         MyGLFunc.checkGlError("u_matMVP")
 
+        // uniform(アルファ成分)
+        GLES20.glGetUniformLocation(programHandle, "u_vertexAlpha").also {
+            GLES20.glUniform1f(it, u_vertexAlpha)
+        }
+        MyGLFunc.checkGlError("u_vertexAlpha")
+
+
         // uniform(テクスチャ0)
         GLES20.glGetUniformLocation(programHandle, "u_Texture0").also {
             GLES20.glUniform1i(it, u_Texture0)
         }
         MyGLFunc.checkGlError("u_Texture0")
 
-        // uniform(テクスチャ1)
-        GLES20.glGetUniformLocation(programHandle, "u_Texture1").also {
-            GLES20.glUniform1i(it, u_Texture1)
+        // uniform(テクスチャを使うかどうか)
+        GLES20.glGetUniformLocation(programHandle, "u_useTexture").also {
+            GLES20.glUniform1i(it, u_useTexture)
         }
-        MyGLFunc.checkGlError("u_Texture1")
+        MyGLFunc.checkGlError("u_useTexture")
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, datIdx.size, GLES20.GL_UNSIGNED_SHORT, bufIdx)
