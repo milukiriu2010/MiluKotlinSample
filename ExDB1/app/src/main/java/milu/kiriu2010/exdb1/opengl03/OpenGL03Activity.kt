@@ -11,6 +11,7 @@ import milu.kiriu2010.exdb1.opengl03.w032.W032Fragment
 import milu.kiriu2010.exdb1.opengl03.w033.W033Fragment
 import milu.kiriu2010.exdb1.opengl03.w034.W034Fragment
 import milu.kiriu2010.exdb1.opengl03.w035.W035Fragment
+import milu.kiriu2010.exdb1.opengl03.w036.W036Fragment
 
 class OpenGL03Activity : AppCompatActivity() {
 
@@ -78,6 +79,15 @@ class OpenGL03Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 点や線のレンダリング
+            R.id.opengl_w036 -> {
+                if (supportFragmentManager.findFragmentByTag("w036") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W036Fragment.newInstance(), "w036")
+                            .commit()
+                }
                 true
             }
             // クォータニオン(ビルボード)
