@@ -13,6 +13,7 @@ import milu.kiriu2010.exdb1.opengl02.w026.W026Fragment
 import milu.kiriu2010.exdb1.opengl02.w027.W027Fragment
 import milu.kiriu2010.exdb1.opengl02.w028.W028Fragment
 import milu.kiriu2010.exdb1.opengl02.w029.W029Fragment
+import milu.kiriu2010.exdb1.opengl02.w030.W030Fragment
 
 class OpenGL02Activity : AppCompatActivity() {
 
@@ -77,6 +78,15 @@ class OpenGL02Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // w030_ブレンドファクター
+            R.id.opengl_w030 -> {
+                if (supportFragmentManager.findFragmentByTag("w030") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W030Fragment.newInstance(), "w030")
+                            .commit()
+                }
                 true
             }
             // w029_アルファブレンディング
