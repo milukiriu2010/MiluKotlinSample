@@ -18,7 +18,7 @@ import kotlin.math.sin
 
 // 点や線のレンダリング
 // https://wgld.org/d/webgl/w036.html
-class W036ModelSphere {
+class W036ModelLine {
     // 頂点バッファ
     private lateinit var bufPos: FloatBuffer
     // 色バッファ
@@ -38,8 +38,17 @@ class W036ModelSphere {
     private val datIdx = arrayListOf<Short>()
 
     init {
-        // 球体のデータを生成
-        createPath(16,16,2f)
+        // 頂点データ
+        datPos.addAll(arrayListOf(-1f,-1f,0f))
+        datPos.addAll(arrayListOf(1f,-1f,0f))
+        datPos.addAll(arrayListOf(-1f,1f,0f))
+        datPos.addAll(arrayListOf(1f,1f,0f))
+
+        // 色データ
+        datCol.addAll(arrayListOf(1f,1f,1f,1f))
+        datCol.addAll(arrayListOf(1f,0f,0f,1f))
+        datCol.addAll(arrayListOf(0f,1f,0f,1f))
+        datCol.addAll(arrayListOf(0f,0f,1f,1f))
 
         // 頂点バッファ
         bufPos = ByteBuffer.allocateDirect(datPos.toArray().size * 4).run {
@@ -74,7 +83,8 @@ class W036ModelSphere {
 
     fun draw(programHandle: Int,
              matMVP: FloatArray,
-             u_pointSize: Float) {
+             u_pointSize: Float,
+             lineType: Int ) {
 
         // attribute(頂点)
         bufPos.position(0)
@@ -105,48 +115,9 @@ class W036ModelSphere {
         MyGLFunc.checkGlError("u_pointSize")
 
         // モデルを描画
-        GLES20.glDrawArrays(GLES20.GL_POINTS, 0, datPos.size/3)
+        GLES20.glDrawArrays(lineType, 0, datPos.size/3)
         // モデルを描画
         //GLES20.glDrawElements(GLES20.GL_TRIANGLES, datIdx.size, GLES20.GL_UNSIGNED_SHORT, bufIdx)
-    }
-
-    // 球体の頂点データを生成
-    private fun createPath( row: Int, column: Int, rad: Float, color: FloatArray? = null ) {
-        datPos.clear()
-        datNor.clear()
-        datCol.clear()
-        datIdx.clear()
-
-        (0..row).forEach { i ->
-            var r = PI.toFloat() / row.toFloat() * i.toFloat()
-            var ry = cos(r)
-            var rr = sin(r)
-            (0..column).forEach {  ii ->
-                var tr = PI.toFloat() * 2f/column.toFloat() * ii.toFloat()
-                var tx = rr * rad * cos(tr)
-                var ty = ry * rad;
-                var tz = rr * rad * sin(tr)
-                var rx = rr * cos(tr)
-                var rz = rr * sin(tr)
-                if ( color != null ) {
-                    datCol.addAll(arrayListOf(color[0],color[1],color[2],color[3]))
-                }
-                else {
-                    var tc = MyColor.hsva(360/row*i,1f,1f,1f)
-                    datCol.addAll(arrayListOf(tc[0],tc[1],tc[2],tc[3]))
-                }
-                datPos.addAll(arrayListOf(tx,ty,tz))
-                datNor.addAll(arrayListOf(rx,ry,rz))
-            }
-
-            (0 until row).forEach { i ->
-                (0 until column).forEach { ii ->
-                    val r = (column+1)*i+ii
-                    datIdx.addAll(arrayListOf<Short>(r.toShort(),(r+1).toShort(),(r+column+2).toShort()))
-                    datIdx.addAll(arrayListOf<Short>(r.toShort(),(r+column+2).toShort(),(r+column+1).toShort()))
-                }
-            }
-        }
     }
 
 }

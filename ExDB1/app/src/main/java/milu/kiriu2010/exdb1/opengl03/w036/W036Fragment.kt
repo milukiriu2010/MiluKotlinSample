@@ -1,5 +1,6 @@
 package milu.kiriu2010.exdb1.opengl03.w036
 
+import android.opengl.GLES20
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -7,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.SeekBar
 
 import milu.kiriu2010.exdb1.R
@@ -55,16 +58,32 @@ class W036Fragment : Fragment() {
         val seekBarW036 = view.findViewById<SeekBar>(R.id.seekBarW036)
         seekBarW036.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                render.u_pointSize = seekBarW036.progress.toFloat()/seekBarW036.max.toFloat()
+                //render.u_pointSize = seekBarW036.progress.toFloat()/seekBarW036.max.toFloat()
+                render.u_pointSize = seekBarW036.progress.toFloat()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                render.u_pointSize = seekBarW036.progress.toFloat()/seekBarW036.max.toFloat()
+                //render.u_pointSize = seekBarW036.progress.toFloat()/seekBarW036.max.toFloat()
+                render.u_pointSize = seekBarW036.progress.toFloat()
             }
         })
+
+        // 線のプリミティブタイプを選択
+        val radioGroupW036 = view.findViewById<RadioGroup>(R.id.radioGroupW036)
+        val rbnW036Lines = view.findViewById<RadioButton>(R.id.rbnW036Lines)
+        val rbnW036LineStrip = view.findViewById<RadioButton>(R.id.rbnW036LineStrip)
+        val rbnW036LineLoop = view.findViewById<RadioButton>(R.id.rbnW036LineLoop)
+        radioGroupW036.setOnCheckedChangeListener { group, checkedId ->
+            render.lineType = when (checkedId) {
+                rbnW036Lines.id -> GLES20.GL_LINES
+                rbnW036LineStrip.id -> GLES20.GL_LINE_STRIP
+                rbnW036LineLoop.id -> GLES20.GL_LINE_LOOP
+                else -> GLES20.GL_LINES
+            }
+        }
 
 
         return view

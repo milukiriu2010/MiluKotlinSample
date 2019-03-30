@@ -8,7 +8,7 @@ import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
-import milu.kiriu2010.exdb1.opengl01.w015.MyTriangle02Renderer
+import milu.kiriu2010.exdb1.opengl01.w015.W015Renderer
 
 class OpenGL01NaviFragment : Fragment() {
 
@@ -27,7 +27,7 @@ class OpenGL01NaviFragment : Fragment() {
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
         //myGL02View.setRenderer(MyTriangle01Renderer())
-        myGL02View.setRenderer(MyTriangle02Renderer())
+        myGL02View.setRenderer(W015Renderer())
         //myGL02View.setRenderer(MyTriangle03Renderer())
 
         return view

@@ -27,7 +27,7 @@ class OpenGL01HomeFragment : Fragment() {
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
         //myGL02View.setRenderer(MyTriangle01Renderer())
-        //myGL02View.setRenderer(MyTriangle02Renderer())
+        //myGL02View.setRenderer(W015Renderer())
         //myGL02View.setRenderer(MyTriangle03Renderer())
         //myGL02View.setRenderer(MyTriangle04Renderer())
         //myGL02View.setRenderer(MyTriangle05Renderer())

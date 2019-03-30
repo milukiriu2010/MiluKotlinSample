@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import android.opengl.Matrix
+import android.util.Log
 import android.view.MotionEvent
 import milu.kiriu2010.exdb1.opengl.MyGLFunc
 import milu.kiriu2010.gui.basic.MyQuaternion
@@ -15,13 +16,14 @@ import kotlin.math.sqrt
 class W036Renderer: GLSurfaceView.Renderer {
     // 描画オブジェクト(球体)
     private lateinit var drawObjSphere: W036ModelSphere
+    // 描画オブジェクト(線)
+    private lateinit var drawObjLine: W036ModelLine
 
     // プログラムハンドル
     private var programHandle: Int = 0
 
     // 画面縦横比
     var ratio: Float = 0f
-
 
     // モデル変換行列
     private val matM = FloatArray(16)
@@ -38,7 +40,7 @@ class W036Renderer: GLSurfaceView.Renderer {
     // 点光源の位置
     private val vecLight = floatArrayOf(15f,10f,15f)
     // 環境光の色
-    //private val vecAmbientColor = floatArrayOf(0.1f,0.1f,0.1f,1f)
+    private val vecAmbientColor = floatArrayOf(0.1f,0.1f,0.1f,1f)
     // カメラの座標
     private val vecEye = floatArrayOf(0f,5f,10f)
     // カメラの上方向を表すベクトル
@@ -49,16 +51,25 @@ class W036Renderer: GLSurfaceView.Renderer {
     // 回転スイッチ
     var rotateSwitch = false
 
+    // 回転角度
+    private var angle1 = 0
+
     // クォータニオン
     var xQuaternion = MyQuaternion().identity()
 
     // 点のサイズ
-    var u_pointSize = 0.5f
+    var u_pointSize = 5f
 
+    // 線のプリミティブタイプ
+    var lineType = GLES20.GL_LINES
 
     override fun onDrawFrame(gl: GL10?) {
         // canvasを初期化
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
+
+        // 回転角度
+        angle1 =(angle1+1)%360
+        val t1 = angle1.toFloat()
 
         // クォータニオンを行列に適用
         var matQ = xQuaternion.toMatIV()
@@ -72,24 +83,23 @@ class W036Renderer: GLSurfaceView.Renderer {
         // ビュー座標変換行列にクォータニオンの回転を適用
         Matrix.multiplyMM(matV,0,matV,0,matQ,0)
         // ビュー×プロジェクション
-        Matrix.perspectiveM(matP,0,60f,ratio,0.1f,100f)
+        Matrix.perspectiveM(matP,0,45f,ratio,0.1f,100f)
         Matrix.multiplyMM(matT,0,matP,0,matV,0)
 
 
-        // フロアのレンダリング
+        // 球体をレンダリング
+        Matrix.setIdentityM(matM,0)
+        Matrix.rotateM(matM,0,t1,0f,1f,0f)
+        Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
+        drawObjSphere.draw(programHandle,matMVP,u_pointSize)
+        //Log.d(javaClass.simpleName,"u_pointSize[${u_pointSize}]")
+
+        // 線をレンダリング
         Matrix.setIdentityM(matM,0)
         Matrix.rotateM(matM,0,90f,1f,0f,0f)
         Matrix.scaleM(matM,0,3f,3f,1f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-        drawObjSphere.draw(programHandle,matMVP,u_pointSize)
-
-
-        // ビルボードのレンダリング
-        Matrix.setIdentityM(matM,0)
-        Matrix.translateM(matM,0,0f,1f,0f)
-        Matrix.multiplyMM(matM,0,matM,0,matI,0)
-        Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-        drawObjSphere.draw(programHandle,matMVP,u_pointSize)
+        drawObjLine.draw(programHandle,matMVP,u_pointSize,lineType)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -114,6 +124,9 @@ class W036Renderer: GLSurfaceView.Renderer {
 
         // モデル生成(球体)
         drawObjSphere = W036ModelSphere()
+
+        // モデル生成(線)
+        drawObjLine = W036ModelLine()
 
         // ----------------------------------
         // 単位行列化

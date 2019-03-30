@@ -16,7 +16,7 @@ import milu.kiriu2010.exdb1.opengl01.w022.Torus03Fragment
 import milu.kiriu2010.exdb1.opengl01.w023.Torus04Fragment
 import milu.kiriu2010.exdb1.opengl01.w024.Torus05Fragment
 import milu.kiriu2010.exdb1.opengl01.begin01.Triangle01Fragment
-import milu.kiriu2010.exdb1.opengl01.w015.Triangle02Fragment
+import milu.kiriu2010.exdb1.opengl01.w015.W015Fragment
 import milu.kiriu2010.exdb1.opengl01.begin02.Triangle03Fragment
 import milu.kiriu2010.exdb1.opengl01.w016.Triangle04Fragment
 import milu.kiriu2010.exdb1.opengl01.w017.Triangle05Fragment
@@ -180,7 +180,7 @@ class OpenGL01Activity : AppCompatActivity() {
             R.id.opengl_w015 -> {
                 if (supportFragmentManager.findFragmentByTag("Triangle02") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Triangle02Fragment.newInstance(), "Triangle02")
+                            .replace(R.id.frameLayout, W015Fragment.newInstance(), "Triangle02")
                             .commit()
                 }
                 true
