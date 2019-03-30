@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl03.w036
+package milu.kiriu2010.exdb1.opengl03.w037
 
 import android.graphics.Bitmap
 import android.opengl.GLES20
@@ -13,11 +13,11 @@ import javax.microedition.khronos.opengles.GL10
 import kotlin.math.sqrt
 
 // 平行光源
-class W036Renderer: GLSurfaceView.Renderer {
+class W037Renderer: GLSurfaceView.Renderer {
     // 描画オブジェクト(球体)
-    private lateinit var drawObjSphere: W036ModelSphere
+    private lateinit var drawObjSphere: W037ModelSphere
     // 描画オブジェクト(線)
-    private lateinit var drawObjLine: W036ModelLine
+    private lateinit var drawObjLine: W037ModelLine
 
     // プログラムハンドル
     private var programHandle: Int = 0
@@ -58,14 +58,23 @@ class W036Renderer: GLSurfaceView.Renderer {
     var xQuaternion = MyQuaternion().identity()
 
     // 点のサイズ
-    var u_pointSize = 16f
+    var u_pointSize = 10f
 
     // 線のプリミティブタイプ
     var lineType = GLES20.GL_LINES
 
+    // ビットマップ配列
+    val bmpArray = arrayListOf<Bitmap>()
+
+    // テクスチャ配列
+    val textures = IntArray(2)
+
     override fun onDrawFrame(gl: GL10?) {
         // canvasを初期化
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
+
+        // テクスチャ0をバインド
+        drawObjSphere.activateTexture(0,textures,bmpArray[0])
 
         // 回転角度
         angle1 =(angle1+1)%360
@@ -91,7 +100,7 @@ class W036Renderer: GLSurfaceView.Renderer {
         Matrix.setIdentityM(matM,0)
         Matrix.rotateM(matM,0,t1,0f,1f,0f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-        drawObjSphere.draw(programHandle,matMVP,u_pointSize)
+        drawObjSphere.draw(programHandle,matMVP,u_pointSize,0,1)
         //Log.d(javaClass.simpleName,"u_pointSize[${u_pointSize}]")
 
         // 線をレンダリング
@@ -99,7 +108,7 @@ class W036Renderer: GLSurfaceView.Renderer {
         Matrix.rotateM(matM,0,90f,1f,0f,0f)
         Matrix.scaleM(matM,0,3f,3f,1f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-        drawObjLine.draw(programHandle,matMVP,u_pointSize,lineType)
+        drawObjLine.draw(programHandle,matMVP,u_pointSize,-1,0,lineType)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -118,15 +127,24 @@ class W036Renderer: GLSurfaceView.Renderer {
         // カリングと深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
+        // ブレンディングを有効にする
+        GLES20.glEnable(GLES20.GL_BLEND)
+
+        // ブレンドファクター
+        GLES20.glBlendFuncSeparate(GLES20.GL_SRC_ALPHA,GLES20.GL_ONE_MINUS_SRC_ALPHA,GLES20.GL_ONE,GLES20.GL_ONE)
 
         // シェーダプログラム登録
-        programHandle = W036Shader().loadShader()
+        programHandle = W037Shader().loadShader()
+
+        // テクスチャ作成し、idをtexturesに保存
+        GLES20.glGenTextures(1,textures,0)
+        MyGLFunc.checkGlError("glGenTextures")
 
         // モデル生成(球体)
-        drawObjSphere = W036ModelSphere()
+        drawObjSphere = W037ModelSphere()
 
         // モデル生成(線)
-        drawObjLine = W036ModelLine()
+        drawObjLine = W037ModelLine()
 
         // ----------------------------------
         // 単位行列化

@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w037"
+        android:title="w037_ポイントスプライト" />
+    <item
         android:id="@+id/opengl_w036"
         android:title="w036_点や線のレンダリング" />
     <item

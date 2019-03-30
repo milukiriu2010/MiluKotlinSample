@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl03.w036
+package milu.kiriu2010.exdb1.opengl03.w037
 
 import android.graphics.Bitmap
 import android.opengl.GLES20
@@ -16,9 +16,9 @@ import kotlin.math.cos
 import kotlin.math.floor
 import kotlin.math.sin
 
-// 点や線のレンダリング
-// https://wgld.org/d/webgl/w036.html
-class W036ModelLine {
+// ポイントスプライト
+// https://wgld.org/d/webgl/w037.html
+class W037ModelLine {
     // 頂点バッファ
     private lateinit var bufPos: FloatBuffer
     // 色バッファ
@@ -84,6 +84,8 @@ class W036ModelLine {
     fun draw(programHandle: Int,
              matMVP: FloatArray,
              u_pointSize: Float,
+             u_Texture0: Int,
+             u_useTexture: Int,
              lineType: Int ) {
 
         // attribute(頂点)
@@ -114,6 +116,19 @@ class W036ModelLine {
         }
         MyGLFunc.checkGlError("u_pointSize")
 
+        /*
+        // uniform(テクスチャ0)
+        GLES20.glGetUniformLocation(programHandle, "u_Texture0").also {
+            GLES20.glUniform1i(it, u_Texture0)
+        }
+        MyGLFunc.checkGlError("u_Texture0")
+        */
+
+        // uniform(テクスチャを使うかどうか)
+        GLES20.glGetUniformLocation(programHandle, "u_useTexture").also {
+            GLES20.glUniform1i(it, u_useTexture)
+        }
+        MyGLFunc.checkGlError("u_useTexture")
 
         // モデルを描画
         GLES20.glDrawArrays(lineType, 0, datPos.size/3)

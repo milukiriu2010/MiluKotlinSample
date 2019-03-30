@@ -12,6 +12,7 @@ import milu.kiriu2010.exdb1.opengl03.w033.W033Fragment
 import milu.kiriu2010.exdb1.opengl03.w034.W034Fragment
 import milu.kiriu2010.exdb1.opengl03.w035.W035Fragment
 import milu.kiriu2010.exdb1.opengl03.w036.W036Fragment
+import milu.kiriu2010.exdb1.opengl03.w037.W037Fragment
 
 class OpenGL03Activity : AppCompatActivity() {
 
@@ -81,8 +82,19 @@ class OpenGL03Activity : AppCompatActivity() {
                 finish()
                 true
             }
+            // ポイントスプライト
+            R.id.opengl_w037 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w037") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W037Fragment.newInstance(), "w037")
+                            .commit()
+                }
+                true
+            }
             // 点や線のレンダリング
             R.id.opengl_w036 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w036") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W036Fragment.newInstance(), "w036")
@@ -92,6 +104,7 @@ class OpenGL03Activity : AppCompatActivity() {
             }
             // クォータニオン(ビルボード)
             R.id.opengl_w035 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w035") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W035Fragment.newInstance(), "w035")
@@ -101,6 +114,7 @@ class OpenGL03Activity : AppCompatActivity() {
             }
             // クォータニオン(球面線形補間)
             R.id.opengl_w034 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w034") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W034Fragment.newInstance(), "w034")
@@ -110,6 +124,7 @@ class OpenGL03Activity : AppCompatActivity() {
             }
             // クォータニオン(タッチで回転)
             R.id.opengl_w033 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w033") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W033Fragment.newInstance(), "w033")
@@ -119,6 +134,7 @@ class OpenGL03Activity : AppCompatActivity() {
             }
             // クォータニオン
             R.id.opengl_w032 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w032") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W032Fragment.newInstance(), "w032")
