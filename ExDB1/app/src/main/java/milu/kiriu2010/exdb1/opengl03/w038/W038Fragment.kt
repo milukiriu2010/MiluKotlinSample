@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl03.w037
+package milu.kiriu2010.exdb1.opengl03.w038
 
 import android.graphics.BitmapFactory
 import android.opengl.GLES20
@@ -16,7 +16,7 @@ import android.widget.SeekBar
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
 
-class W037Fragment : Fragment() {
+class W038Fragment : Fragment() {
 
     private lateinit var myGL02View: MyGL02View
 
@@ -29,11 +29,11 @@ class W037Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl03_w037, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl03_home, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02ViewA03)
-        val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w037)
-        val render = W037Renderer()
+        val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w038)
+        val render = W038Renderer()
         render.bmpArray.add(bmp0)
         myGL02View.setRenderer(render)
         myGL02View.setOnTouchListener { v, event ->
@@ -57,36 +57,6 @@ class W037Fragment : Fragment() {
         }
 
 
-        // 点のサイズ
-        val seekBarW037 = view.findViewById<SeekBar>(R.id.seekBarW037)
-        seekBarW037.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                render.u_pointSize = seekBarW037.progress.toFloat()
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                render.u_pointSize = seekBarW037.progress.toFloat()
-            }
-        })
-
-        // 線のプリミティブタイプを選択
-        val radioGroupW037 = view.findViewById<RadioGroup>(R.id.radioGroupW037)
-        val rbnW037Lines = view.findViewById<RadioButton>(R.id.rbnW037Lines)
-        val rbnW037LineStrip = view.findViewById<RadioButton>(R.id.rbnW037LineStrip)
-        val rbnW037LineLoop = view.findViewById<RadioButton>(R.id.rbnW037LineLoop)
-        radioGroupW037.setOnCheckedChangeListener { group, checkedId ->
-            render.lineType = when (checkedId) {
-                rbnW037Lines.id -> GLES20.GL_LINES
-                rbnW037LineStrip.id -> GLES20.GL_LINE_STRIP
-                rbnW037LineLoop.id -> GLES20.GL_LINE_LOOP
-                else -> GLES20.GL_LINES
-            }
-        }
-
-
         return view
     }
 
@@ -103,7 +73,7 @@ class W037Fragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                W037Fragment().apply {
+                W038Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }
