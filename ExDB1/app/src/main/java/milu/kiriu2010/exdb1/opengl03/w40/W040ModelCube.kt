@@ -97,6 +97,7 @@ class W040ModelCube {
     }
 
     fun draw(programHandle: Int,
+             matM: FloatArray,
              matMVP: FloatArray,
              matI: FloatArray,
              u_vecLight: FloatArray,
@@ -134,6 +135,12 @@ class W040ModelCube {
             GLES20.glEnableVertexAttribArray(it)
         }
         MyGLFunc.checkGlError("a_TextureCoord")
+
+        // uniform(モデル)
+        GLES20.glGetUniformLocation(programHandle,"u_matM").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matM,0)
+        }
+        MyGLFunc.checkGlError("u_matM")
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {

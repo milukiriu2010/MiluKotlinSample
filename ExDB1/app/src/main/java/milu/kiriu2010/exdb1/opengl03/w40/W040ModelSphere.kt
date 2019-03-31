@@ -97,6 +97,7 @@ class W040ModelSphere {
     }
 
     fun draw(programHandle: Int,
+             matM: FloatArray,
              matMVP: FloatArray,
              matI: FloatArray,
              u_vecLight: FloatArray,
@@ -134,6 +135,12 @@ class W040ModelSphere {
             GLES20.glEnableVertexAttribArray(it)
         }
         MyGLFunc.checkGlError("a_TextureCoord")
+
+        // uniform(モデル)
+        GLES20.glGetUniformLocation(programHandle,"u_matM").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matM,0)
+        }
+        MyGLFunc.checkGlError("u_matM")
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
@@ -224,8 +231,8 @@ class W040ModelSphere {
         // 拡大時の補完設定
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
 
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_REPEAT)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_REPEAT)
 
         // ビットマップをテクスチャに設定
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bmp, 0)

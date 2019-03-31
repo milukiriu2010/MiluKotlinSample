@@ -37,11 +37,12 @@ class W040Renderer: GLSurfaceView.Renderer {
     // テンポラリ行列
     private val matT = FloatArray(16)
     // 点光源の位置
-    private val vecLight = floatArrayOf(1f,1f,1f)
+    private val vecLight1 = floatArrayOf(-1f,2f,1f)
+    private val vecLight2 = floatArrayOf(-1f,0f,0f)
     // 環境光の色
     private val vecAmbientColor = floatArrayOf(0.1f,0.1f,0.1f,1f)
     // カメラの座標
-    private val vecEye = floatArrayOf(0f,0f,10f)
+    private val vecEye = floatArrayOf(0f,0f,5f)
     // カメラの上方向を表すベクトル
     private val vecEyeUp = floatArrayOf(0f,1f,0f)
     // 原点のベクトル
@@ -52,6 +53,7 @@ class W040Renderer: GLSurfaceView.Renderer {
 
     // 回転角度
     private var angle1 = 0
+    private var angle2 = 0
 
     // クォータニオン
     var xQuaternion = MyQuaternion().identity()
@@ -62,19 +64,38 @@ class W040Renderer: GLSurfaceView.Renderer {
     // テクスチャ配列
     val textures = IntArray(2)
 
-    override fun onDrawFrame(gl: GL10?) {
-        // canvasを初期化
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT or GLES20.GL_STENCIL_BUFFER_BIT)
+    // フレームバッファ
+    val bufFrame = IntArray(1)
 
+    // 深度バッファ用レンダ―バッファ
+    val bufDepthRender = IntArray(1)
+
+    // フレームバッファ用のテクスチャ
+    val frameTexture = IntArray(1)
+
+
+    override fun onDrawFrame(gl: GL10?) {
         // テクスチャ0をバインド
         drawObjSphere.activateTexture(0,textures,bmpArray[0])
+        // テクスチャ1をバインド
+        drawObjSphere.activateTexture(0,textures,bmpArray[1])
 
         // 回転角度
-        angle1 =(angle1+1)%360
+        angle1 =(angle1+2)%360
+        angle2 =(angle1+1)%360
         val t1 = angle1.toFloat()
+        val t2 = angle2.toFloat()
+
+        // フレームバッファをバインド
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
+        // canvasを初期化
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
+        GLES20.glClearDepthf(1f)
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
+
 
         // クォータニオンを行列に適用
-        var matQ = xQuaternion.toMatIV()
+        //var matQ = xQuaternion.toMatIV()
 
         // カメラの位置
         // ビュー座標変換行列
@@ -85,58 +106,63 @@ class W040Renderer: GLSurfaceView.Renderer {
         // ビュー×プロジェクション
         Matrix.perspectiveM(matP,0,45f,ratio,0.1f,100f)
         // ビュー座標変換行列にクォータニオンの回転を適用
-        Matrix.multiplyMM(matV,0,matV,0,matQ,0)
+        //Matrix.multiplyMM(matV,0,matV,0,matQ,0)
         Matrix.multiplyMM(matT,0,matP,0,matV,0)
 
-        // ステンシルテストを有効にする
-        GLES20.glEnable(GLES20.GL_STENCIL_TEST)
-
-        // カラーと深度をマスク
-        GLES20.glColorMask(false,false,false,false)
-        GLES20.glDepthMask(false)
-
-        // トーラス(シルエット)用ステンシル設定
-        GLES20.glStencilFunc(GLES20.GL_ALWAYS,1, 0.inv())
-        GLES20.glStencilOp(GLES20.GL_KEEP,GLES20.GL_REPLACE,GLES20.GL_REPLACE)
-
-        // トーラスをレンダリング
-        //   ライティング:OFF
-        //   アウトライン:ON
-        Matrix.setIdentityM(matM,0)
-        Matrix.rotateM(matM,0,t1,0f,1f,1f)
-        Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-        drawObjCube.draw(programHandle,matMVP,matI,vecLight,0,0)
-
-        // カラーと深度のマスクを解除
-        GLES20.glColorMask(true,true,true,true)
-        GLES20.glDepthMask(true)
-
-        // 球体モデル用ステンシル設定
-        GLES20.glStencilFunc(GLES20.GL_EQUAL,0, 0.inv())
-        GLES20.glStencilOp(GLES20.GL_KEEP,GLES20.GL_KEEP,GLES20.GL_KEEP)
-
-        // 球体をレンダリング
+        // 背景用球体をフレームバッファにレンダリング
+        drawObjSphere.activateTexture(1,textures,bmpArray[1])
         Matrix.setIdentityM(matM,0)
         Matrix.scaleM(matM,0,50f,50f,50f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-        drawObjSphere.draw(programHandle,matMVP,matI,vecLight,0,0)
+        Matrix.invertM(matI,0,matM,0)
+        drawObjSphere.draw(programHandle,matM,matMVP,matI,vecLight1,0,1)
 
-        // ステンシルテストを無効にする
-        GLES20.glDisable(GLES20.GL_STENCIL_TEST)
-
-        // トーラスをレンダリング
-        //   ライティング:ON
-        //   アウトライン:OFF
+        // 地球本体をフレームバッファにレンダリング
+        drawObjSphere.activateTexture(0,textures,bmpArray[0])
         Matrix.setIdentityM(matM,0)
-        Matrix.rotateM(matM,0,t1,0f,1f,1f)
+        Matrix.rotateM(matM,0,t1,0f,1f,0f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-        drawObjCube.draw(programHandle,matMVP,matI,vecLight,1,0)
+        Matrix.invertM(matI,0,matM,0)
+        drawObjSphere.draw(programHandle,matM,matMVP,matI,vecLight1,1,0)
+
+        // フレームバッファのバインドを解除
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,-1)
+        // canvasを初期化
+        GLES20.glClearColor(0.0f, 0.7f, 0.7f, 1.0f)
+        GLES20.glClearDepthf(1f)
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
+
+        // フレームバッファに描きこんだ内容をテクスチャとして適用
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[0])
+
+        // カメラの位置
+        // ビュー座標変換行列
+        Matrix.setLookAtM(matV, 0,
+                vecEye[0], vecEye[1], vecEye[2],
+                vecCenter[0], vecCenter[1], vecCenter[2],
+                vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
+        // ビュー×プロジェクション
+        Matrix.perspectiveM(matP,0,45f,ratio,0.1f,100f)
+        // ビュー座標変換行列にクォータニオンの回転を適用
+        //Matrix.multiplyMM(matV,0,matV,0,matQ,0)
+        Matrix.multiplyMM(matT,0,matP,0,matV,0)
+
+        // 立方体をレンダリング
+        Matrix.setIdentityM(matM,0)
+        Matrix.rotateM(matM,0,t2,1f,1f,0f)
+        Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
+        Matrix.invertM(matI,0,matM,0)
+        drawObjCube.draw(programHandle,matM,matMVP,matI,vecLight1,1,1)
+
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
         GLES20.glViewport(0, 0, width, height)
 
         ratio = width.toFloat()/height.toFloat()
+
+        //createFrameBuffer(width,height)
+        createFrameBuffer(512,512)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
@@ -145,8 +171,6 @@ class W040Renderer: GLSurfaceView.Renderer {
 
         // canvasを初期化する際の深度を設定する
         GLES20.glClearDepthf(1f)
-
-        GLES20.glClearStencil(0)
 
         // カリングと深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
@@ -181,6 +205,36 @@ class W040Renderer: GLSurfaceView.Renderer {
         Matrix.setIdentityM(matMVP,0)
         // テンポラリ行列
         Matrix.setIdentityM(matT,0)
+    }
+
+    // フレームバッファをオブジェクトとして生成する
+    private fun createFrameBuffer(width: Int, height: Int) {
+        // フレームバッファのバインド
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
+
+        // 深度バッファ用レンダ―バッファのバインド
+        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,bufDepthRender[0])
+
+        // レンダ―バッファを深度バッファとして設定
+        GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER, GLES20.GL_DEPTH_COMPONENT16, width, height)
+
+        // フレームバッファにレンダ―バッファを関連付ける
+        GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT, GLES20.GL_RENDERBUFFER,bufDepthRender[0])
+
+
+        // フレームバッファ用のテクスチャをバインド
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[0])
+
+        // フレームバッファ用のテクスチャにカラー用のメモリ領域を確保
+        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,width,height,0,GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,null)
+
+        // テクスチャパラメータ
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MIN_FILTER,GLES20.GL_LINEAR)
+
+        // フレームバッファにテクスチャを関連付ける
+        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,GLES20.GL_TEXTURE_2D,frameTexture[0],0)
+
     }
 
     fun receiveTouch(ev: MotionEvent, w: Int, h: Int ) {
