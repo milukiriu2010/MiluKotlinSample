@@ -36,11 +36,11 @@ class W038Renderer: GLSurfaceView.Renderer {
     // テンポラリ行列
     private val matT = FloatArray(16)
     // 点光源の位置
-    private val vecLight = floatArrayOf(15f,10f,15f)
+    private val vecLight = floatArrayOf(1f,1f,1f)
     // 環境光の色
     private val vecAmbientColor = floatArrayOf(0.1f,0.1f,0.1f,1f)
     // カメラの座標
-    private val vecEye = floatArrayOf(0f,5f,10f)
+    private val vecEye = floatArrayOf(0f,0f,5f)
     // カメラの上方向を表すベクトル
     private val vecEyeUp = floatArrayOf(0f,1f,0f)
     // 原点のベクトル
@@ -69,7 +69,7 @@ class W038Renderer: GLSurfaceView.Renderer {
 
     override fun onDrawFrame(gl: GL10?) {
         // canvasを初期化
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT or GLES20.GL_STENCIL_BUFFER_BIT)
 
         // テクスチャ0をバインド
         drawObj.activateTexture(0,textures,bmpArray[0])
@@ -87,18 +87,39 @@ class W038Renderer: GLSurfaceView.Renderer {
                 vecEye[0], vecEye[1], vecEye[2],
                 vecCenter[0], vecCenter[1], vecCenter[2],
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
+        Matrix.perspectiveM(matP,0,45f,ratio,0.1f,100f)
         // ビュー座標変換行列にクォータニオンの回転を適用
         Matrix.multiplyMM(matV,0,matV,0,matQ,0)
         // ビュー×プロジェクション
-        Matrix.perspectiveM(matP,0,45f,ratio,0.1f,100f)
         Matrix.multiplyMM(matT,0,matP,0,matV,0)
 
+        // テクスチャをバインドし登録する
+        drawObj.activateTexture(0,textures,bmpArray[0])
 
-        // モデルをレンダリング
+
+        // モデル１をレンダリング
+        GLES20.glStencilFunc(GLES20.GL_ALWAYS,1, 0.inv())
+        GLES20.glStencilOp(GLES20.GL_KEEP, GLES20.GL_REPLACE, GLES20.GL_REPLACE)
+        render(floatArrayOf(-0.25f,0.25f,-0.5f))
+
+        // モデル２をレンダリング
+        GLES20.glStencilFunc(GLES20.GL_ALWAYS,0, 0.inv())
+        GLES20.glStencilOp(GLES20.GL_KEEP, GLES20.GL_INCR, GLES20.GL_INCR)
+        render(floatArrayOf(0f,0f,0f))
+
+        // モデル３をレンダリング
+        GLES20.glStencilFunc(GLES20.GL_EQUAL,2, 0.inv())
+        GLES20.glStencilOp(GLES20.GL_KEEP, GLES20.GL_KEEP, GLES20.GL_KEEP)
+        render(floatArrayOf(0.25f,-0.25f,0.5f))
+    }
+
+    // モデルをレンダリング
+    private fun render(tr: FloatArray) {
         Matrix.setIdentityM(matM,0)
-        Matrix.rotateM(matM,0,t1,0f,1f,0f)
+        Matrix.translateM(matM,0,tr[0],tr[1],tr[2])
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-        drawObj.draw(programHandle,matMVP,matI,vecLight,1)
+        Matrix.invertM(matI,0,matM,0)
+        drawObj.draw(programHandle,matMVP,matI,vecLight,0)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -109,19 +130,19 @@ class W038Renderer: GLSurfaceView.Renderer {
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
         // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
+        GLES20.glClearColor(0.0f, 0.7f, 0.7f, 1.0f)
 
         // canvasを初期化する際の深度を設定する
         GLES20.glClearDepthf(1f)
 
+        GLES20.glClearStencil(0)
+
         // カリングと深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
-        // ブレンディングを有効にする
-        GLES20.glEnable(GLES20.GL_BLEND)
 
-        // ブレンドファクター
-        GLES20.glBlendFuncSeparate(GLES20.GL_SRC_ALPHA,GLES20.GL_ONE_MINUS_SRC_ALPHA,GLES20.GL_ONE,GLES20.GL_ONE)
+        // ステンシルテストを有効にする
+        GLES20.glEnable(GLES20.GL_STENCIL_TEST)
 
         // シェーダプログラム登録
         programHandle = W038Shader().loadShader()

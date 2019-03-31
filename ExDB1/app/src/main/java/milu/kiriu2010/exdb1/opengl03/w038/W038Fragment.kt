@@ -1,7 +1,6 @@
 package milu.kiriu2010.exdb1.opengl03.w038
 
 import android.graphics.BitmapFactory
-import android.opengl.GLES20
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -9,9 +8,6 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.SeekBar
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View

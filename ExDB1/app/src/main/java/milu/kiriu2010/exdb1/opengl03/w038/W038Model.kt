@@ -117,7 +117,7 @@ class W038Model {
     fun draw(programHandle: Int,
              matMVP: FloatArray,
              matI: FloatArray,
-             vecLight: FloatArray,
+             u_vecLight: FloatArray,
              u_Texture0: Int
     ) {
         // attribute(頂点)
@@ -165,7 +165,7 @@ class W038Model {
 
         // uniform(平行光源)
         GLES20.glGetUniformLocation(programHandle,"u_vecLight").also {
-            GLES20.glUniform3fv(it,1,vecLight,0)
+            GLES20.glUniform3fv(it,1,u_vecLight,0)
         }
 
 

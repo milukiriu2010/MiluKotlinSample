@@ -18,11 +18,11 @@ class W038Shader {
             varying   vec2  v_TextureCoord;
 
             void main() {
-                vec3  invLight = normalize(u_matINV*vec4(u_vecLight,0.0)).xyz;
-                float diffuse  = clamp(dot(a_Normal,invLight),0.1,1.0);
-                v_Color        = a_Color*vec4(vec3(diffuse),1.0);
+                vec3  invLight = normalize(u_matINV * vec4(u_vecLight, 0.0)).xyz;
+                float diffuse  = clamp(dot(a_Normal, invLight), 0.1, 1.0);
+                v_Color        = a_Color * vec4(vec3(diffuse), 1.0);
                 v_TextureCoord = a_TextureCoord;
-                gl_Position    = u_matMVP*vec4(a_Position,1.0);
+                gl_Position    = u_matMVP * vec4(a_Position, 1.0);
             }
             """.trimIndent()
 
