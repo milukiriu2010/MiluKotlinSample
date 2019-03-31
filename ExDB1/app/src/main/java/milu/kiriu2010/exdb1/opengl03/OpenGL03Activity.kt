@@ -14,6 +14,7 @@ import milu.kiriu2010.exdb1.opengl03.w035.W035Fragment
 import milu.kiriu2010.exdb1.opengl03.w036.W036Fragment
 import milu.kiriu2010.exdb1.opengl03.w037.W037Fragment
 import milu.kiriu2010.exdb1.opengl03.w038.W038Fragment
+import milu.kiriu2010.exdb1.opengl03.w039.W039Fragment
 
 class OpenGL03Activity : AppCompatActivity() {
 
@@ -81,6 +82,16 @@ class OpenGL03Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // ステンシルバッファでアウトライン
+            R.id.opengl_w039 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w039") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W039Fragment.newInstance(), "w039")
+                            .commit()
+                }
                 true
             }
             // ステンシルバッファ

@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w039"
+        android:title="w039_ステンシルバッファでアウトライン" />
+    <item
         android:id="@+id/opengl_w038"
         android:title="w038_ステンシルバッファ" />
     <item

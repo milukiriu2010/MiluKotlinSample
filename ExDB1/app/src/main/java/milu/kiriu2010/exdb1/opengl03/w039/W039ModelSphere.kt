@@ -1,17 +1,24 @@
-package milu.kiriu2010.exdb1.opengl01.w019
+package milu.kiriu2010.exdb1.opengl03.w039
 
 import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLUtils
 import milu.kiriu2010.exdb1.opengl.MyGLFunc
+import milu.kiriu2010.gui.basic.MyColor
+import milu.kiriu2010.math.MyMathUtil
 import java.lang.RuntimeException
-import java.nio.*
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
+import java.nio.FloatBuffer
+import java.nio.ShortBuffer
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.floor
+import kotlin.math.sin
 
-// ----------------------------------------
-// ステンシルバッファ
-// ----------------------------------------
-// https://wgld.org/d/webgl/w029.html
-class W038Model {
+// ステンシルバッファでアウトライン
+// https://wgld.org/d/webgl/w039.html
+class W039ModelSphere {
     // 頂点バッファ
     private lateinit var bufPos: FloatBuffer
     // 法線バッファ
@@ -35,33 +42,8 @@ class W038Model {
     private val datIdx = arrayListOf<Short>()
 
     init {
-        // 頂点データ
-        datPos.addAll(arrayListOf(-1f,1f,0f))
-        datPos.addAll(arrayListOf(1f,1f,0f))
-        datPos.addAll(arrayListOf(-1f,-1f,0f))
-        datPos.addAll(arrayListOf(1f,-1f,0f))
-
-        // 法線データ
-        (0..3).forEach {
-            datNor.addAll(arrayListOf(0f,0f,1f))
-        }
-
-        // 色データ
-        datCol.addAll(arrayListOf(1f,0f,0f,1f))
-        datCol.addAll(arrayListOf(0f,1f,0f,1f))
-        datCol.addAll(arrayListOf(0f,0f,1f,1f))
-        datCol.addAll(arrayListOf(1f,1f,1f,1f))
-
-        // テクスチャコードデータ
-        datTxc.addAll(arrayListOf(0f,0f))
-        datTxc.addAll(arrayListOf(1f,0f))
-        datTxc.addAll(arrayListOf(0f,1f))
-        datTxc.addAll(arrayListOf(1f,1f))
-
-        // インデックスデータ
-        datIdx.addAll(arrayListOf(0,1,2))
-        datIdx.addAll(arrayListOf(3,2,1))
-
+        // 球体のデータを生成
+        createPath(16,16,1f, floatArrayOf(1f,1f,1f,1f))
 
         // 頂点バッファ
         bufPos = ByteBuffer.allocateDirect(datPos.toArray().size * 4).run {
@@ -118,8 +100,11 @@ class W038Model {
              matMVP: FloatArray,
              matI: FloatArray,
              u_vecLight: FloatArray,
-             u_Texture0: Int
-    ) {
+             u_useLight: Int,
+             u_outLine: Int,
+             u_Texture0: Int,
+             u_useTexture: Int) {
+
         // attribute(頂点)
         bufPos.position(0)
         GLES20.glGetAttribLocation(programHandle,"a_Position").also {
@@ -168,15 +153,71 @@ class W038Model {
             GLES20.glUniform3fv(it,1,u_vecLight,0)
         }
 
+        // uniform(ライティングを使うかどうか)
+        GLES20.glGetUniformLocation(programHandle,"u_useLight").also {
+            GLES20.glUniform1i(it,u_useLight)
+        }
+
+        // uniform(法線方向に頂点を膨らませるかどうか)
+        GLES20.glGetUniformLocation(programHandle,"u_outLine").also {
+            GLES20.glUniform1i(it,u_outLine)
+        }
+
         // uniform(テクスチャ0)
         GLES20.glGetUniformLocation(programHandle, "u_Texture0").also {
             GLES20.glUniform1i(it, u_Texture0)
         }
         MyGLFunc.checkGlError("u_Texture0")
 
+        // uniform(テクスチャを使うかどうか)
+        GLES20.glGetUniformLocation(programHandle,"u_useTexture").also {
+            GLES20.glUniform1i(it,u_useTexture)
+        }
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, datIdx.size, GLES20.GL_UNSIGNED_SHORT, bufIdx)
+    }
+
+    // 球体の頂点データを生成
+    private fun createPath( row: Int, column: Int, rad: Float, color: FloatArray? = null ) {
+        datPos.clear()
+        datNor.clear()
+        datCol.clear()
+        datTxc.clear()
+        datIdx.clear()
+
+        (0..row).forEach { i ->
+            var r = PI.toFloat() / row.toFloat() * i.toFloat()
+            var ry = cos(r)
+            var rr = sin(r)
+            (0..column).forEach {  ii ->
+                var tr = PI.toFloat() * 2f/column.toFloat() * ii.toFloat()
+                var tx = rr * rad * cos(tr)
+                var ty = ry * rad;
+                var tz = rr * rad * sin(tr)
+                var rx = rr * cos(tr)
+                var rz = rr * sin(tr)
+                if ( color != null ) {
+                    datCol.addAll(arrayListOf(color[0],color[1],color[2],color[3]))
+                }
+                else {
+                    var tc = MyColor.hsva(360/row*i,1f,1f,1f)
+                    datCol.addAll(arrayListOf(tc[0],tc[1],tc[2],tc[3]))
+                }
+                datPos.addAll(arrayListOf(tx,ty,tz))
+                datNor.addAll(arrayListOf(rx,ry,rz))
+                datTxc.add(1f-1f/column.toFloat()*ii.toFloat())
+                datTxc.add(1f/row.toFloat()*i.toFloat())
+            }
+
+            (0 until row).forEach { i ->
+                (0 until column).forEach { ii ->
+                    val r = (column+1)*i+ii
+                    datIdx.addAll(arrayListOf<Short>(r.toShort(),(r+1).toShort(),(r+column+2).toShort()))
+                    datIdx.addAll(arrayListOf<Short>(r.toShort(),(r+column+2).toShort(),(r+column+1).toShort()))
+                }
+            }
+        }
     }
 
     fun activateTexture(id: Int, textures: IntArray, bmp: Bitmap, doRecycle: Boolean = false) {
@@ -214,4 +255,5 @@ class W038Model {
             throw RuntimeException("Error loading texture[${id}]")
         }
     }
+
 }
