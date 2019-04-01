@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_mgl00.*
 import milu.kiriu2010.exdb1.R
+import milu.kiriu2010.exdb1.mgl00.octahedron01.Octahedron01Fragment
 import milu.kiriu2010.exdb1.mgl00.pyramid01.Pyramid01Fragment
 
 class Mgl00Activity : AppCompatActivity() {
@@ -77,15 +78,27 @@ class Mgl00Activity : AppCompatActivity() {
                 finish()
                 true
             }
+            // 正八面体(点光源)
+            R.id.opengl_octahedron01 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("Octahedron01Model") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Octahedron01Fragment.newInstance(), "Octahedron01Model")
+                            .commit()
+                }
+                true
+            }
             // ピラミッド(点光源)
             R.id.opengl_pyramid01 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Pyramid01Model") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Pyramid01Fragment.newInstance(), "Pyramid01Model")
                             .commit()
                 }
                 true
-            }            else -> return super.onOptionsItemSelected(item)
+            }
+            else -> return super.onOptionsItemSelected(item)
         }
     }
 }

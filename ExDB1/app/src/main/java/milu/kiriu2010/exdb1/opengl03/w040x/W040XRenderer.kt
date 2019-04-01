@@ -132,7 +132,7 @@ class W040XRenderer: GLSurfaceView.Renderer {
         drawObjSphere.draw(programHandle,matM,matMVP,matI,vecLight1,1,0)
 
         // フレームバッファのバインドを解除
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,-1)
+        //GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,-1)
         // canvasを初期化
         GLES20.glClearColor(0.0f, 0.7f, 0.7f, 1.0f)
         GLES20.glClearDepthf(1f)
