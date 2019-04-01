@@ -16,6 +16,7 @@ import milu.kiriu2010.exdb1.opengl03.w037.W037Fragment
 import milu.kiriu2010.exdb1.opengl03.w038.W038Fragment
 import milu.kiriu2010.exdb1.opengl03.w039.W039Fragment
 import milu.kiriu2010.exdb1.opengl03.w040.W040Fragment
+import milu.kiriu2010.exdb1.opengl03.w040x.W040XFragment
 
 class OpenGL03Activity : AppCompatActivity() {
 
@@ -83,6 +84,16 @@ class OpenGL03Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // フレームバッファx
+            R.id.opengl_w040x -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w040x") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W040XFragment.newInstance(), "w040x")
+                            .commit()
+                }
                 true
             }
             // フレームバッファ
