@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl03.w40
+package milu.kiriu2010.exdb1.opengl03.w040
 
 import android.graphics.Bitmap
 import android.opengl.GLES20
@@ -7,6 +7,7 @@ import android.opengl.Matrix
 import android.view.MotionEvent
 import milu.kiriu2010.exdb1.opengl.MyGLFunc
 import milu.kiriu2010.gui.basic.MyQuaternion
+import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import kotlin.math.sqrt
@@ -65,20 +66,20 @@ class W040Renderer: GLSurfaceView.Renderer {
     val textures = IntArray(2)
 
     // フレームバッファ
-    val bufFrame = IntArray(1)
+    val bufFrame = IntBuffer.allocate(1)
 
     // 深度バッファ用レンダ―バッファ
-    val bufDepthRender = IntArray(1)
+    val bufDepthRender = IntBuffer.allocate(1)
 
     // フレームバッファ用のテクスチャ
-    val frameTexture = IntArray(1)
+    val frameTexture = IntBuffer.allocate(1)
 
 
     override fun onDrawFrame(gl: GL10?) {
         // テクスチャ0をバインド
         drawObjSphere.activateTexture(0,textures,bmpArray[0])
         // テクスチャ1をバインド
-        drawObjSphere.activateTexture(0,textures,bmpArray[1])
+        //drawObjSphere.activateTexture(0,textures,bmpArray[1])
 
         // 回転角度
         angle1 =(angle1+2)%360

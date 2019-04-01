@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_open_gl02.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl02.labo01.TestGLFragment
 import milu.kiriu2010.exdb1.mgl00.pyramid01.Pyramid01Fragment
+import milu.kiriu2010.exdb1.opengl02.jayce07.Jayce07Fragment
 import milu.kiriu2010.exdb1.opengl02.w026.W026Fragment
 import milu.kiriu2010.exdb1.opengl02.w027.W027Fragment
 import milu.kiriu2010.exdb1.opengl02.w028.W028Fragment
@@ -82,6 +83,7 @@ class OpenGL02Activity : AppCompatActivity() {
             }
             // w030_ブレンドファクター
             R.id.opengl_w030 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w030") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W030Fragment.newInstance(), "w030")
@@ -91,6 +93,7 @@ class OpenGL02Activity : AppCompatActivity() {
             }
             // w029_アルファブレンディング
             R.id.opengl_w029 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w029") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W029Fragment.newInstance(), "w029")
@@ -100,6 +103,7 @@ class OpenGL02Activity : AppCompatActivity() {
             }
             // w028_テクスチャパラメータ
             R.id.opengl_w028 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w028") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W028Fragment.newInstance(), "w028")
@@ -109,6 +113,7 @@ class OpenGL02Activity : AppCompatActivity() {
             }
             // w027_マルチテクスチャ
             R.id.opengl_w027 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w027") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W027Fragment.newInstance(), "w027")
@@ -118,6 +123,7 @@ class OpenGL02Activity : AppCompatActivity() {
             }
             // w026_テクスチャ
             R.id.opengl_w026 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w026") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W026Fragment.newInstance(), "w026")
@@ -125,8 +131,19 @@ class OpenGL02Activity : AppCompatActivity() {
                 }
                 true
             }
+            // jayce07_フレームバッファ
+            R.id.opengl_jayce07 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("jayce07") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Jayce07Fragment.newInstance(), "jayce07")
+                            .commit()
+                }
+                true
+            }
             // labo01_テクスチャ
             R.id.opengl_labo01 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Labo01") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, TestGLFragment.newInstance(), "Labo01")

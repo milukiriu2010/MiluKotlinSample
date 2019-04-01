@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl03.w40
+package milu.kiriu2010.exdb1.opengl03.w040
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -25,7 +25,7 @@ class W040Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl03_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl03_w040, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02ViewA03)
         val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w40_0)

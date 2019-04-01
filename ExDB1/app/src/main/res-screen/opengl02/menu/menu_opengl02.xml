@@ -17,6 +17,9 @@
         android:id="@+id/opengl_w026"
         android:title="w026_テクスチャ" />
     <item
+        android:id="@+id/opengl_jayce07"
+        android:title="jayce07_フレームバッファ" />
+    <item
         android:id="@+id/opengl_labo01"
         android:title="labo01_テクスチャ" />
 </menu>

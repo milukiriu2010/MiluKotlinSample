@@ -15,7 +15,7 @@ import milu.kiriu2010.exdb1.opengl03.w036.W036Fragment
 import milu.kiriu2010.exdb1.opengl03.w037.W037Fragment
 import milu.kiriu2010.exdb1.opengl03.w038.W038Fragment
 import milu.kiriu2010.exdb1.opengl03.w039.W039Fragment
-import milu.kiriu2010.exdb1.opengl03.w40.W040Fragment
+import milu.kiriu2010.exdb1.opengl03.w040.W040Fragment
 
 class OpenGL03Activity : AppCompatActivity() {
 
