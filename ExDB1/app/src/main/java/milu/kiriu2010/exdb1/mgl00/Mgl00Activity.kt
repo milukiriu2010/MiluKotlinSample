@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_mgl00.*
 import milu.kiriu2010.exdb1.R
+import milu.kiriu2010.exdb1.mgl00.dodecahedron01.Dodecahedron01Fragment
 import milu.kiriu2010.exdb1.mgl00.octahedron01.Octahedron01Fragment
 import milu.kiriu2010.exdb1.mgl00.pyramid01.Pyramid01Fragment
 
@@ -78,6 +79,16 @@ class Mgl00Activity : AppCompatActivity() {
                 finish()
                 true
             }
+            // 正十二面体(点光源)
+            R.id.opengl_dodecahedron01 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("Dodecahedron01Model") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Dodecahedron01Fragment.newInstance(), "Dodecahedron01Model")
+                            .commit()
+                }
+                true
+            }
             // 正八面体(点光源)
             R.id.opengl_octahedron01 -> {
                 supportFragmentManager.popBackStack()
@@ -88,7 +99,7 @@ class Mgl00Activity : AppCompatActivity() {
                 }
                 true
             }
-            // ピラミッド(点光源)
+            // 正四面体(点光源)
             R.id.opengl_pyramid01 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Pyramid01Model") == null) {
