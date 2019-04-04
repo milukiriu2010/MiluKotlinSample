@@ -184,12 +184,6 @@ class Dodecahedron01Model {
 
 
         // 法線データ
-        /*
-        (0..35).forEach { i ->
-            // (B-A) x (C-A)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 3*i+1, 3*i+2, 3*i ) )
-        }
-        */
         // ABCDE
         (0..8).forEach { i ->
             // (B-A) x (C-A)
