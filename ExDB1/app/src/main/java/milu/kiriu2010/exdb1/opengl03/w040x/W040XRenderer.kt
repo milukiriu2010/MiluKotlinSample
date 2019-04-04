@@ -81,7 +81,7 @@ class W040XRenderer: GLSurfaceView.Renderer {
 
 
     override fun onDrawFrame(gl: GL10?) {
-        createFrameBuffer(renderW,renderH)
+        //createFrameBuffer(renderW,renderH)
         // テクスチャ0をバインド
         //drawObjSphere.activateTexture(0,textures,bmpArray[0])
         // テクスチャ1をバインド
@@ -100,10 +100,6 @@ class W040XRenderer: GLSurfaceView.Renderer {
         GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
-
-        // クォータニオンを行列に適用
-        //var matQ = xQuaternion.toMatIV()
-
         // カメラの位置
         // ビュー座標変換行列
         Matrix.setLookAtM(matV, 0,
@@ -117,7 +113,7 @@ class W040XRenderer: GLSurfaceView.Renderer {
         Matrix.multiplyMM(matT,0,matP,0,matV,0)
 
         // 背景用球体をフレームバッファにレンダリング
-        //drawObjSphere.activateTexture(1,textures,bmpArray[1])
+        drawObjSphere.activateTexture(1,textures,bmpArray[1])
         Matrix.setIdentityM(matM,0)
         Matrix.scaleM(matM,0,50f,50f,50f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
@@ -129,10 +125,10 @@ class W040XRenderer: GLSurfaceView.Renderer {
         Matrix.rotateM(matM,0,t1,0f,1f,0f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
-        drawObjSphere.draw(programHandle,matM,matMVP,matI,vecLight1,1,0)
+        drawObjSphere.draw(programHandle,matM,matMVP,matI,vecLight1,1,1)
 
         // フレームバッファのバインドを解除
-        //GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,-1)
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
         // canvasを初期化
         GLES20.glClearColor(0.0f, 0.7f, 0.7f, 1.0f)
         GLES20.glClearDepthf(1f)
@@ -170,7 +166,7 @@ class W040XRenderer: GLSurfaceView.Renderer {
         renderW = width
         renderH = height
 
-        //createFrameBuffer(width,height)
+        createFrameBuffer(renderW,renderH)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
@@ -249,8 +245,8 @@ class W040XRenderer: GLSurfaceView.Renderer {
 
         // 以下、２行追加
         // フレームバッファをバインドする
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
-        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER,GLES20.GL_COLOR_ATTACHMENT0,GLES20.GL_TEXTURE_2D,frameTexture[0],0)
+        //GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
+        //GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER,GLES20.GL_COLOR_ATTACHMENT0,GLES20.GL_TEXTURE_2D,frameTexture[0],0)
 
 
 
@@ -269,12 +265,12 @@ class W040XRenderer: GLSurfaceView.Renderer {
         // テクスチャパラメータ
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR)
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MIN_FILTER,GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
+        //GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE)
+        //GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
 
 
         // フレームバッファにテクスチャを関連付ける
-        //GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,GLES20.GL_TEXTURE_2D,frameTexture[0],0)
+        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,GLES20.GL_TEXTURE_2D,frameTexture[0],0)
 
         // 追加
         val status = GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER)

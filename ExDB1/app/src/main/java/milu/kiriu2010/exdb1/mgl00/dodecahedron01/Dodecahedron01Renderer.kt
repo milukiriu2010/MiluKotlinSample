@@ -33,7 +33,7 @@ class Dodecahedron01Renderer: GLSurfaceView.Renderer {
     // テンポラリ行列
     private val matT = FloatArray(16)
     // 点光源の位置
-    private val vecLight = floatArrayOf(0f,10f,10f)
+    private val vecLight = floatArrayOf(0f,0f,5f)
     // 環境光の色
     private val vecAmbientColor = floatArrayOf(0.1f,0.1f,0.1f,1f)
     // カメラの座標
