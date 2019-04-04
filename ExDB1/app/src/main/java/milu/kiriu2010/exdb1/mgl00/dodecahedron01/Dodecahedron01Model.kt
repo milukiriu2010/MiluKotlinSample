@@ -37,142 +37,212 @@ class Dodecahedron01Model {
         val sin72f = MyMathUtil.SIN72F
 
         // 頂点データ
-        datPos.addAll(arrayListOf(1f,0f,0f))              // 0:A
-        datPos.addAll(arrayListOf(cos72f,sin72f,0f))      // 1:B
-        datPos.addAll(arrayListOf(-cos36f,sin36f,0f))     // 2:C
-        datPos.addAll(arrayListOf(-cos36f,-sin36f,0f))    // 3:D
-        datPos.addAll(arrayListOf(cos72f,-sin72f,0f))     // 4:E
-        datPos.addAll(arrayListOf(1f,0f,0f))              // 5:A
-        datPos.addAll(arrayListOf(goldR,0f,1f))           // 6:F
-        datPos.addAll(arrayListOf(goldR*cos36f,goldR*sin36f,goldR))   // 7:G
-        datPos.addAll(arrayListOf(goldR*cos72f,goldR*sin72f,goldR))   // 8:H
-        datPos.addAll(arrayListOf(cos72f,sin72f,0f))      // 9:B
-        datPos.addAll(arrayListOf(cos72f,sin72f,0f))      // 10:B
-        datPos.addAll(arrayListOf(goldR*cos72f,goldR*sin72f,goldR))   // 11:H
-        datPos.addAll(arrayListOf(-goldR*cos72f,goldR*sin72f,goldR))  // 12:I
-        datPos.addAll(arrayListOf(-goldR*cos36f,goldR*sin36f,goldR))  // 13:J
-        datPos.addAll(arrayListOf(-cos36f,sin36f,0f))     // 14:C
-        datPos.addAll(arrayListOf(-cos36f,sin36f,0f))     // 15:C
-        datPos.addAll(arrayListOf(-goldR*cos36f,goldR*sin36f,goldR,1f))  // 16:J
-        datPos.addAll(arrayListOf(-goldR,0f,goldR))       // 17:K
-        datPos.addAll(arrayListOf(-goldR*cos36f,-goldR*sin36f,1f)) // 18:L
-        datPos.addAll(arrayListOf(-cos36f,-sin36f,0f))    // 19:D
-        datPos.addAll(arrayListOf(-cos36f,-sin36f,0f))    // 20:D
-        datPos.addAll(arrayListOf(-goldR*cos36f,-goldR*sin36f,1f)) // 21:L
-        datPos.addAll(arrayListOf(-goldR*cos72f,-goldR*sin72f,goldR))    // 22:M
-        datPos.addAll(arrayListOf(goldR*cos72f,-goldR*sin72f,1f))        // 23:N
-        datPos.addAll(arrayListOf(cos72f,-sin72f,0f))     // 24:E
-        datPos.addAll(arrayListOf(cos72f,-sin72f,0f))     // 25:E
-        datPos.addAll(arrayListOf(goldR*cos72f,-goldR*sin72f,1f))        // 26:N
-        datPos.addAll(arrayListOf(goldR*cos36f,-goldR*sin36f,goldR))     // 27:O
-        datPos.addAll(arrayListOf(goldR,0f,1f))           // 28:F
-        datPos.addAll(arrayListOf(1f,0f,0f))              // 29:A
+        // ABC
+        datPos.addAll(arrayListOf(1f,0f,0f))              // A:0
+        datPos.addAll(arrayListOf(cos72f,sin72f,0f))      // B:1
+        datPos.addAll(arrayListOf(-cos36f,sin36f,0f))     // C:2
+        // ACD
+        datPos.addAll(arrayListOf(1f,0f,0f))              // A:3
+        datPos.addAll(arrayListOf(-cos36f,sin36f,0f))     // C:4
+        datPos.addAll(arrayListOf(-cos36f,-sin36f,0f))    // D:5
+        // ADE
+        datPos.addAll(arrayListOf(1f,0f,0f))              // A:6
+        datPos.addAll(arrayListOf(-cos36f,-sin36f,0f))    // D:7
+        datPos.addAll(arrayListOf(cos72f,-sin72f,0f))     // E:8
+        // BHI
+        datPos.addAll(arrayListOf(cos72f,sin72f,0f))                  // B:9
+        datPos.addAll(arrayListOf(goldR*cos72f,goldR*sin72f,1f))      // H:10
+        datPos.addAll(arrayListOf(-goldR*cos72f,goldR*sin72f,goldR))  // I:11
+        // BIJ
+        datPos.addAll(arrayListOf(cos72f,sin72f,0f))                  // B:12
+        datPos.addAll(arrayListOf(-goldR*cos72f,goldR*sin72f,goldR))  // I:13
+        datPos.addAll(arrayListOf(-goldR*cos36f,goldR*sin36f,1f))     // J:14
+        // BJC
+        datPos.addAll(arrayListOf(cos72f,sin72f,0f))                  // B:15
+        datPos.addAll(arrayListOf(-goldR*cos36f,goldR*sin36f,1f))     // J:16
+        datPos.addAll(arrayListOf(-cos36f,sin36f,0f))                 // C:17
+        // CJK
+        datPos.addAll(arrayListOf(-cos36f,sin36f,0f))                 // C:18
+        datPos.addAll(arrayListOf(-goldR*cos36f,goldR*sin36f,1f))     // J:19
+        datPos.addAll(arrayListOf(-goldR,0f,goldR))                   // K:20
+        // CKL
+        datPos.addAll(arrayListOf(-cos36f,sin36f,0f))                 // C:21
+        datPos.addAll(arrayListOf(-goldR,0f,goldR))                   // K:22
+        datPos.addAll(arrayListOf(-goldR*cos36f,-goldR*sin36f,1f))    // L:23
+        // CLD
+        datPos.addAll(arrayListOf(-cos36f,sin36f,0f))                 // C:24
+        datPos.addAll(arrayListOf(-goldR*cos36f,-goldR*sin36f,1f))    // L:25
+        datPos.addAll(arrayListOf(-cos36f,-sin36f,0f))                // D:26
+        // DLM
+        datPos.addAll(arrayListOf(-cos36f,-sin36f,0f))                // D:27
+        datPos.addAll(arrayListOf(-goldR*cos36f,-goldR*sin36f,1f))    // L:28
+        datPos.addAll(arrayListOf(-goldR*cos72f,-goldR*sin72f,goldR)) // M:29
+        // DMN
+        datPos.addAll(arrayListOf(-cos36f,-sin36f,0f))                // D:30
+        datPos.addAll(arrayListOf(-goldR*cos72f,-goldR*sin72f,goldR)) // M:31
+        datPos.addAll(arrayListOf(goldR*cos72f,-goldR*sin72f,1f))     // N:32
+        // DNE
+        datPos.addAll(arrayListOf(-cos36f,-sin36f,0f))                // D:33
+        datPos.addAll(arrayListOf(goldR*cos72f,-goldR*sin72f,1f))     // N:34
+        datPos.addAll(arrayListOf(cos72f,-sin72f,0f))                 // E:35
+        // ENO
+        datPos.addAll(arrayListOf(cos72f,-sin72f,0f))                 // E:36
+        datPos.addAll(arrayListOf(goldR*cos72f,-goldR*sin72f,1f))     // N:37
+        datPos.addAll(arrayListOf(goldR*cos36f,-goldR*sin36f,goldR))  // O:38
+        // EOF
+        datPos.addAll(arrayListOf(cos72f,-sin72f,0f))                 // E:39
+        datPos.addAll(arrayListOf(goldR*cos36f,-goldR*sin36f,goldR))  // O:40
+        datPos.addAll(arrayListOf(goldR,0f,1f))                       // F:41
+        // EFA
+        datPos.addAll(arrayListOf(cos72f,-sin72f,0f))                 // E:42
+        datPos.addAll(arrayListOf(goldR,0f,1f))                       // F:43
+        datPos.addAll(arrayListOf(1f,0f,0f))                          // A:44
+        // AFG
+        datPos.addAll(arrayListOf(1f,0f,0f))                          // A:45
+        datPos.addAll(arrayListOf(goldR,0f,1f))                       // F:46
+        datPos.addAll(arrayListOf(goldR*cos36f,goldR*sin36f,goldR))   // G:47
+        // AGH
+        datPos.addAll(arrayListOf(1f,0f,0f))                          // A:48
+        datPos.addAll(arrayListOf(goldR*cos36f,goldR*sin36f,goldR))   // G:49
+        datPos.addAll(arrayListOf(goldR*cos72f,goldR*sin72f,1f))      // H:50
+        // AHB
+        datPos.addAll(arrayListOf(1f,0f,0f))                          // A:51
+        datPos.addAll(arrayListOf(goldR*cos72f,goldR*sin72f,1f))      // H:52
+        datPos.addAll(arrayListOf(cos72f,sin72f,0f))                  // B:53
+        // RQP
+        datPos.addAll(arrayListOf(cos36f,-sin36f,goldR+1f))                 // R:54
+        datPos.addAll(arrayListOf(-cos72f,-sin72f,goldR+1f))                // Q:55
+        datPos.addAll(arrayListOf(-1f,0f,goldR+1f))                         // P:56
+        // RPT
+        datPos.addAll(arrayListOf(cos36f,-sin36f,goldR+1f))                 // R:57
+        datPos.addAll(arrayListOf(-1f,0f,goldR+1f))                         // P:58
+        datPos.addAll(arrayListOf(-cos72f,sin72f,goldR+1f))                 // T:59
+        // RTS
+        datPos.addAll(arrayListOf(cos36f,-sin36f,goldR+1f))                 // R:60
+        datPos.addAll(arrayListOf(-cos72f,sin72f,goldR+1f))                 // T:61
+        datPos.addAll(arrayListOf(cos36f,sin36f,goldR+1f))                  // S:62
+        // QML
+        datPos.addAll(arrayListOf(-cos72f,-sin72f,goldR+1f))                // Q:63
+        datPos.addAll(arrayListOf(-goldR*cos72f,-goldR*sin72f,goldR))       // M:64
+        datPos.addAll(arrayListOf(-goldR*cos36f,-goldR*sin36f,1f))          // L:65
+        // QLK
+        datPos.addAll(arrayListOf(-cos72f,-sin72f,goldR+1f))                // Q:66
+        datPos.addAll(arrayListOf(-goldR*cos36f,-goldR*sin36f,1f))          // L:67
+        datPos.addAll(arrayListOf(-goldR,0f,goldR))                         // K:68
+        // QKP
+        datPos.addAll(arrayListOf(-cos72f,-sin72f,goldR+1f))                // Q:69
+        datPos.addAll(arrayListOf(-goldR,0f,goldR))                         // K:70
+        datPos.addAll(arrayListOf(-1f,0f,goldR+1f))                         // P:71
+        // PKJ
+        datPos.addAll(arrayListOf(-1f,0f,goldR+1f))                         // P:72
+        datPos.addAll(arrayListOf(-goldR,0f,goldR))                         // K:73
+        datPos.addAll(arrayListOf(-goldR*cos36f,goldR*sin36f,1f))           // J:74
+        // PJI
+        datPos.addAll(arrayListOf(-1f,0f,goldR+1f))                         // P:75
+        datPos.addAll(arrayListOf(-goldR*cos36f,goldR*sin36f,1f))           // J:76
+        datPos.addAll(arrayListOf(-goldR*cos72f,goldR*sin72f,goldR))        // I:77
+        // PIT
+        datPos.addAll(arrayListOf(-1f,0f,goldR+1f))                         // P:78
+        datPos.addAll(arrayListOf(-goldR*cos72f,goldR*sin72f,goldR))        // I:79
+        datPos.addAll(arrayListOf(-cos72f,sin72f,goldR+1f))                 // T:80
+        // TIH
+        datPos.addAll(arrayListOf(-cos72f,sin72f,goldR+1f))                 // T:81
+        datPos.addAll(arrayListOf(-goldR*cos72f,goldR*sin72f,goldR))        // I:82
+        datPos.addAll(arrayListOf(goldR*cos72f,goldR*sin72f,1f))            // H:83
+        // THG
+        datPos.addAll(arrayListOf(-cos72f,sin72f,goldR+1f))                 // T:84
+        datPos.addAll(arrayListOf(goldR*cos72f,goldR*sin72f,1f))            // H:85
+        datPos.addAll(arrayListOf(goldR*cos36f,goldR*sin36f,goldR))         // G:86
+        // TGS
+        datPos.addAll(arrayListOf(-cos72f,sin72f,goldR+1f))                 // T:87
+        datPos.addAll(arrayListOf(goldR*cos36f,goldR*sin36f,goldR))         // G:88
+        datPos.addAll(arrayListOf(cos36f,sin36f,goldR+1f))                  // S:89
+        // SGF
+        datPos.addAll(arrayListOf(cos36f,sin36f,goldR+1f))                  // S:90
+        datPos.addAll(arrayListOf(goldR*cos36f,goldR*sin36f,goldR))         // G:91
+        datPos.addAll(arrayListOf(goldR,0f,1f))                             // F:92
+        // SFO
+        datPos.addAll(arrayListOf(cos36f,sin36f,goldR+1f))                  // S:93
+        datPos.addAll(arrayListOf(goldR,0f,1f))                             // F:94
+        datPos.addAll(arrayListOf(goldR*cos36f,-goldR*sin36f,goldR))        // O:95
+        // SOR
+        datPos.addAll(arrayListOf(cos36f,sin36f,goldR+1f))                  // S:96
+        datPos.addAll(arrayListOf(goldR*cos36f,-goldR*sin36f,goldR))        // O:97
+        datPos.addAll(arrayListOf(cos36f,-sin36f,goldR+1f))                 // R:98
+        // RON
+        datPos.addAll(arrayListOf(cos36f,-sin36f,goldR+1f))                 // R:99
+        datPos.addAll(arrayListOf(goldR*cos36f,-goldR*sin36f,goldR))        // O:100
+        datPos.addAll(arrayListOf(goldR*cos72f,-goldR*sin72f,1f))           // N:101
+        // RNM
+        datPos.addAll(arrayListOf(cos36f,-sin36f,goldR+1f))                 // R:102
+        datPos.addAll(arrayListOf(goldR*cos72f,-goldR*sin72f,1f))           // N:103
+        datPos.addAll(arrayListOf(-goldR*cos72f,-goldR*sin72f,goldR))       // M:104
+        // RMQ
+        datPos.addAll(arrayListOf(cos36f,-sin36f,goldR+1f))                 // R:105
+        datPos.addAll(arrayListOf(-goldR*cos72f,-goldR*sin72f,goldR))       // M:106
+        datPos.addAll(arrayListOf(-cos72f,-sin72f,goldR+1f))                // Q:107
 
-        datPos.addAll(arrayListOf(-1f,0f,goldR+1f))       // 30:P
-        datPos.addAll(arrayListOf(-goldR*cos72f,goldR*sin72f,goldR+1f)) // 31:T
-        datPos.addAll(arrayListOf(goldR*cos36f,goldR*sin36f,goldR+1f))     // 32:S
-        datPos.addAll(arrayListOf(goldR*cos36f,-goldR*sin36f,goldR+1f))     // 33:R
-        datPos.addAll(arrayListOf(-goldR*cos72f,-goldR*sin72f,goldR+1f)) // 34:Q
-
-        datPos.addAll(arrayListOf(-1f,0f,goldR+1f))       // 35:P
-        datPos.addAll(arrayListOf(-goldR,0f,goldR))       // 36:K
-        datPos.addAll(arrayListOf(-goldR*cos36f,goldR*sin36f,goldR,1f))  // 37:J
-        datPos.addAll(arrayListOf(-goldR*cos72f,goldR*sin72f,goldR))  // 38:I
-        datPos.addAll(arrayListOf(-goldR*cos72f,goldR*sin72f,goldR+1f)) // 39:T
-
-        datPos.addAll(arrayListOf(-goldR*cos72f,goldR*sin72f,goldR+1f)) // 40:T
-        datPos.addAll(arrayListOf(-goldR*cos72f,goldR*sin72f,goldR))  // 41:I
-        datPos.addAll(arrayListOf(goldR*cos72f,goldR*sin72f,goldR))   // 42:H
-        datPos.addAll(arrayListOf(goldR*cos36f,goldR*sin36f,goldR))   // 43:G
-        datPos.addAll(arrayListOf(goldR*cos36f,goldR*sin36f,goldR+1f))     // 44:S
-
-        datPos.addAll(arrayListOf(goldR*cos36f,goldR*sin36f,goldR+1f))     // 45:S
-        datPos.addAll(arrayListOf(goldR*cos36f,goldR*sin36f,goldR))   // 46:G
-        datPos.addAll(arrayListOf(goldR,0f,1f))           // 47:F
-        datPos.addAll(arrayListOf(goldR*cos36f,-goldR*sin36f,goldR))     // 48:O
-        datPos.addAll(arrayListOf(goldR*cos36f,-goldR*sin36f,goldR+1f))     // 49:R
-
-        datPos.addAll(arrayListOf(goldR*cos36f,-goldR*sin36f,goldR+1f))     // 50:R
-        datPos.addAll(arrayListOf(goldR*cos36f,-goldR*sin36f,goldR))     // 51:O
-        datPos.addAll(arrayListOf(goldR*cos72f,-goldR*sin72f,1f))        // 52:N
-        datPos.addAll(arrayListOf(-goldR*cos72f,-goldR*sin72f,goldR))    // 53:M
-        datPos.addAll(arrayListOf(-goldR*cos72f,-goldR*sin72f,goldR+1f)) // 54:Q
-
-        datPos.addAll(arrayListOf(-goldR*cos72f,-goldR*sin72f,goldR+1f)) // 55:Q
-        datPos.addAll(arrayListOf(-goldR*cos72f,-goldR*sin72f,goldR))    // 56:M
-        datPos.addAll(arrayListOf(-goldR*cos36f,-goldR*sin36f,1f))      // 57:L
-        datPos.addAll(arrayListOf(-goldR,0f,goldR))                     // 58:K
-        datPos.addAll(arrayListOf(-1f,0f,goldR+1f))                     // 59:P
 
         // 法線データ
-        (0..2).forEach {
-            // (v1-v0) x (v2-v0)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 3*1, 3*2, 3*0 ) )
-        }
-        (3..5).forEach {
-            // (v4-v3) x (v5-v3)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 3*4, 3*5, 3*3 ) )
-        }
-        (6..8).forEach {
-            // (v7-v6) x (v8-v6)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 3*7, 3*8, 3*6 ) )
-        }
-        (9..11).forEach {
-            // (v10-v9) x (v11-v9)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 3*10, 3*11, 3*9 ) )
-        }
-        (12..14).forEach {
-            // (v13-v12) x (v14-v12)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 3*13, 3*14, 3*12 ) )
-        }
-        (15..17).forEach {
-            // (v16-v15) x (v17-v15)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 3*16, 3*17, 3*15 ) )
-        }
-        (18..20).forEach {
-            // (v19-v18) x (v20-v18)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 3*19, 3*20, 3*18 ) )
-        }
-        (21..23).forEach {
-            // (v22-v21) x (v23-v21)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 3*22, 3*23, 3*21 ) )
+        (0..35).forEach { i ->
+            // (B-A) x (C-A)
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 3*i+1, 3*i+2, 3*i ) )
         }
 
         // 色データ
-        (0..2).forEach {
+        // ABCDE(赤)
+        (0..8).forEach {
             datCol.addAll(arrayListOf<Float>(1f,0f,0f,1f))
         }
-        (3..5).forEach {
+        // BHIJC(オレンジ)
+        (9..17).forEach {
             datCol.addAll(arrayListOf<Float>(1f,0.5f,0f,1f))
         }
-        (6..8).forEach {
+        // CJKLD(黄色)
+        (18..26).forEach {
             datCol.addAll(arrayListOf<Float>(1f,1f,0f,1f))
         }
-        (9..11).forEach {
+        // DLMNE(黄緑)
+        (27..35).forEach {
             datCol.addAll(arrayListOf<Float>(0.5f,1f,0f,1f))
         }
-        (12..14).forEach {
+        // ENOFA(緑)
+        (36..44).forEach {
             datCol.addAll(arrayListOf<Float>(0f,1f,0f,1f))
         }
-        (15..17).forEach {
+        // AFGHB
+        (45..53).forEach {
             datCol.addAll(arrayListOf<Float>(0f,1f,0.5f,1f))
         }
-        (18..20).forEach {
+        // RQPTS
+        (54..62).forEach {
             datCol.addAll(arrayListOf<Float>(0f,1f,1f,1f))
         }
-        (21..23).forEach {
+        // QMLKP
+        (63..71).forEach {
             datCol.addAll(arrayListOf<Float>(0f,0.5f,1f,1f))
+        }
+        // PKJIT
+        (72..80).forEach {
+            datCol.addAll(arrayListOf<Float>(0f,0f,1f,1f))
+        }
+        // TIHGS
+        (81..89).forEach {
+            datCol.addAll(arrayListOf<Float>(0.5f,0f,1f,1f))
+        }
+        // SGFOR
+        (90..98).forEach {
+            datCol.addAll(arrayListOf<Float>(1f,0f,1f,1f))
+        }
+        // RONMQ
+        (99..107).forEach {
+            datCol.addAll(arrayListOf<Float>(1f,0f,0.5f,1f))
         }
 
         // インデックスデータ
-        datIdx.addAll(arrayListOf<Short>(0,1,2))
-        datIdx.addAll(arrayListOf<Short>(3,4,5))
-        datIdx.addAll(arrayListOf<Short>(6,7,8))
-        datIdx.addAll(arrayListOf<Short>(9,10,11))
-        datIdx.addAll(arrayListOf<Short>(12,13,14))
-        datIdx.addAll(arrayListOf<Short>(15,16,17))
-        datIdx.addAll(arrayListOf<Short>(18,19,20))
-        datIdx.addAll(arrayListOf<Short>(21,22,23))
+        (0..107).forEach {
+            datIdx.add(it.toShort())
+        }
 
         // 頂点バッファ
         bufPos = ByteBuffer.allocateDirect(datPos.toArray().size * 4).run {

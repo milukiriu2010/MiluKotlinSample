@@ -33,13 +33,15 @@ class Dodecahedron01Renderer: GLSurfaceView.Renderer {
     // テンポラリ行列
     private val matT = FloatArray(16)
     // 点光源の位置
-    private val vecLight = floatArrayOf(0f,0f,2f)
+    private val vecLight = floatArrayOf(0f,10f,10f)
     // 環境光の色
     private val vecAmbientColor = floatArrayOf(0.1f,0.1f,0.1f,1f)
     // カメラの座標
-    private val vecEye = floatArrayOf(0f,0f,10f)
+    private val vecEye = floatArrayOf(0f,0f,5f)
     // カメラの上方向を表すベクトル
     private val vecEyeUp = floatArrayOf(0f,1f,0f)
+    // 中心座標
+    private val vecCenter = floatArrayOf(0f,0f,0f)
 
     // 回転角度
     private var angle1 = 0
@@ -66,7 +68,9 @@ class Dodecahedron01Renderer: GLSurfaceView.Renderer {
         // モデルを平行移動する
         Matrix.translateM(matM,0,x,y,0f)
         // モデルを"Y軸"を中心に回転する
-        Matrix.rotateM(matM,0,t1,0f,1f,0f)
+        //if ( rotateSwitch ) {
+            Matrix.rotateM(matM,0,t1,0f,1f,0f)
+        //}
         // モデルを"X軸45度Y軸45度/Z軸45度"を中心に回転する
         //Matrix.rotateM(matM,0,t1,1f,1f,1f)
         // モデル×ビュー×プロジェクション
@@ -101,9 +105,9 @@ class Dodecahedron01Renderer: GLSurfaceView.Renderer {
 
         // カメラの位置
         Matrix.setLookAtM(matV, 0,
-                0f, 0f, 5f,
-                0f, 0f, 0f,
-                0f, 1.0f, 0.0f)
+                vecEye[0], vecEye[1], vecEye[2],
+                vecCenter[0], vecCenter[1], vecCenter[2],
+                vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
 
         // シェーダプログラム登録
         programHandle = Dodecahedron01Shader().loadShader()

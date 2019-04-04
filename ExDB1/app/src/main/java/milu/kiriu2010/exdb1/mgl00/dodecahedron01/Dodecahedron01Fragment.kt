@@ -2,7 +2,9 @@ package milu.kiriu2010.exdb1.mgl00.dodecahedron01
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 
@@ -25,7 +27,25 @@ class Dodecahedron01Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_gl_home, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        myGL02View.setRenderer(Dodecahedron01Renderer())
+        val render = Dodecahedron01Renderer()
+        myGL02View.setRenderer(render)
+        myGL02View.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_UP -> {
+                    render.rotateSwitch = false
+                }
+                MotionEvent.ACTION_DOWN -> {
+                    Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
+                    Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
+                    render.rotateSwitch = true
+                }
+                MotionEvent.ACTION_MOVE -> {
+                }
+                else -> {
+                }
+            }
+            true
+        }
 
         return view
     }
