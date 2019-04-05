@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".opengl04.OpenGL04Activity"
+            android:label="@string/title_activity_open_gl04"></activity>
+        <activity
             android:name=".opengl01.OpenGL01Activity"
             android:label="@string/title_activity_open_gl" />
         <activity android:name=".MainActivity">
@@ -56,7 +59,7 @@
             android:label="@string/title_activity_open_gl03" />
         <activity
             android:name=".mgl00.Mgl00Activity"
-            android:label="@string/title_activity_mgl00"></activity>
+            android:label="@string/title_activity_mgl00" />
     </application>
 
 </manifest>

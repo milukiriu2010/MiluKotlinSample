@@ -36,4 +36,5 @@
         <item>ONE_MINUS_CONSTANT_ALPHA</item>
         <item>SRC_ALPHA_SATURATE</item>
     </string-array>
+    <string name="title_activity_open_gl04">OpenGL04Activity</string>
 </resources>
