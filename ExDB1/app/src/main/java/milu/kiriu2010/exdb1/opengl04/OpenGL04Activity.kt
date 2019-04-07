@@ -8,6 +8,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_open_gl04.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl04.w042.W042Fragment
+import milu.kiriu2010.exdb1.opengl04.w043.W043Fragment
 
 class OpenGL04Activity : AppCompatActivity() {
 
@@ -77,12 +78,22 @@ class OpenGL04Activity : AppCompatActivity() {
                 finish()
                 true
             }
+            // 視差マッピング
+            R.id.opengl_w043 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w043") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W043Fragment.newInstance(), "w043")
+                            .commit()
+                }
+                true
+            }
             // バンプマッピング
             R.id.opengl_w042 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w042") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W042Fragment.newInstance(), "w041")
+                            .replace(R.id.frameLayout, W042Fragment.newInstance(), "w042")
                             .commit()
                 }
                 true

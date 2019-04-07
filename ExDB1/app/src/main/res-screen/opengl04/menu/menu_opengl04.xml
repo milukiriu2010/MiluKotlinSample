@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w043"
+        android:title="w043_視差マッピング" />
+    <item
         android:id="@+id/opengl_w042"
         android:title="w042_バンプマッピング" />
 </menu>
