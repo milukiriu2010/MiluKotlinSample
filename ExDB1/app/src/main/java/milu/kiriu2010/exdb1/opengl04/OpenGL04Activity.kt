@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_open_gl04.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl04.w042.W042Fragment
 import milu.kiriu2010.exdb1.opengl04.w043.W043Fragment
+import milu.kiriu2010.exdb1.opengl04.w044.W044Fragment
 
 class OpenGL04Activity : AppCompatActivity() {
 
@@ -76,6 +77,16 @@ class OpenGL04Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // キューブ環境マッピング
+            R.id.opengl_w044 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w044") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W044Fragment.newInstance(), "w044")
+                            .commit()
+                }
                 true
             }
             // 視差マッピング
