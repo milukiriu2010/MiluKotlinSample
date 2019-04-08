@@ -9,12 +9,14 @@ import android.util.Log
 import android.view.MotionEvent
 import milu.kiriu2010.exdb1.opengl.MyGLFunc
 import milu.kiriu2010.gui.basic.MyQuaternion
+import java.nio.ByteBuffer
 import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import kotlin.math.sqrt
 
-// バンプマッピング
+// キューブ環境マッピング
+// http://opengles2learning.blogspot.com/2011/06/texturing-cube-different-textures-on.html
 class W044Renderer: GLSurfaceView.Renderer {
     // 描画オブジェクト(立方体)
     private lateinit var drawObjCube: W044ModelCube
@@ -211,22 +213,31 @@ class W044Renderer: GLSurfaceView.Renderer {
 
         // テクスチャへimageを適用
         bmpArray.forEachIndexed { id, bitmap ->
-            /*
-            GLES20.glTexImage2D(targetArray[id],0,
-                    GLES20.GL_RGBA, GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,)
-                    */
-            GLUtils.texImage2D(targetArray[id],0,GLES20.GL_RGBA,bitmap,GLES20.GL_UNSIGNED_BYTE,GLES20.GL_RGBA)
+            //GLES20.glTexImage2D(targetArray[id],0,
+            //        GLES20.GL_RGBA, GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,)
+            //GLUtils.texImage2D(targetArray[id],0,GLES20.GL_RGBA,bitmap,GLES20.GL_UNSIGNED_BYTE,GLES20.GL_RGBA)
+
+            //val buffer = ByteBuffer.allocate(bitmap.byteCount)
+            val bw = bitmap.width
+            val bh = bitmap.height
+            val buffer = ByteBuffer.allocateDirect(bw*bh*4)
+            bitmap.copyPixelsToBuffer(buffer)
+            buffer.position(0)
+            GLES20.glTexImage2D(targetArray[id],0,GLES20.GL_RGBA,
+                    bw,bh,0,GLES20.GL_RGBA,
+                    GLES20.GL_UNSIGNED_BYTE,buffer)
+            bitmap.recycle()
         }
 
         // ミニマップを生成
         GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_CUBE_MAP)
 
         // 縮小時の補完設定
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_CUBE_MAP, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
         // 拡大時の補完設定
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_CUBE_MAP, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_CUBE_MAP, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_CUBE_MAP, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
 
 
 
