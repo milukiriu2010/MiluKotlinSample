@@ -11,6 +11,7 @@ import milu.kiriu2010.exdb1.opengl04.w042.W042Fragment
 import milu.kiriu2010.exdb1.opengl04.w043.W043Fragment
 import milu.kiriu2010.exdb1.opengl04.w044.W044Fragment
 import milu.kiriu2010.exdb1.opengl04.w045.W045Fragment
+import milu.kiriu2010.exdb1.opengl04.w046.W046Fragment
 
 class OpenGL04Activity : AppCompatActivity() {
 
@@ -78,6 +79,16 @@ class OpenGL04Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 屈折マッピング
+            R.id.opengl_w046 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w046") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W046Fragment.newInstance(), "w046")
+                            .commit()
+                }
                 true
             }
             // キューブ環境バンプマッピング

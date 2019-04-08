@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w046"
+        android:title="w046_屈折マッピング" />
+    <item
         android:id="@+id/opengl_w045"
         android:title="w045_キューブ環境バンプマッピング" />
     <item
