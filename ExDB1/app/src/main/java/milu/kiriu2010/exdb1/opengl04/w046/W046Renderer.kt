@@ -146,7 +146,7 @@ class W046Renderer: GLSurfaceView.Renderer {
         Matrix.translateM(matM,0,5f,0f,0f)
         Matrix.rotateM(matM,0,t1,1f,0f,1f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-        drawObjTorus.draw(programHandle,matM,matMVP,vecEye,0,1,refractRatio)
+        drawObjTorus.draw(programHandle,matM,matMVP,vecEye,0,1)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {

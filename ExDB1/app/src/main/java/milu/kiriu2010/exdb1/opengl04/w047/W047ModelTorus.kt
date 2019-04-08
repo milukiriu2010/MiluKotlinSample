@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl04.w046
+package milu.kiriu2010.exdb1.opengl04.w047
 
 import android.graphics.Bitmap
 import android.opengl.GLES20
@@ -18,7 +18,7 @@ import kotlin.math.sin
 
 // ステンシルバッファでアウトライン
 // https://wgld.org/d/webgl/w039.html
-class W046ModelTorus {
+class W047ModelTorus {
     // 頂点バッファ
     private lateinit var bufPos: FloatBuffer
     // 法線バッファ
@@ -101,7 +101,7 @@ class W046ModelTorus {
              matMVP: FloatArray,
              u_vecEye: FloatArray,
              u_CubeTexture: Int,
-             u_Reflection: Int) {
+             u_Refraction: Int) {
 
         // attribute(頂点)
         bufPos.position(0)
@@ -144,15 +144,17 @@ class W046ModelTorus {
             GLES20.glUniform3fv(it,1,u_vecEye,0)
         }
 
+        /*
         // uniform(キューブテクスチャ)
         GLES20.glGetUniformLocation(programHandle, "u_CubeTexture").also {
             GLES20.glUniform1i(it, u_CubeTexture)
         }
         MyGLFunc.checkGlError("u_CubeTexture")
+        */
 
-        // uniform(反射するかどうか)
-        GLES20.glGetUniformLocation(programHandle,"u_Reflection").also {
-            GLES20.glUniform1i(it,u_Reflection)
+        // uniform(屈折するかどうか)
+        GLES20.glGetUniformLocation(programHandle,"u_Refraction").also {
+            GLES20.glUniform1i(it,u_Refraction)
         }
 
         // モデルを描画

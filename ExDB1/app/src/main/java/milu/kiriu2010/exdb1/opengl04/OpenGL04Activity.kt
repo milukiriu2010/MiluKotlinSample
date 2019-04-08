@@ -12,6 +12,7 @@ import milu.kiriu2010.exdb1.opengl04.w043.W043Fragment
 import milu.kiriu2010.exdb1.opengl04.w044.W044Fragment
 import milu.kiriu2010.exdb1.opengl04.w045.W045Fragment
 import milu.kiriu2010.exdb1.opengl04.w046.W046Fragment
+import milu.kiriu2010.exdb1.opengl04.w047.W047Fragment
 
 class OpenGL04Activity : AppCompatActivity() {
 
@@ -79,6 +80,16 @@ class OpenGL04Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 動的キューブマッピング
+            R.id.opengl_w047 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w047") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W047Fragment.newInstance(), "w047")
+                            .commit()
+                }
                 true
             }
             // 屈折マッピング
