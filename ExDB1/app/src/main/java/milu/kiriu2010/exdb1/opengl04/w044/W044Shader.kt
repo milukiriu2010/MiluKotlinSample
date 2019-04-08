@@ -39,7 +39,7 @@ class W044Shader {
             void main() {
                 vec3  ref;
                 if (bool(u_Reflection)) {
-                    ref = reflect(v_Position - vecEye, v_Normal);
+                    ref = reflect(v_Position - u_vecEye, v_Normal);
                 }
                 else {
                     ref = v_Normal;

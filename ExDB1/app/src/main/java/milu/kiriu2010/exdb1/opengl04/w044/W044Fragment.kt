@@ -30,9 +30,19 @@ class W044Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_gl04_home, container, false)
 
         myGLView = view.findViewById(R.id.myGL02ViewA04)
-        val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w42)
+        val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.cube_w44_px)
+        val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.cube_w44_py)
+        val bmp2 = BitmapFactory.decodeResource(resources,R.drawable.cube_w44_pz)
+        val bmp3 = BitmapFactory.decodeResource(resources,R.drawable.cube_w44_nx)
+        val bmp4 = BitmapFactory.decodeResource(resources,R.drawable.cube_w44_ny)
+        val bmp5 = BitmapFactory.decodeResource(resources,R.drawable.cube_w44_nz)
         val render = W044Renderer()
         render.bmpArray.add(bmp0)
+        render.bmpArray.add(bmp1)
+        render.bmpArray.add(bmp2)
+        render.bmpArray.add(bmp3)
+        render.bmpArray.add(bmp4)
+        render.bmpArray.add(bmp5)
         myGLView.setRenderer(render)
         myGLView.setOnTouchListener { v, event ->
             when (event.action) {

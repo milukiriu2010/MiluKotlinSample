@@ -10,13 +10,10 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
 import java.nio.ShortBuffer
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
 
-// バンプマッピング
-// https://wgld.org/d/webgl/w042.html
-class W044ModelSphere {
+// フレームバッファ
+// https://wgld.org/d/webgl/w040.html
+class W044ModelCube {
     // 頂点バッファ
     private lateinit var bufPos: FloatBuffer
     // 法線バッファ
@@ -40,8 +37,8 @@ class W044ModelSphere {
     private val datIdx = arrayListOf<Short>()
 
     init {
-        // 球体のデータを生成
-        createPath(16,16,2.5f, floatArrayOf(1f,1f,1f,1f))
+        // 立方体のデータを生成
+        createPath(2f, floatArrayOf(1f,1f,1f,1f))
 
         // 頂点バッファ
         bufPos = ByteBuffer.allocateDirect(datPos.toArray().size * 4).run {
@@ -107,7 +104,7 @@ class W044ModelSphere {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Position:Sphere")
+        MyGLFunc.checkGlError("a_Position")
 
         // attribute(法線)
         bufNor.position(0)
@@ -142,63 +139,129 @@ class W044ModelSphere {
             GLES20.glUniform3fv(it,1,u_vecEye,0)
         }
 
-        /*
         // uniform(キューブテクスチャ)
         GLES20.glGetUniformLocation(programHandle, "u_CubeTexture").also {
             GLES20.glUniform1i(it, u_CubeTexture)
         }
         MyGLFunc.checkGlError("u_CubeTexture")
-        */
 
         // uniform(反射)
         GLES20.glGetUniformLocation(programHandle,"u_Reflection").also {
             GLES20.glUniform1i(it,u_Reflection)
         }
 
+
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, datIdx.size, GLES20.GL_UNSIGNED_SHORT, bufIdx)
     }
 
-    // 球体の頂点データを生成
-    private fun createPath( row: Int, column: Int, rad: Float, color: FloatArray? = null ) {
+    // 立方体の頂点データを生成
+    private fun createPath( side: Float, color: FloatArray? = null ) {
         datPos.clear()
         datNor.clear()
         datCol.clear()
         datTxc.clear()
         datIdx.clear()
 
-        (0..row).forEach { i ->
-            var r = PI.toFloat() / row.toFloat() * i.toFloat()
-            var ry = cos(r)
-            var rr = sin(r)
-            (0..column).forEach {  ii ->
-                var tr = PI.toFloat() * 2f/column.toFloat() * ii.toFloat()
-                var tx = rr * rad * cos(tr)
-                var ty = ry * rad;
-                var tz = rr * rad * sin(tr)
-                var rx = rr * cos(tr)
-                var rz = rr * sin(tr)
-                if ( color != null ) {
-                    datCol.addAll(arrayListOf(color[0],color[1],color[2],color[3]))
-                }
-                else {
-                    var tc = MyColor.hsva(360/row*i,1f,1f,1f)
-                    datCol.addAll(arrayListOf(tc[0],tc[1],tc[2],tc[3]))
-                }
-                datPos.addAll(arrayListOf(tx,ty,tz))
-                datNor.addAll(arrayListOf(rx,ry,rz))
-                datTxc.add(1f-1f/column.toFloat()*ii.toFloat())
-                datTxc.add(1f/row.toFloat()*i.toFloat())
-            }
+        val hs = side * 0.5f
 
-            (0 until row).forEach { i ->
-                (0 until column).forEach { ii ->
-                    val r = (column+1)*i+ii
-                    datIdx.addAll(arrayListOf<Short>(r.toShort(),(r+1).toShort(),(r+column+2).toShort()))
-                    datIdx.addAll(arrayListOf<Short>(r.toShort(),(r+column+2).toShort(),(r+column+1).toShort()))
-                }
+        // 頂点データ
+        // 0-3
+        datPos.addAll(arrayListOf(-hs,-hs,hs))
+        datPos.addAll(arrayListOf(hs,-hs,hs))
+        datPos.addAll(arrayListOf(hs,hs,hs))
+        datPos.addAll(arrayListOf(-hs,hs,hs))
+        // 4-7
+        datPos.addAll(arrayListOf(-hs,-hs,-hs))
+        datPos.addAll(arrayListOf(-hs,hs,-hs))
+        datPos.addAll(arrayListOf(hs,hs,-hs))
+        datPos.addAll(arrayListOf(hs,-hs,-hs))
+        // 8-11
+        datPos.addAll(arrayListOf(-hs,hs,-hs))
+        datPos.addAll(arrayListOf(-hs,hs,hs))
+        datPos.addAll(arrayListOf(hs,hs,hs))
+        datPos.addAll(arrayListOf(hs,hs,-hs))
+        // 12-15
+        datPos.addAll(arrayListOf(-hs,-hs,-hs))
+        datPos.addAll(arrayListOf(hs,-hs,-hs))
+        datPos.addAll(arrayListOf(hs,-hs,hs))
+        datPos.addAll(arrayListOf(-hs,-hs,hs))
+        // 16-19
+        datPos.addAll(arrayListOf(hs,-hs,-hs))
+        datPos.addAll(arrayListOf(hs,hs,-hs))
+        datPos.addAll(arrayListOf(hs,hs,hs))
+        datPos.addAll(arrayListOf(hs,-hs,hs))
+        // 20-23
+        datPos.addAll(arrayListOf(-hs,-hs,-hs))
+        datPos.addAll(arrayListOf(-hs,-hs,hs))
+        datPos.addAll(arrayListOf(-hs,hs,hs))
+        datPos.addAll(arrayListOf(-hs,hs,-hs))
+
+        // 法線データ
+        // 0-3
+        datNor.addAll(arrayListOf(-1f,-1f,1f))
+        datNor.addAll(arrayListOf(1f,-1f,1f))
+        datNor.addAll(arrayListOf(1f,1f,1f))
+        datNor.addAll(arrayListOf(-1f,1f,1f))
+        // 4-7
+        datNor.addAll(arrayListOf(-1f,-1f,-1f))
+        datNor.addAll(arrayListOf(-1f,1f,-1f))
+        datNor.addAll(arrayListOf(1f,1f,-1f))
+        datNor.addAll(arrayListOf(1f,-1f,-1f))
+        // 8-11
+        datNor.addAll(arrayListOf(-1f,1f,-1f))
+        datNor.addAll(arrayListOf(-1f,1f,1f))
+        datNor.addAll(arrayListOf(1f,1f,1f))
+        datNor.addAll(arrayListOf(1f,1f,-1f))
+        // 12-15
+        datNor.addAll(arrayListOf(-1f,-1f,-1f))
+        datNor.addAll(arrayListOf(1f,-1f,-1f))
+        datNor.addAll(arrayListOf(1f,-1f,1f))
+        datNor.addAll(arrayListOf(-1f,-1f,1f))
+        // 16-19
+        datNor.addAll(arrayListOf(1f,-1f,-1f))
+        datNor.addAll(arrayListOf(1f,1f,-1f))
+        datNor.addAll(arrayListOf(1f,1f,1f))
+        datNor.addAll(arrayListOf(1f,-1f,1f))
+        // 20-23
+        datNor.addAll(arrayListOf(-1f,-1f,-1f))
+        datNor.addAll(arrayListOf(-1f,-1f,1f))
+        datNor.addAll(arrayListOf(-1f,1f,1f))
+        datNor.addAll(arrayListOf(-1f,1f,-1f))
+
+        // 色データ
+        (0..datPos.size/3).forEach { i ->
+            if ( color != null ) {
+                datCol.addAll(arrayListOf(color[0],color[1],color[2],color[3]))
+            }
+            else {
+                val tc = MyColor.hsva(360/datPos.size/3*i,1f,1f,1f)
+                datCol.addAll(arrayListOf(tc[0],tc[1],tc[2],tc[3]))
             }
         }
+
+        // テクスチャコードのデータ
+        (0..5).forEach {
+            datTxc.addAll(arrayListOf(0f,0f))
+            datTxc.addAll(arrayListOf(1f,0f))
+            datTxc.addAll(arrayListOf(1f,1f))
+            datTxc.addAll(arrayListOf(0f,1f))
+        }
+
+        // インデックスデータ
+        datIdx.addAll(arrayListOf(0,1,2))
+        datIdx.addAll(arrayListOf(0,2,3))
+        datIdx.addAll(arrayListOf(4,5,6))
+        datIdx.addAll(arrayListOf(4,6,7))
+        datIdx.addAll(arrayListOf(8,9,10))
+        datIdx.addAll(arrayListOf(8,10,11))
+        datIdx.addAll(arrayListOf(12,13,14))
+        datIdx.addAll(arrayListOf(12,14,15))
+        datIdx.addAll(arrayListOf(16,17,18))
+        datIdx.addAll(arrayListOf(16,18,19))
+        datIdx.addAll(arrayListOf(20,21,22))
+        datIdx.addAll(arrayListOf(20,22,23))
+
     }
 
     fun activateTexture(id: Int, textures: IntArray, bmp: Bitmap, doRecycle: Boolean = false) {
@@ -217,8 +280,8 @@ class W044ModelSphere {
         // 拡大時の補完設定
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
 
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_REPEAT)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_REPEAT)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
 
         // ビットマップをテクスチャに設定
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bmp, 0)
