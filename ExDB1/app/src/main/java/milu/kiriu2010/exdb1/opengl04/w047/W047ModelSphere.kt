@@ -41,7 +41,7 @@ class W047ModelSphere {
 
     init {
         // 球体のデータを生成
-        createPath(16,16,2.5f, floatArrayOf(1f,1f,1f,1f))
+        createPath(16,16,3f, floatArrayOf(1f,1f,1f,1f))
 
         // 頂点バッファ
         bufPos = ByteBuffer.allocateDirect(datPos.toArray().size * 4).run {
@@ -99,7 +99,7 @@ class W047ModelSphere {
              matMVP: FloatArray,
              u_vecEye: FloatArray,
              u_CubeTexture: Int,
-             u_Refraction: Int) {
+             u_Reflection: Int) {
 
         // attribute(頂点)
         bufPos.position(0)
@@ -142,17 +142,15 @@ class W047ModelSphere {
             GLES20.glUniform3fv(it,1,u_vecEye,0)
         }
 
-        /*
         // uniform(キューブテクスチャ)
         GLES20.glGetUniformLocation(programHandle, "u_CubeTexture").also {
             GLES20.glUniform1i(it, u_CubeTexture)
         }
         MyGLFunc.checkGlError("u_CubeTexture")
-        */
 
-        // uniform(屈折するかどうか)
-        GLES20.glGetUniformLocation(programHandle,"u_Refraction").also {
-            GLES20.glUniform1i(it,u_Refraction)
+        // uniform(反射するかどうか)
+        GLES20.glGetUniformLocation(programHandle,"u_Reflection").also {
+            GLES20.glUniform1i(it,u_Reflection)
         }
 
         // モデルを描画

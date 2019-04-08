@@ -43,7 +43,7 @@ class W047ModelTorus {
 
     init {
         // トーラスのデータを生成
-        createPath(16,16,1f,2f, floatArrayOf(1f,1f,1f,1f))
+        createPath(16,16,0.5f,1f, floatArrayOf(1f,1f,1f,1f))
 
         // 頂点バッファ
         bufPos = ByteBuffer.allocateDirect(datPos.toArray().size * 4).run {
@@ -97,11 +97,11 @@ class W047ModelTorus {
     }
 
     fun draw(programHandle: Int,
-             matM: FloatArray,
              matMVP: FloatArray,
+             matINV: FloatArray,
+             u_vecLight: FloatArray,
              u_vecEye: FloatArray,
-             u_CubeTexture: Int,
-             u_Refraction: Int) {
+             u_ambientColor: FloatArray) {
 
         // attribute(頂点)
         bufPos.position(0)
@@ -127,34 +127,32 @@ class W047ModelTorus {
         }
         MyGLFunc.checkGlError("a_Color")
 
-        // uniform(モデル)
-        GLES20.glGetUniformLocation(programHandle,"u_matM").also {
-            GLES20.glUniformMatrix4fv(it,1,false,matM,0)
-        }
-        MyGLFunc.checkGlError("u_matM")
-
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
         MyGLFunc.checkGlError("u_matMVP")
 
+        // uniform(逆行列)
+        GLES20.glGetUniformLocation(programHandle,"u_matINV").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matINV,0)
+        }
+        MyGLFunc.checkGlError("u_matINV")
+
+        // uniform(ライティング)
+        GLES20.glGetUniformLocation(programHandle,"u_vecLight").also {
+            GLES20.glUniform3fv(it,1,u_vecLight,0)
+        }
+
         // uniform(視点座標)
         GLES20.glGetUniformLocation(programHandle,"u_vecEye").also {
             GLES20.glUniform3fv(it,1,u_vecEye,0)
         }
 
-        /*
-        // uniform(キューブテクスチャ)
-        GLES20.glGetUniformLocation(programHandle, "u_CubeTexture").also {
-            GLES20.glUniform1i(it, u_CubeTexture)
-        }
-        MyGLFunc.checkGlError("u_CubeTexture")
-        */
-
-        // uniform(屈折するかどうか)
-        GLES20.glGetUniformLocation(programHandle,"u_Refraction").also {
-            GLES20.glUniform1i(it,u_Refraction)
+        // uniform(環境色)
+        GLES20.glGetUniformLocation(programHandle,"u_ambientColor").also {
+            //GLES20.glUniform4f(it,u_ambientColor[0],u_ambientColor[1],u_ambientColor[2],u_ambientColor[3])
+            GLES20.glUniform4fv(it,1, u_ambientColor, 0)
         }
 
         // モデルを描画

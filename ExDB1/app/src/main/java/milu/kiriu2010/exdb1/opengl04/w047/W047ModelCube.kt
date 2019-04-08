@@ -96,7 +96,7 @@ class W047ModelCube {
              matMVP: FloatArray,
              u_vecEye: FloatArray,
              u_CubeTexture: Int,
-             u_Refraction: Int) {
+             u_Reflection: Int) {
 
         // attribute(頂点)
         bufPos.position(0)
@@ -145,9 +145,9 @@ class W047ModelCube {
         }
         MyGLFunc.checkGlError("u_CubeTexture")
 
-        // uniform(屈折するかどうか)
-        GLES20.glGetUniformLocation(programHandle,"u_Refraction").also {
-            GLES20.glUniform1i(it,u_Refraction)
+        // uniform(反射するかどうか)
+        GLES20.glGetUniformLocation(programHandle,"u_Reflection").also {
+            GLES20.glUniform1i(it,u_Reflection)
         }
 
         // モデルを描画
