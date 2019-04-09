@@ -197,11 +197,22 @@
         app:layout_constraintTop_toBottomOf="@+id/btnOpenGL01" />
 
     <Button
+        android:id="@+id/btnOpenGL05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="OpenGL05"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/btnOpenGL04"
+        app:layout_constraintStart_toEndOf="@+id/btnOpenGL04"
+        app:layout_constraintTop_toTopOf="@+id/btnOpenGL04" />
+
+    <Button
         android:id="@+id/btnMGL00"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="MGL00"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnOpenGL04" />

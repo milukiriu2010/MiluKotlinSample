@@ -37,4 +37,5 @@
         <item>SRC_ALPHA_SATURATE</item>
     </string-array>
     <string name="title_activity_open_gl04">OpenGL04Activity</string>
+    <string name="title_activity_open_gl05">OpenGL05Activity</string>
 </resources>
