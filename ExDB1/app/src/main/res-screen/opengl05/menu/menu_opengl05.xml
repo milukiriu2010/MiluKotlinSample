@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w049"
+        android:title="w049_射影テクスチャマッピング" />
+    <item
         android:id="@+id/opengl_w048"
         android:title="w048_トゥーンレンダリング" />
 </menu>

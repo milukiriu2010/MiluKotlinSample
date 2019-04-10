@@ -8,6 +8,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_open_gl05.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl05.w048.W048Fragment
+import milu.kiriu2010.exdb1.opengl05.w049.W049Fragment
 
 class OpenGL05Activity : AppCompatActivity() {
 
@@ -76,8 +77,19 @@ class OpenGL05Activity : AppCompatActivity() {
                 finish()
                 true
             }
+            // 射影テクスチャマッピング
+            R.id.opengl_w049 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w049") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W049Fragment.newInstance(), "w049")
+                            .commit()
+                }
+                true
+            }
             // トゥーンレンダリング
             R.id.opengl_w048 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w048") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W048Fragment.newInstance(), "w048")
