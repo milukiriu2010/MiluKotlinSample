@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_open_gl05.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl05.w048.W048Fragment
 import milu.kiriu2010.exdb1.opengl05.w049.W049Fragment
+import milu.kiriu2010.exdb1.opengl05.w050.W050Fragment
 
 class OpenGL05Activity : AppCompatActivity() {
 
@@ -75,6 +76,16 @@ class OpenGL05Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 光学迷彩
+            R.id.opengl_w050 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w050") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W050Fragment.newInstance(), "w050")
+                            .commit()
+                }
                 true
             }
             // 射影テクスチャマッピング
