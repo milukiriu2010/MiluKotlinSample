@@ -117,7 +117,7 @@ class W050Renderer: GLSurfaceView.Renderer {
     private val matMVP4Tex = FloatArray(16)
 
     // 光学迷彩にかける補正係数
-    var k = 10f
+    var k = 1f
 
     override fun onDrawFrame(gl: GL10?) {
         // 回転角度
@@ -151,7 +151,7 @@ class W050Renderer: GLSurfaceView.Renderer {
         Matrix.setIdentityM(matM,0)
         Matrix.scaleM(matM,0,100f,100f,100f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-        drawObjCube.draw(programHandleCubeMap,matM,matMVP,vecEye,0,0)
+        drawObjCube.draw(programHandleCubeMap,matM,matMVP,floatArrayOf(0f,0f,0f),0,0)
 
         // スペキュラライティングシェーダでトーラスモデルをレンダリング
         GLES20.glUseProgram(programHandleSpecular)
@@ -171,71 +171,73 @@ class W050Renderer: GLSurfaceView.Renderer {
         // フレームバッファのバインドを解除
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
 
-
-
-
-
-
-
-
-
-
-
-
-
         // canvasを初期化
-        GLES20.glClearColor(0.0f, 1.0f, 0.0f, 1.0f)
+        GLES20.glClearColor(0.0f, 0.7f, 0.7f, 1.0f)
         GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
-        // ビュー×プロジェクション座標変換行列
-        vecEye = MyQuaternion.toVecIII(floatArrayOf(0f,0f,20f),xQuaternion)
-        vecEyeUp = MyQuaternion.toVecIII(floatArrayOf(0f,1f,0f),xQuaternion)
-        Matrix.setLookAtM(matV, 0,
-                vecEye[0], vecEye[1], vecEye[2],
-                vecCenter[0], vecCenter[1], vecCenter[2],
-                vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
-        Matrix.perspectiveM(matP,0,45f,ratio,0.1f,200f)
-        Matrix.multiplyMM(matT,0,matP,0,matV,0)
-
-        // キューブ環境マッピングシェーダ
-        GLES20.glUseProgram(programHandleSpecular)
-
-        // 背景用キューブをレンダリング
+        // キューブマップテクスチャで背景用キューブをレンダリング
+        GLES20.glUseProgram(programHandleCubeMap)
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
         GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP,textures[0])
         Matrix.setIdentityM(matM,0)
         Matrix.scaleM(matM,0,100f,100f,100f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-        drawObjCube.draw(programHandleSpecular,matM,matMVP,vecEye,0,0)
+        drawObjCube.draw(programHandleCubeMap,matM,matMVP, floatArrayOf(0f,0f,0f),0,0)
 
-        // 動的キューブマップテクスチャを適用して球体をレンダリング
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP,frameTexture[0])
-        Matrix.setIdentityM(matM,0)
-        //Matrix.rotateM(matM,0,t1,0f,0f,1f)
-        //Matrix.translateM(matM,0,5f,0f,0f)
-        Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-        //drawObjSphere.draw(programHandleSpecular,matM,matMVP,vecEye,0,1)
-
-        // スペキュラライティングシェーダ
-        GLES20.glUseProgram(programHandleStealth)
-
-        // トーラスをレンダリング
-        targetArray.forEachIndexed { id, target ->
+        // スペキュラライティングシェーダでトーラスモデルをレンダリング
+        GLES20.glUseProgram(programHandleSpecular)
+        (0..8).forEach {  i ->
+            val t = i.toFloat() * 360f/9f
+            var amb = MyColor.hsva(i*40,1f,1f,1f).toFloatArray()
             Matrix.setIdentityM(matM,0)
-            Matrix.translateM(matM,0,torusPos[0+id*3],torusPos[1+id*3],torusPos[2+id*3])
-            Matrix.rotateM(matM,0,t1,torusEye[0+id*3],torusEye[1+id*3],torusEye[2+id*3])
+            Matrix.rotateM(matM,0,t,0f,1f,0f)
+            Matrix.translateM(matM,0,0f,0f,30f)
+            Matrix.rotateM(matM,0,t1,1f,1f,0f)
             Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
             Matrix.invertM(matI,0,matM,0)
+            drawObjTorus.draw(programHandleSpecular,matMVP,matI,vecLight1,vecEye,amb)
 
-            val amb = FloatArray(4)
-            amb[0] = torusAmb[0+id*4]
-            amb[1] = torusAmb[1+id*4]
-            amb[2] = torusAmb[2+id*4]
-            amb[3] = torusAmb[3+id*4]
-            drawObjTorus.draw(programHandleStealth,matMVP,matI,vecLight1,vecEye,amb)
         }
+
+        // -------------------------------------------------------
+        // テクスチャ変換用行列
+        // -------------------------------------------------------
+        matM4Tex[0] = 0.5f
+        matM4Tex[1] = 0f
+        matM4Tex[2] = 0f
+        matM4Tex[3] = 0f
+        matM4Tex[4] = 0f
+        matM4Tex[5] = 0.5f
+        matM4Tex[6] = 0f
+        matM4Tex[7] = 0f
+        matM4Tex[8] = 0f
+        matM4Tex[9] = 0f
+        matM4Tex[10] = 1f
+        matM4Tex[11] = 0f
+        matM4Tex[12] = 0.5f
+        matM4Tex[13] = 0.5f
+        matM4Tex[14] = 0f
+        matM4Tex[15] = 1f
+
+        // 行列を掛け合わせる
+        Matrix.multiplyMM(matMVP4Tex,0,matM4Tex,0,matP,0)
+        Matrix.multiplyMM(matM4Tex,0,matMVP4Tex,0,matV,0)
+
+        // フレームバッファテクスチャをバインド
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[0])
+
+        // 光学迷彩でトーラスモデルをレンダリング
+        GLES20.glUseProgram(programHandleStealth)
+        Matrix.setIdentityM(matM,0)
+        Matrix.rotateM(matM,0,t1,1f,0f,1f)
+        Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
+        Log.d(javaClass.simpleName,"k[${k}]")
+        drawObjTorus.drawStealth(programHandleStealth,matM,matM4Tex,matMVP, k, 0)
+
+
+
+
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -265,7 +267,7 @@ class W050Renderer: GLSurfaceView.Renderer {
         // シェーダプログラム登録(スペキュラライティング)
         programHandleSpecular = W050ShaderSpecular().loadShader()
         // シェーダプログラム登録(キューブ環境マッピング)
-        programHandleSpecular = W050ShaderCubeMap().loadShader()
+        programHandleCubeMap = W050ShaderCubeMap().loadShader()
 
         // キューブマップを生成
         generateCubeMap()
@@ -292,154 +294,6 @@ class W050Renderer: GLSurfaceView.Renderer {
         Matrix.setIdentityM(matMVP,0)
         // テンポラリ行列
         Matrix.setIdentityM(matT,0)
-    }
-
-    // フレームバッファへの６方向レンダリング
-    private fun render2FrameBuffer(t1:Float) {
-        targetArray.forEachIndexed { id, target ->
-            // フレームバッファにテクスチャを関連付ける
-            GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER,GLES20.GL_COLOR_ATTACHMENT0,target,frameTexture[0],0)
-
-            // フレームバッファを初期化
-            GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-            GLES20.glClearDepthf(1f)
-            GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
-
-            // 方角を判別して処理する
-            when (target) {
-                GLES20.GL_TEXTURE_CUBE_MAP_POSITIVE_X -> {
-                    torusEye[0] = 1f
-                    torusEye[1] = 0f
-                    torusEye[2] = 0f
-                    torusCamUp[0] = 0f
-                    torusCamUp[1] = -1f
-                    torusCamUp[2] = 0f
-                    torusPos[0] = 6f
-                    torusPos[1] = 0f
-                    torusPos[2] = 0f
-                    torusAmb[0] = 1f
-                    torusAmb[1] = 0.5f
-                    torusAmb[2] = 0.5f
-                    torusAmb[3] = 1f
-                }
-                GLES20.GL_TEXTURE_CUBE_MAP_POSITIVE_Y -> {
-                    torusEye[3] = 0f
-                    torusEye[4] = 1f
-                    torusEye[5] = 0f
-                    torusCamUp[3] = 0f
-                    torusCamUp[4] = 0f
-                    torusCamUp[5] = 1f
-                    torusPos[3] = 0f
-                    torusPos[4] = 6f
-                    torusPos[5] = 0f
-                    torusAmb[4] = 0.5f
-                    torusAmb[5] = 1f
-                    torusAmb[6] = 0.5f
-                    torusAmb[7] = 1f
-                }
-                GLES20.GL_TEXTURE_CUBE_MAP_POSITIVE_Z -> {
-                    torusEye[6] = 0f
-                    torusEye[7] = 0f
-                    torusEye[8] = 1f
-                    torusCamUp[6] = 0f
-                    torusCamUp[7] = -1f
-                    torusCamUp[8] = 0f
-                    torusPos[6] = 0f
-                    torusPos[7] = 0f
-                    torusPos[8] = 6f
-                    torusAmb[8] = 0.5f
-                    torusAmb[9] = 0.5f
-                    torusAmb[10] = 1f
-                    torusAmb[11] = 1f
-                }
-                GLES20.GL_TEXTURE_CUBE_MAP_NEGATIVE_X -> {
-                    torusEye[9] = -1f
-                    torusEye[10] = 0f
-                    torusEye[11] = 0f
-                    torusCamUp[9] = 0f
-                    torusCamUp[10] = -1f
-                    torusCamUp[11] = 0f
-                    torusPos[9] = -6f
-                    torusPos[10] = 0f
-                    torusPos[11] = 0f
-                    torusAmb[12] = 0.5f
-                    torusAmb[13] = 0f
-                    torusAmb[14] = 0f
-                    torusAmb[15] = 1f
-                }
-                GLES20.GL_TEXTURE_CUBE_MAP_NEGATIVE_Y -> {
-                    torusEye[12] = 0f
-                    torusEye[13] = -1f
-                    torusEye[14] = 0f
-                    torusCamUp[12] = 0f
-                    torusCamUp[13] = 0f
-                    torusCamUp[14] = -1f
-                    torusPos[12] = 0f
-                    torusPos[13] = -6f
-                    torusPos[14] = 0f
-                    torusAmb[16] = 0f
-                    torusAmb[17] = 0.5f
-                    torusAmb[18] = 0f
-                    torusAmb[19] = 1f
-                }
-                GLES20.GL_TEXTURE_CUBE_MAP_NEGATIVE_Z -> {
-                    torusEye[15] = 0f
-                    torusEye[16] = 0f
-                    torusEye[17] = -1f
-                    torusCamUp[15] = 0f
-                    torusCamUp[16] = -1f
-                    torusCamUp[17] = 0f
-                    torusPos[15] = 0f
-                    torusPos[16] = 0f
-                    torusPos[17] = -6f
-                    torusAmb[20] = 0f
-                    torusAmb[21] = 0f
-                    torusAmb[22] = 0.5f
-                    torusAmb[23] = 1f
-                }
-            }
-
-            // ビュー×プロジェクション座標変換行列
-            Matrix.setLookAtM(matV,0,
-                    torusEye[0+id*3], torusEye[1+id*3], torusEye[2+id*3],
-                    vecCenter[0],vecCenter[1],vecCenter[2],
-                    torusCamUp[0+id*3], torusCamUp[1+id*3], torusCamUp[2+id*3]
-                    )
-            Matrix.perspectiveM(matP,0,90f,1f,0.1f,200f)
-            Matrix.multiplyMM(matT,0,matP,0,matV,0)
-
-            // キューブマップテクスチャで背景用キューブをレンダリング
-            GLES20.glUseProgram(programHandleSpecular)
-            GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
-            GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP, textures[0])
-            Matrix.setIdentityM(matM,0)
-            Matrix.scaleM(matM,0,100f,100f,100f)
-            Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-            drawObjCube.draw(programHandleSpecular,matM,matMVP, floatArrayOf(0f,0f,0f),0,0)
-
-            // 視線ベクトルの変換
-            var torusInvEye = FloatArray(3)
-            torusInvEye[0] = -torusEye[0+id*3]
-            torusInvEye[1] = -torusEye[1+id*3]
-            torusInvEye[2] = -torusEye[2+id*3]
-
-            // 環境色
-            var amb = FloatArray(4)
-            amb[0] = torusAmb[0+id*4]
-            amb[1] = torusAmb[1+id*4]
-            amb[2] = torusAmb[2+id*4]
-            amb[3] = torusAmb[3+id*4]
-
-            // スペキュラライティングシェーダでトーラスをレンダリング
-            GLES20.glUseProgram(programHandleStealth)
-            Matrix.setIdentityM(matM,0)
-            Matrix.translateM(matM,0,torusPos[0+id*3],torusPos[1+id*3],torusPos[2+id*3])
-            Matrix.rotateM(matM,0,t1,torusEye[0+id*3],torusEye[1+id*3],torusEye[2+id*3])
-            Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
-            Matrix.invertM(matI,0,matM,0)
-            drawObjTorus.draw(programHandleStealth,matMVP,matI,vecLight1,torusInvEye,amb)
-        }
-
     }
 
     // フレームバッファをオブジェクトとして生成する
@@ -471,43 +325,37 @@ class W050Renderer: GLSurfaceView.Renderer {
 
 
         // フレームバッファ用のテクスチャをキューブマップテクスチャとしてバインド
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP,frameTexture[0])
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[0])
 
+        // フレームバッファ用のテクスチャにカラー用のメモリ領域を確保
+        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,width,height,0,GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,null)
+        /*
         // フレームバッファ用のテクスチャにカラー用のメモリ領域を６面分確保
         //GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,width,height,0,GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,null)
         bmpArray.forEachIndexed { id, bitmap ->
             GLES20.glTexImage2D(targetArray[id],0,
                     GLES20.GL_RGBA,width,height,0,
                     GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,null)
-            /*
-            val bw = bitmap.width
-            val bh = bitmap.height
-            val buffer = ByteBuffer.allocateDirect(bw*bh*4)
-            bitmap.copyPixelsToBuffer(buffer)
-            buffer.position(0)
-            GLES20.glTexImage2D(targetArray[id],0,GLES20.GL_RGBA,
-                    bw,bh,0,GLES20.GL_RGBA,
-                    GLES20.GL_UNSIGNED_BYTE,buffer)
-            bitmap.recycle()
-            */
         }
+        */
 
         // テクスチャパラメータ
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_CUBE_MAP,GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR)
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_CUBE_MAP,GLES20.GL_TEXTURE_MIN_FILTER,GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_CUBE_MAP, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_CUBE_MAP, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
+        //GLES20.glTexParameteri(GLES20.GL_TEXTURE_CUBE_MAP, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE)
+        //GLES20.glTexParameteri(GLES20.GL_TEXTURE_CUBE_MAP, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
+
+        // フレームバッファにテクスチャを関連付ける
+        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER,GLES20.GL_COLOR_ATTACHMENT0,GLES20.GL_TEXTURE_2D,frameTexture[0],0)
 
         // 追加
         val status = GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER)
         Log.d(javaClass.simpleName,"status[${status}]COMPLETE[${GLES20.GL_FRAMEBUFFER_COMPLETE}]")
 
         // バインド解除
-        /*
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP,0)
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,0)
         GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,0)
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
-        */
     }
 
     private fun generateCubeMap() {
@@ -547,7 +395,8 @@ class W050Renderer: GLSurfaceView.Renderer {
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_CUBE_MAP, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
 
 
-
+        // テクスチャのバインド無効化
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP,0)
     }
 
     fun receiveTouch(ev: MotionEvent, w: Int, h: Int ) {

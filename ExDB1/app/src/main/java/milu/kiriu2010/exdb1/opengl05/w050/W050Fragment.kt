@@ -65,7 +65,8 @@ class W050Fragment : Fragment() {
         val seekBarW050 = view.findViewById<SeekBar>(R.id.seekBarW050)
         seekBarW050.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                render.k = seekBarW050.progress.toFloat()
+                render.k = (seekBarW050.progress-5).toFloat()/5f
+                Log.d(javaClass.simpleName,"k[${render.k}]")
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -73,7 +74,8 @@ class W050Fragment : Fragment() {
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                render.k = seekBarW050.progress.toFloat()
+                render.k = (seekBarW050.progress-5).toFloat()/5f
+                Log.d(javaClass.simpleName,"k[${render.k}]")
             }
 
         })

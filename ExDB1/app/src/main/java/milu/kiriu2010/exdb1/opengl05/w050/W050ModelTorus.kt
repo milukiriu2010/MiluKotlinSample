@@ -109,7 +109,7 @@ class W050ModelTorus {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Position")
+        MyGLFunc.checkGlError("a_Position:Torus:Specular")
 
         // attribute(法線)
         bufNor.position(0)
@@ -159,6 +159,71 @@ class W050ModelTorus {
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, datIdx.size, GLES20.GL_UNSIGNED_SHORT, bufIdx)
     }
 
+    // 光学迷彩
+    fun drawStealth(programHandle: Int,
+                    matM: FloatArray,
+                    matM4Tex: FloatArray,
+                    matMVP: FloatArray,
+                    u_coefficient: Float,
+                    u_Texture0: Int) {
+
+        // attribute(頂点)
+        bufPos.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Position").also {
+            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, bufPos)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLFunc.checkGlError("a_Position:Torus:Stealth")
+
+        // attribute(法線)
+        bufNor.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Normal").also {
+            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, bufNor)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLFunc.checkGlError("a_Normal")
+
+        // attribute(色)
+        bufCol.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Color").also {
+            GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, bufCol)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLFunc.checkGlError("a_Color")
+
+        // uniform(モデル)
+        GLES20.glGetUniformLocation(programHandle,"u_matM").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matM,0)
+        }
+        MyGLFunc.checkGlError("u_matM")
+
+        // uniform(テクスチャ射影用)
+        GLES20.glGetUniformLocation(programHandle,"u_matM4Tex").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matM4Tex,0)
+        }
+        MyGLFunc.checkGlError("u_matM4Tex")
+
+        // uniform(モデル×ビュー×プロジェクション)
+        GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
+        }
+        MyGLFunc.checkGlError("u_matMVP")
+
+        // uniform(光学迷彩にかける係数)
+        GLES20.glGetUniformLocation(programHandle,"u_coefficient").also {
+            GLES20.glUniform1f(it,u_coefficient)
+        }
+        MyGLFunc.checkGlError("u_coefficient")
+
+        // uniform(テクスチャ0)
+        GLES20.glGetUniformLocation(programHandle,"u_Texture0").also {
+            GLES20.glUniform1i(it,u_Texture0)
+        }
+        MyGLFunc.checkGlError("u_Texture0")
+
+        // モデルを描画
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES, datIdx.size, GLES20.GL_UNSIGNED_SHORT, bufIdx)
+    }
 
     // ----------------------------------------------------------------------
     // 第一引数はパイプを形成する円をいくつの頂点で表現するのかを指定します。
