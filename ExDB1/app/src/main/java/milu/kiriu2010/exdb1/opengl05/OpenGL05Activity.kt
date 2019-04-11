@@ -10,6 +10,7 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl05.w048.W048Fragment
 import milu.kiriu2010.exdb1.opengl05.w049.W049Fragment
 import milu.kiriu2010.exdb1.opengl05.w050.W050Fragment
+import milu.kiriu2010.exdb1.opengl05.w051.W051Fragment
 
 class OpenGL05Activity : AppCompatActivity() {
 
@@ -76,6 +77,16 @@ class OpenGL05Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // シャドウマッピング
+            R.id.opengl_w051 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w051") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W051Fragment.newInstance(), "w051")
+                            .commit()
+                }
                 true
             }
             // 光学迷彩

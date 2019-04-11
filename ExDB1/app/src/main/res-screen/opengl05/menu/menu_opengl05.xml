@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w051"
+        android:title="w051_シャドウマッピング" />
+    <item
         android:id="@+id/opengl_w050"
         android:title="w050_光学迷彩" />
     <item
