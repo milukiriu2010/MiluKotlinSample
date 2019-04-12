@@ -96,13 +96,9 @@ class W051ModelTorus {
         }
     }
 
-    fun draw(programHandle: Int,
-             matM: FloatArray,
-             matTex: FloatArray,
-             matMVP: FloatArray,
-             matINV: FloatArray,
-             u_vecLight: FloatArray,
-             u_Texture0: Int) {
+    fun drawShaderDepth(programHandle: Int,
+                        matLight: FloatArray,
+                        u_depthBuffer: Int) {
 
         // attribute(頂点)
         bufPos.position(0)
@@ -110,15 +106,16 @@ class W051ModelTorus {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Position")
+        MyGLFunc.checkGlError("Torus:DrawDepth:a_Position")
 
+        /*
         // attribute(法線)
         bufNor.position(0)
         GLES20.glGetAttribLocation(programHandle,"a_Normal").also {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, bufNor)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Normal")
+        MyGLFunc.checkGlError("Torus:DrawDepth:a_Normal")
 
         // attribute(色)
         bufCol.position(0)
@@ -126,7 +123,58 @@ class W051ModelTorus {
             GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, bufCol)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Color")
+        MyGLFunc.checkGlError("Torus:DrawDepth:a_Color")
+        */
+
+        // uniform(モデル×ビュー×プロジェクション)
+        GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matLight,0)
+        }
+        MyGLFunc.checkGlError("u_matMVP")
+
+        // uniform(深度値を使うかどうか)
+        GLES20.glGetUniformLocation(programHandle, "u_depthBuffer").also {
+            GLES20.glUniform1i(it, u_depthBuffer)
+        }
+        MyGLFunc.checkGlError("Torus:DrawDepth:u_depthBuffer:${u_depthBuffer}")
+
+        // モデルを描画
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES, datIdx.size, GLES20.GL_UNSIGNED_SHORT, bufIdx)
+    }
+
+    fun draw(programHandle: Int,
+             matM: FloatArray,
+             matMVP: FloatArray,
+             matINV: FloatArray,
+             matTex: FloatArray,
+             matLight: FloatArray,
+             u_vecLight: FloatArray,
+             u_Texture0: Int,
+             u_depthBuffer: Int) {
+
+        // attribute(頂点)
+        bufPos.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Position").also {
+            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, bufPos)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLFunc.checkGlError("Torus:Draw:a_Position")
+
+        // attribute(法線)
+        bufNor.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Normal").also {
+            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, bufNor)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLFunc.checkGlError("Torus:Draw:a_Normal")
+
+        // attribute(色)
+        bufCol.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Color").also {
+            GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, bufCol)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLFunc.checkGlError("Torus:Draw:a_Color")
 
         // uniform(モデル)
         GLES20.glGetUniformLocation(programHandle,"u_matM").also {
@@ -134,11 +182,6 @@ class W051ModelTorus {
         }
         MyGLFunc.checkGlError("u_matM")
 
-        // uniform(テクスチャ射影変換用行列)
-        GLES20.glGetUniformLocation(programHandle,"u_matTex").also {
-            GLES20.glUniformMatrix4fv(it,1,false,matTex,0)
-        }
-        MyGLFunc.checkGlError("u_matTex")
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
@@ -150,18 +193,37 @@ class W051ModelTorus {
         GLES20.glGetUniformLocation(programHandle,"u_matINV").also {
             GLES20.glUniformMatrix4fv(it,1,false,matINV,0)
         }
-        MyGLFunc.checkGlError("u_matM")
+        MyGLFunc.checkGlError("u_matINV")
+
+        // uniform(テクスチャ射影変換用行列)
+        GLES20.glGetUniformLocation(programHandle,"u_matTex").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matTex,0)
+        }
+        MyGLFunc.checkGlError("u_matTex")
+
+        // uniform(ライト視点の座標変換行列)
+        GLES20.glGetUniformLocation(programHandle,"u_matLight").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matLight,0)
+        }
+        MyGLFunc.checkGlError("u_matLight")
 
         // uniform(ライティング)
         GLES20.glGetUniformLocation(programHandle,"u_vecLight").also {
             GLES20.glUniform3fv(it,1,u_vecLight,0)
         }
+        MyGLFunc.checkGlError("u_vecLight")
 
         // uniform(テクスチャ0)
         GLES20.glGetUniformLocation(programHandle, "u_Texture0").also {
             GLES20.glUniform1i(it, u_Texture0)
         }
         MyGLFunc.checkGlError("u_Texture0")
+
+        // uniform(深度値を使うかどうか)
+        GLES20.glGetUniformLocation(programHandle, "u_depthBuffer").also {
+            GLES20.glUniform1i(it, u_depthBuffer)
+        }
+        MyGLFunc.checkGlError("Torus:Draw:u_depthBuffer")
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, datIdx.size, GLES20.GL_UNSIGNED_SHORT, bufIdx)

@@ -34,7 +34,7 @@ class W051ShaderDepth {
                 float coef = 1.0/255.0;
                 r -= g*coef;
                 g -= b*coef;
-                b -= a*coe;
+                b -= a*coef;
                 return vec4(r,g,b,a);
             }
 
@@ -61,6 +61,6 @@ class W051ShaderDepth {
         val sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
 
         // プログラムオブジェクトの生成とリンク
-        return MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Normal","a_Color") )
+        return MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position") )
     }
 }

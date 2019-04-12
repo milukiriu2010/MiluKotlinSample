@@ -1,6 +1,5 @@
 package milu.kiriu2010.exdb1.opengl05.w051
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -8,15 +7,18 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
 import android.widget.SeekBar
+import kotlinx.android.synthetic.main.fragment_open_gl05_w51.*
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
-import milu.kiriu2010.exdb1.opengl05.w048.W048Renderer
 
 class W051Fragment : Fragment() {
 
     private lateinit var myGLView: MyGL02View
+
+    private lateinit var seekBarW051: SeekBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,12 +29,10 @@ class W051Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl05_w49, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl05_w51, container, false)
 
         myGLView = view.findViewById(R.id.myGL02ViewA05)
-        val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w49)
         val render = W051Renderer()
-        render.bmpArray.add(bmp0)
         myGLView.setRenderer(render)
         myGLView.setOnTouchListener { v, event ->
             when (event.action) {
@@ -53,10 +53,11 @@ class W051Fragment : Fragment() {
             }
             true
         }
-        val seekBarW049 = view.findViewById<SeekBar>(R.id.seekBarW049)
-        seekBarW049.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
+        seekBarW051 = view.findViewById(R.id.seekBarW051)
+        seekBarW051.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                render.k = seekBarW049.progress.toFloat()
+                Log.d(javaClass.simpleName,"seekBarW051:${seekBarW051.progress}")
+                render.k = (seekBarW051.progress+30).toFloat()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -64,10 +65,19 @@ class W051Fragment : Fragment() {
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                render.k = seekBarW049.progress.toFloat()
+                Log.d(javaClass.simpleName,"seekBarW051:${seekBarW051.progress}")
+                render.k = (seekBarW051.progress+30).toFloat()
             }
 
         })
+        val radioGroupW051 = view.findViewById<RadioGroup>(R.id.radioGroupW051)
+        radioGroupW051.setOnCheckedChangeListener { group, checkedId ->
+            Log.d(javaClass.simpleName,"radioGroupW051:${checkedId}")
+            render.u_depthBuffer = when (checkedId) {
+                radioButtonW051Frag.id -> 1
+                else -> 0
+            }
+        }
 
         return view
     }

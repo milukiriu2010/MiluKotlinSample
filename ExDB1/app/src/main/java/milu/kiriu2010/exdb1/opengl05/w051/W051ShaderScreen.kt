@@ -67,7 +67,7 @@ class W051ShaderScreen {
                 vec4  depthColor = vec4(1.0);
                 if (v_Depth.w > 0.0) {
                     if (bool(u_depthBuffer)) {
-                        vec4 lightCoord = v_Depth/vDepth.w;
+                        vec4 lightCoord = v_Depth/v_Depth.w;
                         if ( (lightCoord.z - 0.0001) > shadow ) {
                             depthColor = vec4(0.5,0.5,0.5,1.0);
                         }
