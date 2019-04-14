@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <SeekBar
-        android:id="@+id/seekBarW051"
+        android:id="@+id/seekBarW052"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBarW051">
+        app:layout_constraintTop_toBottomOf="@+id/seekBarW052">
 
         <RadioButton
             android:id="@+id/radioButtonW051Frag"
