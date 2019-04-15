@@ -12,6 +12,7 @@ import milu.kiriu2010.exdb1.opengl05.w049.W049Fragment
 import milu.kiriu2010.exdb1.opengl05.w050.W050Fragment
 import milu.kiriu2010.exdb1.opengl05.w051.W051Fragment
 import milu.kiriu2010.exdb1.opengl05.w052.W052Fragment
+import milu.kiriu2010.exdb1.opengl05.w053.W053Fragment
 
 class OpenGL05Activity : AppCompatActivity() {
 
@@ -78,6 +79,16 @@ class OpenGL05Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // グレースケール
+            R.id.opengl_w053 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w053") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W053Fragment.newInstance(), "w053")
+                            .commit()
+                }
                 true
             }
             // 高解像度車道マップ
