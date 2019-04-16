@@ -8,6 +8,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_mgl00.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.mgl00.dodecahedron01.Dodecahedron01Fragment
+import milu.kiriu2010.exdb1.mgl00.icosahedron01.Icosahedron01Fragment
 import milu.kiriu2010.exdb1.mgl00.octahedron01.Octahedron01Fragment
 import milu.kiriu2010.exdb1.mgl00.pyramid01.Pyramid01Fragment
 
@@ -77,6 +78,16 @@ class Mgl00Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 正二十面体(点光源)
+            R.id.opengl_icosahedron01 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("Icosahedron01Model") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Icosahedron01Fragment.newInstance(), "Icosahedron01Model")
+                            .commit()
+                }
                 true
             }
             // 正十二面体(点光源)
