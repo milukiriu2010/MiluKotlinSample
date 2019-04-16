@@ -37,10 +37,11 @@
         android:id="@+id/switchCull"
         android:layout_width="126dp"
         android:layout_height="23dp"
+        android:layout_marginEnd="8dp"
         android:checked="true"
         android:text="Cull"
         app:layout_constraintBottom_toBottomOf="@+id/switchDepth"
-        app:layout_constraintEnd_toStartOf="@+id/switchRotate"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/switchDepth"
         app:layout_constraintTop_toTopOf="@+id/switchDepth" />
@@ -50,12 +51,38 @@
         android:layout_width="127dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="Rotate"
-        app:layout_constraintBottom_toBottomOf="@+id/switchCull"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/switchCull"
-        app:layout_constraintTop_toTopOf="@+id/switchCull" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchCull" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupShader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchRotate">
+
+        <RadioButton
+            android:id="@+id/radioButtonShaderSimple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Simple" />
+
+        <RadioButton
+            android:id="@+id/radioButtonShaderLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Light" />
+    </RadioGroup>
 
 </android.support.constraint.ConstraintLayout>

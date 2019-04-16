@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Switch
 
 import milu.kiriu2010.exdb1.R
@@ -61,6 +63,17 @@ class Icosahedron01Fragment : Fragment() {
         val switchRotate = view.findViewById<Switch>(R.id.switchRotate)
         switchRotate.setOnCheckedChangeListener { buttonView, isChecked ->
             render.rotateSwitch = isChecked
+        }
+        // シェーダ選択
+        val radioGroupShader = view.findViewById<RadioGroup>(R.id.radioGroupShader)
+        val radioButtonShaderSimple = view.findViewById<RadioButton>(R.id.radioButtonShaderSimple)
+        val radioButtonShaderLight = view.findViewById<RadioButton>(R.id.radioButtonShaderLight)
+        radioGroupShader.setOnCheckedChangeListener { group, checkedId ->
+            render.shaderSwitch = when (checkedId) {
+                radioButtonShaderSimple.id -> 0
+                radioButtonShaderLight.id -> 1
+                else -> 0
+            }
         }
 
         return view

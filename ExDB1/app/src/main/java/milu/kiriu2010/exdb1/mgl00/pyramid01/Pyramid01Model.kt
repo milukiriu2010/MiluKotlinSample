@@ -1,6 +1,7 @@
 package milu.kiriu2010.exdb1.mgl00.pyramid01
 
 import android.opengl.GLES20
+import milu.kiriu2010.exdb1.opengl.ModelAbs
 import milu.kiriu2010.exdb1.opengl.MyGLFunc
 import milu.kiriu2010.math.MyMathUtil
 import java.lang.RuntimeException
@@ -11,20 +12,7 @@ import kotlin.math.sin
 
 
 // https://wgld.org/d/webgl/w026.html
-class Pyramid01Model {
-    // 頂点バッファ
-    private lateinit var bufPos: FloatBuffer
-    // 法線バッファ
-    private lateinit var bufNor: FloatBuffer
-    // 色バッファ
-    private lateinit var bufCol: FloatBuffer
-    // インデックスバッファ
-    private lateinit var bufIdx: ShortBuffer
-
-    private val datPos = arrayListOf<Float>()
-    private val datNor = arrayListOf<Float>()
-    private val datCol = arrayListOf<Float>()
-    private val datIdx = arrayListOf<Short>()
+class Pyramid01Model: ModelAbs() {
 
     init {
         // 頂点データ

@@ -1,10 +1,10 @@
-package milu.kiriu2010.exdb1.mgl00.icosahedron01
+package milu.kiriu2010.exdb1.mgl00.octahedron01
 
 import android.opengl.GLES20
 import milu.kiriu2010.exdb1.opengl.ModelAbs
 import milu.kiriu2010.exdb1.opengl.MyGLFunc
 
-class Icosahedron01BShader {
+class Octahedron01ShaderSimple {
     // 頂点シェーダ
     private val scv =
             """

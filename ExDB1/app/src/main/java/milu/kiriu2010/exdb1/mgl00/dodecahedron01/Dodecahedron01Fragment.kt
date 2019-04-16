@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.Switch
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
@@ -24,7 +27,7 @@ class Dodecahedron01Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_mgl00_depth_cull, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
         val render = Dodecahedron01Renderer()
@@ -46,6 +49,33 @@ class Dodecahedron01Fragment : Fragment() {
             }
             true
         }
+        // 深度テスト
+        val switchDepth = view.findViewById<Switch>(R.id.switchDepth)
+        switchDepth.setOnCheckedChangeListener { buttonView, isChecked ->
+            render.isDepth = isChecked
+        }
+        // カリング
+        val switchCull = view.findViewById<Switch>(R.id.switchCull)
+        switchCull.setOnCheckedChangeListener { buttonView, isChecked ->
+            render.isCull = isChecked
+        }
+        // 回転
+        val switchRotate = view.findViewById<Switch>(R.id.switchRotate)
+        switchRotate.setOnCheckedChangeListener { buttonView, isChecked ->
+            render.rotateSwitch = isChecked
+        }
+        // シェーダ選択
+        val radioGroupShader = view.findViewById<RadioGroup>(R.id.radioGroupShader)
+        val radioButtonShaderSimple = view.findViewById<RadioButton>(R.id.radioButtonShaderSimple)
+        val radioButtonShaderLight = view.findViewById<RadioButton>(R.id.radioButtonShaderLight)
+        radioGroupShader.setOnCheckedChangeListener { group, checkedId ->
+            render.shaderSwitch = when (checkedId) {
+                radioButtonShaderSimple.id -> 0
+                radioButtonShaderLight.id -> 1
+                else -> 0
+            }
+        }
+
 
         return view
     }

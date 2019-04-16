@@ -13,11 +13,8 @@ class Icosahedron01Renderer: GLSurfaceView.Renderer {
     private lateinit var drawObj: Icosahedron01Model
 
     // シェーダ
-    private lateinit var shaderA: Icosahedron01AShader
-    private lateinit var shaderB: Icosahedron01BShader
-
-    // プログラムハンドル
-    //private var programHandle: Int = 0
+    private lateinit var shaderLight: Icosahedron01ShaderLight
+    private lateinit var shaderSimple: Icosahedron01ShaderSimple
 
 
     // モデル変換行列
@@ -46,13 +43,15 @@ class Icosahedron01Renderer: GLSurfaceView.Renderer {
     // 回転角度
     private var angle1 = 0
 
-    // 回転スイッチ
-    var rotateSwitch = false
 
     // 深度テスト
     var isDepth = true
     // カリング
     var isCull = true
+    // 回転スイッチ
+    var rotateSwitch = false
+    // シェーダスイッチ
+    var shaderSwitch = 0
 
     override fun onDrawFrame(gl: GL10) {
 
@@ -107,8 +106,11 @@ class Icosahedron01Renderer: GLSurfaceView.Renderer {
         Matrix.invertM(matI,0,matM,0)
 
         // モデルを描画
-        //shaderA.draw(drawObj,matMVP,matM,matI,vecLight,vecEye,vecAmbientColor)
-        shaderB.draw(drawObj,matMVP)
+        when (shaderSwitch) {
+            0 -> shaderSimple.draw(drawObj,matMVP)
+            1 -> shaderLight.draw(drawObj,matMVP,matM,matI,vecLight,vecEye,vecAmbientColor)
+            else -> shaderSimple.draw(drawObj,matMVP)
+        }
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -139,12 +141,12 @@ class Icosahedron01Renderer: GLSurfaceView.Renderer {
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
 
         // シェーダプログラム登録
-        shaderA = Icosahedron01AShader()
-        shaderA.loadShader()
+        shaderLight = Icosahedron01ShaderLight()
+        shaderLight.loadShader()
 
         // シェーダプログラム登録
-        shaderB = Icosahedron01BShader()
-        shaderB.loadShader()
+        shaderSimple = Icosahedron01ShaderSimple()
+        shaderSimple.loadShader()
 
         // モデル生成
         drawObj = Icosahedron01Model()

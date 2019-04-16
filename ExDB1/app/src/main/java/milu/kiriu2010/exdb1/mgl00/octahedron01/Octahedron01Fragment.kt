@@ -2,9 +2,14 @@ package milu.kiriu2010.exdb1.mgl00.octahedron01
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.Switch
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
@@ -22,10 +27,54 @@ class Octahedron01Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_mgl00_depth_cull, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        myGL02View.setRenderer(Octahedron01Renderer())
+        val render = Octahedron01Renderer()
+        myGL02View.setRenderer(render)
+        myGL02View.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_UP -> {
+                    render.rotateSwitch = false
+                }
+                MotionEvent.ACTION_DOWN -> {
+                    Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
+                    Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
+                    render.rotateSwitch = true
+                }
+                MotionEvent.ACTION_MOVE -> {
+                }
+                else -> {
+                }
+            }
+            true
+        }
+        // 深度テスト
+        val switchDepth = view.findViewById<Switch>(R.id.switchDepth)
+        switchDepth.setOnCheckedChangeListener { buttonView, isChecked ->
+            render.isDepth = isChecked
+        }
+        // カリング
+        val switchCull = view.findViewById<Switch>(R.id.switchCull)
+        switchCull.setOnCheckedChangeListener { buttonView, isChecked ->
+            render.isCull = isChecked
+        }
+        // 回転
+        val switchRotate = view.findViewById<Switch>(R.id.switchRotate)
+        switchRotate.setOnCheckedChangeListener { buttonView, isChecked ->
+            render.rotateSwitch = isChecked
+        }
+        // シェーダ選択
+        val radioGroupShader = view.findViewById<RadioGroup>(R.id.radioGroupShader)
+        val radioButtonShaderSimple = view.findViewById<RadioButton>(R.id.radioButtonShaderSimple)
+        val radioButtonShaderLight = view.findViewById<RadioButton>(R.id.radioButtonShaderLight)
+        radioGroupShader.setOnCheckedChangeListener { group, checkedId ->
+            render.shaderSwitch = when (checkedId) {
+                radioButtonShaderSimple.id -> 0
+                radioButtonShaderLight.id -> 1
+                else -> 0
+            }
+        }
 
         return view
     }

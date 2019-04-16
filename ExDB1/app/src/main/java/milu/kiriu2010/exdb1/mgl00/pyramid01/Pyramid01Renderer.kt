@@ -5,19 +5,16 @@ import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
-import android.os.SystemClock
 import milu.kiriu2010.math.MyMathUtil
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
 
 // https://wgld.org/d/webgl/w026.html
 class Pyramid01Renderer: GLSurfaceView.Renderer {
     // 描画モデル
     private lateinit var drawObj: Pyramid01Model
 
-    // プログラムハンドル
-    private var programHandle: Int = 0
+    // シェーダ
+    private lateinit var shaderLight: Pyramid01ShaderLight
+    private lateinit var shaderSimple: Pyramid01ShaderSimple
 
 
     // モデル変換行列
@@ -44,15 +41,41 @@ class Pyramid01Renderer: GLSurfaceView.Renderer {
     // 回転角度
     private var angle1 = 0
 
+    // 深度テスト
+    var isDepth = true
+    // カリング
+    var isCull = true
     // 回転スイッチ
     var rotateSwitch = false
+    // シェーダスイッチ
+    var shaderSwitch = 0
 
     override fun onDrawFrame(gl: GL10) {
+        // 深度テスト
+        if ( isDepth ) {
+            GLES20.glEnable(GLES20.GL_DEPTH_TEST)
+            GLES20.glDepthFunc(GLES20.GL_LEQUAL)
+        }
+        else {
+            GLES20.glDisable(GLES20.GL_DEPTH_TEST)
+        }
+
+        // カリング
+        // カリングをonにすると、奥が広がってるようにみえる。なぜ？
+        if ( isCull ) {
+            GLES20.glEnable(GLES20.GL_CULL_FACE)
+        }
+        else {
+            GLES20.glDisable(GLES20.GL_CULL_FACE)
+        }
+
         // canvasを初期化
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // 回転角度
-        angle1 =(angle1+1)%360
+        if ( rotateSwitch ) {
+            angle1 =(angle1+1)%360
+        }
         val t1 = angle1.toFloat()
 
         val x = MyMathUtil.cosf(t1)
@@ -75,8 +98,12 @@ class Pyramid01Renderer: GLSurfaceView.Renderer {
         // モデル座標変換行列から逆行列を生成
         Matrix.invertM(matI,0,matM,0)
 
-        // Draw triangle
-        drawObj.draw(programHandle,matMVP,matM,matI,vecLight,vecEye,vecAmbientColor)
+        // モデルを描画
+        when (shaderSwitch) {
+            0 -> shaderSimple.draw(drawObj,matMVP)
+            1 -> shaderLight.draw(drawObj,matMVP,matM,matI,vecLight,vecEye,vecAmbientColor)
+            else -> shaderSimple.draw(drawObj,matMVP)
+        }
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -106,7 +133,12 @@ class Pyramid01Renderer: GLSurfaceView.Renderer {
                 0f, 1.0f, 0.0f)
 
         // シェーダプログラム登録
-        programHandle = Pyramid01Shader().loadShader()
+        shaderLight = Pyramid01ShaderLight()
+        shaderLight.loadShader()
+
+        // シェーダプログラム登録
+        shaderSimple = Pyramid01ShaderSimple()
+        shaderSimple.loadShader()
 
         // モデル生成
         drawObj = Pyramid01Model()
