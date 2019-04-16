@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w055"
+        android:title="w055_sobelフィルタ" />
+    <item
         android:id="@+id/opengl_w054"
         android:title="w054_セピア調" />
     <item

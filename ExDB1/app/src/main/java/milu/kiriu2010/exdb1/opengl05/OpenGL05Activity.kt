@@ -14,6 +14,7 @@ import milu.kiriu2010.exdb1.opengl05.w051.W051Fragment
 import milu.kiriu2010.exdb1.opengl05.w052.W052Fragment
 import milu.kiriu2010.exdb1.opengl05.w053.W053Fragment
 import milu.kiriu2010.exdb1.opengl05.w054.W054Fragment
+import milu.kiriu2010.exdb1.opengl05.w055.W055Fragment
 
 class OpenGL05Activity : AppCompatActivity() {
 
@@ -80,6 +81,16 @@ class OpenGL05Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // sobelフィルタ
+            R.id.opengl_w055 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w055") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W055Fragment.newInstance(), "w055")
+                            .commit()
+                }
                 true
             }
             // セピア調
