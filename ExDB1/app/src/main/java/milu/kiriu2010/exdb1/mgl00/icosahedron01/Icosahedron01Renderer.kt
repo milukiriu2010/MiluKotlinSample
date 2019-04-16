@@ -49,12 +49,39 @@ class Icosahedron01Renderer: GLSurfaceView.Renderer {
     // 回転スイッチ
     var rotateSwitch = false
 
+    // 深度テスト
+    var isDepth = true
+    // カリング
+    var isCull = true
+
     override fun onDrawFrame(gl: GL10) {
+
+        // 深度テスト
+        if ( isDepth ) {
+            GLES20.glEnable(GLES20.GL_DEPTH_TEST)
+            GLES20.glDepthFunc(GLES20.GL_LEQUAL)
+        }
+        else {
+            GLES20.glDisable(GLES20.GL_DEPTH_TEST)
+        }
+
+        // カリング
+        // カリングをonにすると、奥が広がってるようにみえる。なぜ？
+        if ( isCull ) {
+            GLES20.glEnable(GLES20.GL_CULL_FACE)
+        }
+        else {
+            GLES20.glDisable(GLES20.GL_CULL_FACE)
+        }
+
+
         // canvasを初期化
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // 回転角度
-        angle1 =(angle1+1)%360
+        if ( rotateSwitch ) {
+            angle1 =(angle1+1)%360
+        }
         val t1 = angle1.toFloat()
 
         val x = MyMathUtil.cosf(t1)
@@ -89,7 +116,8 @@ class Icosahedron01Renderer: GLSurfaceView.Renderer {
 
         val ratio = width.toFloat()/height.toFloat()
 
-        Matrix.perspectiveM(matP,0,60f,ratio,0.1f,100f)
+        Matrix.perspectiveM(matP,0,45f,ratio,0.1f,100f)
+        //Matrix.orthoM(matP,0,0f,width.toFloat(),0f,height.toFloat(),0.1f,100f)
     }
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
@@ -102,8 +130,7 @@ class Icosahedron01Renderer: GLSurfaceView.Renderer {
         // カリングと深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
-        // コメントアウトした方が、みやすい
-        //GLES20.glEnable(GLES20.GL_CULL_FACE)
+        GLES20.glEnable(GLES20.GL_CULL_FACE)
 
         // カメラの位置
         Matrix.setLookAtM(matV, 0,

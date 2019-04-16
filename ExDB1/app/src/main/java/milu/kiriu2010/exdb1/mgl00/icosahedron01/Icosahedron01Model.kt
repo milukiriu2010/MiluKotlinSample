@@ -13,6 +13,7 @@ import kotlin.math.sqrt
 
 
 // 正二十面体
+// https://github.com/8q/Android-OpenGL-Icosahedron/blob/master/GL1/src/com/example/gl1/MyIcosa.java
 class Icosahedron01Model: ModelAbs() {
 
     init {
