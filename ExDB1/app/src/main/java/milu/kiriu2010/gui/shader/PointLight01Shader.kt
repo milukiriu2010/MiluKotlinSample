@@ -1,10 +1,10 @@
-package milu.kiriu2010.exdb1.mgl00.pyramid01
+package milu.kiriu2010.gui.shader
 
 import android.opengl.GLES20
 import milu.kiriu2010.exdb1.opengl.ModelAbs
 import milu.kiriu2010.exdb1.opengl.MyGLFunc
 
-class Pyramid01ShaderLight {
+class PointLight01Shader {
     // 頂点シェーダ
     private val scv =
             """

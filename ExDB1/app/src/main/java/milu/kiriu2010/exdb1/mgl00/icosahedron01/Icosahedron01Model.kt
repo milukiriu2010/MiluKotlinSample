@@ -117,9 +117,10 @@ class Icosahedron01Model: ModelAbs() {
 
 
         // 法線データ
-        (0..19).forEach { i ->
+        (0..59).forEach { i ->
             // (B-A) x (C-A)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 1+3*i, 2+3*i, 0+3*i ) )
+            val m=i/3
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 2+3*m, 1+3*m, 0+3*m ) )
         }
 
         // 色データ
@@ -206,7 +207,11 @@ class Icosahedron01Model: ModelAbs() {
 
         // インデックスデータ
         (0..59).forEach {
-            datIdx.add(it.toShort())
+            when (it%3) {
+                0 -> datIdx.add(it.toShort())
+                1 -> datIdx.add((it+1).toShort())
+                2 -> datIdx.add((it-1).toShort())
+            }
         }
 
         // 頂点バッファ

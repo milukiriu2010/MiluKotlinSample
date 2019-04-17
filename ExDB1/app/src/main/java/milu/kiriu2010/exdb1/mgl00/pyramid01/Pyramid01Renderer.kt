@@ -5,6 +5,8 @@ import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
+import milu.kiriu2010.gui.shader.DirectionalLight01Shader
+import milu.kiriu2010.gui.shader.Simple01Shader
 import milu.kiriu2010.math.MyMathUtil
 
 // https://wgld.org/d/webgl/w026.html
@@ -13,8 +15,8 @@ class Pyramid01Renderer: GLSurfaceView.Renderer {
     private lateinit var drawObj: Pyramid01Model
 
     // シェーダ
-    private lateinit var shaderLight: Pyramid01ShaderLight
-    private lateinit var shaderSimple: Pyramid01ShaderSimple
+    private lateinit var shaderDirectionalLight: DirectionalLight01Shader
+    private lateinit var shaderSimple: Simple01Shader
 
 
     // モデル変換行列
@@ -101,7 +103,7 @@ class Pyramid01Renderer: GLSurfaceView.Renderer {
         // モデルを描画
         when (shaderSwitch) {
             0 -> shaderSimple.draw(drawObj,matMVP)
-            1 -> shaderLight.draw(drawObj,matMVP,matM,matI,vecLight,vecEye,vecAmbientColor)
+            1 -> shaderDirectionalLight.draw(drawObj,matMVP,matI,vecLight)
             else -> shaderSimple.draw(drawObj,matMVP)
         }
     }
@@ -133,11 +135,11 @@ class Pyramid01Renderer: GLSurfaceView.Renderer {
                 0f, 1.0f, 0.0f)
 
         // シェーダプログラム登録
-        shaderLight = Pyramid01ShaderLight()
-        shaderLight.loadShader()
+        shaderDirectionalLight = DirectionalLight01Shader()
+        shaderDirectionalLight.loadShader()
 
         // シェーダプログラム登録
-        shaderSimple = Pyramid01ShaderSimple()
+        shaderSimple = Simple01Shader()
         shaderSimple.loadShader()
 
         // モデル生成

@@ -175,62 +175,62 @@ class Dodecahedron01Model: ModelAbs() {
         // ABCDE
         (0..8).forEach { i ->
             // (B-A) x (C-A)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 1, 2, 0 ) )
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 2, 1, 0 ) )
         }
         // BHIJC
         (9..17).forEach { i ->
             // (H-B) x (I-B)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 10, 11, 9 ) )
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 11, 10, 9 ) )
         }
         // CJKLD
         (18..26).forEach { i ->
             // (J-C) x (K-C)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 19, 20, 18 ) )
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 20, 19, 18 ) )
         }
         // DLMNE
         (27..35).forEach { i ->
             // (L-D) x (M-D)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 28, 29, 27 ) )
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 29, 28, 27 ) )
         }
         // ENOFA
         (36..44).forEach { i ->
             // (N-E) x (O-E)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 37, 38, 36 ) )
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 38, 37, 36 ) )
         }
         // AFGHB
         (45..53).forEach { i ->
             // (F-A) x (G-A)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 46, 47, 45 ) )
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 47, 46, 45 ) )
         }
         // RQPTS
         (54..62).forEach { i ->
             // (Q-R) x (P-R)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 55, 56, 54 ) )
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 56, 55, 54 ) )
         }
         // QMLKP
         (63..71).forEach { i ->
             // (M-Q) x (L-Q)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 64, 65, 63 ) )
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 65, 64, 63 ) )
         }
         // PKJIT
         (72..80).forEach { i ->
             // (K-P) x (J-P)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 73, 74, 72 ) )
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 74, 73, 72 ) )
         }
         // TIHGS
         (81..89).forEach { i ->
             // (I-T) x (H-T)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 82, 83, 81 ) )
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 83, 82, 81 ) )
         }
         // SGFOR
         (90..98).forEach { i ->
             // (G-S) x (F-S)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 91, 92, 90 ) )
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 92, 91, 90 ) )
         }
         // RONMQ
         (99..107).forEach { i ->
             // (O-R) x (N-R)
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 100, 101, 99 ) )
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 101, 100, 99 ) )
         }
 
         // 色データ
@@ -285,7 +285,11 @@ class Dodecahedron01Model: ModelAbs() {
 
         // インデックスデータ
         (0..107).forEach {
-            datIdx.add(it.toShort())
+            when (it%3) {
+                0 -> datIdx.add(it.toShort())
+                1 -> datIdx.add((it+1).toShort())
+                2 -> datIdx.add((it-1).toShort())
+            }
         }
 
         // 頂点バッファ

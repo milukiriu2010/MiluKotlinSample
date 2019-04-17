@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.Switch
+import android.widget.*
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
@@ -27,7 +25,7 @@ class Pyramid01Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_mgl00_depth_cull, container, false)
+        val view = inflater.inflate(R.layout.fragment_mgl00_depth_cull_01, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
         val render = Pyramid01Renderer()
@@ -64,6 +62,34 @@ class Pyramid01Fragment : Fragment() {
         switchRotate.setOnCheckedChangeListener { buttonView, isChecked ->
             render.rotateSwitch = isChecked
         }
+
+
+        // シェーダ選択
+        val spinnerShader = view.findViewById<Spinner>(R.id.spinnerShader)
+        //val adapter = ArrayAdapter<String>(context,android.R.layout.simple_spinner_item)
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        //val adapter = ArrayAdapter.createFromResource(context,R.array.shaderlist,android.R.layout.simple_spinner_item)
+        //spinnerShader.adapter = adapter
+        spinnerShader.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                // http://android-note.open-memo.net/sub/spinner--get-resource-id-for-selected-item.html
+                val array = resources.obtainTypedArray(R.array.shaderlist)
+                val itemId = array.getResourceId(position,R.string.shader_simple)
+                render.shaderSwitch = when (itemId) {
+                    R.string.shader_simple -> 0
+                    R.string.shader_directional_light -> 1
+                    else -> 0
+                }
+                // 使わなくなったら解放
+                array.recycle()
+            }
+
+        }
+
+        /*
         // シェーダ選択
         val radioGroupShader = view.findViewById<RadioGroup>(R.id.radioGroupShader)
         val radioButtonShaderSimple = view.findViewById<RadioButton>(R.id.radioButtonShaderSimple)
@@ -75,6 +101,7 @@ class Pyramid01Fragment : Fragment() {
                 else -> 0
             }
         }
+        */
 
         return view
     }
