@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl05.w056
+package milu.kiriu2010.exdb1.opengl05.w57
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -13,11 +13,11 @@ import android.widget.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
 
-class W056Fragment : Fragment() {
+class W057Fragment : Fragment() {
 
     private lateinit var myGLView: MyGL02View
 
-    private lateinit var radioGroupW56: RadioGroup
+    private lateinit var radioGroupW57: RadioGroup
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,12 +28,12 @@ class W056Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl05_w56, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl05_w57, container, false)
 
         myGLView = view.findViewById(R.id.myGL02ViewA05)
         val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w56_01)
         val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.texture_w56_02)
-        val render = W056Renderer()
+        val render = W057Renderer()
         render.bmpArray.add(bmp0)
         render.bmpArray.add(bmp1)
         myGLView.setRenderer(render)
@@ -57,36 +57,53 @@ class W056Fragment : Fragment() {
             true
         }
 
-        radioGroupW56 = view.findViewById(R.id.radioGroupW56)
-        val radioButtonW56Render = view.findViewById<RadioButton>(R.id.radioButtonW56Render)
-        val radioButtonW56Texture1 = view.findViewById<RadioButton>(R.id.radioButtonW56Texture1)
-        val radioButtonW56Texture2 = view.findViewById<RadioButton>(R.id.radioButtonW56Texture2)
+        radioGroupW57 = view.findViewById(R.id.radioGroupW57)
+        val radioButtonW57Render = view.findViewById<RadioButton>(R.id.radioButtonW57Render)
+        val radioButtonW57Texture1 = view.findViewById<RadioButton>(R.id.radioButtonW57Texture1)
+        val radioButtonW57Texture2 = view.findViewById<RadioButton>(R.id.radioButtonW57Texture2)
 
-        radioGroupW56.setOnCheckedChangeListener { group, checkedId ->
+        radioGroupW57.setOnCheckedChangeListener { group, checkedId ->
             render.textureType = when (checkedId) {
-                radioButtonW56Render.id -> 0
-                radioButtonW56Texture1.id -> 1
-                radioButtonW56Texture2.id -> 2
+                radioButtonW57Render.id -> 0
+                radioButtonW57Texture1.id -> 1
+                radioButtonW57Texture2.id -> 2
                 else -> 0
             }
         }
 
-        val checkBoxW56Laplacian = view.findViewById<CheckBox>(R.id.checkBoxW57Laplacian)
-        checkBoxW56Laplacian.setOnCheckedChangeListener { buttonView, isChecked ->
-            render.u_laplacian = when (isChecked) {
+        val checkBoxW57Gaussian = view.findViewById<CheckBox>(R.id.checkBoxW57Gaussian)
+        checkBoxW57Gaussian.setOnCheckedChangeListener { buttonView, isChecked ->
+            render.u_gaussian = when (isChecked) {
                 true -> 1
                 else -> 0
             }
         }
 
-        val checkBoxW56Gray = view.findViewById<CheckBox>(R.id.checkBoxW56Gray)
-        checkBoxW56Gray.setOnCheckedChangeListener { buttonView, isChecked ->
-            render.u_laplacianGray = when (isChecked) {
-                true -> 1
-                else -> 0
+        val seekBarW57Dispersion = view.findViewById<SeekBar>(R.id.seekBarW57Dispersion)
+        seekBarW57Dispersion.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                render.k_gaussian = if ( seekBarW57Dispersion.progress > 0 ) {
+                    seekBarW57Dispersion.progress.toFloat()
+                }
+                else {
+                    1f
+                }
             }
-        }
 
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                render.k_gaussian = if ( seekBarW57Dispersion.progress > 0 ) {
+                    seekBarW57Dispersion.progress.toFloat()
+                }
+                else {
+                    1f
+                }
+            }
+
+        })
 
         return view
     }
@@ -104,7 +121,7 @@ class W056Fragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                W056Fragment().apply {
+                W057Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

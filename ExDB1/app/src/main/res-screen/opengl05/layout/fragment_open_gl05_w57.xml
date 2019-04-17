@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
-        android:id="@+id/radioGroupW56"
+        android:id="@+id/radioGroupW57"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/myGL02ViewA05">
 
         <RadioButton
-            android:id="@+id/radioButtonW56Render"
+            android:id="@+id/radioButtonW57Render"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -41,14 +41,14 @@
             android:text="Render" />
 
         <RadioButton
-            android:id="@+id/radioButtonW56Texture1"
+            android:id="@+id/radioButtonW57Texture1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Texture1" />
 
         <RadioButton
-            android:id="@+id/radioButtonW56Texture2"
+            android:id="@+id/radioButtonW57Texture2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -57,29 +57,28 @@
     </RadioGroup>
 
     <CheckBox
-        android:id="@+id/checkBoxW57Laplacian"
+        android:id="@+id/checkBoxW57Gaussian"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Laplacian"
-        app:layout_constraintEnd_toStartOf="@+id/checkBoxW56Gray"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:text="Gaussian"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupW56" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupW57" />
 
-    <CheckBox
-        android:id="@+id/checkBoxW56Gray"
-        android:layout_width="wrap_content"
+    <SeekBar
+        android:id="@+id/seekBarW57Dispersion"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Gray"
-        app:layout_constraintBottom_toBottomOf="@+id/checkBoxW57Laplacian"
+        android:max="10"
+        android:progress="3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/checkBoxW57Laplacian"
-        app:layout_constraintTop_toTopOf="@+id/checkBoxW57Laplacian" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxW57Gaussian" />
 
 
 </android.support.constraint.ConstraintLayout>
