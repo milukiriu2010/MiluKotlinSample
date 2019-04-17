@@ -1,11 +1,11 @@
-package milu.kiriu2010.exdb1.opengl05.w055
+package milu.kiriu2010.exdb1.opengl05.w056
 
 import android.opengl.GLES20
 import milu.kiriu2010.exdb1.opengl.ModelAbs
 import milu.kiriu2010.exdb1.opengl.MyGLFunc
 
-// sobelフィルタ用シェーダ
-class W055ShaderSobel {
+// laplacianフィルタ用シェーダ
+class W056ShaderLaplacian {
     // 頂点シェーダ
     private val scv =
             """
@@ -26,10 +26,9 @@ class W055ShaderSobel {
             precision mediump     float;
 
             uniform   sampler2D   u_Texture0;
-            uniform   int         u_sobel;
-            uniform   int         u_sobelGray;
-            uniform   float       u_hCoef[9];
-            uniform   float       u_vCoef[9];
+            uniform   int         u_laplacian;
+            uniform   int         u_laplacianGray;
+            uniform   float       u_Coef[9];
             varying   vec2        v_TexCoord;
 
             const float redScale   = 0.298912;
@@ -50,40 +49,28 @@ class W055ShaderSobel {
                 offset[8] = vec2( 1.0,  1.0);
                 float tFrag = 1.0 / 512.0;
                 vec2  fc = vec2(gl_FragCoord.s, 512.0 - gl_FragCoord.t);
-                vec3  horizonColor  = vec3(0.0);
-                vec3  verticalColor = vec3(0.0);
-                vec4  destColor     = vec4(0.0);
+                vec3  destColor     = vec3(0.0);
 
-                horizonColor  += texture2D(u_Texture0, (fc + offset[0]) * tFrag).rgb * u_hCoef[0];
-                horizonColor  += texture2D(u_Texture0, (fc + offset[1]) * tFrag).rgb * u_hCoef[1];
-                horizonColor  += texture2D(u_Texture0, (fc + offset[2]) * tFrag).rgb * u_hCoef[2];
-                horizonColor  += texture2D(u_Texture0, (fc + offset[3]) * tFrag).rgb * u_hCoef[3];
-                horizonColor  += texture2D(u_Texture0, (fc + offset[4]) * tFrag).rgb * u_hCoef[4];
-                horizonColor  += texture2D(u_Texture0, (fc + offset[5]) * tFrag).rgb * u_hCoef[5];
-                horizonColor  += texture2D(u_Texture0, (fc + offset[6]) * tFrag).rgb * u_hCoef[6];
-                horizonColor  += texture2D(u_Texture0, (fc + offset[7]) * tFrag).rgb * u_hCoef[7];
-                horizonColor  += texture2D(u_Texture0, (fc + offset[8]) * tFrag).rgb * u_hCoef[8];
+                destColor  += texture2D(u_Texture0, (fc + offset[0]) * tFrag).rgb * u_Coef[0];
+                destColor  += texture2D(u_Texture0, (fc + offset[1]) * tFrag).rgb * u_Coef[1];
+                destColor  += texture2D(u_Texture0, (fc + offset[2]) * tFrag).rgb * u_Coef[2];
+                destColor  += texture2D(u_Texture0, (fc + offset[3]) * tFrag).rgb * u_Coef[3];
+                destColor  += texture2D(u_Texture0, (fc + offset[4]) * tFrag).rgb * u_Coef[4];
+                destColor  += texture2D(u_Texture0, (fc + offset[5]) * tFrag).rgb * u_Coef[5];
+                destColor  += texture2D(u_Texture0, (fc + offset[6]) * tFrag).rgb * u_Coef[6];
+                destColor  += texture2D(u_Texture0, (fc + offset[7]) * tFrag).rgb * u_Coef[7];
+                destColor  += texture2D(u_Texture0, (fc + offset[8]) * tFrag).rgb * u_Coef[8];
 
-                verticalColor += texture2D(u_Texture0, (fc + offset[0]) * tFrag).rgb * u_vCoef[0];
-                verticalColor += texture2D(u_Texture0, (fc + offset[1]) * tFrag).rgb * u_vCoef[1];
-                verticalColor += texture2D(u_Texture0, (fc + offset[2]) * tFrag).rgb * u_vCoef[2];
-                verticalColor += texture2D(u_Texture0, (fc + offset[3]) * tFrag).rgb * u_vCoef[3];
-                verticalColor += texture2D(u_Texture0, (fc + offset[4]) * tFrag).rgb * u_vCoef[4];
-                verticalColor += texture2D(u_Texture0, (fc + offset[5]) * tFrag).rgb * u_vCoef[5];
-                verticalColor += texture2D(u_Texture0, (fc + offset[6]) * tFrag).rgb * u_vCoef[6];
-                verticalColor += texture2D(u_Texture0, (fc + offset[7]) * tFrag).rgb * u_vCoef[7];
-                verticalColor += texture2D(u_Texture0, (fc + offset[8]) * tFrag).rgb * u_vCoef[8];
-
-                if(bool(u_sobel)){
-                    destColor = vec4(vec3(sqrt(horizonColor * horizonColor + verticalColor * verticalColor)), 1.0);
+                if(bool(u_laplacian)){
+                    destColor = max(destColor, 0.0);
                 }else{
-                    destColor = texture2D(u_Texture0, v_TexCoord);
+                    destColor = texture2D(u_Texture0, v_TexCoord).rgb;
                 }
-                if(bool(u_sobelGray)){
+                if(bool(u_laplacianGray)){
                     float grayColor = dot(destColor.rgb, monochromeScale);
-                    destColor = vec4(vec3(grayColor), 1.0);
+                    destColor = vec3(grayColor);
                 }
-                gl_FragColor = destColor;
+                gl_FragColor = vec4(destColor, 1.0);
             }
             """.trimIndent()
 
@@ -107,8 +94,7 @@ class W055ShaderSobel {
              u_Texture0: Int,
              u_sobel: Int,
              u_sobelGray: Int,
-             u_hCoef: FloatArray,
-             u_vCoef: FloatArray) {
+             u_Coef: FloatArray) {
 
         GLES20.glUseProgram(programHandle)
         MyGLFunc.checkGlError("Board:Draw:UseProgram")
@@ -142,29 +128,22 @@ class W055ShaderSobel {
         MyGLFunc.checkGlError("u_Texture0")
 
         // uniform(sobelフィルタを使うかどうか)
-        GLES20.glGetUniformLocation(programHandle, "u_sobel").also {
+        GLES20.glGetUniformLocation(programHandle, "u_laplacian").also {
             GLES20.glUniform1i(it, u_sobel)
         }
-        MyGLFunc.checkGlError("Board:Draw:u_sobel")
+        MyGLFunc.checkGlError("Board:Draw:u_laplacian")
 
         // uniform(グレースケールを使うかどうか)
-        GLES20.glGetUniformLocation(programHandle, "u_sobelGray").also {
+        GLES20.glGetUniformLocation(programHandle, "u_laplacianGray").also {
             GLES20.glUniform1i(it, u_sobelGray)
         }
-        MyGLFunc.checkGlError("Board:Draw:u_sobelGray")
+        MyGLFunc.checkGlError("Board:Draw:u_laplacianGray")
 
         // カーネル
-        GLES20.glGetUniformLocation(programHandle, "u_hCoef").also {
-            GLES20.glUniform1fv(it, 9,u_hCoef,0)
+        GLES20.glGetUniformLocation(programHandle, "u_Coef").also {
+            GLES20.glUniform1fv(it, 9,u_Coef,0)
         }
-        MyGLFunc.checkGlError("Board:Draw:u_hCoef")
-
-        // カーネル
-        GLES20.glGetUniformLocation(programHandle, "u_vCoef").also {
-            GLES20.glUniform1fv(it, 9,u_vCoef,0)
-        }
-        MyGLFunc.checkGlError("Board:Draw:u_vCoef")
-
+        MyGLFunc.checkGlError("Board:Draw:u_Coef")
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, modelAbs.datIdx.size, GLES20.GL_UNSIGNED_SHORT, modelAbs.bufIdx)

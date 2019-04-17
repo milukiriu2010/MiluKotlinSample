@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w056"
+        android:title="w056_laplacianフィルタ" />
+    <item
         android:id="@+id/opengl_w055"
         android:title="w055_sobelフィルタ" />
     <item

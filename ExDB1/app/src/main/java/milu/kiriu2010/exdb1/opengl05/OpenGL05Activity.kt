@@ -15,6 +15,7 @@ import milu.kiriu2010.exdb1.opengl05.w052.W052Fragment
 import milu.kiriu2010.exdb1.opengl05.w053.W053Fragment
 import milu.kiriu2010.exdb1.opengl05.w054.W054Fragment
 import milu.kiriu2010.exdb1.opengl05.w055.W055Fragment
+import milu.kiriu2010.exdb1.opengl05.w056.W056Fragment
 
 class OpenGL05Activity : AppCompatActivity() {
 
@@ -81,6 +82,16 @@ class OpenGL05Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // laplacianフィルタ
+            R.id.opengl_w056 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w056") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W056Fragment.newInstance(), "w056")
+                            .commit()
+                }
                 true
             }
             // sobelフィルタ
