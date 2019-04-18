@@ -13,7 +13,6 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.fractal.HirbertCurvDrawable
 import milu.kiriu2010.gui.fractal.TakagiCurve01Drawable
 
 class DrawHomeFragment : Fragment() {

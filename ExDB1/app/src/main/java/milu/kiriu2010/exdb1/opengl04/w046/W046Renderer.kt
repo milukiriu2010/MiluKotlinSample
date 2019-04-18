@@ -3,11 +3,9 @@ package milu.kiriu2010.exdb1.opengl04.w046
 import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
-import android.opengl.GLUtils
 import android.opengl.Matrix
-import android.util.Log
 import android.view.MotionEvent
-import milu.kiriu2010.exdb1.opengl.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.basic.MyQuaternion
 import java.nio.ByteBuffer
 import java.nio.IntBuffer

@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl05.w052
 
 import android.opengl.GLES20
-import milu.kiriu2010.exdb1.opengl.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLFunc
 
 // 深度格納用シェーダ
 class W052ShaderDepth {

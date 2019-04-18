@@ -1,12 +1,8 @@
 package milu.kiriu2010.exdb1.opengl05.w055
 
-import android.opengl.GLES20
-import milu.kiriu2010.exdb1.opengl.ModelAbs
-import milu.kiriu2010.exdb1.opengl.MyGLFunc
+import milu.kiriu2010.gui.model.ModelAbs
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
-import java.nio.FloatBuffer
-import java.nio.ShortBuffer
 
 // 板ポリゴン
 // https://wgld.org/d/webgl/w049.html

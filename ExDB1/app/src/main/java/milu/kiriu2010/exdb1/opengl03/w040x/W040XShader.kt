@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl03.w040x
 
 import android.opengl.GLES20
-import milu.kiriu2010.exdb1.opengl.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLFunc
 
 class W040XShader {
     // 頂点シェーダ

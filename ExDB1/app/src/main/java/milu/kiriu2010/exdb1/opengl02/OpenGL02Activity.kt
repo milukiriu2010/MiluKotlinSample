@@ -8,7 +8,6 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_open_gl02.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl02.labo01.TestGLFragment
-import milu.kiriu2010.exdb1.mgl00.pyramid01.Pyramid01Fragment
 import milu.kiriu2010.exdb1.opengl02.jayce07.Jayce07Fragment
 import milu.kiriu2010.exdb1.opengl02.w026.W026Fragment
 import milu.kiriu2010.exdb1.opengl02.w027.W027Fragment

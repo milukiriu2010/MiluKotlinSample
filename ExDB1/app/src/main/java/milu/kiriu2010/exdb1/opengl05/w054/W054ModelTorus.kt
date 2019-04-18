@@ -1,12 +1,7 @@
 package milu.kiriu2010.exdb1.opengl05.w054
 
-import android.graphics.Bitmap
 import android.opengl.GLES20
-import android.opengl.GLUtils
-import milu.kiriu2010.exdb1.opengl.MyGLFunc
-import milu.kiriu2010.gui.basic.MyColor
-import milu.kiriu2010.math.MyMathUtil
-import java.lang.RuntimeException
+import milu.kiriu2010.gui.basic.MyGLFunc
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer

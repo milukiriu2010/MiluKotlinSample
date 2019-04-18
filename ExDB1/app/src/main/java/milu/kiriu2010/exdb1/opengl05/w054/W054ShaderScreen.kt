@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl05.w054
 
 import android.opengl.GLES20
-import milu.kiriu2010.exdb1.opengl.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLFunc
 
 // スクリーンレンダリング用シェーダ
 class W054ShaderScreen {

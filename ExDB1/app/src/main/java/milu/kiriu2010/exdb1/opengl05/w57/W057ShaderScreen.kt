@@ -1,8 +1,8 @@
 package milu.kiriu2010.exdb1.opengl05.w57
 
 import android.opengl.GLES20
-import milu.kiriu2010.exdb1.opengl.ModelAbs
-import milu.kiriu2010.exdb1.opengl.MyGLFunc
+import milu.kiriu2010.gui.model.ModelAbs
+import milu.kiriu2010.gui.basic.MyGLFunc
 
 // スクリーンレンダリング用シェーダ
 class W057ShaderScreen {
@@ -59,11 +59,11 @@ class W057ShaderScreen {
 
 
     fun draw(modelAbs: ModelAbs,
-               matMVP: FloatArray,
-               matINV: FloatArray,
-               u_vecLight: FloatArray,
-               u_vecEye: FloatArray,
-               u_ambientColor: FloatArray) {
+             matMVP: FloatArray,
+             matINV: FloatArray,
+             u_vecLight: FloatArray,
+             u_vecEye: FloatArray,
+             u_ambientColor: FloatArray) {
 
         GLES20.glUseProgram(programHandle)
         MyGLFunc.checkGlError("Torus:Draw:UseProgram")

@@ -7,10 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_mgl00.*
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.mgl00.dodecahedron01.Dodecahedron01Fragment
 import milu.kiriu2010.exdb1.mgl00.icosahedron01.Icosahedron01Fragment
-import milu.kiriu2010.exdb1.mgl00.octahedron01.Octahedron01Fragment
-import milu.kiriu2010.exdb1.mgl00.pyramid01.Pyramid01Fragment
 
 class Mgl00Activity : AppCompatActivity() {
 
@@ -20,7 +17,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Home") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, MGL00HomeFragment.newInstance(), "Home")
+                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(), "Home")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
@@ -29,7 +26,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Home") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, MGL00HomeFragment.newInstance(), "Home")
+                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(), "Home")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
@@ -38,7 +35,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Home") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, MGL00HomeFragment.newInstance(), "Home")
+                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(), "Home")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
@@ -55,7 +52,7 @@ class Mgl00Activity : AppCompatActivity() {
 
         if (supportFragmentManager.findFragmentByTag("Home") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, MGL00HomeFragment.newInstance(), "Home")
+                    .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(), "Home")
                     .commit()
         }
 
@@ -95,7 +92,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Dodecahedron01Model") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Dodecahedron01Fragment.newInstance(), "Dodecahedron01Model")
+                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(2), "Dodecahedron01Model")
                             .commit()
                 }
                 true
@@ -105,7 +102,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Octahedron01Model") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Octahedron01Fragment.newInstance(), "Octahedron01Model")
+                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(1), "Octahedron01Model")
                             .commit()
                 }
                 true
@@ -113,9 +110,9 @@ class Mgl00Activity : AppCompatActivity() {
             // 正四面体(点光源)
             R.id.opengl_pyramid01 -> {
                 supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Pyramid01Model") == null) {
+                if (supportFragmentManager.findFragmentByTag("Tetrahedron01Model") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Pyramid01Fragment.newInstance(), "Pyramid01Model")
+                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(), "Tetrahedron01Model")
                             .commit()
                 }
                 true

@@ -1,56 +1,24 @@
-package milu.kiriu2010.exdb1.mgl00.pyramid01
+package milu.kiriu2010.exdb1.mgl00.tetrahedron01
 
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
+import milu.kiriu2010.gui.model.Tetrahedron01Model
+import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.shader.DirectionalLight01Shader
 import milu.kiriu2010.gui.shader.Simple01Shader
 import milu.kiriu2010.math.MyMathUtil
 
 // https://wgld.org/d/webgl/w026.html
-class Pyramid01Renderer: GLSurfaceView.Renderer {
+class Tetrahedron01Renderer: MgRenderer() {
     // 描画モデル
-    private lateinit var drawObj: Pyramid01Model
+    private lateinit var drawObj: Tetrahedron01Model
 
     // シェーダ
-    private lateinit var shaderDirectionalLight: DirectionalLight01Shader
     private lateinit var shaderSimple: Simple01Shader
-
-
-    // モデル変換行列
-    private val matM = FloatArray(16)
-    // モデル変換行列の逆行列
-    private val matI = FloatArray(16)
-    // ビュー変換行列
-    private val matV = FloatArray(16)
-    // プロジェクション変換行列
-    private val matP = FloatArray(16)
-    // モデル・ビュー・プロジェクション行列
-    private val matMVP = FloatArray(16)
-    // テンポラリ行列
-    private val matT = FloatArray(16)
-    // 点光源の位置
-    private val vecLight = floatArrayOf(0f,0f,2f)
-    // 環境光の色
-    private val vecAmbientColor = floatArrayOf(0.1f,0.1f,0.1f,1f)
-    // カメラの座標
-    private val vecEye = floatArrayOf(0f,0f,10f)
-    // カメラの上方向を表すベクトル
-    private val vecEyeUp = floatArrayOf(0f,1f,0f)
-
-    // 回転角度
-    private var angle1 = 0
-
-    // 深度テスト
-    var isDepth = true
-    // カリング
-    var isCull = true
-    // 回転スイッチ
-    var rotateSwitch = false
-    // シェーダスイッチ
-    var shaderSwitch = 0
+    private lateinit var shaderDirectionalLight: DirectionalLight01Shader
 
     override fun onDrawFrame(gl: GL10) {
         // 深度テスト
@@ -130,19 +98,19 @@ class Pyramid01Renderer: GLSurfaceView.Renderer {
 
         // カメラの位置
         Matrix.setLookAtM(matV, 0,
-                0f, 0f, 10f,
-                0f, 0f, 0f,
-                0f, 1.0f, 0.0f)
+                vecEye[0], vecEye[1], vecEye[2],
+                vecCenter[0], vecCenter[1], vecCenter[2],
+                vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
 
-        // シェーダプログラム登録
-        shaderDirectionalLight = DirectionalLight01Shader()
-        shaderDirectionalLight.loadShader()
-
-        // シェーダプログラム登録
+        // シェーダプログラム登録(エフェクトなし)
         shaderSimple = Simple01Shader()
         shaderSimple.loadShader()
 
+        // シェーダプログラム登録(平行光源)
+        shaderDirectionalLight = DirectionalLight01Shader()
+        shaderDirectionalLight.loadShader()
+
         // モデル生成
-        drawObj = Pyramid01Model()
+        drawObj = Tetrahedron01Model()
     }
 }

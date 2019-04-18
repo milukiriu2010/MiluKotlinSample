@@ -3,15 +3,12 @@ package milu.kiriu2010.exdb1.opengl01.w019
 import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
-import android.opengl.GLUtils
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
-import android.os.SystemClock
 import android.view.MotionEvent
-import milu.kiriu2010.exdb1.opengl.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.exdb1.opengl02.w028.W028Shader
-import java.lang.RuntimeException
 
 // ---------------------------------------------------
 // テクスチャ

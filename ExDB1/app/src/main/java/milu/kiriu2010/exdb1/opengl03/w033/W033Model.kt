@@ -1,9 +1,7 @@
 package milu.kiriu2010.exdb1.opengl03.w033
 
 import android.opengl.GLES20
-import milu.kiriu2010.exdb1.opengl.MyGLFunc
-import milu.kiriu2010.math.MyMathUtil
-import java.lang.RuntimeException
+import milu.kiriu2010.gui.basic.MyGLFunc
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer

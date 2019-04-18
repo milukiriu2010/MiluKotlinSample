@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl02.w027
 
 import android.opengl.GLES20
-import milu.kiriu2010.exdb1.opengl.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLFunc
 
 class W027Shader {
     // 頂点シェーダ

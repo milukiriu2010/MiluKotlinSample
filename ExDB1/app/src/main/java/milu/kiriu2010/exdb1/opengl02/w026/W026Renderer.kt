@@ -3,15 +3,11 @@ package milu.kiriu2010.exdb1.opengl01.w019
 import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
-import android.opengl.GLUtils
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
-import android.os.SystemClock
-import milu.kiriu2010.exdb1.opengl.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.exdb1.opengl02.w026.W026Shader
-import java.lang.RuntimeException
-import kotlin.math.PI
 
 // ---------------------------------------------------
 // テクスチャ

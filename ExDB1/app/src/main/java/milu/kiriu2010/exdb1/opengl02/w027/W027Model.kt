@@ -3,7 +3,7 @@ package milu.kiriu2010.exdb1.opengl01.w019
 import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLUtils
-import milu.kiriu2010.exdb1.opengl.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLFunc
 import java.lang.RuntimeException
 import java.nio.*
 

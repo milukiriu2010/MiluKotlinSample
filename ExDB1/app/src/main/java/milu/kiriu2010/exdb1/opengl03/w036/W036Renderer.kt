@@ -1,12 +1,9 @@
 package milu.kiriu2010.exdb1.opengl03.w036
 
-import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import android.opengl.Matrix
-import android.util.Log
 import android.view.MotionEvent
-import milu.kiriu2010.exdb1.opengl.MyGLFunc
 import milu.kiriu2010.gui.basic.MyQuaternion
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10

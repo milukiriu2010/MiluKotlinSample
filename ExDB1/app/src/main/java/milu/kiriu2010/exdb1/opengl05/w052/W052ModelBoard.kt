@@ -3,18 +3,12 @@ package milu.kiriu2010.exdb1.opengl05.w052
 import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLUtils
-import milu.kiriu2010.exdb1.opengl.MyGLFunc
-import milu.kiriu2010.gui.basic.MyColor
-import milu.kiriu2010.math.MyMathUtil
+import milu.kiriu2010.gui.basic.MyGLFunc
 import java.lang.RuntimeException
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
 import java.nio.ShortBuffer
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.floor
-import kotlin.math.sin
 
 // 板ポリゴン
 // https://wgld.org/d/webgl/w049.html

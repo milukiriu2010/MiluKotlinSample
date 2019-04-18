@@ -1,18 +1,14 @@
-package milu.kiriu2010.exdb1.mgl00.pyramid01
+package milu.kiriu2010.gui.model
 
 import android.opengl.GLES20
-import milu.kiriu2010.exdb1.opengl.ModelAbs
-import milu.kiriu2010.exdb1.opengl.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.math.MyMathUtil
 import java.lang.RuntimeException
 import java.nio.*
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
 
 
 // https://wgld.org/d/webgl/w026.html
-class Pyramid01Model: ModelAbs() {
+class Tetrahedron01Model: ModelAbs() {
 
     init {
         // 頂点データ

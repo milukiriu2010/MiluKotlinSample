@@ -11,7 +11,6 @@ import milu.kiriu2010.gui.basic.MyQuaternion
 import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
-import kotlin.math.floor
 import kotlin.math.sqrt
 
 // シャドウマッピング

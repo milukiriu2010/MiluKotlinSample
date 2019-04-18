@@ -9,8 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.mgl00.pyramid01.Pyramid01Renderer
-import milu.kiriu2010.exdb1.mgl01.cube07.Cube07Renderer
+import milu.kiriu2010.exdb1.mgl00.tetrahedron01.Tetrahedron01Renderer
 import milu.kiriu2010.exdb1.opengl.MyGL02View
 
 
@@ -30,7 +29,7 @@ class MGL00HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_mgl00_home, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        val render = Pyramid01Renderer()
+        val render = Tetrahedron01Renderer()
         myGL02View.setRenderer(render)
         myGL02View.setOnTouchListener { v, event ->
             when (event.action) {

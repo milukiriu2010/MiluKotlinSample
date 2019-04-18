@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl
+package milu.kiriu2010.gui.model
 
 import java.nio.FloatBuffer
 import java.nio.ShortBuffer

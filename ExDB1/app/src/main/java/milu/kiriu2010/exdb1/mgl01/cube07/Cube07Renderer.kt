@@ -3,13 +3,9 @@ package milu.kiriu2010.exdb1.mgl01.cube07
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import android.opengl.Matrix
-import android.os.SystemClock
 import milu.kiriu2010.gui.basic.MyQuaternion
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
 
 // 平行光源
 class Cube07Renderer: GLSurfaceView.Renderer {

@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl
+package milu.kiriu2010.gui.basic
 
 import android.opengl.GLES20
 import android.util.Log
@@ -45,11 +45,11 @@ class MyGLFunc {
             val programHandle = GLES20.glCreateProgram().also {
                 // 頂点シェーダをプログラムに追加
                 GLES20.glAttachShader(it,svhandle)
-                MyGLFunc.printShaderInfoLog(svhandle)
+                printShaderInfoLog(svhandle)
 
                 // フラグメントシェーダをプログラムに追加
                 GLES20.glAttachShader(it,sfhandle)
-                MyGLFunc.printShaderInfoLog(sfhandle)
+                printShaderInfoLog(sfhandle)
 
                 // シェーダオブジェクトを削除
                 GLES20.glDeleteShader(svhandle)
@@ -68,7 +68,7 @@ class MyGLFunc {
                 GLES20.glGetProgramiv(it,GLES20.GL_LINK_STATUS,linkStatus,0)
                 // リンク失敗
                 if (linkStatus[0] == 0) {
-                    MyGLFunc.printProgramInfoLog(it)
+                    printProgramInfoLog(it)
                     GLES20.glDeleteProgram(it)
                     throw RuntimeException("Error creating program.")
                 }

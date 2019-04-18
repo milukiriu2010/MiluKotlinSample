@@ -5,7 +5,7 @@ import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import android.opengl.Matrix
 import android.view.MotionEvent
-import milu.kiriu2010.exdb1.opengl.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.exdb1.opengl01.w019.W038Model
 import milu.kiriu2010.gui.basic.MyQuaternion
 import javax.microedition.khronos.egl.EGLConfig

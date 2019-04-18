@@ -1,8 +1,8 @@
 package milu.kiriu2010.exdb1.mgl00.icosahedron01
 
 import android.opengl.GLES20
-import milu.kiriu2010.exdb1.opengl.ModelAbs
-import milu.kiriu2010.exdb1.opengl.MyGLFunc
+import milu.kiriu2010.gui.model.ModelAbs
+import milu.kiriu2010.gui.basic.MyGLFunc
 
 class Icosahedron01ShaderSimple {
     // 頂点シェーダ
