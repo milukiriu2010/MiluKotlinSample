@@ -34,7 +34,7 @@ abstract class MgRenderer: GLSurfaceView.Renderer {
     // カリング
     var isCull = true
     // 回転スイッチ
-    var rotateSwitch = false
+    var rotateSwitch = true
     // シェーダスイッチ
     var shaderSwitch = 0
 }

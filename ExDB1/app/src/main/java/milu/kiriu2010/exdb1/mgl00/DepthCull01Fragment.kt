@@ -36,13 +36,15 @@ class DepthCull01Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_mgl00_depth_cull_01, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        val render =
+        val render = DepthCull01Renderer(renderId)
+        /*
                 when (renderId) {
                     0 -> Tetrahedron01Renderer()
                     1 -> Octahedron01Renderer()
                     2 -> Dodecahedron01Renderer()
                     else -> Tetrahedron01Renderer()
                 }
+                */
 
         myGL02View.setRenderer(render)
         myGL02View.setOnTouchListener { v, event ->

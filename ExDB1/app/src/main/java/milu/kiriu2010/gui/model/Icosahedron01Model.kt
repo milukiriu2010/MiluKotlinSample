@@ -1,6 +1,5 @@
-package milu.kiriu2010.exdb1.mgl00.icosahedron01
+package milu.kiriu2010.gui.model
 
-import milu.kiriu2010.gui.model.ModelAbs
 import milu.kiriu2010.math.MyMathUtil
 import java.nio.*
 

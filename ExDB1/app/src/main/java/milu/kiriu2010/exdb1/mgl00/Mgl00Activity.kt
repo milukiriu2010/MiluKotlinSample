@@ -82,7 +82,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Icosahedron01Model") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Icosahedron01Fragment.newInstance(), "Icosahedron01Model")
+                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(4), "Icosahedron01Model")
                             .commit()
                 }
                 true
@@ -92,7 +92,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Dodecahedron01Model") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(2), "Dodecahedron01Model")
+                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(3), "Dodecahedron01Model")
                             .commit()
                 }
                 true
@@ -102,7 +102,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Octahedron01Model") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(1), "Octahedron01Model")
+                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(2), "Octahedron01Model")
                             .commit()
                 }
                 true
