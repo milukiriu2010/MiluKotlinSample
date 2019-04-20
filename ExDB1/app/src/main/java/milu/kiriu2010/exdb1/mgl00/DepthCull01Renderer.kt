@@ -1,7 +1,6 @@
 package milu.kiriu2010.exdb1.mgl00
 
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
@@ -14,7 +13,7 @@ import milu.kiriu2010.math.MyMathUtil
 
 class DepthCull01Renderer(val modelID: Int): MgRenderer() {
     // 描画モデル
-    private lateinit var drawObj: ModelAbs
+    private lateinit var model: MgModelAbs
 
     // シェーダ
     private lateinit var shaderSimple: Simple01Shader
@@ -70,9 +69,9 @@ class DepthCull01Renderer(val modelID: Int): MgRenderer() {
 
         // モデルを描画
         when (shaderSwitch) {
-            0 -> shaderSimple.draw(drawObj,matMVP)
-            1 -> shaderDirectionalLight.draw(drawObj,matMVP,matI,vecLight)
-            else -> shaderSimple.draw(drawObj,matMVP)
+            0 -> shaderSimple.draw(model,matMVP)
+            1 -> shaderDirectionalLight.draw(model,matMVP,matI,vecLight)
+            else -> shaderSimple.draw(model,matMVP)
         }
     }
 
@@ -111,12 +110,13 @@ class DepthCull01Renderer(val modelID: Int): MgRenderer() {
         shaderDirectionalLight.loadShader()
 
         // モデル生成
-        drawObj = when (modelID) {
+        model = when (modelID) {
             0 -> Tetrahedron01Model()
             2 -> Octahedron01Model()
             3 -> Dodecahedron01Model()
             4 -> Icosahedron01Model()
             else -> Tetrahedron01Model()
         }
+        model.createPath()
     }
 }

@@ -210,9 +210,11 @@ class W056Renderer: GLSurfaceView.Renderer {
 
         // モデル生成(トーラス)
         drawObjTorus = W056ModelTorus()
+        drawObjTorus.createPath()
 
         // モデル生成(板ポリゴン)
         drawObjBoard = W056ModelBoard()
+        drawObjBoard.createPath()
 
         // ----------------------------------
         // 単位行列化

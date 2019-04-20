@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl05.w056
 
 import android.opengl.GLES20
-import milu.kiriu2010.gui.model.ModelAbs
+import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLFunc
 
 // スクリーンレンダリング用シェーダ
@@ -58,7 +58,7 @@ class W056ShaderScreen {
     }
 
 
-    fun draw(modelAbs: ModelAbs,
+    fun draw(modelAbs: MgModelAbs,
              matMVP: FloatArray,
              matINV: FloatArray,
              u_vecLight: FloatArray,

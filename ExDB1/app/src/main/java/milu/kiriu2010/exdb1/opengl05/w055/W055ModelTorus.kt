@@ -1,6 +1,6 @@
 package milu.kiriu2010.exdb1.opengl05.w055
 
-import milu.kiriu2010.gui.model.ModelAbs
+import milu.kiriu2010.gui.model.MgModelAbs
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import kotlin.math.PI
@@ -10,9 +10,9 @@ import kotlin.math.sin
 
 // ステンシルバッファでアウトライン
 // https://wgld.org/d/webgl/w039.html
-class W055ModelTorus: ModelAbs() {
+class W055ModelTorus: MgModelAbs() {
 
-    init {
+    override fun createPath(opt: Map<String, Float>) {
         // トーラスのデータを生成
         createPath(16,16,1.0f,2.0f, floatArrayOf(1f,1f,1f,1f))
 

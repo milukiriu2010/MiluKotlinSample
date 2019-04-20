@@ -1,14 +1,14 @@
 package milu.kiriu2010.exdb1.opengl05.w055
 
-import milu.kiriu2010.gui.model.ModelAbs
+import milu.kiriu2010.gui.model.MgModelAbs
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
 // 板ポリゴン
 // https://wgld.org/d/webgl/w049.html
-class W055ModelBoard: ModelAbs() {
+class W055ModelBoard: MgModelAbs() {
 
-    init {
+    override fun createPath(opt: Map<String, Float>) {
         // 頂点データ
         datPos.addAll(listOf(-1f,1f,0f))
         datPos.addAll(listOf(1f,1f,0f))

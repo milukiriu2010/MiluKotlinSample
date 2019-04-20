@@ -6,36 +6,45 @@ import kotlin.math.sqrt
 
 
 // 正八面体
-class Octahedron01Model: ModelAbs() {
+class Octahedron01Model: MgModelAbs() {
 
-    init {
+    override fun createPath( opt: Map<String,Float> ) {
         val sq2 = sqrt(2f)
 
+        var scale = opt["scale"] ?: 1f
+
+        val va = arrayListOf(0f,-sq2*scale,0f)
+        val vb = arrayListOf(scale,0f,scale)
+        val vc = arrayListOf(-scale,0f,scale)
+        val vd = arrayListOf(-scale,0f,-scale)
+        val ve = arrayListOf(scale,0f,-scale)
+        val vf = arrayListOf(0f,sq2*scale,0f)
+
         // 頂点データ
-        datPos.addAll(arrayListOf(0f,-sq2,0f))   // v0
-        datPos.addAll(arrayListOf(1f,0f,1f))    // v1
-        datPos.addAll(arrayListOf(-1f,0f,1f))   // v2
-        datPos.addAll(arrayListOf(1f,0f,1f))    // v3,v1
-        datPos.addAll(arrayListOf(0f,sq2,0f))    // v4
-        datPos.addAll(arrayListOf(-1f,0f,1f))   // v5,v2
-        datPos.addAll(arrayListOf(1f,0f,1f))    // v6,v3,v1
-        datPos.addAll(arrayListOf(1f,0f,-1f))   // v7
-        datPos.addAll(arrayListOf(0f,sq2,0f))    // v8,v4
-        datPos.addAll(arrayListOf(1f,0f,-1f))   // v9,v7
-        datPos.addAll(arrayListOf(-1f,0f,-1f))  // v10
-        datPos.addAll(arrayListOf(0f,sq2,0f))    // v11,v8,v4
-        datPos.addAll(arrayListOf(1f,0f,-1f))   // v12,v9,v7
-        datPos.addAll(arrayListOf(0f,-sq2,0f))   // v13,v0
-        datPos.addAll(arrayListOf(-1f,0f,-1f))  // v14,v10
-        datPos.addAll(arrayListOf(0f,-sq2,0f))   // v15,v13,v0
-        datPos.addAll(arrayListOf(-1f,0f,1f))   // v16,v5,v2
-        datPos.addAll(arrayListOf(-1f,0f,-1f))  // v17,v14,v10
-        datPos.addAll(arrayListOf(0f,sq2,0f))    // v18,v11,v8,v4
-        datPos.addAll(arrayListOf(-1f,0f,-1f))  // v19,v17,v14,v10
-        datPos.addAll(arrayListOf(-1f,0f,1f))   // v20,v16,v5,v2
-        datPos.addAll(arrayListOf(0f,-sq2,0f))   // v21,v15,v13,v0
-        datPos.addAll(arrayListOf(1f,0f,-1f))   // v22,v12,v9,v7
-        datPos.addAll(arrayListOf(1f,0f,1f))    // v23,v6,v3,v1
+        datPos.addAll(ArrayList<Float>(va))   // v0
+        datPos.addAll(ArrayList<Float>(vb))   // v1
+        datPos.addAll(ArrayList<Float>(vc))   // v2
+        datPos.addAll(ArrayList<Float>(vb))   // v3,v1
+        datPos.addAll(ArrayList<Float>(vf))   // v4
+        datPos.addAll(ArrayList<Float>(vc))   // v5,v2
+        datPos.addAll(ArrayList<Float>(vb))   // v6,v3,v1
+        datPos.addAll(ArrayList<Float>(ve))   // v7
+        datPos.addAll(ArrayList<Float>(vf))   // v8,v4
+        datPos.addAll(ArrayList<Float>(ve))   // v9,v7
+        datPos.addAll(ArrayList<Float>(vd))   // v10
+        datPos.addAll(ArrayList<Float>(vf))   // v11,v8,v4
+        datPos.addAll(ArrayList<Float>(ve))   // v12,v9,v7
+        datPos.addAll(ArrayList<Float>(va))   // v13,v0
+        datPos.addAll(ArrayList<Float>(vd))   // v14,v10
+        datPos.addAll(ArrayList<Float>(va))   // v15,v13,v0
+        datPos.addAll(ArrayList<Float>(vc))   // v16,v5,v2
+        datPos.addAll(ArrayList<Float>(vd))   // v17,v14,v10
+        datPos.addAll(ArrayList<Float>(vf))   // v18,v11,v8,v4
+        datPos.addAll(ArrayList<Float>(vd))   // v19,v17,v14,v10
+        datPos.addAll(ArrayList<Float>(vc))   // v20,v16,v5,v2
+        datPos.addAll(ArrayList<Float>(va))   // v21,v15,v13,v0
+        datPos.addAll(ArrayList<Float>(ve))   // v22,v12,v9,v7
+        datPos.addAll(ArrayList<Float>(vb))   // v23,v6,v3,v1
 
         // 法線データ
         (0..2).forEach {
@@ -72,79 +81,44 @@ class Octahedron01Model: ModelAbs() {
         }
 
         // 色データ
+        // ABC(赤)
         (0..2).forEach {
             datCol.addAll(arrayListOf<Float>(1f,0f,0f,1f))
         }
+        // BFC(だいだい)
         (3..5).forEach {
             datCol.addAll(arrayListOf<Float>(1f,0.5f,0f,1f))
         }
+        // BEF(黄色)
         (6..8).forEach {
             datCol.addAll(arrayListOf<Float>(1f,1f,0f,1f))
         }
+        // EDF(緑)
         (9..11).forEach {
-            datCol.addAll(arrayListOf<Float>(0.5f,1f,0f,1f))
-        }
-        (12..14).forEach {
             datCol.addAll(arrayListOf<Float>(0f,1f,0f,1f))
         }
-        (15..17).forEach {
-            datCol.addAll(arrayListOf<Float>(0f,1f,0.5f,1f))
-        }
-        (18..20).forEach {
+        // EAD(水色)
+        (12..14).forEach {
             datCol.addAll(arrayListOf<Float>(0f,1f,1f,1f))
         }
-        (21..23).forEach {
+        // ACD
+        (15..17).forEach {
             datCol.addAll(arrayListOf<Float>(0f,0.5f,1f,1f))
+        }
+        // FDC(青)
+        (18..20).forEach {
+            datCol.addAll(arrayListOf<Float>(0f,0f,1f,1f))
+        }
+        // AEB(紫)
+        (21..23).forEach {
+            datCol.addAll(arrayListOf<Float>(1f,0f,1f,1f))
         }
 
         // インデックスデータ
-        datIdx.addAll(arrayListOf<Short>(0,1,2))
-        datIdx.addAll(arrayListOf<Short>(3,4,5))
-        datIdx.addAll(arrayListOf<Short>(6,7,8))
-        datIdx.addAll(arrayListOf<Short>(9,10,11))
-        datIdx.addAll(arrayListOf<Short>(12,13,14))
-        datIdx.addAll(arrayListOf<Short>(15,16,17))
-        datIdx.addAll(arrayListOf<Short>(18,19,20))
-        datIdx.addAll(arrayListOf<Short>(21,22,23))
-
-        // 頂点バッファ
-        bufPos = ByteBuffer.allocateDirect(datPos.toArray().size * 4).run {
-            order(ByteOrder.nativeOrder())
-
-            asFloatBuffer().apply {
-                put(datPos.toFloatArray())
-                position(0)
-            }
+        (0..23).forEach { it ->
+            datIdx.addAll(arrayListOf<Short>(it.toShort()))
         }
 
-        // 法線バッファ
-        bufNor = ByteBuffer.allocateDirect(datNor.toArray().size * 4).run {
-            order(ByteOrder.nativeOrder())
-
-            asFloatBuffer().apply {
-                put(datNor.toFloatArray())
-                position(0)
-            }
-        }
-
-        // 色バッファ
-        bufCol = ByteBuffer.allocateDirect(datCol.toArray().size * 4).run {
-            order(ByteOrder.nativeOrder())
-
-            asFloatBuffer().apply {
-                put(datCol.toFloatArray())
-                position(0)
-            }
-        }
-
-        // インデックスバッファ
-        bufIdx = ByteBuffer.allocateDirect(datIdx.toArray().size * 2).run {
-            order(ByteOrder.nativeOrder())
-
-            asShortBuffer().apply {
-                put(datIdx.toShortArray())
-                position(0)
-            }
-        }
+        allocateBuffer()
     }
 }

@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl05.w57
+package milu.kiriu2010.exdb1.opengl05.w057
 
 import android.graphics.BitmapFactory
 import android.os.Bundle

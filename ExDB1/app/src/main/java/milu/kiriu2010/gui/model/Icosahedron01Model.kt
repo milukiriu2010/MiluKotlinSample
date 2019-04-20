@@ -6,24 +6,26 @@ import java.nio.*
 
 // 正二十面体
 // https://github.com/8q/Android-OpenGL-Icosahedron/blob/master/GL1/src/com/example/gl1/MyIcosa.java
-class Icosahedron01Model: ModelAbs() {
+class Icosahedron01Model: MgModelAbs() {
 
-    init {
+    override fun createPath( opt: Map<String,Float> ) {
         val goldR = MyMathUtil.GOLDEN_RATIO
 
+        var scale = opt["scale"] ?: 1f
+
         // 頂点
-        val va = arrayListOf(1f,0f,-goldR)
-        val vb = arrayListOf(-1f,0f,-goldR)
-        val vc = arrayListOf(0f,-goldR,-1f)
-        val vd = arrayListOf(-goldR,-1f,0f)
-        val ve = arrayListOf(goldR,-1f,0f)
-        val vf = arrayListOf(0f,goldR,-1f)
-        val vg = arrayListOf(goldR,1f,0f)
-        val vh = arrayListOf(-goldR,1f,0f)
-        val vi = arrayListOf(0f,-goldR,1f)
-        val vj = arrayListOf(-1f,0f,goldR)
-        val vk = arrayListOf(1f,0f,goldR)
-        val vl = arrayListOf(0f,goldR,1f)
+        val va = arrayListOf(scale,0f,-goldR*scale)
+        val vb = arrayListOf(-scale,0f,-goldR*scale)
+        val vc = arrayListOf(0f,-goldR*scale,-scale)
+        val vd = arrayListOf(-goldR*scale,-scale,0f)
+        val ve = arrayListOf(goldR*scale,-scale,0f)
+        val vf = arrayListOf(0f,goldR*scale,-scale)
+        val vg = arrayListOf(goldR*scale,scale,0f)
+        val vh = arrayListOf(-goldR*scale,scale,0f)
+        val vi = arrayListOf(0f,-goldR*scale,scale)
+        val vj = arrayListOf(-scale,0f,goldR*scale)
+        val vk = arrayListOf(scale,0f,goldR*scale)
+        val vl = arrayListOf(0f,goldR*scale,scale)
 
         // 頂点データ
         // ABC
@@ -112,7 +114,7 @@ class Icosahedron01Model: ModelAbs() {
         (0..59).forEach { i ->
             // (B-A) x (C-A)
             val m=i/3
-            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 2+3*m, 1+3*m, 0+3*m ) )
+            datNor.addAll( MyMathUtil.crossProduct3Dv2( datPos, 3*(3*m+2), 3*(3*m+1), 3*(3*m+0) ) )
         }
 
         // 色データ
@@ -206,45 +208,7 @@ class Icosahedron01Model: ModelAbs() {
             }
         }
 
-        // 頂点バッファ
-        bufPos = ByteBuffer.allocateDirect(datPos.toArray().size * 4).run {
-            order(ByteOrder.nativeOrder())
-
-            asFloatBuffer().apply {
-                put(datPos.toFloatArray())
-                position(0)
-            }
-        }
-
-        // 法線バッファ
-        bufNor = ByteBuffer.allocateDirect(datNor.toArray().size * 4).run {
-            order(ByteOrder.nativeOrder())
-
-            asFloatBuffer().apply {
-                put(datNor.toFloatArray())
-                position(0)
-            }
-        }
-
-        // 色バッファ
-        bufCol = ByteBuffer.allocateDirect(datCol.toArray().size * 4).run {
-            order(ByteOrder.nativeOrder())
-
-            asFloatBuffer().apply {
-                put(datCol.toFloatArray())
-                position(0)
-            }
-        }
-
-        // インデックスバッファ
-        bufIdx = ByteBuffer.allocateDirect(datIdx.toArray().size * 2).run {
-            order(ByteOrder.nativeOrder())
-
-            asShortBuffer().apply {
-                put(datIdx.toShortArray())
-                position(0)
-            }
-        }
+        allocateBuffer()
     }
 
 }

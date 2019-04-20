@@ -1,7 +1,7 @@
 package milu.kiriu2010.gui.shader
 
 import android.opengl.GLES20
-import milu.kiriu2010.gui.model.ModelAbs
+import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLFunc
 
 class PointLight01Shader {
@@ -74,7 +74,7 @@ class PointLight01Shader {
         return programHandle
     }
 
-    fun draw(modelAbs: ModelAbs,
+    fun draw(modelAbs: MgModelAbs,
              matMVP: FloatArray,
              matM: FloatArray,
              matI: FloatArray,

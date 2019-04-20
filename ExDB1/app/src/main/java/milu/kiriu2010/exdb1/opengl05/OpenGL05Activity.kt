@@ -16,7 +16,7 @@ import milu.kiriu2010.exdb1.opengl05.w053.W053Fragment
 import milu.kiriu2010.exdb1.opengl05.w054.W054Fragment
 import milu.kiriu2010.exdb1.opengl05.w055.W055Fragment
 import milu.kiriu2010.exdb1.opengl05.w056.W056Fragment
-import milu.kiriu2010.exdb1.opengl05.w57.W057Fragment
+import milu.kiriu2010.exdb1.opengl05.w057.W057Fragment
 
 class OpenGL05Activity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl05.w57
+package milu.kiriu2010.exdb1.opengl05.w057
 
 import android.graphics.Bitmap
 import android.opengl.GLES20
@@ -259,9 +259,11 @@ class W057Renderer: GLSurfaceView.Renderer {
 
         // モデル生成(トーラス)
         drawObjTorus = W057ModelTorus()
+        drawObjTorus.createPath()
 
         // モデル生成(板ポリゴン)
         drawObjBoard = W057ModelBoard()
+        drawObjBoard.createPath()
 
         // ----------------------------------
         // 単位行列化

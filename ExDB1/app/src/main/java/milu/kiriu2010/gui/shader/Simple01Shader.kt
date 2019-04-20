@@ -1,7 +1,7 @@
 package milu.kiriu2010.gui.shader
 
 import android.opengl.GLES20
-import milu.kiriu2010.gui.model.ModelAbs
+import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLFunc
 
 class Simple01Shader {
@@ -44,7 +44,7 @@ class Simple01Shader {
     }
 
 
-    fun draw(modelAbs: ModelAbs,
+    fun draw(modelAbs: MgModelAbs,
              matMVP: FloatArray) {
         GLES20.glUseProgram(programHandle)
 
