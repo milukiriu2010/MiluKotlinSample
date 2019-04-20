@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_mgl00.*
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.mgl00.icosahedron01.Icosahedron01Fragment
 
 class Mgl00Activity : AppCompatActivity() {
 

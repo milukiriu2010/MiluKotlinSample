@@ -10,9 +10,6 @@ import android.view.ViewGroup
 import android.widget.*
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.mgl00.dodecahedron01.Dodecahedron01Renderer
-import milu.kiriu2010.exdb1.mgl00.octahedron01.Octahedron01Renderer
-import milu.kiriu2010.exdb1.mgl00.tetrahedron01.Tetrahedron01Renderer
 import milu.kiriu2010.exdb1.opengl.MyGL02View
 
 const val ARG_RENDER_ID = "RENDER_ID"
