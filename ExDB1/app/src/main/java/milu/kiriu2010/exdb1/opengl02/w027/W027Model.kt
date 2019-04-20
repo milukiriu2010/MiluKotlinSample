@@ -187,13 +187,11 @@ class W027Model {
         GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D)
 
         // テクスチャのバインドを解除
-        //GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,0)
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,0)
 
-        /*
         if ( bmp.isRecycled == false ) {
             bmp.recycle()
         }
-        */
 
         if (textures[id] == 0) {
             throw RuntimeException("Error loading texture[${id}]")

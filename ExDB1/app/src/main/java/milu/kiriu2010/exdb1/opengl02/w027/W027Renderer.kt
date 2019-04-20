@@ -56,11 +56,11 @@ class W027Renderer: GLSurfaceView.Renderer {
         angle1 =(angle1+1)%360
         val t1 = angle1.toFloat()
 
-        /*
         // テクスチャをバインドする
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0])
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE1)
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[1])
-        */
 
         // ビュー×プロジェクション座標変換行列
         Matrix.multiplyMM(matT,0,matP,0,matV,0)
@@ -70,10 +70,6 @@ class W027Renderer: GLSurfaceView.Renderer {
         Matrix.rotateM(matM,0,t1,0f,1f,0f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
 
-        // テクスチャ0をバインド
-        drawObj.activateTexture(0,textures,bmpArray[0])
-        // テクスチャ1をバインド
-        drawObj.activateTexture(1,textures,bmpArray[1])
 
         // モデル描画
         drawObj.draw(programHandle,matMVP, 0,1)
@@ -107,6 +103,11 @@ class W027Renderer: GLSurfaceView.Renderer {
 
         // モデル生成
         drawObj = W027Model()
+
+        // テクスチャ0をバインド
+        drawObj.activateTexture(0,textures,bmpArray[0])
+        // テクスチャ1をバインド
+        drawObj.activateTexture(1,textures,bmpArray[1])
 
         // カメラの位置
         Matrix.setLookAtM(matV, 0,
