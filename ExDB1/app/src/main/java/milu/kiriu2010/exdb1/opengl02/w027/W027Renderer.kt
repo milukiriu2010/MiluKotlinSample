@@ -53,8 +53,14 @@ class W027Renderer: GLSurfaceView.Renderer {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // 回転角度
-        angle1 =(angle1+5)%360
+        angle1 =(angle1+1)%360
         val t1 = angle1.toFloat()
+
+        /*
+        // テクスチャをバインドする
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0])
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[1])
+        */
 
         // ビュー×プロジェクション座標変換行列
         Matrix.multiplyMM(matT,0,matP,0,matV,0)

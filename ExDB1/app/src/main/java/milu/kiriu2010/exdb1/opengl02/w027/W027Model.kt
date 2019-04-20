@@ -145,17 +145,19 @@ class W027Model {
     }
 
 
-    fun activateTexture(id: Int, textures: IntArray, bmp: Bitmap, doRecycle: Boolean = false) {
+    fun activateTexture(id: Int, textures: IntArray, bmp: Bitmap) {
         // 有効にするテクスチャユニットを指定
         when (id) {
             0 -> GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
             1 -> GLES20.glActiveTexture(GLES20.GL_TEXTURE1)
         }
 
-        //
+        // テクスチャをバインドする
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[id])
         MyGLFunc.checkGlError("glBindTexture")
 
+        /*
+        // ここは必要ないかも
         // 縮小時の補完設定
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
         // 拡大時の補完設定
@@ -163,12 +165,35 @@ class W027Model {
 
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE)
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
+        */
 
+        // ビットマップ⇒バッファへ変換
+        val buffer = ByteBuffer.allocate(bmp.byteCount)
+        bmp.copyPixelsToBuffer(buffer)
+        buffer.rewind()
+
+        // テクスチャへイメージを適用
+        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,bmp.width,bmp.height,0,
+                GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,buffer)
+
+        /*
+        // GLES20.glTexImage2Dを使わないやり方
         // ビットマップをテクスチャに設定
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bmp, 0)
         MyGLFunc.checkGlError("texImage2D")
+        */
 
-        //if ( doRecycle ) bmp.recycle()
+        // ミップマップを生成
+        GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D)
+
+        // テクスチャのバインドを解除
+        //GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,0)
+
+        /*
+        if ( bmp.isRecycled == false ) {
+            bmp.recycle()
+        }
+        */
 
         if (textures[id] == 0) {
             throw RuntimeException("Error loading texture[${id}]")
