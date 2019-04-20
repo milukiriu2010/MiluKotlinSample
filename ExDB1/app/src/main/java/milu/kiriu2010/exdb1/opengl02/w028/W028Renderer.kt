@@ -57,16 +57,18 @@ class W028Renderer: GLSurfaceView.Renderer {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // 回転角度
-        angle1 =(angle1+5)%360
+        angle1 =(angle1+1)%360
         val t1 = angle1.toFloat()
+
+        // テクスチャをバインドする
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0])
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE1)
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[1])
 
         // ビュー×プロジェクション座標変換行列
         Matrix.multiplyMM(matT,0,matP,0,matV,0)
 
-        // テクスチャ0をバインド
-        drawObj.activateTexture(0,textures,bmpArray[0])
-        // テクスチャ1をバインド
-        drawObj.activateTexture(1,textures,bmpArray[1])
 
         renderMap(1,t1)
         renderMap(2,t1)
@@ -108,6 +110,12 @@ class W028Renderer: GLSurfaceView.Renderer {
         // モデル生成
         drawObj = W028Model()
 
+
+        // テクスチャ0をバインド
+        drawObj.activateTexture(0,textures,bmpArray[0])
+        // テクスチャ1をバインド
+        drawObj.activateTexture(1,textures,bmpArray[1])
+
         // カメラの位置
         Matrix.setLookAtM(matV, 0,
                 vecEye[0], vecEye[1], vecEye[2],
@@ -126,7 +134,9 @@ class W028Renderer: GLSurfaceView.Renderer {
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST)
                 // 拡大時の補完設定
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_NEAREST)
+                // 範囲外のテクスチャ座標が指定されたときの設定(横)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
+                // 範囲外のテクスチャ座標が指定されたときの設定(縦)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
                 render(t1, floatArrayOf(-3f,3f,0f))
             }
