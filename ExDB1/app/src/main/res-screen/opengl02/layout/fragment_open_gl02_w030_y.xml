@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollViewW030y"
+    android:layout_width="match_parent"
+    android:layout_height="3000dp"
+    android:fillViewport="true">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <milu.kiriu2010.exdb1.opengl.TextureView
+            android:id="@+id/textureView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewW030ContextClearColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Context Clear Color"
+            app:layout_constraintEnd_toStartOf="@+id/textureView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textureView" />
+
+        <TextView
+            android:id="@+id/textViewW030ContextRed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Red    "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewW030ContextClearColor" />
+
+        <SeekBar
+            android:id="@+id/seekBarW030ContextRed"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:max="10"
+            android:progress="3"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewW030ContextRed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewW030ContextRed"
+            app:layout_constraintTop_toTopOf="@+id/textViewW030ContextRed" />
+
+        <TextView
+            android:id="@+id/textViewW030ContextGreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Green"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewW030ContextRed" />
+
+        <SeekBar
+            android:id="@+id/seekBarW030ContextGreen"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:max="10"
+            android:progress="3"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewW030ContextGreen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewW030ContextGreen"
+            app:layout_constraintTop_toTopOf="@+id/textViewW030ContextGreen" />
+
+        <TextView
+            android:id="@+id/textViewW030ContextBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Blue   "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewW030ContextGreen" />
+
+        <SeekBar
+            android:id="@+id/seekBarW030ContextBlue"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:max="10"
+            android:progress="3"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewW030ContextBlue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewW030ContextBlue"
+            app:layout_constraintTop_toTopOf="@+id/textViewW030ContextBlue" />
+
+        <TextView
+            android:id="@+id/textViewW030ContextAlpha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Alpha"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewW030ContextBlue" />
+
+        <SeekBar
+            android:id="@+id/seekBarW030ContextAlpha"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:max="10"
+            android:progress="3"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewW030ContextAlpha"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewW030ContextAlpha"
+            app:layout_constraintTop_toTopOf="@+id/textViewW030ContextAlpha" />
+
+        <TextView
+            android:id="@+id/textViewW030BlendConstantColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Blend Constant Color"
+            app:layout_constraintEnd_toStartOf="@+id/textViewW030ContextAlpha"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewW030ContextAlpha" />
+
+        <TextView
+            android:id="@+id/textViewW030BlendRed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Red    "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewW030BlendConstantColor" />
+
+        <SeekBar
+            android:id="@+id/seekBarW030BlendRed"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:max="10"
+            android:progress="3"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewW030BlendRed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewW030BlendRed"
+            app:layout_constraintTop_toTopOf="@+id/textViewW030BlendRed" />
+
+        <TextView
+            android:id="@+id/textViewW030BlendGreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Green"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewW030BlendRed" />
+
+        <SeekBar
+            android:id="@+id/seekBarW030BlendGreen"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:max="10"
+            android:progress="3"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewW030BlendGreen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewW030BlendGreen"
+            app:layout_constraintTop_toTopOf="@+id/textViewW030BlendGreen" />
+
+        <TextView
+            android:id="@+id/textViewW030BlendBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Blue   "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewW030BlendGreen" />
+
+        <SeekBar
+            android:id="@+id/seekBarW030BlendBlue"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:max="10"
+            android:progress="3"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewW030BlendBlue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewW030BlendBlue"
+            app:layout_constraintTop_toTopOf="@+id/textViewW030BlendBlue" />
+
+        <TextView
+            android:id="@+id/textViewW030BlendAlpha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Alpha"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewW030BlendBlue" />
+
+        <SeekBar
+            android:id="@+id/seekBarW030BlendAlpha"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:max="10"
+            android:progress="3"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewW030BlendAlpha"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewW030BlendAlpha"
+            app:layout_constraintTop_toTopOf="@+id/textViewW030BlendAlpha" />
+
+        <TextView
+            android:id="@+id/textViewW030Model1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Model 1"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewW030BlendAlpha" />
+
+        <CheckBox
+            android:id="@+id/checkBoxW030Model1Blend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Enable Blend"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewW030Model1" />
+
+        <TextView
+            android:id="@+id/textViewW030Model1VertexAlpha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Model 1"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxW030Model1Blend" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
