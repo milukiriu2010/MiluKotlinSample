@@ -86,11 +86,7 @@ class W030Renderer: GLSurfaceView.Renderer {
         GLES20.glBlendColor(1f,0f,0f,1f)
 
         // テクスチャ0をバインド
-        drawObj.activateTexture(0,textures,bmpArray[0])
-
-
-        // ブレンディングを無効にする
-        //GLES20.glDisable(GLES20.GL_BLEND)
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[0])
 
         // ブレンディングを有効/無効にする
         when (blend) {
@@ -106,11 +102,13 @@ class W030Renderer: GLSurfaceView.Renderer {
         Matrix.rotateM(matM,0,t1,0f,1f,0f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
 
-        // uniform変数の登録と描画
-        drawObj.draw(programHandle, matMVP,1f,0,1)
+        // テクスチャ描画
+        drawObj.draw(programHandle, matMVP,vertexAplha,0,1)
 
         // ----------------------------------------------------------------------
 
+        // テクスチャのバインドを解除
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,0)
 
         // モデル座標変換行列の生成
         Matrix.setIdentityM(matM,0)
@@ -118,7 +116,7 @@ class W030Renderer: GLSurfaceView.Renderer {
         Matrix.rotateM(matM,0,t1,0f,0f,1f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
 
-        // uniform変数の登録と描画
+        // ポリゴンを描画
         drawObj.draw(programHandle, matMVP,vertexAplha,0,0)
     }
 
@@ -150,6 +148,9 @@ class W030Renderer: GLSurfaceView.Renderer {
 
         // モデル生成
         drawObj = W030Model()
+
+        // テクスチャ0をバインド
+        drawObj.activateTexture(0,textures,bmpArray[0])
 
         // カメラの位置
         Matrix.setLookAtM(matV, 0,

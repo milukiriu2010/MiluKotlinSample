@@ -30,7 +30,7 @@ class W030Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl02_w030, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl02_w030_x, container, false)
 
         textureView = view.findViewById<TextureView>(R.id.textureView)
         val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w029)
