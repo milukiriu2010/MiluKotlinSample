@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w030z"
+        android:title="w030z_ブレンドファクター" />
+    <item
         android:id="@+id/opengl_w030y"
         android:title="w030y_ブレンドファクター" />
     <item

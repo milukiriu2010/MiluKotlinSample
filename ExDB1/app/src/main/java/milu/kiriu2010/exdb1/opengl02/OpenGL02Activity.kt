@@ -15,6 +15,7 @@ import milu.kiriu2010.exdb1.opengl02.w028.W028Fragment
 import milu.kiriu2010.exdb1.opengl02.w029.W029Fragment
 import milu.kiriu2010.exdb1.opengl02.w030.W030Fragment
 import milu.kiriu2010.exdb1.opengl02.w030y.W030yFragment
+import milu.kiriu2010.exdb1.opengl02.w030z.W030zFragment
 
 class OpenGL02Activity : AppCompatActivity() {
 
@@ -79,6 +80,16 @@ class OpenGL02Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // w030z_ブレンドファクター
+            R.id.opengl_w030z -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w030z") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W030zFragment.newInstance(), "w030z")
+                            .commit()
+                }
                 true
             }
             // w030y_ブレンドファクター
