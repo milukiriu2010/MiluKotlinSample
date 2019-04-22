@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
-        android:id="@+id/checkBoxW030"
+        android:id="@+id/checkBoxW030Blend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textureView" />
 
     <SeekBar
-        android:id="@+id/seekBarW030"
+        android:id="@+id/seekBarW030VertexAlpha"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -45,8 +45,8 @@
         android:max="10"
         android:progress="5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/checkBoxW030"
-        app:layout_constraintTop_toTopOf="@+id/checkBoxW030" />
+        app:layout_constraintStart_toEndOf="@+id/checkBoxW030Blend"
+        app:layout_constraintTop_toTopOf="@+id/checkBoxW030Blend" />
 
     <TextView
         android:id="@+id/textViewW30CE"
@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toStartOf="@+id/spinnerW30CE"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBarW030" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBarW030VertexAlpha" />
 
     <Spinner
         android:id="@+id/spinnerW30CE"

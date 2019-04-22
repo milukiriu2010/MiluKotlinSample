@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
-import kotlinx.android.synthetic.main.fragment_open_gl02_w030.*
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.TextureView
@@ -58,13 +57,13 @@ class W030Fragment : Fragment() {
         }
 
         // ブレンド有効
-        val checkBoxW030 = view.findViewById<CheckBox>(R.id.checkBoxW030)
+        val checkBoxW030 = view.findViewById<CheckBox>(R.id.checkBoxW030Blend)
         checkBoxW030.setOnCheckedChangeListener { buttonView, isChecked ->
             render.blend = isChecked
         }
 
         // アルファ成分
-        val seekBarW030 = view.findViewById<SeekBar>(R.id.seekBarW030)
+        val seekBarW030 = view.findViewById<SeekBar>(R.id.seekBarW030VertexAlpha)
         seekBarW030.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 render.vertexAplha = seekBarW030.progress.toFloat()/seekBarW030.max.toFloat()

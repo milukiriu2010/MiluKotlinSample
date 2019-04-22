@@ -51,29 +51,30 @@ class W030zRenderer: GLSurfaceView.Renderer {
     // 回転角度
     private var angle1 = 0
 
-    // ブレンド有効
-    var blend = false
-
-    // アルファ成分
-    var vertexAplha = 0.5f
 
     // コンテキストの色
     val contextColor = floatArrayOf(0f,0.7f,0.7f,1f)
     // ブレンドの色
     val blendColor = floatArrayOf(0f,0f,0f,1f)
 
-    // Color Equation
-    var equationColor = GLES20.GL_FUNC_ADD
-    // Alpha Equation
-    var equationAlpha = GLES20.GL_FUNC_ADD
+    // ブレンド有効
+    var blend = booleanArrayOf(false,true)
+    // アルファ成分
+    var vertexAplha = floatArrayOf(0f,0.5f)
+    // 方程式(カラー)
+    //  0: テクスチャ用
+    //  1: ポリゴン用
+    var equationColor = intArrayOf(GLES20.GL_FUNC_ADD,GLES20.GL_FUNC_ADD)
+    // 方程式(アルファ)
+    var equationAlpha = intArrayOf(GLES20.GL_FUNC_ADD,GLES20.GL_FUNC_ADD)
     // ブレンドファクター(カラー元)
-    var blendFctSCBF = GLES20.GL_SRC_ALPHA
+    var blendFctSCBF = intArrayOf(GLES20.GL_ONE,GLES20.GL_SRC_ALPHA)
     // ブレンドファクター(カラー先)
-    var blendFctDCBF = GLES20.GL_ONE_MINUS_SRC_ALPHA
+    var blendFctDCBF = intArrayOf(GLES20.GL_ZERO,GLES20.GL_ONE_MINUS_SRC_ALPHA)
     // ブレンドファクター(アルファ元)
-    var blendFctSABF = GLES20.GL_ONE
+    var blendFctSABF = intArrayOf(GLES20.GL_ONE,GLES20.GL_ONE)
     // ブレンドファクター(アルファ先)
-    var blendFctDABF = GLES20.GL_ONE
+    var blendFctDABF = intArrayOf(GLES20.GL_ZERO,GLES20.GL_ONE)
 
     override fun onDrawFrame(gl: GL10) {
 
@@ -85,26 +86,12 @@ class W030zRenderer: GLSurfaceView.Renderer {
         // ブレンドカラーを設定
         GLES20.glBlendColor(blendColor[0],blendColor[1],blendColor[2],blendColor[3])
 
-        // 回転角度
-        angle1 =(angle1+1)%360
-        val t1 = angle1.toFloat()
-
         // ビュー×プロジェクション座標変換行列
         Matrix.multiplyMM(matT,0,matP,0,matV,0)
 
-        // ブレンドカラー
-        GLES20.glBlendColor(1f,0f,0f,1f)
-
-        // テクスチャ0をバインド
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[0])
-
-        // ブレンディングを有効/無効にする
-        when (blend) {
-            true -> GLES20.glEnable(GLES20.GL_BLEND)
-            false -> GLES20.glDisable(GLES20.GL_BLEND)
-        }
-        GLES20.glBlendEquationSeparate(equationColor,equationAlpha)
-        GLES20.glBlendFuncSeparate(blendFctSCBF,blendFctDCBF,blendFctSABF,blendFctDABF)
+        // 回転角度
+        angle1 =(angle1+1)%360
+        val t1 = angle1.toFloat()
 
         // モデル座標変換行列の生成
         Matrix.setIdentityM(matM,0)
@@ -112,8 +99,19 @@ class W030zRenderer: GLSurfaceView.Renderer {
         Matrix.rotateM(matM,0,t1,0f,1f,0f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
 
+        // テクスチャ0をバインド
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[0])
+
+        // テクスチャのブレンディングを有効/無効にする
+        when (blend[0]) {
+            true -> GLES20.glEnable(GLES20.GL_BLEND)
+            false -> GLES20.glDisable(GLES20.GL_BLEND)
+        }
+        GLES20.glBlendEquationSeparate(equationColor[0],equationAlpha[0])
+        GLES20.glBlendFuncSeparate(blendFctSCBF[0],blendFctDCBF[0],blendFctSABF[0],blendFctDABF[0])
+
         // テクスチャ描画
-        drawObj.draw(programHandle, matMVP,vertexAplha,0,1)
+        drawObj.draw(programHandle, matMVP,vertexAplha[0],0,1)
 
         // ----------------------------------------------------------------------
 
@@ -126,8 +124,16 @@ class W030zRenderer: GLSurfaceView.Renderer {
         Matrix.rotateM(matM,0,t1,0f,0f,1f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
 
+        // ポリゴンのブレンディングを有効/無効にする
+        when (blend[0]) {
+            true -> GLES20.glEnable(GLES20.GL_BLEND)
+            false -> GLES20.glDisable(GLES20.GL_BLEND)
+        }
+        GLES20.glBlendEquationSeparate(equationColor[1],equationAlpha[1])
+        GLES20.glBlendFuncSeparate(blendFctSCBF[1],blendFctDCBF[1],blendFctSABF[1],blendFctDABF[1])
+
         // ポリゴンを描画
-        drawObj.draw(programHandle, matMVP,vertexAplha,0,0)
+        drawObj.draw(programHandle, matMVP,vertexAplha[1],0,0)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
