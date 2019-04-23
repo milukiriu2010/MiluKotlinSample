@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLUtils
 import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.gui.basic.MyColor
+import milu.kiriu2010.gui.basic.MgColor
 import java.lang.RuntimeException
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -182,7 +182,7 @@ class W044ModelSphere {
                     datCol.addAll(arrayListOf(color[0],color[1],color[2],color[3]))
                 }
                 else {
-                    var tc = MyColor.hsva(360/row*i,1f,1f,1f)
+                    var tc = MgColor.hsva(360/row*i,1f,1f,1f)
                     datCol.addAll(arrayListOf(tc[0],tc[1],tc[2],tc[3]))
                 }
                 datPos.addAll(arrayListOf(tx,ty,tz))

@@ -2,7 +2,7 @@ package milu.kiriu2010.gui.basic
 
 import kotlin.math.floor
 
-class MyColor {
+class MgColor {
     companion object {
 
         // ---------------------------------------------------------

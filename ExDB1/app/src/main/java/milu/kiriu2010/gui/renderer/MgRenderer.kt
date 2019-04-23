@@ -13,10 +13,10 @@ abstract class MgRenderer: GLSurfaceView.Renderer {
     protected val matP = FloatArray(16)
     // モデル・ビュー・プロジェクション行列
     protected val matMVP = FloatArray(16)
-    // テンポラリ行列
-    protected val matT = FloatArray(16)
+    // ビュー・プロジェクション行列
+    protected val matPV = FloatArray(16)
     // 点光源の位置
-    protected val vecLight = floatArrayOf(0f,0f,2f)
+    protected val vecLight = floatArrayOf(5f,5f,5f)
     // 環境光の色
     protected val vecAmbientColor = floatArrayOf(0.1f,0.1f,0.1f,1f)
     // カメラの座標

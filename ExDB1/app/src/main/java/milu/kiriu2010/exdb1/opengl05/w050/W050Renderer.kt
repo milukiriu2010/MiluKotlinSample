@@ -7,7 +7,7 @@ import android.opengl.Matrix
 import android.util.Log
 import android.view.MotionEvent
 import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.gui.basic.MyColor
+import milu.kiriu2010.gui.basic.MgColor
 import milu.kiriu2010.gui.basic.MyQuaternion
 import java.nio.ByteBuffer
 import java.nio.IntBuffer
@@ -157,7 +157,7 @@ class W050Renderer: GLSurfaceView.Renderer {
         GLES20.glUseProgram(programHandleSpecular)
         (0..8).forEach {  i ->
             val t = i.toFloat() * 360f/9f
-            var amb = MyColor.hsva(i*40,1f,1f,1f).toFloatArray()
+            var amb = MgColor.hsva(i*40,1f,1f,1f).toFloatArray()
             Matrix.setIdentityM(matM,0)
             Matrix.rotateM(matM,0,t,0f,1f,0f)
             Matrix.translateM(matM,0,0f,0f,30f)
@@ -189,7 +189,7 @@ class W050Renderer: GLSurfaceView.Renderer {
         GLES20.glUseProgram(programHandleSpecular)
         (0..8).forEach {  i ->
             val t = i.toFloat() * 360f/9f
-            var amb = MyColor.hsva(i*40,1f,1f,1f).toFloatArray()
+            var amb = MgColor.hsva(i*40,1f,1f,1f).toFloatArray()
             Matrix.setIdentityM(matM,0)
             Matrix.rotateM(matM,0,t,0f,1f,0f)
             Matrix.translateM(matM,0,0f,0f,30f)

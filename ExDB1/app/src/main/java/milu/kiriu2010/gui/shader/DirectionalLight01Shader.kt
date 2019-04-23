@@ -4,7 +4,7 @@ import android.opengl.GLES20
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLFunc
 
-class DirectionalLight01Shader {
+class DirectionalLight01Shader: MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -36,9 +36,7 @@ class DirectionalLight01Shader {
             }
             """.trimIndent()
 
-    var programHandle = -1
-
-    fun loadShader(): Int {
+    override fun loadShader(): MgShader {
         // 頂点シェーダを生成
         val svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
@@ -46,7 +44,7 @@ class DirectionalLight01Shader {
 
         // プログラムオブジェクトの生成とリンク
         programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Normal","a_Color") )
-        return programHandle
+        return this
     }
 
     fun draw(modelAbs: MgModelAbs,

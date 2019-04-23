@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/mgl01_qtn01"
+        android:title="クォータニオン" />
+    <item
         android:id="@+id/mgl01_cube07"
         android:title="立方体(クォータニオン)" />
     <item

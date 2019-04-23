@@ -7,7 +7,7 @@ import android.opengl.GLUtils
 import android.opengl.Matrix
 import android.util.Log
 import android.view.MotionEvent
-import milu.kiriu2010.gui.basic.MyColor
+import milu.kiriu2010.gui.basic.MgColor
 import milu.kiriu2010.gui.basic.MyQuaternion
 import java.lang.RuntimeException
 import java.nio.IntBuffer
@@ -109,7 +109,7 @@ class W056Renderer: GLSurfaceView.Renderer {
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
 
         // フレームバッファを初期化
-        var hsv = MyColor.hsva(cntColor%360,1f,1f,1f)
+        var hsv = MgColor.hsva(cntColor%360,1f,1f,1f)
         GLES20.glClearColor(hsv[0], hsv[1], hsv[2], hsv[3])
         GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
@@ -128,7 +128,7 @@ class W056Renderer: GLSurfaceView.Renderer {
         // トーラス描画(10個)
         // -------------------------------------------------------
         (0..9).forEach { i ->
-            val amb = MyColor.hsva(i*40,1f,1f,1f)
+            val amb = MgColor.hsva(i*40,1f,1f,1f)
             Matrix.setIdentityM(matM,0)
             Matrix.rotateM(matM,0,i.toFloat()*360f/9f,0f,1f,0f)
             Matrix.translateM(matM,0,0f,0f,10f)

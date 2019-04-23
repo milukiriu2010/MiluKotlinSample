@@ -14,6 +14,7 @@ import milu.kiriu2010.exdb1.mgl01.cube04.Cube04Fragment
 import milu.kiriu2010.exdb1.mgl01.cube05.Cube05Fragment
 import milu.kiriu2010.exdb1.mgl01.cube06.Cube06Fragment
 import milu.kiriu2010.exdb1.mgl01.cube07.Cube07Fragment
+import milu.kiriu2010.exdb1.mgl01.qtn01.Qtn01Fragment
 
 class Mgl01Activity : AppCompatActivity() {
 
@@ -23,7 +24,7 @@ class Mgl01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Home") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, MGL01HomeFragment.newInstance(), "Home")
+                            .replace(R.id.frameLayout, Qtn01Fragment.newInstance(), "Home")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
@@ -58,7 +59,7 @@ class Mgl01Activity : AppCompatActivity() {
 
         if (supportFragmentManager.findFragmentByTag("Home") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, MGL01HomeFragment.newInstance(), "Home")
+                    .replace(R.id.frameLayout, Qtn01Fragment.newInstance(), "Home")
                     .commit()
         }
 
@@ -80,6 +81,16 @@ class Mgl01Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // クォータニオン
+            R.id.mgl01_qtn01 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("qtn01") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Qtn01Fragment.newInstance(), "qtn01")
+                            .commit()
+                }
                 true
             }
             // 立方体(クォータニオン)
