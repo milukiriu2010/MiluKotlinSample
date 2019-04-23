@@ -48,8 +48,6 @@ class W035Renderer: GLSurfaceView.Renderer {
 
     // ビットマップ配列
     val bmpArray = arrayListOf<Bitmap>()
-    // ビットマップリサイクル配列
-    val bmpRecycleDoneArray = arrayListOf<Boolean>(false,false)
 
     // テクスチャ配列
     val textures = IntArray(2)
@@ -66,6 +64,8 @@ class W035Renderer: GLSurfaceView.Renderer {
 
     override fun onDrawFrame(gl: GL10?) {
         // canvasを初期化
+        GLES20.glClearColor(0f,0.7f,0.7f,1f)
+        GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // クォータニオンを行列に適用
@@ -93,22 +93,22 @@ class W035Renderer: GLSurfaceView.Renderer {
         Matrix.perspectiveM(matP,0,60f,ratio,0.1f,100f)
         Matrix.multiplyMM(matT,0,matP,0,matV,0)
 
-        // フロア用テクスチャをバインド
-        drawObj.activateTexture(1,textures,bmpArray[1],bmpRecycleDoneArray[1])
-        bmpRecycleDoneArray[1] = true
+        // 背景用テクスチャをバインド
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE1)
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[1])
 
-        // フロアのレンダリング
+        // 背景テクスチャをレンダリング
         Matrix.setIdentityM(matM,0)
         Matrix.rotateM(matM,0,90f,1f,0f,0f)
         Matrix.scaleM(matM,0,3f,3f,1f)
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
         drawObj.draw(programHandle,matMVP,1)
 
-        // ビルボード用テクスチャをバインド
-        drawObj.activateTexture(0,textures,bmpArray[0],bmpRecycleDoneArray[0])
-        bmpRecycleDoneArray[0] = true
+        // ビルボード用テクスチャ(ボール)をバインド
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[0])
 
-        // ビルボードのレンダリング
+        // ビルボード用テクスチャ(ボール)のレンダリング
         Matrix.setIdentityM(matM,0)
         Matrix.translateM(matM,0,0f,1f,0f)
         if (isBillBoard) {
@@ -150,10 +150,11 @@ class W035Renderer: GLSurfaceView.Renderer {
         // モデル生成
         drawObj = W035Model()
 
-        /*
+        // ビルボード用テクスチャ(ボール)をバインド
         drawObj.activateTexture(0,textures,bmpArray[0])
+
+        // 背景テクスチャをバインド
         drawObj.activateTexture(1,textures,bmpArray[1])
-        */
 
         // ----------------------------------
         // 単位行列化

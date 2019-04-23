@@ -154,7 +154,7 @@ class W030zModel {
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, datIdx.size, GLES20.GL_UNSIGNED_SHORT, bufIdx)
     }
 
-    fun activateTexture(id: Int, textures: IntArray, bmp: Bitmap, doRecycle: Boolean = false) {
+    fun activateTexture(id: Int, textures: IntArray, bmp: Bitmap ) {
         // 有効にするテクスチャユニットを指定
         when (id) {
             0 -> GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
@@ -193,7 +193,9 @@ class W030zModel {
         // テクスチャのバインドを無効化
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0)
 
-        //if ( doRecycle ) bmp.recycle()
+        if ( bmp.isRecycled === false ) {
+            bmp.recycle()
+        }
 
         if (textures[id] == 0) {
             throw RuntimeException("Error loading texture[${id}]")
