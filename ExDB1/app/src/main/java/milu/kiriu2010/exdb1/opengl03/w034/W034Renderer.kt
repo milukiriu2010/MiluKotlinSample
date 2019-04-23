@@ -64,8 +64,8 @@ class W034Renderer: GLSurfaceView.Renderer {
         Matrix.multiplyMM(matT,0,matP,0,matV,0)
 
         // 回転角度
-        angle1 =(angle1+5)%360
-        angle2 =(angle2+2)%360
+        angle1 =(angle1+2)%360
+        angle2 =(angle2+1)%360
         val t1 = angle1.toFloat()
         val t2 = angle2.toFloat()
 
@@ -76,9 +76,12 @@ class W034Renderer: GLSurfaceView.Renderer {
 
 
         // モデル描画
-        draw(aQuaternion, floatArrayOf(0.5f,0f,0f,1f))
-        draw(bQuaternion, floatArrayOf(0f,0.5f,0f,1f))
-        draw(sQuaternion, floatArrayOf(0f,0f,0.5f,1f))
+        // 赤(X軸を中心に回転)
+        draw(aQuaternion, floatArrayOf(0.5f,  0f,  0f,1f))
+        // 緑(Y軸を中心に回転)
+        draw(bQuaternion, floatArrayOf(  0f,0.5f,  0f,1f))
+        // 青(線形補間軸を中心に回転)
+        draw(sQuaternion, floatArrayOf(  0f,  0f,0.5f,1f))
 
     }
 
@@ -91,7 +94,7 @@ class W034Renderer: GLSurfaceView.Renderer {
         var matQ = qtn.toMatIV()
         // モデルを単位行列にする
         Matrix.setIdentityM(matM,0)
-        Matrix.multiplyMM(matM,0,matQ,0,matM,0)
+        Matrix.multiplyMM(matM,0,matM,0,matQ,0)
         Matrix.translateM(matM,0,0f,0f,-5f)
         // モデル×ビュー×プロジェクション
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)

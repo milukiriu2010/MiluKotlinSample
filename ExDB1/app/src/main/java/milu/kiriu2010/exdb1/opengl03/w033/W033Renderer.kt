@@ -59,12 +59,13 @@ class W033Renderer: GLSurfaceView.Renderer {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // 回転角度
-        angle1 =(angle1+5)%360
-        angle2 =(angle2+2)%360
+        angle1 =(angle1+2)%360
+        angle2 =(angle2+1)%360
         val t1 = angle1.toFloat()
         val t2 = angle2.toFloat()
 
         // クォータニオンを行列に適用する
+        // クォータニオンによる回転が適用された状態の座標変換行列を取得する
         val matQ = xQuaternion.toMatIV()
         //Log.d(javaClass.simpleName,"0[${matQ[0]}}1[${matQ[1]}}2[${matQ[2]}}3[${matQ[3]}}")
 
@@ -74,7 +75,7 @@ class W033Renderer: GLSurfaceView.Renderer {
 
         // モデルを単位行列にする
         Matrix.setIdentityM(matM,0)
-        Matrix.multiplyMM(matM,0,matQ,0,matM,0)
+        Matrix.multiplyMM(matM,0,matM,0,matQ,0)
         // モデルを"Y軸"を中心に回転する
         Matrix.rotateM(matM, 0, t1, 0f, 1f, 0f)
         // モデルを"Y軸45度/Z軸45度"を中心に回転する
@@ -121,7 +122,10 @@ class W033Renderer: GLSurfaceView.Renderer {
         drawObj = W033Model()
     }
 
+    // w: キャンバスの幅
+    // h: キャンバスの高さ
     fun receiveTouch(ev: MotionEvent, w: Int, h: Int ) {
+        // キャンバスの対角線の長さの逆数
         var wh = 1f/ sqrt((w*w+h*h).toFloat())
         // canvasの中心点からみたタッチ点の相対位置
         var x = ev.x - w.toFloat()*0.5f
@@ -130,11 +134,14 @@ class W033Renderer: GLSurfaceView.Renderer {
         //var r = sq*2f*PI.toFloat()*wh
         // 回転角
         var r = sq*wh*360f
-        if (sq != 1f) {
+        // 単位化する
+        if ( (sq != 1f) and ( sq != 0f ) ) {
             sq = 1f/sq
             x *= sq
             y *= sq
         }
+
+        // 回転角と回転軸ベクトルからクォータニオンを生成
         xQuaternion = MyQuaternion.rotate(r, floatArrayOf(y,x,0f))
     }
 }

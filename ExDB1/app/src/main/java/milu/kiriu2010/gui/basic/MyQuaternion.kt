@@ -8,10 +8,17 @@ import kotlin.math.sqrt
 
 // https://wgld.org/d/webgl/w032.html
 // のライブラリをまねた
+// ------------------------------------
+//  0:X座標
+//  1:Y座標
+//  2:Z座標
+//  3:角度
+// ------------------------------------
 data class MyQuaternion(
     val q: FloatArray = floatArrayOf(0f,0f,0f,0f)
 ) {
 
+    // クォータニオンを単位化する
     fun identity(): MyQuaternion {
         q[0] = 0f
         q[1] = 0f
@@ -21,6 +28,7 @@ data class MyQuaternion(
         return this
     }
 
+    // クォータニオンを反転し、共役四元数を生成する
     fun inverse(): MyQuaternion {
         q[0] = -q[0]
         q[1] = -q[1]
@@ -30,6 +38,7 @@ data class MyQuaternion(
         return this
     }
 
+    // クォータニオンを正規化する
     fun normalize(): MyQuaternion {
         val x = q[0]
         val y = q[1]
@@ -52,6 +61,10 @@ data class MyQuaternion(
         return this
     }
 
+    // クォータニオンを掛け合わせる
+    //  Q  = (q        ; V)
+    //  R  = (r        ; W)
+    //  QR = (qr - V・W; qW + rV + V x W)
     fun multiply( qtn: MyQuaternion ): MyQuaternion {
         val ax = q[0]
         val ay = q[1]
@@ -70,7 +83,47 @@ data class MyQuaternion(
         return this
     }
 
+    // 4x4の正方行列にクォータニオンを掛け合わせる
+    // ----------------------------------------------
+    // http://marupeke296.com/DXG_No58_RotQuaternionTrans.html
     fun toMatIV(): FloatArray {
+        var x = q[0]
+        var y = q[1]
+        var z = q[2]
+        var w = q[3]
+
+        var xx = 2f*x*x
+        var yy = 2f*y*y
+        var zz = 2f*z*z
+        var xy = 2f*x*y
+        var xz = 2f*x*z
+        var yz = 2f*y*z
+        var wx = 2f*w*x
+        var wy = 2f*w*y
+        var wz = 2f*w*z
+
+        return floatArrayOf(
+                1f-yy-zz,   //  0:1-2yy-2zz
+                xy+wz,      //  1:2xy+2wz
+                xz-wy,      //  2:2xz-2wy
+                0f,         //  3:0
+                xy-wz,      //  4:2xy-2wz
+                1-xx-zz,    //  5:1-2xx-2zz
+                yz+wx,      //  6:2yz+2wx
+                0f,         //  7:0
+                xz+wy,      //  8:2xz+2wy
+                yz-wx,      //  9:2yz-2wx
+                1-xx-yy,    // 10:1-2xx-2zz
+                0f,         // 11:0
+                0f,         // 12:0
+                0f,         // 13:0
+                0f,         // 14:0
+                1f          // 15:1
+        )
+    }
+
+    // 符号が上と逆
+    fun toMatIV2(): FloatArray {
         var x = q[0]
         var y = q[1]
         var z = q[2]
@@ -108,7 +161,18 @@ data class MyQuaternion(
         )
     }
 
+
     companion object {
+        // ------------------------------------------------------
+        // 任意軸での任意角回転を粟原素クォータニオンを生成する
+        // ------------------------------------------------------
+        //   angle
+        //     任意軸回転の角度(度)
+        //   axis
+        //     回転軸を表すベクトル
+        //   return
+        //     生成されたクォータニオン
+        // ------------------------------------------------------
         fun rotate( angle: Float, axis: FloatArray ): MyQuaternion {
             val qtn = MyQuaternion()
             var sq = sqrt(axis[0]*axis[0]+axis[1]*axis[1]+axis[2]*axis[2])
@@ -122,12 +186,14 @@ data class MyQuaternion(
                 var a = axis[0]
                 var b = axis[1]
                 var c = axis[2]
+                // 軸ベクトルを正規化する
                 if ( sq != 1f ) {
                     sq = 1f/sq
                     a *= sq
                     b *= sq
                     c *= sq
                 }
+
                 var sin = MyMathUtil.sinf(angle/2f)
                 qtn.q[0] = a * sin
                 qtn.q[1] = b * sin
@@ -138,12 +204,31 @@ data class MyQuaternion(
             return qtn
         }
 
+        // ---------------------------------------------------------
+        // クォータニオンで３次元ベクトルを回転させる
+        // ---------------------------------------------------------
+        //   vec
+        //     回転させたいベクトル
+        //   qtn
+        //     回転要素を持つクォータニオンQ
+        //   return
+        //     計算結果
+        // ---------------------------------------------------------
+        //  ３次元空間上の座標
+        //    P = (0; x,y,z)
+        //  Pを回転させるための計算は
+        //    R * P * Q = (0; X,Y,Z)
+        // ---------------------------------------------------------
         fun toVecIII(vec: FloatArray, qtn: MyQuaternion): FloatArray {
+            // 座標P(３次元空間の座標)をクォータニオン形式にする
             var qp = MyQuaternion(floatArrayOf(vec[0],vec[1],vec[2],0f))
+            // クォータニオンQに対応する共役四元数R
             var qr = MyQuaternion(floatArrayOf(qtn.q[0],qtn.q[1],qtn.q[2],qtn.q[3]))
             qr.inverse()
+            // R*P
             var qq = MyQuaternion(floatArrayOf(qr.q[0],qr.q[1],qr.q[2],qr.q[3]))
                     .multiply(qp)
+            // (R*P)*Q
             var qs = MyQuaternion(floatArrayOf(qq.q[0],qq.q[1],qq.q[2],qq.q[3]))
                     .multiply(qtn)
             return floatArrayOf(qs.q[0],qs.q[1],qs.q[2])
