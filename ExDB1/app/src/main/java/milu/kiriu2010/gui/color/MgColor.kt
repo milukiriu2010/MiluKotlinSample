@@ -1,10 +1,10 @@
-package milu.kiriu2010.gui.basic
+package milu.kiriu2010.gui.color
 
 import kotlin.math.floor
 
 class MgColor {
-    companion object {
 
+    companion object {
         // ---------------------------------------------------------
         // HSVカラー取得用関数
         // ---------------------------------------------------------
@@ -17,6 +17,8 @@ class MgColor {
         // s: 彩度(0.0-1.0)
         // v: 明度(0.0-1.0)
         // a: 透明度(0.0-1.0)
+        // ---------------------------------------------------------
+        // https://wgld.org/sitemap.html
         // ---------------------------------------------------------
         fun hsva(h: Int, s: Float, v: Float, a: Float): ArrayList<Float> {
             val color = arrayListOf<Float>()

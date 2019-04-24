@@ -6,7 +6,7 @@ import android.opengl.GLSurfaceView
 import android.opengl.Matrix
 import android.util.Log
 import android.view.MotionEvent
-import milu.kiriu2010.gui.basic.MgColor
+import milu.kiriu2010.gui.color.MgColor
 import milu.kiriu2010.gui.basic.MyQuaternion
 import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig

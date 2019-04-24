@@ -6,6 +6,7 @@ import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import milu.kiriu2010.gui.model.*
 import milu.kiriu2010.gui.renderer.MgRenderer
+import milu.kiriu2010.gui.renderer.Tetrahedron01Model
 import milu.kiriu2010.gui.shader.DirectionalLight01Shader
 import milu.kiriu2010.gui.shader.Simple01Shader
 import milu.kiriu2010.math.MyMathUtil
@@ -122,11 +123,11 @@ class DepthCull01Renderer(val modelID: Int): MgRenderer() {
             4 -> Icosahedron01Model()
             else -> Tetrahedron01Model()
         }
-        model.createPath()
+        model.createPath( mapOf("pattern" to 2f) )
 
         // 座標軸モデル
         axisModel = Axis01Model()
-        axisModel.createPath()
+        axisModel.createPath( mapOf("scale" to 3f))
 
         // 座標軸モデルの線の太さを設定
         GLES20.glLineWidth(5f)

@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLUtils
 import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.gui.basic.MgColor
+import milu.kiriu2010.gui.color.MgColor
 import java.lang.RuntimeException
 import java.nio.ByteBuffer
 import java.nio.ByteOrder

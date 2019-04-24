@@ -7,7 +7,7 @@ import android.opengl.GLUtils
 import android.opengl.Matrix
 import android.util.Log
 import android.view.MotionEvent
-import milu.kiriu2010.gui.basic.MgColor
+import milu.kiriu2010.gui.color.MgColor
 import milu.kiriu2010.gui.basic.MyQuaternion
 import java.lang.RuntimeException
 import java.nio.IntBuffer

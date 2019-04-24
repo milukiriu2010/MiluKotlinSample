@@ -164,10 +164,10 @@ class MyTorus06 {
 
         // 頂点シェーダを生成
         val vertexShader: Int = loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode)
-        MyGLFunc.printShaderInfoLog(vertexShader)
+        MyGLFunc.printShaderInfoLog(vertexShader,"MyTorus6:vertex")
         // フラグメントシェーダを生成
         val fragmentShader: Int = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode)
-        MyGLFunc.printShaderInfoLog(fragmentShader)
+        MyGLFunc.printShaderInfoLog(fragmentShader,"MyTorus6:fragment")
 
         // プログラムオブジェクトの生成とリンク
         mProgram = GLES20.glCreateProgram().also {

@@ -12,21 +12,21 @@ abstract class MgModelAbs {
     lateinit var bufNor: FloatBuffer
     // 色バッファ
     lateinit var bufCol: FloatBuffer
-    // テクスチャコードバッファ
+    // テクスチャ座標バッファ
     lateinit var bufTxc: FloatBuffer
     // インデックスバッファ
     lateinit var bufIdx: ShortBuffer
 
     // 頂点データ
-    val datPos = arrayListOf<Float>()
+    var datPos = arrayListOf<Float>()
     // 法線データ
-    val datNor = arrayListOf<Float>()
+    var datNor = arrayListOf<Float>()
     // 色データ
-    val datCol = arrayListOf<Float>()
-    // テクスチャコードデータ
-    val datTxc = arrayListOf<Float>()
+    var datCol = arrayListOf<Float>()
+    // テクスチャ座標データ
+    var datTxc = arrayListOf<Float>()
     // インデックスデータ
-    val datIdx = arrayListOf<Short>()
+    var datIdx = arrayListOf<Short>()
 
     protected fun allocateBuffer() {
         // 頂点バッファ

@@ -2,7 +2,7 @@ package milu.kiriu2010.exdb1.opengl03.w036
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.gui.basic.MgColor
+import milu.kiriu2010.gui.color.MgColor
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer

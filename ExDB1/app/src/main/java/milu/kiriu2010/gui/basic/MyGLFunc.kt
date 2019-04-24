@@ -2,7 +2,6 @@ package milu.kiriu2010.gui.basic
 
 import android.opengl.GLES20
 import android.util.Log
-import java.lang.RuntimeException
 
 class MyGLFunc {
 
@@ -45,11 +44,11 @@ class MyGLFunc {
             val programHandle = GLES20.glCreateProgram().also {
                 // 頂点シェーダをプログラムに追加
                 GLES20.glAttachShader(it,svhandle)
-                printShaderInfoLog(svhandle)
+                MyGLFunc.printShaderInfoLog(svhandle,"vertex shader")
 
                 // フラグメントシェーダをプログラムに追加
                 GLES20.glAttachShader(it,sfhandle)
-                printShaderInfoLog(sfhandle)
+                MyGLFunc.printShaderInfoLog(sfhandle,"fragment shader")
 
                 // シェーダオブジェクトを削除
                 GLES20.glDeleteShader(svhandle)
@@ -68,7 +67,7 @@ class MyGLFunc {
                 GLES20.glGetProgramiv(it,GLES20.GL_LINK_STATUS,linkStatus,0)
                 // リンク失敗
                 if (linkStatus[0] == 0) {
-                    printProgramInfoLog(it)
+                    MyGLFunc.printProgramInfoLog(it)
                     GLES20.glDeleteProgram(it)
                     throw RuntimeException("Error creating program.")
                 }
@@ -93,8 +92,8 @@ class MyGLFunc {
         // -------------------------------------
         // シェーダの情報を表示する
         // -------------------------------------
-        fun printShaderInfoLog(shaderHandle: Int) {
-            Log.d(TAG,"=== shader compile ============================")
+        fun printShaderInfoLog(shaderHandle: Int, tag: String) {
+            Log.d(TAG,"=== shader compile[${tag}] ===================")
             // シェーダのコンパイル時のログの内容を取得する
             Log.d(TAG,GLES20.glGetShaderInfoLog(shaderHandle))
             /*
@@ -116,7 +115,7 @@ class MyGLFunc {
         fun printProgramInfoLog(programHandle: Int) {
             Log.d(TAG,"=== shader link ============================")
             // シェーダのリンク時のログの内容を取得する
-            Log.d(TAG,GLES20.glGetProgramInfoLog(programHandle))
+            Log.d(TAG, GLES20.glGetProgramInfoLog(programHandle))
             /*
             val len = IntArray(1)
             GLES20.glGetProgramiv(programHandle,GLES20.GL_INFO_LOG_LENGTH,len,0)

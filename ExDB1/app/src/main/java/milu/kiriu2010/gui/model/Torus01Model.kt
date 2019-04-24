@@ -1,12 +1,10 @@
 package milu.kiriu2010.gui.model
 
-import milu.kiriu2010.gui.basic.MgColor
-import milu.kiriu2010.math.MyMathUtil
+import milu.kiriu2010.gui.color.MgColor
 import java.nio.*
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
-import kotlin.math.sqrt
 
 
 // トーラス

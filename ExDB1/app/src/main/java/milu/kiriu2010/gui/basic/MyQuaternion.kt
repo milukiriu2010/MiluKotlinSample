@@ -6,16 +6,19 @@ import kotlin.math.acos
 import kotlin.math.sin
 import kotlin.math.sqrt
 
+// ------------------------------------
 // https://wgld.org/d/webgl/w032.html
-// のライブラリをまねた
+// のライブラリをコピー
 // ------------------------------------
 //  0:X座標
 //  1:Y座標
 //  2:Z座標
 //  3:角度
 // ------------------------------------
+// 2019.04.24  マージ
+// ------------------------------------
 data class MyQuaternion(
-    val q: FloatArray = floatArrayOf(0f,0f,0f,1f)
+        val q: FloatArray = floatArrayOf(0f,0f,0f,1f)
 ) {
 
     // クォータニオンを単位化する
@@ -236,38 +239,6 @@ data class MyQuaternion(
             return qtn
         }
 
-        /*
-        // ---------------------------------------------------------
-        // クォータニオンで３次元ベクトルを回転させる
-        // ---------------------------------------------------------
-        //   vec
-        //     回転させたいベクトル
-        //   qtn
-        //     回転要素を持つクォータニオンQ
-        //   return
-        //     計算結果
-        // ---------------------------------------------------------
-        //  ３次元空間上の座標
-        //    P = (0; x,y,z)
-        //  Pを回転させるための計算は
-        //    R * P * Q = (0; X,Y,Z)
-        // ---------------------------------------------------------
-        fun toVecIII(vec: FloatArray, qtn: MyQuaternion): FloatArray {
-            // 座標P(３次元空間の座標)をクォータニオン形式にする
-            var qp = MyQuaternion(floatArrayOf(vec[0],vec[1],vec[2],0f))
-            // クォータニオンQに対応する共役四元数R
-            var qr = MyQuaternion(floatArrayOf(qtn.q[0],qtn.q[1],qtn.q[2],qtn.q[3]))
-            qr.inverse()
-            // R*P
-            var qq = MyQuaternion(floatArrayOf(qr.q[0],qr.q[1],qr.q[2],qr.q[3]))
-                    .multiply(qp)
-            // (R*P)*Q
-            var qs = MyQuaternion(floatArrayOf(qq.q[0],qq.q[1],qq.q[2],qq.q[3]))
-                    .multiply(qtn)
-            return floatArrayOf(qs.q[0],qs.q[1],qs.q[2])
-        }
-        */
-
         // 球面線形補間
         //   ktime: 0 - 1
         fun slerp(qtn1: MyQuaternion,qtn2: MyQuaternion,ktime: Float): MyQuaternion {
@@ -302,5 +273,4 @@ data class MyQuaternion(
             return qtn0
         }
     }
-
 }
