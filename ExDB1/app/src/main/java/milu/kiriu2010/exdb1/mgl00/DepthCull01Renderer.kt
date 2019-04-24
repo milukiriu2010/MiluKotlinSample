@@ -1,5 +1,6 @@
 package milu.kiriu2010.exdb1.mgl00
 
+import android.content.Context
 import android.opengl.GLES20
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
@@ -12,7 +13,8 @@ import milu.kiriu2010.gui.shader.Simple01Shader
 import milu.kiriu2010.math.MyMathUtil
 
 
-class DepthCull01Renderer(val modelID: Int): MgRenderer() {
+class DepthCull01Renderer(val modelID: Int,ctx: Context): MgRenderer(ctx) {
+
     // 描画モデル
     private lateinit var model: MgModelAbs
     // 座標軸モデル
@@ -47,16 +49,16 @@ class DepthCull01Renderer(val modelID: Int): MgRenderer() {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // 回転角度
-        if ( rotateSwitch ) {
-            angle1 =(angle1+1)%360
+        if ( isRunning ) {
+            angle[0] =(angle[0]+1)%360
         }
-        val t1 = angle1.toFloat()
+        val t1 = angle[0].toFloat()
 
         val x = MyMathUtil.cosf(t1)
         val y = MyMathUtil.sinf(t1)
 
         // ビュー×プロジェクション
-        Matrix.multiplyMM(matPV,0,matP,0,matV,0)
+        Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
         // モデルを単位行列にする
         Matrix.setIdentityM(matM,0)
@@ -65,7 +67,7 @@ class DepthCull01Renderer(val modelID: Int): MgRenderer() {
         // モデルをY軸を中心に自転させる
         Matrix.rotateM(matM,0,t1,0f,1f,0f)
         // モデル×ビュー×プロジェクション
-        Matrix.multiplyMM(matMVP,0,matPV,0,matM,0)
+        Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
 
         // モデル座標変換行列から逆行列を生成
         Matrix.invertM(matI,0,matM,0)
@@ -102,6 +104,7 @@ class DepthCull01Renderer(val modelID: Int): MgRenderer() {
         GLES20.glEnable(GLES20.GL_CULL_FACE)
 
         // カメラの位置
+        vecEye[2]  = 10f
         Matrix.setLookAtM(matV, 0,
                 vecEye[0], vecEye[1], vecEye[2],
                 vecCenter[0], vecCenter[1], vecCenter[2],
@@ -131,5 +134,11 @@ class DepthCull01Renderer(val modelID: Int): MgRenderer() {
 
         // 座標軸モデルの線の太さを設定
         GLES20.glLineWidth(5f)
+    }
+
+    override fun setMotionParam(motionParam: MutableMap<String, Float>) {
+    }
+
+    override fun closeShader() {
     }
 }

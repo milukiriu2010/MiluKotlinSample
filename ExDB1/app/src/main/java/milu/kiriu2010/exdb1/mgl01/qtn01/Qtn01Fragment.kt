@@ -29,17 +29,17 @@ class Qtn01Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_mgl01_qtn01, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        val render = Qtn01Renderer()
+        val render = Qtn01Renderer(context!!)
         myGL02View.setRenderer(render)
         myGL02View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
-                    render.rotateSwitch = false
+                    render.isRunning = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     //Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
                     //Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
-                    render.rotateSwitch = true
+                    render.isRunning = true
                     render.receiveTouch(event,myGL02View.width,myGL02View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
