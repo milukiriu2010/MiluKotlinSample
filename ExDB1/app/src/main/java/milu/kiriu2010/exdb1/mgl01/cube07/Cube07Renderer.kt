@@ -62,9 +62,9 @@ class Cube07Renderer: GLSurfaceView.Renderer {
         // クォータニオンによる回転
         xQuaternion = MyQuaternion.rotate(t2,xaxis)
         // カメラの座標
-        val vecEyeT = MyQuaternion.toVecIII(vecEye,xQuaternion)
+        val vecEyeT = xQuaternion.toVecIII(vecEye)
         // カメラの上方向を表すベクトル
-        val vecEyeUpT = MyQuaternion.toVecIII(vecEyeUp,xQuaternion)
+        val vecEyeUpT = xQuaternion.toVecIII(vecEyeUp)
 
         /* カメラの回転を止める
 

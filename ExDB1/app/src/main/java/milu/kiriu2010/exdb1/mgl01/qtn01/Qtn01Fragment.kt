@@ -37,8 +37,8 @@ class Qtn01Fragment : Fragment() {
                     render.rotateSwitch = false
                 }
                 MotionEvent.ACTION_DOWN -> {
-                    Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
-                    Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
+                    //Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
+                    //Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
                     render.rotateSwitch = true
                     render.receiveTouch(event,myGL02View.width,myGL02View.height)
                 }

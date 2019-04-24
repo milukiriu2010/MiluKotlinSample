@@ -63,9 +63,9 @@ class W032Renderer: GLSurfaceView.Renderer {
         // X軸が回転軸としてt2度回転したクォータニオンを生成
         xQuaternion = MyQuaternion.rotate(t2,xaxis)
         // クォータニオンを使って座標変換(カメラの座標)
-        val vecEyeT = MyQuaternion.toVecIII(vecEye,xQuaternion)
+        val vecEyeT = xQuaternion.toVecIII(vecEye)
         // クォータニオンを使って座標変換(カメラの上方向を表すベクトル)
-        val vecEyeUpT = MyQuaternion.toVecIII(vecEyeUp,xQuaternion)
+        val vecEyeUpT = xQuaternion.toVecIII(vecEyeUp)
 
         /* カメラの回転を止める
 

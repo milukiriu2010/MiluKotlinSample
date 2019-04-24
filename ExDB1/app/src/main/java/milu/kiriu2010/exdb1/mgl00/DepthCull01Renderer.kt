@@ -14,6 +14,8 @@ import milu.kiriu2010.math.MyMathUtil
 class DepthCull01Renderer(val modelID: Int): MgRenderer() {
     // 描画モデル
     private lateinit var model: MgModelAbs
+    // 座標軸モデル
+    private lateinit var axisModel: MgModelAbs
 
     // シェーダ
     private lateinit var shaderSimple: Simple01Shader
@@ -73,6 +75,9 @@ class DepthCull01Renderer(val modelID: Int): MgRenderer() {
             1 -> shaderDirectionalLight.draw(model,matMVP,matI,vecLight)
             else -> shaderSimple.draw(model,matMVP)
         }
+
+        // 座標軸を描画
+        shaderSimple.drawArrays(axisModel,matMVP)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -118,5 +123,12 @@ class DepthCull01Renderer(val modelID: Int): MgRenderer() {
             else -> Tetrahedron01Model()
         }
         model.createPath()
+
+        // 座標軸モデル
+        axisModel = Axis01Model()
+        axisModel.createPath()
+
+        // 座標軸モデルの線の太さを設定
+        GLES20.glLineWidth(5f)
     }
 }

@@ -117,8 +117,8 @@ class W052Renderer: GLSurfaceView.Renderer {
         angle1 =(angle1+2)%360
 
         // ビュー×プロジェクション座標変換行列
-        vecEye = MyQuaternion.toVecIII(floatArrayOf(0f,0f,70f),xQuaternion)
-        vecEyeUp = MyQuaternion.toVecIII(floatArrayOf(0f,0f,-1f),xQuaternion)
+        vecEye = xQuaternion.toVecIII(floatArrayOf(0f,0f,70f))
+        vecEyeUp = xQuaternion.toVecIII(floatArrayOf(0f,0f,-1f))
         Matrix.setLookAtM(matV, 0,
                 vecEye[0], vecEye[1], vecEye[2],
                 vecCenter[0], vecCenter[1], vecCenter[2],

@@ -43,7 +43,6 @@ class Simple01Shader {
         return programHandle
     }
 
-
     fun draw(modelAbs: MgModelAbs,
              matMVP: FloatArray) {
         GLES20.glUseProgram(programHandle)
@@ -72,6 +71,47 @@ class Simple01Shader {
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, modelAbs.datIdx.size, GLES20.GL_UNSIGNED_SHORT, modelAbs.bufIdx)
+    }
+
+
+    fun drawArrays(modelAbs: MgModelAbs,
+             matMVP: FloatArray) {
+        GLES20.glUseProgram(programHandle)
+
+        // attribute(頂点)
+        modelAbs.bufPos.position(0)
+        // get handle to vertex shader's vPosition member
+        GLES20.glGetAttribLocation(programHandle, "a_Position").also {
+            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false,3*4,modelAbs.bufPos)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLFunc.checkGlError("a_Position")
+
+        // attribute(色)
+        modelAbs.bufCol.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Color").also {
+            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 4*4, modelAbs.bufCol)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLFunc.checkGlError("a_Color")
+
+        // uniform(モデル×ビュー×プロジェクション)
+        GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
+        }
+
+        // モデルを描画
+        /*
+        GLES20.glDrawArrays(GLES20.GL_LINES,0,4)
+        GLES20.glDrawArrays(GLES20.GL_LINES,4,4)
+        GLES20.glDrawArrays(GLES20.GL_LINES,8,4)
+        */
+        // XYZ軸の３方向で３割る
+        // 描画点がXYZの３座標保持するため３割る
+        val cnt = modelAbs.datPos.size/3/3
+        (0..2).forEach { i ->
+            GLES20.glDrawArrays(GLES20.GL_LINES,i*cnt,cnt)
+        }
     }
 
 }

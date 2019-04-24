@@ -4,7 +4,9 @@ import android.opengl.GLES20
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
+import android.util.Log
 import android.view.MotionEvent
+import milu.kiriu2010.gui.basic.MyPointF
 import milu.kiriu2010.gui.basic.MyQuaternion
 import milu.kiriu2010.gui.model.*
 import milu.kiriu2010.gui.renderer.MgRenderer
@@ -21,7 +23,12 @@ class Qtn01Renderer: MgRenderer() {
     private lateinit var shaderPointLight: PointLight01Shader
 
     // クォータニオン
-    private var xQuaternion = MyQuaternion().identity()
+    private var xQtn = MyQuaternion()
+
+    // タッチポイント
+    private val touchP = MyPointF()
+    // タッチ時のクォータニオン
+    private var tQtn = MyQuaternion()
 
     override fun onDrawFrame(gl: GL10) {
 
@@ -39,11 +46,11 @@ class Qtn01Renderer: MgRenderer() {
         // クォータニオン⇒座標変換行列の検証
         // -----------------------------------------------
         //// クォータニオン生成
-        //xQuaternion = MyQuaternion.rotate(90f, floatArrayOf(1f,0f,0f))
+        //xQtn = MyQuaternion.rotate(90f, floatArrayOf(1f,0f,0f))
 
 
         // クォータニオンによる回転が適用された状態の座標変換行列を取得する
-        val matQ = xQuaternion.toMatIV()
+        val matQ = xQtn.toMatIV()
 
         // ビュー×プロジェクション
         Matrix.multiplyMM(matPV,0,matP,0,matV,0)
@@ -100,7 +107,48 @@ class Qtn01Renderer: MgRenderer() {
         model.createPath()
     }
 
+    // w: キャンバスの幅
+    // h: キャンバスの高さ
+    fun receiveTouch(ev: MotionEvent, w: Int, h: Int ) {
+        when (ev.action) {
+            MotionEvent.ACTION_DOWN -> {
+                touchP.x = ev.x
+                touchP.y = ev.y
+                tQtn = xQtn.copy()
+                Log.d(javaClass.simpleName,"ACTION_DOWN:${tQtn}")
+                return
+            }
+        }
 
+        //Log.d(javaClass.simpleName,"ev:${ev.action}:${tQtn}")
+
+        // キャンバスの対角線の長さの逆数
+        var wh = 1f/ sqrt((w*w+h*h).toFloat())
+        // タッチ点からみた座標
+        var x = ev.x - touchP.x
+        var y = ev.y - touchP.y
+        var sq = sqrt(x*x+y*y)
+        // 回転角
+        var r = sq*wh*360f
+        // 単位化する
+        if ( (sq != 1f) and ( sq != 0f ) ) {
+            sq = 1f/sq
+            x *= sq
+            y *= sq
+        }
+
+        // 回転角と回転軸ベクトルからクォータニオンを生成
+        // OpenGLでは、Y座標が上のため、yにマイナスをつけない
+        //xQtn = MyQuaternion.rotate(r, floatArrayOf(y,x,0f))
+        val tmpQtn = MyQuaternion.rotate(r, floatArrayOf(y,x,0f))
+        xQtn = tmpQtn.multiply(tQtn)
+
+        Log.d(javaClass.simpleName,"xQtn:${xQtn}")
+        Log.d(javaClass.simpleName,"tQtn:${tQtn}")
+
+    }
+
+    /*
     // w: キャンバスの幅
     // h: キャンバスの高さ
     fun receiveTouch(ev: MotionEvent, w: Int, h: Int ) {
@@ -122,6 +170,7 @@ class Qtn01Renderer: MgRenderer() {
 
         // 回転角と回転軸ベクトルからクォータニオンを生成
         // OpenGLでは、Y座標が上のため、yにマイナスをつけない
-        xQuaternion = MyQuaternion.rotate(r, floatArrayOf(y,x,0f))
+        xQtn = MyQuaternion.rotate(r, floatArrayOf(y,x,0f))
     }
+    */
 }
