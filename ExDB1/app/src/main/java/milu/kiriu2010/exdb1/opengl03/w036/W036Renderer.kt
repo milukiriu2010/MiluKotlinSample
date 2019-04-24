@@ -2,14 +2,10 @@ package milu.kiriu2010.exdb1.opengl03.w036
 
 import android.content.Context
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import android.opengl.Matrix
-import android.view.MotionEvent
-import milu.kiriu2010.gui.basic.MyQuaternion
 import milu.kiriu2010.gui.renderer.MgRenderer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
-import kotlin.math.sqrt
 
 // 平行光源
 class W036Renderer(ctx: Context): MgRenderer(ctx) {
@@ -56,7 +52,6 @@ class W036Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.perspectiveM(matP,0,45f,ratio,0.1f,100f)
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
-
         // 球体をレンダリング
         Matrix.setIdentityM(matM,0)
         Matrix.rotateM(matM,0,t1,0f,1f,0f)
@@ -98,10 +93,6 @@ class W036Renderer(ctx: Context): MgRenderer(ctx) {
         // モデル生成(線)
         drawObjLine = W036ModelLine()
 
-        // 点光源の位置
-        vecLight[0] = 15f
-        vecLight[1] = 10f
-        vecLight[2] = 15f
         // カメラの座標
         vecEye[0] = 0f
         vecEye[1] = 5f

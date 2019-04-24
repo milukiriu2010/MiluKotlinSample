@@ -1,5 +1,6 @@
 package milu.kiriu2010.exdb1.opengl03.w037
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
@@ -7,12 +8,14 @@ import android.opengl.Matrix
 import android.view.MotionEvent
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.basic.MyQuaternion
+import milu.kiriu2010.gui.renderer.MgRenderer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import kotlin.math.sqrt
 
 // 平行光源
-class W037Renderer: GLSurfaceView.Renderer {
+class W037Renderer(ctx: Context): MgRenderer(ctx) {
+
     // 描画オブジェクト(球体)
     private lateinit var drawObjSphere: W037ModelSphere
     // 描画オブジェクト(線)
@@ -23,38 +26,6 @@ class W037Renderer: GLSurfaceView.Renderer {
 
     // 画面縦横比
     var ratio: Float = 0f
-
-    // モデル変換行列
-    private val matM = FloatArray(16)
-    // モデル変換行列の逆行列
-    private val matI = FloatArray(16)
-    // ビュー変換行列
-    private val matV = FloatArray(16)
-    // プロジェクション変換行列
-    private val matP = FloatArray(16)
-    // モデル・ビュー・プロジェクション行列
-    private val matMVP = FloatArray(16)
-    // テンポラリ行列
-    private val matT = FloatArray(16)
-    // 点光源の位置
-    private val vecLight = floatArrayOf(15f,10f,15f)
-    // 環境光の色
-    private val vecAmbientColor = floatArrayOf(0.1f,0.1f,0.1f,1f)
-    // カメラの座標
-    private val vecEye = floatArrayOf(0f,5f,10f)
-    // カメラの上方向を表すベクトル
-    private val vecEyeUp = floatArrayOf(0f,1f,0f)
-    // 原点のベクトル
-    private val vecCenter = floatArrayOf(0f,0f,0f)
-
-    // 回転スイッチ
-    var rotateSwitch = false
-
-    // 回転角度
-    private var angle1 = 0
-
-    // クォータニオン
-    var xQuaternion = MyQuaternion().identity()
 
     // 点のサイズ
     var u_pointSize = 10f
@@ -72,15 +43,12 @@ class W037Renderer: GLSurfaceView.Renderer {
         // canvasを初期化
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
-        // テクスチャ0をバインド
-        drawObjSphere.activateTexture(0,textures,bmpArray[0])
-
         // 回転角度
-        angle1 =(angle1+1)%360
-        val t1 = angle1.toFloat()
+        angle[0] =(angle[0]+1)%360
+        val t1 = angle[0].toFloat()
 
         // クォータニオンを行列に適用
-        var matQ = xQuaternion.toMatIV()
+        var matQ = qtnNow.toMatIV()
 
         // カメラの位置
         // ビュー座標変換行列
@@ -92,13 +60,16 @@ class W037Renderer: GLSurfaceView.Renderer {
         Matrix.multiplyMM(matV,0,matV,0,matQ,0)
         // ビュー×プロジェクション
         Matrix.perspectiveM(matP,0,45f,ratio,0.1f,100f)
-        Matrix.multiplyMM(matT,0,matP,0,matV,0)
+        Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
+        // ポイントスプライトに設定するテクスチャをバインド
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[0])
 
         // 球体をレンダリング
         Matrix.setIdentityM(matM,0)
         Matrix.rotateM(matM,0,t1,0f,1f,0f)
-        Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
+        Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         drawObjSphere.draw(programHandle,matMVP,u_pointSize,0,1)
         //Log.d(javaClass.simpleName,"u_pointSize[${u_pointSize}]")
 
@@ -106,7 +77,7 @@ class W037Renderer: GLSurfaceView.Renderer {
         Matrix.setIdentityM(matM,0)
         Matrix.rotateM(matM,0,90f,1f,0f,0f)
         Matrix.scaleM(matM,0,3f,3f,1f)
-        Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
+        Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         drawObjLine.draw(programHandle,matMVP,u_pointSize,-1,0,lineType)
     }
 
@@ -142,8 +113,16 @@ class W037Renderer: GLSurfaceView.Renderer {
         // モデル生成(球体)
         drawObjSphere = W037ModelSphere()
 
+        // テクスチャをバインド
+        drawObjSphere.activateTexture(0,textures,bmpArray[0])
+
         // モデル生成(線)
         drawObjLine = W037ModelLine()
+
+        // カメラの座標
+        vecEye[0] = 0f
+        vecEye[1] = 5f
+        vecEye[2] = 10f
 
         // ----------------------------------
         // 単位行列化
@@ -159,23 +138,12 @@ class W037Renderer: GLSurfaceView.Renderer {
         // モデル・ビュー・プロジェクション行列
         Matrix.setIdentityM(matMVP,0)
         // テンポラリ行列
-        Matrix.setIdentityM(matT,0)
+        Matrix.setIdentityM(matVP,0)
     }
 
-    fun receiveTouch(ev: MotionEvent, w: Int, h: Int ) {
-        var wh = 1f/ sqrt((w*w+h*h).toFloat())
-        // canvasの中心点からみたタッチ点の相対位置
-        var x = ev.x - w.toFloat()*0.5f
-        var y = ev.y - h.toFloat()*0.5f
-        var sq = sqrt(x*x+y*y)
-        //var r = sq*2f*PI.toFloat()*wh
-        // 回転角
-        var r = sq*wh*360f
-        if (sq != 1f) {
-            sq = 1f/sq
-            x *= sq
-            y *= sq
-        }
-        xQuaternion = MyQuaternion.rotate(r, floatArrayOf(y,x,0f))
+    override fun setMotionParam(motionParam: MutableMap<String, Float>) {
+    }
+
+    override fun closeShader() {
     }
 }
