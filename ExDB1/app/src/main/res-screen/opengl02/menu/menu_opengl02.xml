@@ -5,12 +5,6 @@
         android:id="@+id/opengl_w030z"
         android:title="w030z_ブレンドファクター" />
     <item
-        android:id="@+id/opengl_w030y"
-        android:title="w030y_ブレンドファクター" />
-    <item
-        android:id="@+id/opengl_w030"
-        android:title="w030_ブレンドファクター" />
-    <item
         android:id="@+id/opengl_w029"
         android:title="w029_アルファブレンディング" />
     <item

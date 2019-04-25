@@ -98,6 +98,10 @@ class W036Renderer(ctx: Context): MgRenderer(ctx) {
         vecEye[1] = 5f
         vecEye[2] = 10f
 
+        // 関数がないのでコメントアウト
+        // 点の最大ピクセル数をコンソールに出力
+        //val pointSizeRange = GLES20.glGetParameter(GLES20.GL_ALIASED_POINT_SIZE_RANGE)
+
         // ----------------------------------
         // 単位行列化
         // ----------------------------------

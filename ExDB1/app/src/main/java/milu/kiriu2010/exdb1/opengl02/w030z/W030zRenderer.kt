@@ -60,7 +60,7 @@ class W030zRenderer: GLSurfaceView.Renderer {
     // ブレンド有効
     var blend = booleanArrayOf(false,true)
     // アルファ成分
-    var vertexAplha = floatArrayOf(0f,0.5f)
+    var vertexAplha = floatArrayOf(1f,0.5f)
     // 方程式(カラー)
     //  0: テクスチャ用
     //  1: ポリゴン用
@@ -125,7 +125,7 @@ class W030zRenderer: GLSurfaceView.Renderer {
         Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
 
         // ポリゴンのブレンディングを有効/無効にする
-        when (blend[0]) {
+        when (blend[1]) {
             true -> GLES20.glEnable(GLES20.GL_BLEND)
             false -> GLES20.glDisable(GLES20.GL_BLEND)
         }

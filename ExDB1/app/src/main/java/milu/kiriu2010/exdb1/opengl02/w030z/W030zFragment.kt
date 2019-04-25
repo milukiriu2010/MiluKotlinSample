@@ -35,13 +35,6 @@ class W030zFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_open_gl02_w030z, container, false)
 
-        /*
-        scrollViewW030y = view.findViewById(R.id.scrollViewW030y)
-        val marginLayoutParams = scrollViewW030y.layoutParams
-        marginLayoutParams.height = 3000;
-        scrollViewW030y.layoutParams = marginLayoutParams
-        */
-
         textureView = view.findViewById<TextureView>(R.id.textureView)
         val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w029)
         renderer = W030zRenderer()
@@ -66,89 +59,6 @@ class W030zFragment : Fragment() {
             }
             true
         }
-
-        /*
-        // ブレンド有効
-        val checkBoxW030 = view.findViewById<CheckBox>(R.id.checkBoxW030)
-        checkBoxW030.setOnCheckedChangeListener { buttonView, isChecked ->
-            render.blend = isChecked
-        }
-
-        // アルファ成分
-        val seekBarW030 = view.findViewById<SeekBar>(R.id.seekBarW030)
-        seekBarW030.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                render.vertexAplha = seekBarW030.progress.toFloat()/seekBarW030.max.toFloat()
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                render.vertexAplha = seekBarW030.progress.toFloat()/seekBarW030.max.toFloat()
-            }
-        })
-
-        // Color Equation
-        val spinnerW30CE = view.findViewById<Spinner>(R.id.spinnerW30CE)
-        spinnerW30CE.onItemSelectedListener = object: OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                render.equationColor = when (spinnerW30CE.selectedItem) {
-                    "FUNC_ADD" -> GLES20.GL_FUNC_ADD
-                    "FUNC_SUBTRACT" -> GLES20.GL_FUNC_SUBTRACT
-                    "FUNC_REVERSE_SUBTRACT" -> GLES20.GL_FUNC_REVERSE_SUBTRACT
-                    else -> GLES20.GL_FUNC_ADD
-                }
-            }
-        }
-
-        // Alpha Equation
-        val spinnerW30AE = view.findViewById<Spinner>(R.id.spinnerW30AE)
-        spinnerW30AE.onItemSelectedListener = object: OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                render.equationAlpha = when (spinnerW30CE.selectedItem) {
-                    "FUNC_ADD" -> GLES20.GL_FUNC_ADD
-                    "FUNC_SUBTRACT" -> GLES20.GL_FUNC_SUBTRACT
-                    "FUNC_REVERSE_SUBTRACT" -> GLES20.GL_FUNC_REVERSE_SUBTRACT
-                    else -> GLES20.GL_FUNC_ADD
-                }
-            }
-        }
-
-        // ブレンドファクター(カラー元)
-        val spinnerW30SCBF = view.findViewById<Spinner>(R.id.spinnerW30SCBF)
-        spinnerW30SCBF.onItemSelectedListener = object: OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                render.blendFctSCBF = when (spinnerW30SCBF.selectedItem) {
-                    "ZERO" -> GLES20.GL_ZERO
-                    "ONE" -> GLES20.GL_ONE
-                    "SRC_COLOR" -> GLES20.GL_SRC_COLOR
-                    "DST_COLOR" -> GLES20.GL_DST_COLOR
-                    "ONE_MINUS_SRC_COLOR" -> GLES20.GL_ONE_MINUS_SRC_COLOR
-                    "ONE_MINUS_DST_COLOR" -> GLES20.GL_ONE_MINUS_DST_COLOR
-                    "SRC_ALPHA" -> GLES20.GL_SRC_ALPHA
-                    "DST_ALPHA" -> GLES20.GL_DST_ALPHA
-                    "ONE_MINUS_SRC_ALPHA" -> GLES20.GL_ONE_MINUS_SRC_ALPHA
-                    "ONE_MINUS_DST_ALPHA" -> GLES20.GL_ONE_MINUS_DST_ALPHA
-                    "CONSTANT_COLOR" -> GLES20.GL_CONSTANT_COLOR
-                    "ONE_MINUS_CONSTANT_COLOR" -> GLES20.GL_ONE_MINUS_CONSTANT_COLOR
-                    "CONSTANT_ALPHA" -> GLES20.GL_CONSTANT_ALPHA
-                    "ONE_MINUS_CONSTANT_ALPHA" -> GLES20.GL_ONE_MINUS_CONSTANT_ALPHA
-                    "SRC_ALPHA_SATURATE" -> GLES20.GL_SRC_ALPHA_SATURATE
-                    else -> GLES20.GL_ONE
-                }
-            }
-        }
-        */
 
         // コンテキストの色を変更するダイアログを開く
         val btnW030ContextClearColor = view.findViewById<Button>(R.id.btnW030ContextClearColor)
@@ -234,7 +144,7 @@ class W030zFragment : Fragment() {
             }
 
             val dlg = W030zModelDialog.newInstance(bundle)
-            dlg.setTargetFragment(this,3)
+            dlg.setTargetFragment(this,4)
             dlg.show(fragmentManager,"Model2")
         }
 
@@ -246,6 +156,8 @@ class W030zFragment : Fragment() {
         when (requestCode) {
             // コンテキストの色
             1 -> {
+                Log.d(javaClass.simpleName,"onActivityResult:${requestCode}")
+
                 val red   = data.getFloatExtra("RED",0f)
                 val green = data.getFloatExtra("GREEN",0f)
                 val blue  = data.getFloatExtra("BLUE",0f)
@@ -258,6 +170,8 @@ class W030zFragment : Fragment() {
             }
             // ブレンドの色
             2 -> {
+                Log.d(javaClass.simpleName,"onActivityResult:${requestCode}")
+
                 val red   = data.getFloatExtra("RED",0f)
                 val green = data.getFloatExtra("GREEN",0f)
                 val blue  = data.getFloatExtra("BLUE",0f)
@@ -270,6 +184,7 @@ class W030zFragment : Fragment() {
             }
             // パラメータを変更するダイアログを開く(テクスチャ)
             3 -> {
+                Log.d(javaClass.simpleName,"onActivityResult:${requestCode}")
                 // ブレンド
                 renderer.blend[0] = data.getBooleanExtra("BLEND", false )
                 // アルファ成分
@@ -289,6 +204,7 @@ class W030zFragment : Fragment() {
             }
             // パラメータを変更するダイアログを開く(ポリゴン)
             4 -> {
+                Log.d(javaClass.simpleName,"onActivityResult:${requestCode}")
                 // ブレンド
                 renderer.blend[1] = data.getBooleanExtra("BLEND", false )
                 // アルファ成分

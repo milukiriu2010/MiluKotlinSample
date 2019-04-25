@@ -13,8 +13,6 @@ import milu.kiriu2010.exdb1.opengl02.w026.W026Fragment
 import milu.kiriu2010.exdb1.opengl02.w027.W027Fragment
 import milu.kiriu2010.exdb1.opengl02.w028.W028Fragment
 import milu.kiriu2010.exdb1.opengl02.w029.W029Fragment
-import milu.kiriu2010.exdb1.opengl02.w030.W030Fragment
-import milu.kiriu2010.exdb1.opengl02.w030y.W030yFragment
 import milu.kiriu2010.exdb1.opengl02.w030z.W030zFragment
 
 class OpenGL02Activity : AppCompatActivity() {
@@ -88,26 +86,6 @@ class OpenGL02Activity : AppCompatActivity() {
                 if (supportFragmentManager.findFragmentByTag("w030z") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W030zFragment.newInstance(), "w030z")
-                            .commit()
-                }
-                true
-            }
-            // w030y_ブレンドファクター
-            R.id.opengl_w030y -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w030y") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W030yFragment.newInstance(), "w030y")
-                            .commit()
-                }
-                true
-            }
-            // w030_ブレンドファクター
-            R.id.opengl_w030 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w030") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W030Fragment.newInstance(), "w030")
                             .commit()
                 }
                 true
