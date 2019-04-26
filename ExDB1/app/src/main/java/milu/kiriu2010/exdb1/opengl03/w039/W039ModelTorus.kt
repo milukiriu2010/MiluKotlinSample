@@ -41,7 +41,7 @@ class W039ModelTorus {
 
     init {
         // トーラスのデータを生成
-        createPath(16,16,0.25f,1f)
+        createPath(32,32,0.25f,1f)
 
         // 頂点バッファ
         bufPos = ByteBuffer.allocateDirect(datPos.toArray().size * 4).run {
@@ -269,42 +269,6 @@ class W039ModelTorus {
             color.addAll(arrayListOf<Float>(r[i.toInt()],g[i.toInt()],b[i.toInt()],a))
         }
         return color
-    }
-
-    fun activateTexture(id: Int, textures: IntArray, bmp: Bitmap, doRecycle: Boolean = false) {
-        // 有効にするテクスチャユニットを指定
-        when (id) {
-            0 -> GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
-            1 -> GLES20.glActiveTexture(GLES20.GL_TEXTURE1)
-        }
-
-        // テクスチャをバインドする
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[id])
-        MyGLFunc.checkGlError("glBindTexture")
-
-        // 縮小時の補完設定
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
-        // 拡大時の補完設定
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
-
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
-
-        // ビットマップをテクスチャに設定
-        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bmp, 0)
-        MyGLFunc.checkGlError("texImage2D")
-
-        // ミップマップを生成
-        GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D)
-
-        // テクスチャのバインドを無効化
-        //GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, null)
-
-        //if ( doRecycle ) bmp.recycle()
-
-        if (textures[id] == 0) {
-            throw RuntimeException("Error loading texture[${id}]")
-        }
     }
 
 }

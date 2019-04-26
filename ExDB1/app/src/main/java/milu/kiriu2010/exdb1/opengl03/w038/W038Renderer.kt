@@ -26,12 +26,6 @@ class W038Renderer(ctx: Context): MgRenderer(ctx) {
     // 画面縦横比
     var ratio: Float = 0f
 
-    // 回転スイッチ
-    var rotateSwitch = false
-
-    // 点のサイズ
-    var u_pointSize = 10f
-
     // ビットマップ配列
     val bmpArray = arrayListOf<Bitmap>()
 
@@ -136,9 +130,6 @@ class W038Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
 
-        // ステンシルテストを有効にする
-        GLES20.glEnable(GLES20.GL_STENCIL_TEST)
-
         // シェーダプログラム登録
         programHandle = W038Shader().loadShader()
 
@@ -151,7 +142,6 @@ class W038Renderer(ctx: Context): MgRenderer(ctx) {
 
         // テクスチャ0をバインド
         drawObj.activateTexture(0,textures,bmpArray[0])
-
 
         // 光源位置
         vecLight[0] = 1f

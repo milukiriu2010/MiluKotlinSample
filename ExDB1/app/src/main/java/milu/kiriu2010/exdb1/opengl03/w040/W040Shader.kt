@@ -23,7 +23,7 @@ class W040Shader {
                 if (u_useLight) {
                     vec3  invLight = normalize(u_matINV * vec4(u_vecLight, 0.0)).xyz;
                     float diffuse  = clamp(dot(a_Normal, invLight), 0.2, 1.0);
-                    v_Color        = a_Color * vec4(vec3(diffuse), 1.0);
+                    v_Color        = vec4(a_Color.xyz * vec3(diffuse), 1.0);
                 }
                 else {
                     v_Color        = a_Color;
