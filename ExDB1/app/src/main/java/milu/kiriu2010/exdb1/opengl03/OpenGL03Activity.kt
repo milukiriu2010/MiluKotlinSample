@@ -16,7 +16,6 @@ import milu.kiriu2010.exdb1.opengl03.w037.W037Fragment
 import milu.kiriu2010.exdb1.opengl03.w038.W038Fragment
 import milu.kiriu2010.exdb1.opengl03.w039.W039Fragment
 import milu.kiriu2010.exdb1.opengl03.w040.W040Fragment
-import milu.kiriu2010.exdb1.opengl03.w040x.W040XFragment
 import milu.kiriu2010.exdb1.opengl03.w041.W041Fragment
 
 class OpenGL03Activity : AppCompatActivity() {
@@ -93,16 +92,6 @@ class OpenGL03Activity : AppCompatActivity() {
                 if (supportFragmentManager.findFragmentByTag("w041") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W041Fragment.newInstance(), "w041")
-                            .commit()
-                }
-                true
-            }
-            // フレームバッファx
-            R.id.opengl_w040x -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w040x") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W040XFragment.newInstance(), "w040x")
                             .commit()
                 }
                 true
