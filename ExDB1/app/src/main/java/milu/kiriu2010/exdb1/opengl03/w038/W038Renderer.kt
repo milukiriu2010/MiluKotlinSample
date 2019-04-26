@@ -1,5 +1,6 @@
 package milu.kiriu2010.exdb1.opengl03.w038
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
@@ -8,12 +9,14 @@ import android.view.MotionEvent
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.exdb1.opengl01.w019.W038Model
 import milu.kiriu2010.gui.basic.MyQuaternion
+import milu.kiriu2010.gui.renderer.MgRenderer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import kotlin.math.sqrt
 
 // 平行光源
-class W038Renderer: GLSurfaceView.Renderer {
+class W038Renderer(ctx: Context): MgRenderer(ctx) {
+
     // 描画オブジェクト
     private lateinit var drawObj: W038Model
 
@@ -23,43 +26,11 @@ class W038Renderer: GLSurfaceView.Renderer {
     // 画面縦横比
     var ratio: Float = 0f
 
-    // モデル変換行列
-    private val matM = FloatArray(16)
-    // モデル変換行列の逆行列
-    private val matI = FloatArray(16)
-    // ビュー変換行列
-    private val matV = FloatArray(16)
-    // プロジェクション変換行列
-    private val matP = FloatArray(16)
-    // モデル・ビュー・プロジェクション行列
-    private val matMVP = FloatArray(16)
-    // テンポラリ行列
-    private val matT = FloatArray(16)
-    // 点光源の位置
-    private val vecLight = floatArrayOf(1f,1f,1f)
-    // 環境光の色
-    private val vecAmbientColor = floatArrayOf(0.1f,0.1f,0.1f,1f)
-    // カメラの座標
-    private val vecEye = floatArrayOf(0f,0f,5f)
-    // カメラの上方向を表すベクトル
-    private val vecEyeUp = floatArrayOf(0f,1f,0f)
-    // 原点のベクトル
-    private val vecCenter = floatArrayOf(0f,0f,0f)
-
     // 回転スイッチ
     var rotateSwitch = false
 
-    // 回転角度
-    private var angle1 = 0
-
-    // クォータニオン
-    var xQuaternion = MyQuaternion().identity()
-
     // 点のサイズ
     var u_pointSize = 10f
-
-    // 線のプリミティブタイプ
-    var lineType = GLES20.GL_LINES
 
     // ビットマップ配列
     val bmpArray = arrayListOf<Bitmap>()
@@ -69,17 +40,17 @@ class W038Renderer: GLSurfaceView.Renderer {
 
     override fun onDrawFrame(gl: GL10?) {
         // canvasを初期化
+        GLES20.glClearColor(0.0f, 0.7f, 0.7f, 1.0f)
+        GLES20.glClearDepthf(1f)
+        GLES20.glClearStencil(0)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT or GLES20.GL_STENCIL_BUFFER_BIT)
 
-        // テクスチャ0をバインド
-        drawObj.activateTexture(0,textures,bmpArray[0])
-
         // 回転角度
-        angle1 =(angle1+1)%360
-        val t1 = angle1.toFloat()
+        angle[0] =(angle[0]+1)%360
+        val t1 = angle[0].toFloat()
 
         // クォータニオンを行列に適用
-        var matQ = xQuaternion.toMatIV()
+        var matQ = qtnNow.toMatIV()
 
         // カメラの位置
         // ビュー座標変換行列
@@ -91,33 +62,59 @@ class W038Renderer: GLSurfaceView.Renderer {
         // ビュー座標変換行列にクォータニオンの回転を適用
         Matrix.multiplyMM(matV,0,matV,0,matQ,0)
         // ビュー×プロジェクション
-        Matrix.multiplyMM(matT,0,matP,0,matV,0)
+        Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
-        // テクスチャをバインドし登録する
-        drawObj.activateTexture(0,textures,bmpArray[0])
+        // テクスチャ0をバインド
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[0])
 
+        // ステンシルテストを有効にする
+        GLES20.glEnable(GLES20.GL_STENCIL_TEST)
 
         // モデル１をレンダリング
-        GLES20.glStencilFunc(GLES20.GL_ALWAYS,1, 0.inv())
+        // -------------------------------------------------------------
+        // 常にステンシルテストをパスする
+        // ステンシルテストをパスすると、
+        // ステンシルバッファの対象ピクセルの基準値が１に書き換えられる
+        // -------------------------------------------------------------
+        GLES20.glStencilFunc(GLES20.GL_ALWAYS,1, 0.inv() )
         GLES20.glStencilOp(GLES20.GL_KEEP, GLES20.GL_REPLACE, GLES20.GL_REPLACE)
         render(floatArrayOf(-0.25f,0.25f,-0.5f))
 
         // モデル２をレンダリング
-        GLES20.glStencilFunc(GLES20.GL_ALWAYS,0, 0.inv())
+        // -------------------------------------------------------------
+        // 常にステンシルテストをパスする
+        // ステンシルテストをパスすると、
+        // ステンシルバッファの対象ピクセルの基準値がインクリメントされる
+        // すなわち、２枚目のポリゴンがレンダリングされた時点で、
+        // 双方のポリゴンが重なっている領域の基準値は２
+        // 重なっていない部分の基準値は最大でも１にしかなりえない
+        // -------------------------------------------------------------
+        GLES20.glStencilFunc(GLES20.GL_ALWAYS,0, 0.inv() )
         GLES20.glStencilOp(GLES20.GL_KEEP, GLES20.GL_INCR, GLES20.GL_INCR)
         render(floatArrayOf(0f,0f,0f))
 
         // モデル３をレンダリング
-        GLES20.glStencilFunc(GLES20.GL_EQUAL,2, 0.inv())
+        // -------------------------------------------------------------
+        // ステンシルバッファの基準値２と同じものしか
+        // ステンシルテストをパスしない
+        // １枚目と２枚目が重なり合っている領域が基準値２の領域なので、
+        // ３枚目のポリゴンは２つのポリゴンが重なっている
+        // 領域しかレンダリングされない
+        // -------------------------------------------------------------
+        GLES20.glStencilFunc(GLES20.GL_EQUAL,2, 0.inv() )
         GLES20.glStencilOp(GLES20.GL_KEEP, GLES20.GL_KEEP, GLES20.GL_KEEP)
         render(floatArrayOf(0.25f,-0.25f,0.5f))
+
+        // ステンシルテストを無効にする
+        GLES20.glDisable(GLES20.GL_STENCIL_TEST)
     }
 
     // モデルをレンダリング
     private fun render(tr: FloatArray) {
         Matrix.setIdentityM(matM,0)
         Matrix.translateM(matM,0,tr[0],tr[1],tr[2])
-        Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
+        Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
         drawObj.draw(programHandle,matMVP,matI,vecLight,0)
     }
@@ -131,10 +128,8 @@ class W038Renderer: GLSurfaceView.Renderer {
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
         // canvasを初期化する色を設定する
         GLES20.glClearColor(0.0f, 0.7f, 0.7f, 1.0f)
-
         // canvasを初期化する際の深度を設定する
         GLES20.glClearDepthf(1f)
-
         GLES20.glClearStencil(0)
 
         // カリングと深度テストを有効にする
@@ -154,6 +149,19 @@ class W038Renderer: GLSurfaceView.Renderer {
         // モデル生成
         drawObj = W038Model()
 
+        // テクスチャ0をバインド
+        drawObj.activateTexture(0,textures,bmpArray[0])
+
+
+        // 光源位置
+        vecLight[0] = 1f
+        vecLight[1] = 1f
+        vecLight[2] = 1f
+        // 視点位置
+        vecEye[0] = 0f
+        vecEye[1] = 0f
+        vecEye[2] = 5f
+
         // ----------------------------------
         // 単位行列化
         // ----------------------------------
@@ -168,23 +176,13 @@ class W038Renderer: GLSurfaceView.Renderer {
         // モデル・ビュー・プロジェクション行列
         Matrix.setIdentityM(matMVP,0)
         // テンポラリ行列
-        Matrix.setIdentityM(matT,0)
+        Matrix.setIdentityM(matVP,0)
     }
 
-    fun receiveTouch(ev: MotionEvent, w: Int, h: Int ) {
-        var wh = 1f/ sqrt((w*w+h*h).toFloat())
-        // canvasの中心点からみたタッチ点の相対位置
-        var x = ev.x - w.toFloat()*0.5f
-        var y = ev.y - h.toFloat()*0.5f
-        var sq = sqrt(x*x+y*y)
-        //var r = sq*2f*PI.toFloat()*wh
-        // 回転角
-        var r = sq*wh*360f
-        if (sq != 1f) {
-            sq = 1f/sq
-            x *= sq
-            y *= sq
-        }
-        xQuaternion = MyQuaternion.rotate(r, floatArrayOf(y,x,0f))
+    override fun setMotionParam(motionParam: MutableMap<String, Float>) {
     }
+
+    override fun closeShader() {
+    }
+
 }

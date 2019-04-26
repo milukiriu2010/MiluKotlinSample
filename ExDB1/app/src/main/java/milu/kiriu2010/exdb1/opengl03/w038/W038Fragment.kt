@@ -29,7 +29,7 @@ class W038Fragment : Fragment() {
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02ViewA03)
         val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w038)
-        val render = W038Renderer()
+        val render = W038Renderer(context!!)
         render.bmpArray.add(bmp0)
         myGL02View.setRenderer(render)
         myGL02View.setOnTouchListener { v, event ->
