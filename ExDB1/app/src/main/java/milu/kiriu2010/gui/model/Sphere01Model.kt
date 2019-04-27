@@ -9,8 +9,11 @@ import kotlin.math.sin
 import kotlin.math.sqrt
 
 
+// -------------------------------------------
 // 球
-// https://wgld.org/d/webgl/w025.html
+// -------------------------------------------
+// 2019.04.27
+// -------------------------------------------
 class Sphere01Model: MgModelAbs() {
 
     override fun createPath( opt: Map<String,Float> ) {
@@ -94,6 +97,16 @@ class Sphere01Model: MgModelAbs() {
 
             asFloatBuffer().apply {
                 put(datCol.toFloatArray())
+                position(0)
+            }
+        }
+
+        // テクスチャ座標バッファ
+        bufTxc = ByteBuffer.allocateDirect(datTxc.toArray().size * 4).run {
+            order(ByteOrder.nativeOrder())
+
+            asFloatBuffer().apply {
+                put(datTxc.toFloatArray())
                 position(0)
             }
         }

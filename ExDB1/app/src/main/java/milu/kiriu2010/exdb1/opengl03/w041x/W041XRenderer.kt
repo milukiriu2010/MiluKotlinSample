@@ -47,6 +47,7 @@ class W041XRenderer(ctx: Context): MgRenderer(ctx) {
     private val vecEye1 = floatArrayOf(0f,0f,5f)
     private val vecEye2 = floatArrayOf(0f,0f,0.5f)
     */
+    private val vecEye2 = floatArrayOf(0f,0f,0.5f)
 
 
     // ビットマップ配列
@@ -83,7 +84,7 @@ class W041XRenderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // プログラムハンドル(フレームバッファ用)を有効化
-        //GLES20.glUseProgram(programHandleA)
+        //GLES20.glUseProgram(shaderA.programHandle)
 
         // カメラの位置
         // ビュー座標変換行列
@@ -124,7 +125,7 @@ class W041XRenderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // プログラムハンドル(ブラー用)を有効化
-        //GLES20.glUseProgram(programHandleB)
+        //GLES20.glUseProgram(shaderB.programHandle)
 
         // フレームバッファに描きこんだ内容をテクスチャとして適用
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
@@ -133,11 +134,9 @@ class W041XRenderer(ctx: Context): MgRenderer(ctx) {
         // カメラの位置
         // ビュー座標変換行列
         Matrix.setLookAtM(matV, 0,
-                vecEye[0], vecEye[1], vecEye[2],
+                vecEye2[0], vecEye2[1], vecEye2[2],
                 vecCenter[0], vecCenter[1], vecCenter[2],
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
-        // ビュー×プロジェクション
-        //Matrix.perspectiveM(matP,0,45f,ratio,0.1f,100f)
         // 正射影
         Matrix.orthoM(matP,0,-1f,1f,-1f,1f,0.1f,1f)
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
@@ -146,7 +145,7 @@ class W041XRenderer(ctx: Context): MgRenderer(ctx) {
         Matrix.setIdentityM(matM,0)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         val u_useBlur = if (isBlur) 1 else 0
-        shaderB.draw(drawObjBoard,matMVP,u_useBlur,0)
+        shaderB.draw(drawObjBoard,matMVP,u_useBlur,0,renderW.toFloat())
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -156,6 +155,12 @@ class W041XRenderer(ctx: Context): MgRenderer(ctx) {
 
         renderW = width
         renderH = height
+
+        Log.d(javaClass.simpleName,"renderW[${renderW}]renderH[${renderH}]")
+
+        // テクスチャをバインド
+        activateTextureResize(0,textures,bmpArray[0],renderW)
+        activateTextureResize(1,textures,bmpArray[1],renderW)
 
         createFrameBuffer(renderW,renderH)
     }
@@ -171,6 +176,11 @@ class W041XRenderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
 
+
+        // テクスチャ作成し、idをtexturesに保存
+        GLES20.glGenTextures(2,textures,0)
+        MyGLFunc.checkGlError("glGenTextures")
+
         // シェーダプログラム登録(フレームバッファ用)
         shaderA = W041XAShader()
         shaderA.loadShader()
@@ -178,13 +188,6 @@ class W041XRenderer(ctx: Context): MgRenderer(ctx) {
         shaderB = W041XBShader()
         shaderB.loadShader()
 
-        // テクスチャ作成し、idをtexturesに保存
-        GLES20.glGenTextures(2,textures,0)
-        MyGLFunc.checkGlError("glGenTextures")
-
-        // テクスチャをバインド
-        activateTexture(0,textures,bmpArray[0])
-        activateTexture(1,textures,bmpArray[1])
 
         // モデル生成(球体)
         drawObjSphere = Sphere01Model()
@@ -229,12 +232,6 @@ class W041XRenderer(ctx: Context): MgRenderer(ctx) {
     }
 
     fun activateTexture(id: Int, textures: IntArray, bmp: Bitmap) {
-        // 有効にするテクスチャユニットを指定
-        when (id) {
-            0 -> GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
-            1 -> GLES20.glActiveTexture(GLES20.GL_TEXTURE1)
-        }
-
         // テクスチャをバインドする
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[id])
         MyGLFunc.checkGlError("glBindTexture")
@@ -246,6 +243,57 @@ class W041XRenderer(ctx: Context): MgRenderer(ctx) {
 
         // テクスチャへイメージを適用
         GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,bmp.width,bmp.height,0,
+                GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,buffer)
+
+        /*
+        // GLES20.glTexImage2Dを使わないやり方
+        // ビットマップをテクスチャに設定
+        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bmp, 0)
+        MyGLFunc.checkGlError("texImage2D")
+        */
+
+        // ミップマップを生成
+        GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D)
+
+        // テクスチャパラメータを設定
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_REPEAT)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_REPEAT)
+
+        // テクスチャのバインドを無効化
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0)
+
+        if ( bmp.isRecycled == false ) {
+            bmp.recycle()
+        }
+
+        if (textures[id] == 0) {
+            throw RuntimeException("Error loading texture[${id}]")
+        }
+    }
+
+    fun activateTextureResize(id: Int, textures: IntArray, bmp: Bitmap, len: Int) {
+
+        // テクスチャをバインドする
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[id])
+        MyGLFunc.checkGlError("glBindTexture")
+
+        val resizedBmp = Bitmap.createScaledBitmap(bmp,len,len,false)
+
+        /*
+        val mat = android.graphics.Matrix()
+        mat.setScale(len.toFloat()/bmp.width.toFloat(), len.toFloat()/bmp.height.toFloat())
+        val resizedBmp = Bitmap.createBitmap(bmp,0,0,bmp.width,bmp.height,mat,true)
+        */
+
+        // ビットマップ⇒バッファへ変換
+        val buffer = ByteBuffer.allocate(resizedBmp.byteCount)
+        resizedBmp.copyPixelsToBuffer(buffer)
+        buffer.rewind()
+
+        // テクスチャへイメージを適用
+        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,resizedBmp.width,resizedBmp.height,0,
                 GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,buffer)
 
         /*
@@ -304,6 +352,8 @@ class W041XRenderer(ctx: Context): MgRenderer(ctx) {
         // テクスチャパラメータ
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR)
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MIN_FILTER,GLES20.GL_LINEAR)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_CLAMP_TO_EDGE)
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_CLAMP_TO_EDGE)
 
         // フレームバッファにテクスチャを関連付ける
         GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,GLES20.GL_TEXTURE_2D,frameTexture[0],0)
@@ -312,6 +362,9 @@ class W041XRenderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,0)
         GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,0)
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
+
+        val status = GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER)
+        Log.d(javaClass.simpleName,"status[${status}]COMPLETE[${GLES20.GL_FRAMEBUFFER_COMPLETE}]")
     }
 
     override fun setMotionParam(motionParam: MutableMap<String, Float>) {

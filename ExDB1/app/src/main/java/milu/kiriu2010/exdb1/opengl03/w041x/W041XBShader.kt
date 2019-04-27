@@ -27,10 +27,20 @@ class W041XBShader: MgShader() {
 
             uniform   sampler2D u_Texture0;
             uniform   int       u_useBlur;
+            uniform   float     u_renderWH;
             varying   vec4      v_Color;
 
             void main() {
-                vec2 tFrag     = vec2(1.0/256.0);
+                // 256x256pixelの画像フォーマットをそのまま使う場合
+                //vec2 tFrag     = vec2(1.0/256);
+
+                // gl_FragCoord
+                //   これから描かれようとしているフラグメントのピクセル単位の座標
+                // tFrag
+                //   gl_FragCoord を参照して得られた値を、テクスチャ座標に変換するために使う
+                // ----------------------------------------------------------------------
+                // 画像をレンダリングの幅・高さに合わせている場合に、こちらを使う
+                vec2 tFrag     = vec2(1.0/u_renderWH);
                 vec4 destColor = texture2D(u_Texture0, gl_FragCoord.st * tFrag);
                 if(bool(u_useBlur)){
                     destColor *= 0.36;
@@ -77,7 +87,8 @@ class W041XBShader: MgShader() {
     fun draw(model: MgModelAbs,
              matMVP: FloatArray,
              u_useBlur: Int,
-             u_Texture0: Int) {
+             u_Texture0: Int,
+             u_renderWH: Float) {
 
         // プログラムハンドル(ブラー用)を有効化
         GLES20.glUseProgram(programHandle)
@@ -114,6 +125,13 @@ class W041XBShader: MgShader() {
             GLES20.glUniform1i(it, u_Texture0)
         }
         MyGLFunc.checkGlError("u_Texture0")
+
+        // uniform(レンダ領域の幅・高さ)
+        GLES20.glGetUniformLocation(programHandle, "u_renderWH").also {
+            GLES20.glUniform1f(it, u_renderWH)
+        }
+
+        MyGLFunc.checkGlError("u_renderWH")
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
