@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w041x"
+        android:title="w041x_ブラーフィルター" />
+    <item
         android:id="@+id/opengl_w041"
         android:title="w041_ブラーフィルター" />
     <item
