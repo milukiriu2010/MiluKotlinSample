@@ -123,7 +123,7 @@ class W045Renderer(ctx: Context): MgRenderer(ctx) {
         // canvasを初期化する際の深度を設定する
         GLES20.glClearDepthf(1f)
 
-        // カリングと深度テストを有効にする
+        // 深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
 

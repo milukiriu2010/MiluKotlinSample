@@ -37,7 +37,7 @@ class W046Fragment : Fragment() {
         val bmp3 = BitmapFactory.decodeResource(resources,R.drawable.cube_w46_nx)
         val bmp4 = BitmapFactory.decodeResource(resources,R.drawable.cube_w46_ny)
         val bmp5 = BitmapFactory.decodeResource(resources,R.drawable.cube_w46_nz)
-        val render = W046Renderer()
+        val render = W046Renderer(context!!)
         render.bmpArray.add(bmp0)
         render.bmpArray.add(bmp1)
         render.bmpArray.add(bmp2)
@@ -48,12 +48,12 @@ class W046Fragment : Fragment() {
         myGLView.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
-                    render.rotateSwitch = false
+                    render.isRunning = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
                     Log.d(javaClass.simpleName,"vw[${myGLView.width}]vh[${myGLView.height}]")
-                    render.rotateSwitch = true
+                    render.isRunning = true
                     render.receiveTouch(event,myGLView.width,myGLView.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
