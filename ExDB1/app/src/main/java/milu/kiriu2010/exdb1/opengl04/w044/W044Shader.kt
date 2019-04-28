@@ -2,8 +2,10 @@ package milu.kiriu2010.exdb1.opengl04.w044
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.model.MgModelAbs
+import milu.kiriu2010.gui.shader.MgShader
 
-class W044Shader {
+class W044Shader: MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -39,9 +41,15 @@ class W044Shader {
             void main() {
                 vec3  ref;
                 if (bool(u_Reflection)) {
+                    // 頂点シェーダから送られてきた頂点のモデル座標変換後の座標位置から
+                    // カメラの座標位置を減算することで視線ベクトルを算出
+                    // ----------------------------------------------------------
+                    // 視線ベクトルと頂点シェーダから送られてきた法線を使って
+                    // 視線ベクトルの反射ベクトルを導き出す
                     ref = reflect(v_Position - u_vecEye, v_Normal);
                 }
                 else {
+                    // 背景をレンダリングする
                     ref = v_Normal;
                 }
                 vec4  envColor  = textureCube(u_CubeTexture, ref);
@@ -50,13 +58,82 @@ class W044Shader {
             }
             """.trimIndent()
 
-    fun loadShader(): Int {
+    override fun loadShader(): MgShader {
         // 頂点シェーダを生成
         val svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
         val sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
 
         // プログラムオブジェクトの生成とリンク
-        return MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Normal","a_Color") )
+        programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Normal","a_Color") )
+        return this
     }
+
+    fun draw(model: MgModelAbs,
+             matM: FloatArray,
+             matMVP: FloatArray,
+             u_vecEye: FloatArray,
+             u_CubeTexture: Int,
+             u_Reflection: Int) {
+
+        // attribute(頂点)
+        model.bufPos.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Position").also {
+            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLFunc.checkGlError("a_Position:${model.javaClass.simpleName}")
+
+        // attribute(法線)
+        model.bufNor.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Normal").also {
+            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufNor)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLFunc.checkGlError("a_Normal:${model.javaClass.simpleName}")
+
+        // attribute(色)
+        model.bufCol.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Color").also {
+            GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, model.bufCol)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLFunc.checkGlError("a_Color:${model.javaClass.simpleName}")
+
+        // uniform(モデル)
+        GLES20.glGetUniformLocation(programHandle,"u_matM").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matM,0)
+        }
+        MyGLFunc.checkGlError("u_matM:${model.javaClass.simpleName}")
+
+        // uniform(モデル×ビュー×プロジェクション)
+        GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
+        }
+        MyGLFunc.checkGlError("u_matMVP:${model.javaClass.simpleName}")
+
+        // uniform(視点座標)
+        GLES20.glGetUniformLocation(programHandle,"u_vecEye").also {
+            GLES20.glUniform3fv(it,1,u_vecEye,0)
+        }
+        MyGLFunc.checkGlError("u_vecEye:${model.javaClass.simpleName}")
+
+        if ( u_CubeTexture != -1 ) {
+            // uniform(キューブテクスチャ)
+            GLES20.glGetUniformLocation(programHandle, "u_CubeTexture").also {
+                GLES20.glUniform1i(it, u_CubeTexture)
+            }
+            MyGLFunc.checkGlError("u_CubeTexture:${model.javaClass.simpleName}")
+        }
+
+        // uniform(反射)
+        GLES20.glGetUniformLocation(programHandle,"u_Reflection").also {
+            GLES20.glUniform1i(it,u_Reflection)
+        }
+        MyGLFunc.checkGlError("u_Reflection:${model.javaClass.simpleName}")
+
+        // モデルを描画
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
+    }
+
 }

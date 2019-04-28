@@ -40,9 +40,7 @@ class W043Renderer(ctx: Context): MgRenderer(ctx) {
     override fun onDrawFrame(gl: GL10?) {
         // 回転角度
         angle[0] =(angle[0]+2)%360
-        angle[1] =(angle[1]+1)%360
         val t1 = angle[0].toFloat()
-        val t2 = angle[1].toFloat()
 
         // canvasを初期化
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
