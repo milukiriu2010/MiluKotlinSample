@@ -1,16 +1,27 @@
 package milu.kiriu2010.gui.model
 
 import milu.kiriu2010.gui.color.MgColor
+import milu.kiriu2010.math.MyMathUtil
 import java.nio.*
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
+import kotlin.math.sqrt
 
-
+// -------------------------------------------
 // トーラス
+// -------------------------------------------
+// 2019.04.27  クリア
+// -------------------------------------------
 class Torus01Model: MgModelAbs() {
 
     override fun createPath( opt: Map<String,Float> ) {
+        datPos.clear()
+        datNor.clear()
+        datCol.clear()
+        datTxc.clear()
+        datIdx.clear()
+
         // パイプを形成する円を、いくつの頂点で表現するのかを指定する
         var row = opt["row"]?.toInt() ?: 24
         // パイプをどれくらい分割するのかを指定する
@@ -26,15 +37,8 @@ class Torus01Model: MgModelAbs() {
         color[2] = opt["colorB"] ?: -1f
         color[3] = opt["colorA"] ?: -1f
 
-
         var irad = iradius * scale
         var orad = oradius * scale
-
-        datPos.clear()
-        datNor.clear()
-        datCol.clear()
-        datTxc.clear()
-        datIdx.clear()
 
         (0..row).forEach { i ->
             var r = PI.toFloat() *2f/row.toFloat()*i.toFloat()

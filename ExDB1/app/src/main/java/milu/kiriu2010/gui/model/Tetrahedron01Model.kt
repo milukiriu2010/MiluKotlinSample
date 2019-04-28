@@ -1,5 +1,6 @@
 package milu.kiriu2010.gui.renderer
 
+import milu.kiriu2010.gui.color.MgColor
 import milu.kiriu2010.math.MyMathUtil
 import milu.kiriu2010.gui.model.MgModelAbs
 import kotlin.math.sqrt
@@ -7,18 +8,28 @@ import kotlin.math.sqrt
 // ------------------------------------------
 // 正四面体
 // ------------------------------------------
-// 2019.04.24  マージ
+// 2019.04.27  点・線
 // ------------------------------------------
 class Tetrahedron01Model : MgModelAbs() {
 
     override fun createPath( opt: Map<String,Float> ) {
+        datPos.clear()
+        datNor.clear()
+        datCol.clear()
+        datTxc.clear()
+        datIdx.clear()
+
         val pattern = opt["pattern"]?.toInt() ?: 1
 
         when ( pattern ) {
-            // 底面が三角形
+            // 面：底面が三角形
             1 -> createPathPattern1(opt)
-            // 正四面体の辺が立方体の対角線に合うよう配置
+            // 面：正四面体の辺が立方体の対角線に合うよう配置
             2 -> createPathPattern2(opt)
+            // 点：底面が三角形
+            10 -> createPathPattern10(opt)
+            // 線：底面が三角形
+            20 -> createPathPattern20(opt)
             else -> createPathPattern1(opt)
         }
 
@@ -26,7 +37,7 @@ class Tetrahedron01Model : MgModelAbs() {
         allocateBuffer()
     }
 
-    // 底面が三角形
+    // 面：底面が三角形
     private fun createPathPattern1( opt: Map<String,Float> ) {
         val ta = sqrt(3f)/2f
         val tb = 0.5f
@@ -88,6 +99,7 @@ class Tetrahedron01Model : MgModelAbs() {
         }
 
         // 色データ
+        /*
         (0..2).forEach {
             datCol.addAll(arrayListOf<Float>(1f,0f,0f,1f))
         }
@@ -100,6 +112,14 @@ class Tetrahedron01Model : MgModelAbs() {
         (9..11).forEach {
             datCol.addAll(arrayListOf<Float>(1f,1f,0f,1f))
         }
+        */
+        (0..11).forEach { i ->
+            // ３頂点で１つの面を構成するため３で割る
+            val ii = i/3
+            // 正四面体は４つ頂点があるので４で割る
+            var tc = MgColor.hsva(360/4*ii,1f,1f,1f)
+            datCol.addAll(arrayListOf(tc[0],tc[1],tc[2],tc[3]))
+        }
 
         // インデックスデータ
         // 裏からみているので、右回りにインデックスを張る必要がある
@@ -109,7 +129,7 @@ class Tetrahedron01Model : MgModelAbs() {
         datIdx.addAll(arrayListOf<Short>(9,11,10))
     }
 
-    // 正四面体の辺が立方体の対角線に合うよう配置
+    // 面：正四面体の辺が立方体の対角線に合うよう配置
     private fun createPathPattern2( opt: Map<String,Float> ){
         var scale = opt["scale"] ?: 1f
 
@@ -156,6 +176,7 @@ class Tetrahedron01Model : MgModelAbs() {
         }
 
         // 色データ
+        /*
         (0..2).forEach {
             datCol.addAll(arrayListOf<Float>(1f,0f,0f,1f))
         }
@@ -168,6 +189,14 @@ class Tetrahedron01Model : MgModelAbs() {
         (9..11).forEach {
             datCol.addAll(arrayListOf<Float>(1f,1f,0f,1f))
         }
+        */
+        (0..11).forEach { i ->
+            // ３頂点で１つの面を構成するため３で割る
+            val ii = i/3
+            // 正四面体は４つ頂点があるので４で割る
+            var tc = MgColor.hsva(360/4*ii,1f,1f,1f)
+            datCol.addAll(arrayListOf(tc[0],tc[1],tc[2],tc[3]))
+        }
 
         // インデックスデータ
         datIdx.addAll(arrayListOf<Short>(0,1,2))
@@ -175,5 +204,112 @@ class Tetrahedron01Model : MgModelAbs() {
         datIdx.addAll(arrayListOf<Short>(6,7,8))
         datIdx.addAll(arrayListOf<Short>(9,10,11))
     }
+
+    // 点：底面が三角形
+    private fun createPathPattern10( opt: Map<String,Float> ) {
+        val ta = sqrt(3f)/2f
+        val tb = 0.5f
+        val tc = sqrt(2f)/2f
+
+        var scale = opt["scale"] ?: 1f
+
+        // v0,v3,v11
+        val va = arrayListOf(-ta*scale,-tc*scale,-tb*scale)
+        // v1,v5,v6
+        val vb = arrayListOf(       0f,-tc*scale, 1f*scale)
+        // v2,v8,v9
+        val vc = arrayListOf( ta*scale,-tc*scale,-tb*scale)
+        // v4,v7,v10
+        val vd = arrayListOf(       0f, tc*scale,       0f)
+
+        // 頂点データ
+        datPos.addAll(ArrayList<Float>(va))
+        datPos.addAll(ArrayList<Float>(vb))
+        datPos.addAll(ArrayList<Float>(vc))
+        datPos.addAll(ArrayList<Float>(vd))
+
+        // 色データ
+        (0..3).forEach { i ->
+            // 正四面体は４つ頂点があるので４で割る
+            var tc = MgColor.hsva(360/4*i,1f,1f,1f)
+            datCol.addAll(arrayListOf(tc[0],tc[1],tc[2],tc[3]))
+        }
+
+    }
+
+    // 線：底面が三角形
+    private fun createPathPattern20( opt: Map<String,Float> ) {
+        val ta = sqrt(3f)/2f
+        val tb = 0.5f
+        val tc = sqrt(2f)/2f
+
+        var scale = opt["scale"] ?: 1f
+
+        // v0,v3,v11
+        val va = arrayListOf(-ta*scale,-tc*scale,-tb*scale)
+        // v1,v5,v6
+        val vb = arrayListOf(       0f,-tc*scale, 1f*scale)
+        // v2,v8,v9
+        val vc = arrayListOf( ta*scale,-tc*scale,-tb*scale)
+        // v4,v7,v10
+        val vd = arrayListOf(       0f, tc*scale,       0f)
+
+        // 頂点データ
+        // l0
+        datPos.addAll(ArrayList<Float>(va))
+        datPos.addAll(ArrayList<Float>(vb))
+        // l1
+        datPos.addAll(ArrayList<Float>(vb))
+        datPos.addAll(ArrayList<Float>(vc))
+        // l2
+        datPos.addAll(ArrayList<Float>(vc))
+        datPos.addAll(ArrayList<Float>(va))
+        // l3
+        datPos.addAll(ArrayList<Float>(vd))
+        datPos.addAll(ArrayList<Float>(va))
+        // l4
+        datPos.addAll(ArrayList<Float>(vd))
+        datPos.addAll(ArrayList<Float>(vb))
+        // l5
+        datPos.addAll(ArrayList<Float>(vd))
+        datPos.addAll(ArrayList<Float>(vc))
+
+        // 色データ
+        /*
+        // l0
+        (0..1).forEach {
+            datCol.addAll(arrayListOf<Float>(1f,0f,0f,1f))
+        }
+        // l1
+        (2..3).forEach {
+            datCol.addAll(arrayListOf<Float>(1f,1f,0f,1f))
+        }
+        // l2
+        (4..5).forEach {
+            datCol.addAll(arrayListOf<Float>(0f,1f,0f,1f))
+        }
+        /// l3
+        (6..7).forEach {
+            datCol.addAll(arrayListOf<Float>(0f,1f,1f,1f))
+        }
+        /// l4
+        (8..9).forEach {
+            datCol.addAll(arrayListOf<Float>(0f,0f,1f,1f))
+        }
+        /// l5
+        (10..11).forEach {
+            datCol.addAll(arrayListOf<Float>(1f,0f,1f,1f))
+        }
+        */
+        (0..11).forEach { i ->
+            // ２頂点で１つの線を構成するため２で割る
+            val ii = i/2
+            // 正四面体は６つ線があるので６で割る
+            var tc = MgColor.hsva(360/6*ii,1f,1f,1f)
+            datCol.addAll(arrayListOf(tc[0],tc[1],tc[2],tc[3]))
+        }
+
+    }
+
 
 }

@@ -80,7 +80,7 @@ class DepthCull01Renderer(val modelID: Int,ctx: Context): MgRenderer(ctx) {
         }
 
         // 座標軸を描画
-        shaderSimple.drawArrays(axisModel,matMVP)
+        shaderSimple.draw(axisModel,matMVP,GLES20.GL_LINES)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
