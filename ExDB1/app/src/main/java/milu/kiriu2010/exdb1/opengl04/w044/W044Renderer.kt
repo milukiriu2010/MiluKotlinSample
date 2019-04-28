@@ -50,18 +50,9 @@ class W044Renderer(ctx: Context): MgRenderer(ctx) {
     // テクスチャ配列
     val textures = IntArray(2)
 
-    // フレームバッファ
-    val bufFrame = IntBuffer.allocate(1)
-
-    // 深度バッファ用レンダ―バッファ
-    val bufDepthRender = IntBuffer.allocate(1)
-
-    // フレームバッファ用のテクスチャ
-    val frameTexture = IntBuffer.allocate(1)
-
     override fun onDrawFrame(gl: GL10?) {
         // 回転角度
-        angle[0] =(angle[0]+2)%360
+        angle[0] =(angle[0]+1)%360
         angle[1] =(angle[0]+180)%360
         val t1 = angle[0].toFloat()
         val t2 = angle[1].toFloat()
