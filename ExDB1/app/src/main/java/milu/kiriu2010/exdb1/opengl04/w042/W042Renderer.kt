@@ -111,6 +111,15 @@ class W042Renderer(ctx: Context): MgRenderer(ctx) {
                 "radius" to 1f
         ))
 
+        // 光源位置
+        vecLight[0] = -10f
+        vecLight[1] = 10f
+        vecLight[2] = 10f
+        // 視点位置
+        vecEye[0] = 0f
+        vecEye[1] = 0f
+        vecEye[2] = 5f
+
         // ----------------------------------
         // 単位行列化
         // ----------------------------------

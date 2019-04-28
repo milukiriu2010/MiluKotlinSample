@@ -29,9 +29,13 @@ class W042Shader: MgShader() {
                 vec3 invLight = (u_matINV * vec4(u_vecLight,0.0)).xyz;
                 vec3 eye      = invEye - pos;
                 vec3 light    = invLight - pos;
+                // 法線ベクトル
                 vec3 n = normalize(a_Normal);
+                // 接線ベクトル
                 vec3 t = normalize(cross(a_Normal,vec3(0.0,1.0,0.0)));
+                // 従法線ベクトル
                 vec3 b = cross(n,t);
+                // 視線ベクトルとライトベクトルを接空間上に変換する
                 v_vecEye.x = dot(t,eye);
                 v_vecEye.y = dot(b,eye);
                 v_vecEye.z = dot(n,eye);
@@ -58,6 +62,9 @@ class W042Shader: MgShader() {
             varying   vec3      v_vecEye;
 
             void main() {
+                // 法線マップからRGB値を抜き出し、法線として扱う
+                // 法線マップ上の色データは負の値がない(0～1)
+                // 一方、法線は-1～1の範囲をとるので、"２倍して１引く"という処理になっている
                 vec3  mNormal   = (texture2D(u_Texture0, v_TextureCoord) * 2.0 - 1.0).rgb;
                 vec3  light     = normalize(v_vecLight);
                 vec3  eye       = normalize(v_vecEye);
