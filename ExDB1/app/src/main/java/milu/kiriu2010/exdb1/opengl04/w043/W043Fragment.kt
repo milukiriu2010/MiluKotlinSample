@@ -33,19 +33,19 @@ class W043Fragment : Fragment() {
         myGLView = view.findViewById(R.id.myGL02ViewA04)
         val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w43_0)
         val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.texture_w43_1)
-        val render = W043Renderer()
+        val render = W043Renderer(context!!)
         render.bmpArray.add(bmp0)
         render.bmpArray.add(bmp1)
         myGLView.setRenderer(render)
         myGLView.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
-                    render.rotateSwitch = false
+                    render.isRunning = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
                     Log.d(javaClass.simpleName,"vw[${myGLView.width}]vh[${myGLView.height}]")
-                    render.rotateSwitch = true
+                    render.isRunning = true
                     render.receiveTouch(event,myGLView.width,myGLView.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
@@ -60,14 +60,16 @@ class W043Fragment : Fragment() {
         val seekBarW043 = view.findViewById<SeekBar>(R.id.seekBarW043)
         seekBarW043.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                render.hScale = seekBarW043.progress.toFloat()/(seekBarW043.max.toFloat()*100f)
+                //render.hScale = seekBarW043.progress.toFloat()/(seekBarW043.max.toFloat()*100f)
+                render.hScale = seekBarW043.progress.toFloat()/seekBarW043.max.toFloat()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                render.hScale = seekBarW043.progress.toFloat()/(seekBarW043.max.toFloat()*100f)
+                //render.hScale = seekBarW043.progress.toFloat()/(seekBarW043.max.toFloat()*100f)
+                render.hScale = seekBarW043.progress.toFloat()/seekBarW043.max.toFloat()
             }
 
         })

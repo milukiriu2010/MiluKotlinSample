@@ -87,7 +87,6 @@ class W042Shader: MgShader() {
         return this
     }
 
-
     fun draw(model: MgModelAbs,
              matM: FloatArray,
              matMVP: FloatArray,
