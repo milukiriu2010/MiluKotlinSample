@@ -9,13 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.mgl01.cube01.Cube01Renderer
-import milu.kiriu2010.exdb1.mgl01.cube02.Cube02Renderer
-import milu.kiriu2010.exdb1.mgl01.cube03.Cube03Renderer
-import milu.kiriu2010.exdb1.mgl01.cube04.Cube04Renderer
-import milu.kiriu2010.exdb1.mgl01.cube05.Cube05Renderer
-import milu.kiriu2010.exdb1.mgl01.cube06.Cube06Renderer
-import milu.kiriu2010.exdb1.mgl01.cube07.Cube07Renderer
 import milu.kiriu2010.exdb1.opengl.MyGL02View
 
 

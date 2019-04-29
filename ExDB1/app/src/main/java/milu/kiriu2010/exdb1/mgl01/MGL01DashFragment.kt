@@ -7,13 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.mgl01.cube01.Cube01Renderer
-import milu.kiriu2010.exdb1.mgl01.cube02.Cube02Renderer
-import milu.kiriu2010.exdb1.mgl01.cube03.Cube03Renderer
-import milu.kiriu2010.exdb1.mgl01.cube04.Cube04Renderer
-import milu.kiriu2010.exdb1.mgl01.cube05.Cube05Renderer
+import milu.kiriu2010.exdb1.mgl01.qtn01.Qtn01Renderer
 import milu.kiriu2010.exdb1.opengl.MyGL02View
-
 
 class MGL01DashFragment : Fragment() {
 
@@ -31,11 +26,7 @@ class MGL01DashFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_mgl01_dash, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        //myGL02View.setRenderer(Cube01Renderer())
-        //myGL02View.setRenderer(Cube02Renderer())
-        //myGL02View.setRenderer(Cube03Renderer())
-        //myGL02View.setRenderer(Cube04Renderer())
-        myGL02View.setRenderer(Cube05Renderer())
+        myGL02View.setRenderer(Qtn01Renderer(context!!))
 
         return view
     }

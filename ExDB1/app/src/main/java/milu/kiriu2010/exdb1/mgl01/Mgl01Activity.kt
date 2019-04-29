@@ -7,13 +7,6 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_mgl01.*
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.mgl01.cube01.Cube01Fragment
-import milu.kiriu2010.exdb1.mgl01.cube02.Cube02Fragment
-import milu.kiriu2010.exdb1.mgl01.cube03.Cube03Fragment
-import milu.kiriu2010.exdb1.mgl01.cube04.Cube04Fragment
-import milu.kiriu2010.exdb1.mgl01.cube05.Cube05Fragment
-import milu.kiriu2010.exdb1.mgl01.cube06.Cube06Fragment
-import milu.kiriu2010.exdb1.mgl01.cube07.Cube07Fragment
 import milu.kiriu2010.exdb1.mgl01.qtn01.Qtn01Fragment
 
 class Mgl01Activity : AppCompatActivity() {
@@ -33,7 +26,7 @@ class Mgl01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Dash") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, MGL01DashFragment.newInstance(), "Dash")
+                            .replace(R.id.frameLayout, Qtn01Fragment.newInstance(), "Dash")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
@@ -42,7 +35,7 @@ class Mgl01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Home") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, MGL01HomeFragment.newInstance(), "Home")
+                            .replace(R.id.frameLayout, Qtn01Fragment.newInstance(), "Home")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
@@ -89,76 +82,6 @@ class Mgl01Activity : AppCompatActivity() {
                 if (supportFragmentManager.findFragmentByTag("qtn01") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Qtn01Fragment.newInstance(), "qtn01")
-                            .commit()
-                }
-                true
-            }
-            // 立方体(クォータニオン)
-            R.id.mgl01_cube07 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("cube07") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Cube07Fragment.newInstance(), "cube07")
-                            .commit()
-                }
-                true
-            }
-            // 立方体(点光源)
-            R.id.mgl01_cube06 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("cube06") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Cube06Fragment.newInstance(), "cube06")
-                            .commit()
-                }
-                true
-            }
-            // 立方体(フォンシェーディング)
-            R.id.mgl01_cube05 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("cube05") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Cube05Fragment.newInstance(), "cube05")
-                            .commit()
-                }
-                true
-            }
-            // 立方体(反射光)
-            R.id.mgl01_cube04 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("cube04") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Cube04Fragment.newInstance(), "cube04")
-                            .commit()
-                }
-                true
-            }
-            // 立方体(環境光)
-            R.id.mgl01_cube03 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("cube03") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Cube03Fragment.newInstance(), "cube03")
-                            .commit()
-                }
-                true
-            }
-            // 立方体(平行光源)
-            R.id.mgl01_cube02 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("cube02") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Cube02Fragment.newInstance(), "cube02")
-                            .commit()
-                }
-                true
-            }
-            // 立方体
-            R.id.mgl01_cube01 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("cube01") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Cube01Fragment.newInstance(), "cube01")
                             .commit()
                 }
                 true

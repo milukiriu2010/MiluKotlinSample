@@ -121,6 +121,7 @@ class DepthCull01Renderer(val modelID: Int,ctx: Context): MgRenderer(ctx) {
         // モデル生成
         model = when (modelID) {
             0 -> Tetrahedron01Model()
+            1 -> Cube01Model()
             2 -> Octahedron01Model()
             3 -> Dodecahedron01Model()
             4 -> Icosahedron01Model()

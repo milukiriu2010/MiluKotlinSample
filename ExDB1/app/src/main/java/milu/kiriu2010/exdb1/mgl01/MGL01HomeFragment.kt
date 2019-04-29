@@ -9,13 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.mgl01.cube01.Cube01Renderer
-import milu.kiriu2010.exdb1.mgl01.cube02.Cube02Renderer
-import milu.kiriu2010.exdb1.mgl01.cube03.Cube03Renderer
-import milu.kiriu2010.exdb1.mgl01.cube04.Cube04Renderer
-import milu.kiriu2010.exdb1.mgl01.cube05.Cube05Renderer
-import milu.kiriu2010.exdb1.mgl01.cube06.Cube06Renderer
-import milu.kiriu2010.exdb1.mgl01.cube07.Cube07Renderer
+import milu.kiriu2010.exdb1.mgl01.qtn01.Qtn01Renderer
 import milu.kiriu2010.exdb1.opengl.MyGL02View
 
 
@@ -35,23 +29,17 @@ class MGL01HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_mgl01_home, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        //myGL02View.setRenderer(Cube01Renderer())
-        //myGL02View.setRenderer(Cube02Renderer())
-        //myGL02View.setRenderer(Cube03Renderer())
-        //myGL02View.setRenderer(Cube04Renderer())
-        //myGL02View.setRenderer(Cube05Renderer())
-        //val render = Cube06Renderer()
-        val render = Cube07Renderer()
+        val render = Qtn01Renderer(context!!)
         myGL02View.setRenderer(render)
         myGL02View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
-                    render.rotateSwitch = false
+                    render.isRunning = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
                     Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
-                    render.rotateSwitch = true
+                    render.isRunning = true
                 }
                 MotionEvent.ACTION_MOVE -> {
                 }

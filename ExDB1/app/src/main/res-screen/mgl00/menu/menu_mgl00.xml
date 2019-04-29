@@ -3,14 +3,17 @@
 
     <item
         android:id="@+id/opengl_icosahedron01"
-        android:title="正二十面体(点光源)" />
+        android:title="正二十面体" />
     <item
         android:id="@+id/opengl_dodecahedron01"
-        android:title="正十二面体(点光源)" />
+        android:title="正十二面体" />
     <item
         android:id="@+id/opengl_octahedron01"
-        android:title="正八面体(点光源)" />
+        android:title="正八面体" />
     <item
-        android:id="@+id/opengl_pyramid01"
-        android:title="正四面体(点光源)" />
+        android:id="@+id/opengl_cube01"
+        android:title="立方体" />
+    <item
+        android:id="@+id/opengl_tetrahedron01"
+        android:title="正四面体" />
 </menu>

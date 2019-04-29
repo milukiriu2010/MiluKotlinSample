@@ -76,7 +76,7 @@ class Mgl00Activity : AppCompatActivity() {
                 finish()
                 true
             }
-            // 正二十面体(点光源)
+            // 正二十面体
             R.id.opengl_icosahedron01 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Icosahedron01Model") == null) {
@@ -86,7 +86,7 @@ class Mgl00Activity : AppCompatActivity() {
                 }
                 true
             }
-            // 正十二面体(点光源)
+            // 正十二面体
             R.id.opengl_dodecahedron01 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Dodecahedron01Model") == null) {
@@ -96,7 +96,7 @@ class Mgl00Activity : AppCompatActivity() {
                 }
                 true
             }
-            // 正八面体(点光源)
+            // 正八面体
             R.id.opengl_octahedron01 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Octahedron01Model") == null) {
@@ -106,8 +106,18 @@ class Mgl00Activity : AppCompatActivity() {
                 }
                 true
             }
-            // 正四面体(点光源)
-            R.id.opengl_pyramid01 -> {
+            // 立方体
+            R.id.opengl_cube01 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("Cube01Model") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(1), "Cube01Model")
+                            .commit()
+                }
+                true
+            }
+            // 正四面体
+            R.id.opengl_tetrahedron01 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Tetrahedron01Model") == null) {
                     supportFragmentManager.beginTransaction()

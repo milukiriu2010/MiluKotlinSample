@@ -4,25 +4,4 @@
     <item
         android:id="@+id/mgl01_qtn01"
         android:title="クォータニオン" />
-    <item
-        android:id="@+id/mgl01_cube07"
-        android:title="立方体(クォータニオン)" />
-    <item
-        android:id="@+id/mgl01_cube06"
-        android:title="立方体(点光源)" />
-    <item
-        android:id="@+id/mgl01_cube05"
-        android:title="立方体(フォンシェーディング)" />
-    <item
-        android:id="@+id/mgl01_cube04"
-        android:title="立方体(反射光)" />
-    <item
-        android:id="@+id/mgl01_cube03"
-        android:title="立方体(環境光)" />
-    <item
-        android:id="@+id/mgl01_cube02"
-        android:title="立方体(平行光源)" />
-    <item
-        android:id="@+id/mgl01_cube01"
-        android:title="立方体" />
 </menu>
