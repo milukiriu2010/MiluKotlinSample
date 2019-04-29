@@ -32,6 +32,7 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
 
     // シェーダ(スペキュラライティング)
     private lateinit var shaderA: W047AShader
+    // シェーダ(キューブ環境マッピング)
     private lateinit var shaderB: W047BShader
 
     // 画面縦横比
@@ -114,13 +115,10 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
         GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP,frameTexture[0])
         Matrix.setIdentityM(matM,0)
-        //Matrix.rotateM(matM,0,t1,0f,0f,1f)
-        //Matrix.translateM(matM,0,5f,0f,0f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         shaderB.draw(drawObjSphere,matM,matMVP,vecEye,0,1)
 
-        // スペキュラライティングシェーダ
-
+        // スペキュラライティングシェーダを使って
         // トーラスをレンダリング
         targetArray.forEachIndexed { id, target ->
             Matrix.setIdentityM(matM,0)
@@ -138,91 +136,6 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
         }
     }
 
-    override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
-        GLES20.glViewport(0, 0, width, height)
-
-        ratio = width.toFloat()/height.toFloat()
-
-        renderW = width
-        renderH = height
-
-        createFrameBuffer(renderW,renderH)
-    }
-
-    override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
-        // カリングと深度テストを有効にする
-        GLES20.glEnable(GLES20.GL_DEPTH_TEST)
-        GLES20.glDepthFunc(GLES20.GL_LEQUAL)
-
-        // シェーダプログラム登録
-        shaderA = W047AShader()
-        shaderA.loadShader()
-        // シェーダプログラム登録
-        shaderB = W047BShader()
-        shaderB.loadShader()
-
-        // キューブマップを生成
-        generateCubeMap()
-
-        // モデル生成(立方体)
-        drawObjCube = Cube01Model()
-        drawObjCube.createPath(mapOf(
-                "pattern" to 2f,
-                "scale"   to 2f,
-                "colorR"  to 1f,
-                "colorG"  to 1f,
-                "colorB"  to 1f,
-                "colorA"  to 1f
-        ))
-
-        // モデル生成(球体)
-        drawObjSphere = Sphere01Model()
-        drawObjSphere.createPath(mapOf(
-                "row"    to 32f,
-                "column" to 32f,
-                "radius" to 2.5f,
-                "colorR" to 1f,
-                "colorG" to 1f,
-                "colorB" to 1f,
-                "colorA" to 1f
-        ))
-
-        // モデル生成(トーラス)
-        drawObjTorus = Torus01Model()
-        drawObjTorus.createPath(mapOf(
-                "row"     to 32f,
-                "column"  to 32f,
-                "iradius" to 1f,
-                "oradius" to 2f,
-                "colorR"  to 1f,
-                "colorG"  to 1f,
-                "colorB"  to 1f,
-                "colorA"  to 1f
-        ))
-
-        // ----------------------------------
-        // 単位行列化
-        // ----------------------------------
-        // モデル変換行列
-        Matrix.setIdentityM(matM,0)
-        // モデル変換行列の逆行列
-        Matrix.setIdentityM(matI,0)
-        // ビュー変換行列
-        Matrix.setIdentityM(matV,0)
-        // プロジェクション変換行列
-        Matrix.setIdentityM(matP,0)
-        // モデル・ビュー・プロジェクション行列
-        Matrix.setIdentityM(matMVP,0)
-        // テンポラリ行列
-        Matrix.setIdentityM(matVP,0)
-    }
-
     // フレームバッファへの６方向レンダリング
     private fun render2FrameBuffer(t1:Float) {
         targetArray.forEachIndexed { id, target ->
@@ -233,6 +146,9 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
             GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
             GLES20.glClearDepthf(1f)
             GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
+
+            // ライトベクトル
+            val lightDirection = floatArrayOf(-1f,1f,1f)
 
             // 方角を判別して処理する
             when (target) {
@@ -333,7 +249,7 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
                     torusEye[0+id*3], torusEye[1+id*3], torusEye[2+id*3],
                     vecCenter[0],vecCenter[1],vecCenter[2],
                     torusCamUp[0+id*3], torusCamUp[1+id*3], torusCamUp[2+id*3]
-                    )
+            )
             Matrix.perspectiveM(matP,0,90f,1f,0.1f,200f)
             Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
@@ -364,9 +280,103 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.rotateM(matM,0,t1,torusEye[0+id*3],torusEye[1+id*3],torusEye[2+id*3])
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
             Matrix.invertM(matI,0,matM,0)
-            shaderA.draw(drawObjTorus,matMVP,matI,vecLight,torusInvEye,amb)
+            shaderA.draw(drawObjTorus,matMVP,matI,lightDirection,torusInvEye,amb)
         }
 
+    }
+
+    override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
+        GLES20.glViewport(0, 0, width, height)
+
+        ratio = width.toFloat()/height.toFloat()
+
+        renderW = width
+        renderH = height
+
+        createFrameBuffer(renderW,renderH)
+    }
+
+    override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
+        // canvasを初期化する色を設定する
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
+
+        // canvasを初期化する際の深度を設定する
+        GLES20.glClearDepthf(1f)
+
+        // カリングと深度テストを有効にする
+        GLES20.glEnable(GLES20.GL_DEPTH_TEST)
+        GLES20.glDepthFunc(GLES20.GL_LEQUAL)
+
+        // シェーダ(スペキュラライティング)
+        shaderA = W047AShader()
+        shaderA.loadShader()
+        // シェーダ(キューブ環境マッピング)
+        shaderB = W047BShader()
+        shaderB.loadShader()
+
+        // キューブマップを生成
+        generateCubeMap()
+
+        // モデル生成(立方体)
+        drawObjCube = Cube01Model()
+        drawObjCube.createPath(mapOf(
+                "pattern" to 2f,
+                "scale"   to 2f,
+                "colorR"  to 1f,
+                "colorG"  to 1f,
+                "colorB"  to 1f,
+                "colorA"  to 1f
+        ))
+
+        // モデル生成(球体)
+        drawObjSphere = Sphere01Model()
+        drawObjSphere.createPath(mapOf(
+                "row"    to 32f,
+                "column" to 32f,
+                "radius" to 3f,
+                "colorR" to 1f,
+                "colorG" to 1f,
+                "colorB" to 1f,
+                "colorA" to 1f
+        ))
+
+        // モデル生成(トーラス)
+        drawObjTorus = Torus01Model()
+        drawObjTorus.createPath(mapOf(
+                "row"     to 32f,
+                "column"  to 32f,
+                "iradius" to 0.5f,
+                "oradius" to 1f,
+                "colorR"  to 1f,
+                "colorG"  to 1f,
+                "colorB"  to 1f,
+                "colorA"  to 1f
+        ))
+
+        // 光源位置
+        vecLight[0] = -1f
+        vecLight[1] = 1f
+        vecLight[2] = 1f
+        // 視点位置
+        vecEye[0] = 0f
+        vecEye[1] = 0f
+        vecEye[2] = 20f
+
+        // ----------------------------------
+        // 単位行列化
+        // ----------------------------------
+        // モデル変換行列
+        Matrix.setIdentityM(matM,0)
+        // モデル変換行列の逆行列
+        Matrix.setIdentityM(matI,0)
+        // ビュー変換行列
+        Matrix.setIdentityM(matV,0)
+        // プロジェクション変換行列
+        Matrix.setIdentityM(matP,0)
+        // モデル・ビュー・プロジェクション行列
+        Matrix.setIdentityM(matMVP,0)
+        // テンポラリ行列
+        Matrix.setIdentityM(matVP,0)
     }
 
     // フレームバッファをオブジェクトとして生成する
@@ -379,44 +389,28 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
 
         // フレームバッファ生成
         GLES20.glGenFramebuffers(1,bufFrame)
-        // レンダ―バッファ生成
-        GLES20.glGenRenderbuffers(1,bufDepthRender)
-        // テクスチャ生成
-        GLES20.glGenTextures(1,frameTexture)
-
         // フレームバッファのバインド
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
 
+        // 深度バッファ用レンダ―バッファ生成
+        GLES20.glGenRenderbuffers(1,bufDepthRender)
         // 深度バッファ用レンダ―バッファのバインド
         GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,bufDepthRender[0])
-
         // レンダ―バッファを深度バッファとして設定
         GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER, GLES20.GL_DEPTH_COMPONENT16, width, height)
-
         // フレームバッファにレンダ―バッファを関連付ける
         GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT, GLES20.GL_RENDERBUFFER,bufDepthRender[0])
 
-
+        // フレームバッファ用テクスチャ生成
+        GLES20.glGenTextures(1,frameTexture)
         // フレームバッファ用のテクスチャをキューブマップテクスチャとしてバインド
         GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP,frameTexture[0])
 
         // フレームバッファ用のテクスチャにカラー用のメモリ領域を６面分確保
-        //GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,width,height,0,GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,null)
-        bmpArray.forEachIndexed { id, bitmap ->
-            GLES20.glTexImage2D(targetArray[id],0,
+        targetArray.forEachIndexed { id, target ->
+            GLES20.glTexImage2D(target,0,
                     GLES20.GL_RGBA,width,height,0,
                     GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,null)
-            /*
-            val bw = bitmap.width
-            val bh = bitmap.height
-            val buffer = ByteBuffer.allocateDirect(bw*bh*4)
-            bitmap.copyPixelsToBuffer(buffer)
-            buffer.position(0)
-            GLES20.glTexImage2D(targetArray[id],0,GLES20.GL_RGBA,
-                    bw,bh,0,GLES20.GL_RGBA,
-                    GLES20.GL_UNSIGNED_BYTE,buffer)
-            bitmap.recycle()
-            */
         }
 
         // テクスチャパラメータ

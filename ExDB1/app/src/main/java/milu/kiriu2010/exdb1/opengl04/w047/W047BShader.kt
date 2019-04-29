@@ -5,6 +5,7 @@ import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.MgShader
 
+// シェーダ(キューブ環境マッピング)
 class W047BShader: MgShader() {
     // 頂点シェーダ
     private val scv =
