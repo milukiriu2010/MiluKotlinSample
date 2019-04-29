@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_torus01"
+        android:title="トーラス" />
+    <item
+        android:id="@+id/opengl_sphere01"
+        android:title="球" />
+    <item
         android:id="@+id/opengl_icosahedron01"
         android:title="正二十面体" />
     <item

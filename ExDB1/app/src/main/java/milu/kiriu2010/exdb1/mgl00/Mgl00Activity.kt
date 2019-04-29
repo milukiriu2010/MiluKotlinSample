@@ -76,6 +76,26 @@ class Mgl00Activity : AppCompatActivity() {
                 finish()
                 true
             }
+            // トーラス
+            R.id.opengl_torus01 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("Torus01Model") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(6), "Torus01Model")
+                            .commit()
+                }
+                true
+            }
+            // 球
+            R.id.opengl_sphere01 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("Sphere01Model") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(5), "Sphere01Model")
+                            .commit()
+                }
+                true
+            }
             // 正二十面体
             R.id.opengl_icosahedron01 -> {
                 supportFragmentManager.popBackStack()

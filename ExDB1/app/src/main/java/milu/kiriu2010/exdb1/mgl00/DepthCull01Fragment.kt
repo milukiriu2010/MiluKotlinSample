@@ -38,14 +38,14 @@ class DepthCull01Fragment : Fragment() {
         myGL02View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
-                    render.isRunning = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
                     Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
-                    render.isRunning = true
+                    render.receiveTouch(event,myGL02View.width,myGL02View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
+                    render.receiveTouch(event,myGL02View.width,myGL02View.height)
                 }
                 else -> {
                 }
@@ -82,6 +82,7 @@ class DepthCull01Fragment : Fragment() {
                 render.shaderSwitch = when (itemId) {
                     R.string.shader_simple -> 0
                     R.string.shader_directional_light -> 1
+                    R.string.shader_texture -> 2
                     else -> 0
                 }
                 // 使わなくなったら解放
