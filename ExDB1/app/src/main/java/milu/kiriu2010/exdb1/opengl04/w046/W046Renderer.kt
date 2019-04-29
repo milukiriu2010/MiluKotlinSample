@@ -21,7 +21,7 @@ import kotlin.math.sqrt
 // 屈折マッピング
 // http://opengles2learning.blogspot.com/2011/06/texturing-cube-different-textures-on.html
 class W046Renderer(ctx: Context): MgRenderer(ctx) {
-    // 描画オブジェクト(立方体)
+    // 描画オブジェクト(立方体)(背景)
     private lateinit var drawObjCube: Cube01Model
     // 描画オブジェクト(球体)
     private lateinit var drawObjSphere: Sphere01Model

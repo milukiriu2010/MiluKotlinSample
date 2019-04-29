@@ -34,6 +34,7 @@ class W046Shader: MgShader() {
             uniform   vec3        u_vecEye;
             uniform   samplerCube u_CubeTexture;
             uniform   int         u_Refraction;
+            // 屈折率の比
             uniform   float       u_eta;
             varying   vec3        v_Position;
             varying   vec3        v_Normal;
