@@ -72,7 +72,7 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         val t1 = angle[0].toFloat()
 
         // ビュー×プロジェクション座標変換行列
-        vecEye = qtnNow.toVecIII(floatArrayOf(0f,0f,70f))
+        vecEye = qtnNow.toVecIII(floatArrayOf(0f,70f,0f))
         vecEyeUp = qtnNow.toVecIII(floatArrayOf(0f,0f,-1f))
         Matrix.setLookAtM(matV, 0,
                 vecEye[0], vecEye[1], vecEye[2],
