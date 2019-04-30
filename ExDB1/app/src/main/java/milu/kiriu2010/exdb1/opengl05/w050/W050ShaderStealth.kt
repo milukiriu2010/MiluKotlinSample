@@ -2,8 +2,11 @@ package milu.kiriu2010.exdb1.opengl05.w050
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.model.MgModelAbs
+import milu.kiriu2010.gui.shader.MgShader
 
-class W050ShaderStealth {
+// 光学迷彩シェーダ
+class W050ShaderStealth: MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -13,6 +16,7 @@ class W050ShaderStealth {
             uniform   mat4  u_matM;
             uniform   mat4  u_matTex;
             uniform   mat4  u_matMVP;
+            // テクスチャ座標をずらすために使われる係数
             uniform   float u_coefficient;
             varying   vec4  v_Color;
             varying   vec4  v_TexCoord;
@@ -21,6 +25,7 @@ class W050ShaderStealth {
                 vec3   pos  = (u_matM * vec4(a_Position, 1.0)).xyz;
                 vec3   nor  = normalize((u_matM * vec4(a_Normal, 1.0)).xyz);
                 v_Color     = a_Color;
+                // 係数と法線を掛け合わせた数値を加算することでテクスチャ座標をずらしている
                 v_TexCoord  = u_matTex * vec4(pos + nor * u_coefficient, 1.0);
                 gl_Position = u_matMVP * vec4(a_Position, 1.0);
             }
@@ -41,13 +46,82 @@ class W050ShaderStealth {
             }
             """.trimIndent()
 
-    fun loadShader(): Int {
+    override fun loadShader(): MgShader {
         // 頂点シェーダを生成
         val svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
         val sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
 
         // プログラムオブジェクトの生成とリンク
-        return MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Normal","a_Color") )
+        programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Normal","a_Color") )
+        return this
+    }
+
+
+    // 光学迷彩
+    fun draw(model: MgModelAbs,
+                    matM: FloatArray,
+                    matTex: FloatArray,
+                    matMVP: FloatArray,
+                    u_coefficient: Float,
+                    u_Texture0: Int) {
+        GLES20.glUseProgram(programHandle)
+
+        // attribute(頂点)
+        model.bufPos.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Position").also {
+            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLFunc.checkGlError("a_Position:${model.javaClass.simpleName}")
+
+        // attribute(法線)
+        model.bufNor.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Normal").also {
+            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufNor)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLFunc.checkGlError("a_Normal:${model.javaClass.simpleName}")
+
+        // attribute(色)
+        model.bufCol.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Color").also {
+            GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, model.bufCol)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLFunc.checkGlError("a_Color:${model.javaClass.simpleName}")
+
+        // uniform(モデル)
+        GLES20.glGetUniformLocation(programHandle,"u_matM").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matM,0)
+        }
+        MyGLFunc.checkGlError("u_matM:${model.javaClass.simpleName}")
+
+        // uniform(テクスチャ射影用)
+        GLES20.glGetUniformLocation(programHandle,"u_matTex").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matTex,0)
+        }
+        MyGLFunc.checkGlError("u_matTex:${model.javaClass.simpleName}")
+
+        // uniform(モデル×ビュー×プロジェクション)
+        GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
+        }
+        MyGLFunc.checkGlError("u_matMVP:${model.javaClass.simpleName}")
+
+        // uniform(光学迷彩にかける係数)
+        GLES20.glGetUniformLocation(programHandle,"u_coefficient").also {
+            GLES20.glUniform1f(it,u_coefficient)
+        }
+        MyGLFunc.checkGlError("u_coefficient:${model.javaClass.simpleName}")
+
+        // uniform(テクスチャ0)
+        GLES20.glGetUniformLocation(programHandle,"u_Texture0").also {
+            GLES20.glUniform1i(it,u_Texture0)
+        }
+        MyGLFunc.checkGlError("u_Texture0:${model.javaClass.simpleName}")
+
+        // モデルを描画
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
     }
 }

@@ -73,6 +73,7 @@ class W049Shader: MgShader() {
              matINV: FloatArray,
              u_vecLight: FloatArray,
              u_Texture0: Int) {
+        GLES20.glUseProgram(programHandle)
 
         // attribute(頂点)
         model.bufPos.position(0)

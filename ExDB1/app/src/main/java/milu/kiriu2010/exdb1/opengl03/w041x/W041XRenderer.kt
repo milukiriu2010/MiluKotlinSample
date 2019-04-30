@@ -28,27 +28,10 @@ class W041XRenderer(ctx: Context): MgRenderer(ctx) {
     // シェーダ(ブラーフィルタ用)
     private lateinit var shaderB: W041XBShader
 
-
-    /*
-    // プログラムハンドル(フレームバッファ用)
-    private var programHandleA: Int = 0
-    // プログラムハンドル(ブラーフィルター用)
-    private var programHandleB: Int = 0
-    */
-
     // 画面縦横比
     var ratio: Float = 0f
 
-    /*
-    // 点光源の位置
-    private val vecLight1 = floatArrayOf(-1f,2f,1f)
-    private val vecLight2 = floatArrayOf(-1f,0f,0f)
-    // カメラの座標
-    private val vecEye1 = floatArrayOf(0f,0f,5f)
     private val vecEye2 = floatArrayOf(0f,0f,0.5f)
-    */
-    private val vecEye2 = floatArrayOf(0f,0f,0.5f)
-
 
     // ビットマップ配列
     val bmpArray = arrayListOf<Bitmap>()
@@ -82,9 +65,6 @@ class W041XRenderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
         GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
-
-        // プログラムハンドル(フレームバッファ用)を有効化
-        //GLES20.glUseProgram(shaderA.programHandle)
 
         // カメラの位置
         // ビュー座標変換行列
@@ -123,9 +103,6 @@ class W041XRenderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
         GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
-
-        // プログラムハンドル(ブラー用)を有効化
-        //GLES20.glUseProgram(shaderB.programHandle)
 
         // フレームバッファに描きこんだ内容をテクスチャとして適用
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
