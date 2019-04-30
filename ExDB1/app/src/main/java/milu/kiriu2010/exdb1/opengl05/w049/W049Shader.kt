@@ -24,6 +24,7 @@ class W049Shader: MgShader() {
                 v_Position    = (u_matM * vec4(a_Position,1.0)).xyz;
                 v_Normal      = a_Normal;
                 v_Color       = a_Color;
+                // テクスチャ座標を取得
                 v_TexCoord    = u_matTex * vec4(v_Position,1.0);
                 gl_Position   = u_matMVP * vec4(a_Position,1.0);
             }
@@ -46,6 +47,8 @@ class W049Shader: MgShader() {
                 vec3  light    = u_vecLight - v_Position;
                 vec3  invLight = normalize(u_matINV * vec4(light,0.0)).xyz;
                 float diffuse  = clamp(dot(v_Normal,invLight), 0.1, 1.0);
+                // 頂点を射影変換した結果からテクスチャをサンプリングするため
+                // texture2DProjを使う
                 vec4  smpColor = texture2DProj(u_Texture0, v_TexCoord);
                 gl_FragColor   = v_Color * vec4(vec3(diffuse), 1.0) * smpColor;
             }

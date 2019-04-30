@@ -40,14 +40,17 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
     // テクスチャ配列
     val textures = IntArray(2)
 
-    // モデル変換行列(テクスチャ用)
-    private val matM4Tex = FloatArray(16)
-    // ビュー変換行列(テクスチャ用)
-    private val matV4Tex = FloatArray(16)
-    // プロジェクション変換行列(テクスチャ用)
-    private val matP4Tex = FloatArray(16)
-    // モデル×ビュー×プロジェクション行列(テクスチャ用)
-    private val matMVP4Tex = FloatArray(16)
+    // ---------------------------------------------
+    // ライトを視点とみなした場合の変換行列として使う
+    // ---------------------------------------------
+    // テクスチャ座標変換行列
+    private val matTex = FloatArray(16)
+    // ビュー変換行列(ライト視点)
+    private val matV4L = FloatArray(16)
+    // プロジェクション変換行列(ライト視点)
+    private val matP4L = FloatArray(16)
+    // テンポラリ行列(ライト視点)
+    private val matT4L = FloatArray(16)
 
     // ライトの位置補正用係数
     var k = 10f
@@ -79,40 +82,43 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
         // -------------------------------------------------------
         // テクスチャ変換用行列
         // -------------------------------------------------------
-        matM4Tex[0] = 0.5f
-        matM4Tex[1] = 0f
-        matM4Tex[2] = 0f
-        matM4Tex[3] = 0f
-        matM4Tex[4] = 0f
-        matM4Tex[5] = -0.5f
-        matM4Tex[6] = 0f
-        matM4Tex[7] = 0f
-        matM4Tex[8] = 0f
-        matM4Tex[9] = 0f
-        matM4Tex[10] = 1f
-        matM4Tex[11] = 0f
-        matM4Tex[12] = 0.5f
-        matM4Tex[13] = 0.5f
-        matM4Tex[14] = 0f
-        matM4Tex[15] = 1f
+        // http://asura.iaigiri.com/OpenGL/gl45.html
+        // -------------------------------------------------------
+        matTex[0] = 0.5f
+        matTex[1] = 0f
+        matTex[2] = 0f
+        matTex[3] = 0f
+        matTex[4] = 0f
+        matTex[5] = -0.5f
+        matTex[6] = 0f
+        matTex[7] = 0f
+        matTex[8] = 0f
+        matTex[9] = 0f
+        matTex[10] = 1f
+        matTex[11] = 0f
+        matTex[12] = 0.5f
+        matTex[13] = 0.5f
+        matTex[14] = 0f
+        matTex[15] = 1f
 
         // ライトの距離を調整
+        //  k = 0 ～ 20
         vecLight[0] = -k
-        vecLight[1] = k
-        vecLight[2] = k
+        vecLight[1] =  k
+        vecLight[2] =  k
 
         // ライトから見たビュー座標変換行列
-        Matrix.setLookAtM(matV4Tex,0,
+        Matrix.setLookAtM(matV4L,0,
                 vecLight[0],vecLight[1],vecLight[2],
                 vecCenter[0],vecCenter[1],vecCenter[2],
                 vecLightUp[0],vecLightUp[1],vecLightUp[2])
 
         // ライトから見たプロジェクション座標変換行列
-        Matrix.perspectiveM(matP4Tex,0,90f,1f,0.1f,150f)
+        Matrix.perspectiveM(matP4L,0,90f,1f,0.1f,150f)
 
         // ライトから見た座標変換行列を掛け合わせる
-        Matrix.multiplyMM(matMVP4Tex,0,matM4Tex,0,matP4Tex,0)
-        Matrix.multiplyMM(matM4Tex,0,matMVP4Tex,0,matV4Tex,0)
+        Matrix.multiplyMM(matT4L,0,matTex,0,matP4L,0)
+        Matrix.multiplyMM(matTex,0,matT4L,0,matV4L,0)
 
         // -------------------------------------------------------
         // トーラス描画(10個)
@@ -131,7 +137,7 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.rotateM(matM,0,t,1f,1f,0f)
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
             Matrix.invertM(matI,0,matM,0)
-            shader.draw(drawObjTorus,matM,matM4Tex,matMVP,matI,vecLight,0)
+            shader.draw(drawObjTorus,matM,matTex,matMVP,matI,vecLight,0)
         }
 
         // 板ポリゴンの描画(底面)
@@ -140,7 +146,7 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.scaleM(matM,0,20f,0f,20f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
-        shader.draw(drawObjBoard,matM,matM4Tex,matMVP,matI,vecLight,0)
+        shader.draw(drawObjBoard,matM,matTex,matMVP,matI,vecLight,0)
 
         // 板ポリゴンの描画(奥面)
         Matrix.setIdentityM(matM,0)
@@ -149,7 +155,7 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.scaleM(matM,0,20f,0f,20f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
-        shader.draw(drawObjBoard,matM,matM4Tex,matMVP,matI,vecLight,0)
+        shader.draw(drawObjBoard,matM,matTex,matMVP,matI,vecLight,0)
 
         // 板ポリゴンの描画(右脇面)
         Matrix.setIdentityM(matM,0)
@@ -158,7 +164,7 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.scaleM(matM,0,20f,0f,20f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
-        shader.draw(drawObjBoard,matM,matM4Tex,matMVP,matI,vecLight,0)
+        shader.draw(drawObjBoard,matM,matTex,matMVP,matI,vecLight,0)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -207,6 +213,15 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
         drawObjBoard.createPath(mapOf(
                 "pattern" to 49f
         ))
+
+        // 光源座標
+        vecLight[0] = -10f
+        vecLight[1] =  10f
+        vecLight[2] =  10f
+        // ライトビューの上方向
+        vecLightUp[0] =  0.577f
+        vecLightUp[1] =  0.577f
+        vecLightUp[2] = -0.577f
 
         // ----------------------------------
         // 単位行列化
