@@ -3,19 +3,13 @@ package milu.kiriu2010.exdb1.opengl05.w049
 import android.content.Context
 import android.graphics.Bitmap
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
-import android.opengl.GLUtils
 import android.opengl.Matrix
-import android.view.MotionEvent
 import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.gui.basic.MyQuaternion
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import java.lang.RuntimeException
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
-import kotlin.math.sqrt
 
 // 射影テクスチャマッピング
 class W049Renderer(ctx: Context): MgRenderer(ctx) {
@@ -66,7 +60,7 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // ビュー×プロジェクション座標変換行列
-        vecEye = qtnNow.toVecIII(floatArrayOf(0f,0f,70f))
+        vecEye = qtnNow.toVecIII(floatArrayOf(0f,0f,100f))
         vecEyeUp = qtnNow.toVecIII(floatArrayOf(0f,1f,0f))
         Matrix.setLookAtM(matV, 0,
                 vecEye[0], vecEye[1], vecEye[2],
