@@ -24,8 +24,9 @@ class Board01Model: MgModelAbs() {
         val pattern = opt["pattern"]?.toInt() ?: 1
 
         when ( pattern ) {
-            //
+            // XY平面(右回り)
             1 -> createPathPattern1(opt)
+            53 -> createPathPattern53(opt)
             // XZ平面(左回り)
             49 -> createPathPattern49(opt)
             // XZ平面(右回り)
@@ -37,16 +38,28 @@ class Board01Model: MgModelAbs() {
         allocateBuffer()
     }
 
+    // XY平面(右回り)
     private fun createPathPattern1(opt: Map<String, Float>) {
+        val color = FloatArray(4)
+        color[0] = opt["colorR"] ?: 1f
+        color[1] = opt["colorG"] ?: 1f
+        color[2] = opt["colorB"] ?: 1f
+        color[3] = opt["colorA"] ?: 1f
+
         // 頂点データ
         datPos.addAll(arrayListOf(-1f, 1f,0f))
         datPos.addAll(arrayListOf( 1f, 1f,0f))
         datPos.addAll(arrayListOf(-1f,-1f,0f))
         datPos.addAll(arrayListOf( 1f,-1f,0f))
 
+        // 法線データ
+        (0..3).forEach {
+            datNor.addAll(arrayListOf(0f,0f,1f))
+        }
+
         // 色データ
         (0..3).forEach {
-            datCol.addAll(arrayListOf<Float>(1f,1f,1f,1f))
+            datCol.addAll(arrayListOf<Float>(color[0],color[1],color[2],color[3]))
         }
 
         // インデックスデータ
@@ -54,8 +67,46 @@ class Board01Model: MgModelAbs() {
         datIdx.addAll(arrayListOf<Short>(3,2,1))
     }
 
+    // XY平面(左回り)
+    //  w53
+    private fun createPathPattern53(opt: Map<String, Float>) {
+        val color = FloatArray(4)
+        color[0] = opt["colorR"] ?: 1f
+        color[1] = opt["colorG"] ?: 1f
+        color[2] = opt["colorB"] ?: 1f
+        color[3] = opt["colorA"] ?: 1f
+
+        // 頂点データ
+        datPos.addAll(arrayListOf(-1f, 1f,0f))
+        datPos.addAll(arrayListOf( 1f, 1f,0f))
+        datPos.addAll(arrayListOf(-1f,-1f,0f))
+        datPos.addAll(arrayListOf( 1f,-1f,0f))
+
+        // 法線データ
+        (0..3).forEach {
+            datNor.addAll(arrayListOf(0f,0f,1f))
+        }
+
+        // 色データ
+        (0..3).forEach {
+            datCol.addAll(arrayListOf<Float>(color[0],color[1],color[2],color[3]))
+        }
+
+        // テクスチャ座標
+        (0..3).forEach {
+            datTxc.addAll(arrayListOf(0f,0f))
+            datTxc.addAll(arrayListOf(1f,0f))
+            datTxc.addAll(arrayListOf(0f,1f))
+            datTxc.addAll(arrayListOf(1f,1f))
+        }
+
+        // インデックスデータ
+        datIdx.addAll(arrayListOf<Short>(0,2,1))
+        datIdx.addAll(arrayListOf<Short>(2,3,1))
+    }
+
     // XZ平面(左回り)
-    // w49
+    //  w49
     private fun createPathPattern49(opt: Map<String, Float>) {
         val color = FloatArray(4)
         color[0] = opt["colorR"] ?: 1f
@@ -85,7 +136,7 @@ class Board01Model: MgModelAbs() {
     }
 
     // XZ平面(右回り)
-    // w51
+    //  w51
     private fun createPathPattern51(opt: Map<String, Float>) {
         val color = FloatArray(4)
         color[0] = opt["colorR"] ?: 1f

@@ -33,17 +33,15 @@ class W053Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_gl05_w53, container, false)
 
         myGLView = view.findViewById(R.id.myGL02ViewA05)
-        val render = W053Renderer()
+        val render = W053Renderer(context!!)
         myGLView.setRenderer(render)
         myGLView.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
-                    render.rotateSwitch = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
                     Log.d(javaClass.simpleName,"vw[${myGLView.width}]vh[${myGLView.height}]")
-                    render.rotateSwitch = true
                     render.receiveTouch(event,myGLView.width,myGLView.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
