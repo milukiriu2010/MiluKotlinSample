@@ -33,19 +33,17 @@ class W056Fragment : Fragment() {
         myGLView = view.findViewById(R.id.myGL02ViewA05)
         val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w56_01)
         val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.texture_w56_02)
-        val render = W056Renderer()
+        val render = W056Renderer(context!!)
         render.bmpArray.add(bmp0)
         render.bmpArray.add(bmp1)
         myGLView.setRenderer(render)
         myGLView.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
-                    render.rotateSwitch = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
                     Log.d(javaClass.simpleName,"vw[${myGLView.width}]vh[${myGLView.height}]")
-                    render.rotateSwitch = true
                     render.receiveTouch(event,myGLView.width,myGLView.height)
                 }
                 MotionEvent.ACTION_MOVE -> {

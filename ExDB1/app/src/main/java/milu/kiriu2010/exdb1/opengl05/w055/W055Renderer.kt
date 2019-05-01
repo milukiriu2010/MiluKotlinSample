@@ -209,10 +209,8 @@ class W055Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.setIdentityM(matVP,0)
     }
 
-
     // フレームバッファをオブジェクトとして生成する
     private fun createFrameBuffer(width: Int, height: Int) {
-
         val maxRenderbufferSize = IntBuffer.allocate(1)
         GLES20.glGetIntegerv(GLES20.GL_MAX_RENDERBUFFER_SIZE,maxRenderbufferSize)
 

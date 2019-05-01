@@ -59,7 +59,7 @@ class W055ShaderSobel: MgShader() {
 
                 // 512x512pixelの画像フォーマットをそのまま使う場合
                 // float tFrag = 1.0 / 512.0;
-                //  vec2  fc = vec2(gl_FragCoord.s, 512.0 - gl_FragCoord.t);
+                // vec2  fc = vec2(gl_FragCoord.s, 512.0 - gl_FragCoord.t);
 
                 // ---------------------------------------------------------------
                 // gl_FragCoord
