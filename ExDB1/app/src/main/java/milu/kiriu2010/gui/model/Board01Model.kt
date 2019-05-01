@@ -11,6 +11,7 @@ import java.nio.ShortBuffer
 // 板ポリゴン
 // --------------------------------------
 // 2019.04.30  51:XZ平面(右回り)
+// 2019.05.01  53:XY平面(左回り)
 // --------------------------------------
 class Board01Model: MgModelAbs() {
 
@@ -69,7 +70,7 @@ class Board01Model: MgModelAbs() {
     }
 
     // XY平面(左回り)
-    //  w53,w54
+    //  w53,w54,w55
     private fun createPathPattern53(opt: Map<String, Float>) {
         val color = FloatArray(4)
         color[0] = opt["colorR"] ?: 1f

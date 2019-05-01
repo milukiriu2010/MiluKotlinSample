@@ -3,9 +3,14 @@ package milu.kiriu2010.exdb1.opengl05.w055
 import android.opengl.GLES20
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.shader.MgShader
 
 // sobelフィルタ用シェーダ
-class W055ShaderSobel {
+// -------------------------------------------------------------------------------
+// sobelフィルタは、エッジ(色の諧調が極端に変化しているところ)の検出が可能になる。
+// 一次微分を計算することで、色の諧調差を計算する
+// -------------------------------------------------------------------------------
+class W055ShaderSobel: MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -30,14 +35,17 @@ class W055ShaderSobel {
             uniform   int         u_sobelGray;
             uniform   float       u_hCoef[9];
             uniform   float       u_vCoef[9];
+            uniform   float       u_renderWH;
             varying   vec2        v_TexCoord;
 
+            // NTSC系加重平均法
             const float redScale   = 0.298912;
             const float greenScale = 0.586611;
             const float blueScale  = 0.114478;
             const vec3  monochromeScale = vec3(redScale, greenScale, blueScale);
 
             void main() {
+                // 3x3の範囲のテクセルにアクセスするためのオフセット値
                 vec2 offset[9];
                 offset[0] = vec2(-1.0, -1.0);
                 offset[1] = vec2( 0.0, -1.0);
@@ -48,8 +56,26 @@ class W055ShaderSobel {
                 offset[6] = vec2(-1.0,  1.0);
                 offset[7] = vec2( 0.0,  1.0);
                 offset[8] = vec2( 1.0,  1.0);
-                float tFrag = 1.0 / 512.0;
-                vec2  fc = vec2(gl_FragCoord.s, 512.0 - gl_FragCoord.t);
+
+                // 512x512pixelの画像フォーマットをそのまま使う場合
+                // float tFrag = 1.0 / 512.0;
+                //  vec2  fc = vec2(gl_FragCoord.s, 512.0 - gl_FragCoord.t);
+
+                // ---------------------------------------------------------------
+                // gl_FragCoord
+                //   テクスチャの各テクセルを参照する
+                // gl_FragCoord.s
+                //   テクスチャの横幅がピクセル単位で格納されている
+                // gl_FragCoord.t
+                //   テクスチャの縦幅がピクセル単位で格納されている
+                // ---------------------------------------------------------------
+                // 画像をレンダリングの幅・高さに合わせている場合に、こちらを使う
+                float tFrag    = 1.0/u_renderWH;
+                // テクスチャ座標は描画が上下逆なので、
+                // 第２引数が"テクスチャの大きさ-テクスチャの縦幅"
+                vec2  fc = vec2(gl_FragCoord.s, u_renderWH - gl_FragCoord.t);
+
+
                 vec3  horizonColor  = vec3(0.0);
                 vec3  verticalColor = vec3(0.0);
                 vec4  destColor     = vec4(0.0);
@@ -74,11 +100,14 @@ class W055ShaderSobel {
                 verticalColor += texture2D(u_Texture0, (fc + offset[7]) * tFrag).rgb * u_vCoef[7];
                 verticalColor += texture2D(u_Texture0, (fc + offset[8]) * tFrag).rgb * u_vCoef[8];
 
+                // sobelフィルタを適用
                 if(bool(u_sobel)){
                     destColor = vec4(vec3(sqrt(horizonColor * horizonColor + verticalColor * verticalColor)), 1.0);
                 }else{
                     destColor = texture2D(u_Texture0, v_TexCoord);
                 }
+
+                // グレースケールを適用
                 if(bool(u_sobelGray)){
                     float grayColor = dot(destColor.rgb, monochromeScale);
                     destColor = vec4(vec3(grayColor), 1.0);
@@ -87,9 +116,7 @@ class W055ShaderSobel {
             }
             """.trimIndent()
 
-    var programHandle: Int = -1
-
-    fun loadShader(): Int {
+    override fun loadShader(): MgShader {
         // 頂点シェーダを生成
         val svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
@@ -97,76 +124,81 @@ class W055ShaderSobel {
 
         // プログラムオブジェクトの生成とリンク
         programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_TexCoord") )
-
-        return programHandle
+        return this
     }
 
 
-    fun draw(modelAbs: MgModelAbs,
+    fun draw(model: MgModelAbs,
              matMVP: FloatArray,
              u_Texture0: Int,
              u_sobel: Int,
              u_sobelGray: Int,
              u_hCoef: FloatArray,
-             u_vCoef: FloatArray) {
+             u_vCoef: FloatArray,
+             u_renderWH: Float) {
 
         GLES20.glUseProgram(programHandle)
-        MyGLFunc.checkGlError("Board:Draw:UseProgram")
+        MyGLFunc.checkGlError("UseProgram:${model.javaClass.simpleName}")
 
         // attribute(頂点)
-        modelAbs.bufPos.position(0)
+        model.bufPos.position(0)
         GLES20.glGetAttribLocation(programHandle,"a_Position").also {
-            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, modelAbs.bufPos)
+            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("Board:Draw:a_Position")
+        MyGLFunc.checkGlError("a_Position:${model.javaClass.simpleName}")
 
         // attribute(テクスチャ座標)
-        modelAbs.bufTxc.position(0)
+        model.bufTxc.position(0)
         GLES20.glGetAttribLocation(programHandle,"a_TexCoord").also {
-            GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, modelAbs.bufTxc)
+            GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, model.bufTxc)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("Board:Draw:a_TexCoord")
+        MyGLFunc.checkGlError("a_TexCoord:${model.javaClass.simpleName}")
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
-        MyGLFunc.checkGlError("Board:Draw:u_matMVP")
+        MyGLFunc.checkGlError("u_matMVP:${model.javaClass.simpleName}")
 
         // uniform(テクスチャ0)
         GLES20.glGetUniformLocation(programHandle, "u_Texture0").also {
             GLES20.glUniform1i(it, u_Texture0)
         }
-        MyGLFunc.checkGlError("u_Texture0")
+        MyGLFunc.checkGlError("u_Texture0:${model.javaClass.simpleName}")
 
         // uniform(sobelフィルタを使うかどうか)
         GLES20.glGetUniformLocation(programHandle, "u_sobel").also {
             GLES20.glUniform1i(it, u_sobel)
         }
-        MyGLFunc.checkGlError("Board:Draw:u_sobel")
+        MyGLFunc.checkGlError("u_sobel:${model.javaClass.simpleName}")
 
         // uniform(グレースケールを使うかどうか)
         GLES20.glGetUniformLocation(programHandle, "u_sobelGray").also {
             GLES20.glUniform1i(it, u_sobelGray)
         }
-        MyGLFunc.checkGlError("Board:Draw:u_sobelGray")
+        MyGLFunc.checkGlError("u_sobelGray:${model.javaClass.simpleName}")
 
-        // カーネル
+        // uniform(sobelフィルタの横方向カーネル)
         GLES20.glGetUniformLocation(programHandle, "u_hCoef").also {
             GLES20.glUniform1fv(it, 9,u_hCoef,0)
         }
-        MyGLFunc.checkGlError("Board:Draw:u_hCoef")
+        MyGLFunc.checkGlError("u_hCoef:${model.javaClass.simpleName}")
 
-        // カーネル
+        // uniform(sobelフィルタの縦方向カーネル)
         GLES20.glGetUniformLocation(programHandle, "u_vCoef").also {
             GLES20.glUniform1fv(it, 9,u_vCoef,0)
         }
-        MyGLFunc.checkGlError("Board:Draw:u_vCoef")
+        MyGLFunc.checkGlError("u_vCoef:${model.javaClass.simpleName}")
 
+        // uniform(画像の大きさ)
+        GLES20.glGetUniformLocation(programHandle, "u_renderWH").also {
+            GLES20.glUniform1f(it, u_renderWH)
+        }
+        MyGLFunc.checkGlError("u_renderWH:${model.javaClass.simpleName}")
 
         // モデルを描画
-        GLES20.glDrawElements(GLES20.GL_TRIANGLES, modelAbs.datIdx.size, GLES20.GL_UNSIGNED_SHORT, modelAbs.bufIdx)
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
     }
 }
