@@ -51,8 +51,8 @@ class W053Renderer(ctx: Context): MgRenderer(ctx) {
     override fun onDrawFrame(gl: GL10?) {
         angle[0] =(angle[0]+1)%360
         val t1 = angle[0].toFloat()
-        if ( (cntColor%2) == 0 ) {
-            cntColor = cntColor+1
+        if ( (angle[0]%2) == 0 ) {
+            cntColor++
         }
 
         // フレームバッファのバインド
@@ -188,7 +188,7 @@ class W053Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
 
-    // フレームバッファをオブジェクトとして生成する
+    // フレームバッファを生成する
     private fun createFrameBuffer(width: Int, height: Int) {
         // フレームバッファ生成
         GLES20.glGenFramebuffers(1,bufFrame)
