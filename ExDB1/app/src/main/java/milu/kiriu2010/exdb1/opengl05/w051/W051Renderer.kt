@@ -301,7 +301,6 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.setIdentityM(matVP4L,0)
     }
 
-
     // フレームバッファをオブジェクトとして生成する
     private fun createFrameBuffer(width: Int, height: Int) {
         // フレームバッファ生成
