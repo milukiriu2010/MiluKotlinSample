@@ -41,8 +41,8 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
     // テクスチャ座標変換行列
     private val matTex = FloatArray(16)
 
-    // ライトの座標変換行列
-    private val matLight = FloatArray(16)
+    // ライトから見たモデル×ビュー×プロジェクション座標変換行列
+    private val matMVP4L = FloatArray(16)
     // ライトから見たビュー座標変換行列
     private val matV4L = FloatArray(16)
     // ライトから見たプロジェクション座標変換行列
@@ -102,6 +102,7 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         matTex[15] = 1f
 
         // ライトの距離を係数で調整
+        //   k=30-60
         vecLight[0] = 0f * k
         vecLight[1] = 1f * k
         vecLight[2] = 0f * k
@@ -121,6 +122,12 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         // ライトから見たビュー×プロジェクション座標変換行列
         Matrix.multiplyMM(matVP4L,0,matP4L,0,matV4L,0)
 
+        // ------------------------------------------------------
+        // フレームバッファにはライトから見た時の深度値のみを描く
+        // デプスバッファの範囲は0.0～1.0
+        //   カメラに最も近いところ⇒0.0
+        //   　　　　最も遠いところ⇒1.0
+        // ------------------------------------------------------
         // フレームバッファをバインド
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
 
@@ -133,6 +140,7 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         // シャドウマップ
         // -------------------------------------------------------
         // トーラス描画(10個)
+        // 上段・下段５個ずつ、五角形の配置
         // -------------------------------------------------------
         (0..9).forEach { i ->
             // 回転角度
@@ -145,16 +153,16 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.rotateM(matM,0,t2,0f,1f,0f)
             Matrix.translateM(matM,0,0f,ifl*10f+10f,(ifl-2f)*7f)
             Matrix.rotateM(matM,0,t1,1f,1f,0f)
-            Matrix.multiplyMM(matLight,0,matVP4L,0,matM,0)
-            shaderDepth.draw(drawObjTorus,matLight,u_depthBuffer)
+            Matrix.multiplyMM(matMVP4L,0,matVP4L,0,matM,0)
+            shaderDepth.draw(drawObjTorus,matMVP4L,u_depthBuffer)
         }
 
         // 板ポリゴンの描画(底面)
         Matrix.setIdentityM(matM,0)
         Matrix.translateM(matM,0,0f,-10f,0f)
         Matrix.scaleM(matM,0,30f,0f,30f)
-        Matrix.multiplyMM(matLight,0,matVP4L,0,matM,0)
-        shaderDepth.draw(drawObjBoard,matLight,0)
+        Matrix.multiplyMM(matMVP4L,0,matVP4L,0,matM,0)
+        shaderDepth.draw(drawObjBoard,matMVP4L,0)
 
         // -----------------------------------------------
         // スクリーンレンダリング
@@ -189,8 +197,8 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.rotateM(matM,0,t1,1f,1f,0f)
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
             Matrix.invertM(matI,0,matM,0)
-            Matrix.multiplyMM(matLight,0,matVP4L,0,matM,0)
-            shaderScreen.draw(drawObjTorus,matM,matMVP,matI,matTex,matLight,vecLight,0,u_depthBuffer)
+            Matrix.multiplyMM(matMVP4L,0,matVP4L,0,matM,0)
+            shaderScreen.draw(drawObjTorus,matM,matMVP,matI,matTex,matMVP4L,vecLight,0,u_depthBuffer)
         }
 
         // 板ポリゴンの描画(底面)
@@ -199,8 +207,8 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.scaleM(matM,0,30f,0f,30f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
-        Matrix.multiplyMM(matLight,0,matVP4L,0,matM,0)
-        shaderScreen.draw(drawObjBoard,matM,matMVP,matI,matTex,matLight,vecLight,0,0)
+        Matrix.multiplyMM(matMVP4L,0,matVP4L,0,matM,0)
+        shaderScreen.draw(drawObjBoard,matM,matMVP,matI,matTex,matMVP4L,vecLight,0,0)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -248,11 +256,20 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
 
         // モデル生成(板ポリゴン)
         drawObjBoard = Board01Model()
+        /*
         drawObjBoard.createPath(mapOf(
                 "pattern" to 51f,
                 "colorR"  to 0.5f,
                 "colorG"  to 0.5f,
                 "colorB"  to 0.5f,
+                "colorA"  to 1f
+        ))
+        */
+        drawObjBoard.createPath(mapOf(
+                "pattern" to 51f,
+                "colorR"  to 1f, // 0.5f
+                "colorG"  to 1f, // 0.5f
+                "colorB"  to 1f, // 0.5f
                 "colorA"  to 1f
         ))
 
@@ -275,7 +292,7 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         // モデル変換行列(テクスチャ用)
         Matrix.setIdentityM(matTex,0)
         // ライトの座標変換行列
-        Matrix.setIdentityM(matLight,0)
+        Matrix.setIdentityM(matMVP4L,0)
         // ライトから見たビュー座標変換行列
         Matrix.setIdentityM(matV4L,0)
         // ライトから見たプロジェクション座標変換行列

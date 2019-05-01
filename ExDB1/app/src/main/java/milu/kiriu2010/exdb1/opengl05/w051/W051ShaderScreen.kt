@@ -15,11 +15,11 @@ class W051ShaderScreen: MgShader() {
             attribute vec4  a_Color;
             // カメラ視点のモデル座標変換行列
             uniform   mat4  u_matM;
-            // カメラ支店の座標変換行列
+            // カメラ視点のモデルxビューxプロジェクション座標変換行列
             uniform   mat4  u_matMVP;
             // 射影テクスチャマッピング用行列
             uniform   mat4  u_matTex;
-            // ライト視点の座標変換行列
+            // ライト視点のモデルxビューxプロジェクション座標変換行列
             uniform   mat4  u_matLight;
             varying   vec3  v_Position;
             varying   vec3  v_Normal;
@@ -31,7 +31,9 @@ class W051ShaderScreen: MgShader() {
                 v_Position  = (u_matM * vec4(a_Position, 1.0)).xyz;
                 v_Normal    = a_Normal;
                 v_Color     = a_Color;
+                // 影を射影テクスチャマッピングによって投影するために使う
                 v_TexCoord  = u_matTex   * vec4(v_Position, 1.0);
+                // ライト視点での座標変換行列で変換した頂点座標が格納される
                 v_Depth     = u_matLight * vec4(a_Position, 1.0);
                 gl_Position = u_matMVP   * vec4(a_Position, 1.0);
             }
@@ -52,6 +54,7 @@ class W051ShaderScreen: MgShader() {
             varying   vec4        v_TexCoord;
             varying   vec4        v_Depth;
 
+            // フレームバッファに描きこまれた深度値を本来の値に変換する
             float restDepth(vec4 RGBA) {
                 const float rMask = 1.0;
                 const float gMask = 1.0/255.0;
@@ -61,19 +64,28 @@ class W051ShaderScreen: MgShader() {
                 return depth;
             }
 
+            // フレームバッファに描かれた深度値を読み出し、
+            // ライト視点で座標変換した頂点の深度値と比較する
             void main() {
+                // 点光源による拡散光のライティング計算
                 vec3  light      = u_vecEye - v_Position;
                 vec3  invLight   = normalize(u_matINV * vec4(light, 0.0)).xyz;
                 float diffuse    = clamp(dot(v_Normal, invLight), 0.2, 1.0);
+                // フレームバッファに描かれた深度値を読み出し、本来の値を取り出す
                 float shadow     = restDepth(texture2DProj(u_Texture0, v_TexCoord));
                 vec4  depthColor = vec4(1.0);
                 if (v_Depth.w > 0.0) {
+                    // フレームバッファへの描きこみ時にデプスバッファの値を使った場合、
+                    // ライト視点でみたときの座標変換を行った頂点Zの値とshadowの値を比較
                     if (bool(u_depthBuffer)) {
                         vec4 lightCoord = v_Depth/v_Depth.w;
+                        // 0.0001は、深度値が完全に一致した場合、
+                        // マッハバンドと呼ばれる縞模様が発生するのを避けるための措置
                         if ( (lightCoord.z - 0.0001) > shadow ) {
                             depthColor = vec4(0.5,0.5,0.5,1.0);
                         }
                     }
+                    // フレームバッファの描きこみで、ダイレクトに頂点位置を用いた場合
                     else {
                         float  near = 0.1;
                         float  far  = 150.0;

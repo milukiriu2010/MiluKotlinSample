@@ -28,11 +28,15 @@ class W051ShaderDepth: MgShader() {
             uniform   int       u_depthBuffer;
             varying   vec4      v_Position;
 
+            // 深度値を32ビット制度に変換している
             vec4 convRGBA(float depth) {
+                // 深度値を255倍し、その小数点以下の数値を抜き出し、次に渡す。
+                // の繰り返し
                 float r = depth;
                 float g = fract(r*255.0);
                 float b = fract(g*255.0);
                 float a = fract(b*255.0);
+                // 誤差を相殺するためのバイアスを各要素にかける
                 float coef = 1.0/255.0;
                 r -= g*coef;
                 g -= b*coef;
@@ -40,11 +44,14 @@ class W051ShaderDepth: MgShader() {
                 return vec4(r,g,b,a);
             }
 
+            // 深度値を色情報に格納する
             void main() {
                 vec4 convColor;
+                // デプスバッファの深度値を使う
                 if (bool(u_depthBuffer)) {
                     convColor = convRGBA(gl_FragCoord.z);
                 }
+                // 頂点座標からダイレクトに深度に相当する値を生成してフラグメントに描く
                 else {
                     float near = 0.1;
                     float far  = 150.0;
