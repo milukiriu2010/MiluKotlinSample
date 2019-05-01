@@ -19,46 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Switch
-        android:id="@+id/switchDepth"
-        android:layout_width="126dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:checked="true"
-        android:text="Depth"
-        app:layout_constraintEnd_toStartOf="@+id/switchCull"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myGL02View" />
-
-    <Switch
-        android:id="@+id/switchCull"
-        android:layout_width="126dp"
-        android:layout_height="23dp"
-        android:layout_marginEnd="8dp"
-        android:checked="true"
-        android:text="Cull"
-        app:layout_constraintBottom_toBottomOf="@+id/switchDepth"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/switchDepth"
-        app:layout_constraintTop_toTopOf="@+id/switchDepth" />
-
-    <Switch
-        android:id="@+id/switchRotate"
-        android:layout_width="127dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:checked="true"
-        android:text="Rotate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchCull" />
-
     <Spinner
         android:id="@+id/spinnerShader"
         android:layout_width="0dp"
@@ -68,6 +28,76 @@
         android:spinnerMode="dialog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchRotate" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxDepth" />
+
+    <CheckBox
+        android:id="@+id/checkBoxDepth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Depth"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myGL02View" />
+
+    <CheckBox
+        android:id="@+id/checkBoxCull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Cull"
+        app:layout_constraintBottom_toBottomOf="@+id/checkBoxDepth"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxDepth"
+        app:layout_constraintTop_toTopOf="@+id/checkBoxDepth" />
+
+    <CheckBox
+        android:id="@+id/checkBoxRotate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Rotate"
+        app:layout_constraintBottom_toBottomOf="@+id/checkBoxCull"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxCull"
+        app:layout_constraintTop_toTopOf="@+id/checkBoxCull" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupPersFrus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerShader">
+
+        <RadioButton
+            android:id="@+id/radioButtonPers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Perspective" />
+
+        <RadioButton
+            android:id="@+id/radioButtonFrus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Frustum" />
+    </RadioGroup>
+
+    <SeekBar
+        android:id="@+id/seekBarFov"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:max="180"
+        android:progress="45"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupPersFrus" />
 
 </android.support.constraint.ConstraintLayout>

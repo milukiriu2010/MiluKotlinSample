@@ -53,18 +53,21 @@ class DepthCull01Fragment : Fragment() {
             true
         }
         // 深度テスト
-        val switchDepth = view.findViewById<Switch>(R.id.switchDepth)
-        switchDepth.setOnCheckedChangeListener { buttonView, isChecked ->
+        val checkBoxDepth = view.findViewById<CheckBox>(R.id.checkBoxDepth)
+        checkBoxDepth.isChecked = render.isDepth
+        checkBoxDepth.setOnCheckedChangeListener { buttonView, isChecked ->
             render.isDepth = isChecked
         }
         // カリング
-        val switchCull = view.findViewById<Switch>(R.id.switchCull)
-        switchCull.setOnCheckedChangeListener { buttonView, isChecked ->
+        val checkBoxCull = view.findViewById<CheckBox>(R.id.checkBoxCull)
+        checkBoxCull.isChecked = render.isCull
+        checkBoxCull.setOnCheckedChangeListener { buttonView, isChecked ->
             render.isCull = isChecked
         }
         // 回転
-        val switchRotate = view.findViewById<Switch>(R.id.switchRotate)
-        switchRotate.setOnCheckedChangeListener { buttonView, isChecked ->
+        val checkBoxRotate = view.findViewById<CheckBox>(R.id.checkBoxRotate)
+        checkBoxRotate.isChecked = false
+        checkBoxRotate.setOnCheckedChangeListener { buttonView, isChecked ->
             render.isRunning = isChecked
         }
 
@@ -83,6 +86,7 @@ class DepthCull01Fragment : Fragment() {
                     R.string.shader_simple -> 0
                     R.string.shader_directional_light -> 1
                     R.string.shader_texture -> 2
+                    R.string.shader_lines -> 3
                     else -> 0
                 }
                 // 使わなくなったら解放
@@ -90,6 +94,44 @@ class DepthCull01Fragment : Fragment() {
             }
 
         }
+
+        // Perspective/Frustum
+        val radioGroupPersFrus = view.findViewById<RadioGroup>(R.id.radioGroupPersFrus)
+        val radioButtonPers = view.findViewById<RadioButton>(R.id.radioButtonPers)
+        val radioButtonFrus = view.findViewById<RadioButton>(R.id.radioButtonFrus)
+        when (render.flgPersFrus) {
+            1 -> {
+                radioButtonPers.isChecked = true
+                radioButtonFrus.isChecked = false
+            }
+            2 -> {
+                radioButtonPers.isChecked = false
+                radioButtonFrus.isChecked = true
+            }
+        }
+        radioGroupPersFrus.setOnCheckedChangeListener { group, checkedId ->
+            render.flgPersFrus = when (checkedId) {
+                radioButtonPers.id -> 1
+                radioButtonFrus.id -> 2
+                else -> 1
+            }
+        }
+
+        // fov
+        val seekBarFov = view.findViewById<SeekBar>(R.id.seekBarFov)
+        seekBarFov.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                render.fov = seekBar.progress.toFloat()
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                render.fov = seekBar.progress.toFloat()
+            }
+
+        })
 
         return view
     }

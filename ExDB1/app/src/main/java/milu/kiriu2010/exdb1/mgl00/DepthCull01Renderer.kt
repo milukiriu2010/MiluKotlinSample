@@ -40,6 +40,14 @@ class DepthCull01Renderer(val modelID: Int,ctx: Context): MgRenderer(ctx) {
     // 前回選択したシェーダ
     private var shaderSwitchPrev = 0
 
+    // 1:Perspective
+    // 2:Frustum
+    var flgPersFrus = 1
+
+    // fovy
+    var fov = 45f
+
+
     override fun onDrawFrame(gl: GL10) {
 
         // 深度テスト
@@ -80,7 +88,12 @@ class DepthCull01Renderer(val modelID: Int,ctx: Context): MgRenderer(ctx) {
                 vecEye[0], vecEye[1], vecEye[2],
                 vecCenter[0], vecCenter[1], vecCenter[2],
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
-        Matrix.perspectiveM(matP,0,45f,ratio,0.1f,200f)
+        when ( flgPersFrus ) {
+            1 -> Matrix.perspectiveM(matP,0,fov,ratio,0.1f,100f)
+            //2 -> Matrix.frustumM(matP,0,-1f,1f,-1f,1f,0.1f,200f)
+            2 -> Matrix.frustumM(matP,0,-ratio,ratio,-1f,1f,0.1f,100f)
+        }
+
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
         // モデルを単位行列にする
@@ -127,6 +140,9 @@ class DepthCull01Renderer(val modelID: Int,ctx: Context): MgRenderer(ctx) {
                 shaderTexture.draw(model,matMVP,0)
                 GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,0)
             }
+            3 -> {
+                shaderSimple.draw(model,matMVP,GLES20.GL_LINES)
+            }
             else -> shaderSimple.draw(model,matMVP)
         }
 
@@ -163,6 +179,9 @@ class DepthCull01Renderer(val modelID: Int,ctx: Context): MgRenderer(ctx) {
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(1,textures,0)
         MyGLFunc.createTexture(0,textures,bmp0)
+
+        // 回転を止めておく
+        isRunning = false
 
         // カメラの位置
         vecEye[0]  = 0f

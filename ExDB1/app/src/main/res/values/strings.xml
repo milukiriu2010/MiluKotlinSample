@@ -40,11 +40,13 @@
     </string-array>
 
     <string name="shader_simple">Simple</string>
+    <string name="shader_lines">Lines</string>
     <string name="shader_directional_light">Directional Light</string>
     <string name="shader_texture">Texture</string>
 
     <string-array name="shaderlist">
         <item>@string/shader_simple</item>
+        <item>@string/shader_lines</item>
         <item>@string/shader_directional_light</item>
         <item>@string/shader_texture</item>
     </string-array>
