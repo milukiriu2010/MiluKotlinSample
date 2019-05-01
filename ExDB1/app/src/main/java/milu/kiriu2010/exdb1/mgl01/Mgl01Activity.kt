@@ -8,6 +8,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_mgl01.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.mgl01.qtn01.Qtn01Fragment
+import milu.kiriu2010.exdb1.mgl01.rot01.Rotate01Fragment
 
 class Mgl01Activity : AppCompatActivity() {
 
@@ -52,7 +53,7 @@ class Mgl01Activity : AppCompatActivity() {
 
         if (supportFragmentManager.findFragmentByTag("Home") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, Qtn01Fragment.newInstance(), "Home")
+                    .replace(R.id.frameLayout, Rotate01Fragment.newInstance(), "Home")
                     .commit()
         }
 
@@ -74,6 +75,16 @@ class Mgl01Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 回転
+            R.id.mgl01_rotate01 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("rot01") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Rotate01Fragment.newInstance(), "rot01")
+                            .commit()
+                }
                 true
             }
             // クォータニオン

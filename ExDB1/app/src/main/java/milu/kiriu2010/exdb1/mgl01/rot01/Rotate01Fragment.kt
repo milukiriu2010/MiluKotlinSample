@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.mgl01
+package milu.kiriu2010.exdb1.mgl01.rot01
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,11 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.mgl01.qtn01.Qtn01Renderer
 import milu.kiriu2010.exdb1.opengl.MyGL02View
 
 
-class MGL01HomeFragment : Fragment() {
+class Rotate01Fragment : Fragment() {
 
     private lateinit var myGL02View: MyGL02View
 
@@ -29,17 +28,15 @@ class MGL01HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_mgl01_home, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        val render = Qtn01Renderer(context!!)
+        val render = Rotate01Renderer(context!!)
         myGL02View.setRenderer(render)
         myGL02View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
-                    render.isRunning = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
                     Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
-                    render.isRunning = true
                 }
                 MotionEvent.ACTION_MOVE -> {
                 }
@@ -65,7 +62,7 @@ class MGL01HomeFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                MGL01HomeFragment().apply {
+                Rotate01Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

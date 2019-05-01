@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/mgl01_rotate01"
+        android:title="回転" />
+    <item
         android:id="@+id/mgl01_qtn01"
         android:title="クォータニオン" />
 </menu>
