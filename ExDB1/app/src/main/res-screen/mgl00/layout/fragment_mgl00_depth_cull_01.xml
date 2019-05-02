@@ -84,6 +84,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Frustum" />
+
+        <RadioButton
+            android:id="@+id/radioButtonOrth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ortho" />
     </RadioGroup>
 
     <SeekBar
@@ -92,12 +99,70 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:max="180"
         android:progress="45"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewFov"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewFov"
+        app:layout_constraintTop_toTopOf="@+id/textViewFov" />
+
+    <TextView
+        android:id="@+id/textViewFov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Fov"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupPersFrus" />
+
+    <TextView
+        android:id="@+id/textViewNear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Near"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFov" />
+
+    <SeekBar
+        android:id="@+id/seekBarNear"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:max="20"
+        android:progress="1"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewNear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewNear"
+        app:layout_constraintTop_toTopOf="@+id/textViewNear" />
+
+    <TextView
+        android:id="@+id/textViewFar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Far"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNear" />
+
+    <SeekBar
+        android:id="@+id/seekBarFar"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:max="50"
+        android:progress="10"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewFar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewFar"
+        app:layout_constraintTop_toTopOf="@+id/textViewFar" />
 
 </android.support.constraint.ConstraintLayout>

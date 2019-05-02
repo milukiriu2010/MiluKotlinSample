@@ -37,8 +37,10 @@ class Rotate01Fragment : Fragment() {
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
                     Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
+                    render.receiveTouch(event,myGL02View.width,myGL02View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
+                    render.receiveTouch(event,myGL02View.width,myGL02View.height)
                 }
                 else -> {
                 }

@@ -39,6 +39,13 @@ class Rotate01Renderer(ctx: Context): MgRenderer(ctx) {
         val y = MyMathUtil.sinf(t1)
 
         // ビュー×プロジェクション
+        vecEye = qtnNow.toVecIII(floatArrayOf(0f,0f,10f))
+        vecEyeUp = qtnNow.toVecIII(floatArrayOf(0f,1f,0f))
+        Matrix.setLookAtM(matV, 0,
+                vecEye[0], vecEye[1], vecEye[2],
+                vecCenter[0], vecCenter[1], vecCenter[2],
+                vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
+        Matrix.perspectiveM(matP,0,45f,1f,0.1f,100f)
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
         // ----------------------------------------------
@@ -123,7 +130,7 @@ class Rotate01Renderer(ctx: Context): MgRenderer(ctx) {
 
         val ratio = width.toFloat()/height.toFloat()
 
-        Matrix.perspectiveM(matP,0,60f,ratio,0.1f,100f)
+        //Matrix.perspectiveM(matP,0,60f,ratio,0.1f,100f)
     }
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
@@ -138,6 +145,7 @@ class Rotate01Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
         GLES20.glEnable(GLES20.GL_CULL_FACE)
 
+        /*
         // カメラの位置
         vecEye[0]  = 0f
         vecEye[1]  = 0f
@@ -147,6 +155,7 @@ class Rotate01Renderer(ctx: Context): MgRenderer(ctx) {
                 vecEye[0], vecEye[1], vecEye[2],
                 vecCenter[0], vecCenter[1], vecCenter[2],
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
+                */
 
         // シェーダ(特殊効果なし)
         shaderSimple = Simple01Shader()

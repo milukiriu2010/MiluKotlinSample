@@ -46,7 +46,10 @@ class DepthCull01Renderer(val modelID: Int,ctx: Context): MgRenderer(ctx) {
 
     // fovy
     var fov = 45f
-
+    // near
+    var near = 1f
+    // far
+    var far = 20f
 
     override fun onDrawFrame(gl: GL10) {
 
@@ -89,9 +92,9 @@ class DepthCull01Renderer(val modelID: Int,ctx: Context): MgRenderer(ctx) {
                 vecCenter[0], vecCenter[1], vecCenter[2],
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
         when ( flgPersFrus ) {
-            1 -> Matrix.perspectiveM(matP,0,fov,ratio,0.1f,100f)
-            //2 -> Matrix.frustumM(matP,0,-1f,1f,-1f,1f,0.1f,200f)
-            2 -> Matrix.frustumM(matP,0,-ratio,ratio,-1f,1f,0.1f,100f)
+            1 -> Matrix.perspectiveM(matP,0,fov,ratio,near,far)
+            2 -> Matrix.frustumM(matP,0,-1f,1f,-1f,1f,near,far)
+            3 -> Matrix.orthoM(matP,0,-1f,1f,-1f,1f,near,far)
         }
 
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)

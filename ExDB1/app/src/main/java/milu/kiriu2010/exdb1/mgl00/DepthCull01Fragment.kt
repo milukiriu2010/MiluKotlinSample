@@ -3,10 +3,7 @@ package milu.kiriu2010.exdb1.mgl00
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
 
 import milu.kiriu2010.exdb1.R
@@ -19,6 +16,7 @@ class DepthCull01Fragment : Fragment() {
     private var renderId = 0
 
     private lateinit var myGL02View: MyGL02View
+    private lateinit var scaleDetector: ScaleGestureDetector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +34,8 @@ class DepthCull01Fragment : Fragment() {
         val render = DepthCull01Renderer(renderId,context!!)
         myGL02View.setRenderer(render)
         myGL02View.setOnTouchListener { v, event ->
+            // scaleDetectorは、認識されない
+            scaleDetector.onTouchEvent(event)
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }
@@ -52,6 +52,26 @@ class DepthCull01Fragment : Fragment() {
             }
             true
         }
+
+        // ピンチイン・アウト
+        scaleDetector = ScaleGestureDetector(context,object: ScaleGestureDetector.OnScaleGestureListener{
+            override fun onScaleBegin(detector: ScaleGestureDetector): Boolean {
+                Log.d(javaClass.simpleName,"ScaleBegin")
+
+                return true
+            }
+
+            override fun onScaleEnd(detector: ScaleGestureDetector?) {
+            }
+
+            override fun onScale(detector: ScaleGestureDetector): Boolean {
+                Log.d(javaClass.simpleName,"scale[${detector.scaleFactor}]")
+
+                return true
+            }
+        })
+
+
         // 深度テスト
         val checkBoxDepth = view.findViewById<CheckBox>(R.id.checkBoxDepth)
         checkBoxDepth.isChecked = render.isDepth
@@ -99,20 +119,29 @@ class DepthCull01Fragment : Fragment() {
         val radioGroupPersFrus = view.findViewById<RadioGroup>(R.id.radioGroupPersFrus)
         val radioButtonPers = view.findViewById<RadioButton>(R.id.radioButtonPers)
         val radioButtonFrus = view.findViewById<RadioButton>(R.id.radioButtonFrus)
+        val radioButtonOrth = view.findViewById<RadioButton>(R.id.radioButtonOrth)
         when (render.flgPersFrus) {
             1 -> {
                 radioButtonPers.isChecked = true
                 radioButtonFrus.isChecked = false
+                radioButtonOrth.isChecked = false
             }
             2 -> {
                 radioButtonPers.isChecked = false
                 radioButtonFrus.isChecked = true
+                radioButtonOrth.isChecked = false
+            }
+            3 -> {
+                radioButtonPers.isChecked = false
+                radioButtonFrus.isChecked = false
+                radioButtonOrth.isChecked = true
             }
         }
         radioGroupPersFrus.setOnCheckedChangeListener { group, checkedId ->
             render.flgPersFrus = when (checkedId) {
                 radioButtonPers.id -> 1
                 radioButtonFrus.id -> 2
+                radioButtonOrth.id -> 3
                 else -> 1
             }
         }
@@ -129,6 +158,38 @@ class DepthCull01Fragment : Fragment() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 render.fov = seekBar.progress.toFloat()
+            }
+
+        })
+
+        // near
+        val seekBarNear = view.findViewById<SeekBar>(R.id.seekBarNear)
+        seekBarNear.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                render.near = seekBar.progress.toFloat()
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                render.near = seekBar.progress.toFloat()
+            }
+
+        })
+
+        // far
+        val seekBarFar = view.findViewById<SeekBar>(R.id.seekBarFar)
+        seekBarFar.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                render.far = seekBar.progress.toFloat()
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                render.far = seekBar.progress.toFloat()
             }
 
         })
