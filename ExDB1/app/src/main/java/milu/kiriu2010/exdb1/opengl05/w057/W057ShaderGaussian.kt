@@ -3,9 +3,13 @@ package milu.kiriu2010.exdb1.opengl05.w057
 import android.opengl.GLES20
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.shader.MgShader
 
 // gaussianフィルタ用シェーダ
-class W057ShaderGaussian {
+// -------------------------------------------------------------------------------
+// ぼかしフィルタ
+// -------------------------------------------------------------------------------
+class W057ShaderGaussian: MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -14,6 +18,7 @@ class W057ShaderGaussian {
             uniform   mat4  u_matMVP;
             varying   vec2  v_TexCoord;
 
+            // 正射影での座標変換行列が入ってくるようにする
             void main() {
                 v_TexCoord      = a_TexCoord;
                 gl_Position     = u_matMVP   * vec4(a_Position, 1.0);
@@ -29,16 +34,28 @@ class W057ShaderGaussian {
             uniform   int         u_gaussian;
             uniform   float       u_weight[10];
             uniform   int         u_horizontal;
+            uniform   float       u_renderWH;
             varying   vec2        v_TexCoord;
 
             void main() {
-                float tFrag = 1.0 / 512.0;
+                // 512x512pixelの画像フォーマットをそのまま使う場合
+                // float tFrag = 1.0 / 512.0;
+
+                // 画像をレンダリングの幅・高さに合わせている場合に、こちらを使う
+                float tFrag    = 1.0/u_renderWH;
+
                 vec2  fc;
                 vec3  destColor = vec3(0.0);
 
                 if(bool(u_gaussian)){
+                    // 横方向にガウスフィルタをかける
                     if(bool(u_horizontal)){
-                        fc = vec2(gl_FragCoord.s, 512.0 - gl_FragCoord.t);
+                        // 512x512pixelの画像フォーマットをそのまま使う場合
+                        // fc = vec2(gl_FragCoord.s, 512.0 - gl_FragCoord.t);
+
+                        // 画像をレンダリングの幅・高さに合わせている場合に、こちらを使う
+                        fc = vec2(gl_FragCoord.s, u_renderWH - gl_FragCoord.t);
+
                         destColor += texture2D(u_Texture0, (fc + vec2(-9.0, 0.0)) * tFrag).rgb * u_weight[9];
                         destColor += texture2D(u_Texture0, (fc + vec2(-8.0, 0.0)) * tFrag).rgb * u_weight[8];
                         destColor += texture2D(u_Texture0, (fc + vec2(-7.0, 0.0)) * tFrag).rgb * u_weight[7];
@@ -58,7 +75,9 @@ class W057ShaderGaussian {
                         destColor += texture2D(u_Texture0, (fc + vec2( 7.0, 0.0)) * tFrag).rgb * u_weight[7];
                         destColor += texture2D(u_Texture0, (fc + vec2( 8.0, 0.0)) * tFrag).rgb * u_weight[8];
                         destColor += texture2D(u_Texture0, (fc + vec2( 9.0, 0.0)) * tFrag).rgb * u_weight[9];
-                    }else{
+                    }
+                    // 縦方向にガウスフィルタをかける
+                    else{
                         fc = gl_FragCoord.st;
                         destColor += texture2D(u_Texture0, (fc + vec2(0.0, -9.0)) * tFrag).rgb * u_weight[9];
                         destColor += texture2D(u_Texture0, (fc + vec2(0.0, -8.0)) * tFrag).rgb * u_weight[8];
@@ -84,12 +103,11 @@ class W057ShaderGaussian {
                     destColor = texture2D(u_Texture0, v_TexCoord).rgb;
                 }
 
-                gl_FragColor = vec4(destColor, 1.0);            }
+                gl_FragColor = vec4(destColor, 1.0);
+            }
             """.trimIndent()
 
-    var programHandle: Int = -1
-
-    fun loadShader(): Int {
+    override fun loadShader(): MgShader {
         // 頂点シェーダを生成
         val svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
@@ -97,68 +115,73 @@ class W057ShaderGaussian {
 
         // プログラムオブジェクトの生成とリンク
         programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_TexCoord") )
-
-        return programHandle
+        return this
     }
 
-
-    fun draw(modelAbs: MgModelAbs,
+    fun draw(model: MgModelAbs,
              matMVP: FloatArray,
              u_Texture0: Int,
              u_gaussian: Int,
              u_weight: FloatArray,
-             u_horizontal: Int) {
+             u_horizontal: Int,
+             u_renderWH: Float) {
 
         GLES20.glUseProgram(programHandle)
-        MyGLFunc.checkGlError("Board:Draw:UseProgram")
+        MyGLFunc.checkGlError("UseProgram:${model.javaClass.simpleName}")
 
         // attribute(頂点)
-        modelAbs.bufPos.position(0)
+        model.bufPos.position(0)
         GLES20.glGetAttribLocation(programHandle,"a_Position").also {
-            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, modelAbs.bufPos)
+            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("Board:Draw:a_Position")
+        MyGLFunc.checkGlError("a_Position:${model.javaClass.simpleName}")
 
         // attribute(テクスチャ座標)
-        modelAbs.bufTxc.position(0)
+        model.bufTxc.position(0)
         GLES20.glGetAttribLocation(programHandle,"a_TexCoord").also {
-            GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, modelAbs.bufTxc)
+            GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, model.bufTxc)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("Board:Draw:a_TexCoord")
+        MyGLFunc.checkGlError("a_TexCoord:${model.javaClass.simpleName}")
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
-        MyGLFunc.checkGlError("Board:Draw:u_matMVP")
+        MyGLFunc.checkGlError("u_matMVP:${model.javaClass.simpleName}")
 
         // uniform(テクスチャ0)
         GLES20.glGetUniformLocation(programHandle, "u_Texture0").also {
             GLES20.glUniform1i(it, u_Texture0)
         }
-        MyGLFunc.checkGlError("u_Texture0")
+        MyGLFunc.checkGlError("u_Texture0:${model.javaClass.simpleName}")
 
         // uniform(gaussianフィルタを使うかどうか)
         GLES20.glGetUniformLocation(programHandle, "u_gaussian").also {
             GLES20.glUniform1i(it, u_gaussian)
         }
-        MyGLFunc.checkGlError("Board:Draw:u_gaussian")
+        MyGLFunc.checkGlError("u_gaussian:${model.javaClass.simpleName}")
 
-        // カーネル
+        // uniform(カーネル)
         GLES20.glGetUniformLocation(programHandle, "u_weight").also {
             GLES20.glUniform1fv(it, 10,u_weight,0)
         }
-        MyGLFunc.checkGlError("Board:Draw:u_weight")
+        MyGLFunc.checkGlError("u_weight:${model.javaClass.simpleName}")
 
         // uniform(水平方向かどうか)
         GLES20.glGetUniformLocation(programHandle, "u_horizontal").also {
             GLES20.glUniform1i(it, u_horizontal)
         }
-        MyGLFunc.checkGlError("Board:Draw:u_horizontal")
+        MyGLFunc.checkGlError("u_horizontal:${model.javaClass.simpleName}")
+
+        // uniform(画像の大きさ)
+        GLES20.glGetUniformLocation(programHandle, "u_renderWH").also {
+            GLES20.glUniform1f(it, u_renderWH)
+        }
+        MyGLFunc.checkGlError("u_renderWH:${model.javaClass.simpleName}")
 
         // モデルを描画
-        GLES20.glDrawElements(GLES20.GL_TRIANGLES, modelAbs.datIdx.size, GLES20.GL_UNSIGNED_SHORT, modelAbs.bufIdx)
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
     }
 }

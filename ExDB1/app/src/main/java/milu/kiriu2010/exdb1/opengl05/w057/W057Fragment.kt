@@ -33,19 +33,17 @@ class W057Fragment : Fragment() {
         myGLView = view.findViewById(R.id.myGL02ViewA05)
         val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w56_01)
         val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.texture_w56_02)
-        val render = W057Renderer()
+        val render = W057Renderer(context!!)
         render.bmpArray.add(bmp0)
         render.bmpArray.add(bmp1)
         myGLView.setRenderer(render)
         myGLView.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
-                    render.rotateSwitch = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
                     Log.d(javaClass.simpleName,"vw[${myGLView.width}]vh[${myGLView.height}]")
-                    render.rotateSwitch = true
                     render.receiveTouch(event,myGLView.width,myGLView.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
@@ -61,7 +59,6 @@ class W057Fragment : Fragment() {
         val radioButtonW57Render = view.findViewById<RadioButton>(R.id.radioButtonW57Render)
         val radioButtonW57Texture1 = view.findViewById<RadioButton>(R.id.radioButtonW57Texture1)
         val radioButtonW57Texture2 = view.findViewById<RadioButton>(R.id.radioButtonW57Texture2)
-
         radioGroupW57.setOnCheckedChangeListener { group, checkedId ->
             render.textureType = when (checkedId) {
                 radioButtonW57Render.id -> 0
@@ -72,6 +69,10 @@ class W057Fragment : Fragment() {
         }
 
         val checkBoxW57Gaussian = view.findViewById<CheckBox>(R.id.checkBoxW57Gaussian)
+        checkBoxW57Gaussian.isChecked = when(render.u_gaussian) {
+            1 -> true
+            else -> false
+        }
         checkBoxW57Gaussian.setOnCheckedChangeListener { buttonView, isChecked ->
             render.u_gaussian = when (isChecked) {
                 true -> 1

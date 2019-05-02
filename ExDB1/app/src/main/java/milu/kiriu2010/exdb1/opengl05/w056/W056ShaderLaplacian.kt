@@ -166,7 +166,7 @@ class W056ShaderLaplacian: MgShader() {
         }
         MyGLFunc.checkGlError("u_laplacianGray:${model.javaClass.simpleName}")
 
-        // カーネル
+        // uniform(カーネル)
         GLES20.glGetUniformLocation(programHandle, "u_Coef").also {
             GLES20.glUniform1fv(it, 9,u_Coef,0)
         }
