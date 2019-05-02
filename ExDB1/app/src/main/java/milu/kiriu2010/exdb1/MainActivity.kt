@@ -17,6 +17,7 @@ import milu.kiriu2010.exdb1.opengl02.OpenGL02Activity
 import milu.kiriu2010.exdb1.opengl03.OpenGL03Activity
 import milu.kiriu2010.exdb1.opengl04.OpenGL04Activity
 import milu.kiriu2010.exdb1.opengl05.OpenGL05Activity
+import milu.kiriu2010.exdb1.opengl06.OpenGL06Activity
 import milu.kiriu2010.exdb1.scheduler.SchedulerActivity
 import milu.kiriu2010.exdb1.sqlite.SQLiteOpenHelperActivity
 
@@ -85,6 +86,13 @@ class MainActivity : AppCompatActivity() {
         btnOpenGL05.transformationMethod = null
         btnOpenGL05.setOnClickListener {
             val intent = Intent(this, OpenGL05Activity::class.java)
+            startActivity(intent)
+        }
+
+        // 描画OpenGL06ページへ遷移
+        btnOpenGL06.transformationMethod = null
+        btnOpenGL06.setOnClickListener {
+            val intent = Intent(this, OpenGL06Activity::class.java)
             startActivity(intent)
         }
 

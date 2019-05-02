@@ -150,7 +150,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="OpenGL01"
+        android:text="GL01"
         android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@+id/btnOpenGL02"
         app:layout_constraintHorizontal_bias="0.5"
@@ -162,7 +162,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="OpenGL02"
+        android:text="GL02"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="@+id/btnOpenGL01"
         app:layout_constraintEnd_toStartOf="@+id/btnOpenGL03"
@@ -177,7 +177,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="OpenGL03"
+        android:text="GL03"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="@+id/btnOpenGL02"
         app:layout_constraintEnd_toEndOf="parent"
@@ -190,7 +190,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="OpenGL04"
+        android:text="GL04"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="@+id/btnOpenGL01"
         app:layout_constraintStart_toStartOf="@+id/btnOpenGL01"
@@ -201,11 +201,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="OpenGL05"
+        android:text="GL05"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="@+id/btnOpenGL04"
         app:layout_constraintStart_toEndOf="@+id/btnOpenGL04"
         app:layout_constraintTop_toTopOf="@+id/btnOpenGL04" />
+
+    <Button
+        android:id="@+id/btnOpenGL06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="GL06"
+        app:layout_constraintBottom_toBottomOf="@+id/btnOpenGL05"
+        app:layout_constraintStart_toEndOf="@+id/btnOpenGL05"
+        app:layout_constraintTop_toTopOf="@+id/btnOpenGL05" />
 
     <Button
         android:id="@+id/btnMGL00"

@@ -39,6 +39,20 @@
         <item>SRC_ALPHA_SATURATE</item>
     </string-array>
 
+    <string name="w59_depth_of_field">depth of field</string>
+    <string name="w59_depth">depth</string>
+    <string name="w59_scene">scene</string>
+    <string name="w59_blur1">blur scene1</string>
+    <string name="w59_blur2">blur scene2</string>
+
+    <string-array name="w59list">
+        <item>@string/w59_depth_of_field</item>
+        <item>@string/w59_depth</item>
+        <item>@string/w59_scene</item>
+        <item>@string/w59_blur1</item>
+        <item>@string/w59_blur2</item>
+    </string-array>
+
     <string name="shader_simple">Simple</string>
     <string name="shader_lines">Lines</string>
     <string name="shader_directional_light">Directional Light</string>
