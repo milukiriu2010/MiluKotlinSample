@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import milu.kiriu2010.exdb1.R
+import milu.kiriu2010.exdb1.opengl06.w058.W058Fragment
 import milu.kiriu2010.exdb1.opengl06.w059.W059Fragment
 
 class OpenGL06Activity : AppCompatActivity() {
@@ -16,7 +17,7 @@ class OpenGL06Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("w058") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W059Fragment.newInstance(), "w058")
+                    .replace(R.id.frameLayout, W058Fragment.newInstance(), "w058")
                     .commit()
         }
 
@@ -46,6 +47,16 @@ class OpenGL06Activity : AppCompatActivity() {
                 if (supportFragmentManager.findFragmentByTag("w059") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W059Fragment.newInstance(), "w059")
+                            .commit()
+                }
+                true
+            }
+            // グレアフィルタ
+            R.id.opengl_w058 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w058") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W058Fragment.newInstance(), "w058")
                             .commit()
                 }
                 true

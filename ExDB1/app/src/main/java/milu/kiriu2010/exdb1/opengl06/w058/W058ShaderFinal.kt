@@ -27,7 +27,9 @@ class W058ShaderFinal: MgShader() {
             """
             precision mediump   float;
 
+            // フルカラーの本来のレンダリング結果
             uniform   sampler2D   u_Texture1;
+            // ブラーをかけた反射光のレンダリング結果
             uniform   sampler2D   u_Texture2;
             uniform   int         u_glare;
             varying   vec2        v_TextureCoord;
@@ -37,6 +39,7 @@ class W058ShaderFinal: MgShader() {
                 vec4 smpColor  = texture2D(u_Texture2, vec2(v_TextureCoord.s,1.0-v_TextureCoord.t));
 
                 if ( bool(u_glare) ) {
+                    // 反射光を２倍している
                     destColor += smpColor * 2.0;
                 }
                 gl_FragColor = destColor;
