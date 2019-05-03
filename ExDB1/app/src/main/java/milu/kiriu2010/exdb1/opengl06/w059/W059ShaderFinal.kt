@@ -27,9 +27,13 @@ class W059ShaderFinal: MgShader() {
             """
             precision mediump   float;
 
+            // 深度マップテクスチャ
             uniform   sampler2D   u_TextureDepth;
+            // ぼけていないシーンのテクスチャ
             uniform   sampler2D   u_TextureScene;
+            // 小さくぼけたシーンのテクスチャ
             uniform   sampler2D   u_TextureBlur1;
+            // 大きくぼけたシーンのテクスチャ
             uniform   sampler2D   u_TextureBlur2;
             uniform   int         u_result;
             varying   vec2        v_TextureCoord;
@@ -47,7 +51,9 @@ class W059ShaderFinal: MgShader() {
             // フレームバッファに描かれた深度値を読み出し、
             // ライト視点で座標変換した頂点の深度値と比較する
             void main() {
+                // 深度値を逆変換して、元に戻している
                 float d = restDepth(texture2D(u_TextureDepth, vec2(v_TextureCoord.s,1.0-v_TextureCoord.t)));
+                // ぼやけたシーンをどの程度合成するか決めている
                 float coef = 1.0 - d;
                 float coefBlur1 = coef * d;
                 float coefBlur2 = coef * coef;
@@ -55,18 +61,24 @@ class W059ShaderFinal: MgShader() {
                 vec4 colorBlur1 = texture2D(u_TextureBlur1, v_TextureCoord);
                 vec4 colorBlur2 = texture2D(u_TextureBlur2, v_TextureCoord);
                 vec4 destColor  = colorScene*d + colorBlur1*coefBlur1 + colorBlur2*coefBlur2;
+
+                // 合成
                 if ( u_result == 0 ) {
                     gl_FragColor = destColor;
                 }
+                // モノクロ
                 else if ( u_result == 1 ) {
                     gl_FragColor = vec4(vec3(d),1.0);
                 }
+                // ぼやけていないシーン
                 else if ( u_result == 2 ) {
                     gl_FragColor = colorScene;
                 }
+                // 小さくぼやけたシーン
                 else if ( u_result == 3 ) {
                     gl_FragColor = colorBlur1;
                 }
+                // 大きくぼやけたシーン
                 else {
                     gl_FragColor = colorBlur2;
                 }

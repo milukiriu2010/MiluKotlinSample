@@ -200,10 +200,10 @@ class MyGLFunc {
         // ------------------------------------------------
         // gaussianブラーの重みを計算
         // ------------------------------------------------
-        fun gaussianWeigt(cnt: Int, dis: Float): FloatArray {
+        fun gaussianWeigt(cnt: Int, dis: Float, denominator: Float = 10f): FloatArray {
             val weight = FloatArray(cnt)
             var t = 0f
-            var d = dis*dis/10f
+            var d = dis*dis/denominator
             (0 until weight.size).forEach { i ->
                 val r = 1f + 2f*i.toFloat()
                 var w = exp(-0.5f*(r*r)/d)

@@ -1,7 +1,6 @@
-package milu.kiriu2010.exdb1.opengl06.w059
+package milu.kiriu2010.exdb1.opengl06.w058
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.Matrix
 import android.util.Log
@@ -15,11 +14,8 @@ import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
-// 被写界深度
-//   ピントが合っていない部分がぼやけて写るようにすること
-//   被写界深度ではピントを合わせたい深度を決め、
-//   その深度に応じて、ぼけていないシーンとぼけたシーンとを合成する
-class W059Renderer(ctx: Context): MgRenderer(ctx) {
+// グレアフィルタ
+class W058Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)
     private lateinit var drawObjTorus: Torus01Model
     // 描画オブジェクト(板ポリゴン)
@@ -27,48 +23,34 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(立方体)
     private lateinit var drawObjCube: Cube01Model
 
-    // シェーダ(メイン)
-    private lateinit var mainShader: W059ShaderMain
-    // シェーダ(深度をレンダリング)
-    private lateinit var depthShader: W059ShaderDepth
+    // シェーダ(シーン)
+    private lateinit var screenShader: W058ShaderScreen
+    // シェーダ(拡散光)
+    private lateinit var specularShader: W058ShaderSpecular
     // シェーダ(正射影で板ポリゴンをgaussianフィルタでレンダリング)
-    private lateinit var gaussianShader: W059ShaderGaussian
+    private lateinit var gaussianShader: W058ShaderGaussian
     // シェーダ(正射影でレンダリング結果を合成する)
-    private lateinit var finalShader: W059ShaderFinal
+    private lateinit var finalShader: W058ShaderFinal
 
     // 画面縦横比
     var ratio: Float = 0f
 
-    // ビットマップ配列
-    val bmpArray = arrayListOf<Bitmap>()
-
-    // テクスチャ配列
-    val textures = IntArray(1)
-
     // フレームバッファ
-    // 0:depth:深度マップレンダリング用のバッファ
-    // 1:scene:ぼやけてないシーン
-    // 2:blur1:小さくぼやけたシーン
-    // 3:blur2:大きくぼやけたシーン
-    // 4:ぼやけたシーンの一時バッファ
-    val bufFrame = IntBuffer.allocate(5)
+    val bufFrame = IntBuffer.allocate(2)
 
     // 深度バッファ用レンダ―バッファ
-    val bufDepthRender = IntBuffer.allocate(5)
+    val bufDepthRender = IntBuffer.allocate(2)
 
     // フレームバッファ用のテクスチャ
-    // 1:scene:ぼやけてないシーン
-    val frameTexture = IntBuffer.allocate(5)
+    val frameTexture = IntBuffer.allocate(2)
 
+    // ガウス関数に与えるパラメータ
+    var k_gaussian = 5f
     // u_gaussianフィルタの重み係数
-    val u_weight1 = MyGLFunc.gaussianWeigt(10,15f)
-    val u_weight2 = MyGLFunc.gaussianWeigt(10,45f)
+    val u_weight = FloatArray(10)
 
-    // フォーカスする深度値
-    var u_depthOffset = 0f
-
-    // 選択値
-    var u_result = 0
+    // グレアフィルタをかけるかどうか
+    var u_glare = 0
 
     // プロジェクションxビュー(正射影用の座標変換行列)
     private val matVP4O = FloatArray(16)
@@ -114,7 +96,7 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
 
         // テクスチャのバインド
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[0])
+        //GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[0])
 
         // ぼやけていないシーンをレンダリング(立方体)
         GLES20.glCullFace(GLES20.GL_FRONT)
@@ -122,8 +104,8 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.scaleM(matM,0,3.5f,2.5f,10f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
-        mainShader.draw(drawObjCube,matMVP,matI,vecLight,
-                floatArrayOf(0f,0f,10f), floatArrayOf(1f,1f,1f,1f), 0)
+        //screenShader.draw(drawObjCube,matMVP,matI,vecLight,
+        //        floatArrayOf(0f,0f,10f), floatArrayOf(1f,1f,1f,1f), 0)
 
         // -------------------------------------------------------
         // ぼやけていないシーンをレンダリング(トーラス)(10個)
@@ -136,7 +118,7 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.rotateM(matM,0,angleF[i],1f,1f,0f)
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
             Matrix.invertM(matI,0,matM,0)
-            mainShader.draw(drawObjTorus,matMVP,matI,vecLight,vecEye,amb.toFloatArray(),0)
+            //screenShader.draw(drawObjTorus,matMVP,matI,vecLight,vecEye,amb.toFloatArray(),0)
         }
 
         // --------------------------------------------------------------------------
@@ -156,7 +138,7 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[1])
 
         // 板ポリゴンのレンダリング
-        gaussianShader.draw(drawObjBoard,matVP4O,0,1,u_weight1,1,renderW.toFloat())
+        //gaussianShader.draw(drawObjBoard,matVP4O,0,1,u_weight1,1,renderW.toFloat())
 
         // -----------------------------------------------
         // 【2:小さくぼやけたシーンをバッファに描く】
@@ -175,7 +157,7 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[4])
 
         // 板ポリゴンのレンダリング
-        gaussianShader.draw(drawObjBoard,matVP4O,0,1,u_weight1,0,renderW.toFloat())
+        //gaussianShader.draw(drawObjBoard,matVP4O,0,1,u_weight1,0,renderW.toFloat())
 
         // --------------------------------------------------------------------------
         // 【3:ぼやけていないシーンから大きくぼやけたシーン生成し一時バッファに格納】
@@ -194,7 +176,7 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[1])
 
         // 板ポリゴンのレンダリング
-        gaussianShader.draw(drawObjBoard,matVP4O,0,1,u_weight2,1,renderW.toFloat())
+        //gaussianShader.draw(drawObjBoard,matVP4O,0,1,u_weight2,1,renderW.toFloat())
 
         // -----------------------------------------------
         // 【4:小さくぼやけたシーンをバッファに描く】
@@ -213,7 +195,7 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[4])
 
         // 板ポリゴンのレンダリング
-        gaussianShader.draw(drawObjBoard,matVP4O,0,1,u_weight2,0,renderW.toFloat())
+        //gaussianShader.draw(drawObjBoard,matVP4O,0,1,u_weight2,0,renderW.toFloat())
 
         // -----------------------------------------------
         // 【5:深度値マップをレンダリング】
@@ -232,7 +214,7 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.setIdentityM(matM,0)
         Matrix.scaleM(matM,0,3.5f,2.5f,10f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        depthShader.draw(drawObjCube,matMVP,u_depthOffset)
+        //specularShader.draw(drawObjCube,matMVP,u_depthOffset)
 
         // -------------------------------------------------------
         // 深度をレンダリング(トーラス)(10個)
@@ -244,7 +226,7 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.translateM(matM,0,0.2f*i.toFloat(),0f,8.8f-2.2f*i.toFloat())
             Matrix.rotateM(matM,0,angleF[i],1f,1f,0f)
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-            depthShader.draw(drawObjTorus,matMVP,u_depthOffset)
+            //specularShader.draw(drawObjTorus,matMVP,u_depthOffset)
         }
 
         // -----------------------------------------------
@@ -270,7 +252,7 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // 板ポリゴンのレンダリング
-        finalShader.draw(drawObjBoard,matVP4O,0,1,2,3,u_result)
+        //finalShader.draw(drawObjBoard,matVP4O,0,1,2,3,u_result)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -280,11 +262,6 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
 
         renderW = width
         renderH = height
-
-        // テクスチャを作成
-        GLES20.glGenTextures(1,textures,0)
-        // テクスチャに使う画像をロード
-        MyGLFunc.createTexture(0,textures,bmpArray[0])
 
         // フレームバッファ生成
         GLES20.glGenFramebuffers(5,bufFrame)
@@ -309,20 +286,20 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
         GLES20.glEnable(GLES20.GL_CULL_FACE)
 
-        // シェーダ(メイン)
-        mainShader = W059ShaderMain()
-        mainShader.loadShader()
+        // シェーダ(シーン)
+        screenShader = W058ShaderScreen()
+        screenShader.loadShader()
 
-        // シェーダ(深度をレンダリング)
-        depthShader = W059ShaderDepth()
-        depthShader.loadShader()
+        // シェーダ(拡散光)
+        specularShader = W058ShaderSpecular()
+        specularShader.loadShader()
 
         // シェーダ(正射影で板ポリゴンをgaussianフィルタでレンダリング)
-        gaussianShader = W059ShaderGaussian()
+        gaussianShader = W058ShaderGaussian()
         gaussianShader.loadShader()
 
         // シェーダ(正射影でレンダリング結果を合成する)
-        finalShader = W059ShaderFinal()
+        finalShader = W058ShaderFinal()
         finalShader.loadShader()
 
         // モデル生成(トーラス)

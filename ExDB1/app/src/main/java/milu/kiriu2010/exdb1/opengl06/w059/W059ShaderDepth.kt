@@ -25,6 +25,10 @@ class W059ShaderDepth: MgShader() {
             """
             precision mediump   float;
 
+            // 被写界深度をシミュレートする際、
+            //  どこにフォーカスするか、
+            //  どの深度にピントを合わせるか
+            // を決めるために使う
             uniform   float     u_depthOffset;
             varying   vec4      v_Position;
 
@@ -32,7 +36,7 @@ class W059ShaderDepth: MgShader() {
             const float far  = 30.0;
             const float linearDepth = 1.0/(far-near);
 
-            // 深度値を32ビット制度に変換している
+            // 深度値を32ビット精度に変換している
             vec4 convRGBA(float depth) {
                 // 深度値を255倍し、その小数点以下の数値を抜き出し、次に渡す。
                 // の繰り返し
@@ -50,6 +54,12 @@ class W059ShaderDepth: MgShader() {
 
             float convCoord(float depth, float offset) {
                 float d = clamp(depth+offset, 0.0, 1.0);
+
+                // フォーカスする深度値の範囲を広げている
+                // dが1に近ければ近いほど、
+                // ぼけていないシーンの比率を大きくして鮮明なイメージにする
+                // dが0に近いほど
+                // ぼやけたシーンの比率を上げる
                 if ( d > 0.6 ) {
                     d = 2.5 * (1.0-d);
                 }
@@ -63,6 +73,7 @@ class W059ShaderDepth: MgShader() {
             }
 
             // 深度値を色情報に格納する
+            // 頂点位置情報を使って深度値に相当する値を算出している
             void main() {
                 float linear    = linearDepth * length(v_Position);
                 vec4  convColor = convRGBA(convCoord(linear, u_depthOffset));
