@@ -1,59 +1,24 @@
 package milu.kiriu2010.exdb1.mgl01
 
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_mgl01.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.mgl01.qtn01.Qtn01Fragment
 import milu.kiriu2010.exdb1.mgl01.rot01.Rotate01Fragment
+import milu.kiriu2010.exdb1.mgl01.rot02.CubeRotate02Fragment
 
 class Mgl01Activity : AppCompatActivity() {
-
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.navigation_home -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Qtn01Fragment.newInstance(), "Home")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_dashboard -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Dash") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Qtn01Fragment.newInstance(), "Dash")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_notifications -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Qtn01Fragment.newInstance(), "Home")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mgl01)
 
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
-        if (supportFragmentManager.findFragmentByTag("Home") == null) {
+        supportFragmentManager.popBackStack()
+        if (supportFragmentManager.findFragmentByTag("rot02") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, Rotate01Fragment.newInstance(), "Home")
+                    .replace(R.id.frameLayout, CubeRotate02Fragment.newInstance(), "rot02")
                     .commit()
         }
 
@@ -77,8 +42,18 @@ class Mgl01Activity : AppCompatActivity() {
                 finish()
                 true
             }
-            // 回転
-            R.id.mgl01_rotate01 -> {
+            // 回転(立方体)02
+            R.id.mgl01_cube_rotate02 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("rot02") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, CubeRotate02Fragment.newInstance(), "rot02")
+                            .commit()
+                }
+                true
+            }
+            // 回転(立方体)01
+            R.id.mgl01_cube_rotate01 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("rot01") == null) {
                     supportFragmentManager.beginTransaction()

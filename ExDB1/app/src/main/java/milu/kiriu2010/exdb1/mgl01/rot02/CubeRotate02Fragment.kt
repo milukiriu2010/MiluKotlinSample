@@ -1,16 +1,18 @@
-package milu.kiriu2010.exdb1.mgl01
+package milu.kiriu2010.exdb1.mgl01.rot02
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.mgl01.qtn01.Qtn01Renderer
 import milu.kiriu2010.exdb1.opengl.MyGL02View
 
-class MGL01DashFragment : Fragment() {
+
+class CubeRotate02Fragment : Fragment() {
 
     private lateinit var myGL02View: MyGL02View
 
@@ -23,10 +25,28 @@ class MGL01DashFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_mgl01_dash, container, false)
+        val view = inflater.inflate(R.layout.fragment_mgl01_rot01, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        myGL02View.setRenderer(Qtn01Renderer(context!!))
+        val render = CubeRotate02Renderer(context!!)
+        myGL02View.setRenderer(render)
+        myGL02View.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_UP -> {
+                }
+                MotionEvent.ACTION_DOWN -> {
+                    Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
+                    Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
+                    render.receiveTouch(event,myGL02View.width,myGL02View.height)
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    render.receiveTouch(event,myGL02View.width,myGL02View.height)
+                }
+                else -> {
+                }
+            }
+            true
+        }
 
         return view
     }
@@ -44,7 +64,7 @@ class MGL01DashFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                MGL01DashFragment().apply {
+                CubeRotate02Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }
