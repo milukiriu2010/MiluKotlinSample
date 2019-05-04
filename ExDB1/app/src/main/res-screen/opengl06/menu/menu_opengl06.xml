@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w060"
+        android:title="w060_フォグ距離" />
+    <item
         android:id="@+id/opengl_w059"
         android:title="w059_被写界深度" />
     <item
