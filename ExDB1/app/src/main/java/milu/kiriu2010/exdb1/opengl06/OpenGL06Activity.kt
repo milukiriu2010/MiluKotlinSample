@@ -8,6 +8,7 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl06.w058.W058Fragment
 import milu.kiriu2010.exdb1.opengl06.w059.W059Fragment
 import milu.kiriu2010.exdb1.opengl06.w060.W060Fragment
+import milu.kiriu2010.exdb1.opengl06.w061.W061Fragment
 
 class OpenGL06Activity : AppCompatActivity() {
 
@@ -16,9 +17,9 @@ class OpenGL06Activity : AppCompatActivity() {
         setContentView(R.layout.activity_open_gl06)
 
         supportFragmentManager.popBackStack()
-        if (supportFragmentManager.findFragmentByTag("w060") == null) {
+        if (supportFragmentManager.findFragmentByTag("w061") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W060Fragment.newInstance(), "w060")
+                    .replace(R.id.frameLayout, W061Fragment.newInstance(), "w061")
                     .commit()
         }
 
@@ -40,6 +41,16 @@ class OpenGL06Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // パーティクルフォグ
+            R.id.opengl_w061 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w061") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W061Fragment.newInstance(), "w061")
+                            .commit()
+                }
                 true
             }
             // フォグ距離

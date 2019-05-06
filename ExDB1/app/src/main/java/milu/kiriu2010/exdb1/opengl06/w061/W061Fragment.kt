@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl06.w058
+package milu.kiriu2010.exdb1.opengl06.w061
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -12,11 +12,9 @@ import android.widget.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
 
-class W058Fragment : Fragment() {
+class W061Fragment : Fragment() {
 
     private lateinit var myGLView: MyGL02View
-
-    private lateinit var radioGroupW58: RadioGroup
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +25,10 @@ class W058Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl06_w58, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl06_w61, container, false)
 
-        myGLView = view.findViewById(R.id.myGL02ViewW58)
-        val render = W058Renderer(context!!)
+        myGLView = view.findViewById(R.id.myGL02ViewW61)
+        val render = W061Renderer(context!!)
         myGLView.setRenderer(render)
         myGLView.setOnTouchListener { v, event ->
             when (event.action) {
@@ -50,40 +48,25 @@ class W058Fragment : Fragment() {
             true
         }
 
-        val checkBoxW58Glare = view.findViewById<CheckBox>(R.id.checkBoxW58Glare)
-        checkBoxW58Glare.isChecked = when(render.u_glare) {
-            1 -> true
-            else -> false
-        }
-        checkBoxW58Glare.setOnCheckedChangeListener { buttonView, isChecked ->
-            render.u_glare = when (isChecked) {
+        val checkBoxW61Fog = view.findViewById<CheckBox>(R.id.checkBoxW61Fog)
+        checkBoxW61Fog.setOnCheckedChangeListener { buttonView, isChecked ->
+            render.u_softParticle = when(isChecked) {
                 true -> 1
                 else -> 0
             }
         }
 
-        val seekBarW58Dispersion = view.findViewById<SeekBar>(R.id.seekBarW58Dispersion)
-        seekBarW58Dispersion.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener{
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                render.k_gaussian = if ( seekBarW58Dispersion.progress > 0 ) {
-                    seekBarW58Dispersion.progress.toFloat()
-                }
-                else {
-                    1f
-                }
+        val seekBarW61DepthCoef = view.findViewById<SeekBar>(R.id.seekBarW61DepthCoef)
+        seekBarW61DepthCoef.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                render.u_depthCoef = seekBar.progress.toFloat()*0.01f
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
-
             }
 
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                render.k_gaussian = if ( seekBarW58Dispersion.progress > 0 ) {
-                    seekBarW58Dispersion.progress.toFloat()
-                }
-                else {
-                    1f
-                }
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                render.u_depthCoef = seekBar.progress.toFloat()*0.01f
             }
 
         })
@@ -104,7 +87,7 @@ class W058Fragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                W058Fragment().apply {
+                W061Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

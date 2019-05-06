@@ -1,17 +1,11 @@
 package milu.kiriu2010.exdb1.opengl06.w060
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.Matrix
-import android.util.Log
-import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.color.MgColor
-import milu.kiriu2010.gui.model.Board01Model
-import milu.kiriu2010.gui.model.Cube01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
