@@ -25,6 +25,9 @@ class W061ShaderFog: MgShader() {
                 vec3   pos      = (u_matM * vec4(a_Position, 1.0)).xyz;
                 v_Position      = u_matMVP * vec4(a_Position, 1.0);
                 v_Color         = a_Color;
+                // テクスチャ座標は、
+                // フラグメントシェーダ側で半月形に見えるように
+                // アルファ値を加工するために使う
                 v_TextureCoord  = a_TextureCoord;
                 v_TexProjCoord  = u_matTex * vec4(pos, 1.0);
                 gl_Position     = v_Position;
@@ -36,7 +39,22 @@ class W061ShaderFog: MgShader() {
             """
             precision mediump   float;
 
+            // ----------------------------------------------------------------
+            // テクスチャ座標をずらすために使う
+            // 全てのパーティクルが同じノイズを表示しているのは、かっこよくないので、
+            // フラグメントシェーダ側でテクスチャ座標をずらすために使う
+            // ----------------------------------------------------------------
             uniform   vec2      u_offset;
+            // ----------------------------------------------------------------
+            // 他のモデルの深度とパーティクルの深度の差が、
+            // どのくらい近い場合にアルファ値を操作するのかを決めるための係数
+            //   0.0 - 1.0
+            // パーティクル以外のモデルの深度、
+            // すなわちオフスクリーンレンダリングされたフレームバッファから
+            // 読みだした深度が仮に0.5で、u_distLengthが仮に0.1だったとすると、
+            // パーティクルの深度が0.4-0.6の範囲に収まるとき、
+            // アルファ値に影響を及ぼす
+            // ----------------------------------------------------------------
             uniform   float     u_distLength;
             uniform   sampler2D u_TextureDepth;
             uniform   sampler2D u_TextureNoise;
@@ -61,9 +79,19 @@ class W061ShaderFog: MgShader() {
             const float linearDepth = 1.0/(far-near);
 
             void main() {
+                // 射影テクスチャマッピングを使ってオフスクリーンレンダリングした深度値
+                // すなわち、パーティクル以外のモデルの深度値を読み出す
                 float depth      = restDepth(texture2DProj(u_TextureDepth, v_TexProjCoord));
+                // パーティクル自身の深度値
                 float linearPos  = linearDepth * length(v_Position);
+                // オフセットを適用したノイズテクスチャの色情報を取得
                 vec4  noiseColor = texture2D(u_TextureNoise, v_TextureCoord + u_offset);
+                // パーティクルを半月形になるように透明度を調整している
+                // (0.5,1.0)というテクスチャ座標位置とパーティクルのテクスチャ座標との距離を
+                // クランプ下上で1.0から減算する。
+                // こうすると、(0.5,1.0)を中心として、
+                // 円形に透明度が徐々に高くなっていくようなアルファ値を適用できる
+                // (0.5,1.0)をずらすと、半月形だけでなく円形に透明度を適用することもできる。
                 float alpha      = 1.0 - clamp(length(vec2(0.5,1.0) - v_TextureCoord)*2.0, 0.0, 1.0);
                 if (bool(u_softParticle)) {
                     float distance = abs(depth-linearPos);

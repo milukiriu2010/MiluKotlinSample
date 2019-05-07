@@ -1,11 +1,12 @@
-package milu.kiriu2010.exdb1.opengl02.w026
+package milu.kiriu2010.exdb1.opengl02.noise01
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.MgShader
 
-class W026Shader: MgShader() {
+// シェーダ(テクスチャをレンダリング)
+class Noise01Shader: MgShader() {
     // 頂点シェーダ
     private val scv =
             """

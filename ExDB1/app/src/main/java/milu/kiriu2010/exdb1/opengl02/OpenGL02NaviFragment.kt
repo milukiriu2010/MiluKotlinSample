@@ -31,7 +31,7 @@ class OpenGL02NaviFragment : Fragment() {
         val drawable = ResourcesCompat.getDrawable(resources,R.drawable.texture_w026,null)
         // drawableからbitmapへ変換
         val bmp = (drawable as BitmapDrawable).bitmap
-        val render = W026Renderer()
+        val render = W026Renderer(context!!)
         render.bmpArray.add(bmp)
         textureView.setRenderer(render)
 

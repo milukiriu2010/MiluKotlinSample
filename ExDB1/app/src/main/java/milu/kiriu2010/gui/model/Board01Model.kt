@@ -7,12 +7,13 @@ import java.nio.ByteOrder
 import java.nio.FloatBuffer
 import java.nio.ShortBuffer
 
-// --------------------------------------
+// --------------------------------------------------
 // 板ポリゴン
-// --------------------------------------
+// --------------------------------------------------
 // 2019.04.30  51:XZ平面(右回り)
 // 2019.05.01  53:XY平面(左回り)
-// --------------------------------------
+// 2019.05.07   1:XY平面(右回り)にテクスチャ座標付与
+// --------------------------------------------------
 class Board01Model: MgModelAbs() {
 
     override fun createPath( opt: Map<String,Float> ) {
@@ -41,6 +42,7 @@ class Board01Model: MgModelAbs() {
     }
 
     // XY平面(右回り)
+    //  w26
     private fun createPathPattern1(opt: Map<String, Float>) {
         val color = FloatArray(4)
         color[0] = opt["colorR"] ?: 1f
@@ -62,6 +64,14 @@ class Board01Model: MgModelAbs() {
         // 色データ
         (0..3).forEach {
             datCol.addAll(arrayListOf<Float>(color[0],color[1],color[2],color[3]))
+        }
+
+        // テクスチャ座標
+        (0..3).forEach {
+            datTxc.addAll(arrayListOf(0f,0f))
+            datTxc.addAll(arrayListOf(1f,0f))
+            datTxc.addAll(arrayListOf(0f,1f))
+            datTxc.addAll(arrayListOf(1f,1f))
         }
 
         // インデックスデータ

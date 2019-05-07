@@ -7,23 +7,24 @@ import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
+import milu.kiriu2010.exdb1.opengl02.noise01.Noise01Shader
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.exdb1.opengl02.w026.W026Shader
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
 // ---------------------------------------------------
-// テクスチャ
+// パーリンノイズで生成した画像をテクスチャとして貼る
 // ---------------------------------------------------
 // https://wgld.org/d/webgl/w026.html
 // ---------------------------------------------------
-class W026Renderer(ctx: Context): MgRenderer(ctx) {
+class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト
     private lateinit var drawObj: Board01Model
 
     // シェーダ
-    private lateinit var shader: W026Shader
+    private lateinit var shader: Noise01Shader
 
     // ビットマップ配列
     val bmpArray = arrayListOf<Bitmap>()
@@ -82,7 +83,7 @@ class W026Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
 
         // シェーダプログラム登録
-        shader = W026Shader()
+        shader = Noise01Shader()
         shader.loadShader()
 
         // テクスチャ作成し、idをtexturesに保存

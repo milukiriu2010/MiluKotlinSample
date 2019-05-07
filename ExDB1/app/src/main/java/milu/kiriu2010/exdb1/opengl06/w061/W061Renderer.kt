@@ -17,8 +17,11 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import kotlin.random.Random
 
-// 被写界深度
-//   パーティクルフォグ
+// パーティクルフォグ
+//   板状の四角形ポリゴンを３次元空間にたくさん配置し、
+//   これら板状のポリゴンに霧のようなテクスチャを適用して、
+//   ブレンドを有効にして半透明描画することにより、
+//   なんとなく霧っぽく見えるようにしている
 class W061Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)
     private lateinit var drawObjTorus: Torus01Model
@@ -65,11 +68,18 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
     // プロジェクションxビュー(正射影用の座標変換行列)
     private val matVP4T = FloatArray(16)
 
+    // --------------------------------------------
     // パーティクル用のデータ
+    // --------------------------------------------
+    // パーティクルの数
     private val particleCount = 30
+    // パーティクルの初期X座標
     private val offsetPositionX = FloatArray(particleCount)
+    // パーティクルの初期Z座標
     private val offsetPositionZ = FloatArray(particleCount)
+    // パーティクルの移動速度
     private val offsetPositionS = FloatArray(particleCount)
+    // テクスチャのオフセット座標
     private val offsetTexCoordS = FloatArray(particleCount)
     private val offsetTexCoordT = FloatArray(particleCount)
 
@@ -82,6 +92,7 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
             offsetTexCoordS[i] =  Random.nextFloat()
             offsetTexCoordT[i] =  Random.nextFloat()
         }
+        // Z座標をソートして奥から順番にパーティクルがレンダリングされるようにする
         offsetPositionZ.sort()
         Log.d(javaClass.simpleName,"create noise bitmap start")
 

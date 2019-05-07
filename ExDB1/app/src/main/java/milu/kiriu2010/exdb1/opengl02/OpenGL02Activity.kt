@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_open_gl02.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl02.labo01.TestGLFragment
 import milu.kiriu2010.exdb1.opengl02.jayce07.Jayce07Fragment
+import milu.kiriu2010.exdb1.opengl02.noise01.Noise01Fragment
 import milu.kiriu2010.exdb1.opengl02.w026.W026Fragment
 import milu.kiriu2010.exdb1.opengl02.w027.W027Fragment
 import milu.kiriu2010.exdb1.opengl02.w028.W028Fragment
@@ -126,6 +127,16 @@ class OpenGL02Activity : AppCompatActivity() {
                 if (supportFragmentManager.findFragmentByTag("w026") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W026Fragment.newInstance(), "w026")
+                            .commit()
+                }
+                true
+            }
+            // noise01_ノイズテクスチャ
+            R.id.opengl_noise01 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("noise01") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, Noise01Fragment.newInstance(), "noise01")
                             .commit()
                 }
                 true
