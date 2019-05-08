@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w064"
+        android:title="w064_リムライティング" />
+    <item
         android:id="@+id/opengl_w063"
         android:title="w063_半球ライティング" />
     <item
