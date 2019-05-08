@@ -11,6 +11,7 @@ import milu.kiriu2010.exdb1.opengl06.w060.W060Fragment
 import milu.kiriu2010.exdb1.opengl06.w061.W061Fragment
 import milu.kiriu2010.exdb1.opengl06.w062.W062Fragment
 import milu.kiriu2010.exdb1.opengl06.w063.W063Fragment
+import milu.kiriu2010.exdb1.opengl06.w064.W064Fragment
 
 class OpenGL06Activity : AppCompatActivity() {
 
@@ -19,9 +20,9 @@ class OpenGL06Activity : AppCompatActivity() {
         setContentView(R.layout.activity_open_gl06)
 
         supportFragmentManager.popBackStack()
-        if (supportFragmentManager.findFragmentByTag("w063") == null) {
+        if (supportFragmentManager.findFragmentByTag("w064") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W063Fragment.newInstance(), "w063")
+                    .replace(R.id.frameLayout, W064Fragment.newInstance(), "w064")
                     .commit()
         }
 
@@ -43,6 +44,16 @@ class OpenGL06Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // リムライティング
+            R.id.opengl_w064 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w064") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W064Fragment.newInstance(), "w064")
+                            .commit()
+                }
                 true
             }
             // 半球ライティング

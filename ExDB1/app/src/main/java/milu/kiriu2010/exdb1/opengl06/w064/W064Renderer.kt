@@ -8,6 +8,7 @@ import android.util.Log
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.color.MgColor
 import milu.kiriu2010.gui.model.Board01Model
+import milu.kiriu2010.gui.model.Ray01Model
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
@@ -17,11 +18,12 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // リムライティング
+//   モデルの後方からライトが当たっている情報を再現する照明効果
 class W064Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)
     private lateinit var drawObjTorus: Torus01Model
-    // 描画オブジェクト(球体)
-    private lateinit var drawObjSphere: Sphere01Model
+    // 描画オブジェクト(レイモデル)(というよりXYZ軸)
+    private lateinit var drawObjRay: Ray01Model
 
     // シェーダ(メイン)
     private lateinit var mainShader: W064ShaderMain
@@ -31,29 +33,18 @@ class W064Renderer(ctx: Context): MgRenderer(ctx) {
     // 画面縦横比
     var ratio: Float = 1f
 
-    // 映り込み係数
-    //   0.0 - 1.0
-    var u_alpha = 0.5f
+    // リムライトの色
+    var colorRim = floatArrayOf(1f,1f,1f,1f)
 
-    // 天空の向き
-    var vecSky = floatArrayOf(0f,1f,0f)
-
-    // 天空の色
-    var colorSky = floatArrayOf(0f,0f,1f,1f)
-
-    // 地面の色
-    var colorGround = floatArrayOf(0.3f,0.2f,0.1f,1f)
-
-
-    var u_rimCoef = 0.5f
-
+    // リムライトの強さ係数
+    var u_rimCoef = 1f
 
     override fun onDrawFrame(gl: GL10?) {
         angle[0] =(angle[0]+1)%360
         val t0 = angle[0].toFloat()
 
         // ビュー×プロジェクション座標変換行列
-        vecEye = qtnNow.toVecIII(floatArrayOf(0f,0f,5f))
+        vecEye = qtnNow.toVecIII(floatArrayOf(0f,1f,5f))
         vecEyeUp = qtnNow.toVecIII(floatArrayOf(0f,1f,0f))
         Matrix.setLookAtM(matV, 0,
                 vecEye[0], vecEye[1], vecEye[2],
@@ -69,21 +60,15 @@ class W064Renderer(ctx: Context): MgRenderer(ctx) {
 
         // レンダリング(トーラス)
         Matrix.setIdentityM(matM,0)
-        Matrix.translateM(matM,0,-1f,0f,0f)
         Matrix.rotateM(matM,0,t0,0f,1f,0f)
         Matrix.rotateM(matM,0,90f,1f,0f,0f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
         mainShader.draw(drawObjTorus,matM,matMVP,matI,
-                vecSky,vecLight,vecEye, colorSky, colorGround, u_rimCoef )
+                vecLight,vecCenter,vecEye,colorRim,  u_rimCoef )
 
-        // レンダリング(球体)
-        Matrix.setIdentityM(matM,0)
-        Matrix.translateM(matM,0,1f,0f,0f)
-        Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        Matrix.invertM(matI,0,matM,0)
-        mainShader.draw(drawObjSphere,matM,matMVP,matI,
-                vecSky,vecLight,vecEye, colorSky, colorGround, u_rimCoef )
+        // レンダリング(レイモデル)
+        rayShader.draw(drawObjRay,matVP)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -124,13 +109,9 @@ class W064Renderer(ctx: Context): MgRenderer(ctx) {
                 "oradius" to 0.5f
         ))
 
-        // モデル生成(球体)
-        drawObjSphere = Sphere01Model()
-        drawObjSphere.createPath(mapOf(
-                "row" to 32f,
-                "column" to 32f,
-                "radius" to 0.75f
-        ))
+        // モデル生成(レイモデル)
+        drawObjRay = Ray01Model()
+        drawObjRay.createPath()
 
         // ライトの向き
         vecLight[0] =  0f

@@ -73,6 +73,9 @@ class W064ShaderRay: MgShader() {
         MyGLFunc.checkGlError("u_matMVP:${model.javaClass.simpleName}")
 
         // モデルを描画
-        GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
+        GLES20.glDrawArrays(GLES20.GL_LINES,0,2)
+        GLES20.glDrawArrays(GLES20.GL_LINES,2,4)
+        GLES20.glDrawArrays(GLES20.GL_LINES,6,2)
+        GLES20.glDrawArrays(GLES20.GL_LINES,8,2)
     }
 }

@@ -21,6 +21,7 @@ class W064ShaderMain: MgShader() {
             uniform   vec3  u_vecCenter;
             uniform   vec3  u_vecEye;
             uniform   vec4  u_colorRim;
+            // リムライトの強さ係数
             uniform   float u_rimCoef;
             varying   vec4  v_Color;
 
@@ -30,7 +31,24 @@ class W064ShaderMain: MgShader() {
                 vec3   halfLE     = normalize(invLight + invEye);
                 float  diffuse    = clamp(dot(a_Normal,invLight), 0.1, 1.0);
                 float  specular   = pow(clamp(dot(a_Normal, halfLE), 0.0, 1.0), 50.0);
+                // リムライティングの係数
+                // ----------------------------------------------------------------------
+                // 視線ベクトルと法線ベクトルの角度が直角に近づけば近づくほど、
+                // ライティングの係数が大きくなるようにする
+                // ----------------------------------------------------------------------
+                // rimの値が0の場合、
+                // 視線ベクトルとライトベクトルの計算がどのような結果でも
+                // リムライトは当たらない
+                // ----------------------------------------------------------------------
+                // powを使ってコントラストを強くしている
+                // ----------------------------------------------------------------------
                 float  rim        = pow(1.0 - clamp(dot(a_Normal,invEye),0.0,1.0), 5.0);
+                // ----------------------------------------------------------------------
+                // 視線ベクトルとライトベクトルとの間で内積をとることで、
+                // ２つのベクトルがどの程度向かいあっているかを係数化する
+                // ----------------------------------------------------------------------
+                // powを使ってコントラストを強くしている
+                // ----------------------------------------------------------------------
                 float  dotLE      = pow(max(dot(normalize(u_vecCenter-u_vecEye),normalize(u_vecLight)), 0.0), 30.0);
                 vec4   ambient    = u_colorRim * u_rimCoef * dotLE;
                 v_Color         = a_Color * vec4(vec3(diffuse),1.0) + vec4(vec3(specular),1.0) + vec4(ambient.rgb, 1.0);
@@ -66,7 +84,6 @@ class W064ShaderMain: MgShader() {
              matM: FloatArray,
              matMVP: FloatArray,
              matINV: FloatArray,
-             u_vecSky: FloatArray,
              u_vecLight: FloatArray,
              u_vecCenter: FloatArray,
              u_vecEye: FloatArray,
