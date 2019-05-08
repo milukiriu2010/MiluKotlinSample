@@ -10,6 +10,7 @@ import milu.kiriu2010.exdb1.opengl06.w059.W059Fragment
 import milu.kiriu2010.exdb1.opengl06.w060.W060Fragment
 import milu.kiriu2010.exdb1.opengl06.w061.W061Fragment
 import milu.kiriu2010.exdb1.opengl06.w062.W062Fragment
+import milu.kiriu2010.exdb1.opengl06.w063.W063Fragment
 
 class OpenGL06Activity : AppCompatActivity() {
 
@@ -18,9 +19,9 @@ class OpenGL06Activity : AppCompatActivity() {
         setContentView(R.layout.activity_open_gl06)
 
         supportFragmentManager.popBackStack()
-        if (supportFragmentManager.findFragmentByTag("w062") == null) {
+        if (supportFragmentManager.findFragmentByTag("w063") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W062Fragment.newInstance(), "w062")
+                    .replace(R.id.frameLayout, W063Fragment.newInstance(), "w063")
                     .commit()
         }
 
@@ -42,6 +43,16 @@ class OpenGL06Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 半球ライティング
+            R.id.opengl_w063 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w063") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W063Fragment.newInstance(), "w063")
+                            .commit()
+                }
                 true
             }
             // ステンシル鏡面反射
