@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w062"
+        android:title="w062_ステンシル鏡面反射" />
+    <item
         android:id="@+id/opengl_w061"
         android:title="w061_パーティクルフォグ" />
     <item

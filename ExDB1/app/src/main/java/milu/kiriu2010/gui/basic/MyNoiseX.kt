@@ -2,6 +2,7 @@ package milu.kiriu2010.gui.basic
 
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.util.Log
 import kotlin.math.floor
 import kotlin.math.pow
 
@@ -140,8 +141,11 @@ class MyNoiseX(
 
         (0 until width).forEach { i ->
             (0 until width).forEach { j ->
-                val d = data[i*width+j]*255
+                val d = data[i*width+j]*255f
                 bmp.setPixel(i,j, Color.argb(255f,d,d,d))
+                if ( (i == 0) and (j == 0) ) {
+                    Log.d(javaClass.simpleName,"d[$d]")
+                }
             }
         }
 

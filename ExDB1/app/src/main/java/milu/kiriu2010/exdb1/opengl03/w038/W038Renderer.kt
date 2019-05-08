@@ -71,7 +71,9 @@ class W038Renderer(ctx: Context): MgRenderer(ctx) {
         // ステンシルテストをパスすると、
         // ステンシルバッファの対象ピクセルの基準値が１に書き換えられる
         // -------------------------------------------------------------
-        GLES20.glStencilFunc(GLES20.GL_ALWAYS,1, 0.inv() )
+        // 0の補数(~0)を0.inv()でなく0xffにしてみる
+        // -------------------------------------------------------------
+        GLES20.glStencilFunc(GLES20.GL_ALWAYS,1, 0xff )
         GLES20.glStencilOp(GLES20.GL_KEEP, GLES20.GL_REPLACE, GLES20.GL_REPLACE)
         render(floatArrayOf(-0.25f,0.25f,-0.5f))
 
@@ -84,7 +86,9 @@ class W038Renderer(ctx: Context): MgRenderer(ctx) {
         // 双方のポリゴンが重なっている領域の基準値は２
         // 重なっていない部分の基準値は最大でも１にしかなりえない
         // -------------------------------------------------------------
-        GLES20.glStencilFunc(GLES20.GL_ALWAYS,0, 0.inv() )
+        // 0の補数(~0)を0.inv()でなく0xffにしてみる
+        // -------------------------------------------------------------
+        GLES20.glStencilFunc(GLES20.GL_ALWAYS,0, 0xff )
         GLES20.glStencilOp(GLES20.GL_KEEP, GLES20.GL_INCR, GLES20.GL_INCR)
         render(floatArrayOf(0f,0f,0f))
 
@@ -96,7 +100,9 @@ class W038Renderer(ctx: Context): MgRenderer(ctx) {
         // ３枚目のポリゴンは２つのポリゴンが重なっている
         // 領域しかレンダリングされない
         // -------------------------------------------------------------
-        GLES20.glStencilFunc(GLES20.GL_EQUAL,2, 0.inv() )
+        // 0の補数(~0)を0.inv()でなく0xffにしてみる
+        // -------------------------------------------------------------
+        GLES20.glStencilFunc(GLES20.GL_EQUAL,2, 0xff )
         GLES20.glStencilOp(GLES20.GL_KEEP, GLES20.GL_KEEP, GLES20.GL_KEEP)
         render(floatArrayOf(0.25f,-0.25f,0.5f))
 

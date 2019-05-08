@@ -7,9 +7,11 @@ import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
+import android.os.SystemClock
 import milu.kiriu2010.exdb1.opengl02.noise01.Noise01Shader
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.exdb1.opengl02.w026.W026Shader
+import milu.kiriu2010.gui.basic.MyNoiseX
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
@@ -31,6 +33,22 @@ class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
 
     // テクスチャ配列
     val textures = IntArray(1)
+
+    init {
+        // ノイズを生成するビットマップに描く
+        val noise = MyNoiseX(5,2,0.6f)
+        noise.seed = (SystemClock.uptimeMillis()/1000).toInt()
+        val size = 128
+        val noiseColor = FloatArray(size*size)
+        (0 until size).forEach { i ->
+            (0 until size).forEach { j ->
+                noiseColor[i*size+j] = noise.snoise(i.toFloat(),j.toFloat(),size.toFloat())
+            }
+        }
+        val bmp = noise.createImage(size,noiseColor)
+        bmpArray.add(0,bmp)
+    }
+
     override fun onDrawFrame(gl: GL10) {
 
         // canvasを初期化

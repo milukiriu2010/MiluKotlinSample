@@ -9,6 +9,7 @@ import milu.kiriu2010.exdb1.opengl06.w058.W058Fragment
 import milu.kiriu2010.exdb1.opengl06.w059.W059Fragment
 import milu.kiriu2010.exdb1.opengl06.w060.W060Fragment
 import milu.kiriu2010.exdb1.opengl06.w061.W061Fragment
+import milu.kiriu2010.exdb1.opengl06.w062.W062Fragment
 
 class OpenGL06Activity : AppCompatActivity() {
 
@@ -17,9 +18,9 @@ class OpenGL06Activity : AppCompatActivity() {
         setContentView(R.layout.activity_open_gl06)
 
         supportFragmentManager.popBackStack()
-        if (supportFragmentManager.findFragmentByTag("w061") == null) {
+        if (supportFragmentManager.findFragmentByTag("w062") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W061Fragment.newInstance(), "w061")
+                    .replace(R.id.frameLayout, W062Fragment.newInstance(), "w062")
                     .commit()
         }
 
@@ -41,6 +42,16 @@ class OpenGL06Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // ステンシル鏡面反射
+            R.id.opengl_w062 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w062") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W062Fragment.newInstance(), "w062")
+                            .commit()
+                }
                 true
             }
             // パーティクルフォグ

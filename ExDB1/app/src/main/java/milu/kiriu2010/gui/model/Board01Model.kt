@@ -13,6 +13,7 @@ import java.nio.ShortBuffer
 // 2019.04.30  51:XZ平面(右回り)
 // 2019.05.01  53:XY平面(左回り)
 // 2019.05.07   1:XY平面(右回り)にテクスチャ座標付与
+// 2019.05.08  62:XY平面(左+右回り)
 // --------------------------------------------------
 class Board01Model: MgModelAbs() {
 
@@ -30,6 +31,8 @@ class Board01Model: MgModelAbs() {
             1 -> createPathPattern1(opt)
             // XY平面(左回り)
             53 -> createPathPattern53(opt)
+            // XY平面(左+右回り)
+            62 -> createPathPattern62(opt)
             // XZ平面(左回り)
             49 -> createPathPattern49(opt)
             // XZ平面(右回り)
@@ -115,6 +118,44 @@ class Board01Model: MgModelAbs() {
         // インデックスデータ
         datIdx.addAll(arrayListOf<Short>(0,2,1))
         datIdx.addAll(arrayListOf<Short>(2,3,1))
+    }
+
+    // XY平面(左+右回り)
+    //  w62
+    private fun createPathPattern62(opt: Map<String, Float>) {
+        val color = FloatArray(4)
+        color[0] = opt["colorR"] ?: 1f
+        color[1] = opt["colorG"] ?: 1f
+        color[2] = opt["colorB"] ?: 1f
+        color[3] = opt["colorA"] ?: 1f
+
+        // 頂点データ
+        datPos.addAll(arrayListOf(-1f, 1f,0f))
+        datPos.addAll(arrayListOf( 1f, 1f,0f))
+        datPos.addAll(arrayListOf(-1f,-1f,0f))
+        datPos.addAll(arrayListOf( 1f,-1f,0f))
+
+        // 法線データ
+        (0..3).forEach {
+            datNor.addAll(arrayListOf(0f,0f,1f))
+        }
+
+        // 色データ
+        (0..3).forEach {
+            datCol.addAll(arrayListOf<Float>(color[0],color[1],color[2],color[3]))
+        }
+
+        // テクスチャ座標
+        (0..3).forEach {
+            datTxc.addAll(arrayListOf(0f,0f))
+            datTxc.addAll(arrayListOf(1f,0f))
+            datTxc.addAll(arrayListOf(0f,1f))
+            datTxc.addAll(arrayListOf(1f,1f))
+        }
+
+        // インデックスデータ
+        datIdx.addAll(arrayListOf<Short>(0,2,1))
+        datIdx.addAll(arrayListOf<Short>(1,2,3))
     }
 
     // XZ平面(左回り)
