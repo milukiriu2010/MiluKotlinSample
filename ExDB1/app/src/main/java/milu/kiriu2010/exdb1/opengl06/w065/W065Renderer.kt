@@ -6,11 +6,13 @@ import android.opengl.GLES20
 import android.opengl.Matrix
 import android.util.Log
 import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyQuaternion
 import milu.kiriu2010.gui.color.MgColor
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
+import milu.kiriu2010.math.MyMathUtil
 import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
@@ -73,9 +75,35 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
 
     // テクスチャ変換用行列
     private val matTex = FloatArray(16)
+    // プロジェクション(テクスチャ変換用行列)
+    //   tvpMatrix
+    private val matP4Tex = FloatArray(16)
+    // プロジェクション×ビュー(テクスチャ変換用行列)
+    //   tmvpMatrix
+    private val matVP4Tex = FloatArray(16)
+    // プロジェクション×ビュー(テクスチャ変換用行列)(X軸反転版)
+    //   itmvpMatrix
+    private val matVP4TexX = FloatArray(16)
 
+    // プロジェクション(正射影用の座標変換行列)
+    //   ort_pMatrix
+    private val matP4O = FloatArray(16)
     // プロジェクションxビュー(正射影用の座標変換行列)
+    //   ort_tmpMatrix
     private val matVP4O = FloatArray(16)
+
+    // ビュー(裏面の深度値を描く際に使用する正射影座標変換行列)
+    //   inv_vMatrix
+    private val matV4I = FloatArray(16)
+    // プロジェクション×ビュー(裏面の深度値を描く際に使用する正射影座標変換行列)
+    //   inv_ort_tmpMatrix
+    private val matVP4I = FloatArray(16)
+
+    // モデル座標変換行列(トーラス)
+    private val matM4Torus = FloatArray(16)
+    // モデル座標変換行列(球体)
+    private val matM4Sphere = FloatArray(16)
+
 
     init {
         // テクスチャ変換用行列を初期化
@@ -99,12 +127,7 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
 
     override fun onDrawFrame(gl: GL10?) {
         angle[0] =(angle[0]+1)%360
-
-        // 各トーラスの傾き
-        val angleF = FloatArray(10)
-        (0..9).forEach { i ->
-            angleF[i] = ((angle[0]+40*i)%360).toFloat()
-        }
+        val angleF0 = angle[0].toFloat()
 
         // ビュー×プロジェクション座標変換行列
         vecEye = qtnNow.toVecIII(floatArrayOf(0f,0f,7f))
@@ -119,216 +142,206 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.perspectiveM(matP,0,45f,ratio,0.1f,15f)
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
-        /*
-        // 正射影用の座標変換行列
-        Matrix.setLookAtM(matV,0,
-                0f,0f,0.5f,
-                0f,0f,0f,
-                0f,1f,0f)
-        Matrix.orthoM(matP,0,-1f,1f,-1f,1f,0.1f,1f)
-        Matrix.multiplyMM(matVP4O,0,matP,0,matV,0)
+        // バックバッファに描きこむ際に使用する正射影座標変換行列を生成
+        Matrix.orthoM(matP4O,0,-3f,3f,-3f,3f,0.1f,15f)
+        Matrix.multiplyMM(matVP4O,0,matP4O,0,matV,0)
+
+        // 裏面の深度値を描きこむ際に使用する正射影変換行列を生成
+        Matrix.setLookAtM(matV4I,0,
+                vecI4Eye[0],vecI4Eye[1],vecI4Eye[2],
+                vecCenter[0],vecCenter[1],vecCenter[2],
+                vecEyeUp[0],vecEyeUp[1],vecEyeUp[2])
+        Matrix.multiplyMM(matVP4I,0,matP4O,0,matV4I,0)
+
+        // テクスチャ座標変換用の行列を掛け合わせる
+        matTex[0] = 0.5f
+        Matrix.multiplyMM(matP4Tex,0,matTex,0,matP4O,0)
+        Matrix.multiplyMM(matVP4Tex,0,matP4Tex,0,matP4Tex,0)
+
+        // テクスチャ座標変換用の行列を掛け合わせる(X軸反転版)
+        matTex[0] = -0.5f
+        Matrix.multiplyMM(matP4Tex,0,matTex,0,matP4O,0)
+        Matrix.multiplyMM(matVP4TexX,0,matP4Tex,0,matP4Tex,0)
+
+        // ライトの位置
+        vecLight[0] = -1.75f
+        vecLight[1] =  1.75f
+        vecLight[2] =  1.75f
 
 
+        // ライトを回転させる際の軸ベクトル
+        var vecLightAxis = floatArrayOf(1f,1f,0f)
 
+        // ライト回転軸ベクトルの正規化
+        vecLightAxis = MyMathUtil.normalize(vecLightAxis)
 
+        // ライトの位置を回転させるためのクォータニオン
+        // クォータニオンを回転
+        val qtnLightPos = MyQuaternion.rotate(angleF0,vecLightAxis)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        // 回転後のライトの位置
+        // ライトの位置をクォータニオンで変換
+        val vecLight2 = qtnLightPos.toVecIII(vecLight)
 
         // -----------------------------------------------
-        // 【0:ぼやけていないシーンのレンダリング】
+        // 各種レンダリング開始
         // -----------------------------------------------
 
-        // フレームバッファのバインド(1:Scene)
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[1])
+        // --------------------------------------------------------------
+        // 【0】
+        //  裏面からみた深度値を１つ目のフレームバッファにレンダリング
+        // --------------------------------------------------------------
+
+        // フレームバッファをバインド
+        GLES20.glBindBuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
 
         // フレームバッファを初期化
         GLES20.glClearColor(0f, 0f, 1f, 1f)
         GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
-        // テクスチャのバインド
+        // トーラスのレンダリング(裏面の深度)
+        Matrix.setIdentityM(matM4Torus,0)
+        Matrix.rotateM(matM4Torus,0,90f,1f,0f,0f)
+        Matrix.multiplyMM(matMVP,0,matVP4I,0,matM4Torus,0)
+        depthShader.draw(drawObjTorus,matM4Torus,matMVP,vecI4Eye)
+
+        // 球体のレンダリング(裏面の深度)
+        Matrix.setIdentityM(matM4Sphere,0)
+        Matrix.rotateM(matM4Sphere,0,angleF0,0f,0f,1f)
+        Matrix.translateM(matM4Sphere,0,0f,1.5f,0f)
+        Matrix.multiplyMM(matMVP,0,matVP4I,0,matM4Sphere,0)
+        depthShader.draw(drawObjSphere,matM4Torus,matMVP,vecI4Eye)
+
+        // --------------------------------------------------------------
+        // 【1】
+        //  表側と裏側の深度値の差分を２つ目のフレームバッファにレンダリング
+        // --------------------------------------------------------------
+
+        // フレームバッファをバインド
+        GLES20.glBindBuffer(GLES20.GL_FRAMEBUFFER,bufFrame[1])
+
+        // 裏面深度をレンダリングしたフレームバッファをテクスチャとしてバインド
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[0])
-
-        // ぼやけていないシーンをレンダリング(立方体)
-        GLES20.glCullFace(GLES20.GL_FRONT)
-        Matrix.setIdentityM(matM,0)
-        Matrix.scaleM(matM,0,3.5f,2.5f,10f)
-        Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        Matrix.invertM(matI,0,matM,0)
-        mainShader.draw(drawObjSphere,matMVP,matI,vecLight,
-                floatArrayOf(0f,0f,10f), floatArrayOf(1f,1f,1f,1f), 0)
-
-        // -------------------------------------------------------
-        // ぼやけていないシーンをレンダリング(トーラス)(10個)
-        // -------------------------------------------------------
-        GLES20.glCullFace(GLES20.GL_BACK)
-        (0..9).forEach { i ->
-            val amb = MgColor.hsva(i*40,1f,1f,1f)
-            Matrix.setIdentityM(matM,0)
-            Matrix.translateM(matM,0,0.2f*i.toFloat(),0f,8.8f-2.2f*i.toFloat())
-            Matrix.rotateM(matM,0,angleF[i],1f,1f,0f)
-            Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-            Matrix.invertM(matI,0,matM,0)
-            mainShader.draw(drawObjTorus,matMVP,matI,vecLight,vecEye,amb.toFloatArray(),0)
-        }
-
-        // --------------------------------------------------------------------------
-        // 【1:ぼやけていないシーンから小さくぼやけたシーン生成し一時バッファに格納】
-        // --------------------------------------------------------------------------
-        // フレームバッファのバインド(4:テンポラリ)
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[4])
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[0])
 
         // フレームバッファを初期化
         GLES20.glClearColor(0f, 0f, 1f, 1f)
         GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
-        // テクスチャのバインド(Scene)
-        // ボケていないシーンをテクスチャとしてバインド
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[1])
+        // トーラスのレンダリング(深度の差分をレンダリング)
+        Matrix.setIdentityM(matM4Torus,0)
+        Matrix.rotateM(matM4Torus,0,90f,1f,0f,0f)
+        Matrix.multiplyMM(matMVP,0,matVP4O,0,matM4Torus,0)
+        diffShader.draw(drawObjTorus,matM4Torus,matMVP,matVP4TexX,vecEye,0)
 
-        // 板ポリゴンのレンダリング
-        gaussianShader.draw(drawObjBoard,matVP4O,0,1,u_weight,1,renderW.toFloat())
+        // 球体のレンダリング(深度の差分をレンダリング)
+        Matrix.setIdentityM(matM4Sphere,0)
+        Matrix.multiplyMM(matMVP,0,matVP4O,0,matM4Sphere,0)
+        diffShader.draw(drawObjSphere,matM4Torus,matMVP,matVP4TexX,vecEye,0)
 
-        // -----------------------------------------------
-        // 【2:小さくぼやけたシーンをバッファに描く】
-        // -----------------------------------------------
+        // --------------------------------------------------------------
+        // 【2】
+        //  深度値の差分をぼかすため
+        //  ３つ目のフレームバッファで水平方向のブラーをかける
+        // --------------------------------------------------------------
 
-        // フレームバッファのバインド(2:Blur1)
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[2])
+        // フレームバッファをバインド
+        GLES20.glBindBuffer(GLES20.GL_FRAMEBUFFER,bufFrame[2])
 
-        // フレームバッファを初期化
-        GLES20.glClearColor(0f, 0f, 1f, 1f)
-        GLES20.glClearDepthf(1f)
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
-
-        // テクスチャのバインド(4:テンポラリ)
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[4])
-
-        // 板ポリゴンのレンダリング
-        gaussianShader.draw(drawObjBoard,matVP4O,0,1,u_weight,0,renderW.toFloat())
-
-        // --------------------------------------------------------------------------
-        // 【3:ぼやけていないシーンから大きくぼやけたシーン生成し一時バッファに格納】
-        // --------------------------------------------------------------------------
-
-        // フレームバッファのバインド(テンポラリ)
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[4])
-
-        // フレームバッファを初期化
-        GLES20.glClearColor(0f, 0f, 1f, 1f)
-        GLES20.glClearDepthf(1f)
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
-
-        // テクスチャのバインド(1:Scene)
+        // フレームバッファをテクスチャとしてバインド
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[1])
-
-        // 板ポリゴンのレンダリング
-        gaussianShader.draw(drawObjBoard,matVP4O,0,1,u_weight2,1,renderW.toFloat())
-
-        // -----------------------------------------------
-        // 【4:小さくぼやけたシーンをバッファに描く】
-        // -----------------------------------------------
-
-        // フレームバッファのバインド(3:Blur2)
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[3])
-
-        // フレームバッファを初期化
-        GLES20.glClearColor(0f, 0f, 1f, 1f)
-        GLES20.glClearDepthf(1f)
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
-
-        // テクスチャのバインド(4:テンポラリ)
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[4])
-
-        // 板ポリゴンのレンダリング
-        gaussianShader.draw(drawObjBoard,matVP4O,0,1,u_weight2,0,renderW.toFloat())
-
-        // -----------------------------------------------
-        // 【5:深度値マップをレンダリング】
-        // -----------------------------------------------
-
-        // フレームバッファのバインド(0:Depth)
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
 
         // フレームバッファを初期化
         GLES20.glClearColor(1f, 1f, 1f, 1f)
         GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
-        // 深度をレンダリング(立方体)
-        GLES20.glCullFace(GLES20.GL_FRONT)
-        Matrix.setIdentityM(matM,0)
-        Matrix.scaleM(matM,0,3.5f,2.5f,10f)
-        Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        depthShader.draw(drawObjSphere,matMVP,u_depthOffset)
+        // 水平方向にブラーをかける
+        gaussianShader.draw(drawObjBoard,matVP4O,0,u_weight,1,renderW.toFloat())
 
-        // -------------------------------------------------------
-        // 深度をレンダリング(トーラス)(10個)
-        // -------------------------------------------------------
-        GLES20.glCullFace(GLES20.GL_BACK)
-        (0..9).forEach { i ->
-            val amb = MgColor.hsva(i*40,1f,1f,1f)
-            Matrix.setIdentityM(matM,0)
-            Matrix.translateM(matM,0,0.2f*i.toFloat(),0f,8.8f-2.2f*i.toFloat())
-            Matrix.rotateM(matM,0,angleF[i],1f,1f,0f)
-            Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-            depthShader.draw(drawObjTorus,matMVP,u_depthOffset)
-        }
+        // --------------------------------------------------------------
+        // 【3】
+        //  深度値の差分をぼかすため
+        //  ４つ目のフレームバッファで垂直方向のブラーをかける
+        // --------------------------------------------------------------
 
-        // -----------------------------------------------
-        // 【6:合成結果をレンダリング】
-        // -----------------------------------------------
+        // フレームバッファをバインド
+        GLES20.glBindBuffer(GLES20.GL_FRAMEBUFFER,bufFrame[3])
 
-        // フレームバッファのバインドを解除
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
+        // フレームバッファをテクスチャとしてバインド
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[2])
 
-        // テクスチャのバインド
+        // フレームバッファを初期化
+        GLES20.glClearColor(1f, 1f, 1f, 1f)
+        GLES20.glClearDepthf(1f)
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
+
+        // 水平方向にブラーをかける
+        gaussianShader.draw(drawObjBoard,matVP4O,0,u_weight,0,renderW.toFloat())
+
+        // --------------------------------------------------------------
+        // 【4】
+        //  全てのオフスクリーンレンダリングが完了したので
+        //  フレームバッファをテクスチャとしてバインド
+        // --------------------------------------------------------------
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[0])
         GLES20.glActiveTexture(GLES20.GL_TEXTURE1)
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[1])
         GLES20.glActiveTexture(GLES20.GL_TEXTURE2)
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[2])
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE3)
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[3])
 
+        // --------------------------------------------------------------
+        // 【5】
+        //  最終シーンのレンダリングを開始
+        // --------------------------------------------------------------
+
+        // フレームバッファのバインドを解除
+        GLES20.glBindBuffer(GLES20.GL_FRAMEBUFFER,0)
+
         // canvasを初期化
-        GLES20.glClearColor(0f, 0f, 1f, 1f)
+        GLES20.glClearColor(0f, 0.1f, 0.1f, 1f)
         GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
-        // 板ポリゴンのレンダリング
-        orthShader.draw(drawObjBoard,matVP4O,0,1,2,3,u_result)
+        // トーラスのレンダリング
+        Matrix.invertM(matI,0,matM4Torus,0)
+        Matrix.multiplyMM(matMVP,0,matVP,0,matM4Torus,0)
+        mainShader.draw(drawObjTorus,matM4Torus,matMVP,matI,matVP4Tex,
+                vecLight2,vecCenter,vecEye,vecAmbientColor,2)
 
-        */
+        // 球体のレンダリング
+        Matrix.invertM(matI,0,matM4Sphere,0)
+        Matrix.multiplyMM(matMVP,0,matVP,0,matM4Sphere,0)
+        mainShader.draw(drawObjSphere,matM4Sphere,matMVP,matI,matVP4Tex,
+                vecLight2,vecCenter,vecEye,vecAmbientColor,2)
+
+        // ライトの位置を点としてレンダリング
+        //pointShader.draw()
+
+        // --------------------------------------------------------------
+        // 【6】
+        //  オフスクリーンでレンダリングした結果を正射影で最終シーンに合成
+        // --------------------------------------------------------------
+
+        // 板ポリゴンのレンダリング
+        Matrix.setIdentityM(matM,0)
+        Matrix.translateM(matM,0,-0.8f,-0.8f,0f)
+        Matrix.scaleM(matM,0,0.2f,0.2f,1f)
+        Matrix.multiplyMM(matMVP,0,matVP4O,0,matM,0)
+        orthShader.draw(drawObjBoard,matMVP,0)
+
+        Matrix.translateM(matM,0,2f,0f,0f)
+        Matrix.multiplyMM(matMVP,0,matVP4O,0,matM,0)
+        orthShader.draw(drawObjBoard,matMVP,1)
+
+        Matrix.translateM(matM,0,2f,0f,0f)
+        Matrix.multiplyMM(matMVP,0,matVP4O,0,matM,0)
+        orthShader.draw(drawObjBoard,matMVP,2)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {

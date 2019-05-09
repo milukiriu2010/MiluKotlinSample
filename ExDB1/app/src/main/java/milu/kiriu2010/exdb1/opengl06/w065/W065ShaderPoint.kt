@@ -64,6 +64,7 @@ class W065ShaderPoint: MgShader() {
         MyGLFunc.checkGlError("u_matMVP:${model.javaClass.simpleName}")
 
         // モデルを描画
-        GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
+        //GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
+        GLES20.glDrawArrays(GLES20.GL_POINTS,0,1)
     }
 }

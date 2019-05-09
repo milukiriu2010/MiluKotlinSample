@@ -19,8 +19,8 @@ class W065ShaderGaussian: MgShader() {
             varying   vec2  v_TexCoord;
 
             void main() {
-                v_TexCoord      = a_TexCoord;
-                gl_Position     = u_matMVP   * vec4(a_Position, 1.0);
+                v_TexCoord  = a_TexCoord;
+                gl_Position = u_matO   * vec4(a_Position, 1.0);
             }
             """.trimIndent()
 

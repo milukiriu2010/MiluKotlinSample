@@ -32,9 +32,9 @@ class W065ShaderMain: MgShader() {
                 vec3   halfLE   = normalize(invLight + invEye);
                 float  diffuse  = clamp(dot(a_Normal,invLight), 0.0, 1.0);
                 float  specular = pow(clamp(dot(a_Normal, halfLE), 0.0, 1.0), 50.0);
-                v_Color = a_Color*vec4(vec3(diffuse),1.0) + vec4(vec3(specular),1.0) + u_ambientColor;
+                v_Color = a_Color*vec4(vec3(diffuse),1.0) + vec4(vec3(specular),0.0) + u_ambientColor;
                 v_TextureCoord  = u_matO * vec4(pos,1.0);
-                v_DotLE         = pow(max(max(dot(normalize(u_vecCenter-u_vecEye),normalize(u_vecLight)),0.0), 10.0);
+                v_DotLE         = pow(max(dot(normalize(u_vecCenter-u_vecEye),normalize(u_vecLight)),0.0), 10.0);
                 gl_Position     = u_matMVP   * vec4(a_Position, 1.0);
             }
             """.trimIndent()
