@@ -13,6 +13,7 @@ import milu.kiriu2010.exdb1.opengl06.w062.W062Fragment
 import milu.kiriu2010.exdb1.opengl06.w063.W063Fragment
 import milu.kiriu2010.exdb1.opengl06.w064.W064Fragment
 import milu.kiriu2010.exdb1.opengl06.w065.W065Fragment
+import milu.kiriu2010.exdb1.opengl06.w066.W066Fragment
 
 class OpenGL06Activity : AppCompatActivity() {
 
@@ -21,9 +22,9 @@ class OpenGL06Activity : AppCompatActivity() {
         setContentView(R.layout.activity_open_gl06)
 
         supportFragmentManager.popBackStack()
-        if (supportFragmentManager.findFragmentByTag("w065") == null) {
+        if (supportFragmentManager.findFragmentByTag("w066") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W065Fragment.newInstance(), "w065")
+                    .replace(R.id.frameLayout, W066Fragment.newInstance(), "w066")
                     .commit()
         }
 
@@ -45,6 +46,16 @@ class OpenGL06Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // モザイクフィルタ
+            R.id.opengl_w066 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w066") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W066Fragment.newInstance(), "w066")
+                            .commit()
+                }
                 true
             }
             // 後光 表面化散乱

@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w066"
+        android:title="w066_モザイクフィルタ" />
+    <item
         android:id="@+id/opengl_w065"
         android:title="w065_後光表面化散乱" />
     <item
