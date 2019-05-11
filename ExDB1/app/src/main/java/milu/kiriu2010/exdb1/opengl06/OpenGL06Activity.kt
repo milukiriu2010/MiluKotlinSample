@@ -14,6 +14,7 @@ import milu.kiriu2010.exdb1.opengl06.w063.W063Fragment
 import milu.kiriu2010.exdb1.opengl06.w064.W064Fragment
 import milu.kiriu2010.exdb1.opengl06.w065.W065Fragment
 import milu.kiriu2010.exdb1.opengl06.w066.W066Fragment
+import milu.kiriu2010.exdb1.opengl06.w067.W067Fragment
 
 class OpenGL06Activity : AppCompatActivity() {
 
@@ -22,9 +23,9 @@ class OpenGL06Activity : AppCompatActivity() {
         setContentView(R.layout.activity_open_gl06)
 
         supportFragmentManager.popBackStack()
-        if (supportFragmentManager.findFragmentByTag("w066") == null) {
+        if (supportFragmentManager.findFragmentByTag("w067") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W066Fragment.newInstance(), "w066")
+                    .replace(R.id.frameLayout, W067Fragment.newInstance(), "w067")
                     .commit()
         }
 
@@ -46,6 +47,16 @@ class OpenGL06Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // ズームブラー
+            R.id.opengl_w067 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w067") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W067Fragment.newInstance(), "w067")
+                            .commit()
+                }
                 true
             }
             // モザイクフィルタ
