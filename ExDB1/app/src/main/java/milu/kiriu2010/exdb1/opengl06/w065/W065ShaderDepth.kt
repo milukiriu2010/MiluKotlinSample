@@ -57,6 +57,7 @@ class W065ShaderDepth: MgShader() {
              u_matMVP: FloatArray,
              u_vecEye: FloatArray) {
         GLES20.glUseProgram(programHandle)
+        MyGLFunc.checkGlError2("UseProgram", this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)
@@ -64,25 +65,25 @@ class W065ShaderDepth: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Position:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Position", this,model)
 
         // uniform(モデル座標変換行列)
         GLES20.glGetUniformLocation(programHandle,"u_matM").also {
             GLES20.glUniformMatrix4fv(it,1,false,u_matM,0)
         }
-        MyGLFunc.checkGlError("u_matM:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matM", this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,u_matMVP,0)
         }
-        MyGLFunc.checkGlError("u_matMVP:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matMVP", this,model)
 
         // uniform(視点座標)
         GLES20.glGetUniformLocation(programHandle,"u_vecEye").also {
             GLES20.glUniform3fv(it,1,u_vecEye,0)
         }
-        MyGLFunc.checkGlError("u_vecEye:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_vecEye", this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

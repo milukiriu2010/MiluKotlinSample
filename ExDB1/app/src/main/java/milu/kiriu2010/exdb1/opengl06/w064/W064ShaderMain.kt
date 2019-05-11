@@ -50,7 +50,7 @@ class W064ShaderMain: MgShader() {
                 // powを使ってコントラストを強くしている
                 // ----------------------------------------------------------------------
                 float  dotLE      = pow(max(dot(normalize(u_vecCenter-u_vecEye),normalize(u_vecLight)), 0.0), 30.0);
-                vec4   ambient    = u_colorRim * u_rimCoef * dotLE;
+                vec4   ambient    = u_colorRim * u_rimCoef * rim * dotLE;
                 v_Color         = a_Color * vec4(vec3(diffuse),1.0) + vec4(vec3(specular),1.0) + vec4(ambient.rgb, 1.0);
                 gl_Position     = u_matMVP * vec4(a_Position, 1.0);
             }

@@ -9,6 +9,7 @@ import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.basic.MyQuaternion
 import milu.kiriu2010.gui.color.MgColor
 import milu.kiriu2010.gui.model.Board01Model
+import milu.kiriu2010.gui.model.Point01Model
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
@@ -62,13 +63,7 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
     val frameTexture = IntBuffer.allocate(4)
 
     // u_gaussianフィルタの重み係数
-    val u_weight = MyGLFunc.gaussianWeigt(5,0.25f)
-
-    // フォーカスする深度値
-    var u_depthOffset = 0f
-
-    // 選択値
-    var u_result = 0
+    val u_weight = MyGLFunc.gaussianWeigt(5,10f,1f)
 
     // 視点ベクトルの逆行列
     private var vecI4Eye = FloatArray(3)
@@ -85,6 +80,9 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
     //   itmvpMatrix
     private val matVP4TexX = FloatArray(16)
 
+    // プロジェクションxビュー(正射影用の座標変換行列)
+    //   ortMatrix
+    private val matO = FloatArray(16)
     // プロジェクション(正射影用の座標変換行列)
     //   ort_pMatrix
     private val matP4O = FloatArray(16)
@@ -123,6 +121,13 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         matTex[13] = 0.5f
         matTex[14] =   0f
         matTex[15] =   1f
+
+        Matrix.setLookAtM(matV,0,
+                0f,0f,0.5f,
+                0f,0f,0f,
+                0f,1f,0f)
+        Matrix.orthoM(matP,0,-1f,1f,-1f,1f,0.1f,1f)
+        Matrix.multiplyMM(matO,0,matP,0,matV,0)
     }
 
     override fun onDrawFrame(gl: GL10?) {
@@ -130,11 +135,11 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         val angleF0 = angle[0].toFloat()
 
         // ビュー×プロジェクション座標変換行列
-        vecEye = qtnNow.toVecIII(floatArrayOf(0f,0f,7f))
+        vecEye   = qtnNow.toVecIII(floatArrayOf(0f,0f, 7f))
         vecI4Eye = qtnNow.toVecIII(floatArrayOf(0f,0f,-7f))
-        vecEyeUp = qtnNow.toVecIII(floatArrayOf(0f,1f,0f))
+        vecEyeUp = qtnNow.toVecIII(floatArrayOf(0f,1f, 0f))
 
-        // 最終シーンで使う透視射影変換行列を生成
+        // 最終シーンで使う透視射影変換行列を生成(tmpMatrix)
         Matrix.setLookAtM(matV, 0,
                 vecEye[0], vecEye[1], vecEye[2],
                 vecCenter[0], vecCenter[1], vecCenter[2],
@@ -142,11 +147,11 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.perspectiveM(matP,0,45f,ratio,0.1f,15f)
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
-        // バックバッファに描きこむ際に使用する正射影座標変換行列を生成
+        // バックバッファに描きこむ際に使用する正射影座標変換行列を生成(orth_tmpMatrix)
         Matrix.orthoM(matP4O,0,-3f,3f,-3f,3f,0.1f,15f)
         Matrix.multiplyMM(matVP4O,0,matP4O,0,matV,0)
 
-        // 裏面の深度値を描きこむ際に使用する正射影変換行列を生成
+        // 裏面の深度値を描きこむ際に使用する正射影変換行列を生成(inv_ort_tmpMatrix)
         Matrix.setLookAtM(matV4I,0,
                 vecI4Eye[0],vecI4Eye[1],vecI4Eye[2],
                 vecCenter[0],vecCenter[1],vecCenter[2],
@@ -155,13 +160,13 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
 
         // テクスチャ座標変換用の行列を掛け合わせる
         matTex[0] = 0.5f
-        Matrix.multiplyMM(matP4Tex,0,matTex,0,matP4O,0)
-        Matrix.multiplyMM(matVP4Tex,0,matP4Tex,0,matP4Tex,0)
+        Matrix.multiplyMM( matP4Tex,0,  matTex,0,matP4O,0)
+        Matrix.multiplyMM(matVP4Tex,0,matP4Tex,0,  matV,0)
 
         // テクスチャ座標変換用の行列を掛け合わせる(X軸反転版)
         matTex[0] = -0.5f
-        Matrix.multiplyMM(matP4Tex,0,matTex,0,matP4O,0)
-        Matrix.multiplyMM(matVP4TexX,0,matP4Tex,0,matP4Tex,0)
+        Matrix.multiplyMM(  matP4Tex,0,  matTex,0,matP4O,0)
+        Matrix.multiplyMM(matVP4TexX,0,matP4Tex,0,  matV,0)
 
         // ライトの位置
         vecLight[0] = -1.75f
@@ -196,7 +201,7 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glBindBuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
 
         // フレームバッファを初期化
-        GLES20.glClearColor(0f, 0f, 1f, 1f)
+        GLES20.glClearColor(0f, 0f, 0f, 1f)
         GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
@@ -211,7 +216,7 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.rotateM(matM4Sphere,0,angleF0,0f,0f,1f)
         Matrix.translateM(matM4Sphere,0,0f,1.5f,0f)
         Matrix.multiplyMM(matMVP,0,matVP4I,0,matM4Sphere,0)
-        depthShader.draw(drawObjSphere,matM4Torus,matMVP,vecI4Eye)
+        depthShader.draw(drawObjSphere,matM4Sphere,matMVP,vecI4Eye)
 
         // --------------------------------------------------------------
         // 【1】
@@ -226,7 +231,7 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[0])
 
         // フレームバッファを初期化
-        GLES20.glClearColor(0f, 0f, 1f, 1f)
+        GLES20.glClearColor(1f, 1f, 1f, 1f)
         GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
@@ -239,7 +244,7 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         // 球体のレンダリング(深度の差分をレンダリング)
         Matrix.setIdentityM(matM4Sphere,0)
         Matrix.multiplyMM(matMVP,0,matVP4O,0,matM4Sphere,0)
-        diffShader.draw(drawObjSphere,matM4Torus,matMVP,matVP4TexX,vecEye,0)
+        diffShader.draw(drawObjSphere,matM4Sphere,matMVP,matVP4TexX,vecEye,0)
 
         // --------------------------------------------------------------
         // 【2】
@@ -260,7 +265,7 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // 水平方向にブラーをかける
-        gaussianShader.draw(drawObjBoard,matVP4O,0,u_weight,1,renderW.toFloat())
+        gaussianShader.draw(drawObjBoard,matO,0,u_weight,1,renderW.toFloat())
 
         // --------------------------------------------------------------
         // 【3】
@@ -281,7 +286,7 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // 水平方向にブラーをかける
-        gaussianShader.draw(drawObjBoard,matVP4O,0,u_weight,0,renderW.toFloat())
+        gaussianShader.draw(drawObjBoard,matO,0,u_weight,0,renderW.toFloat())
 
         // --------------------------------------------------------------
         // 【4】
@@ -321,7 +326,13 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
                 vecLight2,vecCenter,vecEye,vecAmbientColor,2)
 
         // ライトの位置を点としてレンダリング
-        //pointShader.draw()
+        val modelPoint = Point01Model()
+        modelPoint.createPath(mapOf(
+                "x" to vecLight2[0],
+                "y" to vecLight2[1],
+                "z" to vecLight2[2]
+        ))
+        pointShader.draw(modelPoint,matVP)
 
         // --------------------------------------------------------------
         // 【6】
@@ -329,18 +340,21 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         // --------------------------------------------------------------
 
         // 板ポリゴンのレンダリング
+        //   0:裏面の深度値を描画
         Matrix.setIdentityM(matM,0)
         Matrix.translateM(matM,0,-0.8f,-0.8f,0f)
         Matrix.scaleM(matM,0,0.2f,0.2f,1f)
-        Matrix.multiplyMM(matMVP,0,matVP4O,0,matM,0)
+        Matrix.multiplyMM(matMVP,0,matO,0,matM,0)
         orthShader.draw(drawObjBoard,matMVP,0)
 
+        //   1:深度の差分を描画
         Matrix.translateM(matM,0,2f,0f,0f)
-        Matrix.multiplyMM(matMVP,0,matVP4O,0,matM,0)
+        Matrix.multiplyMM(matMVP,0,matO,0,matM,0)
         orthShader.draw(drawObjBoard,matMVP,1)
 
+        //   3:ブラーをかけた深度値を描画
         Matrix.translateM(matM,0,2f,0f,0f)
-        Matrix.multiplyMM(matMVP,0,matVP4O,0,matM,0)
+        Matrix.multiplyMM(matMVP,0,matO,0,matM,0)
         orthShader.draw(drawObjBoard,matMVP,2)
     }
 
@@ -423,6 +437,8 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         // 描画オブジェクト(球体)
         drawObjSphere = Sphere01Model()
         drawObjSphere.createPath(mapOf(
+                "row"     to 32f,
+                "column"  to 32f,
                 "radius"  to 0.5f,
                 "colorR"  to 1f,
                 "colorG"  to 1f,

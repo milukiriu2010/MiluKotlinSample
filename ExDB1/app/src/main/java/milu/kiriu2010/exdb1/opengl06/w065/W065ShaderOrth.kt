@@ -61,11 +61,11 @@ class W065ShaderOrth: MgShader() {
 
         // attribute(テクスチャ座標)
         model.bufTxc.position(0)
-        GLES20.glGetAttribLocation(programHandle,"a_TexCoord").also {
+        GLES20.glGetAttribLocation(programHandle,"a_TextureCoord").also {
             GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, model.bufTxc)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_TexCoord:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError("a_TextureCoord:${model.javaClass.simpleName}")
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
