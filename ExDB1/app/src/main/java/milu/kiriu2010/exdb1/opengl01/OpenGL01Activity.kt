@@ -24,45 +24,14 @@ import milu.kiriu2010.exdb1.opengl01.w025.Torus06Fragment
 
 class OpenGL01Activity : AppCompatActivity() {
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.navigation_home -> {
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, OpenGL01HomeFragment.newInstance(), "Home")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_dashboard -> {
-                if (supportFragmentManager.findFragmentByTag("Dashboard") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, OpenGL01DashboardFragment.newInstance(), "Dashboard")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_notifications -> {
-                if (supportFragmentManager.findFragmentByTag("Navi") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, OpenGL01NaviFragment.newInstance(), "Home")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_open_gl)
 
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
-        if (supportFragmentManager.findFragmentByTag("Home") == null) {
+        supportFragmentManager.popBackStack()
+        if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, OpenGL01HomeFragment.newInstance(), "Home")
+                    .replace(R.id.frameLayout, W015Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -88,6 +57,7 @@ class OpenGL01Activity : AppCompatActivity() {
             }
             // 点光源
             R.id.opengl_w025 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Torus06") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Torus06Fragment.newInstance(), "Torus06")
@@ -97,6 +67,7 @@ class OpenGL01Activity : AppCompatActivity() {
             }
             // フォンシェーディング
             R.id.opengl_w024 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Torus05") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Torus05Fragment.newInstance(), "Torus05")
@@ -106,6 +77,7 @@ class OpenGL01Activity : AppCompatActivity() {
             }
             // 反射光
             R.id.opengl_w023 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Torus04") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Torus04Fragment.newInstance(), "Torus04")
@@ -115,6 +87,7 @@ class OpenGL01Activity : AppCompatActivity() {
             }
             // 環境光
             R.id.opengl_w022 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Torus03") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Torus03Fragment.newInstance(), "Torus03")
@@ -124,6 +97,7 @@ class OpenGL01Activity : AppCompatActivity() {
             }
             // 平行光源
             R.id.opengl_w021 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Torus02") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Torus02Fragment.newInstance(), "Torus02")
@@ -133,6 +107,7 @@ class OpenGL01Activity : AppCompatActivity() {
             }
             // トーラス
             R.id.opengl_w020 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Torus01") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Torus01Fragment.newInstance(), "Torus01")
@@ -142,6 +117,7 @@ class OpenGL01Activity : AppCompatActivity() {
             }
             // カリングと深度テスト
             R.id.opengl_w019 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Square02") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Square02Fragment.newInstance(), "Square02")
@@ -151,6 +127,7 @@ class OpenGL01Activity : AppCompatActivity() {
             }
             // w018_インデックスバッファ
             R.id.opengl_w018 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Square01") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Square01Fragment.newInstance(), "Square01")
@@ -160,6 +137,7 @@ class OpenGL01Activity : AppCompatActivity() {
             }
             // w17_移動・回転・拡大/縮小
             R.id.opengl_w017 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Triangle05") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Triangle05Fragment.newInstance(), "Triangle05")
@@ -169,6 +147,7 @@ class OpenGL01Activity : AppCompatActivity() {
             }
             // w016_複数モデルレンダリング
             R.id.opengl_w016 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Triangle04") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Triangle04Fragment.newInstance(), "Triangle04")
@@ -178,15 +157,17 @@ class OpenGL01Activity : AppCompatActivity() {
             }
             // w015_ポリゴンに色を塗る
             R.id.opengl_w015 -> {
-                if (supportFragmentManager.findFragmentByTag("Triangle02") == null) {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w15") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W015Fragment.newInstance(), "Triangle02")
+                            .replace(R.id.frameLayout, W015Fragment.newInstance(), "w15")
                             .commit()
                 }
                 true
             }
             // 初めて_三角形(色+回転)
             R.id.opengl_begin02 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Triangle03") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Triangle03Fragment.newInstance(), "Triangle03")
@@ -196,6 +177,7 @@ class OpenGL01Activity : AppCompatActivity() {
             }
             // 初めて_三角形＋正方形
             R.id.opengl_begin01 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Triangle01") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Triangle01Fragment.newInstance(), "Triangle01")
@@ -205,6 +187,7 @@ class OpenGL01Activity : AppCompatActivity() {
             }
             // OpenGL 1.0
             R.id.opengl_begin00 -> {
+                supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("OpenGL1.0") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, OpenGL10Fragment.newInstance(), "OpenGL1.0")

@@ -2,8 +2,10 @@ package milu.kiriu2010.exdb1.opengl01.w015
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.model.MgModelAbs
+import milu.kiriu2010.gui.shader.MgShader
 
-class W015Shader {
+class W015Shader: MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -30,13 +32,50 @@ class W015Shader {
             }
             """.trimIndent()
 
-    fun loadShader(): Int {
+    override fun loadShader(): MgShader {
         // 頂点シェーダを生成
         val svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
         val sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
 
         // プログラムオブジェクトの生成とリンク
-        return MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Color","a_TextureCoord") )
+        programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Color") )
+        return this
+    }
+
+
+    fun draw(model: MgModelAbs,
+             matMVP: FloatArray
+    ) {
+        GLES20.glUseProgram(programHandle)
+        MyGLFunc.checkGlError2("UseProgram",this,model)
+
+        // attribute(頂点)
+        model.bufPos.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Position").also {
+            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLFunc.checkGlError2("a_Position",this,model)
+
+        // attribute(色)
+        model.bufCol.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Color").also {
+            GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, model.bufCol)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLFunc.checkGlError2("a_Color",this,model)
+
+        // uniform(モデル×ビュー×プロジェクション)
+        GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
+        }
+        MyGLFunc.checkGlError2("u_matMVP",this,model)
+
+        // モデル描画
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 3)
+
+        // 頂点配列を無効化
+        GLES20.glDisableVertexAttribArray(programHandle)
     }
 }

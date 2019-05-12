@@ -23,12 +23,11 @@ class OpenGL01NaviFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl_navi, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w15, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        //myGL02View.setRenderer(MyTriangle01Renderer())
-        myGL02View.setRenderer(W015Renderer())
-        //myGL02View.setRenderer(MyTriangle03Renderer())
+        val renderer = W015Renderer(context!!)
+        myGL02View.setRenderer(renderer)
 
         return view
     }
