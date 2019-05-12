@@ -15,6 +15,7 @@ import milu.kiriu2010.exdb1.opengl06.w064.W064Fragment
 import milu.kiriu2010.exdb1.opengl06.w065.W065Fragment
 import milu.kiriu2010.exdb1.opengl06.w066.W066Fragment
 import milu.kiriu2010.exdb1.opengl06.w067.W067Fragment
+import milu.kiriu2010.exdb1.opengl06.w068.W068Fragment
 
 class OpenGL06Activity : AppCompatActivity() {
 
@@ -23,9 +24,9 @@ class OpenGL06Activity : AppCompatActivity() {
         setContentView(R.layout.activity_open_gl06)
 
         supportFragmentManager.popBackStack()
-        if (supportFragmentManager.findFragmentByTag("w065") == null) {
+        if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W065Fragment.newInstance(), "w065")
+                    .replace(R.id.frameLayout, W068Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -47,6 +48,16 @@ class OpenGL06Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // ゴッドレイ
+            R.id.opengl_w068 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w068") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W068Fragment.newInstance(), "w068")
+                            .commit()
+                }
                 true
             }
             // ズームブラー
