@@ -96,6 +96,16 @@
 -->
 
     <Button
+        android:id="@+id/btnOpenGL07"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="GL07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnOpenGL04" />
+
+    <Button
         android:id="@+id/btnAnimeObj"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -189,11 +199,14 @@
         android:id="@+id/btnOpenGL04"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="GL04"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="@+id/btnOpenGL01"
-        app:layout_constraintStart_toStartOf="@+id/btnOpenGL01"
+        app:layout_constraintEnd_toStartOf="@+id/btnOpenGL05"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnOpenGL01" />
 
     <Button
@@ -204,6 +217,8 @@
         android:text="GL05"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="@+id/btnOpenGL04"
+        app:layout_constraintEnd_toStartOf="@+id/btnOpenGL06"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnOpenGL04"
         app:layout_constraintTop_toTopOf="@+id/btnOpenGL04" />
 
@@ -212,8 +227,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="GL06"
         app:layout_constraintBottom_toBottomOf="@+id/btnOpenGL05"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnOpenGL05"
         app:layout_constraintTop_toTopOf="@+id/btnOpenGL05" />
 
@@ -221,11 +239,11 @@
         android:id="@+id/btnMGL00"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="8dp"
         android:text="MGL00"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnOpenGL04" />
+        app:layout_constraintTop_toBottomOf="@+id/btnOpenGL07" />
 
     <Button
         android:id="@+id/btnMGL01"
