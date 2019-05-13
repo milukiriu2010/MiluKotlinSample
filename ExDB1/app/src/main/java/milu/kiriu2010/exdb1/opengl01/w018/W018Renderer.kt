@@ -2,15 +2,11 @@ package milu.kiriu2010.exdb1.opengl01.w018
 
 import android.content.Context
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
-import android.os.SystemClock
 import milu.kiriu2010.gui.model.Square01Model
-import milu.kiriu2010.gui.model.Triangle01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.Simple00Shader
 import milu.kiriu2010.gui.shader.Simple01Shader
 
 // インデックスバッファ

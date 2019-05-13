@@ -2,7 +2,6 @@ package milu.kiriu2010.exdb1.opengl01.w016
 
 import android.content.Context
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
