@@ -1,11 +1,9 @@
 package milu.kiriu2010.exdb1.opengl01
 
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_open_gl.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl01.begin00.OpenGL10Fragment
 import milu.kiriu2010.exdb1.opengl01.w018.Square01Fragment
@@ -18,7 +16,7 @@ import milu.kiriu2010.exdb1.opengl01.w024.Torus05Fragment
 import milu.kiriu2010.exdb1.opengl01.begin01.Triangle01Fragment
 import milu.kiriu2010.exdb1.opengl01.w015.W015Fragment
 import milu.kiriu2010.exdb1.opengl01.begin02.Triangle03Fragment
-import milu.kiriu2010.exdb1.opengl01.w016.Triangle04Fragment
+import milu.kiriu2010.exdb1.opengl01.w016.W016Fragment
 import milu.kiriu2010.exdb1.opengl01.w017.Triangle05Fragment
 import milu.kiriu2010.exdb1.opengl01.w025.Torus06Fragment
 
@@ -150,7 +148,7 @@ class OpenGL01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Triangle04") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Triangle04Fragment.newInstance(), "Triangle04")
+                            .replace(R.id.frameLayout, W016Fragment.newInstance(), "Triangle04")
                             .commit()
                 }
                 true

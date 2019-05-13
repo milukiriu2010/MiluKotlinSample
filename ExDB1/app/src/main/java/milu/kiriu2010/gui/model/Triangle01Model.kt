@@ -1,14 +1,10 @@
-package milu.kiriu2010.exdb1.opengl01.w015
+package milu.kiriu2010.gui.model
 
-import android.opengl.GLES20
-import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.gui.model.MgModelAbs
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
-import java.nio.FloatBuffer
 
 // https://developer.android.com/training/graphics/opengl/shapes
-class W015Model: MgModelAbs() {
+class Triangle01Model: MgModelAbs() {
     override fun createPath(opt: Map<String, Float>) {
         // 頂点データ
         datPos.addAll(arrayListOf( 0f,1f,0f))

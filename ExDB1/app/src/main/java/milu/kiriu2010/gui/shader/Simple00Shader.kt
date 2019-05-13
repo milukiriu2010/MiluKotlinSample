@@ -1,18 +1,16 @@
-package milu.kiriu2010.exdb1.opengl01.w015
+package milu.kiriu2010.gui.shader
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.model.MgModelAbs
-import milu.kiriu2010.gui.shader.MgShader
 
-class W015Shader: MgShader() {
+class Simple00Shader: MgShader() {
     // 頂点シェーダ
     private val scv =
             """
             attribute vec3  a_Position;
             attribute vec4  a_Color;
             uniform   mat4  u_matMVP;
-            uniform   float u_pointSize;
             varying   vec4  v_Color;
 
             void main() {
