@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl01.w017
+package milu.kiriu2010.exdb1.opengl01.w018
 
 import android.content.Context
 import android.opengl.GLES20
@@ -7,27 +7,24 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import android.os.SystemClock
+import milu.kiriu2010.gui.model.Square01Model
 import milu.kiriu2010.gui.model.Triangle01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.shader.Simple00Shader
-import milu.kiriu2010.math.MyMathUtil
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
+import milu.kiriu2010.gui.shader.Simple01Shader
 
-// 移動・回転・拡大縮小
-// --------------------------------------------------------
-// https://wgld.org/d/webgl/w017.html
-// https://android.googlesource.com/platform/development/+/master/samples/OpenGL/HelloOpenGLES20/src/com/example/android/opengl/MyGLRenderer.java
-// https://android.keicode.com/basics/opengl-drawing-basic-shapes.php
-// https://developer.android.com/training/graphics/opengl/draw
-class W017Renderer(ctx: Context): MgRenderer(ctx) {
+// インデックスバッファ
+// ----------------------------------------------
+// https://wgld.org/d/webgl/w018.html
+class W018Renderer(ctx: Context): MgRenderer(ctx) {
+
 
     // 描画モデル
-    private lateinit var drawObj: Triangle01Model
+    private lateinit var drawObj: Square01Model
 
     // シェーダ
-    private lateinit var shader: Simple00Shader
+    private lateinit var shader: Simple01Shader
+
 
     override fun onDrawFrame(gl: GL10) {
         // 回転角度
@@ -44,36 +41,11 @@ class W017Renderer(ctx: Context): MgRenderer(ctx) {
         // ビュー×プロジェクション座標変換行列
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
-        val x = MyMathUtil.cosf(t0)
-        val y = MyMathUtil.sinf(t0)
-
         // ---------------------------------------------------
-        // １つ目のモデル
-        // (0,1,0)を中心にZ軸と並行に回転する
-        // ---------------------------------------------------
-        Matrix.setIdentityM(matM,0)
-        Matrix.translateM(matM,0,x,y+1f,0f)
-        Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        shader.draw(drawObj,matMVP)
-
-        // ---------------------------------------------------
-        // ２つ目のモデル
         // Y軸を中心に回転する
         // ---------------------------------------------------
         Matrix.setIdentityM(matM,0)
-        Matrix.translateM(matM,0,1f,-1f,0f)
         Matrix.rotateM(matM,0,t0,0f,1f,0f)
-        Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        shader.draw(drawObj,matMVP)
-
-        // ---------------------------------------------------
-        // ３つ目のモデル
-        // 拡大縮小する
-        // ---------------------------------------------------
-        val s = MyMathUtil.sinf(t0) + 1f
-        Matrix.setIdentityM(matM,0)
-        Matrix.translateM(matM,0,-1f,-1f,0f)
-        Matrix.scaleM(matM,0,s,s,0f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         shader.draw(drawObj,matMVP)
     }
@@ -89,16 +61,16 @@ class W017Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.frustumM(mProjectionMatrix, 0, -ratio, ratio, -1f, 1f, 1f, 10f)
         */
         // プロジェクション座標変換行列
-        Matrix.perspectiveM(matP, 0, 90f,ratio,0.1f,100f)
+        Matrix.perspectiveM(matP, 0, 45f,ratio,0.1f,100f)
     }
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
         // シェーダ
-        shader = Simple00Shader()
+        shader = Simple01Shader()
         shader.loadShader()
 
         // モデル生成
-        drawObj = Triangle01Model()
+        drawObj = Square01Model()
         drawObj.createPath()
 
         // カメラの位置

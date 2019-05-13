@@ -6,7 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl01.begin00.OpenGL10Fragment
-import milu.kiriu2010.exdb1.opengl01.w018.Square01Fragment
+import milu.kiriu2010.exdb1.opengl01.w018.W018Fragment
 import milu.kiriu2010.exdb1.opengl01.w019.Square02Fragment
 import milu.kiriu2010.exdb1.opengl01.w020.Torus01Fragment
 import milu.kiriu2010.exdb1.opengl01.w021.Torus02Fragment
@@ -126,9 +126,9 @@ class OpenGL01Activity : AppCompatActivity() {
             // w018_インデックスバッファ
             R.id.opengl_w018 -> {
                 supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Square01") == null) {
+                if (supportFragmentManager.findFragmentByTag("w18") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Square01Fragment.newInstance(), "Square01")
+                            .replace(R.id.frameLayout, W018Fragment.newInstance(), "w18")
                             .commit()
                 }
                 true

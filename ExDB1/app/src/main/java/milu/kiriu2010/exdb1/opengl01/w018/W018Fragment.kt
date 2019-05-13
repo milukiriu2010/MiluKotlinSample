@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
 
-class Square01Fragment : Fragment() {
+class W018Fragment : Fragment() {
 
     private lateinit var myGL02View: MyGL02View
 
@@ -22,10 +22,11 @@ class Square01Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w15, container, false)
 
-        myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        myGL02View.setRenderer(MySquare01Renderer())
+        myGL02View = view.findViewById<MyGL02View>(R.id.myGL02ViewW15)
+        val renderer = W018Renderer(context!!)
+        myGL02View.setRenderer(renderer)
 
         return view
     }
@@ -43,7 +44,7 @@ class Square01Fragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                Square01Fragment().apply {
+                W018Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }
