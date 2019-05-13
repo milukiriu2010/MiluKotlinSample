@@ -7,8 +7,8 @@ import android.view.MenuItem
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl01.begin00.OpenGL10Fragment
 import milu.kiriu2010.exdb1.opengl01.w018.W018Fragment
-import milu.kiriu2010.exdb1.opengl01.w019.Square02Fragment
-import milu.kiriu2010.exdb1.opengl01.w020.Torus01Fragment
+import milu.kiriu2010.exdb1.opengl01.w019.W019Fragment
+import milu.kiriu2010.exdb1.opengl01.w020.W020Fragment
 import milu.kiriu2010.exdb1.opengl01.w021.Torus02Fragment
 import milu.kiriu2010.exdb1.opengl01.w022.Torus03Fragment
 import milu.kiriu2010.exdb1.opengl01.w023.Torus04Fragment
@@ -103,22 +103,22 @@ class OpenGL01Activity : AppCompatActivity() {
                 }
                 true
             }
-            // トーラス
+            // w020_トーラス
             R.id.opengl_w020 -> {
                 supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Torus01") == null) {
+                if (supportFragmentManager.findFragmentByTag("w20") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Torus01Fragment.newInstance(), "Torus01")
+                            .replace(R.id.frameLayout, W020Fragment.newInstance(), "w20")
                             .commit()
                 }
                 true
             }
-            // カリングと深度テスト
+            // w019_カリングと深度テスト
             R.id.opengl_w019 -> {
                 supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Square02") == null) {
+                if (supportFragmentManager.findFragmentByTag("w19") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Square02Fragment.newInstance(), "Square02")
+                            .replace(R.id.frameLayout, W019Fragment.newInstance(), "w19")
                             .commit()
                 }
                 true

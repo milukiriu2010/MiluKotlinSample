@@ -10,7 +10,7 @@ import android.widget.Switch
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
 
-class Square02Fragment : Fragment() {
+class W019Fragment : Fragment() {
 
     private lateinit var myGL02View: MyGL02View
 
@@ -29,23 +29,23 @@ class Square02Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl_square02, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w19, container, false)
 
-        myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        var renderer = MySquare02Renderer()
+        myGL02View = view.findViewById<MyGL02View>(R.id.myGL02ViewW19)
+        var renderer = W019Renderer(context!!)
         myGL02View.setRenderer(renderer)
 
-        switchCulling = view.findViewById(R.id.switchCulling)
+        switchCulling = view.findViewById(R.id.switchCullingW19)
         switchCulling.setOnCheckedChangeListener { buttonView, isChecked ->
             renderer.culling = isChecked
         }
 
-        switchFront = view.findViewById(R.id.switchFront)
+        switchFront = view.findViewById(R.id.switchFrontW19)
         switchFront.setOnCheckedChangeListener { buttonView, isChecked ->
             renderer.frontFace = isChecked
         }
 
-        switchDepth = view.findViewById(R.id.switchDepth)
+        switchDepth = view.findViewById(R.id.switchDepthW19)
         switchDepth.setOnCheckedChangeListener { buttonView, isChecked ->
             renderer.depthTest = isChecked
         }
@@ -66,7 +66,7 @@ class Square02Fragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                Square02Fragment().apply {
+                W019Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }
