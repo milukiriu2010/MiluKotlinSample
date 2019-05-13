@@ -4,6 +4,11 @@ import android.opengl.GLES20
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLFunc
 
+// --------------------------------------
+// 平行光源
+// --------------------------------------
+// 2019.05.13 コメント追加
+// --------------------------------------
 class DirectionalLight01Shader: MgShader() {
     // 頂点シェーダ
     private val scv =
@@ -12,12 +17,24 @@ class DirectionalLight01Shader: MgShader() {
             attribute vec3 a_Normal;
             attribute vec4 a_Color;
             uniform   mat4 u_matMVP;
+            // モデル座標変換行列の逆行列
             uniform   mat4 u_matINV;
+            // 光の向きを表すベクトル
             uniform   vec3 u_vecLight;
             varying   vec4 v_Color;
 
             void main() {
+                // 光の向きベクトルにモデル座標変換行列の逆行列を掛ける
+                // ---------------------------------------------------------
+                // モデル座標変換行列は外部プログラムで座標変換されるのに対し、
+                // 光の向きは一定でなければならないので、これを実施している
+                // ---------------------------------------------------------
                 vec3  invLight = normalize(u_matINV * vec4(u_vecLight,0.0)).xyz;
+                // ---------------------------------------------------------
+                // ライトベクトルと法線ベクトルによって形成される角度が
+                // 90度以上の場合は、光の影響力がなくなる。
+                // これを内積で実装している。
+                // ---------------------------------------------------------
                 float diffuse  = clamp(dot(a_Normal,invLight), 0.1, 1.0);
                 v_Color        = a_Color * vec4(vec3(diffuse), 1.0);
                 gl_Position    = u_matMVP * vec4(a_Position,1.0);

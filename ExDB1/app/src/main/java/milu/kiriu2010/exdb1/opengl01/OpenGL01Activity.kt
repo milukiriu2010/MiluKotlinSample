@@ -9,7 +9,7 @@ import milu.kiriu2010.exdb1.opengl01.begin00.OpenGL10Fragment
 import milu.kiriu2010.exdb1.opengl01.w018.W018Fragment
 import milu.kiriu2010.exdb1.opengl01.w019.W019Fragment
 import milu.kiriu2010.exdb1.opengl01.w020.W020Fragment
-import milu.kiriu2010.exdb1.opengl01.w021.Torus02Fragment
+import milu.kiriu2010.exdb1.opengl01.w021.W021Fragment
 import milu.kiriu2010.exdb1.opengl01.w022.Torus03Fragment
 import milu.kiriu2010.exdb1.opengl01.w023.Torus04Fragment
 import milu.kiriu2010.exdb1.opengl01.w024.Torus05Fragment
@@ -96,9 +96,9 @@ class OpenGL01Activity : AppCompatActivity() {
             // 平行光源
             R.id.opengl_w021 -> {
                 supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Torus02") == null) {
+                if (supportFragmentManager.findFragmentByTag("w21") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Torus02Fragment.newInstance(), "Torus02")
+                            .replace(R.id.frameLayout, W021Fragment.newInstance(), "w21")
                             .commit()
                 }
                 true

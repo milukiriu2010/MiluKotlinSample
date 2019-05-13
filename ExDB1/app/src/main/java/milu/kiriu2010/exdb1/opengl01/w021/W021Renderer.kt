@@ -2,26 +2,29 @@ package milu.kiriu2010.exdb1.opengl01.w019
 
 import android.content.Context
 import android.opengl.GLES20
+import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import android.os.SystemClock
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.Simple01Shader
+import milu.kiriu2010.gui.shader.DirectionalLight01Shader
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
-// トーラスの描画
-// --------------------------------------------------
-// https://wgld.org/d/webgl/w020.html
-class W020Renderer(ctx: Context): MgRenderer(ctx) {
+// ---------------------------------------------------
+// 平行光源によるライティング
+// ---------------------------------------------------
+// https://wgld.org/d/webgl/w021.html
+class W021Renderer(ctx: Context): MgRenderer(ctx) {
+
     // 描画モデル(トーラス)
     private lateinit var drawObj: Torus01Model
 
     // シェーダ
-    private lateinit var shader: Simple01Shader
+    private lateinit var shader: DirectionalLight01Shader
 
     override fun onDrawFrame(gl: GL10) {
         // 回転角度
@@ -40,8 +43,9 @@ class W020Renderer(ctx: Context): MgRenderer(ctx) {
 
         Matrix.setIdentityM(matM,0)
         Matrix.rotateM(matM,0,t0,0f,1f,1f)
+        Matrix.invertM(matI,0,matM,0)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        shader.draw(drawObj,matMVP)
+        shader.draw(drawObj,matMVP,matI,vecLight)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -70,7 +74,7 @@ class W020Renderer(ctx: Context): MgRenderer(ctx) {
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
 
         // シェーダ
-        shader = Simple01Shader()
+        shader = DirectionalLight01Shader()
         shader.loadShader()
 
         // 描画モデル(トーラス)
@@ -81,6 +85,7 @@ class W020Renderer(ctx: Context): MgRenderer(ctx) {
                 "iradius" to 1f,
                 "oradius" to 2f
         ))
+
     }
 
     override fun setMotionParam(motionParam: MutableMap<String, Float>) {
