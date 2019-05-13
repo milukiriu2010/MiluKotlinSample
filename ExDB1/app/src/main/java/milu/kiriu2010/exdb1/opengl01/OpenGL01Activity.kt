@@ -17,7 +17,7 @@ import milu.kiriu2010.exdb1.opengl01.begin01.Triangle01Fragment
 import milu.kiriu2010.exdb1.opengl01.w015.W015Fragment
 import milu.kiriu2010.exdb1.opengl01.begin02.Triangle03Fragment
 import milu.kiriu2010.exdb1.opengl01.w016.W016Fragment
-import milu.kiriu2010.exdb1.opengl01.w017.Triangle05Fragment
+import milu.kiriu2010.exdb1.opengl01.w017.W017Fragment
 import milu.kiriu2010.exdb1.opengl01.w025.Torus06Fragment
 
 class OpenGL01Activity : AppCompatActivity() {
@@ -136,9 +136,9 @@ class OpenGL01Activity : AppCompatActivity() {
             // w17_移動・回転・拡大/縮小
             R.id.opengl_w017 -> {
                 supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Triangle05") == null) {
+                if (supportFragmentManager.findFragmentByTag("w17") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Triangle05Fragment.newInstance(), "Triangle05")
+                            .replace(R.id.frameLayout, W017Fragment.newInstance(), "w17")
                             .commit()
                 }
                 true
@@ -146,9 +146,9 @@ class OpenGL01Activity : AppCompatActivity() {
             // w016_複数モデルレンダリング
             R.id.opengl_w016 -> {
                 supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Triangle04") == null) {
+                if (supportFragmentManager.findFragmentByTag("w16") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W016Fragment.newInstance(), "Triangle04")
+                            .replace(R.id.frameLayout, W016Fragment.newInstance(), "w16")
                             .commit()
                 }
                 true
