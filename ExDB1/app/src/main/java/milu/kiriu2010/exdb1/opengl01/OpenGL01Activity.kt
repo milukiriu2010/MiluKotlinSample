@@ -18,7 +18,7 @@ import milu.kiriu2010.exdb1.opengl01.w016.W016Fragment
 import milu.kiriu2010.exdb1.opengl01.w017.W017Fragment
 import milu.kiriu2010.exdb1.opengl01.w021.W021Fragment
 import milu.kiriu2010.exdb1.opengl01.w022.W022Fragment
-import milu.kiriu2010.exdb1.opengl01.w025.Torus06Fragment
+import milu.kiriu2010.exdb1.opengl01.w025.W025Fragment
 
 class OpenGL01Activity : AppCompatActivity() {
 
@@ -29,7 +29,7 @@ class OpenGL01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W015Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, W025Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -58,7 +58,7 @@ class OpenGL01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w25") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Torus06Fragment.newInstance(), "w25")
+                            .replace(R.id.frameLayout, W025Fragment.newInstance(), "w25")
                             .commit()
                 }
                 true

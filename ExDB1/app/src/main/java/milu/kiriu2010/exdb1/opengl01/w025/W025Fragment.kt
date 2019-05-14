@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl01
+package milu.kiriu2010.exdb1.opengl01.w025
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,9 +8,8 @@ import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
-import milu.kiriu2010.exdb1.opengl01.w015.W015Renderer
 
-class OpenGL01NaviFragment : Fragment() {
+class W025Fragment : Fragment() {
 
     private lateinit var myGL02View: MyGL02View
 
@@ -25,8 +24,8 @@ class OpenGL01NaviFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_open_gl_w15, container, false)
 
-        myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        val renderer = W015Renderer(context!!)
+        myGL02View = view.findViewById<MyGL02View>(R.id.myGL02ViewW15)
+        val renderer = W025Renderer(context!!)
         myGL02View.setRenderer(renderer)
 
         return view
@@ -45,7 +44,7 @@ class OpenGL01NaviFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                OpenGL01NaviFragment().apply {
+                W025Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }
