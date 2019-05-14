@@ -10,7 +10,7 @@ import milu.kiriu2010.exdb1.opengl01.w018.W018Fragment
 import milu.kiriu2010.exdb1.opengl01.w019.W019Fragment
 import milu.kiriu2010.exdb1.opengl01.w020.W020Fragment
 import milu.kiriu2010.exdb1.opengl01.w023.W023Fragment
-import milu.kiriu2010.exdb1.opengl01.w024.Torus05Fragment
+import milu.kiriu2010.exdb1.opengl01.w024.W024Fragment
 import milu.kiriu2010.exdb1.opengl01.begin01.Triangle01Fragment
 import milu.kiriu2010.exdb1.opengl01.w015.W015Fragment
 import milu.kiriu2010.exdb1.opengl01.begin02.Triangle03Fragment
@@ -56,9 +56,9 @@ class OpenGL01Activity : AppCompatActivity() {
             // 点光源
             R.id.opengl_w025 -> {
                 supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Torus06") == null) {
+                if (supportFragmentManager.findFragmentByTag("w25") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Torus06Fragment.newInstance(), "Torus06")
+                            .replace(R.id.frameLayout, Torus06Fragment.newInstance(), "w25")
                             .commit()
                 }
                 true
@@ -66,9 +66,9 @@ class OpenGL01Activity : AppCompatActivity() {
             // フォンシェーディング
             R.id.opengl_w024 -> {
                 supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Torus05") == null) {
+                if (supportFragmentManager.findFragmentByTag("w24") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Torus05Fragment.newInstance(), "Torus05")
+                            .replace(R.id.frameLayout, W024Fragment.newInstance(), "w24")
                             .commit()
                 }
                 true
@@ -76,9 +76,9 @@ class OpenGL01Activity : AppCompatActivity() {
             // 反射光
             R.id.opengl_w023 -> {
                 supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Torus04") == null) {
+                if (supportFragmentManager.findFragmentByTag("w23") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W023Fragment.newInstance(), "Torus04")
+                            .replace(R.id.frameLayout, W023Fragment.newInstance(), "w23")
                             .commit()
                 }
                 true
