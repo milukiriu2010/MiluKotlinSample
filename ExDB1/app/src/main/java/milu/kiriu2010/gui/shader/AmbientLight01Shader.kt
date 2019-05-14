@@ -4,7 +4,11 @@ import android.opengl.GLES20
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLFunc
 
+// ----------------------------------------
 // 環境光
+// ----------------------------------------
+// 2019.05.14 コメント追加
+// ----------------------------------------
 class AmbientLight01Shader: MgShader() {
     // 頂点シェーダ
     private val scv =
@@ -18,9 +22,12 @@ class AmbientLight01Shader: MgShader() {
             uniform   vec4 u_ambientColor;
             varying   vec4 v_Color;
 
+            // 環境光
+            // 現実世界における自然光の乱反射をシミュレートする
             void main() {
                 vec3  invLight = normalize(u_matINV * vec4(u_vecLight,0.0)).xyz;
                 float diffuse  = clamp(dot(a_Normal,invLight), 0.1, 1.0);
+                // 平行光源(頂点の色成分に拡散光の成分を掛ける)による色成分、環境光の成分を足す
                 v_Color        = a_Color * vec4(vec3(diffuse), 1.0) + u_ambientColor;
                 gl_Position    = u_matMVP * vec4(a_Position,1.0);
             }

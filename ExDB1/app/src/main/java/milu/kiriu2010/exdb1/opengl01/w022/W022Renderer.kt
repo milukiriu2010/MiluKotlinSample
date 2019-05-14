@@ -1,27 +1,26 @@
-package milu.kiriu2010.exdb1.opengl01.w020
+package milu.kiriu2010.exdb1.opengl01.w022
 
 import android.content.Context
 import android.opengl.GLES20
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
-import android.os.SystemClock
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.Simple01Shader
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
+import milu.kiriu2010.gui.shader.AmbientLight01Shader
 
-// トーラスの描画
-// --------------------------------------------------
-// https://wgld.org/d/webgl/w020.html
-class W020Renderer(ctx: Context): MgRenderer(ctx) {
+// ---------------------------------------------------
+// 環境光によるライティング
+// ---------------------------------------------------
+// https://wgld.org/d/webgl/w022.html
+// ---------------------------------------------------
+class W022Renderer(ctx: Context): MgRenderer(ctx) {
+
     // 描画モデル(トーラス)
-    private lateinit var drawObj: Torus01Model
+    private lateinit var model: Torus01Model
 
-    // シェーダ
-    private lateinit var shader: Simple01Shader
+    // シェーダ(拡散光)
+    private lateinit var shader: AmbientLight01Shader
 
     override fun onDrawFrame(gl: GL10) {
         // 回転角度
@@ -38,10 +37,14 @@ class W020Renderer(ctx: Context): MgRenderer(ctx) {
         // ビュー×プロジェクション座標変換行列
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
+        // モデルを座標変換
         Matrix.setIdentityM(matM,0)
         Matrix.rotateM(matM,0,t0,0f,1f,1f)
+        Matrix.invertM(matI,0,matM,0)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        shader.draw(drawObj,matMVP)
+
+        // モデル描画
+        shader.draw(model,matMVP,matI,vecLight,vecAmbientColor)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -63,26 +66,31 @@ class W020Renderer(ctx: Context): MgRenderer(ctx) {
         vecEye[1] = 0f
         vecEye[2] = 20f
 
+        // 環境光
+        vecAmbientColor[0] = 0.1f
+        vecAmbientColor[1] = 0.1f
+        vecAmbientColor[2] = 0.1f
+        vecAmbientColor[3] = 1f
+
         // ビュー座標変換行列
         Matrix.setLookAtM(matV, 0,
                 vecEye[0], vecEye[1], vecEye[2],
                 vecCenter[0], vecCenter[1], vecCenter[2],
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
 
-        // シェーダ
-        shader = Simple01Shader()
+        // シェーダ(拡散光)
+        shader = AmbientLight01Shader()
         shader.loadShader()
 
         // 描画モデル(トーラス)
-        drawObj = Torus01Model()
-        drawObj.createPath(mapOf(
+        model = Torus01Model()
+        model.createPath(mapOf(
                 "row"     to 32f,
                 "column"  to 32f,
                 "iradius" to 1f,
                 "oradius" to 2f
         ))
     }
-
     override fun setMotionParam(motionParam: MutableMap<String, Float>) {
     }
 

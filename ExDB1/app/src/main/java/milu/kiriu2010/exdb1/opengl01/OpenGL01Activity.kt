@@ -9,8 +9,6 @@ import milu.kiriu2010.exdb1.opengl01.begin00.OpenGL10Fragment
 import milu.kiriu2010.exdb1.opengl01.w018.W018Fragment
 import milu.kiriu2010.exdb1.opengl01.w019.W019Fragment
 import milu.kiriu2010.exdb1.opengl01.w020.W020Fragment
-import milu.kiriu2010.exdb1.opengl01.w021.W021Fragment
-import milu.kiriu2010.exdb1.opengl01.w022.Torus03Fragment
 import milu.kiriu2010.exdb1.opengl01.w023.Torus04Fragment
 import milu.kiriu2010.exdb1.opengl01.w024.Torus05Fragment
 import milu.kiriu2010.exdb1.opengl01.begin01.Triangle01Fragment
@@ -18,6 +16,8 @@ import milu.kiriu2010.exdb1.opengl01.w015.W015Fragment
 import milu.kiriu2010.exdb1.opengl01.begin02.Triangle03Fragment
 import milu.kiriu2010.exdb1.opengl01.w016.W016Fragment
 import milu.kiriu2010.exdb1.opengl01.w017.W017Fragment
+import milu.kiriu2010.exdb1.opengl01.w021.W021Fragment
+import milu.kiriu2010.exdb1.opengl01.w022.W022Fragment
 import milu.kiriu2010.exdb1.opengl01.w025.Torus06Fragment
 
 class OpenGL01Activity : AppCompatActivity() {
@@ -86,9 +86,9 @@ class OpenGL01Activity : AppCompatActivity() {
             // 環境光
             R.id.opengl_w022 -> {
                 supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Torus03") == null) {
+                if (supportFragmentManager.findFragmentByTag("w22") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Torus03Fragment.newInstance(), "Torus03")
+                            .replace(R.id.frameLayout, W022Fragment.newInstance(), "w22")
                             .commit()
                 }
                 true

@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl01.w019
+package milu.kiriu2010.exdb1.opengl01.w021
 
 import android.content.Context
 import android.opengl.GLES20
@@ -21,9 +21,9 @@ import kotlin.math.sin
 class W021Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画モデル(トーラス)
-    private lateinit var drawObj: Torus01Model
+    private lateinit var model: Torus01Model
 
-    // シェーダ
+    // シェーダ(平行光源)
     private lateinit var shader: DirectionalLight01Shader
 
     override fun onDrawFrame(gl: GL10) {
@@ -41,11 +41,14 @@ class W021Renderer(ctx: Context): MgRenderer(ctx) {
         // ビュー×プロジェクション座標変換行列
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
+        // モデルを座標変換
         Matrix.setIdentityM(matM,0)
         Matrix.rotateM(matM,0,t0,0f,1f,1f)
         Matrix.invertM(matI,0,matM,0)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        shader.draw(drawObj,matMVP,matI,vecLight)
+
+        // モデル描画
+        shader.draw(model,matMVP,matI,vecLight)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -73,13 +76,13 @@ class W021Renderer(ctx: Context): MgRenderer(ctx) {
                 vecCenter[0], vecCenter[1], vecCenter[2],
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
 
-        // シェーダ
+        // シェーダ(平行光源)
         shader = DirectionalLight01Shader()
         shader.loadShader()
 
         // 描画モデル(トーラス)
-        drawObj = Torus01Model()
-        drawObj.createPath(mapOf(
+        model = Torus01Model()
+        model.createPath(mapOf(
                 "row"     to 32f,
                 "column"  to 32f,
                 "iradius" to 1f,
