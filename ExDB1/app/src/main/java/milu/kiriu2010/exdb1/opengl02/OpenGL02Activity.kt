@@ -18,45 +18,14 @@ import milu.kiriu2010.exdb1.opengl02.w030z.W030zFragment
 
 class OpenGL02Activity : AppCompatActivity() {
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.navigation_home -> {
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, OpenGL02HomeFragment.newInstance(), "Home")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_dashboard -> {
-                if (supportFragmentManager.findFragmentByTag("Dashboard") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, OpenGL02DashFragment.newInstance(), "Dashboard")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_notifications -> {
-                if (supportFragmentManager.findFragmentByTag("Navi") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, OpenGL02NaviFragment.newInstance(), "Navi")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_open_gl02)
 
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
-        if (supportFragmentManager.findFragmentByTag("Home") == null) {
+        supportFragmentManager.popBackStack()
+        if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, OpenGL02HomeFragment.newInstance(), "Home")
+                    .replace(R.id.frameLayout, W028Fragment.newInstance(), "xyz")
                     .commit()
         }
 

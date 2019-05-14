@@ -53,7 +53,7 @@ class Board01Model: MgModelAbs() {
         color[2] = opt["colorB"] ?: 1f
         color[3] = opt["colorA"] ?: 1f
 
-        // 頂点データ
+        // 頂点データ(Zを描くような順序)
         datPos.addAll(arrayListOf(-1f, 1f,0f))
         datPos.addAll(arrayListOf( 1f, 1f,0f))
         datPos.addAll(arrayListOf(-1f,-1f,0f))

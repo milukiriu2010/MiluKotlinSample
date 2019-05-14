@@ -16,8 +16,6 @@ import android.graphics.Color
 import android.util.AttributeSet
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
-import kotlinx.android.synthetic.main.fragment_open_gl02_home.view.*
-
 
 class TestGLView : GLSurfaceView, GLSurfaceView.Renderer {
 

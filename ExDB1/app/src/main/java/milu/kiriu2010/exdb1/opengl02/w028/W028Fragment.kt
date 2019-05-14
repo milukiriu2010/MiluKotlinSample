@@ -10,14 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
+import milu.kiriu2010.exdb1.opengl.MyGL02View
 import milu.kiriu2010.exdb1.opengl.TextureView
-import milu.kiriu2010.exdb1.opengl01.w019.W026Renderer
 import milu.kiriu2010.exdb1.opengl01.w019.W027Renderer
 import milu.kiriu2010.exdb1.opengl01.w019.W028Renderer
 
 class W028Fragment : Fragment() {
 
-    private lateinit var textureView: TextureView
+    private lateinit var myGL02View: MyGL02View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,28 +28,28 @@ class W028Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl02_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w15, container, false)
 
-        textureView = view.findViewById<TextureView>(R.id.textureView)
+        myGL02View = view.findViewById(R.id.myGL02ViewW15)
         val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w027_0)
         val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.texture_w028_1)
         val render = W028Renderer()
         render.bmpArray.add(bmp0)
         render.bmpArray.add(bmp1)
-        textureView.setRenderer(render)
-        textureView.setOnTouchListener { v, event ->
+        myGL02View.setRenderer(render)
+        myGL02View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                     render.rotateSwitch = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
-                    Log.d(javaClass.simpleName,"vw[${textureView.width}]vh[${textureView.height}]")
+                    Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
                     render.rotateSwitch = true
-                    render.receiveTouch(event,textureView.width,textureView.height)
+                    render.receiveTouch(event,myGL02View.width,myGL02View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    render.receiveTouch(event,textureView.width,textureView.height)
+                    render.receiveTouch(event,myGL02View.width,myGL02View.height)
                 }
                 else -> {
                 }
@@ -62,12 +62,12 @@ class W028Fragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        textureView.onResume()
+        myGL02View.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        textureView.onPause()
+        myGL02View.onPause()
     }
 
     companion object {

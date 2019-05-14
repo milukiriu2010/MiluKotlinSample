@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.fragment_open_gl02_w029.*
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.TextureView
-import milu.kiriu2010.exdb1.opengl01.w019.W026Renderer
 import milu.kiriu2010.exdb1.opengl01.w019.W027Renderer
 import milu.kiriu2010.exdb1.opengl01.w019.W028Renderer
 import milu.kiriu2010.exdb1.opengl01.w019.W029Renderer
