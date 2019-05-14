@@ -9,7 +9,7 @@ import milu.kiriu2010.exdb1.opengl01.begin00.OpenGL10Fragment
 import milu.kiriu2010.exdb1.opengl01.w018.W018Fragment
 import milu.kiriu2010.exdb1.opengl01.w019.W019Fragment
 import milu.kiriu2010.exdb1.opengl01.w020.W020Fragment
-import milu.kiriu2010.exdb1.opengl01.w023.Torus04Fragment
+import milu.kiriu2010.exdb1.opengl01.w023.W023Fragment
 import milu.kiriu2010.exdb1.opengl01.w024.Torus05Fragment
 import milu.kiriu2010.exdb1.opengl01.begin01.Triangle01Fragment
 import milu.kiriu2010.exdb1.opengl01.w015.W015Fragment
@@ -78,7 +78,7 @@ class OpenGL01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Torus04") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Torus04Fragment.newInstance(), "Torus04")
+                            .replace(R.id.frameLayout, W023Fragment.newInstance(), "Torus04")
                             .commit()
                 }
                 true
