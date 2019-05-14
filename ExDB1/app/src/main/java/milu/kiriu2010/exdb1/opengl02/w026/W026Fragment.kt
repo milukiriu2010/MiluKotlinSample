@@ -26,9 +26,7 @@ class W026Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_gl_w15, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02ViewW15)
-        val bmp = BitmapFactory.decodeResource(resources,R.drawable.texture_w026)
         val render = W026Renderer(context!!)
-        render.bmpArray.add(bmp)
         myGL02View.setRenderer(render)
 
         return view

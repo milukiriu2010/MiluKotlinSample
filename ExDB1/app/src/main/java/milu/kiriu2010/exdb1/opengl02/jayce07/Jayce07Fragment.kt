@@ -11,8 +11,6 @@ import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
-import milu.kiriu2010.exdb1.opengl01.w019.W027Renderer
-import milu.kiriu2010.exdb1.opengl01.w019.W028Renderer
 
 class Jayce07Fragment : Fragment() {
 

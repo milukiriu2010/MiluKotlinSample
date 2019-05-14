@@ -1,7 +1,6 @@
 package milu.kiriu2010.exdb1.opengl02
 
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem

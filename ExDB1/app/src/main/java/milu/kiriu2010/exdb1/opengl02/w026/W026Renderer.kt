@@ -2,10 +2,12 @@ package milu.kiriu2010.exdb1.opengl02.w026
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.opengl.GLES20
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
+import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
@@ -33,9 +35,19 @@ class W026Renderer(ctx: Context): MgRenderer(ctx) {
 
     // テクスチャ配列
     val textures = IntArray(1)
+
+    init {
+        // ビットマップをロード
+        bmpArray.clear()
+        val bmp0 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w026)
+        bmpArray.add(bmp0)
+    }
+
     override fun onDrawFrame(gl: GL10) {
 
         // canvasを初期化
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
+        GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // 回転角度
@@ -66,6 +78,15 @@ class W026Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
+        // 深度テストを有効にする
+        GLES20.glEnable(GLES20.GL_DEPTH_TEST)
+        GLES20.glDepthFunc(GLES20.GL_LEQUAL)
+
+        // シェーダ
+        shader = W026Shader()
+        shader.loadShader()
+
+        // モデル
         model = Board01Model()
         model.createPath(mapOf(
                 "colorR" to 1f,
@@ -74,19 +95,6 @@ class W026Renderer(ctx: Context): MgRenderer(ctx) {
                 "colorA" to 1f
         ))
 
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
-        // 深度テストを有効にする
-        GLES20.glEnable(GLES20.GL_DEPTH_TEST)
-        GLES20.glDepthFunc(GLES20.GL_LEQUAL)
-
-        // シェーダプログラム登録
-        shader = W026Shader()
-        shader.loadShader()
 
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(1,textures,0)

@@ -62,7 +62,6 @@ class W026Shader: MgShader() {
         return this
     }
 
-
     fun draw(model: MgModelAbs,
              matMVP: FloatArray,
              texture: Int
