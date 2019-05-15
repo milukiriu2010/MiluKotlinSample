@@ -1,56 +1,36 @@
-package milu.kiriu2010.exdb1.opengl01.w019
+package milu.kiriu2010.exdb1.opengl02.w030z
 
+import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
-import android.view.MotionEvent
+import milu.kiriu2010.exdb1.R
+import milu.kiriu2010.exdb1.opengl01.w019.W030zModel
 import milu.kiriu2010.exdb1.opengl02.w030z.W030zShader
 import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.renderer.MgRenderer
 
 // ---------------------------------------------------
-// テクスチャ
+// ブレンドファクター
 // ---------------------------------------------------
-// https://wgld.org/d/webgl/w029.html
+// https://wgld.org/d/webgl/w030.html
 // ---------------------------------------------------
-class W030zRenderer: GLSurfaceView.Renderer {
-    // 描画オブジェクト
-    private lateinit var drawObj: W030zModel
+class W030zRenderer(ctx: Context): MgRenderer(ctx) {
 
-    // プログラムハンドル
-    private var programHandle: Int = 0
+    // モデル
+    private lateinit var model: W030zModel
 
-    // モデル変換行列
-    private val matM = FloatArray(16)
-    // ビュー変換行列
-    private val matV = FloatArray(16)
-    // プロジェクション変換行列
-    private val matP = FloatArray(16)
-    // モデル・ビュー・プロジェクション行列
-    private val matMVP = FloatArray(16)
-    // テンポラリ行列
-    private val matT = FloatArray(16)
-    // カメラの座標
-    private val vecEye = floatArrayOf(0f,0f,5f)
-    // カメラの上方向を表すベクトル
-    private val vecEyeUp = floatArrayOf(0f,1f,0f)
-    // 原点のベクトル
-    private val vecCenter = floatArrayOf(0f,0f,0f)
+    // シェーダ
+    private lateinit var shader: W030zShader
 
     // ビットマップ配列
     val bmpArray = arrayListOf<Bitmap>()
 
     // テクスチャ配列
     val textures = IntArray(2)
-
-    // 回転スイッチ
-    var rotateSwitch = false
-
-    // 回転角度
-    private var angle1 = 0
-
 
     // コンテキストの色
     val contextColor = floatArrayOf(0f,0.7f,0.7f,1f)
@@ -76,7 +56,17 @@ class W030zRenderer: GLSurfaceView.Renderer {
     // ブレンドファクター(アルファ先)
     var blendFctDABF = intArrayOf(GLES20.GL_ZERO,GLES20.GL_ONE)
 
+    init {
+        // ビットマップをロード
+        bmpArray.clear()
+        val bmp0 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w029)
+        bmpArray.add(bmp0)
+    }
+
     override fun onDrawFrame(gl: GL10) {
+        // 回転角度
+        angle[0] =(angle[0]+1)%360
+        val t0 = angle[0].toFloat()
 
         // canvasを初期化
         GLES20.glClearColor(contextColor[0],contextColor[1],contextColor[2],contextColor[3])
@@ -87,17 +77,17 @@ class W030zRenderer: GLSurfaceView.Renderer {
         GLES20.glBlendColor(blendColor[0],blendColor[1],blendColor[2],blendColor[3])
 
         // ビュー×プロジェクション座標変換行列
-        Matrix.multiplyMM(matT,0,matP,0,matV,0)
+        Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
-        // 回転角度
-        angle1 =(angle1+1)%360
-        val t1 = angle1.toFloat()
+        // ----------------------------------------------------------------------
+        // 後ろにテクスチャを描画
+        // ----------------------------------------------------------------------
 
         // モデル座標変換行列の生成
         Matrix.setIdentityM(matM,0)
         Matrix.translateM(matM,0,0.25f,0.25f,-0.25f)
-        Matrix.rotateM(matM,0,t1,0f,1f,0f)
-        Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
+        Matrix.rotateM(matM,0,t0,0f,1f,0f)
+        Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
 
         // テクスチャ0をバインド
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[0])
@@ -111,8 +101,10 @@ class W030zRenderer: GLSurfaceView.Renderer {
         GLES20.glBlendFuncSeparate(blendFctSCBF[0],blendFctDCBF[0],blendFctSABF[0],blendFctDABF[0])
 
         // テクスチャ描画
-        drawObj.draw(programHandle, matMVP,vertexAplha[0],0,1)
+        shader.draw(model,matMVP,vertexAplha[0],0,1)
 
+        // ----------------------------------------------------------------------
+        // 手前に板ポリゴンを描画
         // ----------------------------------------------------------------------
 
         // テクスチャのバインドを解除
@@ -121,8 +113,8 @@ class W030zRenderer: GLSurfaceView.Renderer {
         // モデル座標変換行列の生成
         Matrix.setIdentityM(matM,0)
         Matrix.translateM(matM,0,-0.25f,-0.25f,0.25f)
-        Matrix.rotateM(matM,0,t1,0f,0f,1f)
-        Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
+        Matrix.rotateM(matM,0,t0,0f,0f,1f)
+        Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
 
         // ポリゴンのブレンディングを有効/無効にする
         when (blend[1]) {
@@ -133,7 +125,7 @@ class W030zRenderer: GLSurfaceView.Renderer {
         GLES20.glBlendFuncSeparate(blendFctSCBF[1],blendFctDCBF[1],blendFctSABF[1],blendFctDABF[1])
 
         // ポリゴンを描画
-        drawObj.draw(programHandle, matMVP,vertexAplha[1],0,0)
+        shader.draw(model,matMVP,vertexAplha[1],0,0)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -145,28 +137,24 @@ class W030zRenderer: GLSurfaceView.Renderer {
     }
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.75f, 0.75f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
         // 深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
 
-        // シェーダプログラム登録
-        programHandle = W030zShader().loadShader()
+        // シェーダ
+        shader = W030zShader()
+        shader.loadShader()
+
+        // モデル生成
+        model = W030zModel()
+        model.createPath()
 
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(1,textures,0)
         MyGLFunc.checkGlError("glGenTextures")
 
-        // モデル生成
-        drawObj = W030zModel()
-
         // テクスチャ0をバインド
-        drawObj.activateTexture(0,textures,bmpArray[0])
+        MyGLFunc.createTexture(0,textures,bmpArray[0])
 
         // カメラの位置
         Matrix.setLookAtM(matV, 0,
@@ -175,7 +163,9 @@ class W030zRenderer: GLSurfaceView.Renderer {
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
     }
 
-    fun receiveTouch(ev: MotionEvent, w: Int, h: Int ) {
+    override fun setMotionParam(motionParam: MutableMap<String, Float>) {
+    }
 
+    override fun closeShader() {
     }
 }
