@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/glsl_g003"
+        android:title="g003_光の玉" />
+    <item
         android:id="@+id/glsl_g002"
         android:title="g002_同心円" />
     <item

@@ -7,6 +7,7 @@ import android.view.MenuItem
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.glsl01.g001.GLSL01Fragment
 import milu.kiriu2010.exdb1.glsl01.g002.GLSL02Fragment
+import milu.kiriu2010.exdb1.glsl01.g003.GLSL03Fragment
 
 class GLSL01Activity : AppCompatActivity() {
 
@@ -17,7 +18,7 @@ class GLSL01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, GLSL02Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, GLSL03Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -39,6 +40,16 @@ class GLSL01Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 光の玉
+            R.id.glsl_g003 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("g03") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSL03Fragment.newInstance(), "g03")
+                            .commit()
+                }
                 true
             }
             // 同心円
