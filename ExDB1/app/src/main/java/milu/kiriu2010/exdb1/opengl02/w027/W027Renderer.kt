@@ -86,7 +86,7 @@ class W027Renderer(ctx: Context): MgRenderer(ctx) {
         shader = W027Shader()
         shader.loadShader()
 
-        // モデル
+        // モデル生成
         model = Board01Model()
         model.createPath(mapOf(
                 "colorR" to 1f,

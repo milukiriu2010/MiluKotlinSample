@@ -1,43 +1,45 @@
-package milu.kiriu2010.exdb1.opengl01.w019
+package milu.kiriu2010.exdb1.opengl02.w028
 
+import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
-import android.view.MotionEvent
+import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.exdb1.opengl02.w028.W028Shader
+import milu.kiriu2010.gui.renderer.MgRenderer
 
-// ---------------------------------------------------
-// テクスチャ
-// ---------------------------------------------------
-// https://wgld.org/d/webgl/w026.html
-// ---------------------------------------------------
-class W028Renderer: GLSurfaceView.Renderer {
+// --------------------------------------------------------------------------------------------
+// テクスチャパラメータ
+// --------------------------------------------------------------------------------------------
+// テクスチャパラメータとは
+// レンダリングされる際の品質や性質にかかわる特性
+// まったく同じ解像度・同じサイズの画像を適用したテクスチャでも
+// テクスチャパラメータが異なっている場合、レンダリング結果が大きく変化する
+// --------------------------------------------------------------------------------------------
+// テクスチャの品質に関するパラメータ
+//   テクスチャが伸縮(拡大縮小)されるときに、どのように扱われるか指定する。
+//   これらを変化させることでレンダリングされた際にテクスチャに適用されるフィルタが変化します。
+//   結果、美しく補間されたテクスチャを使った高品質なレンダリングを行なうことが可能になります。
+//   ミップマップが使われるのは、イメージを縮小表示しなければならないとき。
+// --------------------------------------------------------------------------------------------
+// テクスチャの性質に関するパラメータ
+//   通常の範囲外のテクスチャ座標を指定された際のテクスチャの挙動が変化する。
+//   テクスチャ座標は0～1の範囲に収まるようにしなければならないが、
+//   実際には、範囲外のテクスチャ座標を指定してもレンダリング自体は行われる。
+//   このパラメータを指定することで、範囲外の値をどのように扱うか指定することができる
+// --------------------------------------------------------------------------------------------
+// https://wgld.org/d/webgl/w028.html
+// --------------------------------------------------------------------------------------------
+class W028Renderer(ctx: Context): MgRenderer(ctx) {
+
     // 描画オブジェクト
-    private lateinit var drawObj: W028Model
+    private lateinit var model: W028Model
 
-    // プログラムハンドル
-    private var programHandle: Int = 0
-
-    // モデル変換行列
-    private val matM = FloatArray(16)
-    // ビュー変換行列
-    private val matV = FloatArray(16)
-    // プロジェクション変換行列
-    private val matP = FloatArray(16)
-    // モデル・ビュー・プロジェクション行列
-    private val matMVP = FloatArray(16)
-    // テンポラリ行列
-    private val matT = FloatArray(16)
-    // カメラの座標
-    private val vecEye = floatArrayOf(0f,0f,8f)
-    // カメラの上方向を表すベクトル
-    private val vecEyeUp = floatArrayOf(0f,1f,0f)
-    // 原点のベクトル
-    private val vecCenter = floatArrayOf(0f,0f,0f)
+    // シェーダ
+    private lateinit var shader: W028Shader
 
     // ビットマップ配列
     val bmpArray = arrayListOf<Bitmap>()
@@ -45,20 +47,25 @@ class W028Renderer: GLSurfaceView.Renderer {
     // テクスチャ配列
     val textures = IntArray(2)
 
-    // 回転スイッチ
-    var rotateSwitch = false
-
-    // 回転角度
-    private var angle1 = 0
+    init {
+        // ビットマップをロード
+        bmpArray.clear()
+        val bmp0 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w027_0)
+        val bmp1 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w028_1)
+        bmpArray.add(bmp0)
+        bmpArray.add(bmp1)
+    }
 
     override fun onDrawFrame(gl: GL10) {
 
         // canvasを初期化
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
+        GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // 回転角度
-        angle1 =(angle1+1)%360
-        val t1 = angle1.toFloat()
+        angle[0] =(angle[0]+1)%360
+        val t0 = angle[0].toFloat()
 
         // テクスチャをバインドする
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
@@ -67,18 +74,22 @@ class W028Renderer: GLSurfaceView.Renderer {
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[1])
 
         // ビュー×プロジェクション座標変換行列
-        Matrix.multiplyMM(matT,0,matP,0,matV,0)
+        Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
 
-        renderMap(1,t1)
-        renderMap(2,t1)
-        renderMap(3,t1)
-        renderMap(4,t1)
-        renderMap(5,t1)
-        renderMap(6,t1)
-        renderMap(7,t1)
-        renderMap(8,t1)
-        renderMap(9,t1)
+        // ２つの画像をテクスチャパラメータを変えて描画
+        // テクスチャパラメータは、その時点ｄえバインドされているテクスチャに対してのみ有効
+        // ２枚目の画像を読み込んだテクスチャが常にバインドされている状態になるため、
+        // １枚目の画像を読み込んだテクスチャには、品質・性質に一切の変化が発生しない。
+        renderMap(1,t0)
+        renderMap(2,t0)
+        renderMap(3,t0)
+        renderMap(4,t0)
+        renderMap(5,t0)
+        renderMap(6,t0)
+        renderMap(7,t0)
+        renderMap(8,t0)
+        renderMap(9,t0)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -90,31 +101,31 @@ class W028Renderer: GLSurfaceView.Renderer {
     }
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
         // 深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
 
-        // シェーダプログラム登録
-        programHandle = W028Shader().loadShader()
+        // シェーダ
+        shader = W028Shader()
+        shader.loadShader()
+
+        // モデル生成
+        model = W028Model()
+        model.createPath()
 
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(2,textures,0)
         MyGLFunc.checkGlError("glGenTextures")
 
-        // モデル生成
-        drawObj = W028Model()
-
-
         // テクスチャ0をバインド
-        drawObj.activateTexture(0,textures,bmpArray[0])
+        MyGLFunc.createTexture(0,textures,bmpArray[0])
         // テクスチャ1をバインド
-        drawObj.activateTexture(1,textures,bmpArray[1])
+        MyGLFunc.createTexture(1,textures,bmpArray[1])
+
+        // カメラの座標
+        vecEye[0] = 0f
+        vecEye[1] = 0f
+        vecEye[2] = 8f
 
         // カメラの位置
         Matrix.setLookAtM(matV, 0,
@@ -130,9 +141,9 @@ class W028Renderer: GLSurfaceView.Renderer {
                 // -----------------------------------------------
                 // １つ目
                 // -----------------------------------------------
-                // 縮小時の補完設定
+                // 縮小時の補間設定
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST)
-                // 拡大時の補完設定
+                // 拡大時の補間設定
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_NEAREST)
                 // 範囲外のテクスチャ座標が指定されたときの設定(横)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
@@ -144,9 +155,9 @@ class W028Renderer: GLSurfaceView.Renderer {
                 // -----------------------------------------------
                 // ２つ目
                 // -----------------------------------------------
-                // 縮小時の補完設定
+                // 縮小時の補間設定
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
-                // 拡大時の補完設定
+                // 拡大時の補間設定
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
@@ -156,9 +167,9 @@ class W028Renderer: GLSurfaceView.Renderer {
                 // -----------------------------------------------
                 // ３つ目
                 // -----------------------------------------------
-                // 縮小時の補完設定
+                // 縮小時の補間設定
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST_MIPMAP_NEAREST)
-                // 拡大時の補完設定
+                // 拡大時の補間設定
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
@@ -168,9 +179,9 @@ class W028Renderer: GLSurfaceView.Renderer {
                 // -----------------------------------------------
                 // ４つ目
                 // -----------------------------------------------
-                // 縮小時の補完設定
+                // 縮小時の補間設定
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST_MIPMAP_LINEAR)
-                // 拡大時の補完設定
+                // 拡大時の補間設定
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
@@ -180,9 +191,9 @@ class W028Renderer: GLSurfaceView.Renderer {
                 // -----------------------------------------------
                 // ５つ目
                 // -----------------------------------------------
-                // 縮小時の補完設定
+                // 縮小時の補間設定
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR_MIPMAP_NEAREST)
-                // 拡大時の補完設定
+                // 拡大時の補間設定
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
@@ -192,9 +203,9 @@ class W028Renderer: GLSurfaceView.Renderer {
                 // -----------------------------------------------
                 // ６つ目
                 // -----------------------------------------------
-                // 縮小時の補完設定
+                // 縮小時の補間設定
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR_MIPMAP_LINEAR)
-                // 拡大時の補完設定
+                // 拡大時の補間設定
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT)
                 GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT)
@@ -227,20 +238,22 @@ class W028Renderer: GLSurfaceView.Renderer {
         }
     }
 
-    private fun render(angleInDegrees: Float, trans: FloatArray) {
+    private fun render(t: Float, trans: FloatArray) {
         // モデル座標変換行列の生成
         Matrix.setIdentityM(matM,0)
         Matrix.translateM(matM,0,trans[0],trans[1],trans[2])
-        if ( rotateSwitch == true ) {
-            Matrix.rotateM(matM,0,angleInDegrees,0f,1f,0f)
+        if ( isRunning == true ) {
+            Matrix.rotateM(matM,0,t,0f,1f,0f)
         }
-        Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
+        Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
 
         // uniform変数の登録と描画
-        drawObj.draw(programHandle, matMVP,0,1)
+        shader.draw(model,matMVP,0,1)
     }
 
-    fun receiveTouch(ev: MotionEvent, w: Int, h: Int ) {
+    override fun setMotionParam(motionParam: MutableMap<String, Float>) {
+    }
 
+    override fun closeShader() {
     }
 }
