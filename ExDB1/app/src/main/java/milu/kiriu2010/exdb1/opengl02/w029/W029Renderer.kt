@@ -11,6 +11,7 @@ import android.opengl.Matrix
 import android.view.MotionEvent
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
 // ----------------------------------------------------------------------------------
@@ -26,7 +27,7 @@ import milu.kiriu2010.gui.renderer.MgRenderer
 class W029Renderer(ctx: Context): MgRenderer(ctx) {
 
     // モデル
-    private lateinit var model: W029Model
+    private lateinit var model: Board01Model
 
     // シェーダ
     private lateinit var shader: W029Shader
@@ -38,10 +39,13 @@ class W029Renderer(ctx: Context): MgRenderer(ctx) {
     val textures = IntArray(2)
 
     // ブレンドタイプ
-    var blendType = 0
+    var blendType = 1
 
-    // ブレンドするアルファ成分の割合
+    // ブレンディングに使うアルファ成分の割合
     var vertexAplha = 0.5f
+
+    // 背景に使う色
+    val colorBack = floatArrayOf(0f,0.7f,0.7f,1f)
 
     init {
         // ビットマップをロード
@@ -51,14 +55,14 @@ class W029Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun onDrawFrame(gl: GL10) {
+        // 回転角度
+        if ( isRunning ) angle[0] =(angle[0]+1)%360
+        val t0 = angle[0].toFloat()
+
         // canvasを初期化
-        GLES20.glClearColor(0.0f, 0.75f, 0.75f, 1.0f)
+        GLES20.glClearColor( colorBack[0], colorBack[1], colorBack[2], colorBack[3])
         GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
-
-        // 回転角度
-        angle[0] =(angle[0]+1)%360
-        val t0 = angle[0].toFloat()
 
         // ビュー×プロジェクション座標変換行列
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
@@ -73,9 +77,20 @@ class W029Renderer(ctx: Context): MgRenderer(ctx) {
         // テクスチャ⇒ブレンディングは行なわず、テクスチャそのものの色を表示
         // 板ポリゴン⇒ブレンディングを行う。
         // -------------------------------------------------------------------
+        // https://dev.classmethod.jp/smartphone/android/android-rajawali-tutorials-06/
+        // https://blog.chocolapod.net/momokan/entry/23
+        // http://memo.devjam.net/clip/538
+        // http://d.hatena.ne.jp/mswar/20090319/1237474563
+        // https://masuqat.net/programming/csharp/OpenTK01-09.php
+        // -------------------------------------------------------------------
         when (blendType) {
             // --------------------------------------------------------------
-            // 透過処理
+            // 通常
+            // --------------------------------------------------------------
+            0 -> GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ZERO)
+            // --------------------------------------------------------------
+            // 半透明合成
+            //   透過処理/よく使われるブレンディング
             // --------------------------------------------------------------
             // アルファ成分大⇒描画元(これから描画される色)が濃く表示される。
             //   板ポリゴン⇒モデルそのものの色が表示される
@@ -83,9 +98,10 @@ class W029Renderer(ctx: Context): MgRenderer(ctx) {
             // アルファ成分小⇒描画先(既に描画されている色)が濃く表示される
             //   板ポリゴン⇒消える
             // --------------------------------------------------------------
-            0 -> GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA)
+            1 -> GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA)
             // --------------------------------------------------------------
             // 加算合成
+            //   炎の表示などに光が集まるような場合に使うブレンディング
             // --------------------------------------------------------------
             // アルファ成分大⇒描画元(これから描画される色)が濃く表示される。
             //   板ポリゴン⇒全体的に白っぽくなる
@@ -93,7 +109,22 @@ class W029Renderer(ctx: Context): MgRenderer(ctx) {
             // アルファ成分小⇒描画先(既に描画されている色)が濃く表示される
             //   板ポリゴン⇒消える
             // --------------------------------------------------------------
-            1 -> GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE)
+            2 -> GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE)
+            // --------------------------------------------------------------
+            // 反転合成
+            //   フィルムカメラのネガのようになるブレンディング
+            // --------------------------------------------------------------
+            3 -> GLES20.glBlendFunc(GLES20.GL_ONE_MINUS_DST_COLOR,GLES20.GL_ZERO)
+            // --------------------------------------------------------------
+            // 加算＋アルファ
+            //   PhotoShop的スクリーン
+            // --------------------------------------------------------------
+            4 -> GLES20.glBlendFunc(GLES20.GL_SRC_COLOR,GLES20.GL_ONE)
+            // --------------------------------------------------------------
+            // 乗算合成
+            //   カラーセロハンを使ったようなブレンディング
+            // --------------------------------------------------------------
+            5 -> GLES20.glBlendFunc(GLES20.GL_ZERO,GLES20.GL_SRC_COLOR)
         }
 
         // ----------------------------------------------------------------------
@@ -156,8 +187,8 @@ class W029Renderer(ctx: Context): MgRenderer(ctx) {
         shader.loadShader()
 
         // モデル生成
-        model = W029Model()
-        model.createPath()
+        model = Board01Model()
+        model.createPath(mapOf("pattern" to 29f))
 
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(1,textures,0)

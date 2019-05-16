@@ -29,6 +29,8 @@ class Board01Model: MgModelAbs() {
         when ( pattern ) {
             // XY平面(右回り)
             1 -> createPathPattern1(opt)
+            // XY平面(右回り)(アルファブレンディング)
+            29 -> createPathPattern29(opt)
             // XY平面(左回り)
             53 -> createPathPattern53(opt)
             // XY平面(左+右回り)
@@ -80,6 +82,32 @@ class Board01Model: MgModelAbs() {
         // インデックスデータ
         datIdx.addAll(arrayListOf<Short>(0,1,2))
         datIdx.addAll(arrayListOf<Short>(3,2,1))
+    }
+
+    // XY平面(右回り)(アルファブレンディング)
+    // w29,w30
+    private fun createPathPattern29(opt: Map<String, Float>) {
+        // 頂点データ
+        datPos.addAll(arrayListOf(-1f, 1f,0f))
+        datPos.addAll(arrayListOf( 1f, 1f,0f))
+        datPos.addAll(arrayListOf(-1f,-1f,0f))
+        datPos.addAll(arrayListOf( 1f,-1f,0f))
+
+        // 色データ
+        datCol.addAll(arrayListOf(1f,0f,0f,1f))
+        datCol.addAll(arrayListOf(0f,1f,0f,1f))
+        datCol.addAll(arrayListOf(0f,0f,1f,1f))
+        datCol.addAll(arrayListOf(1f,1f,1f,1f))
+
+        // テクスチャ座標
+        datTxc.addAll(arrayListOf(0f,0f))
+        datTxc.addAll(arrayListOf(1f,0f))
+        datTxc.addAll(arrayListOf(0f,1f))
+        datTxc.addAll(arrayListOf(1f,1f))
+
+        // 頂点インデックス
+        datIdx.addAll(arrayListOf(0,1,2))
+        datIdx.addAll(arrayListOf(3,2,1))
     }
 
     // XY平面(左回り)

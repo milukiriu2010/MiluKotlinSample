@@ -8,9 +8,8 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl01.w019.W030zModel
-import milu.kiriu2010.exdb1.opengl02.w030z.W030zShader
 import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
 // ---------------------------------------------------
@@ -21,7 +20,7 @@ import milu.kiriu2010.gui.renderer.MgRenderer
 class W030zRenderer(ctx: Context): MgRenderer(ctx) {
 
     // モデル
-    private lateinit var model: W030zModel
+    private lateinit var model: Board01Model
 
     // シェーダ
     private lateinit var shader: W030zShader
@@ -146,8 +145,8 @@ class W030zRenderer(ctx: Context): MgRenderer(ctx) {
         shader.loadShader()
 
         // モデル生成
-        model = W030zModel()
-        model.createPath()
+        model = Board01Model()
+        model.createPath(mapOf("pattern" to 29f))
 
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(1,textures,0)
