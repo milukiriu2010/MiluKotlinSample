@@ -23,9 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Context Clear Color"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="背景色"
+        app:layout_constraintEnd_toStartOf="@+id/btnW030BlendConstantColor"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myGL02ViewW30" />
 
@@ -34,13 +34,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Blend Constant Color"
+        android:text="ブレンド定数"
+        app:layout_constraintBottom_toBottomOf="@+id/btnW030ContextClearColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnW030ContextClearColor" />
+        app:layout_constraintStart_toEndOf="@+id/btnW030ContextClearColor"
+        app:layout_constraintTop_toTopOf="@+id/btnW030ContextClearColor" />
 
     <Button
         android:id="@+id/btnW030Model1"
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Model1"
+        android:text="テクスチャ"
         app:layout_constraintEnd_toStartOf="@+id/btnW030Model2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Model2"
+        android:text="板ポリゴン"
         app:layout_constraintBottom_toBottomOf="@+id/btnW030Model1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

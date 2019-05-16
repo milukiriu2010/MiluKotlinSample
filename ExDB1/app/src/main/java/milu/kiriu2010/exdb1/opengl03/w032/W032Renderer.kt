@@ -1,80 +1,58 @@
 package milu.kiriu2010.exdb1.opengl03.w032
 
+import android.content.Context
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import android.opengl.Matrix
 import milu.kiriu2010.gui.basic.MyQuaternion
+import milu.kiriu2010.gui.model.Torus01Model
+import milu.kiriu2010.gui.renderer.MgRenderer
+import milu.kiriu2010.gui.shader.PointLight01Shader
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
-// 平行光源
-class W032Renderer: GLSurfaceView.Renderer {
-    // 描画オブジェクト
-    private lateinit var drawObj: W032Model
+// ---------------------------------------
+// クォータニオン
+//   カメラの位置を回転させる
+// ---------------------------------------
+// https://wgld.org/d/webgl/w032.html
+// ---------------------------------------
+class W032Renderer(ctx: Context): MgRenderer(ctx) {
+
+    // モデル(トーラス)
+    private lateinit var model: Torus01Model
+
+    // シェーダ(点光源)
+    private lateinit var shader: PointLight01Shader
 
     // 画面縦横比
     var ratio: Float = 0f
 
 
-    // モデル変換行列
-    private val matM = FloatArray(16)
-    // モデル変換行列の逆行列
-    private val matI = FloatArray(16)
-    // ビュー変換行列
-    private val matV = FloatArray(16)
-    // プロジェクション変換行列
-    private val matP = FloatArray(16)
-    // モデル・ビュー・プロジェクション行列
-    private val matMVP = FloatArray(16)
-    // テンポラリ行列
-    private val matT = FloatArray(16)
-    // 点光源の位置
-    private val vecLight = floatArrayOf(15f,10f,15f)
-    // 環境光の色
-    private val vecAmbientColor = floatArrayOf(0.1f,0.1f,0.1f,1f)
-    // カメラの座標
-    private val vecEye = floatArrayOf(0f,0f,10f)
-    // カメラの上方向を表すベクトル
-    private val vecEyeUp = floatArrayOf(0f,1f,0f)
-
-    // クォータニオン
-    private var xQuaternion = MyQuaternion().identity()
-
     // X軸
     private var xaxis = floatArrayOf(1f,0f,0f)
 
-    // 回転角度
-    private var angle1 = 0
-    private var angle2 = 0
-
-    // 回転スイッチ
-    var rotateSwitch = false
-
     override fun onDrawFrame(gl: GL10?) {
-        // canvasを初期化
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // 回転角度
-        angle1 =(angle1+5)%360
-        angle2 =(angle2+2)%360
-        val t1 = angle1.toFloat()
-        val t2 = angle2.toFloat()
+        angle[0] =(angle[0]+5)%360
+        angle[1] =(angle[1]+2)%360
+        val t0 = angle[0].toFloat()
+        val t1 = angle[1].toFloat()
 
-        // X軸が回転軸としてt2度回転したクォータニオンを生成
-        xQuaternion = MyQuaternion.rotate(t2,xaxis)
+        // canvasを初期化
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
+        GLES20.glClearDepthf(1f)
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
+
+        // ------------------------------------------------------------
+        // カメラをX軸を中心に回転させている
+        // ------------------------------------------------------------
+        // X軸が回転軸としてt1度回転したクォータニオンを生成
+        qtnNow = MyQuaternion.rotate(t1,xaxis)
         // クォータニオンを使って座標変換(カメラの座標)
-        val vecEyeT = xQuaternion.toVecIII(vecEye)
+        val vecEyeT = qtnNow.toVecIII(vecEye)
         // クォータニオンを使って座標変換(カメラの上方向を表すベクトル)
-        val vecEyeUpT = xQuaternion.toVecIII(vecEyeUp)
-
-        /* カメラの回転を止める
-
-        // カメラの座標
-        val vecEyeT = vecEye
-        // カメラの上方向を表すベクトル
-        val vecEyeUpT = vecEyeUp
-        */
-
+        val vecEyeUpT = qtnNow.toVecIII(vecEyeUp)
 
         // カメラの位置
         Matrix.setLookAtM(matV, 0,
@@ -84,29 +62,22 @@ class W032Renderer: GLSurfaceView.Renderer {
         Matrix.perspectiveM(matP,0,60f,ratio,0.1f,100f)
 
         // ビュー×プロジェクション
-        Matrix.multiplyMM(matT,0,matP,0,matV,0)
-
+        Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
         // モデルを単位行列にする
         Matrix.setIdentityM(matM,0)
-        // モデルを右にずらす
-        //Matrix.translateM(matM,0,x,y,0f)
         // モデルを"Y軸"を中心に回転する
-        if ( rotateSwitch ) {
+        if ( isRunning ) {
             Matrix.rotateM(matM, 0, t1, 0f, 1f, 0f)
         }
-        // モデルを"Y軸45度/Z軸45度"を中心に回転する
-        //Matrix.rotateM(matM,0,angle,0f,1f,1f)
-        // モデルを"X軸45度Y軸45度/Z軸45度"を中心に回転する
-        //Matrix.rotateM(matM,0,t1,1f,1f,1f)
         // モデル×ビュー×プロジェクション
-        Matrix.multiplyMM(matMVP,0,matT,0,matM,0)
+        Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
 
         // モデル座標変換行列から逆行列を生成
         Matrix.invertM(matI,0,matM,0)
 
         // モデルを描画
-        drawObj.draw(matMVP,matM,matI,vecLight,vecEyeT,vecAmbientColor)
+        shader.draw(model,matMVP,matM,matI,vecLight,vecEyeT,vecAmbientColor)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -116,17 +87,28 @@ class W032Renderer: GLSurfaceView.Renderer {
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
         // カリングと深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
         GLES20.glEnable(GLES20.GL_CULL_FACE)
 
-        drawObj = W032Model()
+        // シェーダ
+        shader = PointLight01Shader()
+        shader.loadShader()
+
+        // モデル生成
+        model = Torus01Model()
+        model.createPath()
+
+        // カメラの初期位置
+        vecEye[0] = 0f
+        vecEye[1] = 0f
+        vecEye[2] = 10f
+    }
+
+    override fun setMotionParam(motionParam: MutableMap<String, Float>) {
+    }
+
+    override fun closeShader() {
     }
 }

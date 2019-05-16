@@ -61,7 +61,15 @@ class W030zModelDialog: DialogFragment() {
 
         val ctx = context ?: return view
 
-        // ブレンド
+        // 修正対象のモデル
+        val textViewW30Model = view.findViewById<TextView>(R.id.textViewW30Model)
+        when (reqCode) {
+            3 -> textViewW30Model.text = "テクスチャの合成成分を変更"
+            4 -> textViewW30Model.text = "板ポリゴンの合成成分を変更"
+            else -> textViewW30Model.text = "不明"
+        }
+
+        // ブレンドするかどうか
         val checkBoxW030Blend = view.findViewById<CheckBox>(R.id.checkBoxW030Blend)
         checkBoxW030Blend.isChecked = blend
         checkBoxW030Blend.setOnCheckedChangeListener { buttonView, isChecked ->

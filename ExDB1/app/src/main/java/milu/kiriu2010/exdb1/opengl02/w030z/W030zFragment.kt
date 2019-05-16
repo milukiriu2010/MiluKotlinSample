@@ -116,7 +116,7 @@ class W030zFragment : Fragment() {
             dlg.show(fragmentManager,"Model1")
         }
 
-        // パラメータを変更するダイアログを開く(ポリゴン)
+        // パラメータを変更するダイアログを開く(板ポリゴン)
         val btnW030Model2 = view.findViewById<Button>(R.id.btnW030Model2)
         btnW030Model2.setOnClickListener {
             val bundle = Bundle().also {
@@ -199,7 +199,7 @@ class W030zFragment : Fragment() {
                 // ブレンドファクター(アルファ先)
                 renderer.blendFctDABF[0] = data.getIntExtra("BLEND_FCT_DABF", GLES20.GL_ONE )
             }
-            // パラメータを変更するダイアログを開く(ポリゴン)
+            // パラメータを変更するダイアログを開く(板ポリゴン)
             4 -> {
                 Log.d(javaClass.simpleName,"onActivityResult:${requestCode}")
                 // ブレンド

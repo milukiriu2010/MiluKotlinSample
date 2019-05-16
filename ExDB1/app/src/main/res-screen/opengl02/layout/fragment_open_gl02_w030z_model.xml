@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textViewModel"
+        android:id="@+id/textViewW30Model"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -25,7 +25,7 @@
         android:layout_marginTop="8dp"
         android:text="Enable Blend"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewModel" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewW30Model" />
 
     <TextView
         android:id="@+id/textViewVertexAlpha"
