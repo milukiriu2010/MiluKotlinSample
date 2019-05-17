@@ -30,7 +30,7 @@ class W034Fragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_open_gl03_w034, container, false)
 
-        myGL02View = view.findViewById<MyGL02View>(R.id.myGL02ViewA03)
+        myGL02View = view.findViewById<MyGL02View>(R.id.myGL02ViewW34)
         val render = W034Renderer()
         myGL02View.setRenderer(render)
         myGL02View.setOnTouchListener { v, event ->
