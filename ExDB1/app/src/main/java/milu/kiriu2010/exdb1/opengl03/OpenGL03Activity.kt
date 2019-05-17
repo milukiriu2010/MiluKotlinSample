@@ -1,7 +1,6 @@
 package milu.kiriu2010.exdb1.opengl03
 
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -21,48 +20,13 @@ import milu.kiriu2010.exdb1.opengl03.w041x.W041XFragment
 
 class OpenGL03Activity : AppCompatActivity() {
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.navigation_home -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, OpenGL03HomeFragment.newInstance(), "Home")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_dashboard -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, OpenGL03HomeFragment.newInstance(), "Home")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_notifications -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, OpenGL03HomeFragment.newInstance(), "Home")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_open_gl03)
 
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
-        if (supportFragmentManager.findFragmentByTag("Home") == null) {
+        if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, OpenGL03HomeFragment.newInstance(), "Home")
+                    .replace(R.id.frameLayout, W033Fragment.newInstance(), "xyz")
                     .commit()
         }
 
