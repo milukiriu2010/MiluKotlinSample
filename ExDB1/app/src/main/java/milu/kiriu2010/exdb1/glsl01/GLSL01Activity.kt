@@ -8,6 +8,7 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.glsl01.g001.GLSL01Fragment
 import milu.kiriu2010.exdb1.glsl01.g002.GLSL02Fragment
 import milu.kiriu2010.exdb1.glsl01.g003.GLSL03Fragment
+import milu.kiriu2010.exdb1.glsl01.g004.GLSL04Fragment
 
 class GLSL01Activity : AppCompatActivity() {
 
@@ -18,7 +19,7 @@ class GLSL01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, GLSL03Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, GLSL04Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -40,6 +41,16 @@ class GLSL01Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 様々な図形
+            R.id.glsl_g004 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("g04") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSL04Fragment.newInstance(), "g04")
+                            .commit()
+                }
                 true
             }
             // 光の玉

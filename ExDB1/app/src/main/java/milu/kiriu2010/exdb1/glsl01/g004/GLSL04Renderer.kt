@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.glsl01.g003
+package milu.kiriu2010.exdb1.glsl01.g004
 
 import android.content.Context
 import android.opengl.GLES20
@@ -10,30 +10,26 @@ import milu.kiriu2010.gui.model.Square01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
 // ----------------------------------------------
-// オーブ(光の玉)
+// 様々な図形を描く
 // ----------------------------------------------
-// https://wgld.org/d/glsl/g003.html
-class GLSL03Renderer(ctx: Context): MgRenderer(ctx) {
+// https://wgld.org/d/glsl/g004.html
+class GLSL04Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画モデル
     private lateinit var model: Square01Model
 
     // シェーダ
-    private lateinit var shader: GLSL03Shader
+    private lateinit var shader: GLSL04Shader
 
     // 時間管理
     private var startTime = SystemClock.uptimeMillis()
     // サンプルが動作する際に、どの程度時間が経過しているのかをシェーダに渡す
     private var u_time = 0f
 
-    // アニメーションのスピード
-    var u_speed = 5f
-
-    // 同心円の間隔
-    var u_gap = 5f
+    // 描画する図形の種類
+    var u_type = 1
 
     override fun onDrawFrame(gl: GL10) {
         // canvasを初期化
-        // canvasを初期化する色を設定する
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
 
@@ -44,7 +40,8 @@ class GLSL03Renderer(ctx: Context): MgRenderer(ctx) {
         shader.draw(model,
                 u_time,
                 floatArrayOf(touchP.x,touchP.y),
-                floatArrayOf(renderW.toFloat(),renderH.toFloat())
+                floatArrayOf(renderW.toFloat(),renderH.toFloat()),
+                u_type
         )
     }
 
@@ -60,7 +57,7 @@ class GLSL03Renderer(ctx: Context): MgRenderer(ctx) {
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
 
         // シェーダ
-        shader = GLSL03Shader()
+        shader = GLSL04Shader()
         shader.loadShader()
 
         // モデル生成
