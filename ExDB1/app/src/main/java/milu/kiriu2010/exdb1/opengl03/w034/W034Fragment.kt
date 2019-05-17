@@ -8,7 +8,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import kotlinx.android.synthetic.main.fragment_open_gl03_w034.view.*
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
@@ -31,21 +30,21 @@ class W034Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_gl03_w034, container, false)
 
         myGL02View = view.findViewById<MyGL02View>(R.id.myGL02ViewW34)
-        val render = W034Renderer()
-        myGL02View.setRenderer(render)
+        val renderer = W034Renderer(context!!)
+        myGL02View.setRenderer(renderer)
         myGL02View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
-                    render.rotateSwitch = false
+                    renderer.isRunning = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
                     Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
-                    render.rotateSwitch = true
-                    render.receiveTouch(event,myGL02View.width,myGL02View.height)
+                    renderer.isRunning = true
+                    renderer.receiveTouch(event,myGL02View.width,myGL02View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    render.receiveTouch(event,myGL02View.width,myGL02View.height)
+                    renderer.receiveTouch(event,myGL02View.width,myGL02View.height)
                 }
                 else -> {
                 }
@@ -55,19 +54,16 @@ class W034Fragment : Fragment() {
 
         seekBarW034 = view.findViewById<SeekBar>(R.id.seekBarW034)
         seekBarW034.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                render.ktimeNow = seekBarW034.progress.toFloat()
-                render.ktimeMax = seekBarW034.max.toFloat()
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                renderer.ktime = seekBar.progress.toFloat()*0.1f
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
             }
 
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                render.ktimeNow = seekBarW034.progress.toFloat()
-                render.ktimeMax = seekBarW034.max.toFloat()
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                renderer.ktime = seekBar.progress.toFloat()*0.1f
             }
-
         });
 
 
