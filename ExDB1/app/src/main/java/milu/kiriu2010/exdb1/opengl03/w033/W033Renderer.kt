@@ -36,15 +36,13 @@ class W033Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
-        // クォータニオンを行列に適用する
-        // クォータニオンによる回転が適用された状態の座標変換行列を取得する
-        val matQ = qtnNow.toMatIV()
-
         // ビュー×プロジェクション
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
         // モデルを単位行列にする
         Matrix.setIdentityM(matM,0)
+        // モデル座標変換行列×クォータニオンが適用された座標変換行列
+        val matQ = qtnNow.toMatIV()
         Matrix.multiplyMM(matM,0,matM,0,matQ,0)
         // モデルを"Y軸"を中心に回転する
         Matrix.rotateM(matM, 0, t0, 0f, 1f, 0f)

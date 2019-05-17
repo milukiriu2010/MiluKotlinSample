@@ -61,10 +61,10 @@ class W034Renderer(ctx: Context): MgRenderer(ctx) {
     // ------------------------------------
     // vecAmbientColor: 環境光の色
     private fun draw(qtn: MyQuaternion, ambientColor: FloatArray) {
-        // モデル座標変換行列の生成
-        var matQ = qtn.toMatIV()
         // モデルを単位行列にする
         Matrix.setIdentityM(matM,0)
+        // モデル座標変換行列×クォータニオンが適用された座標変換行列
+        var matQ = qtn.toMatIV()
         Matrix.multiplyMM(matM,0,matM,0,matQ,0)
         Matrix.translateM(matM,0,0f,0f,-5f)
         // モデル×ビュー×プロジェクション
