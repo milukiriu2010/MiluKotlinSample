@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/glsl_g005"
+        android:title="g005_マンデルブロ" />
+    <item
         android:id="@+id/glsl_g004"
         android:title="g004_様々な図形" />
     <item

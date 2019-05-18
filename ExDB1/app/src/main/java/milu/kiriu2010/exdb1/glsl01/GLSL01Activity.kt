@@ -9,6 +9,7 @@ import milu.kiriu2010.exdb1.glsl01.g001.GLSL01Fragment
 import milu.kiriu2010.exdb1.glsl01.g002.GLSL02Fragment
 import milu.kiriu2010.exdb1.glsl01.g003.GLSL03Fragment
 import milu.kiriu2010.exdb1.glsl01.g004.GLSL04Fragment
+import milu.kiriu2010.exdb1.glsl01.g005.GLSL05Fragment
 
 class GLSL01Activity : AppCompatActivity() {
 
@@ -41,6 +42,16 @@ class GLSL01Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // マンデルブロ
+            R.id.glsl_g005 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("g05") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSL05Fragment.newInstance(), "g05")
+                            .commit()
+                }
                 true
             }
             // 様々な図形
