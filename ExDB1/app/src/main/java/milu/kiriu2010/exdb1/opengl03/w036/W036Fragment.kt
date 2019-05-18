@@ -11,13 +11,18 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.SeekBar
+import android.widget.TextView
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.MyGL02View
+import milu.kiriu2010.gui.view.MyGLES20View
 
 class W036Fragment : Fragment() {
 
-    private lateinit var myGL02View: MyGL02View
+    private lateinit var myGLES20View: MyGLES20View
+
+    private lateinit var textViewW36MinSizeVal: TextView
+
+    private lateinit var textViewW36MaxSizeVal: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,75 +33,79 @@ class W036Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl03_w036, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w36, container, false)
 
-        myGL02View = view.findViewById<MyGL02View>(R.id.myGL02ViewA03)
-        val render = W036Renderer(context!!)
-        myGL02View.setRenderer(render)
-        myGL02View.setOnTouchListener { v, event ->
+        myGLES20View = view.findViewById(R.id.myGLES20ViewW36)
+        val renderer = W036Renderer(context!!)
+        myGLES20View.setRenderer(renderer)
+        myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
-                    render.isRunning = false
+                    renderer.isRunning = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
-                    Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
-                    render.isRunning = true
-                    render.receiveTouch(event,myGL02View.width,myGL02View.height)
+                    Log.d(javaClass.simpleName,"vw[${myGLES20View.width}]vh[${myGLES20View.height}]")
+                    renderer.isRunning = true
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    render.receiveTouch(event,myGL02View.width,myGL02View.height)
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 else -> {
                 }
             }
             true
         }
-
-
+        
         // 点のサイズ
-        val seekBarW036 = view.findViewById<SeekBar>(R.id.seekBarW036)
-        seekBarW036.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                //render.u_pointSize = seekBarW036.progress.toFloat()/seekBarW036.max.toFloat()
-                render.u_pointSize = seekBarW036.progress.toFloat()
+        val seekBarW36 = view.findViewById<SeekBar>(R.id.seekBarW36)
+        seekBarW36.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                renderer.u_pointSize = (seekBar.progress+15).toFloat()
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
             }
 
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                //render.u_pointSize = seekBarW036.progress.toFloat()/seekBarW036.max.toFloat()
-                render.u_pointSize = seekBarW036.progress.toFloat()
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                renderer.u_pointSize = (seekBar.progress+15).toFloat()
             }
         })
 
         // 線のプリミティブタイプを選択
-        val radioGroupW036 = view.findViewById<RadioGroup>(R.id.radioGroupW036)
-        val rbnW036Lines = view.findViewById<RadioButton>(R.id.rbnW036Lines)
-        val rbnW036LineStrip = view.findViewById<RadioButton>(R.id.rbnW036LineStrip)
-        val rbnW036LineLoop = view.findViewById<RadioButton>(R.id.rbnW036LineLoop)
-        radioGroupW036.setOnCheckedChangeListener { group, checkedId ->
-            render.lineType = when (checkedId) {
-                rbnW036Lines.id -> GLES20.GL_LINES
-                rbnW036LineStrip.id -> GLES20.GL_LINE_STRIP
-                rbnW036LineLoop.id -> GLES20.GL_LINE_LOOP
-                else -> GLES20.GL_LINES
+        val radioGroupW36 = view.findViewById<RadioGroup>(R.id.radioGroupW36)
+        val rbnW36Lines = view.findViewById<RadioButton>(R.id.rbnW36Lines)
+        val rbnW36LineStrip = view.findViewById<RadioButton>(R.id.rbnW36LineStrip)
+        val rbnW36LineLoop = view.findViewById<RadioButton>(R.id.rbnW36LineLoop)
+        radioGroupW36.setOnCheckedChangeListener { group, checkedId ->
+            renderer.lineType = when (checkedId) {
+                rbnW36Lines.id     -> GLES20.GL_LINES
+                rbnW36LineStrip.id -> GLES20.GL_LINE_STRIP
+                rbnW36LineLoop.id  -> GLES20.GL_LINE_LOOP
+                else               -> GLES20.GL_LINES
             }
         }
 
+        // 点のサイズ(最小)
+        textViewW36MinSizeVal = view.findViewById(R.id.textViewW36MinSizeVal)
+        textViewW36MinSizeVal.text = renderer.pointSizeRange[0].toString()
+
+        // 点のサイズ(最大)
+        textViewW36MaxSizeVal = view.findViewById(R.id.textViewW36MaxSizeVal)
+        textViewW36MaxSizeVal.text = renderer.pointSizeRange[1].toString()
 
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        myGL02View.onResume()
+        myGLES20View.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        myGL02View.onPause()
+        myGLES20View.onPause()
     }
 
     companion object {

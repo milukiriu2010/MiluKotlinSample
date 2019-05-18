@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".opengl03.OpenGL03HomeFragment">
+    android:layout_height="match_parent">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <milu.kiriu2010.exdb1.opengl.MyGL02View
-        android:id="@+id/myGL02ViewA03"
+    <milu.kiriu2010.gui.view.MyGLES20View
+        android:id="@+id/myGLES20ViewW36"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -24,21 +23,21 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <SeekBar
-        android:id="@+id/seekBarW036"
+        android:id="@+id/seekBarW36"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:max="32"
-        android:progress="16"
+        android:max="30"
+        android:progress="15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myGL02ViewA03" />
+        app:layout_constraintTop_toBottomOf="@+id/myGLES20ViewW36" />
 
     <RadioGroup
-        android:id="@+id/radioGroupW036"
+        android:id="@+id/radioGroupW36"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -47,10 +46,10 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBarW036" >
+        app:layout_constraintTop_toBottomOf="@+id/seekBarW36" >
 
         <RadioButton
-            android:id="@+id/rbnW036Lines"
+            android:id="@+id/rbnW36Lines"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -58,18 +57,58 @@
             android:text="LINES" />
 
         <RadioButton
-            android:id="@+id/rbnW036LineStrip"
+            android:id="@+id/rbnW36LineStrip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="LINE_STRIP" />
 
         <RadioButton
-            android:id="@+id/rbnW036LineLoop"
+            android:id="@+id/rbnW36LineLoop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="LINE_LOOP" />
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/textViewW36MinSizeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="点サイズ(最小)"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupW36" />
+
+    <TextView
+        android:id="@+id/textViewW36MinSizeVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewW36MinSizeTxt"
+        app:layout_constraintStart_toEndOf="@+id/textViewW36MinSizeTxt"
+        app:layout_constraintTop_toTopOf="@+id/textViewW36MinSizeTxt"
+        tools:text="10" />
+
+    <TextView
+        android:id="@+id/textViewW36MaxSizeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="点サイズ(最大)"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewW36MinSizeTxt" />
+
+    <TextView
+        android:id="@+id/textViewW36MaxSizeVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewW36MaxSizeTxt"
+        app:layout_constraintStart_toEndOf="@+id/textViewW36MaxSizeTxt"
+        app:layout_constraintTop_toTopOf="@+id/textViewW36MaxSizeTxt"
+        tools:text="10" />
 
 </android.support.constraint.ConstraintLayout>
