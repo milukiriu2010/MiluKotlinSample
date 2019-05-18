@@ -1,6 +1,5 @@
 package milu.kiriu2010.exdb1.opengl02.jayce07
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -10,11 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.MyGL02View
+import milu.kiriu2010.gui.view.MyGLES20View
 
 class Jayce07Fragment : Fragment() {
 
-    private lateinit var myGL02View: MyGL02View
+    private lateinit var myGLES20View: MyGLES20View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,17 +26,17 @@ class Jayce07Fragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_open_gl_w15, container, false)
 
-        myGL02View = view.findViewById(R.id.myGL02ViewW15)
+        myGLES20View = view.findViewById(R.id.myGLES20ViewW15)
         val render = Test7Renderer(context!!)
-        myGL02View.setRenderer(render)
-        myGL02View.setOnTouchListener { v, event ->
+        myGLES20View.setRenderer(render)
+        myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                     //render.rotateSwitch = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
-                    Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
+                    Log.d(javaClass.simpleName,"vw[${myGLES20View.width}]vh[${myGLES20View.height}]")
                     //render.rotateSwitch = true
                     //render.receiveTouch(event,textureView.width,textureView.height)
                 }
@@ -55,12 +54,12 @@ class Jayce07Fragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        myGL02View.onResume()
+        myGLES20View.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        myGL02View.onPause()
+        myGLES20View.onPause()
     }
 
     companion object {

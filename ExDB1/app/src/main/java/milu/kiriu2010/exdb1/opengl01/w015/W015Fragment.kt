@@ -8,10 +8,11 @@ import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
+import milu.kiriu2010.gui.view.MyGLES20View
 
 class W015Fragment : Fragment() {
 
-    private lateinit var myGL02View: MyGL02View
+    private lateinit var myGLES20View: MyGLES20View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,20 +25,20 @@ class W015Fragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_open_gl_w15, container, false)
 
-        myGL02View = view.findViewById<MyGL02View>(R.id.myGL02ViewW15)
-        myGL02View.setRenderer(W015Renderer(context!!))
+        myGLES20View = view.findViewById(R.id.myGLES20ViewW15)
+        myGLES20View.setRenderer(W015Renderer(context!!))
 
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        myGL02View.onResume()
+        myGLES20View.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        myGL02View.onPause()
+        myGLES20View.onPause()
     }
 
     companion object {

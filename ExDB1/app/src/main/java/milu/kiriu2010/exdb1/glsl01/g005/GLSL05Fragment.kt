@@ -6,15 +6,13 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
-import android.widget.RadioGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.MyGL02View
+import milu.kiriu2010.gui.view.MyGLES20View
 
 class GLSL05Fragment : Fragment() {
 
-    private lateinit var myGL02View: MyGL02View
+    private lateinit var myGLES20View: MyGLES20View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,11 +25,11 @@ class GLSL05Fragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_open_gl_w15, container, false)
 
-        myGL02View = view.findViewById(R.id.myGL02ViewW15)
+        myGLES20View = view.findViewById(R.id.myGLES20ViewW15)
         val renderer = GLSL05Renderer(context!!)
-        myGL02View.setRenderer(renderer)
+        myGLES20View.setRenderer(renderer)
 
-        myGL02View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                     renderer.touchP.x = event.x.toFloat()/renderer.renderW.toFloat()
@@ -54,12 +52,12 @@ class GLSL05Fragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        myGL02View.onResume()
+        myGLES20View.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        myGL02View.onPause()
+        myGLES20View.onPause()
     }
 
     companion object {
