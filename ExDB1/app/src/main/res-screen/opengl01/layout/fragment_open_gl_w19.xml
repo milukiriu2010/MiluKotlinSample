@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".opengl01.OpenGL01HomeFragment">
+    android:layout_height="match_parent">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <milu.kiriu2010.exdb1.opengl.MyGL02View
-        android:id="@+id/myGL02ViewW19"
+    <milu.kiriu2010.gui.view.MyGLES20View
+        android:id="@+id/myGLES20ViewW19"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -32,7 +31,7 @@
         android:text="Culling"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myGL02ViewW19" />
+        app:layout_constraintTop_toBottomOf="@+id/myGLES20ViewW19" />
 
     <Switch
         android:id="@+id/switchFrontW19"

@@ -10,10 +10,11 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
 import milu.kiriu2010.exdb1.opengl01.w019.Noise01Renderer
+import milu.kiriu2010.gui.view.MyGLES20View
 
 class Noise01Fragment : Fragment() {
 
-    private lateinit var myGL02View: MyGL02View
+    private lateinit var myGLES20View: MyGLES20View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,25 +25,25 @@ class Noise01Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl02_noise01, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_noise01, container, false)
 
-        myGL02View = view.findViewById<MyGL02View>(R.id.myGL02ViewNoise01)
+        myGLES20View = view.findViewById(R.id.myGLES20ViewNoise01)
         val bmp = BitmapFactory.decodeResource(resources,R.drawable.texture_w026)
         val render = Noise01Renderer(context!!)
         render.bmpArray.add(bmp)
-        myGL02View.setRenderer(render)
+        myGLES20View.setRenderer(render)
 
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        myGL02View.onResume()
+        myGLES20View.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        myGL02View.onPause()
+        myGLES20View.onPause()
     }
 
     companion object {

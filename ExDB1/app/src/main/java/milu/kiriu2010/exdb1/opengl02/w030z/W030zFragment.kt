@@ -1,7 +1,6 @@
 package milu.kiriu2010.exdb1.opengl02.w030z
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.opengl.GLES20
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -13,13 +12,13 @@ import android.view.ViewGroup
 import android.widget.*
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.MyGL02View
+import milu.kiriu2010.gui.view.MyGLES20View
 
 class W030zFragment : Fragment() {
 
     private lateinit var scrollViewW030y: ScrollView
 
-    private lateinit var myGL02View: MyGL02View
+    private lateinit var myGLES20View: MyGLES20View
 
     private lateinit var renderer: W030zRenderer
 
@@ -32,24 +31,24 @@ class W030zFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl02_w030z, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w30z, container, false)
 
-        myGL02View = view.findViewById(R.id.myGL02ViewW30)
+        myGLES20View = view.findViewById(R.id.myGLES20ViewW30)
         renderer = W030zRenderer(context!!)
-        myGL02View.setRenderer(renderer)
-        myGL02View.setOnTouchListener { v, event ->
+        myGLES20View.setRenderer(renderer)
+        myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                     renderer.isRunning = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
-                    Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
+                    Log.d(javaClass.simpleName,"vw[${myGLES20View.width}]vh[${myGLES20View.height}]")
                     renderer.isRunning = true
-                    renderer.receiveTouch(event,myGL02View.width,myGL02View.height)
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    renderer.receiveTouch(event,myGL02View.width,myGL02View.height)
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 else -> {
                 }
@@ -227,12 +226,12 @@ class W030zFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        myGL02View.onResume()
+        myGLES20View.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        myGL02View.onPause()
+        myGLES20View.onPause()
     }
 
     companion object {

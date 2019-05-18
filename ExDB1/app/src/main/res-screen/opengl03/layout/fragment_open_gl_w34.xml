@@ -7,8 +7,8 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <milu.kiriu2010.exdb1.opengl.MyGL02View
-        android:id="@+id/myGL02ViewW34"
+    <milu.kiriu2010.gui.view.MyGLES20View
+        android:id="@+id/myGLES20ViewW34"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -29,10 +29,10 @@
         android:layout_marginTop="8dp"
         android:text="球面線形補間"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myGL02ViewW34" />
+        app:layout_constraintTop_toBottomOf="@+id/myGLES20ViewW34" />
 
     <SeekBar
-        android:id="@+id/seekBarW034"
+        android:id="@+id/seekBarW34"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -30,7 +30,7 @@ class W030zBlendDialog: DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater.inflate(R.layout.fragment_open_gl02_w030z_blend, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w30z_blend, container, false)
 
         val ctx = context ?: return view
 
