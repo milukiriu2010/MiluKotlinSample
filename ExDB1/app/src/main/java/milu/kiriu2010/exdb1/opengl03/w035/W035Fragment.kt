@@ -8,12 +8,12 @@ import android.view.*
 import android.widget.Switch
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.TextureView
+import milu.kiriu2010.gui.view.MyGLES20View
 
 
 class W035Fragment : Fragment() {
 
-    private lateinit var textureView: TextureView
+    private lateinit var myGLES20View: MyGLES20View
     private lateinit var switch: Switch
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,28 +25,22 @@ class W035Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl03_w035, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w35, container, false)
 
-        textureView = view.findViewById(R.id.textureViewW035)
-        val render = W035Renderer()
-        val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w035_0)
-        val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.texture_w035_1)
-        render.bmpArray.add(bmp0)
-        render.bmpArray.add(bmp1)
-        textureView.setRenderer(render)
-        textureView.setOnTouchListener { v, event ->
+        myGLES20View = view.findViewById(R.id.myGLES20ViewW35)
+        val renderer = W035Renderer(context!!)
+        myGLES20View.setRenderer(renderer)
+        myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
-                    render.rotateSwitch = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
-                    Log.d(javaClass.simpleName,"vw[${textureView.width}]vh[${textureView.height}]")
-                    render.rotateSwitch = true
-                    render.receiveTouch(event,textureView.width,textureView.height)
+                    Log.d(javaClass.simpleName,"vw[${myGLES20View.width}]vh[${myGLES20View.height}]")
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    render.receiveTouch(event,textureView.width,textureView.height)
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 else -> {
                 }
@@ -54,9 +48,9 @@ class W035Fragment : Fragment() {
             true
         }
 
-        switch = view.findViewById(R.id.switchW035)
+        switch = view.findViewById(R.id.switchW35)
         switch.setOnCheckedChangeListener { buttonView, isChecked ->
-            render.isBillBoard = isChecked
+            renderer.isBillBoard = isChecked
         }
 
         return view
@@ -64,12 +58,12 @@ class W035Fragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        textureView.onResume()
+        myGLES20View.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        textureView.onPause()
+        myGLES20View.onPause()
     }
 
     companion object {

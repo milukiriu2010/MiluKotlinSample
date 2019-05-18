@@ -59,7 +59,8 @@ class W034Renderer(ctx: Context): MgRenderer(ctx) {
     // ------------------------------------
     // モデル描画
     // ------------------------------------
-    // vecAmbientColor: 環境光の色
+    // ambientColor: 環境光の色
+    // ------------------------------------
     private fun draw(qtn: MyQuaternion, ambientColor: FloatArray) {
         // モデルを単位行列にする
         Matrix.setIdentityM(matM,0)

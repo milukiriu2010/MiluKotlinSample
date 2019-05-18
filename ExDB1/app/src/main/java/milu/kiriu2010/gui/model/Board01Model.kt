@@ -47,7 +47,7 @@ class Board01Model: MgModelAbs() {
     }
 
     // XY平面(右回り)
-    //  w26,w27
+    //  w26,w27,w35
     private fun createPathPattern1(opt: Map<String, Float>) {
         val color = FloatArray(4)
         color[0] = opt["colorR"] ?: 1f

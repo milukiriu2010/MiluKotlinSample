@@ -8,11 +8,12 @@ import milu.kiriu2010.gui.shader.MgShader
 import java.nio.ByteBuffer
 import kotlin.math.exp
 
-// ------------------------------------------------
+// ----------------------------------------------------------------
 // 2019.04.27 ビットマップをロードしテクスチャを生成
 // 2019.05.02 gaussianブラーの重みを計算
 // 2019.05.11 OpenGLのエラー状態を出力2
-// ------------------------------------------------
+// 2019.05.18 テクスチャパラメータの設定をしないパラメータ追加
+// ----------------------------------------------------------------
 class MyGLFunc {
 
     companion object {
@@ -180,7 +181,6 @@ class MyGLFunc {
                 // テクスチャへイメージを適用
                 GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,bmp.width,bmp.height,0,
                         GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,buffer)
-
             }
 
             /*
@@ -194,10 +194,12 @@ class MyGLFunc {
             GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D)
 
             // テクスチャパラメータを設定
-            GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
-            GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
-            GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, wrapParam)
-            GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, wrapParam)
+            if ( wrapParam != -1 ) {
+                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
+                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
+                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, wrapParam)
+                GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, wrapParam)
+            }
 
             // テクスチャのバインドを無効化
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0)
