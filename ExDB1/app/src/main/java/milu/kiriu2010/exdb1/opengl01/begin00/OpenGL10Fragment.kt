@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.MyGL01View
+import milu.kiriu2010.gui.view.MyGLES10View
 
 class OpenGL10Fragment : Fragment() {
 
-    private lateinit var myGL01View: MyGL01View
+    private lateinit var myGLES10View: MyGLES10View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,20 +24,20 @@ class OpenGL10Fragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_open_gl_10, container, false)
 
-        myGL01View = view.findViewById<MyGL01View>(R.id.myGL01View)
-        myGL01View.setRenderer(MyCube01Renderer())
+        myGLES10View = view.findViewById(R.id.myGLES10View)
+        myGLES10View.setRenderer(MyCube01Renderer())
 
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        myGL01View.onResume()
+        myGLES10View.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        myGL01View.onPause()
+        myGLES10View.onPause()
     }
 
     companion object {

@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".opengl01.OpenGL01HomeFragment">
+    android:layout_height="match_parent">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <milu.kiriu2010.exdb1.opengl.MyGL01View
-        android:id="@+id/myGL01View"
+    <milu.kiriu2010.gui.view.MyGLES10View
+        android:id="@+id/myGLES10View"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"

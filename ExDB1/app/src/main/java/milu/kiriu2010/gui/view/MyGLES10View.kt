@@ -1,10 +1,10 @@
-package milu.kiriu2010.exdb1.opengl
+package milu.kiriu2010.gui.view
 
 import android.content.Context
 import android.opengl.GLSurfaceView
 import android.util.AttributeSet
 
-class MyGL01View: GLSurfaceView {
+class MyGLES10View: GLSurfaceView {
 
     //private val myRenderer = MyCube01Renderer()
 

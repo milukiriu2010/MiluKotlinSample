@@ -35,12 +35,6 @@
         android:id="@+id/opengl_w015"
         android:title="w015_ポリゴンに色を塗る" />
     <item
-        android:id="@+id/opengl_begin02"
-        android:title="初めて_三角形(色+回転)" />
-    <item
-        android:id="@+id/opengl_begin01"
-        android:title="初めて_三角形＋正方形" />
-    <item
         android:id="@+id/opengl_begin00"
         android:title="OpenGL1.0" />
 </menu>

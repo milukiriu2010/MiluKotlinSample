@@ -11,9 +11,7 @@ import milu.kiriu2010.exdb1.opengl01.w019.W019Fragment
 import milu.kiriu2010.exdb1.opengl01.w020.W020Fragment
 import milu.kiriu2010.exdb1.opengl01.w023.W023Fragment
 import milu.kiriu2010.exdb1.opengl01.w024.W024Fragment
-import milu.kiriu2010.exdb1.opengl01.begin01.Triangle01Fragment
 import milu.kiriu2010.exdb1.opengl01.w015.W015Fragment
-import milu.kiriu2010.exdb1.opengl01.begin02.Triangle03Fragment
 import milu.kiriu2010.exdb1.opengl01.w016.W016Fragment
 import milu.kiriu2010.exdb1.opengl01.w017.W017Fragment
 import milu.kiriu2010.exdb1.opengl01.w021.W021Fragment
@@ -159,26 +157,6 @@ class OpenGL01Activity : AppCompatActivity() {
                 if (supportFragmentManager.findFragmentByTag("w15") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W015Fragment.newInstance(), "w15")
-                            .commit()
-                }
-                true
-            }
-            // 初めて_三角形(色+回転)
-            R.id.opengl_begin02 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Triangle03") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Triangle03Fragment.newInstance(), "Triangle03")
-                            .commit()
-                }
-                true
-            }
-            // 初めて_三角形＋正方形
-            R.id.opengl_begin01 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Triangle01") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Triangle01Fragment.newInstance(), "Triangle01")
                             .commit()
                 }
                 true
