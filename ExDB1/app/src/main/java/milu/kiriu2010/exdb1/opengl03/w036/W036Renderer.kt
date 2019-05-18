@@ -29,7 +29,7 @@ class W036Renderer(ctx: Context): MgRenderer(ctx) {
     var ratio: Float = 0f
 
     // 点のサイズ
-    var u_pointSize = 16f
+    var u_pointSize = 20f
 
     // 点のサイズの範囲
     val pointSizeRange = FloatArray(2)
@@ -38,7 +38,6 @@ class W036Renderer(ctx: Context): MgRenderer(ctx) {
     var lineType = GLES20.GL_LINES
 
     init {
-
         // 点の最大ピクセル数をコンソールに出力
         //val pointSizeRange = GLES20.glGetParameter(GLES20.GL_ALIASED_POINT_SIZE_RANGE)
         GLES20.glGetFloatv(GLES20.GL_ALIASED_POINT_SIZE_RANGE,pointSizeRange,0)
