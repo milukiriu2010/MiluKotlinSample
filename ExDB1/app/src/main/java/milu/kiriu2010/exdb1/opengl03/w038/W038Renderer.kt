@@ -2,26 +2,31 @@ package milu.kiriu2010.exdb1.opengl03.w038
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import android.opengl.Matrix
-import android.view.MotionEvent
+import android.util.Log
+import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.exdb1.opengl01.w019.W038Model
-import milu.kiriu2010.gui.basic.MyQuaternion
+import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
-import kotlin.math.sqrt
 
-// 平行光源
+// ------------------------------------------------
+// ステンシルバッファ
+// ------------------------------------------------
+// 基準値を保存するためのバッファとして機能する
+// ------------------------------------------------
+// https://wgld.org/d/webgl/w038.html
+// ------------------------------------------------
 class W038Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト
-    private lateinit var drawObj: W038Model
+    private lateinit var model: Board01Model
 
-    // プログラムハンドル
-    private var programHandle: Int = 0
+    // シェーダ
+    private lateinit var shader: W038Shader
 
     // 画面縦横比
     var ratio: Float = 0f
@@ -32,16 +37,29 @@ class W038Renderer(ctx: Context): MgRenderer(ctx) {
     // テクスチャ配列
     val textures = IntArray(2)
 
+    init {
+        // ビットマップをロード
+        bmpArray.clear()
+        val bmp0 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w038)
+        bmpArray.add(bmp0)
+
+        // ステンシルバッファに設定できる最大値をコンソールに出力
+        val stencilBufSize = IntArray(1)
+        GLES20.glGetIntegerv(GLES20.GL_STENCIL_BITS,stencilBufSize,0)
+        Log.d(javaClass.simpleName,"stencilBufSize:${stencilBufSize[0]}")
+    }
+
     override fun onDrawFrame(gl: GL10?) {
         // canvasを初期化
         GLES20.glClearColor(0.0f, 0.7f, 0.7f, 1.0f)
         GLES20.glClearDepthf(1f)
+        // ステンシルバッファの基準値を0にする
         GLES20.glClearStencil(0)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT or GLES20.GL_STENCIL_BUFFER_BIT)
 
         // 回転角度
         angle[0] =(angle[0]+1)%360
-        val t1 = angle[0].toFloat()
+        val t0 = angle[0].toFloat()
 
         // クォータニオンを行列に適用
         var matQ = qtnNow.toMatIV()
@@ -73,7 +91,7 @@ class W038Renderer(ctx: Context): MgRenderer(ctx) {
         // -------------------------------------------------------------
         // 0の補数(~0)を0.inv()でなく0xffにしてみる
         // -------------------------------------------------------------
-        GLES20.glStencilFunc(GLES20.GL_ALWAYS,1, 0xff )
+        GLES20.glStencilFunc(GLES20.GL_ALWAYS,1, 0.inv() )
         GLES20.glStencilOp(GLES20.GL_KEEP, GLES20.GL_REPLACE, GLES20.GL_REPLACE)
         render(floatArrayOf(-0.25f,0.25f,-0.5f))
 
@@ -88,7 +106,7 @@ class W038Renderer(ctx: Context): MgRenderer(ctx) {
         // -------------------------------------------------------------
         // 0の補数(~0)を0.inv()でなく0xffにしてみる
         // -------------------------------------------------------------
-        GLES20.glStencilFunc(GLES20.GL_ALWAYS,0, 0xff )
+        GLES20.glStencilFunc(GLES20.GL_ALWAYS,0, 0.inv() )
         GLES20.glStencilOp(GLES20.GL_KEEP, GLES20.GL_INCR, GLES20.GL_INCR)
         render(floatArrayOf(0f,0f,0f))
 
@@ -102,7 +120,7 @@ class W038Renderer(ctx: Context): MgRenderer(ctx) {
         // -------------------------------------------------------------
         // 0の補数(~0)を0.inv()でなく0xffにしてみる
         // -------------------------------------------------------------
-        GLES20.glStencilFunc(GLES20.GL_EQUAL,2, 0xff )
+        GLES20.glStencilFunc(GLES20.GL_EQUAL,2, 0.inv() )
         GLES20.glStencilOp(GLES20.GL_KEEP, GLES20.GL_KEEP, GLES20.GL_KEEP)
         render(floatArrayOf(0.25f,-0.25f,0.5f))
 
@@ -116,7 +134,7 @@ class W038Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.translateM(matM,0,tr[0],tr[1],tr[2])
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
-        drawObj.draw(programHandle,matMVP,matI,vecLight,0)
+        shader.draw(model,matMVP,matI,vecLight,0)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -126,28 +144,24 @@ class W038Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.7f, 0.7f, 1.0f)
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-        GLES20.glClearStencil(0)
-
         // カリングと深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
 
-        // シェーダプログラム登録
-        programHandle = W038Shader().loadShader()
+        // シェーダプ
+        shader = W038Shader()
+        shader.loadShader()
+
+        // モデル生成
+        model = Board01Model()
+        model.createPath(mapOf("pattern" to 29f))
 
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(1,textures,0)
         MyGLFunc.checkGlError("glGenTextures")
 
-        // モデル生成
-        drawObj = W038Model()
-
         // テクスチャ0をバインド
-        drawObj.activateTexture(0,textures,bmpArray[0])
+        MyGLFunc.createTexture(0,textures,bmpArray[0])
 
         // 光源位置
         vecLight[0] = 1f

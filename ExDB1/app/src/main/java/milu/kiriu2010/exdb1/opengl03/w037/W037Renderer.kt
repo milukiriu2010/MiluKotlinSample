@@ -65,7 +65,6 @@ class W037Renderer(ctx: Context): MgRenderer(ctx) {
         Log.d(javaClass.simpleName,"max:${pointSizeRange[1]}")
     }
 
-
     override fun onDrawFrame(gl: GL10?) {
         // canvasを初期化
         GLES20.glClearColor(0f,0f,0f,1f)

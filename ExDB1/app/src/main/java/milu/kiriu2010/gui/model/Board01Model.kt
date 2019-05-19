@@ -84,8 +84,10 @@ class Board01Model: MgModelAbs() {
         datIdx.addAll(arrayListOf<Short>(3,2,1))
     }
 
-    // XY平面(右回り)(アルファブレンディング)
-    // w29,w30
+    // XY平面(右回り)
+    //   アルファブレンディング
+    //   ステンシルバッファ
+    // w29,w30,w38
     private fun createPathPattern29(opt: Map<String, Float>) {
         // 頂点データ
         datPos.addAll(arrayListOf(-1f, 1f,0f))
