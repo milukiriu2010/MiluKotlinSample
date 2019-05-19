@@ -2,27 +2,32 @@ package milu.kiriu2010.exdb1.opengl03.w039
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import android.opengl.Matrix
-import android.view.MotionEvent
+import android.util.Log
+import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.gui.basic.MyQuaternion
+import milu.kiriu2010.gui.model.Sphere01Model
+import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
-import kotlin.math.sqrt
 
-// 平行光源
+// ---------------------------------------------
+// ステンシルバッファを使ってアウトライン描画
+// ---------------------------------------------
+// https://wgld.org/d/webgl/w039.html
+// ---------------------------------------------
 class W039Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト(トーラス)
-    private lateinit var drawObjTorus: W039ModelTorus
+    private lateinit var modelTorus: Torus01Model
     // 描画オブジェクト(球体)
-    private lateinit var drawObjSphere: W039ModelSphere
+    private lateinit var modelSphere: Sphere01Model
 
-    // プログラムハンドル
-    private var programHandle: Int = 0
+    // シェーダ
+    private lateinit var shader: W039Shader
 
     // 画面縦横比
     var ratio: Float = 0f
@@ -33,6 +38,18 @@ class W039Renderer(ctx: Context): MgRenderer(ctx) {
     // テクスチャ配列
     val textures = IntArray(2)
 
+    init {
+        // ビットマップをロード
+        bmpArray.clear()
+        val bmp0 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w039)
+        bmpArray.add(bmp0)
+
+        // ステンシルバッファに設定できる最大値をコンソールに出力
+        val stencilBufSize = IntArray(1)
+        GLES20.glGetIntegerv(GLES20.GL_STENCIL_BITS,stencilBufSize,0)
+        Log.d(javaClass.simpleName,"stencilBufSize:${stencilBufSize[0]}")
+    }
+
     override fun onDrawFrame(gl: GL10?) {
         // canvasを初期化
         GLES20.glClearColor(0f, 0f, 0f, 1.0f)
@@ -42,7 +59,7 @@ class W039Renderer(ctx: Context): MgRenderer(ctx) {
 
         // 回転角度
         angle[0] =(angle[0]+1)%360
-        val t1 = angle[0].toFloat()
+        val t0 = angle[0].toFloat()
 
         // クォータニオンを行列に適用
         var matQ = qtnNow.toMatIV()
@@ -66,6 +83,7 @@ class W039Renderer(ctx: Context): MgRenderer(ctx) {
         // ステンシルテストを有効にする
         GLES20.glEnable(GLES20.GL_STENCIL_TEST)
 
+        // ステンシルバッファだけに描きこむため、
         // カラーバッファと深度バッファへ描画されないようにする
         GLES20.glColorMask(false,false,false,false)
         GLES20.glDepthMask(false)
@@ -84,9 +102,9 @@ class W039Renderer(ctx: Context): MgRenderer(ctx) {
         //   アウトライン:ON
         //   テクスチャ  :OFF
         Matrix.setIdentityM(matM,0)
-        Matrix.rotateM(matM,0,t1,0f,1f,1f)
+        Matrix.rotateM(matM,0,t0,0f,1f,1f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        drawObjTorus.draw(programHandle,matMVP,matI,vecLight,0,1,0,0)
+        shader.draw(modelTorus,matMVP,matI,vecLight,0,1,0,0)
 
         // カラーバッファと深度バッファへ描画されるようにする
         GLES20.glColorMask(true,true,true,true)
@@ -108,7 +126,7 @@ class W039Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.setIdentityM(matM,0)
         Matrix.scaleM(matM,0,50f,50f,50f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        drawObjSphere.draw(programHandle,matMVP,matI,vecLight,0,0,0,1)
+        shader.draw(modelSphere,matMVP,matI,vecLight,0,0,0,1)
 
         // ステンシルテストを無効にする
         GLES20.glDisable(GLES20.GL_STENCIL_TEST)
@@ -118,9 +136,9 @@ class W039Renderer(ctx: Context): MgRenderer(ctx) {
         //   アウトライン:OFF
         //   テクスチャ  :OFF
         Matrix.setIdentityM(matM,0)
-        Matrix.rotateM(matM,0,t1,0f,1f,1f)
+        Matrix.rotateM(matM,0,t0,0f,1f,1f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        drawObjTorus.draw(programHandle,matMVP,matI,vecLight,1,0,0,0)
+        shader.draw(modelTorus,matMVP,matI,vecLight,1,0,0,0)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -130,34 +148,42 @@ class W039Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
-        GLES20.glClearStencil(0)
-
         // 深度テストを有効にする
         // 球体(背景)を内側から見るようにしているため、カリングをOFFにしている
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
 
-        // シェーダプログラム登録
-        programHandle = W039Shader().loadShader()
+        // シェーダ
+        shader = W039Shader()
+        shader.loadShader()
+
+        // モデル生成(球体)(背景)
+        modelSphere = Sphere01Model()
+        modelSphere.createPath(mapOf(
+                "row"    to 32f,
+                "column" to 32f,
+                "radius" to 1f,
+                "colorR" to 1f,
+                "colorG" to 1f,
+                "colorB" to 1f,
+                "colorA" to 1f
+        ))
+
+        // モデル生成(トーラス)(本体とアウトライン)
+        modelTorus = Torus01Model()
+        modelTorus.createPath(mapOf(
+                "row"     to 32f,
+                "column"  to 32f,
+                "iradius" to 0.25f,
+                "oradius" to 1f
+        ))
 
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(1,textures,0)
         MyGLFunc.checkGlError("glGenTextures")
 
-        // モデル生成(球体)(背景)
-        drawObjSphere = W039ModelSphere()
-
-        // モデル生成(トーラス)(本体とアウトライン)
-        drawObjTorus = W039ModelTorus()
-
         // テクスチャ0をバインド
-        drawObjSphere.activateTexture(0,textures,bmpArray[0])
+        MyGLFunc.createTexture(0,textures,bmpArray[0])
 
         // 光源位置
         vecLight[0] = 1f
