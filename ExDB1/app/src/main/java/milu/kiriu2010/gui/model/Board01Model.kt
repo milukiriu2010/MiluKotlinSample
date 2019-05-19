@@ -47,7 +47,7 @@ class Board01Model: MgModelAbs() {
     }
 
     // XY平面(右回り)
-    //  w26,w27,w35
+    //  w26,w27,w35,w40
     private fun createPathPattern1(opt: Map<String, Float>) {
         val color = FloatArray(4)
         color[0] = opt["colorR"] ?: 1f
@@ -72,12 +72,10 @@ class Board01Model: MgModelAbs() {
         }
 
         // テクスチャ座標
-        (0..3).forEach {
-            datTxc.addAll(arrayListOf(0f,0f))
-            datTxc.addAll(arrayListOf(1f,0f))
-            datTxc.addAll(arrayListOf(0f,1f))
-            datTxc.addAll(arrayListOf(1f,1f))
-        }
+        datTxc.addAll(arrayListOf(0f,0f))
+        datTxc.addAll(arrayListOf(1f,0f))
+        datTxc.addAll(arrayListOf(0f,1f))
+        datTxc.addAll(arrayListOf(1f,1f))
 
         // インデックスデータ
         datIdx.addAll(arrayListOf<Short>(0,1,2))

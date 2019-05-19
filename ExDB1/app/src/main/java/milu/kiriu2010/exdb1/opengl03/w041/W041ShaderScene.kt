@@ -1,11 +1,16 @@
-package milu.kiriu2010.exdb1.opengl03.w041x
+package milu.kiriu2010.exdb1.opengl03.w041
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.MgShader
 
-class W041XAShader: MgShader() {
+// -----------------------------------
+// シェーダ(シーン)
+// -----------------------------------
+// https://wgld.org/d/webgl/w041.html
+// -----------------------------------
+class W041ShaderScene: MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -61,7 +66,6 @@ class W041XAShader: MgShader() {
         return this
     }
 
-
     fun draw(model: MgModelAbs,
              matM: FloatArray,
              matMVP: FloatArray,
@@ -69,8 +73,8 @@ class W041XAShader: MgShader() {
              u_vecLight: FloatArray,
              u_useLight: Int,
              u_Texture0: Int) {
-        // プログラムハンドル(フレームバッファ用)を有効化
         GLES20.glUseProgram(programHandle)
+        MyGLFunc.checkGlError2("UserProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)
@@ -78,7 +82,7 @@ class W041XAShader: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Position:${javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Position",this,model)
 
         // attribute(法線)
         model.bufNor.position(0)
@@ -86,7 +90,7 @@ class W041XAShader: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufNor)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Normal")
+        MyGLFunc.checkGlError2("a_Normal",this,model)
 
         // attribute(色)
         model.bufCol.position(0)
@@ -94,48 +98,51 @@ class W041XAShader: MgShader() {
             GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, model.bufCol)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Color")
+        MyGLFunc.checkGlError2("a_Color",this,model)
 
-        // attribute(テクスチャコード)
+        // attribute(テクスチャ座標)
         model.bufTxc.position(0)
         GLES20.glGetAttribLocation(programHandle,"a_TextureCoord").also {
             GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, model.bufTxc)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_TextureCoord")
+        MyGLFunc.checkGlError2("a_TextureCoord",this,model)
 
         // uniform(モデル)
         GLES20.glGetUniformLocation(programHandle,"u_matM").also {
             GLES20.glUniformMatrix4fv(it,1,false,matM,0)
         }
-        MyGLFunc.checkGlError("u_matM")
+        MyGLFunc.checkGlError2("u_matM",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
-        MyGLFunc.checkGlError("u_matMVP")
+        MyGLFunc.checkGlError2("u_matMVP",this,model)
 
         // uniform(逆行列)
         GLES20.glGetUniformLocation(programHandle,"u_matINV").also {
             GLES20.glUniformMatrix4fv(it,1,false,matI,0)
         }
+        MyGLFunc.checkGlError2("u_matINV",this,model)
 
-        // uniform(平行光源)
+        // uniform(光源位置)
         GLES20.glGetUniformLocation(programHandle,"u_vecLight").also {
             GLES20.glUniform3fv(it,1,u_vecLight,0)
         }
+        MyGLFunc.checkGlError2("u_vecLight",this,model)
 
         // uniform(ライティングを使うかどうか)
         GLES20.glGetUniformLocation(programHandle,"u_useLight").also {
             GLES20.glUniform1i(it,u_useLight)
         }
+        MyGLFunc.checkGlError2("u_useLight",this,model)
 
-        // uniform(テクスチャ0)
+        // uniform(テクスチャユニット)
         GLES20.glGetUniformLocation(programHandle, "u_Texture0").also {
             GLES20.glUniform1i(it, u_Texture0)
         }
-        MyGLFunc.checkGlError("u_Texture0")
+        MyGLFunc.checkGlError2("u_Texture0",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

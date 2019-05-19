@@ -53,7 +53,7 @@ class W040Renderer(ctx: Context): MgRenderer(ctx) {
         // ビットマップをロード
         bmpArray.clear()
         val bmp0 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w40_0)
-        val bmp1 = BitmapFactory.decodeResource(ctx.resources,R.drawable.texture_w40_1)
+        val bmp1 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w40_1)
         bmpArray.add(bmp0)
         bmpArray.add(bmp1)
     }
@@ -197,8 +197,8 @@ class W040Renderer(ctx: Context): MgRenderer(ctx) {
 
         // 光源位置
         vecLight[0] = -1f
-        vecLight[1] = 2f
-        vecLight[2] = 1f
+        vecLight[1] =  2f
+        vecLight[2] =  1f
         // 視点位置
         vecEye[0] = 0f
         vecEye[1] = 0f
