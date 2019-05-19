@@ -6,6 +6,7 @@ import android.util.Log
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.MgShader
 import java.nio.ByteBuffer
+import java.nio.IntBuffer
 import kotlin.math.exp
 
 // ----------------------------------------------------------------
@@ -211,6 +212,41 @@ class MyGLFunc {
             if (textures[id] == 0) {
                 throw java.lang.RuntimeException("Error loading texture[${id}]")
             }
+        }
+
+        // --------------------------------------------------
+        // フレームバッファを生成する
+        // --------------------------------------------------
+        fun createFrameBuffer(width: Int, height: Int, id: Int, bufFrame: IntBuffer, bufDepthRender: IntBuffer, frameTexture: IntBuffer) {
+            // フレームバッファのバインド
+            GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[id])
+
+            // 深度バッファ用レンダ―バッファのバインド
+            GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,bufDepthRender[id])
+
+            // レンダ―バッファを深度バッファとして設定
+            GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER, GLES20.GL_DEPTH_COMPONENT16, width, height)
+
+            // フレームバッファにレンダ―バッファを関連付ける
+            GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT, GLES20.GL_RENDERBUFFER,bufDepthRender[id])
+
+            // フレームバッファ用のテクスチャをバインド
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[id])
+
+            // フレームバッファ用のテクスチャにカラー用のメモリ領域を確保
+            GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,width,height,0,GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,null)
+
+            // テクスチャパラメータ
+            GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR)
+            GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MIN_FILTER,GLES20.GL_LINEAR)
+
+            // フレームバッファにテクスチャを関連付ける
+            GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,GLES20.GL_TEXTURE_2D,frameTexture[id],0)
+
+            // 各種オブジェクトのバインドを解除
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,0)
+            GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,0)
+            GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
         }
 
         // ------------------------------------------------
