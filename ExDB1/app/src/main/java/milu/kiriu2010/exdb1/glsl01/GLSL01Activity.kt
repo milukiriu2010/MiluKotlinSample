@@ -10,6 +10,7 @@ import milu.kiriu2010.exdb1.glsl01.g002.GLSL02Fragment
 import milu.kiriu2010.exdb1.glsl01.g003.GLSL03Fragment
 import milu.kiriu2010.exdb1.glsl01.g004.GLSL04Fragment
 import milu.kiriu2010.exdb1.glsl01.g005.GLSL05Fragment
+import milu.kiriu2010.exdb1.glsl01.g006.GLSL06Fragment
 
 class GLSL01Activity : AppCompatActivity() {
 
@@ -20,7 +21,7 @@ class GLSL01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, GLSL04Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, GLSL06Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -44,7 +45,17 @@ class GLSL01Activity : AppCompatActivity() {
                 finish()
                 true
             }
-            // マンデルブロ
+            // ジュリア集合
+            R.id.glsl_g006 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("g06") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSL06Fragment.newInstance(), "g06")
+                            .commit()
+                }
+                true
+            }
+            // マンデルブロ集合
             R.id.glsl_g005 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("g05") == null) {
