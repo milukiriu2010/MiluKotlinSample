@@ -11,6 +11,7 @@ import milu.kiriu2010.exdb1.glsl01.g003.GLSL03Fragment
 import milu.kiriu2010.exdb1.glsl01.g004.GLSL04Fragment
 import milu.kiriu2010.exdb1.glsl01.g005.GLSL05Fragment
 import milu.kiriu2010.exdb1.glsl01.g006.GLSL06Fragment
+import milu.kiriu2010.exdb1.glsl01.g007.GLSL07Fragment
 
 class GLSL01Activity : AppCompatActivity() {
 
@@ -21,7 +22,7 @@ class GLSL01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, GLSL06Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, GLSL07Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -43,6 +44,16 @@ class GLSL01Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // ノイズ
+            R.id.glsl_g007 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("g07") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSL07Fragment.newInstance(), "g07")
+                            .commit()
+                }
                 true
             }
             // ジュリア集合

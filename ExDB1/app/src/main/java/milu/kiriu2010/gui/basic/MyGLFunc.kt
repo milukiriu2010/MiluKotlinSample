@@ -14,6 +14,7 @@ import kotlin.math.exp
 // 2019.05.02 gaussianブラーの重みを計算
 // 2019.05.11 OpenGLのエラー状態を出力2
 // 2019.05.18 テクスチャパラメータの設定をしないパラメータ追加
+// 2019.05.19 フレームバッファを生成
 // ----------------------------------------------------------------
 class MyGLFunc {
 
@@ -38,6 +39,8 @@ class MyGLFunc {
                 val compileStatus = IntArray(1)
                 GLES20.glGetShaderiv(shader, GLES20.GL_COMPILE_STATUS, compileStatus,0)
                 if ( compileStatus[0] == 0 ) {
+                    // 何行目に誤りがあるか出力
+                    Log.d(TAG,GLES20.glGetShaderInfoLog(shader))
                     // コンパイル失敗
                     GLES20.glDeleteShader(shader)
                     throw RuntimeException("Compile Error:"+shaderCode)
