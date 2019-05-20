@@ -1,6 +1,5 @@
 package milu.kiriu2010.exdb1.opengl04.w047
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -28,33 +27,21 @@ class W047Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_gl_w15, container, false)
 
         myGLES20View = view.findViewById(R.id.myGLES20ViewW15)
-        val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.cube_w47_px)
-        val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.cube_w47_py)
-        val bmp2 = BitmapFactory.decodeResource(resources,R.drawable.cube_w47_pz)
-        val bmp3 = BitmapFactory.decodeResource(resources,R.drawable.cube_w47_nx)
-        val bmp4 = BitmapFactory.decodeResource(resources,R.drawable.cube_w47_ny)
-        val bmp5 = BitmapFactory.decodeResource(resources,R.drawable.cube_w47_nz)
-        val render = W047Renderer(context!!)
-        render.bmpArray.add(bmp0)
-        render.bmpArray.add(bmp1)
-        render.bmpArray.add(bmp2)
-        render.bmpArray.add(bmp3)
-        render.bmpArray.add(bmp4)
-        render.bmpArray.add(bmp5)
-        myGLES20View.setRenderer(render)
+        val renderer = W047Renderer(context!!)
+        myGLES20View.setRenderer(renderer)
         myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
-                    render.isRunning = false
+                    renderer.isRunning = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
                     Log.d(javaClass.simpleName,"vw[${myGLES20View.width}]vh[${myGLES20View.height}]")
-                    render.isRunning = true
-                    render.receiveTouch(event,myGLES20View.width,myGLES20View.height)
+                    renderer.isRunning = true
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    render.receiveTouch(event,myGLES20View.width,myGLES20View.height)
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 else -> {
                 }

@@ -2,13 +2,12 @@ package milu.kiriu2010.exdb1.opengl04.w047
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import android.opengl.Matrix
 import android.util.Log
-import android.view.MotionEvent
+import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.gui.basic.MyQuaternion
 import milu.kiriu2010.gui.model.Cube01Model
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.model.Torus01Model
@@ -17,23 +16,25 @@ import java.nio.ByteBuffer
 import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
-import kotlin.math.sqrt
 
+// --------------------------------------
 // 動的キューブマッピング
-// http://opengles2learning.blogspot.com/2011/06/texturing-cube-different-textures-on.html
+// --------------------------------------
+// https://wgld.org/d/webgl/w047.html
+// --------------------------------------
 class W047Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト(立方体)(背景)
-    private lateinit var drawObjCube: Cube01Model
+    private lateinit var modelCube: Cube01Model
     // 描画オブジェクト(球体)
-    private lateinit var drawObjSphere: Sphere01Model
+    private lateinit var modelSphere: Sphere01Model
     // 描画オブジェクト(トーラス)
-    private lateinit var drawObjTorus: Torus01Model
+    private lateinit var modelTorus: Torus01Model
 
-    // シェーダ(スペキュラライティング)
-    private lateinit var shaderA: W047AShader
-    // シェーダ(キューブ環境マッピング)
-    private lateinit var shaderB: W047BShader
+    // シェーダ(反射光ライティング)
+    private lateinit var shaderSpecular: W047ShaderSpecular
+    // シェーダ(キューブマッピング)
+    private lateinit var shaderCubeMap: W047ShaderCubeMap
 
     // 画面縦横比
     var ratio: Float = 0f
@@ -72,18 +73,35 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
     // フレームバッファ用のテクスチャ
     val frameTexture = IntBuffer.allocate(1)
 
+    init {
+        // ビットマップをロード
+        bmpArray.clear()
+        val bmp0 = BitmapFactory.decodeResource(ctx.resources, R.drawable.cube_w44_px)
+        val bmp1 = BitmapFactory.decodeResource(ctx.resources, R.drawable.cube_w44_py)
+        val bmp2 = BitmapFactory.decodeResource(ctx.resources, R.drawable.cube_w44_pz)
+        val bmp3 = BitmapFactory.decodeResource(ctx.resources, R.drawable.cube_w44_nx)
+        val bmp4 = BitmapFactory.decodeResource(ctx.resources, R.drawable.cube_w44_ny)
+        val bmp5 = BitmapFactory.decodeResource(ctx.resources, R.drawable.cube_w44_nz)
+        bmpArray.add(bmp0)
+        bmpArray.add(bmp1)
+        bmpArray.add(bmp2)
+        bmpArray.add(bmp3)
+        bmpArray.add(bmp4)
+        bmpArray.add(bmp5)
+    }
+
     override fun onDrawFrame(gl: GL10?) {
         // 回転角度
         angle[0] =(angle[0]+1)%360
         angle[1] =(angle[0]+180)%360
-        val t1 = angle[0].toFloat()
-        val t2 = angle[1].toFloat()
+        val t0 = angle[0].toFloat()
+        val t1 = angle[1].toFloat()
 
         // フレームバッファをバインド
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
 
         // フレームバッファへの６方向レンダリング
-        render2FrameBuffer(t1)
+        render2FrameBuffer(t0)
 
         // フレームバッファのバインドを解除
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
@@ -109,21 +127,21 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.setIdentityM(matM,0)
         Matrix.scaleM(matM,0,100f,100f,100f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        shaderB.draw(drawObjCube,matM,matMVP,vecEye,0,0)
+        shaderCubeMap.draw(modelCube,matM,matMVP,vecEye,0,0)
 
         // 動的キューブマップテクスチャを適用して球体をレンダリング
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
         GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP,frameTexture[0])
         Matrix.setIdentityM(matM,0)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        shaderB.draw(drawObjSphere,matM,matMVP,vecEye,0,1)
+        shaderCubeMap.draw(modelSphere,matM,matMVP,vecEye,0,1)
 
         // スペキュラライティングシェーダを使って
         // トーラスをレンダリング
         targetArray.forEachIndexed { id, target ->
             Matrix.setIdentityM(matM,0)
             Matrix.translateM(matM,0,torusPos[0+id*3],torusPos[1+id*3],torusPos[2+id*3])
-            Matrix.rotateM(matM,0,t1,torusEye[0+id*3],torusEye[1+id*3],torusEye[2+id*3])
+            Matrix.rotateM(matM,0,t0,torusEye[0+id*3],torusEye[1+id*3],torusEye[2+id*3])
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
             Matrix.invertM(matI,0,matM,0)
 
@@ -132,7 +150,7 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
             amb[1] = torusAmb[1+id*4]
             amb[2] = torusAmb[2+id*4]
             amb[3] = torusAmb[3+id*4]
-            shaderA.draw(drawObjTorus,matMVP,matI,vecLight,vecEye,amb)
+            shaderSpecular.draw(modelTorus,matMVP,matI,vecLight,vecEye,amb)
         }
     }
 
@@ -259,7 +277,7 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.setIdentityM(matM,0)
             Matrix.scaleM(matM,0,100f,100f,100f)
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-            shaderB.draw(drawObjCube,matM,matMVP, floatArrayOf(0f,0f,0f),0,0)
+            shaderCubeMap.draw(modelCube,matM,matMVP, floatArrayOf(0f,0f,0f),0,0)
 
             // 視線ベクトルの変換
             var torusInvEye = FloatArray(3)
@@ -280,7 +298,7 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.rotateM(matM,0,t1,torusEye[0+id*3],torusEye[1+id*3],torusEye[2+id*3])
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
             Matrix.invertM(matI,0,matM,0)
-            shaderA.draw(drawObjTorus,matMVP,matI,lightDirection,torusInvEye,amb)
+            shaderSpecular.draw(modelTorus,matMVP,matI,lightDirection,torusInvEye,amb)
         }
 
     }
@@ -293,33 +311,35 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
         renderW = width
         renderH = height
 
-        createFrameBuffer(renderW,renderH)
+        // フレームバッファ生成
+        GLES20.glGenFramebuffers(1,bufFrame)
+        // 深度バッファ用レンダ―バッファ生成
+        GLES20.glGenRenderbuffers(1,bufDepthRender)
+        // フレームバッファ用テクスチャ生成
+        GLES20.glGenTextures(1,frameTexture)
+        MyGLFunc.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
+
+        //createFrameBuffer(renderW,renderH)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
-        // カリングと深度テストを有効にする
+        // 深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
 
-        // シェーダ(スペキュラライティング)
-        shaderA = W047AShader()
-        shaderA.loadShader()
+        // シェーダ(反射光ライティング)
+        shaderSpecular = W047ShaderSpecular()
+        shaderSpecular.loadShader()
         // シェーダ(キューブ環境マッピング)
-        shaderB = W047BShader()
-        shaderB.loadShader()
+        shaderCubeMap = W047ShaderCubeMap()
+        shaderCubeMap.loadShader()
 
         // キューブマップを生成
         generateCubeMap()
 
         // モデル生成(立方体)
-        drawObjCube = Cube01Model()
-        drawObjCube.createPath(mapOf(
+        modelCube = Cube01Model()
+        modelCube.createPath(mapOf(
                 "pattern" to 2f,
                 "scale"   to 2f,
                 "colorR"  to 1f,
@@ -329,8 +349,8 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(球体)
-        drawObjSphere = Sphere01Model()
-        drawObjSphere.createPath(mapOf(
+        modelSphere = Sphere01Model()
+        modelSphere.createPath(mapOf(
                 "row"    to 32f,
                 "column" to 32f,
                 "radius" to 3f,
@@ -341,8 +361,8 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(トーラス)
-        drawObjTorus = Torus01Model()
-        drawObjTorus.createPath(mapOf(
+        modelTorus = Torus01Model()
+        modelTorus.createPath(mapOf(
                 "row"     to 32f,
                 "column"  to 32f,
                 "iradius" to 0.5f,
@@ -379,6 +399,7 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.setIdentityM(matVP,0)
     }
 
+    /*
     // フレームバッファをオブジェクトとして生成する
     private fun createFrameBuffer(width: Int, height: Int) {
 
@@ -428,6 +449,7 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,0)
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
     }
+    */
 
     private fun generateCubeMap() {
         // テクスチャ作成し、idをtexturesに保存

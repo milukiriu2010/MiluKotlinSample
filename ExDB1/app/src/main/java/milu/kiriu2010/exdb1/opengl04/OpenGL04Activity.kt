@@ -23,7 +23,7 @@ class OpenGL04Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W045Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, W047Fragment.newInstance(), "xyz")
                     .commit()
         }
 

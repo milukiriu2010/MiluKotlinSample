@@ -5,6 +5,11 @@ import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.MgShader
 
+// ----------------------------------------
+// 屈折マッピング
+// ----------------------------------------
+// https://wgld.org/d/webgl/w046.html
+// ----------------------------------------
 class W046Shader: MgShader() {
     // 頂点シェーダ
     private val scv =
@@ -34,7 +39,7 @@ class W046Shader: MgShader() {
             uniform   vec3        u_vecEye;
             uniform   samplerCube u_CubeTexture;
             uniform   int         u_Refraction;
-            // 屈折率の比
+            // 屈折率の比(0.0-1.0)
             uniform   float       u_eta;
             varying   vec3        v_Position;
             varying   vec3        v_Normal;
@@ -43,6 +48,7 @@ class W046Shader: MgShader() {
             void main() {
                 vec3  ref;
                 if (bool(u_Refraction)) {
+                    // 屈折ベクトルを算出
                     ref = refract(normalize(v_Position - u_vecEye), v_Normal, u_eta);
                 }
                 else {
@@ -74,13 +80,16 @@ class W046Shader: MgShader() {
              u_Refraction: Int,
              u_eta: Float) {
 
+        GLES20.glUseProgram(programHandle)
+        MyGLFunc.checkGlError2("UserProgram",this,model)
+
         // attribute(頂点)
         model.bufPos.position(0)
         GLES20.glGetAttribLocation(programHandle,"a_Position").also {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Position:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Position",this,model)
 
         // attribute(法線)
         model.bufNor.position(0)
@@ -88,7 +97,7 @@ class W046Shader: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufNor)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Normal:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Normal",this,model)
 
         // attribute(色)
         model.bufCol.position(0)
@@ -96,45 +105,45 @@ class W046Shader: MgShader() {
             GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, model.bufCol)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Color:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Color",this,model)
 
         // uniform(モデル)
         GLES20.glGetUniformLocation(programHandle,"u_matM").also {
             GLES20.glUniformMatrix4fv(it,1,false,matM,0)
         }
-        MyGLFunc.checkGlError("u_matM:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matM",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
-        MyGLFunc.checkGlError("u_matMVP:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matMVP",this,model)
 
         // uniform(視点座標)
         GLES20.glGetUniformLocation(programHandle,"u_vecEye").also {
             GLES20.glUniform3fv(it,1,u_vecEye,0)
         }
-        MyGLFunc.checkGlError("u_vecEye:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_vecEye",this,model)
 
         if ( u_CubeTexture != -1 ) {
             // uniform(キューブテクスチャ)
             GLES20.glGetUniformLocation(programHandle, "u_CubeTexture").also {
                 GLES20.glUniform1i(it, u_CubeTexture)
             }
-            MyGLFunc.checkGlError("u_CubeTexture:${model.javaClass.simpleName}")
+            MyGLFunc.checkGlError2("u_CubeTexture",this,model)
         }
 
-        // uniform(屈折するかどうか)
+        // uniform(屈折させるかどうか)
         GLES20.glGetUniformLocation(programHandle,"u_Refraction").also {
             GLES20.glUniform1i(it,u_Refraction)
         }
-        MyGLFunc.checkGlError("u_Refraction:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_Refraction",this,model)
 
         // uniform(屈折率の比)
         GLES20.glGetUniformLocation(programHandle,"u_eta").also {
             GLES20.glUniform1f(it,u_eta)
         }
-        MyGLFunc.checkGlError("u_eta:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_eta",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
