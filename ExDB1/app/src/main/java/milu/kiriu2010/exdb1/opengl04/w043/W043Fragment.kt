@@ -11,13 +11,11 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.MyGL02View
-import milu.kiriu2010.exdb1.opengl.TextureView
-import milu.kiriu2010.exdb1.opengl04.w042.W042Renderer
+import milu.kiriu2010.gui.view.MyGLES20View
 
 class W043Fragment : Fragment() {
 
-    private lateinit var myGLView: MyGL02View
+    private lateinit var myGLES20View: MyGLES20View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,28 +26,24 @@ class W043Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl04_w43, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w43, container, false)
 
-        myGLView = view.findViewById(R.id.myGL02ViewA04)
-        val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w43_0)
-        val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.texture_w43_1)
-        val render = W043Renderer(context!!)
-        render.bmpArray.add(bmp0)
-        render.bmpArray.add(bmp1)
-        myGLView.setRenderer(render)
-        myGLView.setOnTouchListener { v, event ->
+        myGLES20View = view.findViewById(R.id.myGLES20ViewW43)
+        val renderer = W043Renderer(context!!)
+        myGLES20View.setRenderer(renderer)
+        myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
-                    render.isRunning = false
+                    renderer.isRunning = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
-                    Log.d(javaClass.simpleName,"vw[${myGLView.width}]vh[${myGLView.height}]")
-                    render.isRunning = true
-                    render.receiveTouch(event,myGLView.width,myGLView.height)
+                    Log.d(javaClass.simpleName,"vw[${myGLES20View.width}]vh[${myGLES20View.height}]")
+                    renderer.isRunning = true
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    render.receiveTouch(event,myGLView.width,myGLView.height)
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 else -> {
                 }
@@ -57,19 +51,17 @@ class W043Fragment : Fragment() {
             true
         }
 
-        val seekBarW043 = view.findViewById<SeekBar>(R.id.seekBarW043)
+        val seekBarW043 = view.findViewById<SeekBar>(R.id.seekBarW43)
         seekBarW043.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                //render.hScale = seekBarW043.progress.toFloat()/(seekBarW043.max.toFloat()*100f)
-                render.hScale = seekBarW043.progress.toFloat()/seekBarW043.max.toFloat()
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                renderer.hScale = seekBar.progress.toFloat()*0.1f
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
             }
 
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                //render.hScale = seekBarW043.progress.toFloat()/(seekBarW043.max.toFloat()*100f)
-                render.hScale = seekBarW043.progress.toFloat()/seekBarW043.max.toFloat()
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                renderer.hScale = seekBar.progress.toFloat()*0.1f
             }
 
         })
@@ -79,12 +71,12 @@ class W043Fragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        myGLView.onResume()
+        myGLES20View.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        myGLView.onPause()
+        myGLES20View.onPause()
     }
 
     companion object {

@@ -5,6 +5,11 @@ import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.MgShader
 
+// -------------------------------------
+// 視差マッピング
+// -------------------------------------
+// https://wgld.org/d/webgl/w043.html
+// -------------------------------------
 class W043Shader: MgShader() {
     // 頂点シェーダ
     private val scv =
@@ -32,8 +37,10 @@ class W043Shader: MgShader() {
                 // 法線ベクトル
                 vec3 n = normalize(a_Normal);
                 // 接線ベクトル
+                // Y軸と法線ベクトルとの間で外積を取ることで算出する
                 vec3 t = normalize(cross(a_Normal,vec3(0.0,1.0,0.0)));
                 // 従法線ベクトル
+                // 接線ベクトルと法線ベクトルとの間で外積をとることで算出する
                 vec3 b = cross(n,t);
                 // 視線ベクトルとライトベクトルを接空間上に変換する
                 v_vecEye.x = dot(t,eye);
@@ -71,7 +78,7 @@ class W043Shader: MgShader() {
                 // 高さマップのイメージから、高さに関する情報を抜き出している
                 // この高さを使って法線マップへの参照点をずらす
                 float hScale    = texture2D(u_Texture1, v_TextureCoord).r * u_Height;
-                // 本来のテクスチャ座標から高さと支店を考慮した分の値を減算してずらす
+                // 本来のテクスチャ座標から高さと視点を考慮した分の値を減算してずらす
                 // こうして得られたテクスチャ座標を使ってバンプマッピング同様の処理を行うことで、
                 // 高さと視線を考慮した視差マッピングを実現する
                 vec2  hTexCoord = v_TextureCoord - hScale * eye.xy;
@@ -110,6 +117,7 @@ class W043Shader: MgShader() {
              u_Height: Float) {
 
         GLES20.glUseProgram(programHandle)
+        MyGLFunc.checkGlError2("UseProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)
@@ -117,7 +125,7 @@ class W043Shader: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Position:${javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Position",this,model)
 
         // attribute(法線)
         model.bufNor.position(0)
@@ -125,7 +133,7 @@ class W043Shader: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufNor)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Normal")
+        MyGLFunc.checkGlError2("a_Normal",this,model)
 
         // attribute(色)
         model.bufCol.position(0)
@@ -133,60 +141,63 @@ class W043Shader: MgShader() {
             GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, model.bufCol)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Color")
+        MyGLFunc.checkGlError2("a_Color",this,model)
 
-        // attribute(テクスチャコード)
+        // attribute(テクスチャ座標)
         model.bufTxc.position(0)
         GLES20.glGetAttribLocation(programHandle,"a_TextureCoord").also {
             GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, model.bufTxc)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_TextureCoord")
+        MyGLFunc.checkGlError2("a_TextureCoord",this,model)
 
         // uniform(モデル)
         GLES20.glGetUniformLocation(programHandle,"u_matM").also {
             GLES20.glUniformMatrix4fv(it,1,false,matM,0)
         }
-        MyGLFunc.checkGlError("u_matM")
+        MyGLFunc.checkGlError2("u_matM",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
-        MyGLFunc.checkGlError("u_matMVP")
+        MyGLFunc.checkGlError2("u_matMVP",this,model)
 
         // uniform(逆行列)
         GLES20.glGetUniformLocation(programHandle,"u_matINV").also {
             GLES20.glUniformMatrix4fv(it,1,false,matI,0)
         }
+        MyGLFunc.checkGlError2("u_matINV",this,model)
 
-        // uniform(ライト座標)
+        // uniform(光源位置)
         GLES20.glGetUniformLocation(programHandle,"u_vecLight").also {
             GLES20.glUniform3fv(it,1,u_vecLight,0)
         }
+        MyGLFunc.checkGlError2("u_vecLight",this,model)
 
         // uniform(視点座標)
         GLES20.glGetUniformLocation(programHandle,"u_vecEye").also {
             GLES20.glUniform3fv(it,1,u_vecEye,0)
         }
+        MyGLFunc.checkGlError2("u_vecEye",this,model)
 
-        // uniform(テクスチャ0)
+        // uniform(テクスチャユニット0)
         GLES20.glGetUniformLocation(programHandle, "u_Texture0").also {
             GLES20.glUniform1i(it, u_Texture0)
         }
-        MyGLFunc.checkGlError("u_Texture0")
+        MyGLFunc.checkGlError2("u_Texture0",this,model)
 
-        // uniform(テクスチャ1)
+        // uniform(テクスチャユニット1)
         GLES20.glGetUniformLocation(programHandle, "u_Texture1").also {
             GLES20.glUniform1i(it, u_Texture1)
         }
-        MyGLFunc.checkGlError("u_Texture1")
+        MyGLFunc.checkGlError2("u_Texture1",this,model)
 
         // uniform(高さ)
         GLES20.glGetUniformLocation(programHandle, "u_Height").also {
             GLES20.glUniform1f(it, u_Height)
         }
-        MyGLFunc.checkGlError("u_Height")
+        MyGLFunc.checkGlError2("u_Height",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
