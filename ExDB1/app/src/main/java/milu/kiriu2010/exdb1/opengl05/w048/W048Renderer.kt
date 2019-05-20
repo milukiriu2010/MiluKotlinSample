@@ -2,28 +2,28 @@ package milu.kiriu2010.exdb1.opengl05.w048
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.opengl.GLES20
-import android.opengl.GLUtils
 import android.opengl.Matrix
-import android.view.MotionEvent
+import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.gui.basic.MyQuaternion
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import java.lang.RuntimeException
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
-import kotlin.math.sqrt
 
+// -----------------------------------------
 // トゥーンレンダリング
-// http://opengles2learning.blogspot.com/2011/06/texturing-cube-different-textures-on.html
+// -----------------------------------------
+// https://wgld.org/d/webgl/w048.html
+// -----------------------------------------
 class W048Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト(球体)
-    private lateinit var drawObjSphere: Sphere01Model
+    private lateinit var modelSphere: Sphere01Model
     // 描画オブジェクト(トーラス)
-    private lateinit var drawObjTorus: Torus01Model
+    private lateinit var modelTorus: Torus01Model
 
     // シェーダ
     private lateinit var shader: W048Shader
@@ -37,10 +37,17 @@ class W048Renderer(ctx: Context): MgRenderer(ctx) {
     // テクスチャ配列
     val textures = IntArray(2)
 
+    init {
+        // ビットマップをロード
+        bmpArray.clear()
+        val bmp0 = BitmapFactory.decodeResource(ctx.resources, R.drawable.toon_w48)
+        bmpArray.add(bmp0)
+    }
+
     override fun onDrawFrame(gl: GL10?) {
         // 回転角度
         angle[0] =(angle[0]+1)%360
-        val t1 = angle[0].toFloat()
+        val t0 = angle[0].toFloat()
 
         // canvasを初期化
         GLES20.glClearColor(0.0f, 0.7f, 0.7f, 1.0f)
@@ -65,17 +72,17 @@ class W048Renderer(ctx: Context): MgRenderer(ctx) {
         // トーラス
         // -------------------------------------------------------
         Matrix.setIdentityM(matM,0)
-        Matrix.rotateM(matM,0,t1,0f,1f,1f)
+        Matrix.rotateM(matM,0,t0,0f,1f,1f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
 
         // モデルをレンダリング
         GLES20.glCullFace(GLES20.GL_BACK)
-        shader.draw(drawObjTorus,matMVP,matI,vecLight,0,0, floatArrayOf(0f,0f,0f,0f))
+        shader.draw(modelTorus,matMVP,matI,vecLight,0,0, floatArrayOf(0f,0f,0f,0f))
 
         // エッジ用モデルをレンダリング
         GLES20.glCullFace(GLES20.GL_FRONT)
-        shader.draw(drawObjTorus,matMVP,matI,vecLight,0,1, floatArrayOf(0f,0f,0f,1f))
+        shader.draw(modelTorus,matMVP,matI,vecLight,0,1, floatArrayOf(0f,0f,0f,1f))
 
         // -------------------------------------------------------
         // 球体
@@ -86,11 +93,11 @@ class W048Renderer(ctx: Context): MgRenderer(ctx) {
 
         // モデルをレンダリング
         GLES20.glCullFace(GLES20.GL_BACK)
-        shader.draw(drawObjSphere,matMVP,matI,vecLight,0,0, floatArrayOf(0f,0f,0f,0f))
+        shader.draw(modelSphere,matMVP,matI,vecLight,0,0, floatArrayOf(0f,0f,0f,0f))
 
         // エッジ用モデルをレンダリング
         GLES20.glCullFace(GLES20.GL_FRONT)
-        shader.draw(drawObjSphere,matMVP,matI,vecLight,0,1, floatArrayOf(0f,0f,0f,1f))
+        shader.draw(modelSphere,matMVP,matI,vecLight,0,1, floatArrayOf(0f,0f,0f,1f))
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -124,16 +131,16 @@ class W048Renderer(ctx: Context): MgRenderer(ctx) {
 
 
         // モデル生成(球体)
-        drawObjSphere = Sphere01Model()
-        drawObjSphere.createPath(mapOf(
+        modelSphere = Sphere01Model()
+        modelSphere.createPath(mapOf(
                 "row"    to 32f,
                 "column" to 32f,
                 "radius" to 1.5f
         ))
 
         // モデル生成(トーラス)
-        drawObjTorus = Torus01Model()
-        drawObjTorus.createPath(mapOf(
+        modelTorus = Torus01Model()
+        modelTorus.createPath(mapOf(
                 "row"     to 32f,
                 "column"  to 32f,
                 "iradius" to 0.5f,
