@@ -5,6 +5,11 @@ import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.MgShader
 
+// -------------------------------------------------
+// キューブ環境バンプマッピング
+// -------------------------------------------------
+// https://wgld.org/d/webgl/w045.html
+// -------------------------------------------------
 class W045Shader: MgShader() {
     // 頂点シェーダ
     private val scv =
@@ -79,7 +84,6 @@ class W045Shader: MgShader() {
         return this
     }
 
-
     fun draw(model: MgModelAbs,
              matM: FloatArray,
              matMVP: FloatArray,
@@ -88,13 +92,16 @@ class W045Shader: MgShader() {
              u_CubeTexture: Int,
              u_Reflection: Int) {
 
+        GLES20.glUseProgram(programHandle)
+        MyGLFunc.checkGlError2("UseProgram",this,model)
+
         // attribute(頂点)
         model.bufPos.position(0)
         GLES20.glGetAttribLocation(programHandle,"a_Position").also {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Position:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Position",this,model)
 
         // attribute(法線)
         model.bufNor.position(0)
@@ -102,7 +109,7 @@ class W045Shader: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufNor)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Normal:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Normal",this,model)
 
         // attribute(色)
         model.bufCol.position(0)
@@ -110,32 +117,32 @@ class W045Shader: MgShader() {
             GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, model.bufCol)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Color:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Color",this,model)
 
         // uniform(モデル)
         GLES20.glGetUniformLocation(programHandle,"u_matM").also {
             GLES20.glUniformMatrix4fv(it,1,false,matM,0)
         }
-        MyGLFunc.checkGlError("u_matM:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matM",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
-        MyGLFunc.checkGlError("u_matMVP:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matMVP",this,model)
 
         // uniform(視点座標)
         GLES20.glGetUniformLocation(programHandle,"u_vecEye").also {
             GLES20.glUniform3fv(it,1,u_vecEye,0)
         }
-        MyGLFunc.checkGlError("u_vecEye:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_vecEye",this,model)
 
         if ( u_normalMap != -1 ) {
             // uniform(法線マップテクスチャ)
             GLES20.glGetUniformLocation(programHandle, "u_normalMap").also {
                 GLES20.glUniform1i(it, u_normalMap)
             }
-            MyGLFunc.checkGlError("u_normalMap:${model.javaClass.simpleName}")
+            MyGLFunc.checkGlError2("u_normalMap",this,model)
         }
 
         if ( u_CubeTexture != -1 ) {
@@ -143,14 +150,14 @@ class W045Shader: MgShader() {
             GLES20.glGetUniformLocation(programHandle, "u_CubeTexture").also {
                 GLES20.glUniform1i(it, u_CubeTexture)
             }
-            MyGLFunc.checkGlError("u_CubeTexture:${model.javaClass.simpleName}")
+            MyGLFunc.checkGlError2("u_CubeTexture",this,model)
         }
 
         // uniform(反射)
         GLES20.glGetUniformLocation(programHandle,"u_Reflection").also {
             GLES20.glUniform1i(it,u_Reflection)
         }
-        MyGLFunc.checkGlError("u_Reflection:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_Reflection",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

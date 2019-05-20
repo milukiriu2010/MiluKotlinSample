@@ -2,33 +2,32 @@ package milu.kiriu2010.exdb1.opengl04.w045
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
-import android.opengl.GLUtils
 import android.opengl.Matrix
-import android.view.MotionEvent
+import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.gui.basic.MyQuaternion
 import milu.kiriu2010.gui.model.Cube01Model
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import java.lang.RuntimeException
 import java.nio.ByteBuffer
-import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
-import kotlin.math.sqrt
 
+// -------------------------------------------------
 // キューブ環境バンプマッピング
+// -------------------------------------------------
+// https://wgld.org/d/webgl/w045.html
 // http://opengles2learning.blogspot.com/2011/06/texturing-cube-different-textures-on.html
+// -------------------------------------------------
 class W045Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(立方体)
-    private lateinit var drawObjCube: Cube01Model
+    private lateinit var modelCube: Cube01Model
     // 描画オブジェクト(球体)
-    private lateinit var drawObjSphere: Sphere01Model
+    private lateinit var modelSphere: Sphere01Model
     // 描画オブジェクト(トーラス)
-    private lateinit var drawObjTorus: Torus01Model
+    private lateinit var modelTorus: Torus01Model
 
     // シェーダ
     private lateinit var shader: W045Shader
@@ -53,12 +52,31 @@ class W045Renderer(ctx: Context): MgRenderer(ctx) {
     val normalTextures = IntArray(2)
     val cubeTextures = IntArray(2)
 
+    init {
+        // ビットマップをロード
+        bmpArray.clear()
+        val bmp0 = BitmapFactory.decodeResource(ctx.resources, R.drawable.cube_w44_px)
+        val bmp1 = BitmapFactory.decodeResource(ctx.resources, R.drawable.cube_w44_py)
+        val bmp2 = BitmapFactory.decodeResource(ctx.resources, R.drawable.cube_w44_pz)
+        val bmp3 = BitmapFactory.decodeResource(ctx.resources, R.drawable.cube_w44_nx)
+        val bmp4 = BitmapFactory.decodeResource(ctx.resources, R.drawable.cube_w44_ny)
+        val bmp5 = BitmapFactory.decodeResource(ctx.resources, R.drawable.cube_w44_nz)
+        val bmp6 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w45)
+        bmpArray.add(bmp0)
+        bmpArray.add(bmp1)
+        bmpArray.add(bmp2)
+        bmpArray.add(bmp3)
+        bmpArray.add(bmp4)
+        bmpArray.add(bmp5)
+        bmpArray.add(bmp6)
+    }
+
     override fun onDrawFrame(gl: GL10?) {
         // 回転角度
         angle[0] =(angle[0]+1)%360
         angle[1] =(angle[0]+180)%360
-        val t1 = angle[0].toFloat()
-        val t2 = angle[1].toFloat()
+        val t0 = angle[0].toFloat()
+        val t1 = angle[1].toFloat()
 
         // canvasを初期化
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
@@ -83,28 +101,27 @@ class W045Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glActiveTexture(GLES20.GL_TEXTURE1)
         GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP,cubeTextures[0])
 
-
         // 背景用キューブをレンダリング
         Matrix.setIdentityM(matM,0)
         Matrix.scaleM(matM,0,100f,100f,100f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        shader.draw(drawObjCube,matM,matMVP,vecEye,0,1,0)
+        shader.draw(modelCube,matM,matMVP,vecEye,0,1,0)
 
         // 球体をレンダリング
         Matrix.setIdentityM(matM,0)
-        Matrix.rotateM(matM,0,t1,0f,0f,1f)
+        Matrix.rotateM(matM,0,t0,0f,0f,1f)
         Matrix.translateM(matM,0,5f,0f,0f)
-        Matrix.rotateM(matM,0,t1,0f,-1f,0f)
+        Matrix.rotateM(matM,0,t0,0f,-1f,0f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        shader.draw(drawObjSphere,matM,matMVP,vecEye,0,1,1)
+        shader.draw(modelSphere,matM,matMVP,vecEye,0,1,1)
 
         // トーラスをレンダリング
         Matrix.setIdentityM(matM,0)
-        Matrix.rotateM(matM,0,t2,0f,0f,1f)
+        Matrix.rotateM(matM,0,t1,0f,0f,1f)
         Matrix.translateM(matM,0,5f,0f,0f)
-        Matrix.rotateM(matM,0,t2,1f,-1f,1f)
+        Matrix.rotateM(matM,0,t1,1f,-1f,1f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        shader.draw(drawObjTorus,matM,matMVP,vecEye,0,1,1)
+        shader.draw(modelTorus,matM,matMVP,vecEye,0,1,1)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -117,12 +134,6 @@ class W045Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
         // 深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
@@ -131,16 +142,9 @@ class W045Renderer(ctx: Context): MgRenderer(ctx) {
         shader = W045Shader()
         shader.loadShader()
 
-        // 法線マップテクスチャを生成
-        GLES20.glGenTextures(1,normalTextures,0)
-        MyGLFunc.createTexture(0,normalTextures,bmpArray[6])
-
-        // キューブマップを生成
-        generateCubeMap()
-
         // モデル生成(立方体)
-        drawObjCube = Cube01Model()
-        drawObjCube.createPath(mapOf(
+        modelCube = Cube01Model()
+        modelCube.createPath(mapOf(
                 "pattern" to 2f,
                 "scale"   to 2f,
                 "colorR"  to 1f,
@@ -150,8 +154,8 @@ class W045Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(球体)
-        drawObjSphere = Sphere01Model()
-        drawObjSphere.createPath(mapOf(
+        modelSphere = Sphere01Model()
+        modelSphere.createPath(mapOf(
                 "row"    to 32f,
                 "column" to 32f,
                 "radius" to 2.5f,
@@ -162,8 +166,8 @@ class W045Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(トーラス)
-        drawObjTorus = Torus01Model()
-        drawObjTorus.createPath(mapOf(
+        modelTorus = Torus01Model()
+        modelTorus.createPath(mapOf(
                 "row"     to 32f,
                 "column"  to 32f,
                 "iradius" to 1f,
@@ -173,6 +177,13 @@ class W045Renderer(ctx: Context): MgRenderer(ctx) {
                 "colorB"  to 1f,
                 "colorA"  to 1f
         ))
+
+        // 法線マップテクスチャを生成
+        GLES20.glGenTextures(1,normalTextures,0)
+        MyGLFunc.createTexture(0,normalTextures,bmpArray[6])
+
+        // キューブマップを生成
+        generateCubeMap()
 
         // ----------------------------------
         // 単位行列化
@@ -193,7 +204,7 @@ class W045Renderer(ctx: Context): MgRenderer(ctx) {
 
     // キューブマッピング用テクスチャ
     private fun generateCubeMap() {
-        // テクスチャ作成し、idをtexturesに保存
+        // テクスチャ作成し、idをcubeTexturesに保存
         GLES20.glGenTextures(1,cubeTextures,0)
         MyGLFunc.checkGlError("glGenTextures")
 

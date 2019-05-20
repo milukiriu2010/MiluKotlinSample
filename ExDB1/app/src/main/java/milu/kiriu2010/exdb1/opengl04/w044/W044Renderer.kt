@@ -138,9 +138,6 @@ class W044Renderer(ctx: Context): MgRenderer(ctx) {
         shader = W044Shader()
         shader.loadShader()
 
-        // キューブマップを生成
-        generateCubeMap()
-
         // モデル生成(立方体)
         modelCube = Cube01Model()
         modelCube.createPath(mapOf(
@@ -176,6 +173,9 @@ class W044Renderer(ctx: Context): MgRenderer(ctx) {
                 "colorB"  to 1f,
                 "colorA"  to 1f
         ))
+
+        // キューブマップを生成
+        generateCubeMap()
 
         // ----------------------------------
         // 単位行列化
