@@ -154,10 +154,14 @@ class W041Renderer(ctx: Context): MgRenderer(ctx) {
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(2,textures,0)
         MyGLFunc.checkGlError("glGenTextures")
+        // ------------------------------------------------------------------------------------
+        // ブラーフィルターを適用する際、端にあるピクセルが周囲のピクセルを参照するときに、
+        // REPEATだと、反対側の端にあるピクセルを参照してしまうため、CLAMP_TO_EDGEを用いている
+        // ------------------------------------------------------------------------------------
         // テクスチャ0をバインド
-        MyGLFunc.createTexture(0,textures,bmpArray[0],renderW)
+        MyGLFunc.createTexture(0,textures,bmpArray[0],renderW,GLES20.GL_CLAMP_TO_EDGE)
         // テクスチャ1をバインド
-        MyGLFunc.createTexture(1,textures,bmpArray[1],renderW)
+        MyGLFunc.createTexture(1,textures,bmpArray[1],renderW,GLES20.GL_CLAMP_TO_EDGE)
 
         // フレームバッファ生成
         GLES20.glGenFramebuffers(1,bufFrame)
@@ -221,74 +225,6 @@ class W041Renderer(ctx: Context): MgRenderer(ctx) {
         // テンポラリ行列
         Matrix.setIdentityM(matVP,0)
     }
-
-    /*
-    // フレームバッファをオブジェクトとして生成する
-    private fun createFrameBuffer(width: Int, height: Int) {
-
-        val maxRenderbufferSize = IntBuffer.allocate(1)
-        GLES20.glGetIntegerv(GLES20.GL_MAX_RENDERBUFFER_SIZE,maxRenderbufferSize)
-
-        Log.d(javaClass.simpleName,"w[${width}]h[${height}]bufSize[${maxRenderbufferSize[0]}]")
-
-        // ----------------------------------------------
-        // 以下3行ない方が表示される
-        // ----------------------------------------------
-        // フレームバッファ生成
-        GLES20.glGenFramebuffers(1,bufFrame)
-        // レンダ―バッファ生成
-        GLES20.glGenRenderbuffers(1,bufDepthRender)
-        // テクスチャ生成
-        GLES20.glGenTextures(1,frameTexture)
-
-
-
-
-
-        // フレームバッファのバインド
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
-
-        // 深度バッファ用レンダ―バッファのバインド
-        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,bufDepthRender[0])
-
-        // レンダ―バッファを深度バッファとして設定
-        GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER, GLES20.GL_DEPTH_COMPONENT16, width, height)
-
-        // 以下、２行追加
-        // フレームバッファをバインドする
-        //GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
-        //GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER,GLES20.GL_COLOR_ATTACHMENT0,GLES20.GL_TEXTURE_2D,frameTexture[0],0)
-
-
-
-
-
-        // フレームバッファにレンダ―バッファを関連付ける
-        GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT, GLES20.GL_RENDERBUFFER,bufDepthRender[0])
-
-
-        // フレームバッファ用のテクスチャをバインド
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[0])
-
-        // フレームバッファ用のテクスチャにカラー用のメモリ領域を確保
-        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,width,height,0,GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,null)
-
-        // テクスチャパラメータ
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MIN_FILTER,GLES20.GL_LINEAR)
-        //GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE)
-        //GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
-
-
-        // フレームバッファにテクスチャを関連付ける
-        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,GLES20.GL_TEXTURE_2D,frameTexture[0],0)
-
-        // 追加
-        val status = GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER)
-        Log.d(javaClass.simpleName,"status[${status}]COMPLETE[${GLES20.GL_FRAMEBUFFER_COMPLETE}]")
-
-    }
-    */
 
     override fun setMotionParam(motionParam: MutableMap<String, Float>) {
     }

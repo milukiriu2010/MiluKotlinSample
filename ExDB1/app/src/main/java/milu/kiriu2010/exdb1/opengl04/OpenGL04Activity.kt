@@ -16,48 +16,14 @@ import milu.kiriu2010.exdb1.opengl04.w047.W047Fragment
 
 class OpenGL04Activity : AppCompatActivity() {
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.navigation_home -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, OpenGL04HomeFragment.newInstance(), "Home")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_dashboard -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Dash") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, OpenGL04HomeFragment.newInstance(), "Dash")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_notifications -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Noti") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, OpenGL04HomeFragment.newInstance(), "Noti")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_open_gl04)
 
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
-        if (supportFragmentManager.findFragmentByTag("Home") == null) {
+        supportFragmentManager.popBackStack()
+        if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, OpenGL04HomeFragment.newInstance(), "Home")
+                    .replace(R.id.frameLayout, W042Fragment.newInstance(), "xyz")
                     .commit()
         }
 
