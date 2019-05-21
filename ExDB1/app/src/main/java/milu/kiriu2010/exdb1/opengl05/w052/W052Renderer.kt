@@ -3,13 +3,11 @@ package milu.kiriu2010.exdb1.opengl05.w052
 import android.content.Context
 import android.graphics.Bitmap
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import android.opengl.Matrix
 import android.util.Log
-import android.view.MotionEvent
 import milu.kiriu2010.exdb1.opengl05.w051.W051ShaderDepth
 import milu.kiriu2010.exdb1.opengl05.w051.W051ShaderScreen
-import milu.kiriu2010.gui.basic.MyQuaternion
+import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
@@ -17,14 +15,17 @@ import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import kotlin.math.floor
-import kotlin.math.sqrt
 
+// -------------------------------------
 // 高解像度シャドウマッピング
+// -------------------------------------
+// https://wgld.org/d/webgl/w052.html
+// -------------------------------------
 class W052Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)
-    private lateinit var drawObjTorus: Torus01Model
+    private lateinit var modelTorus: Torus01Model
     // 描画オブジェクト(板ポリゴン)
-    private lateinit var drawObjBoard: Board01Model
+    private lateinit var modelBoard: Board01Model
 
     // シェーダ(深度値格納用)
     private lateinit var shaderDepth: W051ShaderDepth
@@ -45,7 +46,8 @@ class W052Renderer(ctx: Context): MgRenderer(ctx) {
 
     // テクスチャ座標変換行列
     private val matTex = FloatArray(16)
-
+    // ビュー×プロジェクション×テクスチャ座標変換行列
+    private val matVPT = FloatArray(16)
     // ライトから見たモデル×ビュー×プロジェクション座標変換行列
     private val matMVP4L = FloatArray(16)
     // ライトから見たビュー座標変換行列
@@ -65,15 +67,30 @@ class W052Renderer(ctx: Context): MgRenderer(ctx) {
     val frameTexture = IntBuffer.allocate(1)
 
     // ライトの位置補正用係数
-    //   k:30-60
-    var k = 45f
+    //   k:20-40
+    var k = 30f
 
     // 深度値を使うかどうか
     var u_depthBuffer = 1
+
+    init {
+        // -------------------------------------------------------
+        // テクスチャ変換用行列
+        // -------------------------------------------------------
+        // matTex[5]は
+        // 画像から読み込んだ場合は、-0.5fだが、
+        // フレームバッファに描いた風景は、初めから上下が判定しているので0.5f
+        // -------------------------------------------------------
+        matTex[0]  = 0.5f;  matTex[1]  =   0f;  matTex[2]  = 0f;  matTex[3]  = 0f;
+        matTex[4]  =   0f;  matTex[5]  = 0.5f;  matTex[6]  = 0f;  matTex[7]  = 0f;
+        matTex[8]  =   0f;  matTex[9]  =   0f;  matTex[10] = 1f;  matTex[11] = 0f;
+        matTex[12] = 0.5f;  matTex[13] = 0.5f;  matTex[14] = 0f;  matTex[15] = 1f;
+    }
+
     override fun onDrawFrame(gl: GL10?) {
         // 回転角度
         angle[0] =(angle[0]+1)%360
-        val t1 = angle[0].toFloat()
+        val t0 = angle[0].toFloat()
 
         // ビュー×プロジェクション座標変換行列
         vecEye = qtnNow.toVecIII(floatArrayOf(0f,70f,0f))
@@ -85,28 +102,8 @@ class W052Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.perspectiveM(matP,0,45f,ratio,0.1f,150f)
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
-        // -------------------------------------------------------
-        // テクスチャ変換用行列
-        // -------------------------------------------------------
-        matTex[0] = 0.5f
-        matTex[1] = 0f
-        matTex[2] = 0f
-        matTex[3] = 0f
-        matTex[4] = 0f
-        matTex[5] = 0.5f
-        matTex[6] = 0f
-        matTex[7] = 0f
-        matTex[8] = 0f
-        matTex[9] = 0f
-        matTex[10] = 1f
-        matTex[11] = 0f
-        matTex[12] = 0.5f
-        matTex[13] = 0.5f
-        matTex[14] = 0f
-        matTex[15] = 1f
-
         // ライトの距離を係数で調整
-        //   k=30-60
+        //   k=20-40
         vecLight[0] = 0f * k
         vecLight[1] = 1f * k
         vecLight[2] = 0f * k
@@ -119,9 +116,11 @@ class W052Renderer(ctx: Context): MgRenderer(ctx) {
         // ライトから見たプロジェクション座標変換行列
         Matrix.perspectiveM(matP4L,0,90f,ratio,0.1f,150f)
 
-        // テクスチャ座標変換行列
-        Matrix.multiplyMM(matVP4L,0,matTex,0,matP4L,0)
-        Matrix.multiplyMM(matTex,0,matVP4L,0,matV4L,0)
+        // ライトから見た座標変換行列を掛け合わせ
+        // ビュー×プロジェクション×テクスチャ座標変換行列を求める
+        val matPT = FloatArray(16)
+        Matrix.multiplyMM(matPT,0,matTex,0,matP4L,0)
+        Matrix.multiplyMM(matVPT,0,matPT,0,matV4L,0)
 
         // ライトから見たビュー×プロジェクション座標変換行列
         Matrix.multiplyMM(matVP4L,0,matP4L,0,matV4L,0)
@@ -161,7 +160,7 @@ class W052Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.translateM(matM,0,0f,ifl*10f+10f,(ifl-2f)*7f)
             Matrix.rotateM(matM,0,t1,1f,1f,0f)
             Matrix.multiplyMM(matMVP4L,0,matVP4L,0,matM,0)
-            shaderDepth.draw(drawObjTorus,matMVP4L,u_depthBuffer)
+            shaderDepth.draw(modelTorus,matMVP4L,u_depthBuffer)
         }
 
         // 板ポリゴンの描画(底面)
@@ -169,7 +168,7 @@ class W052Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.translateM(matM,0,0f,-10f,0f)
         Matrix.scaleM(matM,0,30f,0f,30f)
         Matrix.multiplyMM(matMVP4L,0,matVP4L,0,matM,0)
-        shaderDepth.draw(drawObjBoard,matMVP4L,0)
+        shaderDepth.draw(modelBoard,matMVP4L,0)
 
         // -----------------------------------------------
         // スクリーンレンダリング
@@ -207,7 +206,7 @@ class W052Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
             Matrix.invertM(matI,0,matM,0)
             Matrix.multiplyMM(matMVP4L,0,matVP4L,0,matM,0)
-            shaderScreen.draw(drawObjTorus,matM,matMVP,matI,matTex,matMVP4L,vecLight,0,u_depthBuffer)
+            shaderScreen.draw(modelTorus,matM,matMVP,matI,matVPT,matMVP4L,vecLight,0,u_depthBuffer)
         }
 
         // 板ポリゴンの描画(底面)
@@ -217,7 +216,7 @@ class W052Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
         Matrix.multiplyMM(matMVP4L,0,matVP4L,0,matM,0)
-        shaderScreen.draw(drawObjBoard,matM,matMVP,matI,matTex,matMVP4L,vecLight,0,0)
+        shaderScreen.draw(modelBoard,matM,matMVP,matI,matVPT,matMVP4L,vecLight,0,0)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -228,17 +227,16 @@ class W052Renderer(ctx: Context): MgRenderer(ctx) {
         renderW = width
         renderH = height
 
-        //createFrameBuffer(renderW,renderH)
-        createFrameBuffer(2048,2048)
+        // フレームバッファ生成
+        GLES20.glGenFramebuffers(1,bufFrame)
+        // 深度バッファ用レンダ―バッファ生成
+        GLES20.glGenRenderbuffers(1,bufDepthRender)
+        // フレームバッファ用テクスチャ生成
+        GLES20.glGenTextures(1,frameTexture)
+        MyGLFunc.createFrameBuffer(2048,2048,0,bufFrame,bufDepthRender,frameTexture)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
         // カリングと深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
@@ -252,8 +250,8 @@ class W052Renderer(ctx: Context): MgRenderer(ctx) {
         shaderScreen.loadShader()
 
         // モデル生成(トーラス)
-        drawObjTorus = Torus01Model()
-        drawObjTorus.createPath(mapOf(
+        modelTorus = Torus01Model()
+        modelTorus.createPath(mapOf(
                 "row"     to 32f,
                 "column"  to 32f,
                 "iradius" to 1f,
@@ -265,94 +263,14 @@ class W052Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(板ポリゴン)
-        drawObjBoard = Board01Model()
-        /*
-        drawObjBoard.createPath(mapOf(
+        modelBoard = Board01Model()
+        modelBoard.createPath(mapOf(
                 "pattern" to 51f,
-                "colorR"  to 0.5f,
-                "colorG"  to 0.5f,
-                "colorB"  to 0.5f,
+                "colorR"  to 1f,
+                "colorG"  to 1f,
+                "colorB"  to 1f,
                 "colorA"  to 1f
         ))
-        */
-        drawObjBoard.createPath(mapOf(
-                "pattern" to 51f,
-                "colorR"  to 1f, // 0.5f
-                "colorG"  to 1f, // 0.5f
-                "colorB"  to 1f, // 0.5f
-                "colorA"  to 1f
-        ))
-
-        // ----------------------------------
-        // 単位行列化
-        // ----------------------------------
-        // モデル変換行列
-        Matrix.setIdentityM(matM,0)
-        // モデル変換行列の逆行列
-        Matrix.setIdentityM(matI,0)
-        // ビュー変換行列
-        Matrix.setIdentityM(matV,0)
-        // プロジェクション変換行列
-        Matrix.setIdentityM(matP,0)
-        // モデル・ビュー・プロジェクション行列
-        Matrix.setIdentityM(matMVP,0)
-        // テンポラリ行列
-        Matrix.setIdentityM(matVP,0)
-
-        // モデル変換行列(テクスチャ用)
-        Matrix.setIdentityM(matTex,0)
-        // ライトの座標変換行列
-        Matrix.setIdentityM(matMVP4L,0)
-        // ライトから見たビュー座標変換行列
-        Matrix.setIdentityM(matV4L,0)
-        // ライトから見たプロジェクション座標変換行列
-        Matrix.setIdentityM(matP4L,0)
-        // ライトから見たビュー×プロジェクション座標変換行列
-        Matrix.setIdentityM(matVP4L,0)
-    }
-
-
-    // フレームバッファをオブジェクトとして生成する
-    private fun createFrameBuffer(width: Int, height: Int) {
-        // フレームバッファ生成
-        GLES20.glGenFramebuffers(1,bufFrame)
-        // フレームバッファのバインド
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
-
-        // 深度バッファ用レンダ―バッファ生成
-        GLES20.glGenRenderbuffers(1,bufDepthRender)
-        // 深度バッファ用レンダ―バッファのバインド
-        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,bufDepthRender[0])
-
-        // レンダ―バッファを深度バッファとして設定
-        GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER, GLES20.GL_DEPTH_COMPONENT16, width, height)
-        // フレームバッファにレンダ―バッファを関連付ける
-        GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT, GLES20.GL_RENDERBUFFER,bufDepthRender[0])
-
-        // フレームバッファ用テクスチャ生成
-        GLES20.glGenTextures(1,frameTexture)
-        // フレームバッファ用のテクスチャをバインド
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[0])
-
-        // フレームバッファ用のテクスチャにカラー用のメモリ領域を確保
-        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,width,height,0,GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,null)
-
-        // テクスチャパラメータ
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MIN_FILTER,GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_CLAMP_TO_EDGE)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_CLAMP_TO_EDGE)
-
-        // フレームバッファにテクスチャを関連付ける
-        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,GLES20.GL_TEXTURE_2D,frameTexture[0],0)
-
-        // 各種オブジェクトのバインドを解除
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,0)
-        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,0)
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
-
-        val status = GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER)
-        Log.d(javaClass.simpleName,"status[${status}]COMPLETE[${GLES20.GL_FRAMEBUFFER_COMPLETE}]")
     }
 
     override fun setMotionParam(motionParam: MutableMap<String, Float>) {

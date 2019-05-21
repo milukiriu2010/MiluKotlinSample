@@ -65,12 +65,26 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
     // フレームバッファ用のテクスチャ
     val frameTexture = IntBuffer.allocate(1)
 
-    // 光源位置補正用係数
-    //   k:30-60
-    var k = 45f
+    // ライトの位置補正用係数
+    //   k:20-40
+    var k = 30f
 
     // 深度値を使うかどうか
     var u_depthBuffer = 1
+
+    init {
+        // -------------------------------------------------------
+        // テクスチャ変換用行列
+        // -------------------------------------------------------
+        // matTex[5]は
+        // 画像から読み込んだ場合は、-0.5fだが、
+        // フレームバッファに描いた風景は、初めから上下が判定しているので0.5f
+        // -------------------------------------------------------
+        matTex[0]  = 0.5f;  matTex[1]  =   0f;  matTex[2]  = 0f;  matTex[3]  = 0f;
+        matTex[4]  =   0f;  matTex[5]  = 0.5f;  matTex[6]  = 0f;  matTex[7]  = 0f;
+        matTex[8]  =   0f;  matTex[9]  =   0f;  matTex[10] = 1f;  matTex[11] = 0f;
+        matTex[12] = 0.5f;  matTex[13] = 0.5f;  matTex[14] = 0f;  matTex[15] = 1f;
+    }
 
     override fun onDrawFrame(gl: GL10?) {
         // 回転角度
@@ -87,28 +101,8 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.perspectiveM(matP,0,45f,ratio,0.1f,150f)
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
-        // -------------------------------------------------------
-        // テクスチャ変換用行列
-        // -------------------------------------------------------
-        matTex[0] = 0.5f
-        matTex[1] = 0f
-        matTex[2] = 0f
-        matTex[3] = 0f
-        matTex[4] = 0f
-        matTex[5] = 0.5f
-        matTex[6] = 0f
-        matTex[7] = 0f
-        matTex[8] = 0f
-        matTex[9] = 0f
-        matTex[10] = 1f
-        matTex[11] = 0f
-        matTex[12] = 0.5f
-        matTex[13] = 0.5f
-        matTex[14] = 0f
-        matTex[15] = 1f
-
         // ライトの距離を係数で調整
-        //   k=30-60
+        //   k=20-40
         vecLight[0] = 0f * k
         vecLight[1] = 1f * k
         vecLight[2] = 0f * k
@@ -233,16 +227,9 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         // フレームバッファ用テクスチャ生成
         GLES20.glGenTextures(1,frameTexture)
         MyGLFunc.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
-        //createFrameBuffer(renderW,renderH)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
         // カリングと深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
@@ -277,79 +264,7 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
                 "colorB"  to 1f,
                 "colorA"  to 1f
         ))
-
-        // ----------------------------------
-        // 単位行列化
-        // ----------------------------------
-        // モデル変換行列
-        Matrix.setIdentityM(matM,0)
-        // モデル変換行列の逆行列
-        Matrix.setIdentityM(matI,0)
-        // ビュー変換行列
-        Matrix.setIdentityM(matV,0)
-        // プロジェクション変換行列
-        Matrix.setIdentityM(matP,0)
-        // モデル・ビュー・プロジェクション行列
-        Matrix.setIdentityM(matMVP,0)
-        // テンポラリ行列
-        Matrix.setIdentityM(matVP,0)
-
-        // モデル変換行列(テクスチャ用)
-        Matrix.setIdentityM(matTex,0)
-        // ライトの座標変換行列
-        Matrix.setIdentityM(matMVP4L,0)
-        // ライトから見たビュー座標変換行列
-        Matrix.setIdentityM(matV4L,0)
-        // ライトから見たプロジェクション座標変換行列
-        Matrix.setIdentityM(matP4L,0)
-        // ライトから見たビュー×プロジェクション座標変換行列
-        Matrix.setIdentityM(matVP4L,0)
     }
-
-    /*
-    // フレームバッファをオブジェクトとして生成する
-    private fun createFrameBuffer(width: Int, height: Int) {
-        // フレームバッファ生成
-        GLES20.glGenFramebuffers(1,bufFrame)
-        // フレームバッファのバインド
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
-
-        // 深度バッファ用レンダ―バッファ生成
-        GLES20.glGenRenderbuffers(1,bufDepthRender)
-        // 深度バッファ用レンダ―バッファのバインド
-        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,bufDepthRender[0])
-
-        // レンダ―バッファを深度バッファとして設定
-        GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER, GLES20.GL_DEPTH_COMPONENT16, width, height)
-        // フレームバッファにレンダ―バッファを関連付ける
-        GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT, GLES20.GL_RENDERBUFFER,bufDepthRender[0])
-
-        // フレームバッファ用テクスチャ生成
-        GLES20.glGenTextures(1,frameTexture)
-        // フレームバッファ用のテクスチャをバインド
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[0])
-
-        // フレームバッファ用のテクスチャにカラー用のメモリ領域を確保
-        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,width,height,0,GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,null)
-
-        // テクスチャパラメータ
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MIN_FILTER,GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_CLAMP_TO_EDGE)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_CLAMP_TO_EDGE)
-
-        // フレームバッファにテクスチャを関連付ける
-        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,GLES20.GL_TEXTURE_2D,frameTexture[0],0)
-
-        // 各種オブジェクトのバインドを解除
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,0)
-        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,0)
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
-
-        val status = GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER)
-        Log.d(javaClass.simpleName,"status[${status}]COMPLETE[${GLES20.GL_FRAMEBUFFER_COMPLETE}]")
-    }
-    */
 
     override fun setMotionParam(motionParam: MutableMap<String, Float>) {
     }

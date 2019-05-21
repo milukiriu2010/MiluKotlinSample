@@ -56,14 +56,14 @@ class W051Fragment : Fragment() {
         seekBarW51 = view.findViewById(R.id.seekBarW51)
         seekBarW51.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                renderer.k = (seekBar.progress+30).toFloat()
+                renderer.k = (seekBar.progress+20).toFloat()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
-                renderer.k = (seekBar.progress+30).toFloat()
+                renderer.k = (seekBar.progress+20).toFloat()
             }
 
         })
