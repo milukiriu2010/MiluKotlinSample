@@ -5,7 +5,11 @@ import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.MgShader
 
-// グレースケール用シェーダ
+// -------------------------------------
+// シェーダ(グレースケール)
+// -------------------------------------
+// https://wgld.org/d/webgl/w053.html
+// -------------------------------------
 class W053ShaderGray: MgShader() {
     // 頂点シェーダ
     private val scv =
@@ -64,6 +68,7 @@ class W053ShaderGray: MgShader() {
              u_grayScale: Int) {
 
         GLES20.glUseProgram(programHandle)
+        MyGLFunc.checkGlError2("UseProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)
@@ -71,7 +76,7 @@ class W053ShaderGray: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Position:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Position",this,model)
 
         // attribute(テクスチャ座標)
         model.bufTxc.position(0)
@@ -79,25 +84,25 @@ class W053ShaderGray: MgShader() {
             GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, model.bufTxc)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_TexCoord:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_TexCoord",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
-        MyGLFunc.checkGlError("u_matMVP:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matMVP",this,model)
 
-        // uniform(テクスチャ0)
+        // uniform(テクスチャユニット)
         GLES20.glGetUniformLocation(programHandle, "u_Texture0").also {
             GLES20.glUniform1i(it, u_Texture0)
         }
-        MyGLFunc.checkGlError("u_Texture0:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_Texture0",this,model)
 
         // uniform(グレースケールを使うかどうか)
         GLES20.glGetUniformLocation(programHandle, "u_grayScale").also {
             GLES20.glUniform1i(it, u_grayScale)
         }
-        MyGLFunc.checkGlError("u_grayScale:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_grayScale",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
