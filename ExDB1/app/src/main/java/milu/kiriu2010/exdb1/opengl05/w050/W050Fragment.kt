@@ -1,6 +1,5 @@
 package milu.kiriu2010.exdb1.opengl05.w050
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -11,11 +10,11 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.MyGL02View
+import milu.kiriu2010.gui.view.MyGLES20View
 
 class W050Fragment : Fragment() {
 
-    private lateinit var myGLView: MyGL02View
+    private lateinit var myGLES20View: MyGLES20View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,56 +25,44 @@ class W050Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl05_w50, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w50, container, false)
 
-        myGLView = view.findViewById(R.id.myGL02ViewA05)
-        val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.cube_w50_px)
-        val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.cube_w50_py)
-        val bmp2 = BitmapFactory.decodeResource(resources,R.drawable.cube_w50_pz)
-        val bmp3 = BitmapFactory.decodeResource(resources,R.drawable.cube_w50_nx)
-        val bmp4 = BitmapFactory.decodeResource(resources,R.drawable.cube_w50_ny)
-        val bmp5 = BitmapFactory.decodeResource(resources,R.drawable.cube_w50_nz)
-        val render = W050Renderer(context!!)
-        render.bmpArray.add(bmp0)
-        render.bmpArray.add(bmp1)
-        render.bmpArray.add(bmp2)
-        render.bmpArray.add(bmp3)
-        render.bmpArray.add(bmp4)
-        render.bmpArray.add(bmp5)
-        myGLView.setRenderer(render)
-        myGLView.setOnTouchListener { v, event ->
+        myGLES20View = view.findViewById(R.id.myGLES20ViewW50)
+        val renderer = W050Renderer(context!!)
+        myGLES20View.setRenderer(renderer)
+        myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
-                    render.isRunning = false
+                    renderer.isRunning = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
-                    Log.d(javaClass.simpleName,"vw[${myGLView.width}]vh[${myGLView.height}]")
-                    render.isRunning = true
-                    render.receiveTouch(event,myGLView.width,myGLView.height)
+                    Log.d(javaClass.simpleName,"vw[${myGLES20View.width}]vh[${myGLES20View.height}]")
+                    renderer.isRunning = true
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    render.receiveTouch(event,myGLView.width,myGLView.height)
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 else -> {
                 }
             }
             true
         }
-        val seekBarW050 = view.findViewById<SeekBar>(R.id.seekBarW050)
-        seekBarW050.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                render.k = (seekBarW050.progress-5).toFloat()/5f
-                Log.d(javaClass.simpleName,"k[${render.k}]")
+
+        val seekBarW50 = view.findViewById<SeekBar>(R.id.seekBarW50)
+        seekBarW50.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                renderer.k = (seekBar.progress-5).toFloat()/5f
+                Log.d(javaClass.simpleName,"k[${renderer.k}]")
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
             }
 
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                render.k = (seekBarW050.progress-5).toFloat()/5f
-                Log.d(javaClass.simpleName,"k[${render.k}]")
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                renderer.k = (seekBar.progress-5).toFloat()/5f
+                Log.d(javaClass.simpleName,"k[${renderer.k}]")
             }
 
         })
@@ -85,12 +72,12 @@ class W050Fragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        myGLView.onResume()
+        myGLES20View.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        myGLView.onPause()
+        myGLES20View.onPause()
     }
 
     companion object {

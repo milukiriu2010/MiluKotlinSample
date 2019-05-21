@@ -18,8 +18,8 @@ class W049Shader: MgShader() {
             attribute vec3  a_Normal;
             attribute vec4  a_Color;
             uniform   mat4  u_matM;
-            // モデル×ビュー×プロジェクション×テクスチャ座標変換行列
-            uniform   mat4  u_matMVPT;
+            // ビュー×プロジェクション×テクスチャ座標変換行列
+            uniform   mat4  u_matVPT;
             uniform   mat4  u_matMVP;
             varying   vec3  v_Position;
             varying   vec3  v_Normal;
@@ -34,8 +34,8 @@ class W049Shader: MgShader() {
                 // モデル座標変換行列を掛け合わせた頂点位置と
                 // テクスチャ座標変換行列とをかけあわせることで
                 // テクスチャ座標を取得
-                v_TexCoord    = u_matMVPT * vec4(v_Position,1.0);
-                gl_Position   = u_matMVP  * vec4(a_Position,1.0);
+                v_TexCoord    = u_matVPT * vec4(v_Position,1.0);
+                gl_Position   = u_matMVP * vec4(a_Position,1.0);
             }
             """.trimIndent()
 
@@ -78,7 +78,7 @@ class W049Shader: MgShader() {
 
     fun draw(model: MgModelAbs,
              matM: FloatArray,
-             matMVPT: FloatArray,
+             matVPT: FloatArray,
              matMVP: FloatArray,
              matINV: FloatArray,
              u_vecLight: FloatArray,
@@ -116,11 +116,11 @@ class W049Shader: MgShader() {
         }
         MyGLFunc.checkGlError2("u_matM",this,model)
 
-        // uniform(モデル×ビュー×プロジェクション×テクスチャ座標変換行列)
-        GLES20.glGetUniformLocation(programHandle,"u_matMVPT").also {
-            GLES20.glUniformMatrix4fv(it,1,false,matMVPT,0)
+        // uniform(ビュー×プロジェクション×テクスチャ座標変換行列)
+        GLES20.glGetUniformLocation(programHandle,"u_matVPT").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matVPT,0)
         }
-        MyGLFunc.checkGlError2("u_matMVPT",this,model)
+        MyGLFunc.checkGlError2("u_matVPT",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {

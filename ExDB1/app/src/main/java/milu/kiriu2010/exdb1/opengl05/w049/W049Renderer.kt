@@ -71,8 +71,8 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
     private val matV4L = FloatArray(16)
     // プロジェクション変換行列(ライト視点)
     private val matP4L = FloatArray(16)
-    // モデル×ビュー×プロジェクション×テクスチャ座標変換行列(ライト視点)
-    private val matMVPT4L = FloatArray(16)
+    // ビュー×プロジェクション×テクスチャ座標変換行列(ライト視点)
+    private val matVPT4L = FloatArray(16)
 
     // 光源位置補正用係数(0～20)
     // ライトの位置を原点から遠ざけると、投影されるテクスチャの範囲が大きくなる
@@ -135,10 +135,10 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.perspectiveM(matP4L,0,90f,1f,0.1f,150f)
 
         // ライトから見た座標変換行列を掛け合わせ
-        // モデル×ビュー×プロジェクション×テクスチャ座標変換行列を求める
-        val matVPT = FloatArray(16)
-        Matrix.multiplyMM(matVPT,0,matTex,0,matP4L,0)
-        Matrix.multiplyMM(matMVPT4L,0,matVPT,0,matV4L,0)
+        // ビュー×プロジェクション×テクスチャ座標変換行列を求める
+        val matPT = FloatArray(16)
+        Matrix.multiplyMM(matPT,0,matTex,0,matP4L,0)
+        Matrix.multiplyMM(matVPT4L,0,matPT,0,matV4L,0)
 
         // -------------------------------------------------------
         // トーラス描画(10個)
@@ -157,7 +157,7 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.rotateM(matM,0,t,1f,1f,0f)
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
             Matrix.invertM(matI,0,matM,0)
-            shader.draw(modelTorus,matM,matMVPT4L,matMVP,matI,vecLight,0)
+            shader.draw(modelTorus,matM,matVPT4L,matMVP,matI,vecLight,0)
         }
 
         // 板ポリゴンの描画(底面)
@@ -166,7 +166,7 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.scaleM(matM,0,20f,0f,20f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
-        shader.draw(modelBoard,matM,matMVPT4L,matMVP,matI,vecLight,0)
+        shader.draw(modelBoard,matM,matVPT4L,matMVP,matI,vecLight,0)
 
         // 板ポリゴンの描画(奥面)
         Matrix.setIdentityM(matM,0)
@@ -175,7 +175,7 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.scaleM(matM,0,20f,0f,20f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
-        shader.draw(modelBoard,matM,matMVPT4L,matMVP,matI,vecLight,0)
+        shader.draw(modelBoard,matM,matVPT4L,matMVP,matI,vecLight,0)
 
         // 板ポリゴンの描画(右脇面)
         Matrix.setIdentityM(matM,0)
@@ -184,7 +184,7 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.scaleM(matM,0,20f,0f,20f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
-        shader.draw(modelBoard,matM,matMVPT4L,matMVP,matI,vecLight,0)
+        shader.draw(modelBoard,matM,matVPT4L,matMVP,matI,vecLight,0)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
