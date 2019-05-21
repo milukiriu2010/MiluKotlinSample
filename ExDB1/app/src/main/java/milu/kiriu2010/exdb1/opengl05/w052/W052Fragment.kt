@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioGroup
 import android.widget.SeekBar
-import kotlinx.android.synthetic.main.fragment_open_gl05_w51.*
 
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl.MyGL02View
@@ -68,6 +66,7 @@ class W052Fragment : Fragment() {
             }
 
         })
+        /*
         val radioGroupW051 = view.findViewById<RadioGroup>(R.id.radioGroupW051)
         radioGroupW051.setOnCheckedChangeListener { group, checkedId ->
             Log.d(javaClass.simpleName,"radioGroupW051:${checkedId}")
@@ -76,6 +75,7 @@ class W052Fragment : Fragment() {
                 else -> 0
             }
         }
+        */
 
         return view
     }

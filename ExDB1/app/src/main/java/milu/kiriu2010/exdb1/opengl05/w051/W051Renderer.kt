@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.Matrix
 import android.util.Log
+import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
@@ -13,13 +14,17 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import kotlin.math.floor
 
+// -------------------------------------
 // シャドウマッピング
+// -------------------------------------
+// https://wgld.org/d/webgl/w051.html
+// -------------------------------------
 class W051Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト(トーラス)
-    private lateinit var drawObjTorus: Torus01Model
+    private lateinit var modelTorus: Torus01Model
     // 描画オブジェクト(板ポリゴン)
-    private lateinit var drawObjBoard: Board01Model
+    private lateinit var modelBoard: Board01Model
 
     // シェーダ(深度値格納用)
     private lateinit var shaderDepth: W051ShaderDepth
@@ -40,7 +45,8 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
 
     // テクスチャ座標変換行列
     private val matTex = FloatArray(16)
-
+    // ビュー×プロジェクション×テクスチャ座標変換行列
+    private val matVPT = FloatArray(16)
     // ライトから見たモデル×ビュー×プロジェクション座標変換行列
     private val matMVP4L = FloatArray(16)
     // ライトから見たビュー座標変換行列
@@ -59,7 +65,7 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
     // フレームバッファ用のテクスチャ
     val frameTexture = IntBuffer.allocate(1)
 
-    // ライトの位置補正用係数
+    // 光源位置補正用係数
     //   k:30-60
     var k = 45f
 
@@ -69,7 +75,7 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
     override fun onDrawFrame(gl: GL10?) {
         // 回転角度
         angle[0] =(angle[0]+1)%360
-        val t1 = angle[0].toFloat()
+        val t0 = angle[0].toFloat()
 
         // ビュー×プロジェクション座標変換行列
         vecEye = qtnNow.toVecIII(floatArrayOf(0f,70f,0f))
@@ -115,9 +121,11 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         // ライトから見たプロジェクション座標変換行列
         Matrix.perspectiveM(matP4L,0,90f,ratio,0.1f,150f)
 
-        // テクスチャ座標変換行列
-        Matrix.multiplyMM(matVP4L,0,matTex,0,matP4L,0)
-        Matrix.multiplyMM(matTex,0,matVP4L,0,matV4L,0)
+        // ライトから見た座標変換行列を掛け合わせ
+        // ビュー×プロジェクション×テクスチャ座標変換行列を求める
+        val matPT = FloatArray(16)
+        Matrix.multiplyMM(matPT,0,matTex,0,matP4L,0)
+        Matrix.multiplyMM(matVPT,0,matPT,0,matV4L,0)
 
         // ライトから見たビュー×プロジェクション座標変換行列
         Matrix.multiplyMM(matVP4L,0,matP4L,0,matV4L,0)
@@ -154,7 +162,7 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.translateM(matM,0,0f,ifl*10f+10f,(ifl-2f)*7f)
             Matrix.rotateM(matM,0,t1,1f,1f,0f)
             Matrix.multiplyMM(matMVP4L,0,matVP4L,0,matM,0)
-            shaderDepth.draw(drawObjTorus,matMVP4L,u_depthBuffer)
+            shaderDepth.draw(modelTorus,matMVP4L,u_depthBuffer)
         }
 
         // 板ポリゴンの描画(底面)
@@ -162,7 +170,7 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.translateM(matM,0,0f,-10f,0f)
         Matrix.scaleM(matM,0,30f,0f,30f)
         Matrix.multiplyMM(matMVP4L,0,matVP4L,0,matM,0)
-        shaderDepth.draw(drawObjBoard,matMVP4L,0)
+        shaderDepth.draw(modelBoard,matMVP4L,0)
 
         // -----------------------------------------------
         // スクリーンレンダリング
@@ -179,7 +187,6 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glClearColor(0.0f, 0.7f, 0.7f, 1.0f)
         GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
-
 
         // -------------------------------------------------------
         // トーラス描画(10個)
@@ -198,7 +205,7 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
             Matrix.invertM(matI,0,matM,0)
             Matrix.multiplyMM(matMVP4L,0,matVP4L,0,matM,0)
-            shaderScreen.draw(drawObjTorus,matM,matMVP,matI,matTex,matMVP4L,vecLight,0,u_depthBuffer)
+            shaderScreen.draw(modelTorus,matM,matMVP,matI,matVPT,matMVP4L,vecLight,0,u_depthBuffer)
         }
 
         // 板ポリゴンの描画(底面)
@@ -208,7 +215,7 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
         Matrix.multiplyMM(matMVP4L,0,matVP4L,0,matM,0)
-        shaderScreen.draw(drawObjBoard,matM,matMVP,matI,matTex,matMVP4L,vecLight,0,0)
+        shaderScreen.draw(modelBoard,matM,matMVP,matI,matVPT,matMVP4L,vecLight,0,0)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -219,7 +226,14 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         renderW = width
         renderH = height
 
-        createFrameBuffer(renderW,renderH)
+        // フレームバッファ生成
+        GLES20.glGenFramebuffers(1,bufFrame)
+        // 深度バッファ用レンダ―バッファ生成
+        GLES20.glGenRenderbuffers(1,bufDepthRender)
+        // フレームバッファ用テクスチャ生成
+        GLES20.glGenTextures(1,frameTexture)
+        MyGLFunc.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
+        //createFrameBuffer(renderW,renderH)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
@@ -242,8 +256,8 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         shaderScreen.loadShader()
 
         // モデル生成(トーラス)
-        drawObjTorus = Torus01Model()
-        drawObjTorus.createPath(mapOf(
+        modelTorus = Torus01Model()
+        modelTorus.createPath(mapOf(
                 "row"     to 32f,
                 "column"  to 32f,
                 "iradius" to 1f,
@@ -255,21 +269,12 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(板ポリゴン)
-        drawObjBoard = Board01Model()
-        /*
-        drawObjBoard.createPath(mapOf(
+        modelBoard = Board01Model()
+        modelBoard.createPath(mapOf(
                 "pattern" to 51f,
-                "colorR"  to 0.5f,
-                "colorG"  to 0.5f,
-                "colorB"  to 0.5f,
-                "colorA"  to 1f
-        ))
-        */
-        drawObjBoard.createPath(mapOf(
-                "pattern" to 51f,
-                "colorR"  to 1f, // 0.5f
-                "colorG"  to 1f, // 0.5f
-                "colorB"  to 1f, // 0.5f
+                "colorR"  to 1f,
+                "colorG"  to 1f,
+                "colorB"  to 1f,
                 "colorA"  to 1f
         ))
 
@@ -301,6 +306,7 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.setIdentityM(matVP4L,0)
     }
 
+    /*
     // フレームバッファをオブジェクトとして生成する
     private fun createFrameBuffer(width: Int, height: Int) {
         // フレームバッファ生成
@@ -343,6 +349,7 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
         val status = GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER)
         Log.d(javaClass.simpleName,"status[${status}]COMPLETE[${GLES20.GL_FRAMEBUFFER_COMPLETE}]")
     }
+    */
 
     override fun setMotionParam(motionParam: MutableMap<String, Float>) {
     }

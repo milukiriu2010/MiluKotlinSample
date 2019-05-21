@@ -16,8 +16,11 @@ import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
+// ---------------------------------------------
 // 光学迷彩
-// http://opengles2learning.blogspot.com/2011/06/texturing-cube-different-textures-on.html
+// ---------------------------------------------
+// https://wgld.org/d/webgl/w050.html
+// ---------------------------------------------
 class W050Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト(立方体)

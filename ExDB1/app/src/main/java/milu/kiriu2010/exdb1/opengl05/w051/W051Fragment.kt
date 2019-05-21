@@ -7,18 +7,18 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.SeekBar
-import kotlinx.android.synthetic.main.fragment_open_gl05_w51.*
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.MyGL02View
+import milu.kiriu2010.gui.view.MyGLES20View
 
 class W051Fragment : Fragment() {
 
-    private lateinit var myGLView: MyGL02View
+    private lateinit var myGLES20View: MyGLES20View
 
-    private lateinit var seekBarW051: SeekBar
+    private lateinit var seekBarW51: SeekBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,52 +29,51 @@ class W051Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl05_w51, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w51, container, false)
 
-        myGLView = view.findViewById(R.id.myGL02ViewA05)
-        val render = W051Renderer(context!!)
-        myGLView.setRenderer(render)
-        myGLView.setOnTouchListener { v, event ->
+        myGLES20View = view.findViewById(R.id.myGLES20ViewW51)
+        val renderer = W051Renderer(context!!)
+        myGLES20View.setRenderer(renderer)
+        myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
-                    render.isRunning = false
+                    renderer.isRunning = false
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
-                    Log.d(javaClass.simpleName,"vw[${myGLView.width}]vh[${myGLView.height}]")
-                    render.isRunning = true
-                    render.receiveTouch(event,myGLView.width,myGLView.height)
+                    Log.d(javaClass.simpleName,"vw[${myGLES20View.width}]vh[${myGLES20View.height}]")
+                    renderer.isRunning = true
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    render.receiveTouch(event,myGLView.width,myGLView.height)
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 else -> {
                 }
             }
             true
         }
-        seekBarW051 = view.findViewById(R.id.seekBarW051)
-        seekBarW051.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                Log.d(javaClass.simpleName,"seekBarW051:${seekBarW051.progress}")
-                render.k = (seekBarW051.progress+30).toFloat()
+        seekBarW51 = view.findViewById(R.id.seekBarW51)
+        seekBarW51.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                renderer.k = (seekBar.progress+30).toFloat()
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
             }
 
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                Log.d(javaClass.simpleName,"seekBarW051:${seekBarW051.progress}")
-                render.k = (seekBarW051.progress+30).toFloat()
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                renderer.k = (seekBar.progress+30).toFloat()
             }
 
         })
-        val radioGroupW051 = view.findViewById<RadioGroup>(R.id.radioGroupW051)
-        radioGroupW051.setOnCheckedChangeListener { group, checkedId ->
-            Log.d(javaClass.simpleName,"radioGroupW051:${checkedId}")
-            render.u_depthBuffer = when (checkedId) {
-                radioButtonW051Frag.id -> 1
+        val radioGroupW51 = view.findViewById<RadioGroup>(R.id.radioGroupW51)
+        val radioButtonW51Frag = view.findViewById<RadioButton>(R.id.radioButtonW51Frag)
+        val radioButtonW51Vertex = view.findViewById<RadioButton>(R.id.radioButtonW51Vertex)
+        radioGroupW51.setOnCheckedChangeListener { group, checkedId ->
+            renderer.u_depthBuffer = when (checkedId) {
+                radioButtonW51Frag.id   -> 1
+                radioButtonW51Vertex.id -> 0
                 else -> 0
             }
         }
@@ -84,12 +83,12 @@ class W051Fragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        myGLView.onResume()
+        myGLES20View.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        myGLView.onPause()
+        myGLES20View.onPause()
     }
 
     companion object {

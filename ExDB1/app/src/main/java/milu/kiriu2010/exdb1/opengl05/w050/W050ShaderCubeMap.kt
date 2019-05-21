@@ -75,7 +75,7 @@ class W050ShaderCubeMap: MgShader() {
              u_CubeTexture: Int,
              u_Reflection: Int) {
         GLES20.glUseProgram(programHandle)
-        MyGLFunc.checkGlError2("UserProgram",this,model)
+        MyGLFunc.checkGlError2("UseProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)

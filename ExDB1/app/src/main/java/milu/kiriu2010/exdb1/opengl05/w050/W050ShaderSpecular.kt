@@ -66,7 +66,7 @@ class W050ShaderSpecular: MgShader() {
              u_vecEye: FloatArray,
              u_ambientColor: FloatArray) {
         GLES20.glUseProgram(programHandle)
-        MyGLFunc.checkGlError2("UserProgram",this,model)
+        MyGLFunc.checkGlError2("UseProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)

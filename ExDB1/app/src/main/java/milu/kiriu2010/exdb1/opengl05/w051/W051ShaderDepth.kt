@@ -5,7 +5,11 @@ import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.MgShader
 
-// 深度格納用シェーダ
+// -------------------------------------
+// シェーダ(深度格納用)
+// -------------------------------------
+// https://wgld.org/d/webgl/w051.html
+// -------------------------------------
 class W051ShaderDepth: MgShader() {
     // 頂点シェーダ
     private val scv =
@@ -79,6 +83,7 @@ class W051ShaderDepth: MgShader() {
              u_matMVP: FloatArray,
              u_depthBuffer: Int) {
         GLES20.glUseProgram(programHandle)
+        MyGLFunc.checkGlError2("UseProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)
@@ -86,19 +91,19 @@ class W051ShaderDepth: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Position:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Position",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,u_matMVP,0)
         }
-        MyGLFunc.checkGlError("u_matMVP:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matMVP",this,model)
 
         // uniform(深度値を使うかどうか)
         GLES20.glGetUniformLocation(programHandle, "u_depthBuffer").also {
             GLES20.glUniform1i(it, u_depthBuffer)
         }
-        MyGLFunc.checkGlError("u_depthBuffer:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_depthBuffer",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

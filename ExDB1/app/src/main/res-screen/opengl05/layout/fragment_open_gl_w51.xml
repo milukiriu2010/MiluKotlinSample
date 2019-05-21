@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".opengl04.OpenGL04HomeFragment">
+    android:layout_height="match_parent">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <milu.kiriu2010.exdb1.opengl.MyGL02View
-        android:id="@+id/myGL02ViewA05"
+    <milu.kiriu2010.gui.view.MyGLES20View
+        android:id="@+id/myGLES20ViewW51"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -21,56 +20,55 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <SeekBar
-        android:id="@+id/seekBarW051"
+        android:id="@+id/seekBarW51"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:max="20"
         android:progress="10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewW51Light" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textViewW51Light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Light Scale"
+        android:text="光源位置補正係数(30-60)"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myGL02ViewA05" />
+        app:layout_constraintTop_toBottomOf="@+id/myGLES20ViewW51" />
 
     <RadioGroup
-        android:id="@+id/radioGroupW051"
+        android:id="@+id/radioGroupW51"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBarW051">
+        app:layout_constraintTop_toBottomOf="@+id/seekBarW51">
 
         <RadioButton
-            android:id="@+id/radioButtonW051Frag"
+            android:id="@+id/radioButtonW51Frag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
-            android:text="gl_FragCoord.z" />
+            android:text="gl_FragCoord.z(デプスバッファを使った深度値比較)" />
 
         <RadioButton
-            android:id="@+id/radioButtonW051Vertex"
+            android:id="@+id/radioButtonW51Vertex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Vertex Position" />
+            android:text="Vertex Position(頂点座標を用いた深度値比較)" />
     </RadioGroup>
 
 
