@@ -2,34 +2,35 @@ package milu.kiriu2010.exdb1.opengl05.w057
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
-import android.opengl.GLUtils
 import android.opengl.Matrix
 import android.util.Log
-import android.view.MotionEvent
+import milu.kiriu2010.exdb1.R
+import milu.kiriu2010.exdb1.opengl05.w053.W053ShaderScreen
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.color.MgColor
-import milu.kiriu2010.gui.basic.MyQuaternion
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import java.lang.RuntimeException
 import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import kotlin.math.exp
-import kotlin.math.sqrt
 
-// シャドウマッピング
+// -------------------------------------------
+// gaussianフィルタ
+// -------------------------------------------
+// https://wgld.org/d/webgl/w057.html
+// -------------------------------------------
 class W057Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)
-    private lateinit var drawObjTorus: Torus01Model
+    private lateinit var modelTorus: Torus01Model
     // 描画オブジェクト(板ポリゴン)
-    private lateinit var drawObjBoard: Board01Model
+    private lateinit var modelBoard: Board01Model
 
     // シェーダ(モデルをレンダリング)
-    private lateinit var screenShader: W057ShaderScreen
+    private lateinit var screenShader: W053ShaderScreen
     // シェーダ(gaussianフィルタ)
     private lateinit var gaussianShader: W057ShaderGaussian
 
@@ -64,9 +65,18 @@ class W057Renderer(ctx: Context): MgRenderer(ctx) {
     // 色相用カウンタ
     var cntColor = 0
 
+    init {
+        // ビットマップをロード
+        bmpArray.clear()
+        val bmp0 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w55_01)
+        val bmp1 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w55_02)
+        bmpArray.add(bmp0)
+        bmpArray.add(bmp1)
+    }
+
     override fun onDrawFrame(gl: GL10?) {
         angle[0] =(angle[0]+1)%360
-        val t1 = angle[0].toFloat()
+        val t0 = angle[0].toFloat()
         if ( (angle[0]%2) == 0 ) {
             cntColor++
         }
@@ -98,10 +108,10 @@ class W057Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.setIdentityM(matM,0)
             Matrix.rotateM(matM,0,i.toFloat()*360f/9f,0f,1f,0f)
             Matrix.translateM(matM,0,0f,0f,10f)
-            Matrix.rotateM(matM,0,t1,1f,1f,0f)
+            Matrix.rotateM(matM,0,t0,1f,1f,0f)
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
             Matrix.invertM(matI,0,matM,0)
-            screenShader.draw(drawObjTorus,matMVP,matI,vecLight,vecEye,amb.toFloatArray())
+            screenShader.draw(modelTorus,matMVP,matI,vecLight,vecEye,amb.toFloatArray())
         }
 
         // 正射影用の座標変換行列
@@ -178,7 +188,7 @@ class W057Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // 板ポリゴンの描画
-        gaussianShader.draw(drawObjBoard,matVP,0,g,u_weight,h,renderW.toFloat())
+        gaussianShader.draw(modelBoard,matVP,0,g,u_weight,h,renderW.toFloat())
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -201,24 +211,20 @@ class W057Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glGenRenderbuffers(2,bufDepthRender)
         // テクスチャ生成
         GLES20.glGenTextures(2,frameTexture)
-        createFrameBuffer(renderW,renderH,0)
-        createFrameBuffer(renderW,renderH,1)
+        MyGLFunc.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
+        MyGLFunc.createFrameBuffer(renderW,renderH,1,bufFrame,bufDepthRender,frameTexture)
+        //createFrameBuffer(renderW,renderH,0)
+        //createFrameBuffer(renderW,renderH,1)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
         // カリングと深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
         GLES20.glEnable(GLES20.GL_CULL_FACE)
 
         // モデルをレンダリングするシェーダ
-        screenShader = W057ShaderScreen()
+        screenShader = W053ShaderScreen()
         screenShader.loadShader()
 
         // gaussianフィルタ用シェーダ
@@ -226,8 +232,8 @@ class W057Renderer(ctx: Context): MgRenderer(ctx) {
         gaussianShader.loadShader()
 
         // モデル生成(トーラス)
-        drawObjTorus = Torus01Model()
-        drawObjTorus.createPath(mapOf(
+        modelTorus = Torus01Model()
+        modelTorus.createPath(mapOf(
                 "row"     to 32f,
                 "column"  to 32f,
                 "iradius" to 1f,
@@ -239,8 +245,8 @@ class W057Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(板ポリゴン)
-        drawObjBoard = Board01Model()
-        drawObjBoard.createPath(mapOf(
+        modelBoard = Board01Model()
+        modelBoard.createPath(mapOf(
                 "pattern" to 53f
         ))
 
@@ -248,24 +254,9 @@ class W057Renderer(ctx: Context): MgRenderer(ctx) {
         vecLight[0] = -0.577f
         vecLight[1] =  0.577f
         vecLight[2] =  0.577f
-
-        // ----------------------------------
-        // 単位行列化
-        // ----------------------------------
-        // モデル変換行列
-        Matrix.setIdentityM(matM,0)
-        // モデル変換行列の逆行列
-        Matrix.setIdentityM(matI,0)
-        // ビュー変換行列
-        Matrix.setIdentityM(matV,0)
-        // プロジェクション変換行列
-        Matrix.setIdentityM(matP,0)
-        // モデル・ビュー・プロジェクション行列
-        Matrix.setIdentityM(matMVP,0)
-        // テンポラリ行列
-        Matrix.setIdentityM(matVP,0)
     }
 
+    /*
     // フレームバッファをオブジェクトとして生成する
     private fun createFrameBuffer(width: Int, height: Int, id: Int) {
         val maxRenderbufferSize = IntBuffer.allocate(1)
@@ -309,6 +300,7 @@ class W057Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,0)
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
     }
+    */
 
     override fun setMotionParam(motionParam: MutableMap<String, Float>) {
     }
