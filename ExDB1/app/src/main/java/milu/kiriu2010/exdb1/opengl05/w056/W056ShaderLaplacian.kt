@@ -5,11 +5,14 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.shader.MgShader
 
-// laplacianフィルタ用シェーダ
+// -------------------------------------------------------------------------------
+// シェーダ(laplacianフィルタ)
 // -------------------------------------------------------------------------------
 // laplacianフィルタは、エッジ(色の諧調が極端に変化しているところ)の検出が可能になる。
 // 二次微分を計算することで、色の諧調差を計算する
 // sobelフィルタに比べ繊細で細い線によるエッジの検出ができる
+// -------------------------------------------------------------------------------
+// // https://wgld.org/d/webgl/w056.html
 // -------------------------------------------------------------------------------
 class W056ShaderLaplacian: MgShader() {
     // 頂点シェーダ
@@ -118,13 +121,13 @@ class W056ShaderLaplacian: MgShader() {
     fun draw(model: MgModelAbs,
              matMVP: FloatArray,
              u_Texture0: Int,
-             u_sobel: Int,
-             u_sobelGray: Int,
+             u_laplacian: Int,
+             u_laplacianGray: Int,
              u_Coef: FloatArray,
              u_renderWH: Float) {
 
         GLES20.glUseProgram(programHandle)
-        MyGLFunc.checkGlError("UseProgram:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("UseProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)
@@ -132,7 +135,7 @@ class W056ShaderLaplacian: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Position:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Position",this,model)
 
         // attribute(テクスチャ座標)
         model.bufTxc.position(0)
@@ -140,43 +143,43 @@ class W056ShaderLaplacian: MgShader() {
             GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, model.bufTxc)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_TexCoord:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_TexCoord",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
-        MyGLFunc.checkGlError("u_matMVP:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matMVP",this,model)
 
         // uniform(テクスチャ0)
         GLES20.glGetUniformLocation(programHandle, "u_Texture0").also {
             GLES20.glUniform1i(it, u_Texture0)
         }
-        MyGLFunc.checkGlError("u_Texture0:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_Texture0",this,model)
 
-        // uniform(sobelフィルタを使うかどうか)
+        // uniform(laplacianフィルタを使うかどうか)
         GLES20.glGetUniformLocation(programHandle, "u_laplacian").also {
-            GLES20.glUniform1i(it, u_sobel)
+            GLES20.glUniform1i(it, u_laplacian)
         }
-        MyGLFunc.checkGlError("u_laplacian:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_laplacian",this,model)
 
         // uniform(グレースケールを使うかどうか)
         GLES20.glGetUniformLocation(programHandle, "u_laplacianGray").also {
-            GLES20.glUniform1i(it, u_sobelGray)
+            GLES20.glUniform1i(it, u_laplacianGray)
         }
-        MyGLFunc.checkGlError("u_laplacianGray:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_laplacianGray",this,model)
 
         // uniform(カーネル)
         GLES20.glGetUniformLocation(programHandle, "u_Coef").also {
             GLES20.glUniform1fv(it, 9,u_Coef,0)
         }
-        MyGLFunc.checkGlError("u_Coef:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_Coef",this,model)
 
-        // uniform(画像の大きさ)
+        // uniform(レンダリング領域の大きさ)
         GLES20.glGetUniformLocation(programHandle, "u_renderWH").also {
             GLES20.glUniform1f(it, u_renderWH)
         }
-        MyGLFunc.checkGlError("u_renderWH:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_renderWH",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
