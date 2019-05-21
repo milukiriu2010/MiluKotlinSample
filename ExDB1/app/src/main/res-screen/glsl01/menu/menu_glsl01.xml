@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/glsl_g008"
+        android:title="g008_レイ" />
+    <item
         android:id="@+id/glsl_g007"
         android:title="g007_ノイズ" />
     <item

@@ -12,6 +12,7 @@ import milu.kiriu2010.exdb1.glsl01.g004.GLSL04Fragment
 import milu.kiriu2010.exdb1.glsl01.g005.GLSL05Fragment
 import milu.kiriu2010.exdb1.glsl01.g006.GLSL06Fragment
 import milu.kiriu2010.exdb1.glsl01.g007.GLSL07Fragment
+import milu.kiriu2010.exdb1.glsl01.g008.GLSL08Fragment
 
 class GLSL01Activity : AppCompatActivity() {
 
@@ -22,7 +23,7 @@ class GLSL01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, GLSL07Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, GLSL08Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -44,6 +45,16 @@ class GLSL01Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // ノイズ
+            R.id.glsl_g008 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("g08") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSL08Fragment.newInstance(), "g08")
+                            .commit()
+                }
                 true
             }
             // ノイズ
