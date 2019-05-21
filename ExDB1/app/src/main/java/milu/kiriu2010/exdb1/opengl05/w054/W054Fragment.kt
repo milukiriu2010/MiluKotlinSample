@@ -11,13 +11,11 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.MyGL02View
+import milu.kiriu2010.gui.view.MyGLES20View
 
 class W054Fragment : Fragment() {
 
-    private lateinit var myGLView: MyGL02View
-
-    private lateinit var radioGroupW54: RadioGroup
+    private lateinit var myGLES20View: MyGLES20View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,22 +26,22 @@ class W054Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl05_w54, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w54, container, false)
 
-        myGLView = view.findViewById(R.id.myGL02ViewA05)
-        val render = W054Renderer(context!!)
-        myGLView.setRenderer(render)
-        myGLView.setOnTouchListener { v, event ->
+        myGLES20View = view.findViewById(R.id.myGLES20ViewW54)
+        val renderer = W054Renderer(context!!)
+        myGLES20View.setRenderer(renderer)
+        myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
-                    Log.d(javaClass.simpleName,"vw[${myGLView.width}]vh[${myGLView.height}]")
-                    render.receiveTouch(event,myGLView.width,myGLView.height)
+                    Log.d(javaClass.simpleName,"vw[${myGLES20View.width}]vh[${myGLES20View.height}]")
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    render.receiveTouch(event,myGLView.width,myGLView.height)
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 else -> {
                 }
@@ -51,7 +49,7 @@ class W054Fragment : Fragment() {
             true
         }
 
-        radioGroupW54 = view.findViewById(R.id.radioGroupW54)
+        val radioGroupW54 = view.findViewById<RadioGroup>(R.id.radioGroupW54)
         val radioButtonW54Color = view.findViewById<RadioButton>(R.id.radioButtonW54Color)
         val radioButtonW54Gray = view.findViewById<RadioButton>(R.id.radioButtonW54Gray)
         val radioButtonW54Sepia = view.findViewById<RadioButton>(R.id.radioButtonW54Sepia)
@@ -59,16 +57,16 @@ class W054Fragment : Fragment() {
         radioGroupW54.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 radioButtonW54Color.id -> {
-                    render.u_grayScale = 0
-                    render.u_sepiaScale = 0
+                    renderer.u_grayScale = 0
+                    renderer.u_sepiaScale = 0
                 }
                 radioButtonW54Gray.id -> {
-                    render.u_grayScale = 1
-                    render.u_sepiaScale = 0
+                    renderer.u_grayScale = 1
+                    renderer.u_sepiaScale = 0
                 }
                 radioButtonW54Sepia.id -> {
-                    render.u_grayScale = 0
-                    render.u_sepiaScale = 1
+                    renderer.u_grayScale = 0
+                    renderer.u_sepiaScale = 1
                 }
             }
         }
@@ -78,12 +76,12 @@ class W054Fragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        myGLView.onResume()
+        myGLES20View.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        myGLView.onPause()
+        myGLES20View.onPause()
     }
 
     companion object {
