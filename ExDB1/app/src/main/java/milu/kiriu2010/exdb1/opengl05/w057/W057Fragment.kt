@@ -31,8 +31,8 @@ class W057Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_gl05_w57, container, false)
 
         myGLView = view.findViewById(R.id.myGL02ViewA05)
-        val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w56_01)
-        val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.texture_w56_02)
+        val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w55_01)
+        val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.texture_w55_02)
         val render = W057Renderer(context!!)
         render.bmpArray.add(bmp0)
         render.bmpArray.add(bmp1)

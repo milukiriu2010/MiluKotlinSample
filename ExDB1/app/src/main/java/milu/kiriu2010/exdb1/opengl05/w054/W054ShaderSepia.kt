@@ -75,6 +75,7 @@ class W054ShaderSepia: MgShader() {
              u_sepiaScale: Int) {
 
         GLES20.glUseProgram(programHandle)
+        MyGLFunc.checkGlError2("UseProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)
@@ -82,7 +83,7 @@ class W054ShaderSepia: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Position:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Position",this,model)
 
         // attribute(テクスチャ座標)
         model.bufTxc.position(0)
@@ -90,31 +91,31 @@ class W054ShaderSepia: MgShader() {
             GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, model.bufTxc)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_TexCoord:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_TexCoord",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
-        MyGLFunc.checkGlError("u_matMVP:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matMVP",this,model)
 
         // uniform(テクスチャ0)
         GLES20.glGetUniformLocation(programHandle, "u_Texture0").also {
             GLES20.glUniform1i(it, u_Texture0)
         }
-        MyGLFunc.checkGlError("u_Texture0:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_Texture0",this,model)
 
         // uniform(グレースケールを使うかどうか)
         GLES20.glGetUniformLocation(programHandle, "u_grayScale").also {
             GLES20.glUniform1i(it, u_grayScale)
         }
-        MyGLFunc.checkGlError("u_grayScale:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_grayScale",this,model)
 
         // uniform(セピア調にするかどうか)
         GLES20.glGetUniformLocation(programHandle, "u_sepiaScale").also {
             GLES20.glUniform1i(it, u_sepiaScale)
         }
-        MyGLFunc.checkGlError("u_sepiaScale:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_sepiaScale",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

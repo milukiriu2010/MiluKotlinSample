@@ -2,34 +2,35 @@ package milu.kiriu2010.exdb1.opengl05.w055
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
-import android.opengl.GLUtils
 import android.opengl.Matrix
 import android.util.Log
-import android.view.MotionEvent
+import milu.kiriu2010.exdb1.R
+import milu.kiriu2010.exdb1.opengl05.w053.W053ShaderScreen
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.color.MgColor
-import milu.kiriu2010.gui.basic.MyQuaternion
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import java.lang.RuntimeException
 import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
-import kotlin.math.sqrt
 
+// ------------------------------------
 // sobelフィルタ
+// ------------------------------------
+// https://wgld.org/d/webgl/w055.html
+// ------------------------------------
 class W055Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト(トーラス)
-    private lateinit var drawObjTorus: Torus01Model
+    private lateinit var modelTorus: Torus01Model
     // 描画オブジェクト(板ポリゴン)
-    private lateinit var drawObjBoard: Board01Model
+    private lateinit var modelBoard: Board01Model
 
     // シェーダ(モデルをレンダリング)
-    private lateinit var screenShader: W055ShaderScreen
+    private lateinit var screenShader: W053ShaderScreen
     // シェーダ(sobelフィルタ)
     private lateinit var sobelShader: W055ShaderSobel
 
@@ -66,9 +67,18 @@ class W055Renderer(ctx: Context): MgRenderer(ctx) {
     // 色相用カウンタ
     var cntColor = 0
 
+    init {
+        // ビットマップをロード
+        bmpArray.clear()
+        val bmp0 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w55_01)
+        val bmp1 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w55_02)
+        bmpArray.add(bmp0)
+        bmpArray.add(bmp1)
+    }
+
     override fun onDrawFrame(gl: GL10?) {
         angle[0] =(angle[0]+1)%360
-        val t1 = angle[0].toFloat()
+        val t0 = angle[0].toFloat()
         if ( (angle[0]%2) == 0 ) {
             cntColor++
         }
@@ -100,10 +110,10 @@ class W055Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.setIdentityM(matM,0)
             Matrix.rotateM(matM,0,i.toFloat()*360f/9f,0f,1f,0f)
             Matrix.translateM(matM,0,0f,0f,10f)
-            Matrix.rotateM(matM,0,t1,1f,1f,0f)
+            Matrix.rotateM(matM,0,t0,1f,1f,0f)
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
             Matrix.invertM(matI,0,matM,0)
-            screenShader.draw(drawObjTorus,matMVP,matI,vecLight,vecEye,amb.toFloatArray())
+            screenShader.draw(modelTorus,matMVP,matI,vecLight,vecEye,amb.toFloatArray())
         }
 
         // フレームバッファのバインドを解除
@@ -133,7 +143,7 @@ class W055Renderer(ctx: Context): MgRenderer(ctx) {
         }
 
         // 板ポリゴンの描画
-        sobelShader.draw(drawObjBoard,matVP,0,u_sobel,u_sobelGray,u_hCoef,u_vCoef,renderW.toFloat())
+        sobelShader.draw(modelBoard,matVP,0,u_sobel,u_sobelGray,u_hCoef,u_vCoef,renderW.toFloat())
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -166,7 +176,7 @@ class W055Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glEnable(GLES20.GL_CULL_FACE)
 
         // シェーダ(モデルをレンダリング)
-        screenShader = W055ShaderScreen()
+        screenShader = W053ShaderScreen()
         screenShader.loadShader()
 
         // シェーダ(sobelフィルタ)
@@ -174,8 +184,8 @@ class W055Renderer(ctx: Context): MgRenderer(ctx) {
         sobelShader.loadShader()
 
         // モデル生成(トーラス)
-        drawObjTorus = Torus01Model()
-        drawObjTorus.createPath(mapOf(
+        modelTorus = Torus01Model()
+        modelTorus.createPath(mapOf(
                 "row"     to 32f,
                 "column"  to 32f,
                 "iradius" to 1f,
@@ -187,8 +197,8 @@ class W055Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(板ポリゴン)
-        drawObjBoard = Board01Model()
-        drawObjBoard.createPath(mapOf(
+        modelBoard = Board01Model()
+        modelBoard.createPath(mapOf(
                 "pattern" to 53f
         ))
 
