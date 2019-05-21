@@ -5,6 +5,11 @@ import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.MgShader
 
+// -----------------------------------
+// 射影テクスチャマッピング
+// -----------------------------------
+// https://wgld.org/d/webgl/w049.html
+// -----------------------------------
 class W049Shader: MgShader() {
     // 頂点シェーダ
     private val scv =
@@ -13,20 +18,24 @@ class W049Shader: MgShader() {
             attribute vec3  a_Normal;
             attribute vec4  a_Color;
             uniform   mat4  u_matM;
-            uniform   mat4  u_matTex;
+            // モデル×ビュー×プロジェクション×テクスチャ座標変換行列
+            uniform   mat4  u_matMVPT;
             uniform   mat4  u_matMVP;
             varying   vec3  v_Position;
             varying   vec3  v_Normal;
             varying   vec4  v_Color;
+            // 射影変換を適用した頂点座標
             varying   vec4  v_TexCoord;
 
             void main() {
                 v_Position    = (u_matM * vec4(a_Position,1.0)).xyz;
                 v_Normal      = a_Normal;
                 v_Color       = a_Color;
+                // モデル座標変換行列を掛け合わせた頂点位置と
+                // テクスチャ座標変換行列とをかけあわせることで
                 // テクスチャ座標を取得
-                v_TexCoord    = u_matTex * vec4(v_Position,1.0);
-                gl_Position   = u_matMVP * vec4(a_Position,1.0);
+                v_TexCoord    = u_matMVPT * vec4(v_Position,1.0);
+                gl_Position   = u_matMVP  * vec4(a_Position,1.0);
             }
             """.trimIndent()
 
@@ -44,6 +53,7 @@ class W049Shader: MgShader() {
             varying   vec4        v_TexCoord;
 
             void main() {
+                // 点光源でのライティング
                 vec3  light    = u_vecLight - v_Position;
                 vec3  invLight = normalize(u_matINV * vec4(light,0.0)).xyz;
                 float diffuse  = clamp(dot(v_Normal,invLight), 0.1, 1.0);
@@ -68,12 +78,13 @@ class W049Shader: MgShader() {
 
     fun draw(model: MgModelAbs,
              matM: FloatArray,
-             matTex: FloatArray,
+             matMVPT: FloatArray,
              matMVP: FloatArray,
              matINV: FloatArray,
              u_vecLight: FloatArray,
              u_Texture0: Int) {
         GLES20.glUseProgram(programHandle)
+        MyGLFunc.checkGlError2("UserProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)
@@ -81,7 +92,7 @@ class W049Shader: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Position:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Position",this,model)
 
         // attribute(法線)
         model.bufNor.position(0)
@@ -89,7 +100,7 @@ class W049Shader: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufNor)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Normal:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Normal",this,model)
 
         // attribute(色)
         model.bufCol.position(0)
@@ -97,43 +108,43 @@ class W049Shader: MgShader() {
             GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, model.bufCol)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Color:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Color",this,model)
 
         // uniform(モデル)
         GLES20.glGetUniformLocation(programHandle,"u_matM").also {
             GLES20.glUniformMatrix4fv(it,1,false,matM,0)
         }
-        MyGLFunc.checkGlError("u_matM:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matM",this,model)
 
-        // uniform(テクスチャ射影変換用行列)
-        GLES20.glGetUniformLocation(programHandle,"u_matTex").also {
-            GLES20.glUniformMatrix4fv(it,1,false,matTex,0)
+        // uniform(モデル×ビュー×プロジェクション×テクスチャ座標変換行列)
+        GLES20.glGetUniformLocation(programHandle,"u_matMVPT").also {
+            GLES20.glUniformMatrix4fv(it,1,false,matMVPT,0)
         }
-        MyGLFunc.checkGlError("u_matTex:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matMVPT",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
-        MyGLFunc.checkGlError("u_matMVP:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matMVP",this,model)
 
         // uniform(逆行列)
         GLES20.glGetUniformLocation(programHandle,"u_matINV").also {
             GLES20.glUniformMatrix4fv(it,1,false,matINV,0)
         }
-        MyGLFunc.checkGlError("u_matINV:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matINV",this,model)
 
-        // uniform(ライティング)
+        // uniform(光源位置)
         GLES20.glGetUniformLocation(programHandle,"u_vecLight").also {
             GLES20.glUniform3fv(it,1,u_vecLight,0)
         }
-        MyGLFunc.checkGlError("u_vecLight:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_vecLight",this,model)
 
-        // uniform(テクスチャ0)
+        // uniform(テクスチャユニット)
         GLES20.glGetUniformLocation(programHandle, "u_Texture0").also {
             GLES20.glUniform1i(it, u_Texture0)
         }
-        MyGLFunc.checkGlError("u_Texture0:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_Texture0",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

@@ -2,8 +2,10 @@ package milu.kiriu2010.exdb1.opengl05.w049
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.opengl.GLES20
 import android.opengl.Matrix
+import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Torus01Model
@@ -11,13 +13,39 @@ import milu.kiriu2010.gui.renderer.MgRenderer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
+// ------------------------------------------------------------------------------
 // 射影テクスチャマッピング
+// ------------------------------------------------------------------------------
+// テクスチャをまるでスクリーンに投影するかのようにマッピングする
+// モデルの影を投影したり、モデルに光学迷彩がかかったように処理できる
+// ------------------------------------------------------------------------------
+// テクスチャという２次元データを射影変換することで３次元空間上に投影する
+// 画像データの原点が左上になるのに対し、テクスチャの原点が左下となることに注意
+
+// またテクスチャ空間は0～1の範囲で座標を表し、原点は左下。
+// プロジェクション変換を行う射影空間では、座標の範囲は-1～1で、原点は空間の中心
+//
+// ・イメージが上下反転してしまう問題
+// ・テクスチャ空間と射影空間で座標系が異なる問題
+// を対処するために,テクスチャ座標系への変換行列を作成する
+//   http://asura.iaigiri.com/OpenGL/gl45.html
+// ------------------------------------------------------------------------------
+// 物体のローカル座標系からテクスチャ座標系への変換
+//
+//   [テクスチャ座標変換行列]
+//   ×[ライトから見たときの射影行列]
+//   ×[ライトから見たときのビュー行列]
+//   ×[ワールド行列]
+//   ×[ローカル座標系の頂点座標]
+// ------------------------------------------------------------------------------
+// https://wgld.org/d/webgl/w049.html
+// ------------------------------------------------------------------------------
 class W049Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト(トーラス)
-    private lateinit var drawObjTorus: Torus01Model
+    private lateinit var modelTorus: Torus01Model
     // 描画オブジェクト(板ポリゴン)
-    private lateinit var drawObjBoard: Board01Model
+    private lateinit var modelBoard: Board01Model
 
     // シェーダ
     private lateinit var shader: W049Shader
@@ -43,16 +71,34 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
     private val matV4L = FloatArray(16)
     // プロジェクション変換行列(ライト視点)
     private val matP4L = FloatArray(16)
-    // テンポラリ行列(ライト視点)
-    private val matT4L = FloatArray(16)
+    // モデル×ビュー×プロジェクション×テクスチャ座標変換行列(ライト視点)
+    private val matMVPT4L = FloatArray(16)
 
-    // ライトの位置補正用係数
+    // 光源位置補正用係数(0～20)
+    // ライトの位置を原点から遠ざけると、投影されるテクスチャの範囲が大きくなる
     var k = 10f
+
+    init {
+        // ビットマップをロード
+        bmpArray.clear()
+        val bmp0 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w49)
+        bmpArray.add(bmp0)
+
+        // -------------------------------------------------------
+        // テクスチャ変換用行列
+        // -------------------------------------------------------
+        // http://asura.iaigiri.com/OpenGL/gl45.html
+        // -------------------------------------------------------
+        matTex[0]  = 0.5f;  matTex[1]  =    0f;  matTex[2]  = 0f;  matTex[3]  = 0f;
+        matTex[4]  =   0f;  matTex[5]  = -0.5f;  matTex[6]  = 0f;  matTex[7]  = 0f;
+        matTex[8]  =   0f;  matTex[9]  =    0f;  matTex[10] = 1f;  matTex[11] = 0f;
+        matTex[12] = 0.5f;  matTex[13] =  0.5f;  matTex[14] = 0f;  matTex[15] = 1f;
+    }
 
     override fun onDrawFrame(gl: GL10?) {
         // 回転角度
         angle[0] =(angle[0]+1)%360
-        val t1 = angle[0].toFloat()
+        val t0 = angle[0].toFloat()
 
         // canvasを初期化
         GLES20.glClearColor(0.0f, 0.7f, 0.7f, 1.0f)
@@ -73,28 +119,6 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0])
 
-        // -------------------------------------------------------
-        // テクスチャ変換用行列
-        // -------------------------------------------------------
-        // http://asura.iaigiri.com/OpenGL/gl45.html
-        // -------------------------------------------------------
-        matTex[0] = 0.5f
-        matTex[1] = 0f
-        matTex[2] = 0f
-        matTex[3] = 0f
-        matTex[4] = 0f
-        matTex[5] = -0.5f
-        matTex[6] = 0f
-        matTex[7] = 0f
-        matTex[8] = 0f
-        matTex[9] = 0f
-        matTex[10] = 1f
-        matTex[11] = 0f
-        matTex[12] = 0.5f
-        matTex[13] = 0.5f
-        matTex[14] = 0f
-        matTex[15] = 1f
-
         // ライトの距離を調整
         //  k = 0 ～ 20
         vecLight[0] = -k
@@ -110,9 +134,11 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
         // ライトから見たプロジェクション座標変換行列
         Matrix.perspectiveM(matP4L,0,90f,1f,0.1f,150f)
 
-        // ライトから見た座標変換行列を掛け合わせる
-        Matrix.multiplyMM(matT4L,0,matTex,0,matP4L,0)
-        Matrix.multiplyMM(matTex,0,matT4L,0,matV4L,0)
+        // ライトから見た座標変換行列を掛け合わせ
+        // モデル×ビュー×プロジェクション×テクスチャ座標変換行列を求める
+        val matVPT = FloatArray(16)
+        Matrix.multiplyMM(matVPT,0,matTex,0,matP4L,0)
+        Matrix.multiplyMM(matMVPT4L,0,matVPT,0,matV4L,0)
 
         // -------------------------------------------------------
         // トーラス描画(10個)
@@ -131,7 +157,7 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.rotateM(matM,0,t,1f,1f,0f)
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
             Matrix.invertM(matI,0,matM,0)
-            shader.draw(drawObjTorus,matM,matTex,matMVP,matI,vecLight,0)
+            shader.draw(modelTorus,matM,matMVPT4L,matMVP,matI,vecLight,0)
         }
 
         // 板ポリゴンの描画(底面)
@@ -140,7 +166,7 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.scaleM(matM,0,20f,0f,20f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
-        shader.draw(drawObjBoard,matM,matTex,matMVP,matI,vecLight,0)
+        shader.draw(modelBoard,matM,matMVPT4L,matMVP,matI,vecLight,0)
 
         // 板ポリゴンの描画(奥面)
         Matrix.setIdentityM(matM,0)
@@ -149,7 +175,7 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.scaleM(matM,0,20f,0f,20f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
-        shader.draw(drawObjBoard,matM,matTex,matMVP,matI,vecLight,0)
+        shader.draw(modelBoard,matM,matMVPT4L,matMVP,matI,vecLight,0)
 
         // 板ポリゴンの描画(右脇面)
         Matrix.setIdentityM(matM,0)
@@ -158,7 +184,7 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.scaleM(matM,0,20f,0f,20f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
-        shader.draw(drawObjBoard,matM,matTex,matMVP,matI,vecLight,0)
+        shader.draw(modelBoard,matM,matMVPT4L,matMVP,matI,vecLight,0)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -171,13 +197,7 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
-        // カリングと深度テストを有効にする
+        // 深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
 
@@ -190,8 +210,8 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
         shader.loadShader()
 
         // モデル生成(トーラス)
-        drawObjTorus = Torus01Model()
-        drawObjTorus.createPath(mapOf(
+        modelTorus = Torus01Model()
+        modelTorus.createPath(mapOf(
                 "row"     to 32f,
                 "column"  to 32f,
                 "iradius" to 1f,
@@ -203,8 +223,8 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(板ポリゴン)
-        drawObjBoard = Board01Model()
-        drawObjBoard.createPath(mapOf(
+        modelBoard = Board01Model()
+        modelBoard.createPath(mapOf(
                 "pattern" to 49f
         ))
 
