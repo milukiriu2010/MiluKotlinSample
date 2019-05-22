@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".opengl04.OpenGL04HomeFragment">
+    android:layout_height="match_parent">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <milu.kiriu2010.exdb1.opengl.MyGL02View
-        android:id="@+id/myGL02ViewW58"
+    <milu.kiriu2010.gui.view.MyGLES20View
+        android:id="@+id/myGLES20ViewW58"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -29,7 +28,16 @@
         android:checked="true"
         android:text="Glare"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myGL02ViewW58" />
+        app:layout_constraintTop_toBottomOf="@+id/myGLES20ViewW58" />
+
+    <TextView
+        android:id="@+id/textViewW58Dispersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="分散(1.0-10.0)"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxW58Glare" />
 
     <SeekBar
         android:id="@+id/seekBarW58Dispersion"
@@ -39,11 +47,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:max="10"
-        android:progress="5"
+        android:max="9"
+        android:progress="4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxW58Glare" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewW58Dispersion" />
 
 
 </android.support.constraint.ConstraintLayout>

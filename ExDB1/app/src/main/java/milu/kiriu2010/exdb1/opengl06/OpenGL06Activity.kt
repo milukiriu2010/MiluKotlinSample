@@ -26,7 +26,7 @@ class OpenGL06Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W068Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, W058Fragment.newInstance(), "xyz")
                     .commit()
         }
 
