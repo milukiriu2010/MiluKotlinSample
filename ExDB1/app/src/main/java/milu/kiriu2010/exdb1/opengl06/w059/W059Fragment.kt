@@ -1,6 +1,5 @@
 package milu.kiriu2010.exdb1.opengl06.w059
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -11,11 +10,11 @@ import android.view.ViewGroup
 import android.widget.*
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.MyGL02View
+import milu.kiriu2010.gui.view.MyGLES20View
 
 class W059Fragment : Fragment() {
 
-    private lateinit var myGLView: MyGL02View
+    private lateinit var myGLES20View: MyGLES20View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,22 +27,20 @@ class W059Fragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_open_gl06_w59, container, false)
 
-        myGLView = view.findViewById(R.id.myGL02ViewW59)
-        val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w59)
-        val render = W059Renderer(context!!)
-        render.bmpArray.add(bmp0)
-        myGLView.setRenderer(render)
-        myGLView.setOnTouchListener { v, event ->
+        myGLES20View = view.findViewById(R.id.myGLES20ViewW59)
+        val renderer = W059Renderer(context!!)
+        myGLES20View.setRenderer(renderer)
+        myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
-                    Log.d(javaClass.simpleName,"vw[${myGLView.width}]vh[${myGLView.height}]")
-                    render.receiveTouch(event,myGLView.width,myGLView.height)
+                    Log.d(javaClass.simpleName,"vw[${myGLES20View.width}]vh[${myGLES20View.height}]")
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    render.receiveTouch(event,myGLView.width,myGLView.height)
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 else -> {
                 }
@@ -60,7 +57,7 @@ class W059Fragment : Fragment() {
                 // http://android-note.open-memo.net/sub/spinner--get-resource-id-for-selected-item.html
                 val array = resources.obtainTypedArray(R.array.w59list)
                 val itemId = array.getResourceId(position,R.string.w59_depth_of_field)
-                render.u_result = when (itemId) {
+                renderer.u_result = when (itemId) {
                     R.string.w59_depth_of_field -> 0
                     R.string.w59_depth -> 1
                     R.string.w59_scene -> 2
@@ -77,14 +74,14 @@ class W059Fragment : Fragment() {
         val seekBarW59Depth = view.findViewById<SeekBar>(R.id.seekBarW59Depth)
         seekBarW59Depth.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                render.u_depthOffset = (seekBar.progress-5).toFloat()/10f * 0.85f
+                renderer.u_depthOffset = (seekBar.progress-5).toFloat()/10f * 0.85f
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
-                render.u_depthOffset = (seekBar.progress-5).toFloat()/10f * 0.85f
+                renderer.u_depthOffset = (seekBar.progress-5).toFloat()/10f * 0.85f
             }
 
         })
@@ -94,12 +91,12 @@ class W059Fragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        myGLView.onResume()
+        myGLES20View.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        myGLView.onPause()
+        myGLES20View.onPause()
     }
 
     companion object {

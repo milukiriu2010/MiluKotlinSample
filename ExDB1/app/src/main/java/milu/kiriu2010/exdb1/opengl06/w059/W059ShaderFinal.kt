@@ -5,8 +5,12 @@ import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.MgShader
 
+// -----------------------------------------------------------------------
 // シェーダ(最終結果)
 //   レンダリングされた全てのシーンを合成する
+// -----------------------------------------------------------------------
+// https://wgld.org/d/webgl/w059.html
+// -----------------------------------------------------------------------
 class W059ShaderFinal: MgShader() {
     // 頂点シェーダ
     private val scv =
@@ -105,6 +109,7 @@ class W059ShaderFinal: MgShader() {
              u_TextureBlur2: Int,
              u_result: Int) {
         GLES20.glUseProgram(programHandle)
+        MyGLFunc.checkGlError2("UseProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)
@@ -112,7 +117,7 @@ class W059ShaderFinal: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Position:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Position",this,model)
 
         // attribute(テクスチャ座標)
         model.bufTxc.position(0)
@@ -120,43 +125,43 @@ class W059ShaderFinal: MgShader() {
             GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, model.bufTxc)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_TextureCoord:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_TextureCoord",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
-        MyGLFunc.checkGlError("u_matMVP:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matMVP",this,model)
 
-        // uniform(テクスチャ)
+        // uniform(テクスチャユニット)
         GLES20.glGetUniformLocation(programHandle, "u_TextureDepth").also {
             GLES20.glUniform1i(it, u_TextureDepth)
         }
-        MyGLFunc.checkGlError("u_TextureDepth:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_TextureDepth",this,model)
 
-        // uniform(テクスチャ)
+        // uniform(テクスチャユニット)
         GLES20.glGetUniformLocation(programHandle, "u_TextureScene").also {
             GLES20.glUniform1i(it, u_TextureScene)
         }
-        MyGLFunc.checkGlError("u_TextureScene:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_TextureScene",this,model)
 
-        // uniform(テクスチャ)
+        // uniform(テクスチャユニット)
         GLES20.glGetUniformLocation(programHandle, "u_TextureBlur1").also {
             GLES20.glUniform1i(it, u_TextureBlur1)
         }
-        MyGLFunc.checkGlError("u_TextureBlur1:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_TextureBlur1",this,model)
 
-        // uniform(テクスチャ)
+        // uniform(テクスチャユニット)
         GLES20.glGetUniformLocation(programHandle, "u_TextureBlur2").also {
             GLES20.glUniform1i(it, u_TextureBlur2)
         }
-        MyGLFunc.checkGlError("u_TextureBlur2:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_TextureBlur2",this,model)
 
         // uniform(結果)
         GLES20.glGetUniformLocation(programHandle, "u_result").also {
             GLES20.glUniform1i(it, u_result)
         }
-        MyGLFunc.checkGlError("u_result:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_result",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
