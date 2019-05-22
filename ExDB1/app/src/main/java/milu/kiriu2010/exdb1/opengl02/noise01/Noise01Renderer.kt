@@ -40,9 +40,9 @@ class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
         val noiseColor = FloatArray(size*size)
         (0 until size).forEach { i ->
             (0 until size).forEach { j ->
-                //noiseColor[i*size+j] = noise.snoise(i.toFloat(),j.toFloat(),size.toFloat())
-                // 左⇒右:黒⇒灰色⇒黄色
-                noiseColor[i*size+j] = i.toFloat()/size.toFloat()
+                noiseColor[i*size+j] = noise.snoise(i.toFloat(),j.toFloat(),size.toFloat())
+                // 上:黒⇒下：白
+                //noiseColor[i*size+j] = i.toFloat()/size.toFloat()
             }
         }
         val bmp = noise.createImage(size,noiseColor)

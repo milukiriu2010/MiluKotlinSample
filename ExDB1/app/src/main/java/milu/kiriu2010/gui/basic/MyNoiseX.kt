@@ -3,6 +3,7 @@ package milu.kiriu2010.gui.basic
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.util.Log
+import java.lang.RuntimeException
 import kotlin.math.floor
 import kotlin.math.pow
 
@@ -16,37 +17,60 @@ import kotlin.math.pow
 // ---------------------------------------
 // https://wgld.org/d/webgl/w061.html
 // ---------------------------------------
-class MyNoiseX(
-        // いくつの階層のノイズを合成するかを表す
-        var octave: Int = 5,
-        // 最小解像度
-        var offset: Int = 3,
-        // ノイズをどのような割合で合成するかを決定する
-        // たいていの場合、0.5程度の値にする
-        // 解像度の低いノイズから順に、パーシステンスの値を元に割合を決定する
-        // ------------------------------------------------------------------
-        // パーシステンスの値が0.5の場合
-        //   4x  4 のノイズにかけるパーシステンス⇒パーシステンスの1乗=0.5
-        //   8x  8 のノイズにかけるパーシステンス⇒パーシステンスの2乗=0.25
-        //  16x 16 のノイズにかけるパーシステンス⇒パーシステンスの3乗=0.125
-        //  32x 32 のノイズにかけるパーシステンス⇒パーシステンスの4乗=0.0625
-        //  64x 64 のノイズにかけるパーシステンス⇒パーシステンスの5乗=0.03125
-        // 128x128 のノイズにかけるパーシステンス⇒パーシステンスの6乗=0.0015625
-        // ------------------------------------------------------------------
-        var persistence: Float = 0.5f
-) {
+class MyNoiseX {
+    // ------------------------------------------------------------------
+    // 【オクターブ】
+    //   いくつの階層のノイズを合成するかを表す
+    // ------------------------------------------------------------------
+    // 合成するノイズの階層数を増やせば増やすほど精細なノイズが得られる
+    // ------------------------------------------------------------------
+    var octave: Int = 5
+    // 最小解像度
+    var offset: Int = 3
+    // ------------------------------------------------------------------
+    // 【パーシステンス】
+    //   ノイズをどのような割合で合成するかを決定する
+    //   ノイズ生成において
+    //   オクターブの値に応じて複数の階層のノイズを生成し、
+    //   それらを合成して最終的なノイズ値を決定する
+    //   この最終的な合成の場面で、
+    //   どのような割合で合成を行うか決めるのがパーシステンスの値
+    // ------------------------------------------------------------------
+    // たいていの場合、0.5程度の値にする
+    // 解像度の低いノイズから順に、パーシステンスの値を元に割合を決定する
+    // ------------------------------------------------------------------
+    // パーシステンスの値が0.5の場合
+    //   4x  4 のノイズにかけるパーシステンス⇒パーシステンスの1乗=0.5
+    //   8x  8 のノイズにかけるパーシステンス⇒パーシステンスの2乗=0.25
+    //  16x 16 のノイズにかけるパーシステンス⇒パーシステンスの3乗=0.125
+    //  32x 32 のノイズにかけるパーシステンス⇒パーシステンスの4乗=0.0625
+    //  64x 64 のノイズにかけるパーシステンス⇒パーシステンスの5乗=0.03125
+    // 128x128 のノイズにかけるパーシステンス⇒パーシステンスの6乗=0.0015625
+    // ------------------------------------------------------------------
+    var persistence: Float = 0.5f
+
+    // 乱数生成に用いる初期シード値
     var seed = 1
 
-    fun detail(oct: Int, ofs: Int, per: Float): Boolean {
-        if ( oct == 0 )  return false
-        if ( ofs == 0 )  return false
-        if ( per == 0f ) return false
-
-        if (oct > 1) octave = oct
-        if (ofs > 0) offset = ofs
-        if ( (per > 0f) and (per <= 1f) ) persistence = per
-
-        return true
+    constructor(oct: Int, ofs: Int, per: Float) {
+        if (oct > 1) {
+            octave = oct
+        }
+        else {
+            throw RuntimeException("oct > 1.")
+        }
+        if (ofs > 0) {
+            offset = ofs
+        }
+        else {
+            throw RuntimeException("ofs > 0.")
+        }
+        if ( (per > 0f) and (per <= 1f) ) {
+            persistence = per
+        }
+        else {
+            throw RuntimeException("1 >= per > 0.")
+        }
     }
 
     // Xorshiftと呼ばれる疑似乱数生成手法
@@ -129,9 +153,10 @@ class MyNoiseX(
     fun snoise(x: Float,y: Float,w: Float): Float {
         val u = x/w
         val v = y/w
-        val t = noise(x,y) * u * v +
+        val t =
+                noise(x,  y) * u * v +
                 noise(x,y+w) * u * (1f-v) +
-                noise(x+w,y) * (1f-u) * v +
+                noise(x+w, y) * (1f-u) * v +
                 noise(x+w,y+w) * (1f-u) * (1f-v)
         return t
     }
@@ -144,11 +169,13 @@ class MyNoiseX(
 
         (0 until width).forEach { i ->
             (0 until width).forEach { j ->
-                val d = data[i*width+j]*255f
-                bmp.setPixel(i,j, Color.argb(255f,d,d,d))
-                if ( (i == 0) and (j == 0) ) {
-                    Log.d(javaClass.simpleName,"d[$d]")
-                }
+                // 255倍は整数のときらしい
+                //val d = data[i+j*width]*255f
+                //bmp.setPixel(i,j, Color.argb(255f,d,d,d))
+
+                // 浮動小数点の場合、0-1を渡す
+                val d = data[i+j*width]
+                bmp.setPixel(i,j, Color.argb(1f,d,d,d))
             }
         }
 
