@@ -136,6 +136,9 @@ class MyNoiseX(
         return t
     }
 
+    // ---------------------------------------------------------
+    // ビットマップ生成
+    // ---------------------------------------------------------
     fun createImage(width: Int,data: FloatArray): Bitmap {
         val bmp = Bitmap.createBitmap(width,width,Bitmap.Config.ARGB_8888)
 

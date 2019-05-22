@@ -1,9 +1,10 @@
 package milu.kiriu2010.exdb1.opengl02.noise01
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 
@@ -27,10 +28,25 @@ class Noise01Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_gl_noise01, container, false)
 
         myGLES20View = view.findViewById(R.id.myGLES20ViewNoise01)
-        val bmp = BitmapFactory.decodeResource(resources,R.drawable.texture_w026)
-        val render = Noise01Renderer(context!!)
-        render.bmpArray.add(bmp)
-        myGLES20View.setRenderer(render)
+        val renderer = Noise01Renderer(context!!)
+        myGLES20View.setRenderer(renderer)
+        myGLES20View.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_UP -> {
+                }
+                MotionEvent.ACTION_DOWN -> {
+                    renderer.isRunning = when (renderer.isRunning) {
+                        true  -> false
+                        false -> true
+                    }
+                }
+                MotionEvent.ACTION_MOVE -> {
+                }
+                else -> {
+                }
+            }
+            true
+        }
 
         return view
     }

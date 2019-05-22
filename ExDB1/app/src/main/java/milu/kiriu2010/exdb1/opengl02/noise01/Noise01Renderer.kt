@@ -3,14 +3,12 @@ package milu.kiriu2010.exdb1.opengl01.w019
 import android.content.Context
 import android.graphics.Bitmap
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import android.os.SystemClock
 import milu.kiriu2010.exdb1.opengl02.noise01.Noise01Shader
 import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.exdb1.opengl02.w026.W026Shader
 import milu.kiriu2010.gui.basic.MyNoiseX
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
@@ -23,7 +21,7 @@ import milu.kiriu2010.gui.renderer.MgRenderer
 class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト
-    private lateinit var drawObj: Board01Model
+    private lateinit var modelBoard: Board01Model
 
     // シェーダ
     private lateinit var shader: Noise01Shader
@@ -42,7 +40,9 @@ class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
         val noiseColor = FloatArray(size*size)
         (0 until size).forEach { i ->
             (0 until size).forEach { j ->
-                noiseColor[i*size+j] = noise.snoise(i.toFloat(),j.toFloat(),size.toFloat())
+                //noiseColor[i*size+j] = noise.snoise(i.toFloat(),j.toFloat(),size.toFloat())
+                // 左⇒右:黒⇒灰色⇒黄色
+                noiseColor[i*size+j] = i.toFloat()/size.toFloat()
             }
         }
         val bmp = noise.createImage(size,noiseColor)
@@ -55,8 +55,10 @@ class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // 回転角度
-        angle[0] =(angle[0]+1)%360
-        val t1 = angle[0].toFloat()
+        if ( isRunning ) {
+            angle[0] =(angle[0]+1)%360
+        }
+        val t0 = angle[0].toFloat()
 
         // テクスチャをバインドする
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0])
@@ -66,11 +68,11 @@ class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
 
         // モデル座標変換行列の生成
         Matrix.setIdentityM(matM,0)
-        Matrix.rotateM(matM,0,t1,0f,1f,0f)
+        Matrix.rotateM(matM,0,t0,0f,1f,0f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
 
         // モデル描画
-        shader.draw(drawObj,matMVP,0)
+        shader.draw(modelBoard,matMVP,0)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -82,19 +84,8 @@ class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
-        drawObj = Board01Model()
-        drawObj.createPath(mapOf(
-                "colorR" to 1f,
-                "colorG" to 1f,
-                "colorB" to 1f,
-                "colorA" to 1f
-        ))
-
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
+        // 回転停止
+        isRunning = false
 
         // 深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
@@ -103,6 +94,15 @@ class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
         // シェーダプログラム登録
         shader = Noise01Shader()
         shader.loadShader()
+
+        // モデル生成
+        modelBoard = Board01Model()
+        modelBoard.createPath(mapOf(
+                "colorR" to 1f,
+                "colorG" to 1f,
+                "colorB" to 1f,
+                "colorA" to 1f
+        ))
 
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(1,textures,0)
