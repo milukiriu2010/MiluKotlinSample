@@ -5,7 +5,11 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.shader.MgShader
 
+// ------------------------------------------------------------
 // シェーダ(フォグ)
+// ------------------------------------------------------------
+// https://wgld.org/d/webgl/w061.html
+// ------------------------------------------------------------
 class W061ShaderFog: MgShader() {
     // 頂点シェーダ
     private val scv =
@@ -127,6 +131,7 @@ class W061ShaderFog: MgShader() {
              u_softParticle: Int) {
 
         GLES20.glUseProgram(programHandle)
+        MyGLFunc.checkGlError2("UseProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)
@@ -134,7 +139,7 @@ class W061ShaderFog: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Position:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Position",this,model)
 
         // attribute(色)
         model.bufCol.position(0)
@@ -142,7 +147,7 @@ class W061ShaderFog: MgShader() {
             GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, model.bufCol)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Color:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Color",this,model)
 
         // attribute(テクスチャ座標)
         model.bufTxc.position(0)
@@ -150,49 +155,49 @@ class W061ShaderFog: MgShader() {
             GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, model.bufTxc)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_TextureCoord:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_TextureCoord",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
-        MyGLFunc.checkGlError("u_matMVP:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matMVP",this,model)
 
         // uniform()
         GLES20.glGetUniformLocation(programHandle,"u_matTex").also {
             GLES20.glUniformMatrix4fv(it,1,false,matTex,0)
         }
-        MyGLFunc.checkGlError("u_matTex:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matTex",this,model)
 
         // uniform()
         GLES20.glGetUniformLocation(programHandle,"u_offset").also {
             GLES20.glUniform2fv(it,1,u_offset,0)
         }
-        MyGLFunc.checkGlError("u_offset:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_offset",this,model)
 
         // uniform()
         GLES20.glGetUniformLocation(programHandle,"u_distLength").also {
             GLES20.glUniform1f(it,u_distLength)
         }
-        MyGLFunc.checkGlError("u_distLength:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_distLength",this,model)
 
-        // uniform(テクスチャ)
+        // uniform(テクスチャユニット)
         GLES20.glGetUniformLocation(programHandle, "u_TextureDepth").also {
             GLES20.glUniform1i(it, u_TextureDepth)
         }
-        MyGLFunc.checkGlError("u_TextureDepth:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_TextureDepth",this,model)
 
-        // uniform(テクスチャ)
+        // uniform(テクスチャユニット)
         GLES20.glGetUniformLocation(programHandle, "u_TextureNoise").also {
             GLES20.glUniform1i(it, u_TextureNoise)
         }
-        MyGLFunc.checkGlError("u_TextureNoise:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_TextureNoise",this,model)
 
         // uniform()
         GLES20.glGetUniformLocation(programHandle, "u_softParticle").also {
             GLES20.glUniform1i(it, u_softParticle)
         }
-        MyGLFunc.checkGlError("u_softParticle:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_softParticle",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

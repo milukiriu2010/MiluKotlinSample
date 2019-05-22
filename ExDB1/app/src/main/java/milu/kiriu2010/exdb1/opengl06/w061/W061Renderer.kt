@@ -17,18 +17,23 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import kotlin.random.Random
 
+// ------------------------------------------------------------
 // パーティクルフォグ
+// ------------------------------------------------------------
 //   板状の四角形ポリゴンを３次元空間にたくさん配置し、
 //   これら板状のポリゴンに霧のようなテクスチャを適用して、
 //   ブレンドを有効にして半透明描画することにより、
 //   なんとなく霧っぽく見えるようにしている
+// ------------------------------------------------------------
+// https://wgld.org/d/webgl/w061.html
+// ------------------------------------------------------------
 class W061Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)
-    private lateinit var drawObjTorus: Torus01Model
+    private lateinit var modelTorus: Torus01Model
     // 描画オブジェクト(ボックスモデル)
-    private lateinit var drawObjBox: Box01Model
+    private lateinit var modelBox: Box01Model
     // 描画オブジェクト(パーティクル)
-    private lateinit var drawObjParticle: Particle01Model
+    private lateinit var modelParticle: Particle01Model
 
     // シェーダ(メイン)
     private lateinit var mainShader: W061ShaderMain
@@ -106,8 +111,10 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
                 noiseColor[i*size+j] = noise.snoise(i.toFloat(),j.toFloat(),size.toFloat())
             }
         }
-        val bmp = noise.createImage(size,noiseColor)
-        bmpArray.add(0,bmp)
+
+        bmpArray.clear()
+        val bmp0 = noise.createImage(size,noiseColor)
+        bmpArray.add(0,bmp0)
 
         Log.d(javaClass.simpleName,"create noise bitmap end")
     }
@@ -168,7 +175,7 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.translateM(matM,0,0f,0.5f,0f)
         Matrix.rotateM(matM,0,90f,1f,0f,0f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        depthShader.draw(drawObjTorus,matMVP,0f)
+        depthShader.draw(modelTorus,matMVP,0f)
 
         // -------------------------------------------------------
         // ボックスをレンダリング
@@ -177,7 +184,7 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.scaleM(matM,0,2f,2f,2f)
         Matrix.translateM(matM,0,0f,-0.25f,0f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        depthShader.draw(drawObjBox,matMVP,0f)
+        depthShader.draw(modelBox,matMVP,0f)
 
         // -----------------------------------------------
         // 【1:メインシーンをレンダリング】
@@ -203,7 +210,7 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.rotateM(matM,0,90f,1f,0f,0f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
-        mainShader.draw(drawObjTorus,matM,matMVP,matI,vecLight,vecEye, floatArrayOf(0f,0f,0f,0f))
+        mainShader.draw(modelTorus,matM,matMVP,matI,vecLight,vecEye, floatArrayOf(0f,0f,0f,0f))
 
         // -------------------------------------------------------
         // ボックスをレンダリング
@@ -213,7 +220,7 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.translateM(matM,0,0f,-0.25f,0f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
-        mainShader.draw(drawObjBox,matM,matMVP,matI,vecLight,vecEye, floatArrayOf(0f,0f,0f,0f))
+        mainShader.draw(modelBox,matM,matMVP,matI,vecLight,vecEye, floatArrayOf(0f,0f,0f,0f))
 
         // -----------------------------------------------
         // 【2:フォグをレンダリング】
@@ -235,7 +242,7 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.setIdentityM(matM,0)
             Matrix.translateM(matM,0,offsetPositionX[i],0.5f,offsetPositionZ[i])
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-            fogShader.draw(drawObjParticle,matM,matMVP,matTex,
+            fogShader.draw(modelParticle,matM,matMVP,matTex,
                     floatArrayOf(offsetTexCoordS[i],offsetTexCoordT[i]),u_depthCoef,0,1,u_softParticle)
         }
     }
@@ -260,16 +267,10 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glGenRenderbuffers(1,bufDepthRender)
         // フレームバッファを格納するテクスチャ生成
         GLES20.glGenTextures(1,frameTexture)
-        createFrameBuffer(renderW,renderH,0)
+        MyGLFunc.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
         // カリング,深度テスト,ブレンドを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
@@ -291,8 +292,8 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
         fogShader.loadShader()
 
         // モデル生成(トーラス)
-        drawObjTorus = Torus01Model()
-        drawObjTorus.createPath(mapOf(
+        modelTorus = Torus01Model()
+        modelTorus.createPath(mapOf(
                 "row"     to 32f,
                 "column"  to 32f,
                 "iradius" to 0.25f,
@@ -300,8 +301,8 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(ボックス)
-        drawObjBox = Box01Model()
-        drawObjBox.createPath(mapOf(
+        modelBox = Box01Model()
+        modelBox.createPath(mapOf(
                 "colorR"  to 0.3f,
                 "colorG"  to 0.3f,
                 "colorB"  to 0.3f,
@@ -309,8 +310,8 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // 描画オブジェクト(パーティクル)
-        drawObjParticle = Particle01Model()
-        drawObjParticle.createPath(mapOf(
+        modelParticle = Particle01Model()
+        modelParticle.createPath(mapOf(
                 "colorR"  to 1f,
                 "colorG"  to 1f,
                 "colorB"  to 1f,
@@ -321,66 +322,6 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
         vecLight[0] = -0.577f
         vecLight[1] =  0.577f
         vecLight[2] =  0.577f
-
-        // ----------------------------------
-        // 単位行列化
-        // ----------------------------------
-        // モデル変換行列
-        Matrix.setIdentityM(matM,0)
-        // モデル変換行列の逆行列
-        Matrix.setIdentityM(matI,0)
-        // ビュー変換行列
-        Matrix.setIdentityM(matV,0)
-        // プロジェクション変換行列
-        Matrix.setIdentityM(matP,0)
-        // モデル・ビュー・プロジェクション行列
-        Matrix.setIdentityM(matMVP,0)
-        // テンポラリ行列
-        Matrix.setIdentityM(matVP,0)
-    }
-
-    // フレームバッファをオブジェクトとして生成する
-    private fun createFrameBuffer(width: Int, height: Int, id: Int) {
-        val maxRenderbufferSize = IntBuffer.allocate(1)
-        GLES20.glGetIntegerv(GLES20.GL_MAX_RENDERBUFFER_SIZE,maxRenderbufferSize)
-
-        Log.d(javaClass.simpleName,"w[${width}]h[${height}]bufSize[${maxRenderbufferSize[0]}]")
-
-        // フレームバッファのバインド
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[id])
-
-        // 深度バッファ用レンダ―バッファのバインド
-        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,bufDepthRender[id])
-
-        // レンダ―バッファを深度バッファとして設定
-        GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER, GLES20.GL_DEPTH_COMPONENT16, width, height)
-
-        // フレームバッファにレンダ―バッファを関連付ける
-        GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT, GLES20.GL_RENDERBUFFER,bufDepthRender[id])
-
-        // フレームバッファ用のテクスチャをバインド
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[id])
-
-        // フレームバッファ用のテクスチャにカラー用のメモリ領域を確保
-        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,width,height,0,GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,null)
-
-        // テクスチャパラメータ
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MIN_FILTER,GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
-
-        // フレームバッファにテクスチャを関連付ける
-        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER,GLES20.GL_COLOR_ATTACHMENT0,GLES20.GL_TEXTURE_2D,frameTexture[id],0)
-
-        // 追加
-        val status = GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER)
-        Log.d(javaClass.simpleName,"status[${status}]COMPLETE[${GLES20.GL_FRAMEBUFFER_COMPLETE}]")
-
-        // バインド解除
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,0)
-        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,0)
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
     }
 
     override fun setMotionParam(motionParam: MutableMap<String, Float>) {
