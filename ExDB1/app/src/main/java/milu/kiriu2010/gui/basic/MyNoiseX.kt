@@ -15,7 +15,11 @@ import kotlin.math.pow
 // ---------------------------------------
 // パーティクルフォグで利用
 // ---------------------------------------
+// https://wgld.org/d/canvas2d/c001.html
+// https://wgld.org/d/library/l003.html
 // https://wgld.org/d/webgl/w061.html
+// ---------------------------------------
+// 2019.05.23  rndバグ修正
 // ---------------------------------------
 class MyNoiseX {
     // ------------------------------------------------------------------
@@ -80,8 +84,11 @@ class MyNoiseX {
         var a = 123456789
         var b = a xor (a shl 11)
         var c = seed + x + seed*y
+        //Log.d(javaClass.simpleName,"c=$c")
         var d = c xor (c ushr 19) xor (b xor (b ushr 8))
-        var e = (d%0x1000000/0x1000000).toFloat()
+        //Log.d(javaClass.simpleName,"d=$d")
+        var e = (d%0x1000000).toFloat()/(0x1000000).toFloat()
+        //Log.d(javaClass.simpleName,"e1=$e")
         e *= 10000000f
         return e - floor(e)
     }
@@ -104,11 +111,11 @@ class MyNoiseX {
                 rnd( x,y-1) +
                 rnd( x,y+1)
             ) * 0.0625f
-        val center = rnd(x,y) * 0.0625f
+        val center = rnd(x,y) * 0.625f
         return corners + sides + center
     }
 
-    // interpolateメソッドを用いてノイズを線形補完する
+    // interpolateメソッドを用いてノイズを線形補間する
     //  x:X座標
     //  y:Y座標
     fun irnd(x: Float, y: Float): Float {
@@ -148,6 +155,7 @@ class MyNoiseX {
     // ------------------------------------------------------------------
     //  x:X座標
     //  y:Y座標
+    //  w:描画領域の一辺の幅
     //  戻り値: 指定された座標の値を正規化したもの(すなわち0-1の範囲の値)
     // ------------------------------------------------------------------
     fun snoise(x: Float,y: Float,w: Float): Float {
@@ -162,9 +170,9 @@ class MyNoiseX {
     }
 
     // ---------------------------------------------------------
-    // ビットマップ生成
+    // ビットマップ生成(灰色)
     // ---------------------------------------------------------
-    fun createImage(width: Int,data: FloatArray): Bitmap {
+    fun createImageGray(width: Int, data: FloatArray): Bitmap {
         val bmp = Bitmap.createBitmap(width,width,Bitmap.Config.ARGB_8888)
 
         (0 until width).forEach { i ->

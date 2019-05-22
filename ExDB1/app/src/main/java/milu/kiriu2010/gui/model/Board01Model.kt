@@ -49,6 +49,7 @@ class Board01Model: MgModelAbs() {
     // XY平面(右回り)
     //  w26,w27,w35,w40
     private fun createPathPattern1(opt: Map<String, Float>) {
+        val scale = opt["scale"] ?: 1f
         val color = FloatArray(4)
         color[0] = opt["colorR"] ?: 1f
         color[1] = opt["colorG"] ?: 1f
@@ -56,10 +57,10 @@ class Board01Model: MgModelAbs() {
         color[3] = opt["colorA"] ?: 1f
 
         // 頂点データ(Zを描くような順序)
-        datPos.addAll(arrayListOf(-1f, 1f,0f))
-        datPos.addAll(arrayListOf( 1f, 1f,0f))
-        datPos.addAll(arrayListOf(-1f,-1f,0f))
-        datPos.addAll(arrayListOf( 1f,-1f,0f))
+        datPos.addAll(arrayListOf(-scale, scale,0f))
+        datPos.addAll(arrayListOf( scale, scale,0f))
+        datPos.addAll(arrayListOf(-scale,-scale,0f))
+        datPos.addAll(arrayListOf( scale,-scale,0f))
 
         // 法線データ
         (0..3).forEach {

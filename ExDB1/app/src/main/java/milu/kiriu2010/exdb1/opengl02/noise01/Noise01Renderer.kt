@@ -30,13 +30,26 @@ class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
     val bmpArray = arrayListOf<Bitmap>()
 
     // テクスチャ配列
-    val textures = IntArray(1)
+    val textures = IntArray(9)
 
     init {
         // ノイズを生成するビットマップに描く
-        val noise = MyNoiseX(5,2,0.6f)
+        createNoise(5,2,0.6f)
+        createNoise(5,2,0.5f)
+        createNoise(5,2,0.4f)
+        createNoise(6,2,0.6f)
+        createNoise(6,2,0.5f)
+        createNoise(6,2,0.4f)
+        createNoise(6,10,0.6f)
+        createNoise(6,10,0.5f)
+        createNoise(6,10,0.4f)
+    }
+
+    // ノイズを生成するビットマップに描く
+    private fun createNoise(oct: Int, ofs: Int, per: Float) {
+        val noise = MyNoiseX(oct,ofs,per)
         noise.seed = (SystemClock.uptimeMillis()/1000).toInt()
-        val size = 128
+        val size = 64
         val noiseColor = FloatArray(size*size)
         (0 until size).forEach { i ->
             (0 until size).forEach { j ->
@@ -45,33 +58,44 @@ class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
                 //noiseColor[i*size+j] = i.toFloat()/size.toFloat()
             }
         }
-        val bmp = noise.createImage(size,noiseColor)
-        bmpArray.add(0,bmp)
+        val bmp = noise.createImageGray(size,noiseColor)
+        bmpArray.add(bmp)
     }
 
     override fun onDrawFrame(gl: GL10) {
-
-        // canvasを初期化
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
-
         // 回転角度
         if ( isRunning ) {
             angle[0] =(angle[0]+1)%360
         }
         val t0 = angle[0].toFloat()
 
-        // テクスチャをバインドする
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0])
+        // canvasを初期化
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
+        GLES20.glClearDepthf(1f)
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // ビュー×プロジェクション座標変換行列
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
-        // モデル座標変換行列の生成
-        Matrix.setIdentityM(matM,0)
-        Matrix.rotateM(matM,0,t0,0f,1f,0f)
-        Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-
         // モデル描画
+        draw(0,-3f, 3f,t0)
+        draw(1,-3f, 0f,t0)
+        draw(2,-3f,-3f,t0)
+        draw(3, 0f, 3f,t0)
+        draw(4, 0f, 0f,t0)
+        draw(5, 0f,-3f,t0)
+        draw(6, 3f, 3f,t0)
+        draw(7, 3f, 0f,t0)
+        draw(8, 3f,-3f,t0)
+    }
+
+    private fun draw(id: Int,x: Float,y: Float,t: Float) {
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[id])
+        Matrix.setIdentityM(matM,0)
+        Matrix.translateM(matM,0,x,y,0f)
+        Matrix.rotateM(matM,0,t,0f,1f,0f)
+        Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         shader.draw(modelBoard,matMVP,0)
     }
 
@@ -81,6 +105,13 @@ class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
         val ratio = width.toFloat()/height.toFloat()
 
         Matrix.perspectiveM(matP,0,45f,ratio,0.1f,100f)
+
+        // テクスチャ作成し、idをtexturesに保存
+        GLES20.glGenTextures(9,textures,0)
+        (0..8).forEach {
+            MyGLFunc.createTexture(it,textures,bmpArray[it])
+        }
+        MyGLFunc.checkGlError("glGenTextures")
     }
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
@@ -91,25 +122,26 @@ class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
 
-        // シェーダプログラム登録
+        // シェーダ
         shader = Noise01Shader()
         shader.loadShader()
 
         // モデル生成
         modelBoard = Board01Model()
         modelBoard.createPath(mapOf(
+                "scale"  to 0.9f,
                 "colorR" to 1f,
                 "colorG" to 1f,
                 "colorB" to 1f,
                 "colorA" to 1f
         ))
 
-        // テクスチャ作成し、idをtexturesに保存
-        GLES20.glGenTextures(1,textures,0)
-        MyGLFunc.createTexture(0,textures,bmpArray[0])
-        MyGLFunc.checkGlError("glGenTextures")
-
         // カメラの位置
+        vecEye[0] =  0f
+        vecEye[1] =  0f
+        vecEye[2] = 10f
+
+        // ビュー座標変換
         Matrix.setLookAtM(matV, 0,
                 vecEye[0], vecEye[1], vecEye[2],
                 vecCenter[0], vecCenter[1], vecCenter[2],

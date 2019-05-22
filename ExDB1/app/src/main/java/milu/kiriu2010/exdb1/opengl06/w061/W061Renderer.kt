@@ -113,7 +113,7 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
         }
 
         bmpArray.clear()
-        val bmp0 = noise.createImage(size,noiseColor)
+        val bmp0 = noise.createImageGray(size,noiseColor)
         bmpArray.add(0,bmp0)
 
         Log.d(javaClass.simpleName,"create noise bitmap end")
