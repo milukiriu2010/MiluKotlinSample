@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/glsl_g009"
+        android:title="g009_レイマーチングで球体" />
+    <item
         android:id="@+id/glsl_g008"
         android:title="g008_レイ" />
     <item
