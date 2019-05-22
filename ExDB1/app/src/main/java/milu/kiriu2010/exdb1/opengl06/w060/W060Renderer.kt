@@ -9,11 +9,16 @@ import milu.kiriu2010.gui.renderer.MgRenderer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
+// --------------------------------------------------------------
 // 距離フォグ
-//   カメラからの距離に応じて、あたかも視界が遮られているかのようにモデルに色づけをする
+//   カメラからの距離に応じて、
+//   あたかも視界が遮られているかのようにモデルに色づけをする
+// --------------------------------------------------------------
+// https://wgld.org/d/webgl/w060.html
+// --------------------------------------------------------------
 class W060Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)
-    private lateinit var drawObjTorus: Torus01Model
+    private lateinit var modelTorus: Torus01Model
 
     // シェーダ(メイン)
     private lateinit var mainShader: W060ShaderMain
@@ -62,7 +67,7 @@ class W060Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.rotateM(matM,0,angleF[i],1f,1f,0f)
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
             Matrix.invertM(matI,0,matM,0)
-            mainShader.draw(drawObjTorus,matM,matMVP,matI,vecLight,vecEye,amb.toFloatArray(),
+            mainShader.draw(modelTorus,matM,matMVP,matI,vecLight,vecEye,amb.toFloatArray(),
                     u_fogStart,u_fogEnd, floatArrayOf(0.75f,0.75f,0.75f,1f) )
         }
     }
@@ -77,12 +82,6 @@ class W060Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
         // カリングと深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
@@ -93,8 +92,8 @@ class W060Renderer(ctx: Context): MgRenderer(ctx) {
         mainShader.loadShader()
 
         // モデル生成(トーラス)
-        drawObjTorus = Torus01Model()
-        drawObjTorus.createPath(mapOf(
+        modelTorus = Torus01Model()
+        modelTorus.createPath(mapOf(
                 "row"     to 32f,
                 "column"  to 32f,
                 "iradius" to 0.75f,
@@ -109,22 +108,6 @@ class W060Renderer(ctx: Context): MgRenderer(ctx) {
         vecLight[0] = -0.577f
         vecLight[1] =  0.577f
         vecLight[2] =  0.577f
-
-        // ----------------------------------
-        // 単位行列化
-        // ----------------------------------
-        // モデル変換行列
-        Matrix.setIdentityM(matM,0)
-        // モデル変換行列の逆行列
-        Matrix.setIdentityM(matI,0)
-        // ビュー変換行列
-        Matrix.setIdentityM(matV,0)
-        // プロジェクション変換行列
-        Matrix.setIdentityM(matP,0)
-        // モデル・ビュー・プロジェクション行列
-        Matrix.setIdentityM(matMVP,0)
-        // テンポラリ行列
-        Matrix.setIdentityM(matVP,0)
     }
 
     override fun setMotionParam(motionParam: MutableMap<String, Float>) {
