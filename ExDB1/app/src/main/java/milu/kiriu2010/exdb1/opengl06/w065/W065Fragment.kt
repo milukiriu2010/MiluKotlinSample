@@ -7,14 +7,13 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.MyGL02View
+import milu.kiriu2010.gui.view.MyGLES20View
 
 class W065Fragment : Fragment() {
 
-    private lateinit var myGLView: MyGL02View
+    private lateinit var myGLView: MyGLES20View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +26,7 @@ class W065Fragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_open_gl06_w65, container, false)
 
-        myGLView = view.findViewById(R.id.myGL02ViewW65)
+        myGLView = view.findViewById(R.id.myGLES20ViewW65)
         val render = W065Renderer(context!!)
         myGLView.setRenderer(render)
         myGLView.setOnTouchListener { v, event ->

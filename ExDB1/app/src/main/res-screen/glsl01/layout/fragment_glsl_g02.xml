@@ -7,8 +7,8 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <milu.kiriu2010.exdb1.opengl.MyGL02View
-        android:id="@+id/myGL02ViewG02"
+    <milu.kiriu2010.gui.view.MyGLES20View
+        android:id="@+id/myGLES20ViewG02"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -29,7 +29,7 @@
         android:layout_marginTop="8dp"
         android:text="Speed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myGL02ViewG02" />
+        app:layout_constraintTop_toBottomOf="@+id/myGLES20ViewG02" />
 
     <SeekBar
         android:id="@+id/seekBarG02Speed"
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="Gap"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekBarG02Speed" />
 

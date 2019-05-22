@@ -7,7 +7,7 @@ import android.view.*
 import android.widget.*
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl.MyGL02View
+import milu.kiriu2010.gui.view.MyGLES20View
 
 const val ARG_RENDER_ID = "RENDER_ID"
 
@@ -15,7 +15,7 @@ class DepthCull01Fragment : Fragment() {
 
     private var renderId = 0
 
-    private lateinit var myGL02View: MyGL02View
+    private lateinit var myGLES20View: MyGLES20View
     private lateinit var scaleDetector: ScaleGestureDetector
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,10 +30,10 @@ class DepthCull01Fragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_mgl00_depth_cull_01, container, false)
 
-        myGL02View = view.findViewById<MyGL02View>(R.id.myGL02View)
-        val render = DepthCull01Renderer(renderId,context!!)
-        myGL02View.setRenderer(render)
-        myGL02View.setOnTouchListener { v, event ->
+        myGLES20View = view.findViewById(R.id.myGLES20ViewMGL00)
+        val renderer = DepthCull01Renderer(renderId,context!!)
+        myGLES20View.setRenderer(renderer)
+        myGLES20View.setOnTouchListener { v, event ->
             // scaleDetectorは、認識されない
             scaleDetector.onTouchEvent(event)
             when (event.action) {
@@ -41,11 +41,11 @@ class DepthCull01Fragment : Fragment() {
                 }
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
-                    Log.d(javaClass.simpleName,"vw[${myGL02View.width}]vh[${myGL02View.height}]")
-                    render.receiveTouch(event,myGL02View.width,myGL02View.height)
+                    Log.d(javaClass.simpleName,"vw[${myGLES20View.width}]vh[${myGLES20View.height}]")
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    render.receiveTouch(event,myGL02View.width,myGL02View.height)
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 else -> {
                 }
@@ -74,23 +74,22 @@ class DepthCull01Fragment : Fragment() {
 
         // 深度テスト
         val checkBoxDepth = view.findViewById<CheckBox>(R.id.checkBoxDepth)
-        checkBoxDepth.isChecked = render.isDepth
+        checkBoxDepth.isChecked = renderer.isDepth
         checkBoxDepth.setOnCheckedChangeListener { buttonView, isChecked ->
-            render.isDepth = isChecked
+            renderer.isDepth = isChecked
         }
         // カリング
         val checkBoxCull = view.findViewById<CheckBox>(R.id.checkBoxCull)
-        checkBoxCull.isChecked = render.isCull
+        checkBoxCull.isChecked = renderer.isCull
         checkBoxCull.setOnCheckedChangeListener { buttonView, isChecked ->
-            render.isCull = isChecked
+            renderer.isCull = isChecked
         }
         // 回転
         val checkBoxRotate = view.findViewById<CheckBox>(R.id.checkBoxRotate)
         checkBoxRotate.isChecked = false
         checkBoxRotate.setOnCheckedChangeListener { buttonView, isChecked ->
-            render.isRunning = isChecked
+            renderer.isRunning = isChecked
         }
-
 
         // シェーダ選択
         val spinnerShader = view.findViewById<Spinner>(R.id.spinnerShader)
@@ -102,7 +101,7 @@ class DepthCull01Fragment : Fragment() {
                 // http://android-note.open-memo.net/sub/spinner--get-resource-id-for-selected-item.html
                 val array = resources.obtainTypedArray(R.array.shaderlist)
                 val itemId = array.getResourceId(position,R.string.shader_simple)
-                render.shaderSwitch = when (itemId) {
+                renderer.shaderSwitch = when (itemId) {
                     R.string.shader_simple -> 0
                     R.string.shader_directional_light -> 1
                     R.string.shader_texture -> 2
@@ -120,7 +119,7 @@ class DepthCull01Fragment : Fragment() {
         val radioButtonPers = view.findViewById<RadioButton>(R.id.radioButtonPers)
         val radioButtonFrus = view.findViewById<RadioButton>(R.id.radioButtonFrus)
         val radioButtonOrth = view.findViewById<RadioButton>(R.id.radioButtonOrth)
-        when (render.flgPersFrus) {
+        when (renderer.flgPersFrus) {
             1 -> {
                 radioButtonPers.isChecked = true
                 radioButtonFrus.isChecked = false
@@ -138,7 +137,7 @@ class DepthCull01Fragment : Fragment() {
             }
         }
         radioGroupPersFrus.setOnCheckedChangeListener { group, checkedId ->
-            render.flgPersFrus = when (checkedId) {
+            renderer.flgPersFrus = when (checkedId) {
                 radioButtonPers.id -> 1
                 radioButtonFrus.id -> 2
                 radioButtonOrth.id -> 3
@@ -150,14 +149,14 @@ class DepthCull01Fragment : Fragment() {
         val seekBarFov = view.findViewById<SeekBar>(R.id.seekBarFov)
         seekBarFov.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                render.fov = seekBar.progress.toFloat()
+                renderer.fov = seekBar.progress.toFloat()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
-                render.fov = seekBar.progress.toFloat()
+                renderer.fov = seekBar.progress.toFloat()
             }
 
         })
@@ -166,14 +165,14 @@ class DepthCull01Fragment : Fragment() {
         val seekBarNear = view.findViewById<SeekBar>(R.id.seekBarNear)
         seekBarNear.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                render.near = seekBar.progress.toFloat()
+                renderer.near = seekBar.progress.toFloat()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
-                render.near = seekBar.progress.toFloat()
+                renderer.near = seekBar.progress.toFloat()
             }
 
         })
@@ -182,14 +181,14 @@ class DepthCull01Fragment : Fragment() {
         val seekBarFar = view.findViewById<SeekBar>(R.id.seekBarFar)
         seekBarFar.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                render.far = seekBar.progress.toFloat()
+                renderer.far = seekBar.progress.toFloat()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
-                render.far = seekBar.progress.toFloat()
+                renderer.far = seekBar.progress.toFloat()
             }
 
         })
@@ -199,12 +198,12 @@ class DepthCull01Fragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        myGL02View.onResume()
+        myGLES20View.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        myGL02View.onPause()
+        myGLES20View.onPause()
     }
 
     companion object {

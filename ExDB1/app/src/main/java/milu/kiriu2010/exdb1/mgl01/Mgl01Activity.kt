@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.mgl01.qtn01.Qtn01Fragment
 import milu.kiriu2010.exdb1.mgl01.rot01.Rotate01Fragment
 import milu.kiriu2010.exdb1.mgl01.rot02.CubeRotate02Fragment
 
@@ -58,16 +57,6 @@ class Mgl01Activity : AppCompatActivity() {
                 if (supportFragmentManager.findFragmentByTag("rot01") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, Rotate01Fragment.newInstance(), "rot01")
-                            .commit()
-                }
-                true
-            }
-            // クォータニオン
-            R.id.mgl01_qtn01 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("qtn01") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Qtn01Fragment.newInstance(), "qtn01")
                             .commit()
                 }
                 true

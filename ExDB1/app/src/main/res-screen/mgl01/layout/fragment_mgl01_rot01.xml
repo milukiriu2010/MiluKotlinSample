@@ -7,8 +7,8 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <milu.kiriu2010.exdb1.opengl.MyGL02View
-        android:id="@+id/myGL02View"
+    <milu.kiriu2010.exdb1.opengl.MyGLES20View
+        android:id="@+id/myGLES20ViewMGL00"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
