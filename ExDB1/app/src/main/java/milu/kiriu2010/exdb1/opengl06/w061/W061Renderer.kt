@@ -69,9 +69,8 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
 
     // テクスチャ座標変換行列
     private val matTex = FloatArray(16)
-
-    // プロジェクションxビュー(正射影用の座標変換行列)
-    private val matVP4T = FloatArray(16)
+    // ビュー×プロジェクション×テクスチャ座標変換行列
+    private val matVPT = FloatArray(16)
 
     // --------------------------------------------
     // パーティクル用のデータ
@@ -117,6 +116,18 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
         bmpArray.add(0,bmp0)
 
         Log.d(javaClass.simpleName,"create noise bitmap end")
+
+        // -------------------------------------------------------
+        // テクスチャ変換用行列
+        // -------------------------------------------------------
+        // matTex[5]は
+        // 画像から読み込んだ場合は、-0.5fだが、
+        // フレームバッファに描いた風景は、初めから上下が判定しているので0.5f
+        // -------------------------------------------------------
+        matTex[0]  = 0.5f;  matTex[1]  =   0f;  matTex[2]  = 0f;  matTex[3]  = 0f;
+        matTex[4]  =   0f;  matTex[5]  = 0.5f;  matTex[6]  = 0f;  matTex[7]  = 0f;
+        matTex[8]  =   0f;  matTex[9]  =   0f;  matTex[10] = 1f;  matTex[11] = 0f;
+        matTex[12] = 0.5f;  matTex[13] = 0.5f;  matTex[14] = 0f;  matTex[15] = 1f;
     }
 
     override fun onDrawFrame(gl: GL10?) {
@@ -133,28 +144,10 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.perspectiveM(matP,0,45f,ratio,0.1f,10f)
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
-        // -------------------------------------------------------
-        // テクスチャ変換用行列
-        // -------------------------------------------------------
-        matTex[0] = 0.5f
-        matTex[1] = 0f
-        matTex[2] = 0f
-        matTex[3] = 0f
-        matTex[4] = 0f
-        matTex[5] = 0.5f
-        matTex[6] = 0f
-        matTex[7] = 0f
-        matTex[8] = 0f
-        matTex[9] = 0f
-        matTex[10] = 1f
-        matTex[11] = 0f
-        matTex[12] = 0.5f
-        matTex[13] = 0.5f
-        matTex[14] = 0f
-        matTex[15] = 1f
-
-        Matrix.multiplyMM(matVP4T,0,matTex,0,matP,0)
-        Matrix.multiplyMM(matTex,0,matVP4T,0,matV,0)
+        // 行列を掛け合わせる
+        val matPT = FloatArray(16)
+        Matrix.multiplyMM(matPT,0,matTex,0,matP,0)
+        Matrix.multiplyMM(matVPT,0,matPT,0,matV,0)
 
         // フレームバッファのバインド(1:Scene)
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
@@ -242,7 +235,7 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.setIdentityM(matM,0)
             Matrix.translateM(matM,0,offsetPositionX[i],0.5f,offsetPositionZ[i])
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-            fogShader.draw(modelParticle,matM,matMVP,matTex,
+            fogShader.draw(modelParticle,matM,matMVP,matVPT,
                     floatArrayOf(offsetTexCoordS[i],offsetTexCoordT[i]),u_depthCoef,0,1,u_softParticle)
         }
     }
