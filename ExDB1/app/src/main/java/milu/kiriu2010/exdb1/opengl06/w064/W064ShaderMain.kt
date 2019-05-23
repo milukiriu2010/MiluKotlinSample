@@ -5,7 +5,11 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.shader.MgShader
 
+// -------------------------------------
 // シェーダ(メイン)
+// -------------------------------------
+// https://wgld.org/d/webgl/w064.html
+// -------------------------------------
 class W064ShaderMain: MgShader() {
     // 頂点シェーダ
     private val scv =
@@ -71,9 +75,9 @@ class W064ShaderMain: MgShader() {
 
     override fun loadShader(): MgShader {
         // 頂点シェーダを生成
-        val svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
+        svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
-        val sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
+        sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
 
         // プログラムオブジェクトの生成とリンク
         programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Normal","a_Color") )
@@ -91,6 +95,7 @@ class W064ShaderMain: MgShader() {
              u_rimCoef: Float) {
 
         GLES20.glUseProgram(programHandle)
+        MyGLFunc.checkGlError2("UseProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)
@@ -98,7 +103,7 @@ class W064ShaderMain: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Position:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Position",this,model)
 
         // attribute(法線)
         model.bufNor.position(0)
@@ -106,7 +111,7 @@ class W064ShaderMain: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufNor)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Normal:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Normal",this,model)
 
         // attribute(色)
         model.bufCol.position(0)
@@ -114,55 +119,55 @@ class W064ShaderMain: MgShader() {
             GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, model.bufCol)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Color:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Color",this,model)
 
         // uniform(モデル座標変換行列)
         GLES20.glGetUniformLocation(programHandle,"u_matM").also {
             GLES20.glUniformMatrix4fv(it,1,false,matM,0)
         }
-        MyGLFunc.checkGlError("u_matM:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matM",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
-        MyGLFunc.checkGlError("u_matMVP:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matMVP",this,model)
 
         // uniform(逆行列)
         GLES20.glGetUniformLocation(programHandle,"u_matINV").also {
             GLES20.glUniformMatrix4fv(it,1,false,matINV,0)
         }
-        MyGLFunc.checkGlError("u_matINV:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_matINV",this,model)
 
         // uniform(ライトの向き)
         GLES20.glGetUniformLocation(programHandle,"u_vecLight").also {
             GLES20.glUniform3fv(it,1,u_vecLight,0)
         }
-        MyGLFunc.checkGlError("u_vecLight:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_vecLight",this,model)
 
         // uniform()
         GLES20.glGetUniformLocation(programHandle,"u_vecCenter").also {
             GLES20.glUniform3fv(it,1,u_vecCenter,0)
         }
-        MyGLFunc.checkGlError("u_vecCenter:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_vecCenter",this,model)
 
         // uniform(視点座標)
         GLES20.glGetUniformLocation(programHandle,"u_vecEye").also {
             GLES20.glUniform3fv(it,1,u_vecEye,0)
         }
-        MyGLFunc.checkGlError("u_vecEye:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_vecEye",this,model)
 
         // uniform()
         GLES20.glGetUniformLocation(programHandle, "u_colorRim").also {
             GLES20.glUniform4fv(it, 1,u_colorRim,0)
         }
-        MyGLFunc.checkGlError("u_colorRim:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_colorRim",this,model)
 
         // uniform()
         GLES20.glGetUniformLocation(programHandle, "u_rimCoef").also {
             GLES20.glUniform1f(it, u_rimCoef)
         }
-        MyGLFunc.checkGlError("u_rimCoef:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("u_rimCoef",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
