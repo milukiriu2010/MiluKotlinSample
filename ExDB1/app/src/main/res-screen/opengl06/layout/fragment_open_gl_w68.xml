@@ -23,9 +23,9 @@
         android:id="@+id/textViewW68"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Strength"
+        android:text="Strength(0-10)"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myGLES20ViewW68" />
 

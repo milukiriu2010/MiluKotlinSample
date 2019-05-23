@@ -141,14 +141,6 @@ class Board01Model: MgModelAbs() {
         datTxc.addAll(arrayListOf(1f,0f))
         datTxc.addAll(arrayListOf(0f,1f))
         datTxc.addAll(arrayListOf(1f,1f))
-        /*
-        (0..3).forEach {
-            datTxc.addAll(arrayListOf(0f,0f))
-            datTxc.addAll(arrayListOf(1f,0f))
-            datTxc.addAll(arrayListOf(0f,1f))
-            datTxc.addAll(arrayListOf(1f,1f))
-        }
-        */
 
         // インデックスデータ
         datIdx.addAll(arrayListOf<Short>(0,2,1))
@@ -181,12 +173,10 @@ class Board01Model: MgModelAbs() {
         }
 
         // テクスチャ座標
-        (0..3).forEach {
-            datTxc.addAll(arrayListOf(0f,0f))
-            datTxc.addAll(arrayListOf(1f,0f))
-            datTxc.addAll(arrayListOf(0f,1f))
-            datTxc.addAll(arrayListOf(1f,1f))
-        }
+        datTxc.addAll(arrayListOf(0f,0f))
+        datTxc.addAll(arrayListOf(1f,0f))
+        datTxc.addAll(arrayListOf(0f,1f))
+        datTxc.addAll(arrayListOf(1f,1f))
 
         // インデックスデータ
         datIdx.addAll(arrayListOf<Short>(0,2,1))

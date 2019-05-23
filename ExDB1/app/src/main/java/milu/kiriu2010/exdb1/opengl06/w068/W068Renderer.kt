@@ -2,9 +2,10 @@ package milu.kiriu2010.exdb1.opengl06.w068
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.opengl.GLES20
 import android.opengl.Matrix
-import android.util.Log
+import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.color.MgColor
 import milu.kiriu2010.gui.model.Board01Model
@@ -54,13 +55,21 @@ class W068Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画対象のテクスチャ
     var textureType = 0
 
-    var u_strength = 1.5f
+    var u_strength = 5f
 
-    // 正射影用の座標変換行列
-    val matO =FloatArray(16)
+    // 正射影用の座標変換行列(合成用)
+    //   ビュー×プロジェクション(正射影)
+    val matOVP = FloatArray(16)
 
     // マウス位置
     val mouseP = FloatArray(2)
+
+    init {
+        // ビットマップをロード
+        bmpArray.clear()
+        val bmp0 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w68)
+        bmpArray.add(bmp0)
+    }
 
     override fun onDrawFrame(gl: GL10?) {
         angle[0] =(angle[0]+1)%360
@@ -85,7 +94,7 @@ class W068Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glDepthMask(false)
 
         // 板ポリゴンをレンダリングしテクスチャを画面いっぱいに貼り付ける
-        orthShader.draw(modelBoard,matO,0)
+        orthShader.draw(modelBoard,matOVP,0)
 
         // 深度バッファへの描きこみを有効化する
         GLES20.glDepthMask(true)
@@ -104,7 +113,7 @@ class W068Renderer(ctx: Context): MgRenderer(ctx) {
             screenShader.draw(modelTorus,matMVP,matI,vecLight,vecEye,amb.toFloatArray(),0)
         }
 
-        // フレームバッファのバインド(マスク用)
+        // フレームバッファのバインド(ブラー用)
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[1])
 
         // フレームバッファを初期化
@@ -117,17 +126,17 @@ class W068Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[0])
 
         // ズームブラーをかける
-        zoomBlurShader.draw(modelBoard,matO,0,u_strength,renderW.toFloat(),mouseP)
+        zoomBlurShader.draw(modelBoard,matOVP,0,u_strength,renderW.toFloat(),mouseP)
 
         // フレームバッファのバインドを解除
-        GLES20.glBindBuffer(GLES20.GL_FRAMEBUFFER,0)
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
 
         // canvasを初期化
         GLES20.glClearColor(0f, 0f, 0.7f, 1f)
         GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
-        // 背景用に酔いこんだ画像をテクスチャとして適用
+        // 背景用に読み込んだ画像をテクスチャとして適用
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textures[0])
 
@@ -135,7 +144,7 @@ class W068Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glDepthMask(false)
 
         // 板ポリゴンをレンダリングしテクスチャを画面いっぱいに貼り付ける
-        orthShader.draw(modelBoard,matO,0)
+        orthShader.draw(modelBoard,matOVP,0)
 
         // 深度バッファへの描きこみを有効化する
         GLES20.glDepthMask(true)
@@ -163,7 +172,7 @@ class W068Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glBlendFuncSeparate(GLES20.GL_SRC_ALPHA,GLES20.GL_ONE,GLES20.GL_ONE,GLES20.GL_ONE)
 
         // ブラーを合成
-        orthShader.draw(modelBoard,matO,0)
+        orthShader.draw(modelBoard,matOVP,0)
 
         // ブレンドの無効化
         GLES20.glDisable(GLES20.GL_BLEND)
@@ -200,12 +209,6 @@ class W068Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
         // カリングと深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
@@ -246,6 +249,31 @@ class W068Renderer(ctx: Context): MgRenderer(ctx) {
         vecLight[0] = -0.577f
         vecLight[1] =  0.577f
         vecLight[2] =  0.577f
+
+        // 視点座標
+        vecEye[0] =  0f
+        vecEye[1] = 20f
+        vecEye[2] =  0f
+        // 視点の上方向
+        vecEyeUp[0] =  0f
+        vecEyeUp[1] =  0f
+        vecEyeUp[2] = -1f
+
+        // ビュー×プロジェクション座標変換行列
+        Matrix.setLookAtM(matV, 0,
+                vecEye[0], vecEye[1], vecEye[2],
+                vecCenter[0], vecCenter[1], vecCenter[2],
+                vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
+        Matrix.perspectiveM(matP,0,90f,ratio,0.1f,100f)
+        Matrix.multiplyMM(matVP,0,matP,0,matV,0)
+
+        // 正射影用の座標変換行列(合成用)
+        Matrix.setLookAtM(matV,0,
+                0f,0f,0.5f,
+                0f,0f,0f,
+                0f,1f,0f)
+        Matrix.orthoM(matP,0,-1f,1f,-1f,1f,0.1f,1f)
+        Matrix.multiplyMM(matOVP,0,matP,0,matV,0)
     }
 
     override fun setMotionParam(motionParam: MutableMap<String, Float>) {

@@ -5,7 +5,11 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.shader.MgShader
 
+// ------------------------------------
 // シェーダ(正射影)
+// ------------------------------------
+// https://wgld.org/d/webgl/w068.html
+// ------------------------------------
 class W068ShaderOrth: MgShader() {
     // 頂点シェーダ
     private val scv =
@@ -37,9 +41,9 @@ class W068ShaderOrth: MgShader() {
 
     override fun loadShader(): MgShader {
         // 頂点シェーダを生成
-        val svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
+        svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
-        val sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
+        sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
 
         // プログラムオブジェクトの生成とリンク
         programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_TexCoord") )
@@ -51,21 +55,25 @@ class W068ShaderOrth: MgShader() {
              u_Texture: Int) {
 
         GLES20.glUseProgram(programHandle)
-        MyGLFunc.checkGlError2("a_Position",this,model)
+        MyGLFunc.checkGlError2("UseProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)
-        GLES20.glGetAttribLocation(programHandle,"a_Position").also {
-            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
-            GLES20.glEnableVertexAttribArray(it)
+        val hPosition = GLES20.glGetAttribLocation(programHandle,"a_Position").also {
+            if ( it != -1 ) {
+                GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
+                GLES20.glEnableVertexAttribArray(it)
+            }
         }
         MyGLFunc.checkGlError2("a_Position",this,model)
 
         // attribute(テクスチャ座標)
         model.bufTxc.position(0)
-        GLES20.glGetAttribLocation(programHandle,"a_TexCoord").also {
-            GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, model.bufTxc)
-            GLES20.glEnableVertexAttribArray(it)
+        val hTexCoord = GLES20.glGetAttribLocation(programHandle,"a_TexCoord").also {
+            if ( it != -1 ) {
+                GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, model.bufTxc)
+                GLES20.glEnableVertexAttribArray(it)
+            }
         }
         MyGLFunc.checkGlError2("a_TexCoord",this,model)
 
@@ -75,7 +83,7 @@ class W068ShaderOrth: MgShader() {
         }
         MyGLFunc.checkGlError2("u_matMVP",this,model)
 
-        // uniform(テクスチャ)
+        // uniform(テクスチャユニット)
         GLES20.glGetUniformLocation(programHandle, "u_Texture").also {
             GLES20.glUniform1i(it, u_Texture)
         }
@@ -83,5 +91,13 @@ class W068ShaderOrth: MgShader() {
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
+
+        // リソース解放
+        if ( hPosition != -1 ) {
+            GLES20.glDisableVertexAttribArray(hPosition)
+        }
+        if ( hTexCoord != -1 ) {
+            GLES20.glDisableVertexAttribArray(hTexCoord)
+        }
     }
 }

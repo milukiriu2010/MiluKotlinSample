@@ -26,12 +26,10 @@ class W068Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl06_w68, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w68, container, false)
 
         myGLES20View = view.findViewById(R.id.myGLES20ViewW68)
-        val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w68)
         val renderer = W068Renderer(context!!)
-        renderer.bmpArray.add(bmp0)
         myGLES20View.setRenderer(renderer)
         myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
