@@ -21,9 +21,9 @@ import javax.microedition.khronos.opengles.GL10
 // -----------------------------------
 class W067Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)
-    private lateinit var drawObjTorus: Torus01Model
+    private lateinit var modelTorus: Torus01Model
     // 描画オブジェクト(板ポリゴン)
-    private lateinit var drawObjBoard: Board01Model
+    private lateinit var modelBoard: Board01Model
 
     // シェーダ(メイン)
     private lateinit var screenShader: W067ShaderScreen
@@ -93,7 +93,7 @@ class W067Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.rotateM(matM,0,t0,1f,1f,0f)
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
             Matrix.invertM(matI,0,matM,0)
-            screenShader.draw(drawObjTorus,matMVP,matI,vecLight,vecEye,amb.toFloatArray())
+            screenShader.draw(modelTorus,matMVP,matI,vecLight,vecEye,amb.toFloatArray())
         }
 
         // フレームバッファのバインドを解除
@@ -123,7 +123,7 @@ class W067Renderer(ctx: Context): MgRenderer(ctx) {
         }
 
         // 板ポリゴンの描画
-        zoomBlurShader.draw(drawObjBoard,matVP,0,u_strength,renderW.toFloat())
+        zoomBlurShader.draw(modelBoard,matVP,0,u_strength,renderW.toFloat())
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -146,8 +146,7 @@ class W067Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glGenRenderbuffers(1,bufDepthRender)
         // フレームバッファを格納するテクスチャ生成
         GLES20.glGenTextures(1,frameTexture)
-
-        createFrameBuffer(renderW,renderH,0)
+        MyGLFunc.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
@@ -171,8 +170,8 @@ class W067Renderer(ctx: Context): MgRenderer(ctx) {
         zoomBlurShader.loadShader()
 
         // モデル生成(トーラス)
-        drawObjTorus = Torus01Model()
-        drawObjTorus.createPath(mapOf(
+        modelTorus = Torus01Model()
+        modelTorus.createPath(mapOf(
                 "row"     to 32f,
                 "column"  to 32f,
                 "iradius" to 1f,
@@ -184,8 +183,8 @@ class W067Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(板ポリゴン)
-        drawObjBoard = Board01Model()
-        drawObjBoard.createPath(mapOf(
+        modelBoard = Board01Model()
+        modelBoard.createPath(mapOf(
                 "pattern" to 53f
         ))
 
@@ -193,66 +192,6 @@ class W067Renderer(ctx: Context): MgRenderer(ctx) {
         vecLight[0] = -0.577f
         vecLight[1] =  0.577f
         vecLight[2] =  0.577f
-
-        // ----------------------------------
-        // 単位行列化
-        // ----------------------------------
-        // モデル変換行列
-        Matrix.setIdentityM(matM,0)
-        // モデル変換行列の逆行列
-        Matrix.setIdentityM(matI,0)
-        // ビュー変換行列
-        Matrix.setIdentityM(matV,0)
-        // プロジェクション変換行列
-        Matrix.setIdentityM(matP,0)
-        // モデル・ビュー・プロジェクション行列
-        Matrix.setIdentityM(matMVP,0)
-        // テンポラリ行列
-        Matrix.setIdentityM(matVP,0)
-    }
-
-    // フレームバッファをオブジェクトとして生成する
-    private fun createFrameBuffer(width: Int, height: Int, id: Int) {
-        val maxRenderbufferSize = IntBuffer.allocate(1)
-        GLES20.glGetIntegerv(GLES20.GL_MAX_RENDERBUFFER_SIZE,maxRenderbufferSize)
-
-        Log.d(javaClass.simpleName,"w[${width}]h[${height}]bufSize[${maxRenderbufferSize[0]}]")
-
-        // フレームバッファのバインド
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[id])
-
-        // 深度バッファ用レンダ―バッファのバインド
-        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,bufDepthRender[id])
-
-        // レンダ―バッファを深度バッファとして設定
-        GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER, GLES20.GL_DEPTH_COMPONENT16, width, height)
-
-        // フレームバッファにレンダ―バッファを関連付ける
-        GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT, GLES20.GL_RENDERBUFFER,bufDepthRender[id])
-
-        // フレームバッファ用のテクスチャをバインド
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[id])
-
-        // フレームバッファ用のテクスチャにカラー用のメモリ領域を確保
-        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,width,height,0,GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,null)
-
-        // テクスチャパラメータ
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MIN_FILTER,GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
-
-        // フレームバッファにテクスチャを関連付ける
-        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER,GLES20.GL_COLOR_ATTACHMENT0,GLES20.GL_TEXTURE_2D,frameTexture[id],0)
-
-        // 追加
-        val status = GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER)
-        Log.d(javaClass.simpleName,"status[${status}]COMPLETE[${GLES20.GL_FRAMEBUFFER_COMPLETE}]")
-
-        // バインド解除
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,0)
-        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,0)
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
     }
 
     override fun setMotionParam(motionParam: MutableMap<String, Float>) {
