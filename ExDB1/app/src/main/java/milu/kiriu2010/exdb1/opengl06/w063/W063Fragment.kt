@@ -24,9 +24,9 @@ class W063Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl06_w63, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w15, container, false)
 
-        myGLES20View = view.findViewById(R.id.myGLES20ViewW63)
+        myGLES20View = view.findViewById(R.id.myGLES20ViewW15)
         val render = W063Renderer(context!!)
         myGLES20View.setRenderer(render)
         myGLES20View.setOnTouchListener { v, event ->

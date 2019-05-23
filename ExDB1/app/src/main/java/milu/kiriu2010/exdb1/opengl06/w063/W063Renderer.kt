@@ -1,27 +1,20 @@
 package milu.kiriu2010.exdb1.opengl06.w063
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.Matrix
-import android.util.Log
-import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.gui.color.MgColor
-import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.math.MyMathUtil
-import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // 半球ライティング
 class W063Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)
-    private lateinit var drawObjTorus: Torus01Model
+    private lateinit var modelTorus: Torus01Model
     // 描画オブジェクト(球体)
-    private lateinit var drawObjSphere: Sphere01Model
+    private lateinit var modelSphere: Sphere01Model
 
     // シェーダ(メイン)
     private lateinit var mainShader: W063ShaderMain
@@ -69,7 +62,7 @@ class W063Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.rotateM(matM,0,90f,1f,0f,0f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
-        mainShader.draw(drawObjTorus,matM,matMVP,matI,
+        mainShader.draw(modelTorus,matM,matMVP,matI,
                 vecSky,vecLight,vecEye, colorSky, colorGround )
 
         // レンダリング(球体)
@@ -77,7 +70,7 @@ class W063Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.translateM(matM,0,1f,0f,0f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
-        mainShader.draw(drawObjSphere,matM,matMVP,matI,
+        mainShader.draw(modelSphere,matM,matMVP,matI,
                 vecSky,vecLight,vecEye, colorSky, colorGround )
     }
 
@@ -91,12 +84,6 @@ class W063Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
         // カリングと深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
@@ -107,8 +94,8 @@ class W063Renderer(ctx: Context): MgRenderer(ctx) {
         mainShader.loadShader()
 
         // モデル生成(トーラス)
-        drawObjTorus = Torus01Model()
-        drawObjTorus.createPath(mapOf(
+        modelTorus = Torus01Model()
+        modelTorus.createPath(mapOf(
                 "row"     to 32f,
                 "column"  to 32f,
                 "iradius" to 0.25f,
@@ -120,8 +107,8 @@ class W063Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(球体)
-        drawObjSphere = Sphere01Model()
-        drawObjSphere.createPath(mapOf(
+        modelSphere = Sphere01Model()
+        modelSphere.createPath(mapOf(
                 "row" to 32f,
                 "column" to 32f,
                 "radius" to 0.75f,
@@ -135,22 +122,6 @@ class W063Renderer(ctx: Context): MgRenderer(ctx) {
         vecLight[0] = -0.577f
         vecLight[1] =  0.577f
         vecLight[2] =  0.577f
-
-        // ----------------------------------
-        // 単位行列化
-        // ----------------------------------
-        // モデル変換行列
-        Matrix.setIdentityM(matM,0)
-        // モデル変換行列の逆行列
-        Matrix.setIdentityM(matI,0)
-        // ビュー変換行列
-        Matrix.setIdentityM(matV,0)
-        // プロジェクション変換行列
-        Matrix.setIdentityM(matP,0)
-        // モデル・ビュー・プロジェクション行列
-        Matrix.setIdentityM(matMVP,0)
-        // テンポラリ行列
-        Matrix.setIdentityM(matVP,0)
     }
 
     override fun setMotionParam(motionParam: MutableMap<String, Float>) {
