@@ -100,17 +100,21 @@ class W065ShaderGaussian: MgShader() {
 
         // attribute(頂点)
         model.bufPos.position(0)
-        GLES20.glGetAttribLocation(programHandle,"a_Position").also {
-            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
-            GLES20.glEnableVertexAttribArray(it)
+        val hPosition = GLES20.glGetAttribLocation(programHandle,"a_Position").also {
+            if ( it != -1 ) {
+                GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
+                GLES20.glEnableVertexAttribArray(it)
+            }
         }
         MyGLFunc.checkGlError2("a_Position", this,model)
 
         // attribute(テクスチャ座標)
         model.bufTxc.position(0)
-        GLES20.glGetAttribLocation(programHandle,"a_TexCoord").also {
-            GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, model.bufTxc)
-            GLES20.glEnableVertexAttribArray(it)
+        val hTexCoord = GLES20.glGetAttribLocation(programHandle,"a_TexCoord").also {
+            if ( it != -1 ) {
+                GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, model.bufTxc)
+                GLES20.glEnableVertexAttribArray(it)
+            }
         }
         MyGLFunc.checkGlError2("a_TexCoord", this,model)
 
@@ -146,5 +150,13 @@ class W065ShaderGaussian: MgShader() {
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
+
+        // リソース解放
+        if ( hPosition != -1 ) {
+            GLES20.glDisableVertexAttribArray(hPosition)
+        }
+        if ( hTexCoord != -1 ) {
+            GLES20.glDisableVertexAttribArray(hTexCoord)
+        }
     }
 }

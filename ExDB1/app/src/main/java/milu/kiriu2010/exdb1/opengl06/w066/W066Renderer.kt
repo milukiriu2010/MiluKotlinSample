@@ -2,9 +2,11 @@ package milu.kiriu2010.exdb1.opengl06.w066
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.opengl.GLES20
 import android.opengl.Matrix
 import android.util.Log
+import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.color.MgColor
 import milu.kiriu2010.gui.model.Board01Model
@@ -14,12 +16,16 @@ import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
+// ---------------------------------------
 // モザイク
+// ---------------------------------------
+// https://wgld.org/d/webgl/w066.html
+// ---------------------------------------
 class W066Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)
-    private lateinit var drawObjTorus: Torus01Model
+    private lateinit var modelTorus: Torus01Model
     // 描画オブジェクト(板ポリゴン)
-    private lateinit var drawObjBoard: Board01Model
+    private lateinit var modelBoard: Board01Model
 
     // シェーダ(メイン)
     private lateinit var screenShader: W066ShaderScreen
@@ -50,6 +56,15 @@ class W066Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画対象のテクスチャ
     var textureType = 0
 
+    init {
+        // ビットマップをロード
+        bmpArray.clear()
+        val bmp0 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w55_01)
+        val bmp1 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w55_02)
+        bmpArray.add(bmp0)
+        bmpArray.add(bmp1)
+    }
+
     override fun onDrawFrame(gl: GL10?) {
         angle[0] =(angle[0]+1)%360
         val t0 = angle[0].toFloat()
@@ -58,7 +73,7 @@ class W066Renderer(ctx: Context): MgRenderer(ctx) {
         }
 
         // フレームバッファのバインド
-        GLES20.glBindBuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
 
         // フレームバッファを初期化
         val hsv = MgColor.hsva(cntColor%360,1f,1f,1f)
@@ -87,11 +102,11 @@ class W066Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.rotateM(matM,0,t0,1f,1f,0f)
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
             Matrix.invertM(matI,0,matM,0)
-            screenShader.draw(drawObjTorus,matMVP,matI,vecLight,vecEye,amb.toFloatArray())
+            screenShader.draw(modelTorus,matMVP,matI,vecLight,vecEye,amb.toFloatArray())
         }
 
         // フレームバッファのバインドを解除
-        GLES20.glBindBuffer(GLES20.GL_FRAMEBUFFER,0)
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
 
         // canvasを初期化
         GLES20.glClearColor(0f, 0f, 0f, 1f)
@@ -117,7 +132,7 @@ class W066Renderer(ctx: Context): MgRenderer(ctx) {
         }
 
         // 板ポリゴンの描画
-        mosaicShader.draw(drawObjBoard,matVP,0,renderW.toFloat())
+        mosaicShader.draw(modelBoard,matVP,0,renderW.toFloat())
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -140,17 +155,10 @@ class W066Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glGenRenderbuffers(1,bufDepthRender)
         // フレームバッファを格納するテクスチャ生成
         GLES20.glGenTextures(1,frameTexture)
-
-        createFrameBuffer(renderW,renderH,0)
+        MyGLFunc.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
         // カリングと深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
@@ -165,8 +173,8 @@ class W066Renderer(ctx: Context): MgRenderer(ctx) {
         mosaicShader.loadShader()
 
         // モデル生成(トーラス)
-        drawObjTorus = Torus01Model()
-        drawObjTorus.createPath(mapOf(
+        modelTorus = Torus01Model()
+        modelTorus.createPath(mapOf(
                 "row"     to 32f,
                 "column"  to 32f,
                 "iradius" to 1f,
@@ -178,8 +186,8 @@ class W066Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(板ポリゴン)
-        drawObjBoard = Board01Model()
-        drawObjBoard.createPath(mapOf(
+        modelBoard = Board01Model()
+        modelBoard.createPath(mapOf(
                 "pattern" to 53f
         ))
 
@@ -187,66 +195,6 @@ class W066Renderer(ctx: Context): MgRenderer(ctx) {
         vecLight[0] = -0.577f
         vecLight[1] =  0.577f
         vecLight[2] =  0.577f
-
-        // ----------------------------------
-        // 単位行列化
-        // ----------------------------------
-        // モデル変換行列
-        Matrix.setIdentityM(matM,0)
-        // モデル変換行列の逆行列
-        Matrix.setIdentityM(matI,0)
-        // ビュー変換行列
-        Matrix.setIdentityM(matV,0)
-        // プロジェクション変換行列
-        Matrix.setIdentityM(matP,0)
-        // モデル・ビュー・プロジェクション行列
-        Matrix.setIdentityM(matMVP,0)
-        // テンポラリ行列
-        Matrix.setIdentityM(matVP,0)
-    }
-
-    // フレームバッファをオブジェクトとして生成する
-    private fun createFrameBuffer(width: Int, height: Int, id: Int) {
-        val maxRenderbufferSize = IntBuffer.allocate(1)
-        GLES20.glGetIntegerv(GLES20.GL_MAX_RENDERBUFFER_SIZE,maxRenderbufferSize)
-
-        Log.d(javaClass.simpleName,"w[${width}]h[${height}]bufSize[${maxRenderbufferSize[0]}]")
-
-        // フレームバッファのバインド
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[id])
-
-        // 深度バッファ用レンダ―バッファのバインド
-        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,bufDepthRender[id])
-
-        // レンダ―バッファを深度バッファとして設定
-        GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER, GLES20.GL_DEPTH_COMPONENT16, width, height)
-
-        // フレームバッファにレンダ―バッファを関連付ける
-        GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT, GLES20.GL_RENDERBUFFER,bufDepthRender[id])
-
-        // フレームバッファ用のテクスチャをバインド
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[id])
-
-        // フレームバッファ用のテクスチャにカラー用のメモリ領域を確保
-        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,width,height,0,GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,null)
-
-        // テクスチャパラメータ
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MIN_FILTER,GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
-
-        // フレームバッファにテクスチャを関連付ける
-        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER,GLES20.GL_COLOR_ATTACHMENT0,GLES20.GL_TEXTURE_2D,frameTexture[id],0)
-
-        // 追加
-        val status = GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER)
-        Log.d(javaClass.simpleName,"status[${status}]COMPLETE[${GLES20.GL_FRAMEBUFFER_COMPLETE}]")
-
-        // バインド解除
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,0)
-        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,0)
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
     }
 
     override fun setMotionParam(motionParam: MutableMap<String, Float>) {

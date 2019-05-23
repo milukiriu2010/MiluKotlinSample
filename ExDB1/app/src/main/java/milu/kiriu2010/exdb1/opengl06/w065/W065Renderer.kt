@@ -195,7 +195,7 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         // --------------------------------------------------------------
 
         // フレームバッファをバインド
-        GLES20.glBindBuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
 
         // フレームバッファを初期化
         GLES20.glClearColor(0f, 0f, 0f, 1f)
@@ -221,7 +221,7 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         // --------------------------------------------------------------
 
         // フレームバッファをバインド
-        GLES20.glBindBuffer(GLES20.GL_FRAMEBUFFER,bufFrame[1])
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[1])
 
         // 裏面深度をレンダリングしたフレームバッファをテクスチャとしてバインド
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
@@ -250,7 +250,7 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         // --------------------------------------------------------------
 
         // フレームバッファをバインド
-        GLES20.glBindBuffer(GLES20.GL_FRAMEBUFFER,bufFrame[2])
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[2])
 
         // フレームバッファをテクスチャとしてバインド
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
@@ -271,7 +271,7 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         // --------------------------------------------------------------
 
         // フレームバッファをバインド
-        GLES20.glBindBuffer(GLES20.GL_FRAMEBUFFER,bufFrame[3])
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[3])
 
         // フレームバッファをテクスチャとしてバインド
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
@@ -303,7 +303,7 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         // --------------------------------------------------------------
 
         // フレームバッファのバインドを解除
-        GLES20.glBindBuffer(GLES20.GL_FRAMEBUFFER,0)
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
 
         // canvasを初期化
         GLES20.glClearColor(0f, 0.1f, 0.1f, 1f)

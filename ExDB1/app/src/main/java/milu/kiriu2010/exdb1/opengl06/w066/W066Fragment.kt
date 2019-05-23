@@ -31,12 +31,8 @@ class W066Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_gl06_w66, container, false)
 
         myGLES20View = view.findViewById(R.id.myGLES20ViewW66)
-        val bmp0 = BitmapFactory.decodeResource(resources,R.drawable.texture_w55_01)
-        val bmp1 = BitmapFactory.decodeResource(resources,R.drawable.texture_w55_02)
-        val render = W066Renderer(context!!)
-        render.bmpArray.add(bmp0)
-        render.bmpArray.add(bmp1)
-        myGLES20View.setRenderer(render)
+        val renderer = W066Renderer(context!!)
+        myGLES20View.setRenderer(renderer)
         myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
@@ -44,10 +40,10 @@ class W066Fragment : Fragment() {
                 MotionEvent.ACTION_DOWN -> {
                     Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
                     Log.d(javaClass.simpleName,"vw[${myGLES20View.width}]vh[${myGLES20View.height}]")
-                    render.receiveTouch(event,myGLES20View.width,myGLES20View.height)
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    render.receiveTouch(event,myGLES20View.width,myGLES20View.height)
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 else -> {
                 }
@@ -61,7 +57,7 @@ class W066Fragment : Fragment() {
         val radioButtonW66Texture2 = view.findViewById<RadioButton>(R.id.radioButtonW66Texture2)
 
         radioGroupW66.setOnCheckedChangeListener { group, checkedId ->
-            render.textureType = when (checkedId) {
+            renderer.textureType = when (checkedId) {
                 radioButtonW66Render.id -> 0
                 radioButtonW66Texture1.id -> 1
                 radioButtonW66Texture2.id -> 2
