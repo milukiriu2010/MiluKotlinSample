@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.glsl01.g009
+package milu.kiriu2010.exdb1.glsl01.g010
 
 import android.content.Context
 import android.opengl.GLES20
@@ -10,21 +10,25 @@ import milu.kiriu2010.gui.model.Square01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
 // -------------------------------------------
-// レイマーチングで球体を描く
+// レイマーチングで球体をライティングして
+// レンダリングするサンプル
 // -------------------------------------------
-// https://wgld.org/d/glsl/g009.html
+// https://wgld.org/d/glsl/g010.html
 // -------------------------------------------
-class GLSL09Renderer(ctx: Context): MgRenderer(ctx) {
+class GLSL10Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画モデル
     private lateinit var model: Square01Model
 
     // シェーダ
-    private lateinit var shader: GLSL09Shader
+    private lateinit var shader: GLSL10Shader
 
     // 時間管理
     private var startTime = SystemClock.uptimeMillis()
     // サンプルが動作する際に、どの程度時間が経過しているのかをシェーダに渡す
     private var u_time = 0f
+
+    // 法線を出力するかどうか
+    var u_showNormal = 0
 
     override fun onDrawFrame(gl: GL10) {
         // canvasを初期化
@@ -38,7 +42,8 @@ class GLSL09Renderer(ctx: Context): MgRenderer(ctx) {
         shader.draw(model,
                 u_time,
                 floatArrayOf(touchP.x,touchP.y),
-                floatArrayOf(renderW.toFloat(),renderH.toFloat())
+                floatArrayOf(renderW.toFloat(),renderH.toFloat()),
+                u_showNormal
         )
     }
 
@@ -54,7 +59,7 @@ class GLSL09Renderer(ctx: Context): MgRenderer(ctx) {
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
 
         // シェーダ
-        shader = GLSL09Shader()
+        shader = GLSL10Shader()
         shader.loadShader()
 
         // モデル生成
