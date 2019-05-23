@@ -5,7 +5,11 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.shader.MgShader
 
+// -----------------------------------
 // シェーダ(ズームブラー)
+// -----------------------------------
+// https://wgld.org/d/webgl/w067.html
+// -----------------------------------
 class W067ShaderZoomBlur: MgShader() {
     // 頂点シェーダ
     private val scv =

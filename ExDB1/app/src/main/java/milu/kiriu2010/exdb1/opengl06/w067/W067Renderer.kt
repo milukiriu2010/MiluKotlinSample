@@ -14,7 +14,11 @@ import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
+// -----------------------------------
 // ズームブラーフィルタ
+// -----------------------------------
+// https://wgld.org/d/webgl/w067.html
+// -----------------------------------
 class W067Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)
     private lateinit var drawObjTorus: Torus01Model
@@ -50,7 +54,7 @@ class W067Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画対象のテクスチャ
     var textureType = 0
 
-    var u_strength = 1.5f
+    var u_strength = 15f
 
     override fun onDrawFrame(gl: GL10?) {
         angle[0] =(angle[0]+1)%360
@@ -60,7 +64,7 @@ class W067Renderer(ctx: Context): MgRenderer(ctx) {
         }
 
         // フレームバッファのバインド
-        GLES20.glBindBuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
 
         // フレームバッファを初期化
         val hsv = MgColor.hsva(cntColor%360,1f,1f,1f)
@@ -93,7 +97,7 @@ class W067Renderer(ctx: Context): MgRenderer(ctx) {
         }
 
         // フレームバッファのバインドを解除
-        GLES20.glBindBuffer(GLES20.GL_FRAMEBUFFER,0)
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
 
         // canvasを初期化
         GLES20.glClearColor(0f, 0f, 0f, 1f)

@@ -70,25 +70,31 @@ class W047ShaderSpecular: MgShader() {
 
         // attribute(頂点)
         model.bufPos.position(0)
-        GLES20.glGetAttribLocation(programHandle,"a_Position").also {
-            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
-            GLES20.glEnableVertexAttribArray(it)
+        val hPosition = GLES20.glGetAttribLocation(programHandle,"a_Position").also {
+            if ( it != -1 ) {
+                GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
+                GLES20.glEnableVertexAttribArray(it)
+            }
         }
         MyGLFunc.checkGlError2("a_Position",this,model)
 
         // attribute(法線)
         model.bufNor.position(0)
-        GLES20.glGetAttribLocation(programHandle,"a_Normal").also {
-            GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufNor)
-            GLES20.glEnableVertexAttribArray(it)
+        val hNormal = GLES20.glGetAttribLocation(programHandle,"a_Normal").also {
+            if ( it != -1 ) {
+                GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufNor)
+                GLES20.glEnableVertexAttribArray(it)
+            }
         }
         MyGLFunc.checkGlError2("a_Normal",this,model)
 
         // attribute(色)
         model.bufCol.position(0)
-        GLES20.glGetAttribLocation(programHandle,"a_Color").also {
-            GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, model.bufCol)
-            GLES20.glEnableVertexAttribArray(it)
+        val hColor = GLES20.glGetAttribLocation(programHandle,"a_Color").also {
+            if ( it != -1 ) {
+                GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, model.bufCol)
+                GLES20.glEnableVertexAttribArray(it)
+            }
         }
         MyGLFunc.checkGlError2("a_Color",this,model)
 
@@ -124,5 +130,16 @@ class W047ShaderSpecular: MgShader() {
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
+
+        // リソース解放
+        if ( hPosition != -1 ) {
+            GLES20.glDisableVertexAttribArray(hPosition)
+        }
+        if ( hNormal != -1 ) {
+            GLES20.glDisableVertexAttribArray(hNormal)
+        }
+        if ( hColor != -1 ) {
+            GLES20.glDisableVertexAttribArray(hColor)
+        }
     }
 }

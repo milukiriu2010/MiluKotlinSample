@@ -1,6 +1,5 @@
 package milu.kiriu2010.exdb1.opengl06.w066
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -28,7 +27,7 @@ class W066Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl06_w66, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w66, container, false)
 
         myGLES20View = view.findViewById(R.id.myGLES20ViewW66)
         val renderer = W066Renderer(context!!)

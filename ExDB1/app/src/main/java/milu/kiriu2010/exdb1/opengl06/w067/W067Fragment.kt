@@ -70,14 +70,14 @@ class W067Fragment : Fragment() {
         val seekBarW67 = view.findViewById<SeekBar>(R.id.seekBarW67)
         seekBarW67.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                render.u_strength = seekBar.progress.toFloat() * 0.3f
+                render.u_strength = seekBar.progress.toFloat() * 3f
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
-                render.u_strength = seekBar.progress.toFloat() * 0.3f
+                render.u_strength = seekBar.progress.toFloat() * 3f
             }
         })
 
