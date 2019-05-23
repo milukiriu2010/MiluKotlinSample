@@ -25,7 +25,7 @@ class W062Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl06_w62, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w62, container, false)
 
         myGLES20View = view.findViewById(R.id.myGLES20ViewW62)
         val renderer = W062Renderer(context!!)
@@ -54,7 +54,7 @@ class W062Fragment : Fragment() {
                 renderer.u_alpha = seekBar.progress.toFloat()*0.1f
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
