@@ -280,4 +280,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnMGL00" />
 
+    <Button
+        android:id="@+id/btnOpenGLSL02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="GLSL02"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/btnOpenGLSL01"
+        app:layout_constraintStart_toEndOf="@+id/btnOpenGLSL01"
+        app:layout_constraintTop_toTopOf="@+id/btnOpenGLSL01" />
+
 </android.support.constraint.ConstraintLayout>
