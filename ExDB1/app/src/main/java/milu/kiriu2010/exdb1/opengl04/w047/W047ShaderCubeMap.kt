@@ -59,9 +59,9 @@ class W047ShaderCubeMap: MgShader() {
 
     override fun loadShader(): MgShader {
         // 頂点シェーダを生成
-        val svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
+        svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
-        val sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
+        sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
 
         // プログラムオブジェクトの生成とリンク
         programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Normal","a_Color") )
@@ -74,10 +74,11 @@ class W047ShaderCubeMap: MgShader() {
              matMVP: FloatArray,
              u_vecEye: FloatArray,
              u_CubeTexture: Int,
-             u_Reflection: Int) {
+             u_Reflection: Int,
+             mark: String) {
 
         GLES20.glUseProgram(programHandle)
-        MyGLFunc.checkGlError2("UseProgram",this,model)
+        MyGLFunc.checkGlError2("UseProgram($programHandle)($mark)",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)

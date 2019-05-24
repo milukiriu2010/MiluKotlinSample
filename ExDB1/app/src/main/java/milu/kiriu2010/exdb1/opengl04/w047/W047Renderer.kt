@@ -22,6 +22,10 @@ import javax.microedition.khronos.opengles.GL10
 // --------------------------------------
 // https://wgld.org/d/webgl/w047.html
 // --------------------------------------
+// キューブマップのシェーダで
+// UseProgramで0x502が発生する
+// トーラスが写らない
+// --------------------------------------
 class W047Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト(立方体)(背景)
@@ -93,9 +97,7 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
     override fun onDrawFrame(gl: GL10?) {
         // 回転角度
         angle[0] =(angle[0]+1)%360
-        angle[1] =(angle[0]+180)%360
         val t0 = angle[0].toFloat()
-        val t1 = angle[1].toFloat()
 
         // フレームバッファをバインド
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
@@ -127,14 +129,14 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.setIdentityM(matM,0)
         Matrix.scaleM(matM,0,100f,100f,100f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        shaderCubeMap.draw(modelCube,matM,matMVP,vecEye,0,0)
+        shaderCubeMap.draw(modelCube,matM,matMVP,vecEye,0,0,"Default")
 
         // 動的キューブマップテクスチャを適用して球体をレンダリング
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
         GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP,frameTexture[0])
         Matrix.setIdentityM(matM,0)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        shaderCubeMap.draw(modelSphere,matM,matMVP,vecEye,0,1)
+        shaderCubeMap.draw(modelSphere,matM,matMVP,vecEye,0,1,"Default")
 
         // スペキュラライティングシェーダを使って
         // トーラスをレンダリング
@@ -171,101 +173,47 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
             // 方角を判別して処理する
             when (target) {
                 GLES20.GL_TEXTURE_CUBE_MAP_POSITIVE_X -> {
-                    torusEye[0] = 1f
-                    torusEye[1] = 0f
-                    torusEye[2] = 0f
-                    torusCamUp[0] = 0f
-                    torusCamUp[1] = -1f
-                    torusCamUp[2] = 0f
-                    torusPos[0] = 6f
-                    torusPos[1] = 0f
-                    torusPos[2] = 0f
-                    torusAmb[0] = 1f
-                    torusAmb[1] = 0.5f
-                    torusAmb[2] = 0.5f
-                    torusAmb[3] = 1f
+                    torusEye[0]   = 1f;  torusEye[1]   =  0f;  torusEye[2]    = 0f;
+                    torusCamUp[0] = 0f;  torusCamUp[1] = -1f;  torusCamUp[2] = 0f;
+                    torusPos[0]   = 6f;  torusPos[1]   = 0f;   torusPos[2]    = 0f;
+                    torusAmb[0]   = 1f;  torusAmb[1]   = 0.5f;  torusAmb[2] = 0.5f;   torusAmb[3] = 1f;
                 }
                 GLES20.GL_TEXTURE_CUBE_MAP_POSITIVE_Y -> {
-                    torusEye[3] = 0f
-                    torusEye[4] = 1f
-                    torusEye[5] = 0f
-                    torusCamUp[3] = 0f
-                    torusCamUp[4] = 0f
-                    torusCamUp[5] = 1f
-                    torusPos[3] = 0f
-                    torusPos[4] = 6f
-                    torusPos[5] = 0f
-                    torusAmb[4] = 0.5f
-                    torusAmb[5] = 1f
-                    torusAmb[6] = 0.5f
-                    torusAmb[7] = 1f
+                    torusEye[3]   = 0f;  torusEye[4]   = 1f;   torusEye[5]   = 0f;
+                    torusCamUp[3] = 0f;  torusCamUp[4] = 0f;   torusCamUp[5] = 1f;
+                    torusPos[3]   = 0f;  torusPos[4]   = 6f;   torusPos[5]   = 0f;
+                    torusAmb[4] = 0.5f;  torusAmb[5] = 1f;     torusAmb[6] = 0.5f;    torusAmb[7] = 1f;
                 }
                 GLES20.GL_TEXTURE_CUBE_MAP_POSITIVE_Z -> {
-                    torusEye[6] = 0f
-                    torusEye[7] = 0f
-                    torusEye[8] = 1f
-                    torusCamUp[6] = 0f
-                    torusCamUp[7] = -1f
-                    torusCamUp[8] = 0f
-                    torusPos[6] = 0f
-                    torusPos[7] = 0f
-                    torusPos[8] = 6f
-                    torusAmb[8] = 0.5f
-                    torusAmb[9] = 0.5f
-                    torusAmb[10] = 1f
-                    torusAmb[11] = 1f
+                    torusEye[6]   = 0f;  torusEye[7]   = 0f;    torusEye[8]  = 1f;
+                    torusCamUp[6] = 0f;  torusCamUp[7] = -1f;  torusCamUp[8] = 0f;
+                    torusPos[6]   = 0f;  torusPos[7]   = 0f;    torusPos[8]  = 6f;
+                    torusAmb[8] = 0.5f;  torusAmb[9] = 0.5f;    torusAmb[10] = 1f;    torusAmb[11] = 1f;
                 }
                 GLES20.GL_TEXTURE_CUBE_MAP_NEGATIVE_X -> {
-                    torusEye[9] = -1f
-                    torusEye[10] = 0f
-                    torusEye[11] = 0f
-                    torusCamUp[9] = 0f
-                    torusCamUp[10] = -1f
-                    torusCamUp[11] = 0f
-                    torusPos[9] = -6f
-                    torusPos[10] = 0f
-                    torusPos[11] = 0f
-                    torusAmb[12] = 0.5f
-                    torusAmb[13] = 0f
-                    torusAmb[14] = 0f
-                    torusAmb[15] = 1f
+                    torusEye[9]  = -1f;  torusEye[10] = 0f;     torusEye[11] = 0f;
+                    torusCamUp[9] = 0f;  torusCamUp[10] = -1f;  torusCamUp[11] = 0f;
+                    torusPos[9]   = -6f; torusPos[10] = 0f;     torusPos[11] = 0f;
+                    torusAmb[12] = 0.5f; torusAmb[13] = 0f;     torusAmb[14] = 0f;   torusAmb[15] = 1f;
                 }
                 GLES20.GL_TEXTURE_CUBE_MAP_NEGATIVE_Y -> {
-                    torusEye[12] = 0f
-                    torusEye[13] = -1f
-                    torusEye[14] = 0f
-                    torusCamUp[12] = 0f
-                    torusCamUp[13] = 0f
-                    torusCamUp[14] = -1f
-                    torusPos[12] = 0f
-                    torusPos[13] = -6f
-                    torusPos[14] = 0f
-                    torusAmb[16] = 0f
-                    torusAmb[17] = 0.5f
-                    torusAmb[18] = 0f
-                    torusAmb[19] = 1f
+                    torusEye[12] = 0f;   torusEye[13] = -1f;    torusEye[14] = 0f;
+                    torusCamUp[12] = 0f; torusCamUp[13] = 0f;  torusCamUp[14] = -1f;
+                    torusPos[12] = 0f;   torusPos[13] = -6f;    torusPos[14] = 0f;
+                    torusAmb[16] = 0f;   torusAmb[17] = 0.5f;   torusAmb[18] = 0f;   torusAmb[19] = 1f;
                 }
                 GLES20.GL_TEXTURE_CUBE_MAP_NEGATIVE_Z -> {
-                    torusEye[15] = 0f
-                    torusEye[16] = 0f
-                    torusEye[17] = -1f
-                    torusCamUp[15] = 0f
-                    torusCamUp[16] = -1f
-                    torusCamUp[17] = 0f
-                    torusPos[15] = 0f
-                    torusPos[16] = 0f
-                    torusPos[17] = -6f
-                    torusAmb[20] = 0f
-                    torusAmb[21] = 0f
-                    torusAmb[22] = 0.5f
-                    torusAmb[23] = 1f
+                    torusEye[15] = 0f;   torusEye[16] = 0f;     torusEye[17] = -1f;
+                    torusCamUp[15] = 0f; torusCamUp[16] = -1f;  torusCamUp[17] = 0f;
+                    torusPos[15] = 0f;   torusPos[16] = 0f;     torusPos[17] = -6f;
+                    torusAmb[20] = 0f;   torusAmb[21] = 0f;     torusAmb[22] = 0.5f; torusAmb[23] = 1f;
                 }
             }
 
             // ビュー×プロジェクション座標変換行列
             Matrix.setLookAtM(matV,0,
+                    0f,0f,0f,
                     torusEye[0+id*3], torusEye[1+id*3], torusEye[2+id*3],
-                    vecCenter[0],vecCenter[1],vecCenter[2],
                     torusCamUp[0+id*3], torusCamUp[1+id*3], torusCamUp[2+id*3]
             )
             Matrix.perspectiveM(matP,0,90f,1f,0.1f,200f)
@@ -277,7 +225,7 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.setIdentityM(matM,0)
             Matrix.scaleM(matM,0,100f,100f,100f)
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-            shaderCubeMap.draw(modelCube,matM,matMVP, floatArrayOf(0f,0f,0f),0,0)
+            shaderCubeMap.draw(modelCube,matM,matMVP, floatArrayOf(0f,0f,0f),0,0,"FrameBuffer")
 
             // 視線ベクトルの変換
             var torusInvEye = FloatArray(3)
@@ -328,6 +276,7 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
         // シェーダ(反射光ライティング)
         shaderSpecular = W047ShaderSpecular()
         shaderSpecular.loadShader()
+
         // シェーダ(キューブ環境マッピング)
         shaderCubeMap = W047ShaderCubeMap()
         shaderCubeMap.loadShader()
@@ -373,11 +322,12 @@ class W047Renderer(ctx: Context): MgRenderer(ctx) {
 
         // 光源位置
         vecLight[0] = -1f
-        vecLight[1] = 1f
-        vecLight[2] = 1f
+        vecLight[1] =  1f
+        vecLight[2] =  1f
+
         // 視点位置
-        vecEye[0] = 0f
-        vecEye[1] = 0f
+        vecEye[0] =  0f
+        vecEye[1] =  0f
         vecEye[2] = 20f
     }
 
