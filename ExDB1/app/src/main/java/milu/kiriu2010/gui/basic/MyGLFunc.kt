@@ -9,13 +9,14 @@ import java.nio.ByteBuffer
 import java.nio.IntBuffer
 import kotlin.math.exp
 
-// ----------------------------------------------------------------
+// ----------------------------------------------------------------------
 // 2019.04.27 ビットマップをロードしテクスチャを生成
 // 2019.05.02 gaussianブラーの重みを計算
 // 2019.05.11 OpenGLのエラー状態を出力2
 // 2019.05.18 テクスチャパラメータの設定をしないパラメータ追加
 // 2019.05.19 フレームバッファを生成
-// ----------------------------------------------------------------
+// 2019.05.24 フレームバッファ生成の引数に"浮動小数点数テクスチャ"用を追加
+// ----------------------------------------------------------------------
 class MyGLFunc {
 
     companion object {
@@ -220,7 +221,7 @@ class MyGLFunc {
         // --------------------------------------------------
         // フレームバッファを生成する
         // --------------------------------------------------
-        fun createFrameBuffer(width: Int, height: Int, id: Int, bufFrame: IntBuffer, bufDepthRender: IntBuffer, frameTexture: IntBuffer) {
+        fun createFrameBuffer(width: Int, height: Int, id: Int, bufFrame: IntBuffer, bufDepthRender: IntBuffer, frameTexture: IntBuffer, type: Int = GLES20.GL_UNSIGNED_BYTE) {
             // フレームバッファのバインド
             GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[id])
 
@@ -237,7 +238,10 @@ class MyGLFunc {
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[id])
 
             // フレームバッファ用のテクスチャにカラー用のメモリ領域を確保
-            GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,width,height,0,GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,null)
+            //   type:
+            //     浮動小数点数テクスチャ⇒GLES20.GL_FLOATを指定
+            GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,width,height,0,
+                    GLES20.GL_RGBA,type,null)
 
             // テクスチャパラメータ
             GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR)

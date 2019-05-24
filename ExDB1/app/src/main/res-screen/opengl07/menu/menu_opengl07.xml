@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w070"
+        android:title="w070_浮動小数点数テクスチャ" />
+    <item
         android:id="@+id/opengl_w069"
         android:title="w069_シャドウマッピング(新)" />
 </menu>
