@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl07.w071
+package milu.kiriu2010.exdb1.opengl07.w072
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
-class W071Fragment : Fragment() {
+class W072Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View
 
@@ -27,7 +27,7 @@ class W071Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_gl06_w71, container, false)
 
         myGLES20View = view.findViewById(R.id.myGLES20ViewW71)
-        val renderer = W071Renderer(context!!)
+        val renderer = W072Renderer(context!!)
         myGLES20View.setRenderer(renderer)
         myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
@@ -63,7 +63,7 @@ class W071Fragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                W071Fragment().apply {
+                W072Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

@@ -8,6 +8,7 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl07.w069.W069Fragment
 import milu.kiriu2010.exdb1.opengl07.w070.W070Fragment
 import milu.kiriu2010.exdb1.opengl07.w071.W071Fragment
+import milu.kiriu2010.exdb1.opengl07.w072.W072Fragment
 
 class OpenGL07Activity : AppCompatActivity() {
 
@@ -18,7 +19,7 @@ class OpenGL07Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W071Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, W072Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -40,6 +41,16 @@ class OpenGL07Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 浮動小数点数VTF
+            R.id.opengl_w072 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w072") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W072Fragment.newInstance(), "w072")
+                            .commit()
+                }
                 true
             }
             // 頂点テクスチャフェッチ
