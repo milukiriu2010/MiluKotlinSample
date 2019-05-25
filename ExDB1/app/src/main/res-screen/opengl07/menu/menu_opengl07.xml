@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w076"
+        android:title="w076_ハーフトーンシェーディング" />
+    <item
         android:id="@+id/opengl_w072"
         android:title="w072_浮動小数点数VTF" />
     <item

@@ -234,6 +234,9 @@ class W070Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
+        // OpenGL Extension
+        Log.d(javaClass.simpleName,"OpenGL Extensions:${GLES20.glGetString(GLES20.GL_EXTENSIONS)}")
+
         // カリングと深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)

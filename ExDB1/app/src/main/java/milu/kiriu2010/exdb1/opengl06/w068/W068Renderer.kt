@@ -15,7 +15,11 @@ import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
+// -----------------------------------------
 // ゴッドレイフィルタ
+// -----------------------------------------
+// // https://wgld.org/d/webgl/w068.html
+// -----------------------------------------
 class W068Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)
     private lateinit var modelTorus: Torus01Model
