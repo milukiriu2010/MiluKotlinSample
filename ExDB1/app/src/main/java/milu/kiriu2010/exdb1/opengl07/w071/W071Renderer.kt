@@ -49,6 +49,33 @@ class W071Renderer(ctx: Context): MgRenderer(ctx) {
         angle[0] =(angle[0]+1)%360
         val t0 = angle[0].toFloat()
 
+        // ビュー×プロジェクション座標変換行列
+        Matrix.setLookAtM(matV,0,
+                0f,0f,5f,
+                0f,0f,0f,
+                0f,1f,0f)
+        Matrix.perspectiveM(matP,0,45f,ratio,0.1f,10f)
+        Matrix.multiplyMM(matVP,0,matP,0,matV,0)
+
+        // フレームバッファをバインド
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
+
+        // ビューポートを設定
+        GLES20.glViewport(0,0,16,16)
+
+        // フレームバッファを初期化
+        GLES20.glClearColor(0f,0f,0f,1f)
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
+
+        // テクスチャへ頂点情報をレンダリング
+        mappingShader.draw(modelSphere,indices.size.toFloat())
+
+        // フレームバッファのバインドを解除
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
+
+        // ビューポートを設定
+        GLES20.glViewport(0, 0, renderW, renderH)
+
         // canvasを初期化
         GLES20.glClearColor(1f,1f,1f,1f)
         GLES20.glClearDepthf(1f)
@@ -71,13 +98,6 @@ class W071Renderer(ctx: Context): MgRenderer(ctx) {
         renderW = width
         renderH = height
 
-        // ビュー×プロジェクション座標変換行列
-        Matrix.setLookAtM(matV,0,
-                0f,0f,5f,
-                0f,0f,0f,
-                0f,1f,0f)
-        Matrix.perspectiveM(matP,0,45f,ratio,0.1f,10f)
-        Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
         // フレームバッファ生成
         GLES20.glGenFramebuffers(1,bufFrame)
@@ -87,24 +107,6 @@ class W071Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glGenTextures(1,frameTexture)
         MyGLFunc.createFrameBuffer(16,16,0,bufFrame,bufDepthRender,frameTexture)
 
-        // フレームバッファをバインド
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
-
-        // ビューポートを設定
-        GLES20.glViewport(0,0,16,16)
-
-        // フレームバッファを初期化
-        GLES20.glClearColor(0f,0f,0f,1f)
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
-
-        // テクスチャへ頂点情報をレンダリング
-        mappingShader.draw(modelSphere,indices.size.toFloat())
-
-        // フレームバッファのバインドを解除
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
-
-        // ビューポートを設定
-        GLES20.glViewport(0, 0, width, height)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
@@ -151,50 +153,6 @@ class W071Renderer(ctx: Context): MgRenderer(ctx) {
         vecLight[0] = -0.577f
         vecLight[1] =  0.577f
         vecLight[2] =  0.577f
-    }
-
-    // フレームバッファをオブジェクトとして生成する
-    private fun createFrameBuffer(width: Int, height: Int, id: Int) {
-        val maxRenderbufferSize = IntBuffer.allocate(1)
-        GLES20.glGetIntegerv(GLES20.GL_MAX_RENDERBUFFER_SIZE,maxRenderbufferSize)
-
-        Log.d(javaClass.simpleName,"w[${width}]h[${height}]bufSize[${maxRenderbufferSize[0]}]")
-
-        // フレームバッファのバインド
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[id])
-
-        // 深度バッファ用レンダ―バッファのバインド
-        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,bufDepthRender[id])
-
-        // レンダ―バッファを深度バッファとして設定
-        GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER, GLES20.GL_DEPTH_COMPONENT16, width, height)
-
-        // フレームバッファにレンダ―バッファを関連付ける
-        GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT, GLES20.GL_RENDERBUFFER,bufDepthRender[id])
-
-        // フレームバッファ用のテクスチャをバインド
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[id])
-
-        // フレームバッファ用のテクスチャにカラー用のメモリ領域を確保
-        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D,0,GLES20.GL_RGBA,width,height,0,GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,null)
-
-        // テクスチャパラメータ
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MIN_FILTER,GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE)
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
-
-        // フレームバッファにテクスチャを関連付ける
-        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER,GLES20.GL_COLOR_ATTACHMENT0,GLES20.GL_TEXTURE_2D,frameTexture[id],0)
-
-        // 追加
-        val status = GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER)
-        Log.d(javaClass.simpleName,"status[${status}]COMPLETE[${GLES20.GL_FRAMEBUFFER_COMPLETE}]")
-
-        // バインド解除
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,0)
-        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER,0)
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
     }
 
     override fun setMotionParam(motionParam: MutableMap<String, Float>) {

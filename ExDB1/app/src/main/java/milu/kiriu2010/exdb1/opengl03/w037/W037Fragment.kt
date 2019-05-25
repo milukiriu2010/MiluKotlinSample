@@ -17,6 +17,7 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
 class W037Fragment : Fragment() {
+    private lateinit var renderer: W037Renderer
 
     private lateinit var myGLES20View: MyGLES20View
 
@@ -36,7 +37,7 @@ class W037Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_gl_w36, container, false)
 
         myGLES20View = view.findViewById(R.id.myGLES20ViewW36)
-        val renderer = W037Renderer(context!!)
+        renderer = W037Renderer(context!!)
         myGLES20View.setRenderer(renderer)
         myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
@@ -89,11 +90,10 @@ class W037Fragment : Fragment() {
 
         // 点のサイズ(最小)
         textViewW36MinSizeVal = view.findViewById(R.id.textViewW36MinSizeVal)
-        textViewW36MinSizeVal.text = renderer.pointSizeRange[0].toString()
+
 
         // 点のサイズ(最大)
         textViewW36MaxSizeVal = view.findViewById(R.id.textViewW36MaxSizeVal)
-        textViewW36MaxSizeVal.text = renderer.pointSizeRange[1].toString()
 
         return view
     }
@@ -101,6 +101,8 @@ class W037Fragment : Fragment() {
     override fun onResume() {
         super.onResume()
         myGLES20View.onResume()
+        textViewW36MinSizeVal.text = renderer.pointSizeRange[0].toString()
+        textViewW36MaxSizeVal.text = renderer.pointSizeRange[1].toString()
     }
 
     override fun onPause() {

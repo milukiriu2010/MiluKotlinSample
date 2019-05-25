@@ -35,6 +35,7 @@ class W071ShaderPoint: MgShader() {
                 // その結果の小数点以下の部分だけを抜き出す
                 float pu = fract(a_Index*frag + texShift);
                 float pv = floor(a_Index*frag)*frag + texShift;
+                // オフセットさせながらテクスチャを参照
                 vec3  tPosition = texture2D(u_Texture,vec2(pu,pv)).rgb*2.0 - 1.0;
                 gl_Position     = u_matMVP * vec4(tPosition, 1.0);
                 gl_PointSize    = 16.0;
@@ -76,15 +77,21 @@ class W071ShaderPoint: MgShader() {
         // attribute(インデックス)
         model.bufIdx.position(0)
         GLES20.glGetAttribLocation(programHandle,"a_Index").also {
-            GLES20.glVertexAttribPointer(it,1,GLES20.GL_FLOAT,false, 1*4, model.bufIdx)
+            GLES20.glVertexAttribPointer(it,1,GLES20.GL_FLOAT,false, 1*2, model.bufIdx)
             GLES20.glEnableVertexAttribArray(it)
         }
         MyGLFunc.checkGlError2("a_Index",this,model)
 
         // attribute(インデックス)
-        model.bufIdx.position(0)
+        /*
         GLES20.glGetAttribLocation(programHandle,"a_Index").also {
             GLES20.glVertexAttrib1f(it,a_Index)
+        }
+        */
+        model.bufIdx.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Index").also {
+            GLES20.glVertexAttribPointer(it,1,GLES20.GL_FLOAT,false, 4, model.bufIdx)
+            GLES20.glEnableVertexAttribArray(it)
         }
         MyGLFunc.checkGlError2("a_Index",this,model)
 
@@ -101,6 +108,6 @@ class W071ShaderPoint: MgShader() {
         MyGLFunc.checkGlError2("u_Texture",this,model)
 
         // モデルを描画
-        GLES20.glDrawArrays(GLES20.GL_POINTS,0,a_Index.toInt())
+        GLES20.glDrawArrays(GLES20.GL_POINTS,0,model.datIdx.size)
     }
 }

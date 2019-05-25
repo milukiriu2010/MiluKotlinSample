@@ -81,13 +81,19 @@ class W071ShaderMapping: MgShader() {
         MyGLFunc.checkGlError2("a_Position",this,model)
 
         // attribute(インデックス)
-        model.bufIdx.position(0)
+        /*
         GLES20.glGetAttribLocation(programHandle,"a_Index").also {
             GLES20.glVertexAttrib1f(it,a_Index)
+        }
+        */
+        model.bufIdx.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_Index").also {
+            GLES20.glVertexAttribPointer(it,1,GLES20.GL_FLOAT,false, 2, model.bufIdx)
+            GLES20.glEnableVertexAttribArray(it)
         }
         MyGLFunc.checkGlError2("a_Index",this,model)
 
         // モデルを描画
-        GLES20.glDrawArrays(GLES20.GL_POINTS,0,a_Index.toInt())
+        GLES20.glDrawArrays(GLES20.GL_POINTS,0,model.datIdx.size)
     }
 }

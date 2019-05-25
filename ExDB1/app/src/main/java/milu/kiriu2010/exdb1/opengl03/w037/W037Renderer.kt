@@ -56,13 +56,6 @@ class W037Renderer(ctx: Context): MgRenderer(ctx) {
         bmpArray.clear()
         val bmp0 = BitmapFactory.decodeResource(ctx.resources, R.drawable.texture_w037)
         bmpArray.add(bmp0)
-
-        // 点の最大ピクセル数をコンソールに出力
-        //val pointSizeRange = GLES20.glGetParameter(GLES20.GL_ALIASED_POINT_SIZE_RANGE)
-        GLES20.glGetFloatv(GLES20.GL_ALIASED_POINT_SIZE_RANGE,pointSizeRange,0)
-        //callback.receive(pointSizeRange)
-        Log.d(javaClass.simpleName,"min:${pointSizeRange[0]}")
-        Log.d(javaClass.simpleName,"max:${pointSizeRange[1]}")
     }
 
     override fun onDrawFrame(gl: GL10?) {
@@ -116,6 +109,15 @@ class W037Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
+        // 点の最大ピクセル数をコンソールに出力
+        GLES20.glGetFloatv(GLES20.GL_ALIASED_POINT_SIZE_RANGE,pointSizeRange,0)
+        //callback.receive(pointSizeRange)
+        // Huawei P20Lite
+        //   min:    1.0
+        //   max: 1024.0
+        Log.d(javaClass.simpleName,"min:${pointSizeRange[0]}")
+        Log.d(javaClass.simpleName,"max:${pointSizeRange[1]}")
+
         // 深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
@@ -152,22 +154,6 @@ class W037Renderer(ctx: Context): MgRenderer(ctx) {
         vecEye[0] = 0f
         vecEye[1] = 5f
         vecEye[2] = 10f
-
-        // ----------------------------------
-        // 単位行列化
-        // ----------------------------------
-        // モデル変換行列
-        Matrix.setIdentityM(matM,0)
-        // モデル変換行列の逆行列
-        Matrix.setIdentityM(matI,0)
-        // ビュー変換行列
-        Matrix.setIdentityM(matV,0)
-        // プロジェクション変換行列
-        Matrix.setIdentityM(matP,0)
-        // モデル・ビュー・プロジェクション行列
-        Matrix.setIdentityM(matMVP,0)
-        // テンポラリ行列
-        Matrix.setIdentityM(matVP,0)
     }
 
     override fun setMotionParam(motionParam: MutableMap<String, Float>) {
