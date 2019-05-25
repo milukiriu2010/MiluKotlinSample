@@ -10,6 +10,7 @@ import milu.kiriu2010.exdb1.opengl07.w070.W070Fragment
 import milu.kiriu2010.exdb1.opengl07.w071.W071Fragment
 import milu.kiriu2010.exdb1.opengl07.w072.W072Fragment
 import milu.kiriu2010.exdb1.opengl07.w076.W076Fragment
+import milu.kiriu2010.exdb1.opengl07.w077.W077Fragment
 
 class OpenGL07Activity : AppCompatActivity() {
 
@@ -20,7 +21,7 @@ class OpenGL07Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W076Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, W077Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -42,6 +43,16 @@ class OpenGL07Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // ラインシェード
+            R.id.opengl_w077 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w077") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W077Fragment.newInstance(), "w077")
+                            .commit()
+                }
                 true
             }
             // ハーフトーンシェーディング

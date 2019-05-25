@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w077"
+        android:title="w077_ラインシェード" />
+    <item
         android:id="@+id/opengl_w076"
         android:title="w076_ハーフトーンシェーディング" />
     <item
