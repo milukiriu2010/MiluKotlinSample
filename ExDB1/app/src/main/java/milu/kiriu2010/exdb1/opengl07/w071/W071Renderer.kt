@@ -1,28 +1,30 @@
 package milu.kiriu2010.exdb1.opengl07.w071
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.Matrix
 import android.util.Log
 import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.gui.color.MgColor
-import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Sphere01Model
-import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
-// ゴッドレイフィルタ
+// -------------------------------------
+// いまいちよくわからない
+// -------------------------------------
+// 頂点テクスチャフェッチ
+// -------------------------------------
+// https://wgld.org/d/webgl/w071.html
+// -------------------------------------
 class W071Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(球体)
-    private lateinit var drawObjSphere: Sphere01Model
+    private lateinit var modelSphere: Sphere01Model
 
-    // シェーダ(ポイント)
+    // シェーダ(点のレンダリングを行う)
     private lateinit var pointShader: W071ShaderPoint
-    // シェーダ(マッピング)
+    // シェーダ(テクスチャへの描きこみを行う)
     private lateinit var mappingShader: W071ShaderMapping
 
     // 画面縦横比
@@ -39,6 +41,9 @@ class W071Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画対象のテクスチャ
     var textureType = 0
+
+    // 頂点インデックス
+    lateinit var indices: IntArray
 
     override fun onDrawFrame(gl: GL10?) {
         angle[0] =(angle[0]+1)%360
@@ -57,12 +62,10 @@ class W071Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.setIdentityM(matM,0)
         Matrix.rotateM(matM,0,t0,0f,1f,0f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        pointShader.draw(drawObjSphere,matMVP,0)
+        pointShader.draw(modelSphere,matMVP,indices.size.toFloat(),0)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
-        GLES20.glViewport(0, 0, width, height)
-
         ratio = width.toFloat()/height.toFloat()
 
         renderW = width
@@ -82,8 +85,10 @@ class W071Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glGenRenderbuffers(1,bufDepthRender)
         // フレームバッファを格納するテクスチャ生成
         GLES20.glGenTextures(1,frameTexture)
+        MyGLFunc.createFrameBuffer(16,16,0,bufFrame,bufDepthRender,frameTexture)
 
-        createFrameBuffer(16,16,0)
+        // フレームバッファをバインド
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,bufFrame[0])
 
         // ビューポートを設定
         GLES20.glViewport(0,0,16,16)
@@ -93,7 +98,7 @@ class W071Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
 
         // テクスチャへ頂点情報をレンダリング
-        mappingShader.draw(drawObjSphere)
+        mappingShader.draw(modelSphere,indices.size.toFloat())
 
         // フレームバッファのバインドを解除
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0)
@@ -103,54 +108,49 @@ class W071Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        // canvasを初期化する色を設定する
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
+        // uniform変数の上限数
+        // Huawei P20Lite:1024
+        val uniformMaxCnt = IntBuffer.allocate(1)
+        GLES20.glGetIntegerv(GLES20.GL_MAX_FRAGMENT_UNIFORM_VECTORS,uniformMaxCnt)
+        //callback.receive(pointSizeRange)
+        Log.d(javaClass.simpleName,"uniformMaxCnt:${uniformMaxCnt.get(0)}")
+        // 頂点テクスチャフェッチが可能かどうか調べる
+        // Huawei P20Lite:16
+        val vertexTextureMaxCnt = IntBuffer.allocate(1)
+        GLES20.glGetIntegerv(GLES20.GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS,vertexTextureMaxCnt)
+        Log.d(javaClass.simpleName,"vertexTextureMaxCnt:${vertexTextureMaxCnt.get(0)}")
 
-        // canvasを初期化する際の深度を設定する
-        GLES20.glClearDepthf(1f)
-
-        // カリングと深度テストを有効にする
+        // 深度テストを有効にする
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
-        GLES20.glEnable(GLES20.GL_CULL_FACE)
 
-        // シェーダ(ポイント)
+        // シェーダ(点のレンダリングを行う)
         pointShader = W071ShaderPoint()
         pointShader.loadShader()
 
-        // シェーダ(マッピング)
+        // シェーダ(テクスチャへの描きこみを行う)
         mappingShader = W071ShaderMapping()
         mappingShader.loadShader()
 
         // モデル生成(球体)
-        drawObjSphere = Sphere01Model()
-        drawObjSphere.createPath(mapOf(
+        modelSphere = Sphere01Model()
+        modelSphere.createPath(mapOf(
                 "pattern" to 2f,
-                "row"     to 32f,
-                "column"  to 32f,
+                "row"     to 15f,
+                "column"  to 15f,
                 "radius" to 1f
         ))
+
+        // 頂点の数分だけインデックスを格納
+        indices = IntArray(modelSphere.datPos.size/3)
+        (0 until modelSphere.datPos.size/3).forEach {
+            indices[it] = it
+        }
 
         // ライトの向き
         vecLight[0] = -0.577f
         vecLight[1] =  0.577f
         vecLight[2] =  0.577f
-
-        // ----------------------------------
-        // 単位行列化
-        // ----------------------------------
-        // モデル変換行列
-        Matrix.setIdentityM(matM,0)
-        // モデル変換行列の逆行列
-        Matrix.setIdentityM(matI,0)
-        // ビュー変換行列
-        Matrix.setIdentityM(matV,0)
-        // プロジェクション変換行列
-        Matrix.setIdentityM(matP,0)
-        // モデル・ビュー・プロジェクション行列
-        Matrix.setIdentityM(matMVP,0)
-        // テンポラリ行列
-        Matrix.setIdentityM(matVP,0)
     }
 
     // フレームバッファをオブジェクトとして生成する

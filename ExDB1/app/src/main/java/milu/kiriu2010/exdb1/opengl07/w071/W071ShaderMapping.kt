@@ -5,7 +5,15 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLFunc
 import milu.kiriu2010.gui.shader.MgShader
 
-// シェーダ(ズームブラー)
+// ----------------------------------------
+// シェーダ(テクスチャへの描きこみを行う)
+// ----------------------------------------
+// 頂点の座標位置をテクスチャへ描きこむ
+// ----------------------------------------
+// 頂点テクスチャフェッチ
+// ----------------------------------------
+// https://wgld.org/d/webgl/w071.html
+// ----------------------------------------
 class W071ShaderMapping: MgShader() {
     // 頂点シェーダ
     private val scv =
@@ -15,11 +23,18 @@ class W071ShaderMapping: MgShader() {
 
             varying   vec3  v_Color;
 
+            // 描きこみの対象となる
+            // フレームバッファ(テクスチャ)一辺あたりの長さを１で割る
             const float frag     = 1.0/16.0;
+            // さらに半分の値
             const float texShift = 0.5 * frag;
 
             void main() {
+                // -1～1の範囲にある頂点の位置を0～1の範囲に収める
                 v_Color   = (normalize(a_Position)+1.0) * 0.5;
+                // fract => x-floor(x)を返す
+                // 頂点の識別番号に定数fragをかけ,
+                // その結果の小数点以下の部分だけを抜き出す
                 float pu = fract(a_Index*frag)*2.0 - 1.0;
                 float pv = floor(a_Index*frag)*frag*2.0 - 1.0;
                 gl_Position  = vec4(pu+texShift, pv+texShift, 0.0, 1.0);
@@ -42,18 +57,20 @@ class W071ShaderMapping: MgShader() {
 
     override fun loadShader(): MgShader {
         // 頂点シェーダを生成
-        val svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
+        svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
-        val sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
+        sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
 
         // プログラムオブジェクトの生成とリンク
         programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Index") )
         return this
     }
 
-    fun draw(model: MgModelAbs) {
+    fun draw(model: MgModelAbs,
+             a_Index: Float) {
 
         GLES20.glUseProgram(programHandle)
+        MyGLFunc.checkGlError2("UseProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)
@@ -61,18 +78,16 @@ class W071ShaderMapping: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError("a_Position:${model.javaClass.simpleName}")
+        MyGLFunc.checkGlError2("a_Position",this,model)
 
         // attribute(インデックス)
         model.bufIdx.position(0)
         GLES20.glGetAttribLocation(programHandle,"a_Index").also {
-            GLES20.glVertexAttribPointer(it,1,GLES20.GL_FLOAT,false, 1*4, model.bufIdx)
-            GLES20.glEnableVertexAttribArray(it)
+            GLES20.glVertexAttrib1f(it,a_Index)
         }
         MyGLFunc.checkGlError2("a_Index",this,model)
 
         // モデルを描画
-        //GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
-        GLES20.glDrawArrays(GLES20.GL_POINTS,0,model.datIdx.size)
+        GLES20.glDrawArrays(GLES20.GL_POINTS,0,a_Index.toInt())
     }
 }

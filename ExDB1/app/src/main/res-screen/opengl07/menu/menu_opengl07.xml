@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w071"
+        android:title="w071_頂点テクスチャフェッチ" />
+    <item
         android:id="@+id/opengl_w070"
         android:title="w070_浮動小数点数テクスチャ" />
     <item

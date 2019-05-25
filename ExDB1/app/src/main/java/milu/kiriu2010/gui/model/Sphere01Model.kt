@@ -15,6 +15,7 @@ import kotlin.math.sqrt
 // 2019.04.27  パターン１
 // 2019.05.12  パターン２
 // 2019.05.21  頂点インデックス修正
+// 2019.05.25  パターン２修正
 // -------------------------------------------
 class Sphere01Model: MgModelAbs() {
 
@@ -29,6 +30,7 @@ class Sphere01Model: MgModelAbs() {
 
         when ( pattern ) {
             1 -> createPathPattern1(opt)
+            // 頂点テクスチャフェッチ
             2 -> createPathPattern2(opt)
             else -> createPathPattern1(opt)
         }
@@ -86,6 +88,7 @@ class Sphere01Model: MgModelAbs() {
         }
     }
 
+    // 頂点テクスチャフェッチ
     private fun createPathPattern2( opt: Map<String,Float> ) {
         // 緯度
         var row    = opt["row"]?.toInt() ?: 16
@@ -124,11 +127,10 @@ class Sphere01Model: MgModelAbs() {
                 datTxc.add(1f-1f/column.toFloat()*ii.toFloat())
                 datTxc.add(1f/row.toFloat()*i.toFloat())
             }
+        }
 
-            (0 until datPos.size/3).forEach { i ->
-                datIdx.add(i.toShort())
-            }
-
+        (0 until datPos.size/3).forEach { i ->
+            datIdx.add(i.toShort())
         }
     }
 

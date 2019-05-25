@@ -18,7 +18,7 @@ class OpenGL07Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W070Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, W071Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -40,6 +40,16 @@ class OpenGL07Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 頂点テクスチャフェッチ
+            R.id.opengl_w071 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w071") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W071Fragment.newInstance(), "w071")
+                            .commit()
+                }
                 true
             }
             // 浮動小数点数テクスチャ
