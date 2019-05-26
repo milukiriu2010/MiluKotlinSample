@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/glsl_g012"
+        android:title="g012_オブジェクト複製" />
+    <item
         android:id="@+id/glsl_g011"
         android:title="g011_レイマーチング(視野角)" />
 </menu>

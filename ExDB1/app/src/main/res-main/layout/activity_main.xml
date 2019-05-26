@@ -7,95 +7,6 @@
     android:keepScreenOn="true"
     tools:context=".MainActivity">
 
-    <!--
-    <TextView
-        android:id="@+id/abc1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ABCabcあいう"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/abc2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread" />
-
-    <TextView
-        android:id="@+id/abc2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/abc2"
-        android:text="ABCabcあいう"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/abc3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/abc1" />
-
-    <TextView
-        android:id="@+id/abc3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/abc3"
-        android:text="ABCabcあいう"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/abc4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/abc2" />
-
-    <TextView
-        android:id="@+id/abc4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/abc4"
-        android:text="ABCabcあいう"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/abc3" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/android1" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:drawableLeft="@drawable/button_image"
-        android:text="Button"
-        android:textColor="@drawable/button_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
--->
-
     <Button
         android:id="@+id/btnOpenGL"
         android:layout_width="wrap_content"
@@ -248,6 +159,16 @@
         android:text="GL07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnOpenGL04" />
+
+    <Button
+        android:id="@+id/btnOpenGL08"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="GL08"
+        app:layout_constraintBottom_toBottomOf="@+id/btnOpenGL07"
+        app:layout_constraintStart_toEndOf="@+id/btnOpenGL07"
+        app:layout_constraintTop_toTopOf="@+id/btnOpenGL07" />
 
     <Button
         android:id="@+id/btnMGL00"

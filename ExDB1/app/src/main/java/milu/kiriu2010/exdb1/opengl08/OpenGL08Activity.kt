@@ -1,24 +1,22 @@
-package milu.kiriu2010.exdb1.glsl02
+package milu.kiriu2010.exdb1.opengl08
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.glsl02.g011.GLSL11Fragment
-import milu.kiriu2010.exdb1.glsl02.g012.GLSL12Fragment
+import milu.kiriu2010.exdb1.opengl08.w081.W081Fragment
 
-class GLSL02Activity : AppCompatActivity() {
+class OpenGL08Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_glsl02)
-
+        setContentView(R.layout.activity_open_gl08)
 
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, GLSL12Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, W081Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -29,8 +27,9 @@ class GLSL02Activity : AppCompatActivity() {
         }
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_glsl02, menu)
+        menuInflater.inflate(R.menu.menu_opengl08, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -42,22 +41,12 @@ class GLSL02Activity : AppCompatActivity() {
                 finish()
                 true
             }
-            // オブジェクトを複製
-            R.id.glsl_g012 -> {
+            // VBOを逐次更新
+            R.id.opengl_w081 -> {
                 supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("g12") == null) {
+                if (supportFragmentManager.findFragmentByTag("w081") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSL12Fragment.newInstance(), "g12")
-                            .commit()
-                }
-                true
-            }
-            // レイマーチング(視野角)
-            R.id.glsl_g011 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("g11") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSL11Fragment.newInstance(), "g11")
+                            .replace(R.id.frameLayout, W081Fragment.newInstance(), "w081")
                             .commit()
                 }
                 true
@@ -65,5 +54,4 @@ class GLSL02Activity : AppCompatActivity() {
             else -> return super.onOptionsItemSelected(item)
         }
     }
-
 }

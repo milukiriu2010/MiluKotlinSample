@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".glsl02.GLSL02Activity"></activity>
+        <activity android:name=".opengl08.OpenGL08Activity"></activity>
+        <activity android:name=".glsl02.GLSL02Activity" />
         <activity android:name=".glsl01.GLSL01Activity" />
         <activity android:name=".opengl07.OpenGL07Activity" />
         <activity android:name=".opengl06.OpenGL06Activity" />
