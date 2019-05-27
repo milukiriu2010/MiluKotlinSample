@@ -86,7 +86,7 @@ class Board01Model: MgModelAbs() {
     // XY平面(右回り)
     //   アルファブレンディング
     //   ステンシルバッファ
-    // w29,w30,w38
+    // w29,w30,w38,w86
     private fun createPathPattern29(opt: Map<String, Float>) {
         // 頂点データ
         datPos.addAll(arrayListOf(-1f, 1f,0f))

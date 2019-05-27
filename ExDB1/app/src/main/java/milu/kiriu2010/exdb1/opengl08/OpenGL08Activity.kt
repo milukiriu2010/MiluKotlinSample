@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl08.w081.W081Fragment
+import milu.kiriu2010.exdb1.opengl08.w086.W086Fragment
 
 class OpenGL08Activity : AppCompatActivity() {
 
@@ -16,7 +17,7 @@ class OpenGL08Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W081Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, W086Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -39,6 +40,16 @@ class OpenGL08Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // 描画結果から色を取得
+            R.id.opengl_w086 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w086") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W086Fragment.newInstance(), "w086")
+                            .commit()
+                }
                 true
             }
             // VBOを逐次更新

@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w086"
+        android:title="w086_描画結果から色を取得" />
+    <item
         android:id="@+id/opengl_w081"
         android:title="w081_VBOを逐次更新" />
 </menu>
