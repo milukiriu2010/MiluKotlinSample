@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_w087"
+        android:title="w087_フラットシェーディング" />
+    <item
         android:id="@+id/opengl_w086"
         android:title="w086_描画結果から色を取得" />
     <item
