@@ -7,6 +7,7 @@ import android.view.MenuItem
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.glsl02.g011.GLSL11Fragment
 import milu.kiriu2010.exdb1.glsl02.g012.GLSL12Fragment
+import milu.kiriu2010.exdb1.glsl02.g013.GLSL13Fragment
 
 class GLSL02Activity : AppCompatActivity() {
 
@@ -18,7 +19,7 @@ class GLSL02Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, GLSL12Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, GLSL13Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -40,6 +41,16 @@ class GLSL02Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // ボックスモデルを複製
+            R.id.glsl_g013 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("g13") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSL13Fragment.newInstance(), "g13")
+                            .commit()
+                }
                 true
             }
             // オブジェクトを複製
