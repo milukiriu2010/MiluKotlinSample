@@ -53,6 +53,26 @@
         <item>@string/w59_blur2</item>
     </string-array>
 
+    <string name="w89_texture0">Texture0</string>
+    <string name="w89_texture1">Texture1</string>
+    <string name="w89_texture2">Texture2</string>
+    <string name="w89_texture3">Texture3</string>
+    <string name="w89_texture4">Texture4</string>
+    <string name="w89_texture5">Texture5</string>
+    <string name="w89_texture6">Texture6</string>
+    <string name="w89_texture7">Texture7</string>
+
+    <string-array name="w89list">
+        <item>@string/w89_texture0</item>
+        <item>@string/w89_texture1</item>
+        <item>@string/w89_texture2</item>
+        <item>@string/w89_texture3</item>
+        <item>@string/w89_texture4</item>
+        <item>@string/w89_texture5</item>
+        <item>@string/w89_texture6</item>
+        <item>@string/w89_texture7</item>
+    </string-array>
+
     <string name="shader_simple">Simple</string>
     <string name="shader_lines">Lines</string>
     <string name="shader_directional_light">Directional Light</string>

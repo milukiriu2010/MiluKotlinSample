@@ -8,6 +8,7 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl08.w081.W081Fragment
 import milu.kiriu2010.exdb1.opengl08.w086.W086Fragment
 import milu.kiriu2010.exdb1.opengl08.w087.W087Fragment
+import milu.kiriu2010.exdb1.opengl08.w089.W089Fragment
 
 class OpenGL08Activity : AppCompatActivity() {
 
@@ -18,7 +19,7 @@ class OpenGL08Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W087Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, W089Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -41,6 +42,16 @@ class OpenGL08Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // スフィア環境マッピング
+            R.id.opengl_w089 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("w089") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, W089Fragment.newInstance(), "w089")
+                            .commit()
+                }
                 true
             }
             // フラットシェーディング
