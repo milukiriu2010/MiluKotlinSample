@@ -10,6 +10,7 @@ import milu.kiriu2010.exdb1.animeobj.AnimeObjActivity
 import milu.kiriu2010.exdb1.basic.BasicActivity
 import milu.kiriu2010.exdb1.canvas.CanvasActivity
 import milu.kiriu2010.exdb1.draw.DrawActivity
+import milu.kiriu2010.exdb1.es30x01.ES30x01Activity
 import milu.kiriu2010.exdb1.glsl01.GLSL01Activity
 import milu.kiriu2010.exdb1.glsl02.GLSL02Activity
 import milu.kiriu2010.exdb1.mgl00.Mgl00Activity
@@ -111,6 +112,13 @@ class MainActivity : AppCompatActivity() {
         btnOpenGL08.transformationMethod = null
         btnOpenGL08.setOnClickListener {
             val intent = Intent(this, OpenGL08Activity::class.java)
+            startActivity(intent)
+        }
+
+        // 描画GLSL ES30x01ページへ遷移
+        btnES30x01.transformationMethod = null
+        btnES30x01.setOnClickListener {
+            val intent = Intent(this, ES30x01Activity::class.java)
             startActivity(intent)
         }
 

@@ -2,9 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="milu.kiriu2010.exdb1">
 
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true" />
+    <!-- uses-feature android:glEsVersion="0x00020000" android:required="true" / -->
+    <uses-feature android:glEsVersion="0x00030000" android:required="true" />
 
     <supports-gl-texture android:name="GL_OES_compressed_ETC1_RGB8_texture" />
     <supports-gl-texture android:name="GL_OES_compressed_paletted_texture" />
@@ -17,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".opengl08.OpenGL08Activity"></activity>
+        <activity android:name=".es30x01.ES30x01Activity"></activity>
+        <activity android:name=".opengl08.OpenGL08Activity" />
         <activity android:name=".glsl02.GLSL02Activity" />
         <activity android:name=".glsl01.GLSL01Activity" />
         <activity android:name=".opengl07.OpenGL07Activity" />
