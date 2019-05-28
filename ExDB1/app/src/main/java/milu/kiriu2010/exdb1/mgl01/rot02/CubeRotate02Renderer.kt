@@ -7,7 +7,7 @@ import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import milu.kiriu2010.gui.model.*
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.Simple01Shader
+import milu.kiriu2010.gui.shader.es20.ES20Simple01Shader
 import milu.kiriu2010.math.MyMathUtil
 import kotlin.math.sqrt
 
@@ -22,7 +22,7 @@ class CubeRotate02Renderer(ctx: Context): MgRenderer(ctx) {
     private lateinit var axisModel: MgModelAbs
 
     // シェーダ(特殊効果なし)
-    private lateinit var shaderSimple: Simple01Shader
+    private lateinit var shaderSimple: ES20Simple01Shader
 
     private val sqrt2 = sqrt(2f)
 
@@ -298,7 +298,7 @@ class CubeRotate02Renderer(ctx: Context): MgRenderer(ctx) {
                 */
 
         // シェーダ(特殊効果なし)
-        shaderSimple = Simple01Shader()
+        shaderSimple = ES20Simple01Shader()
         shaderSimple.loadShader()
 
         // 描画モデル(静止している立方体)

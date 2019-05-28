@@ -5,13 +5,9 @@ import android.opengl.GLES20
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
-import android.os.SystemClock
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.Simple01Shader
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
+import milu.kiriu2010.gui.shader.es20.ES20Simple01Shader
 
 // トーラスの描画
 // --------------------------------------------------
@@ -21,7 +17,7 @@ class W020Renderer(ctx: Context): MgRenderer(ctx) {
     private lateinit var drawObj: Torus01Model
 
     // シェーダ
-    private lateinit var shader: Simple01Shader
+    private lateinit var shader: ES20Simple01Shader
 
     override fun onDrawFrame(gl: GL10) {
         // 回転角度
@@ -70,7 +66,7 @@ class W020Renderer(ctx: Context): MgRenderer(ctx) {
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
 
         // シェーダ
-        shader = Simple01Shader()
+        shader = ES20Simple01Shader()
         shader.loadShader()
 
         // 描画モデル(トーラス)

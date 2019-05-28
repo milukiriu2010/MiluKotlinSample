@@ -1,27 +1,25 @@
-package milu.kiriu2010.gui.shader
+package milu.kiriu2010.gui.shader.es20
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLES20Func
 
-// ---------------------------------------------------------------
-// フォンシェーディング
-// ---------------------------------------------------------------
-// グーローシェーディング
-//   レンダリングされるポリゴンの色は頂点間で補間される
-//   よって頂点の数が少ないと美しいライティングを行うことが難しい
-//   頂点ごとに色を補間するため、色が変化する協会にジャギーが発生
-// フォンシェーディング
-//   各ピクセルごとに色の補間が行われる
-//   少ない頂点数のモデルをレンダリングする際のライティングでも
-//   自然な照明効果を得られる。
-//   ピクセルごとに色の補間が行われることで、
-//   不自然なジャギーが発生しなくなる
-// ---------------------------------------------------------------
-// 2019.05.14 コメント追加
-// 2019.05.22 リソース解放
-// ---------------------------------------------------------------
-class PhongShading01Shader: MgShader() {
+// -------------------------------------------------------------------------
+// 反射光
+// -------------------------------------------------------------------------
+// 反射光を取り入れることでモデルに光沢や輝きを持たせることが可能になる
+// 金属のような輝きのある面や、表面のツルツルした質感を表現することができる
+//
+// モデルを見つめる視線と光の向きとを考慮してライティングすることで、
+// 自然なハイライトを表現する。
+// 光源から放たれた光がモデルにぶつかって反射し、
+// その反射した光と視線がまっすぎに向き合ている場合、
+// 最も強く光が視線に向かう。
+// -------------------------------------------------------------------------
+// 2019.05.14  コメント追加
+// 2019.05.22  リソース解放
+// -------------------------------------------------------------------------
+class ES20SpecularLight01Shader: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -29,13 +27,25 @@ class PhongShading01Shader: MgShader() {
             attribute vec3 a_Normal;
             attribute vec4 a_Color;
             uniform   mat4 u_matMVP;
-            varying   vec3 v_Normal;
+            uniform   mat4 u_matINV;
+            uniform   vec3 u_vecLight;
+            uniform   vec3 u_vecEye;
+            uniform   vec4 u_ambientColor;
             varying   vec4 v_Color;
 
             void main() {
-                v_Normal    = a_Normal;
-                v_Color     = a_Color;
-                gl_Position = u_matMVP * vec4(a_Position,1.0);
+                vec3  invLight = normalize(u_matINV * vec4(u_vecLight,0.0)).xyz;
+                vec3  invEye   = normalize(u_matINV * vec4(u_vecEye  ,0.0)).xyz;
+                // ライトベクトルと視線ベクトルとのハーフベクトル
+                vec3  halfLE   = normalize(invLight + invEye);
+                float diffuse  = clamp(dot(a_Normal,invLight), 0.0, 1.0);
+                // ハーフベクトルと面の法線ベクトルとの内積を取ることで反射光の強さを決定する
+                // powを使うことで、弱い光をさらに弱く、強い光は、そのまま残している
+                float specular = pow(clamp(dot(a_Normal, halfLE), 0.0, 1.0), 50.0);
+                vec4  light    = a_Color * vec4(vec3(diffuse),1.0) + vec4(vec3(specular),1.0);
+                // 色 = 頂点色 * 拡散光 + 反射光 + 環境光
+                v_Color        = light + u_ambientColor;
+                gl_Position    = u_matMVP * vec4(a_Position,1.0);
             }
             """.trimIndent()
 
@@ -44,26 +54,14 @@ class PhongShading01Shader: MgShader() {
             """
             precision mediump float;
 
-            uniform   mat4 u_matINV;
-            uniform   vec3 u_vecLight;
-            uniform   vec3 u_vecEye;
-            uniform   vec4 u_ambientColor;
-            varying   vec3 v_Normal;
             varying   vec4 v_Color;
 
             void main() {
-                vec3  invLight  = normalize(u_matINV * vec4(u_vecLight,0.0)).xyz;
-                vec3  invEye    = normalize(u_matINV * vec4(u_vecEye  ,0.0)).xyz;
-                vec3  halfLE    = normalize(invLight + invEye);
-                float diffuse   = clamp(dot(v_Normal,invLight), 0.0, 1.0);
-                float specular  = pow(clamp(dot(v_Normal, halfLE), 0.0, 1.0), 50.0);
-                vec4  destColor = v_Color * vec4(vec3(diffuse),1.0) + vec4(vec3(specular),1.0);
-                destColor       = destColor + u_ambientColor;
-                gl_FragColor    = destColor;
+                gl_FragColor   = v_Color;
             }
             """.trimIndent()
 
-    override fun loadShader(): MgShader {
+    override fun loadShader(): ES20MgShader {
         // 頂点シェーダを生成
         svhandle = MyGLES20Func.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成

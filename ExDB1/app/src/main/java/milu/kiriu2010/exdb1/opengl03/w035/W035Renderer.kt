@@ -9,7 +9,7 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.Texture01Shader
+import milu.kiriu2010.gui.shader.es20.ES20Texture01Shader
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
@@ -26,7 +26,7 @@ class W035Renderer(ctx: Context): MgRenderer(ctx) {
     private lateinit var model: Board01Model
 
     // シェーダ
-    private lateinit var shader: Texture01Shader
+    private lateinit var shader: ES20Texture01Shader
 
     // 画面縦横比
     var ratio: Float = 0f
@@ -140,7 +140,7 @@ class W035Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glBlendFuncSeparate(GLES20.GL_SRC_ALPHA,GLES20.GL_ONE_MINUS_SRC_ALPHA,GLES20.GL_ONE,GLES20.GL_ONE)
 
         // シェーダ
-        shader = Texture01Shader()
+        shader = ES20Texture01Shader()
         shader.loadShader()
 
         // モデル生成

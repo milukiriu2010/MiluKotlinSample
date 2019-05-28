@@ -3,7 +3,7 @@ package milu.kiriu2010.exdb1.opengl07.w072
 import android.opengl.GLES20
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLES20Func
-import milu.kiriu2010.gui.shader.MgShader
+import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
 // -------------------------------------
 // シェーダ(点のレンダリングを行う)
@@ -14,7 +14,7 @@ import milu.kiriu2010.gui.shader.MgShader
 // -------------------------------------
 // https://wgld.org/d/webgl/w072.html
 // -------------------------------------
-class W072ShaderPoint: MgShader() {
+class W072ShaderPoint: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -60,7 +60,7 @@ class W072ShaderPoint: MgShader() {
             """.trimIndent()
 
 
-    override fun loadShader(): MgShader {
+    override fun loadShader(): ES20MgShader {
         // 頂点シェーダを生成
         svhandle = MyGLES20Func.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成

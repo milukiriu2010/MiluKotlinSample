@@ -7,7 +7,7 @@ import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.AmbientLight01Shader
+import milu.kiriu2010.gui.shader.es20.ES20AmbientLight01Shader
 
 // ---------------------------------------------------
 // 環境光によるライティング
@@ -20,7 +20,7 @@ class W022Renderer(ctx: Context): MgRenderer(ctx) {
     private lateinit var model: Torus01Model
 
     // シェーダ(拡散光)
-    private lateinit var shader: AmbientLight01Shader
+    private lateinit var shader: ES20AmbientLight01Shader
 
     override fun onDrawFrame(gl: GL10) {
         // 回転角度
@@ -79,7 +79,7 @@ class W022Renderer(ctx: Context): MgRenderer(ctx) {
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
 
         // シェーダ(拡散光)
-        shader = AmbientLight01Shader()
+        shader = ES20AmbientLight01Shader()
         shader.loadShader()
 
         // 描画モデル(トーラス)

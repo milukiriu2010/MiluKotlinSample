@@ -2,17 +2,12 @@ package milu.kiriu2010.exdb1.opengl01.w021
 
 import android.content.Context
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
-import android.os.SystemClock
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.DirectionalLight01Shader
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
+import milu.kiriu2010.gui.shader.es20.ES20DirectionalLight01Shader
 
 // ---------------------------------------------------
 // 平行光源によるライティング
@@ -24,7 +19,7 @@ class W021Renderer(ctx: Context): MgRenderer(ctx) {
     private lateinit var model: Torus01Model
 
     // シェーダ(平行光源)
-    private lateinit var shader: DirectionalLight01Shader
+    private lateinit var shader: ES20DirectionalLight01Shader
 
     override fun onDrawFrame(gl: GL10) {
         // 回転角度
@@ -77,7 +72,7 @@ class W021Renderer(ctx: Context): MgRenderer(ctx) {
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
 
         // シェーダ(平行光源)
-        shader = DirectionalLight01Shader()
+        shader = ES20DirectionalLight01Shader()
         shader.loadShader()
 
         // 描画モデル(トーラス)

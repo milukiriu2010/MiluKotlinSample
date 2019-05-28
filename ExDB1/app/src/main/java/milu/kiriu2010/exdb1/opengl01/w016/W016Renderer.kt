@@ -7,7 +7,7 @@ import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import milu.kiriu2010.gui.model.Triangle01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.Simple00Shader
+import milu.kiriu2010.gui.shader.es20.ES20Simple00Shader
 
 // 複数モデルをレンダリング
 class W016Renderer(ctx: Context): MgRenderer(ctx) {
@@ -16,7 +16,7 @@ class W016Renderer(ctx: Context): MgRenderer(ctx) {
     private lateinit var drawObj: Triangle01Model
 
     // シェーダ
-    private lateinit var shader: Simple00Shader
+    private lateinit var shader: ES20Simple00Shader
 
     override fun onDrawFrame(gl: GL10) {
         // canvasを初期化
@@ -62,7 +62,7 @@ class W016Renderer(ctx: Context): MgRenderer(ctx) {
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
         // シェーダプログラム登録
-        shader = Simple00Shader()
+        shader = ES20Simple00Shader()
         shader.loadShader()
 
         // モデル生成

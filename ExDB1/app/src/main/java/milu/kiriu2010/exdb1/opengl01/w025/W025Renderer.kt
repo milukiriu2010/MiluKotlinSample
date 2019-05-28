@@ -8,7 +8,7 @@ import android.opengl.Matrix
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.PointLight01Shader
+import milu.kiriu2010.gui.shader.es20.ES20PointLight01Shader
 import milu.kiriu2010.math.MyMathUtil
 
 // ---------------------------------------------------
@@ -24,7 +24,7 @@ class W025Renderer(ctx: Context): MgRenderer(ctx) {
     private lateinit var modelSphere: Sphere01Model
 
     // シェーダ(点光源)
-    private lateinit var shader: PointLight01Shader
+    private lateinit var shader: ES20PointLight01Shader
 
     override fun onDrawFrame(gl: GL10) {
         // 回転角度
@@ -98,7 +98,7 @@ class W025Renderer(ctx: Context): MgRenderer(ctx) {
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
 
         // シェーダ(点光源)
-        shader = PointLight01Shader()
+        shader = ES20PointLight01Shader()
         shader.loadShader()
 
         // 描画モデル(トーラス)

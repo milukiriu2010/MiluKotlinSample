@@ -2,17 +2,12 @@ package milu.kiriu2010.exdb1.opengl01.w024
 
 import android.content.Context
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
-import android.os.SystemClock
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.PhongShading01Shader
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
+import milu.kiriu2010.gui.shader.es20.ES20PhongShading01Shader
 
 // ---------------------------------------------------
 // フォンシェーディング
@@ -25,7 +20,7 @@ class W024Renderer(ctx: Context): MgRenderer(ctx) {
     private lateinit var model: Torus01Model
 
     // シェーダ(フォンシェーディング)
-    private lateinit var shader: PhongShading01Shader
+    private lateinit var shader: ES20PhongShading01Shader
 
     override fun onDrawFrame(gl: GL10) {
         // 回転角度
@@ -84,7 +79,7 @@ class W024Renderer(ctx: Context): MgRenderer(ctx) {
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
 
         // シェーダ(フォンシェーディング)
-        shader = PhongShading01Shader()
+        shader = ES20PhongShading01Shader()
         shader.loadShader()
 
         // 描画モデル(トーラス)

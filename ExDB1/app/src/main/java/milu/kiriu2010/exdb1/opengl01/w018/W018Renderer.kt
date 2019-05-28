@@ -7,7 +7,7 @@ import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import milu.kiriu2010.gui.model.Square01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.Simple01Shader
+import milu.kiriu2010.gui.shader.es20.ES20Simple01Shader
 
 // インデックスバッファ
 // ----------------------------------------------
@@ -18,7 +18,7 @@ class W018Renderer(ctx: Context): MgRenderer(ctx) {
     private lateinit var drawObj: Square01Model
 
     // シェーダ
-    private lateinit var shader: Simple01Shader
+    private lateinit var shader: ES20Simple01Shader
 
 
     override fun onDrawFrame(gl: GL10) {
@@ -61,7 +61,7 @@ class W018Renderer(ctx: Context): MgRenderer(ctx) {
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
         // シェーダ
-        shader = Simple01Shader()
+        shader = ES20Simple01Shader()
         shader.loadShader()
 
         // モデル生成

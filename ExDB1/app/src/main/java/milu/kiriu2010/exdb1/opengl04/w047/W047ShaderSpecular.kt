@@ -3,14 +3,14 @@ package milu.kiriu2010.exdb1.opengl04.w047
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.MgModelAbs
-import milu.kiriu2010.gui.shader.MgShader
+import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
 // --------------------------------------
 // シェーダ(反射光ライティング)
 // --------------------------------------
 // https://wgld.org/d/webgl/w047.html
 // --------------------------------------
-class W047ShaderSpecular: MgShader() {
+class W047ShaderSpecular: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -48,7 +48,7 @@ class W047ShaderSpecular: MgShader() {
             }
             """.trimIndent()
 
-    override fun loadShader(): MgShader {
+    override fun loadShader(): ES20MgShader {
         // 頂点シェーダを生成
         svhandle = MyGLES20Func.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成

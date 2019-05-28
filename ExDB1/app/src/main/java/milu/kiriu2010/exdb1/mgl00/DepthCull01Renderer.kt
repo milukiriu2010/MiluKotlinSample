@@ -11,9 +11,9 @@ import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.*
 import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.renderer.Tetrahedron01Model
-import milu.kiriu2010.gui.shader.DirectionalLight01Shader
-import milu.kiriu2010.gui.shader.Simple01Shader
-import milu.kiriu2010.gui.shader.Texture01Shader
+import milu.kiriu2010.gui.shader.es20.ES20DirectionalLight01Shader
+import milu.kiriu2010.gui.shader.es20.ES20Simple01Shader
+import milu.kiriu2010.gui.shader.es20.ES20Texture01Shader
 import milu.kiriu2010.math.MyMathUtil
 
 
@@ -25,11 +25,11 @@ class DepthCull01Renderer(val modelID: Int,ctx: Context): MgRenderer(ctx) {
     private lateinit var axisModel: MgModelAbs
 
     // シェーダ(特殊効果なし)
-    private lateinit var shaderSimple: Simple01Shader
+    private lateinit var shaderSimple: ES20Simple01Shader
     // シェーダ(平行光源)
-    private lateinit var shaderDirectionalLight: DirectionalLight01Shader
+    private lateinit var shaderDirectionalLight: ES20DirectionalLight01Shader
     // シェーダ(テクスチャ)
-    private lateinit var shaderTexture: Texture01Shader
+    private lateinit var shaderTexture: ES20Texture01Shader
 
     private var ratio = 1f
 
@@ -197,15 +197,15 @@ class DepthCull01Renderer(val modelID: Int,ctx: Context): MgRenderer(ctx) {
                 */
 
         // シェーダ(特殊効果なし)
-        shaderSimple = Simple01Shader()
+        shaderSimple = ES20Simple01Shader()
         shaderSimple.loadShader()
 
         // シェーダ(平行光源)
-        shaderDirectionalLight = DirectionalLight01Shader()
+        shaderDirectionalLight = ES20DirectionalLight01Shader()
         shaderDirectionalLight.loadShader()
 
         // シェーダ(テクスチャ)
-        shaderTexture = Texture01Shader()
+        shaderTexture = ES20Texture01Shader()
         shaderTexture.loadShader()
 
         // モデル生成

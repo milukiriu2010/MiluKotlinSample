@@ -6,7 +6,7 @@ import android.opengl.Matrix
 import milu.kiriu2010.gui.basic.MyQuaternion
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.PointLight01Shader
+import milu.kiriu2010.gui.shader.es20.ES20PointLight01Shader
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
@@ -22,7 +22,7 @@ class W032Renderer(ctx: Context): MgRenderer(ctx) {
     private lateinit var model: Torus01Model
 
     // シェーダ(点光源)
-    private lateinit var shader: PointLight01Shader
+    private lateinit var shader: ES20PointLight01Shader
 
     // 画面縦横比
     var ratio: Float = 0f
@@ -93,7 +93,7 @@ class W032Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glEnable(GLES20.GL_CULL_FACE)
 
         // シェーダ
-        shader = PointLight01Shader()
+        shader = ES20PointLight01Shader()
         shader.loadShader()
 
         // モデル生成

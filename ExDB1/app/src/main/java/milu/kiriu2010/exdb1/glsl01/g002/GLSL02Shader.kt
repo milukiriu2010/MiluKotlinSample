@@ -3,12 +3,12 @@ package milu.kiriu2010.exdb1.glsl01.g002
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.MgModelAbs
-import milu.kiriu2010.gui.shader.MgShader
+import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
 // ---------------------------------------
 // 白黒の同心円(マウスに向かって円が縮小)
 // ---------------------------------------
-class GLSL02Shader: MgShader() {
+class GLSL02Shader: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -51,7 +51,7 @@ class GLSL02Shader: MgShader() {
             }
             """.trimIndent()
 
-    override fun loadShader(): MgShader {
+    override fun loadShader(): ES20MgShader {
         // 頂点シェーダを生成
         val svhandle = MyGLES20Func.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成

@@ -3,7 +3,7 @@ package milu.kiriu2010.exdb1.opengl02.w026
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.MgModelAbs
-import milu.kiriu2010.gui.shader.MgShader
+import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
 // ------------------------------------------------------
 // シェーダ(テクスチャ)
@@ -16,7 +16,7 @@ import milu.kiriu2010.gui.shader.MgShader
 // gl.getParameter(gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS)
 // を使うとよいらしいが android は、わからない
 // ------------------------------------------------------
-class W026Shader: MgShader() {
+class W026Shader: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -51,7 +51,7 @@ class W026Shader: MgShader() {
             }
             """.trimIndent()
 
-    override fun loadShader(): MgShader {
+    override fun loadShader(): ES20MgShader {
         // 頂点シェーダを生成
         val svhandle = MyGLES20Func.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成

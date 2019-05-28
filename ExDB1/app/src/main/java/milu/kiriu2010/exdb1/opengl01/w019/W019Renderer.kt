@@ -2,18 +2,13 @@ package milu.kiriu2010.exdb1.opengl01.w019
 
 import android.content.Context
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
-import android.os.SystemClock
 import milu.kiriu2010.gui.model.Square01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.Simple01Shader
+import milu.kiriu2010.gui.shader.es20.ES20Simple01Shader
 import milu.kiriu2010.math.MyMathUtil
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
 
 // カリングと深度テスト
 // ---------------------------------------------
@@ -24,7 +19,7 @@ class W019Renderer(ctx: Context): MgRenderer(ctx) {
     private lateinit var drawObj: Square01Model
 
     // シェーダ
-    private lateinit var shader: Simple01Shader
+    private lateinit var shader: ES20Simple01Shader
 
 
     var culling = false
@@ -108,7 +103,7 @@ class W019Renderer(ctx: Context): MgRenderer(ctx) {
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
         // シェーダ
-        shader = Simple01Shader()
+        shader = ES20Simple01Shader()
         shader.loadShader()
 
         // モデル生成

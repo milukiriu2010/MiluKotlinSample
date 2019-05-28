@@ -3,14 +3,14 @@ package milu.kiriu2010.exdb1.glsl02.g013
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.MgModelAbs
-import milu.kiriu2010.gui.shader.MgShader
+import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
 // -------------------------------------------
 // ボックスモデルを複製
 // -------------------------------------------
 // https://wgld.org/d/glsl/g013.html
 // -------------------------------------------
-class GLSL13Shader: MgShader() {
+class GLSL13Shader: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -135,7 +135,7 @@ class GLSL13Shader: MgShader() {
             }
             """.trimIndent()
 
-    override fun loadShader(): MgShader {
+    override fun loadShader(): ES20MgShader {
         // 頂点シェーダを生成
         svhandle = MyGLES20Func.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成

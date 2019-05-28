@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.util.Log
 import milu.kiriu2010.gui.model.MgModelAbs
-import milu.kiriu2010.gui.shader.MgShader
+import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import java.nio.ByteBuffer
 import java.nio.IntBuffer
 
@@ -109,7 +109,7 @@ class MyGLES20Func {
         // -------------------------------------
         // OpenGLのエラー状態を出力2
         // -------------------------------------
-        fun checkGlError2( str: String, shader: MgShader, model: MgModelAbs ) {
+        fun checkGlError2(str: String, shader: ES20MgShader, model: MgModelAbs ) {
             var error = GLES20.glGetError()
             while ( error != GLES20.GL_NO_ERROR ) {
                 Log.d(TAG, "${shader.javaClass.simpleName}:${str}:${model.javaClass.simpleName}:${error}")

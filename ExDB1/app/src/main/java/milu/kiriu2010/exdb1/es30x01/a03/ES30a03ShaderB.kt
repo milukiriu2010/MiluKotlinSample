@@ -3,14 +3,14 @@ package milu.kiriu2010.exdb1.es30x01.a03
 import android.opengl.GLES30
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLES30Func
-import milu.kiriu2010.gui.shader.MgShader
+import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
 // ------------------------------------
 // シェーダB
 // ------------------------------------
 // https://wgld.org/d/webgl2/w003.html
 // ------------------------------------
-class ES30a03ShaderB: MgShader() {
+class ES30a03ShaderB: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """#version 300 es
@@ -42,7 +42,7 @@ class ES30a03ShaderB: MgShader() {
             }
             """.trimIndent()
 
-    override fun loadShader(): MgShader {
+    override fun loadShader(): ES20MgShader {
         // 頂点シェーダを生成
         svhandle = MyGLES30Func.loadShader(GLES30.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成

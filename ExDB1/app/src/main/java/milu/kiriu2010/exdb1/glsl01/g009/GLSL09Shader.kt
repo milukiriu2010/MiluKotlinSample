@@ -3,14 +3,14 @@ package milu.kiriu2010.exdb1.glsl01.g009
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.MgModelAbs
-import milu.kiriu2010.gui.shader.MgShader
+import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
 // -------------------------------------------
 // レイマーチングで球体を描く
 // -------------------------------------------
 // https://wgld.org/d/glsl/g009.html
 // -------------------------------------------
-class GLSL09Shader: MgShader() {
+class GLSL09Shader: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -90,7 +90,7 @@ class GLSL09Shader: MgShader() {
             }
             """.trimIndent()
 
-    override fun loadShader(): MgShader {
+    override fun loadShader(): ES20MgShader {
         // 頂点シェーダを生成
         svhandle = MyGLES20Func.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成

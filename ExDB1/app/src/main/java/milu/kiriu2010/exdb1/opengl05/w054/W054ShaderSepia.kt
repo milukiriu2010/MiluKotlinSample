@@ -3,10 +3,10 @@ package milu.kiriu2010.exdb1.opengl05.w054
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.MgModelAbs
-import milu.kiriu2010.gui.shader.MgShader
+import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
 // グレースケール用シェーダ
-class W054ShaderSepia: MgShader() {
+class W054ShaderSepia: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -57,7 +57,7 @@ class W054ShaderSepia: MgShader() {
             }
             """.trimIndent()
 
-    override fun loadShader(): MgShader {
+    override fun loadShader(): ES20MgShader {
         // 頂点シェーダを生成
         val svhandle = MyGLES20Func.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
