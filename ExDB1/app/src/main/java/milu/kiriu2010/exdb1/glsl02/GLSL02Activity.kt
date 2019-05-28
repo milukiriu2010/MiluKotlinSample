@@ -10,6 +10,7 @@ import milu.kiriu2010.exdb1.glsl02.g012.GLSL12Fragment
 import milu.kiriu2010.exdb1.glsl02.g013.GLSL13Fragment
 import milu.kiriu2010.exdb1.glsl02.g014.GLSL14Fragment
 import milu.kiriu2010.exdb1.glsl02.g015.GLSL15Fragment
+import milu.kiriu2010.exdb1.glsl02.g016.GLSL16Fragment
 
 class GLSL02Activity : AppCompatActivity() {
 
@@ -21,7 +22,7 @@ class GLSL02Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, GLSL15Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, GLSL16Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -43,6 +44,16 @@ class GLSL02Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // オブジェクトの重なりをスムースにする
+            R.id.glsl_g016 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("g16") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSL16Fragment.newInstance(), "g16")
+                            .commit()
+                }
                 true
             }
             // オブジェクトの重なりを考慮してレンダリング

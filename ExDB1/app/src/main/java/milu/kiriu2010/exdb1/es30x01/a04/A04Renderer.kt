@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.es30x01.a03
+package milu.kiriu2010.exdb1.es30x01.a04
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -8,24 +8,30 @@ import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLES30Func
 import milu.kiriu2010.gui.model.Board01Model
+import milu.kiriu2010.gui.model.Sphere01Model
+import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // -----------------------------------------
-// GLSL ES 3.0
+// GLSL ES 3.0(layout)
 // -----------------------------------------
-// https://wgld.org/d/webgl2/w003.html
+// https://wgld.org/d/webgl2/w004.html
 // -----------------------------------------
-class A03Renderer(ctx: Context): MgRenderer(ctx) {
+class A04Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(板ポリゴン)
     private lateinit var modelBoard: Board01Model
+    // 描画オブジェクト(トーラス)
+    private lateinit var modelTorus: Torus01Model
+    // 描画オブジェクト(球体)
+    private lateinit var modelSphere: Sphere01Model
 
     // シェーダA
-    private lateinit var shaderA: ES30a03ShaderA
+    private lateinit var shaderA: ES30a04ShaderA
     // シェーダB
-    private lateinit var shaderB: ES30a03ShaderB
+    private lateinit var shaderB: ES30a04ShaderB
 
     // 画面縦横比
     var ratio: Float = 1f
@@ -80,14 +86,17 @@ class A03Renderer(ctx: Context): MgRenderer(ctx) {
         GLES30.glActiveTexture(GLES30.GL_TEXTURE0)
         GLES30.glBindTexture(GLES30.GL_TEXTURE_2D,textures[0])
 
-        // 板ポリゴンをレンダリング
+        // 球体をレンダリング
         val matN = FloatArray(16)
         Matrix.setIdentityM(matM,0)
         Matrix.rotateM(matM,0,t0,0f,1f,0f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
         Matrix.transposeM(matN,0,matI,0)
-        shaderA.draw(modelBoard,matM,matMVP,matN,vecLight,vecEye,0)
+        shaderA.draw(modelSphere,matM,matMVP,matN,vecLight,vecEye,0)
+
+        // トーラスをレンダリング
+        shaderA.draw(modelTorus,matM,matMVP,matN,vecLight,vecEye,0)
 
         // フレームバッファのバインドを解除
         GLES30.glBindFramebuffer(GLES30.GL_FRAMEBUFFER,0)
@@ -131,19 +140,37 @@ class A03Renderer(ctx: Context): MgRenderer(ctx) {
         // カリングと深度テストを有効にする
         GLES30.glEnable(GLES30.GL_DEPTH_TEST)
         GLES30.glDepthFunc(GLES30.GL_LEQUAL)
+        GLES30.glEnable(GLES30.GL_CULL_FACE)
 
         // シェーダA
-        shaderA = ES30a03ShaderA()
+        shaderA = ES30a04ShaderA()
         shaderA.loadShader()
 
         // シェーダB
-        shaderB = ES30a03ShaderB()
+        shaderB = ES30a04ShaderB()
         shaderB.loadShader()
 
         // モデル生成(板ポリゴン)
         modelBoard = Board01Model()
         modelBoard.createPath(mapOf(
                 "pattern" to 100f
+        ))
+
+        // モデル生成(トーラス)
+        modelTorus = Torus01Model()
+        modelTorus.createPath(mapOf(
+                "row"     to 32f,
+                "column"  to 32f,
+                "iradius" to 0.25f,
+                "oradius" to 1.25f
+        ))
+
+        // モデル生成(球体)
+        modelSphere = Sphere01Model()
+        modelSphere.createPath(mapOf(
+                "row"    to 16f,
+                "column" to 16f,
+                "radius" to 0.75f
         ))
 
         // ライトの向き

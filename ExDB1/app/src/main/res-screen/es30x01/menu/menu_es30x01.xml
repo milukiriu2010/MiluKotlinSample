@@ -2,8 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/es30_a04"
+        android:title="a04_ES30_layout" />
+    <item
         android:id="@+id/es30_a03"
-        android:title="a03_GLSL_ES30" />
+        android:title="a03_ES30" />
     <item
         android:id="@+id/es30_cube_rotate01"
         android:title="回転(立方体)01_ES30" />

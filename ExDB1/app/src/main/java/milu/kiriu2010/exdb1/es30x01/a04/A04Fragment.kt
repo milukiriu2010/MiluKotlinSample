@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.es30x01.a03
+package milu.kiriu2010.exdb1.es30x01.a04
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES30View
 
-class A03Fragment : Fragment() {
+class A04Fragment : Fragment() {
 
     private lateinit var myGLES30View: MyGLES30View
 
@@ -27,7 +27,7 @@ class A03Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_es30_a03, container, false)
 
         myGLES30View = view.findViewById(R.id.myGLES30ViewA03)
-        val renderer = A03Renderer(context!!)
+        val renderer = A04Renderer(context!!)
         myGLES30View.setRenderer(renderer)
         myGLES30View.setOnTouchListener { v, event ->
             when (event.action) {
@@ -63,7 +63,7 @@ class A03Fragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                A03Fragment().apply {
+                A04Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }
