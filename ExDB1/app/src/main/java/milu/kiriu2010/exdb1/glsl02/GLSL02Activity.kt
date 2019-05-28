@@ -8,6 +8,8 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.glsl02.g011.GLSL11Fragment
 import milu.kiriu2010.exdb1.glsl02.g012.GLSL12Fragment
 import milu.kiriu2010.exdb1.glsl02.g013.GLSL13Fragment
+import milu.kiriu2010.exdb1.glsl02.g014.GLSL14Fragment
+import milu.kiriu2010.exdb1.glsl02.g015.GLSL15Fragment
 
 class GLSL02Activity : AppCompatActivity() {
 
@@ -19,7 +21,7 @@ class GLSL02Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, GLSL13Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, GLSL15Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -41,6 +43,26 @@ class GLSL02Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // オブジェクトの重なりを考慮してレンダリング
+            R.id.glsl_g015 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("g15") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSL15Fragment.newInstance(), "g15")
+                            .commit()
+                }
+                true
+            }
+            // 異なる形状のオブジェクトをレンダリング
+            R.id.glsl_g014 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("g14") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSL14Fragment.newInstance(), "g14")
+                            .commit()
+                }
                 true
             }
             // ボックスモデルを複製

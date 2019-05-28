@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/glsl_g015"
+        android:title="g015_オブジェクトの重なりを考慮" />
+    <item
+        android:id="@+id/glsl_g014"
+        android:title="g014_異なる形状のオブジェクト" />
+    <item
         android:id="@+id/glsl_g013"
         android:title="g013_ボックスモデルを複製" />
     <item
