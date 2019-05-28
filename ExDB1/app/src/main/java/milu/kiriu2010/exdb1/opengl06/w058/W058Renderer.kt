@@ -11,6 +11,7 @@ import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Cube01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
+import milu.kiriu2010.math.MyMathUtil
 import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
@@ -93,7 +94,7 @@ class W058Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.multiplyMM(matVP4O,0,matP,0,matV,0)
 
         // gaussianフィルタの重み係数を算出
-        u_weight = MyGLFunc.gaussianWeigt(10,k_gaussian,1f)
+        u_weight = MyMathUtil.gaussianWeigt(10,k_gaussian,1f)
 
         // -----------------------------------------------
         // 【0:スペキュラ成分のみをレンダリング】

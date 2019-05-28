@@ -66,7 +66,7 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
     val frameTexture = IntBuffer.allocate(4)
 
     // u_gaussianフィルタの重み係数
-    val u_weight = MyGLFunc.gaussianWeigt(5,10f,1f)
+    val u_weight = MyMathUtil.gaussianWeigt(5,10f,1f)
 
     // 視点ベクトルの逆行列
     private var vecI4Eye = FloatArray(3)

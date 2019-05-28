@@ -10,7 +10,7 @@ import milu.kiriu2010.gui.shader.MgShader
 // ------------------------------------
 // https://wgld.org/d/webgl2/w003.html
 // ------------------------------------
-class A03ShaderA: MgShader() {
+class ES30a03ShaderA: MgShader() {
     // 頂点シェーダ
     private val scv =
             """#version 300 es

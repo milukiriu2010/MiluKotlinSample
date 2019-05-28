@@ -13,6 +13,7 @@ import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Cube01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
+import milu.kiriu2010.math.MyMathUtil
 import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
@@ -68,8 +69,8 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
     val frameTexture = IntBuffer.allocate(5)
 
     // u_gaussianフィルタの重み係数
-    val u_weight1 = MyGLFunc.gaussianWeigt(10,15f)
-    val u_weight2 = MyGLFunc.gaussianWeigt(10,45f)
+    val u_weight1 = MyMathUtil.gaussianWeigt(10,15f)
+    val u_weight2 = MyMathUtil.gaussianWeigt(10,45f)
 
     // フォーカスする深度値
     var u_depthOffset = 0f

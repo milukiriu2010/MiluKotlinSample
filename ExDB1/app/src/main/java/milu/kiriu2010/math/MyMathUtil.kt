@@ -10,6 +10,8 @@ import kotlin.math.*
 // --------------------------------------
 // 2019.05.04 小数点kから倍率を求める
 // 2019.05.10 Float配列正規化
+// 2019.05.22 定義追加:SQRT3
+// 2019.05.28 gaussianブラーの重みを計算
 // --------------------------------------
 class MyMathUtil {
     companion object {
@@ -289,6 +291,26 @@ class MyMathUtil {
             return dat2
         }
 
+
+        // ------------------------------------------------
+        // gaussianブラーの重みを計算
+        // ------------------------------------------------
+        fun gaussianWeigt(cnt: Int, dis: Float, denominator: Float = 10f): FloatArray {
+            val weight = FloatArray(cnt)
+            var t = 0f
+            var d = dis*dis/denominator
+            (0 until weight.size).forEach { i ->
+                val r = 1f + 2f*i.toFloat()
+                var w = exp(-0.5f*(r*r)/d)
+                weight[i] = w;
+                if (i > 0) w *= 2f
+                t += w
+            }
+            (0 until weight.size).forEach { i ->
+                weight[i] /= t
+            }
+            return weight
+        }
 
         // --------------------------------------------
         // cos(度)

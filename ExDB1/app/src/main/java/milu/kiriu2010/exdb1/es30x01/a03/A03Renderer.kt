@@ -23,9 +23,9 @@ class A03Renderer(ctx: Context): MgRenderer(ctx) {
     private lateinit var modelBoard: Board01Model
 
     // シェーダA
-    private lateinit var shaderA: A03ShaderA
+    private lateinit var shaderA: ES30a03ShaderA
     // シェーダB
-    private lateinit var shaderB: A03ShaderB
+    private lateinit var shaderB: ES30a03ShaderB
 
     // 画面縦横比
     var ratio: Float = 1f
@@ -124,11 +124,11 @@ class A03Renderer(ctx: Context): MgRenderer(ctx) {
         GLES30.glEnable(GLES30.GL_CULL_FACE)
 
         // シェーダA
-        shaderA = A03ShaderA()
+        shaderA = ES30a03ShaderA()
         shaderA.loadShader()
 
         // シェーダB
-        shaderB = A03ShaderB()
+        shaderB = ES30a03ShaderB()
         shaderB.loadShader()
 
         // モデル生成(板ポリゴン)
