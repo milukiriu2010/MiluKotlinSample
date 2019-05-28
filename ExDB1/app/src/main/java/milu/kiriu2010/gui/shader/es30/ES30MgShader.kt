@@ -1,13 +1,13 @@
-package milu.kiriu2010.gui.shader.es20
+package milu.kiriu2010.gui.shader.es30
 
-import android.opengl.GLES20
+import android.opengl.GLES30
 
 // --------------------------------------
 // GLSL ES20用シェーダ
 // --------------------------------------
-// 2019.05.22 リソース解放
+// 2019.05.28
 // --------------------------------------
-abstract class ES20MgShader {
+abstract class ES30MgShader {
     // 頂点シェーダのハンドル
     var svhandle: Int = -1
     // フラグメントシェーダのハンドル
@@ -19,15 +19,15 @@ abstract class ES20MgShader {
     // シェーダを削除
     fun deleteShader() {
         if ( svhandle != -1 ) {
-            GLES20.glDeleteShader(svhandle)
+            GLES30.glDeleteShader(svhandle)
         }
         if ( sfhandle != -1 ) {
-            GLES20.glDeleteShader(sfhandle)
+            GLES30.glDeleteShader(sfhandle)
         }
         if ( programHandle != -1 ) {
-            GLES20.glDeleteProgram(programHandle)
+            GLES30.glDeleteProgram(programHandle)
         }
     }
 
-    abstract fun loadShader(): ES20MgShader
+    abstract fun loadShader(): ES30MgShader
 }

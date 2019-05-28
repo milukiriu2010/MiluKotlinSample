@@ -106,7 +106,7 @@ class A03Renderer(ctx: Context): MgRenderer(ctx) {
         // テクスチャを作成
         GLES30.glGenTextures(1,textures,0)
         // テクスチャに使う画像をロード
-        MyGLES30Func.createTexture(0,textures,bmpArray[0],renderW)
+        MyGLES30Func.createTexture(0,textures,bmpArray[0])
 
         // フレームバッファ生成
         GLES30.glGenFramebuffers(1,bufFrame)
@@ -121,7 +121,6 @@ class A03Renderer(ctx: Context): MgRenderer(ctx) {
         // カリングと深度テストを有効にする
         GLES30.glEnable(GLES30.GL_DEPTH_TEST)
         GLES30.glDepthFunc(GLES30.GL_LEQUAL)
-        GLES30.glEnable(GLES30.GL_CULL_FACE)
 
         // シェーダA
         shaderA = ES30a03ShaderA()
@@ -134,7 +133,7 @@ class A03Renderer(ctx: Context): MgRenderer(ctx) {
         // モデル生成(板ポリゴン)
         modelBoard = Board01Model()
         modelBoard.createPath(mapOf(
-                "pattern" to 53f
+                "pattern" to 100f
         ))
 
         // ライトの向き
@@ -144,19 +143,20 @@ class A03Renderer(ctx: Context): MgRenderer(ctx) {
 
         // 視点座標
         vecEye[0] =  0f
-        vecEye[1] = 10f
-        vecEye[2] =  0f
+        vecEye[1] =  0f
+        vecEye[2] =  5f
+
         // 視点の上方向
         vecEyeUp[0] =  0f
-        vecEyeUp[1] =  0f
-        vecEyeUp[2] =  1f
+        vecEyeUp[1] =  1f
+        vecEyeUp[2] =  0f
 
         // ビュー×プロジェクション座標変換行列
         Matrix.setLookAtM(matV, 0,
                 vecEye[0], vecEye[1], vecEye[2],
                 vecCenter[0], vecCenter[1], vecCenter[2],
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
-        Matrix.perspectiveM(matP,0,90f,ratio,0.1f,20f)
+        Matrix.perspectiveM(matP,0,60f,ratio,0.1f,20f)
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
     }
 

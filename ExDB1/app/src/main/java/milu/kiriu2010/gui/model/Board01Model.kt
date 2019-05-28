@@ -32,6 +32,8 @@ class Board01Model: MgModelAbs() {
             49 -> createPathPattern49(opt)
             // XZ平面(右回り)
             51 -> createPathPattern51(opt)
+            // XY平面(左回り)画像貼り付け
+            100 -> createPathPattern100(opt)
             else -> createPathPattern1(opt)
         }
 
@@ -234,5 +236,31 @@ class Board01Model: MgModelAbs() {
         // インデックスデータ
         datIdx.addAll(arrayListOf<Short>(0,2,1))
         datIdx.addAll(arrayListOf<Short>(3,1,2))
+    }
+
+
+    // XY平面(左回り)画像貼り付け
+    //  a03
+    private fun createPathPattern100(opt: Map<String, Float>) {
+        // 頂点データ
+        datPos.addAll(arrayListOf( 1f, 1f,0f))
+        datPos.addAll(arrayListOf(-1f, 1f,0f))
+        datPos.addAll(arrayListOf( 1f,-1f,0f))
+        datPos.addAll(arrayListOf(-1f,-1f,0f))
+
+        // 法線データ
+        (0..3).forEach {
+            datNor.addAll(arrayListOf(0f,0f,1f))
+        }
+
+        // テクスチャ座標
+        datTxc.addAll(arrayListOf(1f,0f))
+        datTxc.addAll(arrayListOf(0f,0f))
+        datTxc.addAll(arrayListOf(1f,1f))
+        datTxc.addAll(arrayListOf(0f,1f))
+
+        // インデックスデータ
+        datIdx.addAll(arrayListOf<Short>(0,1,2))
+        datIdx.addAll(arrayListOf<Short>(2,1,3))
     }
 }

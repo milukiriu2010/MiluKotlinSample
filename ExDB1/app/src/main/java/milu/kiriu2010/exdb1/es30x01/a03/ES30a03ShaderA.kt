@@ -3,14 +3,14 @@ package milu.kiriu2010.exdb1.es30x01.a03
 import android.opengl.GLES30
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLES30Func
-import milu.kiriu2010.gui.shader.es20.ES20MgShader
+import milu.kiriu2010.gui.shader.es30.ES30MgShader
 
 // ------------------------------------
 // シェーダA
 // ------------------------------------
 // https://wgld.org/d/webgl2/w003.html
 // ------------------------------------
-class ES30a03ShaderA: ES20MgShader() {
+class ES30a03ShaderA: ES30MgShader() {
     // 頂点シェーダ
     private val scv =
             """#version 300 es
@@ -29,7 +29,7 @@ class ES30a03ShaderA: ES20MgShader() {
 
             void main() {
                 v_Position  = (u_matM * vec4(a_Position,1.0)).xyz;
-                v_Normal    = (u_matN * vec4(a_Normal  ,1.0)).xyz;
+                v_Normal    = (u_matN * vec4(a_Normal  ,0.0)).xyz;
                 v_TexCoord  = a_TexCoord;
                 gl_Position = u_matMVP   * vec4(a_Position, 1.0);
             }
@@ -39,7 +39,7 @@ class ES30a03ShaderA: ES20MgShader() {
     private val scf =
             """#version 300 es
 
-            precision mediump   float;
+            precision highp   float;
 
             uniform  vec3      u_vecLight;
             uniform  vec3      u_vecEye;
@@ -49,21 +49,21 @@ class ES30a03ShaderA: ES20MgShader() {
             in  vec3  v_Normal;
             in  vec2  v_TexCoord;
 
-            out vec4  o_OutColor;
+            out vec4  o_Color;
 
             void main() {
                 vec3  light    = normalize(u_vecLight - v_Position);
                 vec3  eye      = normalize(v_Position - u_vecEye);
-                vec3  ref      = normalize(reflect(u_vecEye,v_Normal));
+                vec3  ref      = normalize(reflect(eye,v_Normal));
                 float diffuse  = max(dot(light,v_Normal),0.2);
                 float specular = max(dot(light,ref)     ,0.0);
                 specular = pow(specular,20.0);
                 vec4 samplerColor = texture(u_Texture,v_TexCoord);
-                o_OutColor = vec4(samplerColor.rgb*diffuse + specular, samplerColor.a);
+                o_Color = vec4(samplerColor.rgb*diffuse + specular, samplerColor.a);
             }
             """.trimIndent()
 
-    override fun loadShader(): ES20MgShader {
+    override fun loadShader(): ES30MgShader {
         // 頂点シェーダを生成
         svhandle = MyGLES30Func.loadShader(GLES30.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
