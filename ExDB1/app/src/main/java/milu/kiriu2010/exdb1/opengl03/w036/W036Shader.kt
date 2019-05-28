@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl03.w036
 
 import android.opengl.GLES20
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.MgShader
 
@@ -41,12 +41,12 @@ class W036Shader: MgShader() {
 
     override fun loadShader(): MgShader {
         // 頂点シェーダを生成
-        val svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
+        val svhandle = MyGLES20Func.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
-        val sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
+        val sfhandle = MyGLES20Func.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
 
         // プログラムオブジェクトの生成とリンク
-        programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Color","a_TextureCoord") )
+        programHandle = MyGLES20Func.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Color","a_TextureCoord") )
         return this
     }
 
@@ -61,7 +61,7 @@ class W036Shader: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError2("a_Position",this,model)
+        MyGLES20Func.checkGlError2("a_Position",this,model)
 
         // attribute(色)
         model.bufCol.position(0)
@@ -69,19 +69,19 @@ class W036Shader: MgShader() {
             GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, model.bufCol)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError2("a_Color",this,model)
+        MyGLES20Func.checkGlError2("a_Color",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
-        MyGLFunc.checkGlError2("u_matMVP",this,model)
+        MyGLES20Func.checkGlError2("u_matMVP",this,model)
 
         // uniform(描画点のサイズ)
         GLES20.glGetUniformLocation(programHandle,"u_pointSize").also {
             GLES20.glUniform1f(it,u_pointSize)
         }
-        MyGLFunc.checkGlError2("u_pointSize",this,model)
+        MyGLES20Func.checkGlError2("u_pointSize",this,model)
 
         // モデルを描画
         GLES20.glDrawArrays(lineType, 0, model.datPos.size/3)

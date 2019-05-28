@@ -3,8 +3,7 @@ package milu.kiriu2010.exdb1.opengl05.w053
 import android.content.Context
 import android.opengl.GLES20
 import android.opengl.Matrix
-import android.util.Log
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.color.MgColor
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Torus01Model
@@ -129,7 +128,7 @@ class W053Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glGenRenderbuffers(1,bufDepthRender)
         // フレームバッファ用テクスチャ生成
         GLES20.glGenTextures(1,frameTexture)
-        MyGLFunc.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
+        MyGLES20Func.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {

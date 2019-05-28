@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory
 import android.opengl.GLES20
 import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.color.MgColor
 import milu.kiriu2010.gui.model.Cube01Model
 import milu.kiriu2010.gui.model.Torus01Model
@@ -208,7 +208,7 @@ class W050Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glGenRenderbuffers(1,bufDepthRender)
         // フレームバッファ用テクスチャ生成
         GLES20.glGenTextures(1,frameTexture)
-        MyGLFunc.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
+        MyGLES20Func.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
@@ -278,7 +278,7 @@ class W050Renderer(ctx: Context): MgRenderer(ctx) {
     private fun generateCubeMap() {
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(1,textures,0)
-        MyGLFunc.checkGlError("glGenTextures")
+        MyGLES20Func.checkGlError("glGenTextures")
 
         // テクスチャをキューブマップにバインド
         GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP,textures[0])

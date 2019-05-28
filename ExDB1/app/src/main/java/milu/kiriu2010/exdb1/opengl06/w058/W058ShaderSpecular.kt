@@ -2,7 +2,7 @@ package milu.kiriu2010.exdb1.opengl06.w058
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.model.MgModelAbs
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.shader.MgShader
 
 // --------------------------------------------
@@ -49,12 +49,12 @@ class W058ShaderSpecular: MgShader() {
 
     override fun loadShader(): MgShader {
         // 頂点シェーダを生成
-        val svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
+        val svhandle = MyGLES20Func.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
-        val sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
+        val sfhandle = MyGLES20Func.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
 
         // プログラムオブジェクトの生成とリンク
-        programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Normal","a_Color") )
+        programHandle = MyGLES20Func.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Normal","a_Color") )
         return this
     }
 
@@ -65,7 +65,7 @@ class W058ShaderSpecular: MgShader() {
              u_vecEye: FloatArray) {
 
         GLES20.glUseProgram(programHandle)
-        MyGLFunc.checkGlError2("UseProgram",this,model)
+        MyGLES20Func.checkGlError2("UseProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)
@@ -73,7 +73,7 @@ class W058ShaderSpecular: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError2("a_Position",this,model)
+        MyGLES20Func.checkGlError2("a_Position",this,model)
 
         // attribute(法線)
         model.bufNor.position(0)
@@ -81,7 +81,7 @@ class W058ShaderSpecular: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufNor)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError2("a_Normal",this,model)
+        MyGLES20Func.checkGlError2("a_Normal",this,model)
 
         // attribute(色)
         model.bufCol.position(0)
@@ -89,31 +89,31 @@ class W058ShaderSpecular: MgShader() {
             GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, model.bufCol)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError2("a_Color",this,model)
+        MyGLES20Func.checkGlError2("a_Color",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
-        MyGLFunc.checkGlError2("u_matMVP",this,model)
+        MyGLES20Func.checkGlError2("u_matMVP",this,model)
 
         // uniform(逆行列)
         GLES20.glGetUniformLocation(programHandle,"u_matINV").also {
             GLES20.glUniformMatrix4fv(it,1,false,matINV,0)
         }
-        MyGLFunc.checkGlError2("u_matINV",this,model)
+        MyGLES20Func.checkGlError2("u_matINV",this,model)
 
         // uniform(光源位置)
         GLES20.glGetUniformLocation(programHandle,"u_vecLight").also {
             GLES20.glUniform3fv(it,1,u_vecLight,0)
         }
-        MyGLFunc.checkGlError2("u_vecLight",this,model)
+        MyGLES20Func.checkGlError2("u_vecLight",this,model)
 
         // uniform(視点座標)
         GLES20.glGetUniformLocation(programHandle,"u_vecEye").also {
             GLES20.glUniform3fv(it,1,u_vecEye,0)
         }
-        MyGLFunc.checkGlError2("u_vecEye",this,model)
+        MyGLES20Func.checkGlError2("u_vecEye",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

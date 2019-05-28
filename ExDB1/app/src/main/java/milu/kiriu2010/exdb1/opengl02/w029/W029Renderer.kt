@@ -4,13 +4,11 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
-import android.view.MotionEvent
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
@@ -198,10 +196,10 @@ class W029Renderer(ctx: Context): MgRenderer(ctx) {
 
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(1,textures,0)
-        MyGLFunc.checkGlError("glGenTextures")
+        MyGLES20Func.checkGlError("glGenTextures")
 
         // テクスチャ0をバインド
-        MyGLFunc.createTexture(0,textures,bmpArray[0])
+        MyGLES20Func.createTexture(0,textures,bmpArray[0])
 
         // カメラの位置
         Matrix.setLookAtM(matV, 0,

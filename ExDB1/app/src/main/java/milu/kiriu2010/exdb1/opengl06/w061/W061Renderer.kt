@@ -6,7 +6,7 @@ import android.opengl.GLES20
 import android.opengl.Matrix
 import android.os.SystemClock
 import android.util.Log
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.basic.MyNoiseX
 import milu.kiriu2010.gui.model.Box01Model
 import milu.kiriu2010.gui.model.Particle01Model
@@ -252,7 +252,7 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
         // テクスチャを作成
         GLES20.glGenTextures(1,textures,0)
         // テクスチャに使う画像をロード
-        MyGLFunc.createTexture(0,textures,bmpArray[0])
+        MyGLES20Func.createTexture(0,textures,bmpArray[0])
 
         // フレームバッファ生成
         GLES20.glGenFramebuffers(1,bufFrame)
@@ -260,7 +260,7 @@ class W061Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glGenRenderbuffers(1,bufDepthRender)
         // フレームバッファを格納するテクスチャ生成
         GLES20.glGenTextures(1,frameTexture)
-        MyGLFunc.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
+        MyGLES20Func.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {

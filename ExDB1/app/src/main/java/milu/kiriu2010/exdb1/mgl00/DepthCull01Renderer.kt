@@ -1,14 +1,13 @@
 package milu.kiriu2010.exdb1.mgl00
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.opengl.GLES20
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.*
 import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.renderer.Tetrahedron01Model
@@ -181,7 +180,7 @@ class DepthCull01Renderer(val modelID: Int,ctx: Context): MgRenderer(ctx) {
 
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(1,textures,0)
-        MyGLFunc.createTexture(0,textures,bmp0)
+        MyGLES20Func.createTexture(0,textures,bmp0)
 
         // 回転を止めておく
         isRunning = false

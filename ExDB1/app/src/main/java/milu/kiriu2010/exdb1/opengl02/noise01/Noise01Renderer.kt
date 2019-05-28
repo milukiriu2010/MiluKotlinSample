@@ -8,7 +8,7 @@ import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import android.os.SystemClock
 import milu.kiriu2010.exdb1.opengl02.noise01.Noise01Shader
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.basic.MyNoiseX
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
@@ -109,9 +109,9 @@ class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(9,textures,0)
         (0..8).forEach {
-            MyGLFunc.createTexture(it,textures,bmpArray[it])
+            MyGLES20Func.createTexture(it,textures,bmpArray[it])
         }
-        MyGLFunc.checkGlError("glGenTextures")
+        MyGLES20Func.checkGlError("glGenTextures")
     }
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {

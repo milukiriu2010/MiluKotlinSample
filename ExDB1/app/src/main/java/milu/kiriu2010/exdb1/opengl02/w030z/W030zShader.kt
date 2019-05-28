@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl02.w030z
 
 import android.opengl.GLES20
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.MgShader
 
@@ -49,12 +49,12 @@ class W030zShader: MgShader() {
 
     override fun loadShader(): MgShader {
         // 頂点シェーダを生成
-        val svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
+        val svhandle = MyGLES20Func.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
-        val sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
+        val sfhandle = MyGLES20Func.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
 
         // プログラムオブジェクトの生成とリンク
-        programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Color","a_TextureCoord") )
+        programHandle = MyGLES20Func.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Color","a_TextureCoord") )
         return this
     }
 
@@ -71,7 +71,7 @@ class W030zShader: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError2("a_Position",this,model)
+        MyGLES20Func.checkGlError2("a_Position",this,model)
 
         // attribute(色)
         model.bufCol.position(0)
@@ -79,7 +79,7 @@ class W030zShader: MgShader() {
             GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false, 4*4, model.bufCol)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError2("a_Color",this,model)
+        MyGLES20Func.checkGlError2("a_Color",this,model)
 
         // attribute(テクスチャコード)
         model.bufTxc.position(0)
@@ -87,31 +87,31 @@ class W030zShader: MgShader() {
             GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, model.bufTxc)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError2("a_TextureCoord",this,model)
+        MyGLES20Func.checkGlError2("a_TextureCoord",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
-        MyGLFunc.checkGlError2("u_matMVP",this,model)
+        MyGLES20Func.checkGlError2("u_matMVP",this,model)
 
         // uniform(ブレンドするアルファ成分の割合)
         GLES20.glGetUniformLocation(programHandle, "u_vertexAlpha").also {
             GLES20.glUniform1f(it, u_vertexAlpha)
         }
-        MyGLFunc.checkGlError2("u_vertexAlpha",this,model)
+        MyGLES20Func.checkGlError2("u_vertexAlpha",this,model)
 
         // uniform(テクスチャユニット0)
         GLES20.glGetUniformLocation(programHandle, "u_Texture0").also {
             GLES20.glUniform1i(it, u_Texture0)
         }
-        MyGLFunc.checkGlError2("u_Texture0",this,model)
+        MyGLES20Func.checkGlError2("u_Texture0",this,model)
 
         // uniform(テクスチャのレンダリングをするかどうか)
         GLES20.glGetUniformLocation(programHandle, "u_useTexture").also {
             GLES20.glUniform1i(it, u_useTexture)
         }
-        MyGLFunc.checkGlError2("u_useTexture",this,model)
+        MyGLES20Func.checkGlError2("u_useTexture",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

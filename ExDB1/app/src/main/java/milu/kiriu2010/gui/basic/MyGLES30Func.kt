@@ -7,7 +7,6 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.MgShader
 import java.nio.ByteBuffer
 import java.nio.IntBuffer
-import kotlin.math.exp
 
 // ----------------------------------------------------------------------
 // GLSL ES3.0用
@@ -24,7 +23,7 @@ import kotlin.math.exp
 class MyGLES30Func {
 
     companion object {
-        private const val TAG = "MyGLFunc"
+        private const val TAG = "MyGLES20Func"
 
         // -------------------------------------
         // シェーダをロードする
@@ -64,11 +63,11 @@ class MyGLES30Func {
             val programHandle = GLES30.glCreateProgram().also {
                 // 頂点シェーダをプログラムに追加
                 GLES30.glAttachShader(it,svhandle)
-                MyGLFunc.printShaderInfoLog(svhandle,"vertex shader")
+                MyGLES20Func.printShaderInfoLog(svhandle,"vertex shader")
 
                 // フラグメントシェーダをプログラムに追加
                 GLES30.glAttachShader(it,sfhandle)
-                MyGLFunc.printShaderInfoLog(sfhandle,"fragment shader")
+                MyGLES20Func.printShaderInfoLog(sfhandle,"fragment shader")
 
                 // シェーダオブジェクトを削除
                 GLES30.glDeleteShader(svhandle)
@@ -87,7 +86,7 @@ class MyGLES30Func {
                 GLES30.glGetProgramiv(it,GLES30.GL_LINK_STATUS,linkStatus,0)
                 // リンク失敗
                 if (linkStatus[0] == 0) {
-                    MyGLFunc.printProgramInfoLog(it)
+                    MyGLES20Func.printProgramInfoLog(it)
                     GLES30.glDeleteProgram(it)
                     throw RuntimeException("Error creating program.")
                 }
@@ -167,7 +166,7 @@ class MyGLES30Func {
 
             // テクスチャをバインドする
             GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, textures[id])
-            MyGLFunc.checkGlError("glBindTexture")
+            MyGLES20Func.checkGlError("glBindTexture")
 
             if ( size > 0 ) {
                 val resizedBmp = Bitmap.createScaledBitmap(bmp,size,size,false)
@@ -196,7 +195,7 @@ class MyGLES30Func {
             // GLES30.glTexImage2Dを使わないやり方
             // ビットマップをテクスチャに設定
             GLUtils.texImage2D(GLES30.GL_TEXTURE_2D, 0, bmp, 0)
-            MyGLFunc.checkGlError("texImage2D")
+            MyGLES20Func.checkGlError("texImage2D")
             */
 
             // ミップマップを生成

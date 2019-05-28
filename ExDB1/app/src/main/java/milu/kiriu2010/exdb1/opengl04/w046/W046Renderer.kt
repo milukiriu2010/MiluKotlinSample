@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory
 import android.opengl.GLES20
 import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.Cube01Model
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.model.Torus01Model
@@ -202,7 +202,7 @@ class W046Renderer(ctx: Context): MgRenderer(ctx) {
     private fun generateCubeMap() {
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(1,textures,0)
-        MyGLFunc.checkGlError("glGenTextures")
+        MyGLES20Func.checkGlError("glGenTextures")
 
         // テクスチャをキューブマップにバインド
         GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP,textures[0])

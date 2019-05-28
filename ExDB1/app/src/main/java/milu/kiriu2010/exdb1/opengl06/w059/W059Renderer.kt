@@ -5,9 +5,8 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.opengl.GLES20
 import android.opengl.Matrix
-import android.util.Log
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.color.MgColor
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Cube01Model
@@ -299,7 +298,7 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
         // テクスチャを作成
         GLES20.glGenTextures(1,textures,0)
         // テクスチャに使う画像をロード
-        MyGLFunc.createTexture(0,textures,bmpArray[0])
+        MyGLES20Func.createTexture(0,textures,bmpArray[0])
 
         // フレームバッファ生成
         GLES20.glGenFramebuffers(5,bufFrame)
@@ -308,7 +307,7 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
         // フレームバッファを格納するテクスチャ生成
         GLES20.glGenTextures(5,frameTexture)
         (0..4).forEach {
-            MyGLFunc.createFrameBuffer(renderW,renderH,it,bufFrame,bufDepthRender,frameTexture)
+            MyGLES20Func.createFrameBuffer(renderW,renderH,it,bufFrame,bufDepthRender,frameTexture)
             //createFrameBuffer(renderW,renderH,it)
         }
     }

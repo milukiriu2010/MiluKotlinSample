@@ -6,12 +6,10 @@ import android.graphics.BitmapFactory
 import android.opengl.GLES20
 import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.Cube01Model
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import java.lang.RuntimeException
-import java.nio.ByteBuffer
 import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
@@ -154,7 +152,7 @@ class W040Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glGenRenderbuffers(1,bufDepthRender)
         // フレームバッファ用テクスチャ生成
         GLES20.glGenTextures(1,frameTexture)
-        MyGLFunc.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
+        MyGLES20Func.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
@@ -189,11 +187,11 @@ class W040Renderer(ctx: Context): MgRenderer(ctx) {
 
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(2,textures,0)
-        MyGLFunc.checkGlError("glGenTextures")
+        MyGLES20Func.checkGlError("glGenTextures")
         // テクスチャ0をバインド
-        MyGLFunc.createTexture(0,textures,bmpArray[0])
+        MyGLES20Func.createTexture(0,textures,bmpArray[0])
         // テクスチャ1をバインド
-        MyGLFunc.createTexture(1,textures,bmpArray[1])
+        MyGLES20Func.createTexture(1,textures,bmpArray[1])
 
         // 光源位置
         vecLight[0] = -1f

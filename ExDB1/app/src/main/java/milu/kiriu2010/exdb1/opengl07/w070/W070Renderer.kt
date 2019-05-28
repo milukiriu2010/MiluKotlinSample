@@ -7,7 +7,7 @@ import android.opengl.Matrix
 import android.util.Log
 import milu.kiriu2010.exdb1.opengl07.w069.W069ShaderDepth
 import milu.kiriu2010.exdb1.opengl07.w069.W069ShaderScreen
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
@@ -230,7 +230,7 @@ class W070Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glGenRenderbuffers(1,bufDepthRender)
         // フレームバッファ用テクスチャ生成
         GLES20.glGenTextures(1,frameTexture)
-        MyGLFunc.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture,GLES20.GL_FLOAT)
+        MyGLES20Func.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture,GLES20.GL_FLOAT)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {

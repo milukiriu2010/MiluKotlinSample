@@ -2,7 +2,7 @@ package milu.kiriu2010.exdb1.opengl07.w072
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.model.MgModelAbs
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.shader.MgShader
 
 // ----------------------------------------
@@ -64,12 +64,12 @@ class W072ShaderMapping: MgShader() {
 
     override fun loadShader(): MgShader {
         // 頂点シェーダを生成
-        svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
+        svhandle = MyGLES20Func.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
-        sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
+        sfhandle = MyGLES20Func.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
 
         // プログラムオブジェクトの生成とリンク
-        programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Index") )
+        programHandle = MyGLES20Func.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_Index") )
         return this
     }
 
@@ -77,7 +77,7 @@ class W072ShaderMapping: MgShader() {
              a_Index: Float) {
 
         GLES20.glUseProgram(programHandle)
-        MyGLFunc.checkGlError2("UseProgram",this,model)
+        MyGLES20Func.checkGlError2("UseProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)
@@ -85,7 +85,7 @@ class W072ShaderMapping: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError2("a_Position",this,model)
+        MyGLES20Func.checkGlError2("a_Position",this,model)
 
         // attribute(インデックス)
         /*
@@ -98,7 +98,7 @@ class W072ShaderMapping: MgShader() {
             GLES20.glVertexAttribPointer(it,1,GLES20.GL_FLOAT,false, 2, model.bufIdx)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError2("a_Index",this,model)
+        MyGLES20Func.checkGlError2("a_Index",this,model)
 
         // モデルを描画
         GLES20.glDrawArrays(GLES20.GL_POINTS,0,model.datIdx.size)

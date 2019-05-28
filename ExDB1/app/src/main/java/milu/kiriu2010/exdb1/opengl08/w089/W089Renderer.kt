@@ -6,14 +6,11 @@ import android.graphics.BitmapFactory
 import android.opengl.GLES20
 import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.gui.color.MgColor
-import milu.kiriu2010.gui.model.Board01Model
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.math.MyMathUtil
-import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
@@ -118,7 +115,7 @@ class W089Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glGenTextures(8,textures,0)
         // テクスチャに使う画像をロード
         (0..7).forEach {
-            MyGLFunc.createTexture(it,textures,bmpArray[it])
+            MyGLES20Func.createTexture(it,textures,bmpArray[it])
         }
 
     }

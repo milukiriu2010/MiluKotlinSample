@@ -8,7 +8,7 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
@@ -150,10 +150,10 @@ class W030zRenderer(ctx: Context): MgRenderer(ctx) {
 
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(1,textures,0)
-        MyGLFunc.checkGlError("glGenTextures")
+        MyGLES20Func.checkGlError("glGenTextures")
 
         // テクスチャ0をバインド
-        MyGLFunc.createTexture(0,textures,bmpArray[0])
+        MyGLES20Func.createTexture(0,textures,bmpArray[0])
 
         // カメラの位置
         Matrix.setLookAtM(matV, 0,

@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory
 import android.opengl.GLES20
 import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
@@ -203,7 +203,7 @@ class W049Renderer(ctx: Context): MgRenderer(ctx) {
 
         // テクスチャに使うビットマップをロード
         GLES20.glGenTextures(1,textures,0)
-        MyGLFunc.createTexture(0,textures,bmpArray[0])
+        MyGLES20Func.createTexture(0,textures,bmpArray[0])
 
         // シェーダプログラム登録
         shader = W049Shader()

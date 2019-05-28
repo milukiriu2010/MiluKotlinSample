@@ -5,9 +5,8 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.opengl.GLES20
 import android.opengl.Matrix
-import android.util.Log
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
@@ -153,15 +152,15 @@ class W041Renderer(ctx: Context): MgRenderer(ctx) {
 
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(2,textures,0)
-        MyGLFunc.checkGlError("glGenTextures")
+        MyGLES20Func.checkGlError("glGenTextures")
         // ------------------------------------------------------------------------------------
         // ブラーフィルターを適用する際、端にあるピクセルが周囲のピクセルを参照するときに、
         // REPEATだと、反対側の端にあるピクセルを参照してしまうため、CLAMP_TO_EDGEを用いている
         // ------------------------------------------------------------------------------------
         // テクスチャ0をバインド
-        MyGLFunc.createTexture(0,textures,bmpArray[0],renderW,GLES20.GL_CLAMP_TO_EDGE)
+        MyGLES20Func.createTexture(0,textures,bmpArray[0],renderW,GLES20.GL_CLAMP_TO_EDGE)
         // テクスチャ1をバインド
-        MyGLFunc.createTexture(1,textures,bmpArray[1],renderW,GLES20.GL_CLAMP_TO_EDGE)
+        MyGLES20Func.createTexture(1,textures,bmpArray[1],renderW,GLES20.GL_CLAMP_TO_EDGE)
 
         // フレームバッファ生成
         GLES20.glGenFramebuffers(1,bufFrame)
@@ -169,7 +168,7 @@ class W041Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glGenRenderbuffers(1,bufDepthRender)
         // フレームバッファ用テクスチャ生成
         GLES20.glGenTextures(1,frameTexture)
-        MyGLFunc.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
+        MyGLES20Func.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {

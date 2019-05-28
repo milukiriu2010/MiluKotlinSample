@@ -3,9 +3,6 @@ package milu.kiriu2010.exdb1.opengl07.w076
 import android.content.Context
 import android.opengl.GLES20
 import android.opengl.Matrix
-import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.gui.color.MgColor
-import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import javax.microedition.khronos.egl.EGLConfig

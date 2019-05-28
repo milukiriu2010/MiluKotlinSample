@@ -4,7 +4,7 @@ import android.content.Context
 import android.opengl.GLES20
 import android.opengl.Matrix
 import android.util.Log
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import java.nio.IntBuffer
@@ -105,7 +105,7 @@ class W072Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glGenRenderbuffers(1,bufDepthRender)
         // フレームバッファを格納するテクスチャ生成
         GLES20.glGenTextures(1,frameTexture)
-        MyGLFunc.createFrameBuffer(16,16,0,bufFrame,bufDepthRender,frameTexture,GLES20.GL_FLOAT)
+        MyGLES20Func.createFrameBuffer(16,16,0,bufFrame,bufDepthRender,frameTexture,GLES20.GL_FLOAT)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {

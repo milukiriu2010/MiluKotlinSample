@@ -4,8 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.Matrix
-import android.util.Log
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.basic.MyQuaternion
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Point01Model
@@ -370,7 +369,7 @@ class W065Renderer(ctx: Context): MgRenderer(ctx) {
         // フレームバッファを格納するテクスチャ生成
         GLES20.glGenTextures(4,frameTexture)
         (0..3).forEach {
-            MyGLFunc.createFrameBuffer(renderW,renderH,it,bufFrame,bufDepthRender,frameTexture)
+            MyGLES20Func.createFrameBuffer(renderW,renderH,it,bufFrame,bufDepthRender,frameTexture)
         }
     }
 

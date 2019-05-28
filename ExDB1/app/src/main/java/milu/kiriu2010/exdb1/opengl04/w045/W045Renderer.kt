@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory
 import android.opengl.GLES20
 import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.Cube01Model
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.model.Torus01Model
@@ -180,7 +180,7 @@ class W045Renderer(ctx: Context): MgRenderer(ctx) {
 
         // 法線マップテクスチャを生成
         GLES20.glGenTextures(1,normalTextures,0)
-        MyGLFunc.createTexture(0,normalTextures,bmpArray[6])
+        MyGLES20Func.createTexture(0,normalTextures,bmpArray[6])
 
         // キューブマップを生成
         generateCubeMap()
@@ -206,7 +206,7 @@ class W045Renderer(ctx: Context): MgRenderer(ctx) {
     private fun generateCubeMap() {
         // テクスチャ作成し、idをcubeTexturesに保存
         GLES20.glGenTextures(1,cubeTextures,0)
-        MyGLFunc.checkGlError("glGenTextures")
+        MyGLES20Func.checkGlError("glGenTextures")
 
         // テクスチャをキューブマップにバインド
         GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP,cubeTextures[0])

@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.glsl02.g012
 
 import android.opengl.GLES20
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.MgShader
 
@@ -138,12 +138,12 @@ class GLSL12Shader: MgShader() {
 
     override fun loadShader(): MgShader {
         // 頂点シェーダを生成
-        svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
+        svhandle = MyGLES20Func.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
-        sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
+        sfhandle = MyGLES20Func.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
 
         // プログラムオブジェクトの生成とリンク
-        programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position") )
+        programHandle = MyGLES20Func.createProgram(svhandle,sfhandle, arrayOf("a_Position") )
         return this
     }
 
@@ -153,7 +153,7 @@ class GLSL12Shader: MgShader() {
              u_resolution: FloatArray,
              u_showNormal: Int) {
         GLES20.glUseProgram(programHandle)
-        MyGLFunc.checkGlError2("UseProgram",this,model)
+        MyGLES20Func.checkGlError2("UseProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)
@@ -161,31 +161,31 @@ class GLSL12Shader: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError2("a_Position",this,model)
+        MyGLES20Func.checkGlError2("a_Position",this,model)
 
         // uniform(時間)
         GLES20.glGetUniformLocation(programHandle,"u_time").also {
             GLES20.glUniform1f(it,u_time)
         }
-        MyGLFunc.checkGlError2("u_time",this,model)
+        MyGLES20Func.checkGlError2("u_time",this,model)
 
         // uniform(タッチ位置)
         GLES20.glGetUniformLocation(programHandle,"u_mouse").also {
             GLES20.glUniform2fv(it,1,u_mouse,0)
         }
-        MyGLFunc.checkGlError2("u_mouse",this,model)
+        MyGLES20Func.checkGlError2("u_mouse",this,model)
 
         // uniform(解像度)
         GLES20.glGetUniformLocation(programHandle,"u_resolution").also {
             GLES20.glUniform2fv(it,1,u_resolution,0)
         }
-        MyGLFunc.checkGlError2("u_resolution",this,model)
+        MyGLES20Func.checkGlError2("u_resolution",this,model)
 
         // uniform(法線の出力をするかどうか)
         GLES20.glGetUniformLocation(programHandle,"u_showNormal").also {
             GLES20.glUniform1i(it,u_showNormal)
         }
-        MyGLFunc.checkGlError2("u_showNormal",this,model)
+        MyGLES20Func.checkGlError2("u_showNormal",this,model)
 
         // モデル描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

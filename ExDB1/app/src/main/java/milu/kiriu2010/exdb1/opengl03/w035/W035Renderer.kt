@@ -4,18 +4,14 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.opengl.GLES20
-import android.opengl.GLSurfaceView
 import android.opengl.Matrix
-import android.view.MotionEvent
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.gui.basic.MyQuaternion
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.shader.Texture01Shader
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
-import kotlin.math.sqrt
 
 // ------------------------------------------------------------------------------
 // ビルボード
@@ -153,12 +149,12 @@ class W035Renderer(ctx: Context): MgRenderer(ctx) {
 
         // テクスチャ作成し、idをtexturesに保存
         GLES20.glGenTextures(2,textures,0)
-        MyGLFunc.checkGlError("glGenTextures")
+        MyGLES20Func.checkGlError("glGenTextures")
 
         // ビルボード用テクスチャ(ボール)をバインド
-        MyGLFunc.createTexture(0,textures,bmpArray[0],-1,-1)
+        MyGLES20Func.createTexture(0,textures,bmpArray[0],-1,-1)
         // フロア用テクスチャをバインド
-        MyGLFunc.createTexture(1,textures,bmpArray[1])
+        MyGLES20Func.createTexture(1,textures,bmpArray[1])
 
         // カメラの座標位置
         vecEye[0] =  0f

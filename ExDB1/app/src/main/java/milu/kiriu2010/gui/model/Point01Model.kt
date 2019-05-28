@@ -1,11 +1,5 @@
 package milu.kiriu2010.gui.model
 
-import android.opengl.GLES20
-import milu.kiriu2010.gui.basic.MyGLFunc
-import milu.kiriu2010.math.MyMathUtil
-import java.lang.RuntimeException
-import java.nio.*
-
 
 // 点
 class Point01Model: MgModelAbs() {

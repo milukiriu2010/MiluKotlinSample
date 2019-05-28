@@ -2,7 +2,7 @@ package milu.kiriu2010.exdb1.opengl05.w055
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.model.MgModelAbs
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.shader.MgShader
 
 // -------------------------------------------------------------------------------
@@ -121,12 +121,12 @@ class W055ShaderSobel: MgShader() {
 
     override fun loadShader(): MgShader {
         // 頂点シェーダを生成
-        val svhandle = MyGLFunc.loadShader(GLES20.GL_VERTEX_SHADER, scv)
+        val svhandle = MyGLES20Func.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
-        val sfhandle = MyGLFunc.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
+        val sfhandle = MyGLES20Func.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
 
         // プログラムオブジェクトの生成とリンク
-        programHandle = MyGLFunc.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_TexCoord") )
+        programHandle = MyGLES20Func.createProgram(svhandle,sfhandle, arrayOf("a_Position","a_TexCoord") )
         return this
     }
 
@@ -141,7 +141,7 @@ class W055ShaderSobel: MgShader() {
              u_renderWH: Float) {
 
         GLES20.glUseProgram(programHandle)
-        MyGLFunc.checkGlError2("UseProgram",this,model)
+        MyGLES20Func.checkGlError2("UseProgram",this,model)
 
         // attribute(頂点)
         model.bufPos.position(0)
@@ -149,7 +149,7 @@ class W055ShaderSobel: MgShader() {
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false, 3*4, model.bufPos)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError2("a_Position",this,model)
+        MyGLES20Func.checkGlError2("a_Position",this,model)
 
         // attribute(テクスチャ座標)
         model.bufTxc.position(0)
@@ -157,49 +157,49 @@ class W055ShaderSobel: MgShader() {
             GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, model.bufTxc)
             GLES20.glEnableVertexAttribArray(it)
         }
-        MyGLFunc.checkGlError2("a_TexCoord",this,model)
+        MyGLES20Func.checkGlError2("a_TexCoord",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
             GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
         }
-        MyGLFunc.checkGlError2("u_matMVP",this,model)
+        MyGLES20Func.checkGlError2("u_matMVP",this,model)
 
         // uniform(テクスチャ0)
         GLES20.glGetUniformLocation(programHandle, "u_Texture0").also {
             GLES20.glUniform1i(it, u_Texture0)
         }
-        MyGLFunc.checkGlError2("u_Texture0",this,model)
+        MyGLES20Func.checkGlError2("u_Texture0",this,model)
 
         // uniform(sobelフィルタを使うかどうか)
         GLES20.glGetUniformLocation(programHandle, "u_sobel").also {
             GLES20.glUniform1i(it, u_sobel)
         }
-        MyGLFunc.checkGlError2("u_sobel",this,model)
+        MyGLES20Func.checkGlError2("u_sobel",this,model)
 
         // uniform(グレースケールを使うかどうか)
         GLES20.glGetUniformLocation(programHandle, "u_sobelGray").also {
             GLES20.glUniform1i(it, u_sobelGray)
         }
-        MyGLFunc.checkGlError2("u_sobelGray",this,model)
+        MyGLES20Func.checkGlError2("u_sobelGray",this,model)
 
         // uniform(sobelフィルタの横方向カーネル)
         GLES20.glGetUniformLocation(programHandle, "u_hCoef").also {
             GLES20.glUniform1fv(it, 9,u_hCoef,0)
         }
-        MyGLFunc.checkGlError2("u_hCoef",this,model)
+        MyGLES20Func.checkGlError2("u_hCoef",this,model)
 
         // uniform(sobelフィルタの縦方向カーネル)
         GLES20.glGetUniformLocation(programHandle, "u_vCoef").also {
             GLES20.glUniform1fv(it, 9,u_vCoef,0)
         }
-        MyGLFunc.checkGlError2("u_vCoef",this,model)
+        MyGLES20Func.checkGlError2("u_vCoef",this,model)
 
         // uniform(レンダリング領域の大きさ)
         GLES20.glGetUniformLocation(programHandle, "u_renderWH").also {
             GLES20.glUniform1f(it, u_renderWH)
         }
-        MyGLFunc.checkGlError2("u_renderWH",this,model)
+        MyGLES20Func.checkGlError2("u_renderWH",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

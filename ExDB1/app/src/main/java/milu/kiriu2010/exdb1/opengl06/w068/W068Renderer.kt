@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory
 import android.opengl.GLES20
 import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.basic.MyGLFunc
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.color.MgColor
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Torus01Model
@@ -197,7 +197,7 @@ class W068Renderer(ctx: Context): MgRenderer(ctx) {
         // テクスチャを作成
         GLES20.glGenTextures(1,textures,0)
         // テクスチャに使う画像をロード
-        MyGLFunc.createTexture(0,textures,bmpArray[0],renderW)
+        MyGLES20Func.createTexture(0,textures,bmpArray[0],renderW)
 
         // フレームバッファ生成
         GLES20.glGenFramebuffers(2,bufFrame)
@@ -207,9 +207,9 @@ class W068Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glGenTextures(2,frameTexture)
 
         // 0:マスク
-        MyGLFunc.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
+        MyGLES20Func.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
         // 1:ブラー
-        MyGLFunc.createFrameBuffer(renderW,renderH,1,bufFrame,bufDepthRender,frameTexture)
+        MyGLES20Func.createFrameBuffer(renderW,renderH,1,bufFrame,bufDepthRender,frameTexture)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {

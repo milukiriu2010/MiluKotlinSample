@@ -7,8 +7,9 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.MgShader
 import java.nio.ByteBuffer
 import java.nio.IntBuffer
-import kotlin.math.exp
 
+// ----------------------------------------------------------------------
+// GLSL ES2.0用
 // ----------------------------------------------------------------------
 // 2019.04.27 ビットマップをロードしテクスチャを生成
 // 2019.05.02 gaussianブラーの重みを計算
@@ -17,10 +18,10 @@ import kotlin.math.exp
 // 2019.05.19 フレームバッファを生成
 // 2019.05.24 フレームバッファ生成の引数に"浮動小数点数テクスチャ"用を追加
 // ----------------------------------------------------------------------
-class MyGLFunc {
+class MyGLES20Func {
 
     companion object {
-        private const val TAG = "MyGLFunc"
+        private const val TAG = "MyGLES20Func"
 
         // -------------------------------------
         // シェーダをロードする
@@ -60,11 +61,11 @@ class MyGLFunc {
             val programHandle = GLES20.glCreateProgram().also {
                 // 頂点シェーダをプログラムに追加
                 GLES20.glAttachShader(it,svhandle)
-                MyGLFunc.printShaderInfoLog(svhandle,"vertex shader")
+                MyGLES20Func.printShaderInfoLog(svhandle,"vertex shader")
 
                 // フラグメントシェーダをプログラムに追加
                 GLES20.glAttachShader(it,sfhandle)
-                MyGLFunc.printShaderInfoLog(sfhandle,"fragment shader")
+                MyGLES20Func.printShaderInfoLog(sfhandle,"fragment shader")
 
                 // シェーダオブジェクトを削除
                 GLES20.glDeleteShader(svhandle)
@@ -83,7 +84,7 @@ class MyGLFunc {
                 GLES20.glGetProgramiv(it,GLES20.GL_LINK_STATUS,linkStatus,0)
                 // リンク失敗
                 if (linkStatus[0] == 0) {
-                    MyGLFunc.printProgramInfoLog(it)
+                    MyGLES20Func.printProgramInfoLog(it)
                     GLES20.glDeleteProgram(it)
                     throw RuntimeException("Error creating program.")
                 }
@@ -163,7 +164,7 @@ class MyGLFunc {
 
             // テクスチャをバインドする
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[id])
-            MyGLFunc.checkGlError("glBindTexture")
+            MyGLES20Func.checkGlError("glBindTexture")
 
             if ( size > 0 ) {
                 val resizedBmp = Bitmap.createScaledBitmap(bmp,size,size,false)
@@ -192,7 +193,7 @@ class MyGLFunc {
             // GLES20.glTexImage2Dを使わないやり方
             // ビットマップをテクスチャに設定
             GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bmp, 0)
-            MyGLFunc.checkGlError("texImage2D")
+            MyGLES20Func.checkGlError("texImage2D")
             */
 
             // ミップマップを生成
