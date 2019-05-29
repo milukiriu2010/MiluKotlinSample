@@ -12,6 +12,9 @@ import milu.kiriu2010.exdb1.glsl02.g014.GLSL14Fragment
 import milu.kiriu2010.exdb1.glsl02.g015.GLSL15Fragment
 import milu.kiriu2010.exdb1.glsl02.g016.GLSL16Fragment
 import milu.kiriu2010.exdb1.glsl02.g017.GLSL17Fragment
+import milu.kiriu2010.exdb1.glsl02.g018.GLSL18Fragment
+import milu.kiriu2010.exdb1.glsl02.g019.GLSL19Fragment
+import milu.kiriu2010.exdb1.glsl02.g020.GLSL20Fragment
 
 class GLSL02Activity : AppCompatActivity() {
 
@@ -19,11 +22,10 @@ class GLSL02Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_glsl02)
 
-
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, GLSL17Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, GLSL20Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -45,6 +47,36 @@ class GLSL02Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // レイマーチングソフトシャドウ
+            R.id.glsl_g020 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("g20") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSL20Fragment.newInstance(), "g20")
+                            .commit()
+                }
+                true
+            }
+            // オブジェクトを２次元エフェクトやテクスチャを投影
+            R.id.glsl_g019 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("g19") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSL19Fragment.newInstance(), "g19")
+                            .commit()
+                }
+                true
+            }
+            // オブジェクトを行列でねじる
+            R.id.glsl_g018 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("g18") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSL18Fragment.newInstance(), "g18")
+                            .commit()
+                }
                 true
             }
             // オブジェクトを行列で回転
