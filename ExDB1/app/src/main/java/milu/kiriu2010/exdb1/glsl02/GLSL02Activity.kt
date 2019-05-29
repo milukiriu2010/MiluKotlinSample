@@ -11,6 +11,7 @@ import milu.kiriu2010.exdb1.glsl02.g013.GLSL13Fragment
 import milu.kiriu2010.exdb1.glsl02.g014.GLSL14Fragment
 import milu.kiriu2010.exdb1.glsl02.g015.GLSL15Fragment
 import milu.kiriu2010.exdb1.glsl02.g016.GLSL16Fragment
+import milu.kiriu2010.exdb1.glsl02.g017.GLSL17Fragment
 
 class GLSL02Activity : AppCompatActivity() {
 
@@ -22,7 +23,7 @@ class GLSL02Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, GLSL16Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, GLSL17Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -44,6 +45,16 @@ class GLSL02Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // オブジェクトを行列で回転
+            R.id.glsl_g017 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("g17") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSL17Fragment.newInstance(), "g17")
+                            .commit()
+                }
                 true
             }
             // オブジェクトの重なりをスムースにする

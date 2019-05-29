@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/es30_a06"
+        android:title="a06_VAO" />
+    <item
+        android:id="@+id/es30_a05"
+        android:title="a05_flat補間" />
+    <item
         android:id="@+id/es30_a04"
         android:title="a04_ES30_layout" />
     <item

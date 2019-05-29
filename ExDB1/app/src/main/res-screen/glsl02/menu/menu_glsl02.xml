@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/glsl_g017"
+        android:title="g017_オブジェクトを行列で回転" />
+    <item
         android:id="@+id/glsl_g016"
         android:title="g016_オブジェクトの重なりをスムース" />
     <item

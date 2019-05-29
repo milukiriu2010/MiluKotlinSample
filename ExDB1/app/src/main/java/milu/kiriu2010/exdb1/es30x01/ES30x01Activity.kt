@@ -8,6 +8,8 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.es30x01.rot01es30.ES30Rotate01Fragment
 import milu.kiriu2010.exdb1.es30x01.a03.A03Fragment
 import milu.kiriu2010.exdb1.es30x01.a04.A04Fragment
+import milu.kiriu2010.exdb1.es30x01.a05.A05Fragment
+import milu.kiriu2010.exdb1.es30x01.a06.A06Fragment
 
 class ES30x01Activity : AppCompatActivity() {
 
@@ -19,7 +21,7 @@ class ES30x01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, A04Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, A05Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -42,6 +44,26 @@ class ES30x01Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // VAO
+            R.id.es30_a06 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("a06") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, A06Fragment.newInstance(), "a06")
+                            .commit()
+                }
+                true
+            }
+            // flat補間
+            R.id.es30_a05 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("a05") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, A05Fragment.newInstance(), "a05")
+                            .commit()
+                }
                 true
             }
             // GLSL ES3.0 layout
