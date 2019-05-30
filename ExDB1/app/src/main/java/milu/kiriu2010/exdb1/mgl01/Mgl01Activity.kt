@@ -7,6 +7,7 @@ import android.view.MenuItem
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.mgl01.rot01.Rotate01Fragment
 import milu.kiriu2010.exdb1.mgl01.rot02.CubeRotate02Fragment
+import milu.kiriu2010.exdb1.mgl01.vbo01.ES20VBO01Fragment
 
 class Mgl01Activity : AppCompatActivity() {
 
@@ -15,9 +16,9 @@ class Mgl01Activity : AppCompatActivity() {
         setContentView(R.layout.activity_mgl01)
 
         supportFragmentManager.popBackStack()
-        if (supportFragmentManager.findFragmentByTag("rot02") == null) {
+        if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, CubeRotate02Fragment.newInstance(), "rot02")
+                    .replace(R.id.frameLayout, ES20VBO01Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -39,6 +40,16 @@ class Mgl01Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // VBO
+            R.id.mgl01_vbo01 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("vbo01") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, ES20VBO01Fragment.newInstance(), "vbo01")
+                            .commit()
+                }
                 true
             }
             // 回転(立方体)02

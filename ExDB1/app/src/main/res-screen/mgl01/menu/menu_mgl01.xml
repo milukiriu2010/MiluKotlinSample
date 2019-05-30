@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/mgl01_vbo01"
+        android:title="VBO" />
     <item
         android:id="@+id/mgl01_cube_rotate02"
         android:title="回転(立方体)02" />
