@@ -3,7 +3,7 @@ package milu.kiriu2010.exdb1.mgl01.vbo01
 import android.opengl.GLES20
 import milu.kiriu2010.gui.model.MgModelAbs
 
-class ES20viBO {
+class ES20VBO01viBO {
     // VBOのハンドル
     lateinit var hVBO: IntArray
     // IBOのハンドル
@@ -35,7 +35,7 @@ class ES20viBO {
         // インデックス
         model.bufIdx.position(0)
         GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER,hIBO[0])
-        GLES20.glBufferData(GLES20.GL_ELEMENT_ARRAY_BUFFER,model.bufIdx.capacity(), model.bufIdx,GLES20.GL_STATIC_DRAW)
+        GLES20.glBufferData(GLES20.GL_ELEMENT_ARRAY_BUFFER,model.bufIdx.capacity()*2, model.bufIdx,GLES20.GL_STATIC_DRAW)
 
         // リソース解放
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER,0)

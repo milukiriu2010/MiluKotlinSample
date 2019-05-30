@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/mgl01_vbo02"
+        android:title="VBO(三角形(白))" />
+    <item
         android:id="@+id/mgl01_vbo01"
         android:title="VBO" />
     <item

@@ -36,9 +36,6 @@ class ES20VBO01Shader: ES20MgShader() {
             }
             """.trimIndent()
 
-    // 属性のハンドル
-    private lateinit var hATTR: IntArray
-
     override fun loadShader(): ES20MgShader {
         // 頂点シェーダを生成
         svhandle = MyGLES20Func.loadShader(GLES20.GL_VERTEX_SHADER, scv)
@@ -116,9 +113,9 @@ class ES20VBO01Shader: ES20MgShader() {
 
     // 面塗りつぶし
     fun drawVIBO(model: MgModelAbs,
-                bo: ES20viBO,
-             u_matMVP: FloatArray,
-             mode: Int = GLES20.GL_TRIANGLES) {
+                 bo: ES20VBO01viBO,
+                 u_matMVP: FloatArray,
+                 mode: Int = GLES20.GL_TRIANGLES) {
         GLES20.glUseProgram(programHandle)
         MyGLES20Func.checkGlError2("UseProgram",this,model)
 

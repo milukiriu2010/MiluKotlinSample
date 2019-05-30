@@ -26,11 +26,11 @@ class ES20VBO01Renderer(ctx: Context): MgRenderer(ctx) {
     private lateinit var modelAxis: MgModelAbs
 
     // VBO/IBO(静止モデル)
-    private lateinit var boStill: ES20viBO
+    private lateinit var boStill: ES20VBO01viBO
     // VBO/IBO(動く立方体)
-    private lateinit var boMotion: ES20viBO
+    private lateinit var boMotion: ES20VBO01viBO
     // VBO/IBO(座標軸モデル)
-    private lateinit var boAxis: ES20viBO
+    private lateinit var boAxis: ES20VBO01viBO
 
     // シェーダ(特殊効果なし)
     private lateinit var shaderSimple: ES20VBO01Shader
@@ -70,7 +70,7 @@ class ES20VBO01Renderer(ctx: Context): MgRenderer(ctx) {
         // ----------------------------------------------
         // モデルを単位行列にする
         Matrix.setIdentityM(matM,0)
-        //val matA = rotateModel0(matM,x,y,0f,t0)
+        val matA = rotateModel0(matM,x,y,0f,t0)
         //rotateModel0(matA.copyOf(),-1f,-1f,-1f,t0)
         //rotateModel0(matA.copyOf(),0f,-1f, 1f,t0)
         //rotateModel0(matA.copyOf(),0f, 1f,-1f,t0)
@@ -135,15 +135,15 @@ class ES20VBO01Renderer(ctx: Context): MgRenderer(ctx) {
         modelAxis.createPath( mapOf("scale" to 3f))
 
         // VBO/IBO(静止モデル)
-        boStill = ES20viBO()
+        boStill = ES20VBO01viBO()
         boStill.makeVIBO(modelStill)
 
         // VBO/IBO(動く立方体)
-        boMotion = ES20viBO()
+        boMotion = ES20VBO01viBO()
         boMotion.makeVIBO(modelMotion)
 
         // VBO/IBO(座標軸モデル)
-        boAxis = ES20viBO()
+        boAxis = ES20VBO01viBO()
         boAxis.makeVIBO(modelAxis)
     }
 

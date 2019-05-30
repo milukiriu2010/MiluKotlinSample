@@ -8,6 +8,7 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.mgl01.rot01.Rotate01Fragment
 import milu.kiriu2010.exdb1.mgl01.rot02.CubeRotate02Fragment
 import milu.kiriu2010.exdb1.mgl01.vbo01.ES20VBO01Fragment
+import milu.kiriu2010.exdb1.mgl01.vbo02.ES20VBO02Fragment
 
 class Mgl01Activity : AppCompatActivity() {
 
@@ -18,7 +19,7 @@ class Mgl01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, ES20VBO01Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, ES20VBO02Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -40,6 +41,16 @@ class Mgl01Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
+                true
+            }
+            // VBO(三角形(白))
+            R.id.mgl01_vbo02 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("vbo02") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, ES20VBO02Fragment.newInstance(), "vbo02")
+                            .commit()
+                }
                 true
             }
             // VBO
