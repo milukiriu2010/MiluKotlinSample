@@ -14,7 +14,10 @@ import milu.kiriu2010.exdb1.opengl01.w024.W024Fragment
 import milu.kiriu2010.exdb1.opengl01.w015.W015Fragment
 import milu.kiriu2010.exdb1.opengl01.w015v.WV015Fragment
 import milu.kiriu2010.exdb1.opengl01.w016.W016Fragment
+import milu.kiriu2010.exdb1.opengl01.w016v.WV016Fragment
 import milu.kiriu2010.exdb1.opengl01.w017.W017Fragment
+import milu.kiriu2010.exdb1.opengl01.w017v.WV017Fragment
+import milu.kiriu2010.exdb1.opengl01.w018v.WV018Fragment
 import milu.kiriu2010.exdb1.opengl01.w021.W021Fragment
 import milu.kiriu2010.exdb1.opengl01.w022.W022Fragment
 import milu.kiriu2010.exdb1.opengl01.w025.W025Fragment
@@ -28,7 +31,7 @@ class OpenGL01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, WV015Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, WV018Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -122,6 +125,16 @@ class OpenGL01Activity : AppCompatActivity() {
                 }
                 true
             }
+            // wv018_インデックスバッファ
+            R.id.opengl_wv018 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv18") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV018Fragment.newInstance(), "wv18")
+                            .commit()
+                }
+                true
+            }
             // w018_インデックスバッファ
             R.id.opengl_w018 -> {
                 supportFragmentManager.popBackStack()
@@ -132,12 +145,32 @@ class OpenGL01Activity : AppCompatActivity() {
                 }
                 true
             }
+            // wv17_移動・回転・拡大/縮小
+            R.id.opengl_wv017 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv17") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV017Fragment.newInstance(), "wv17")
+                            .commit()
+                }
+                true
+            }
             // w17_移動・回転・拡大/縮小
             R.id.opengl_w017 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w17") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W017Fragment.newInstance(), "w17")
+                            .commit()
+                }
+                true
+            }
+            // wv016_複数モデルレンダリング
+            R.id.opengl_wv016 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv16") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV016Fragment.newInstance(), "wv16")
                             .commit()
                 }
                 true

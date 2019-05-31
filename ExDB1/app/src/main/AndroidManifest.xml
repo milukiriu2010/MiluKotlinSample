@@ -11,12 +11,14 @@
     <application
         android:name=".scheduler.MyScheduleApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/texture_w027_1"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
+        <!-- android:icon="@mipmap/ic_launcher"  -->
+        <!-- android:roundIcon="@mipmap/ic_launcher_round" -->
+
         <activity android:name=".es30x01.ES30x01Activity"
             android:hardwareAccelerated="false"></activity>
         <activity android:name=".opengl08.OpenGL08Activity" />
