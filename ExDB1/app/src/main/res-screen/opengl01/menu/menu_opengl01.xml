@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_wv020"
+        android:title="wv020_トーラス" />
+    <item
+        android:id="@+id/opengl_wv019"
+        android:title="wv019_カリングと深度テスト" />
+    <item
         android:id="@+id/opengl_wv018"
         android:title="wv018_インデックスバッファ" />
     <item

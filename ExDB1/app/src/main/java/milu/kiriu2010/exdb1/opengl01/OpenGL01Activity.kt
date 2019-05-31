@@ -18,6 +18,8 @@ import milu.kiriu2010.exdb1.opengl01.w016v.WV016Fragment
 import milu.kiriu2010.exdb1.opengl01.w017.W017Fragment
 import milu.kiriu2010.exdb1.opengl01.w017v.WV017Fragment
 import milu.kiriu2010.exdb1.opengl01.w018v.WV018Fragment
+import milu.kiriu2010.exdb1.opengl01.w019v.WV019Fragment
+import milu.kiriu2010.exdb1.opengl01.w020v.WV020Fragment
 import milu.kiriu2010.exdb1.opengl01.w021.W021Fragment
 import milu.kiriu2010.exdb1.opengl01.w022.W022Fragment
 import milu.kiriu2010.exdb1.opengl01.w025.W025Fragment
@@ -31,7 +33,7 @@ class OpenGL01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, WV018Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, WV020Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -105,12 +107,32 @@ class OpenGL01Activity : AppCompatActivity() {
                 }
                 true
             }
+            // wv020_トーラス
+            R.id.opengl_wv020 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv20") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV020Fragment.newInstance(), "wv20")
+                            .commit()
+                }
+                true
+            }
             // w020_トーラス
             R.id.opengl_w020 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w20") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W020Fragment.newInstance(), "w20")
+                            .commit()
+                }
+                true
+            }
+            // wv019_カリングと深度テスト
+            R.id.opengl_wv019 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv19") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV019Fragment.newInstance(), "wv19")
                             .commit()
                 }
                 true
