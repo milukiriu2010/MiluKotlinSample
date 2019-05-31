@@ -7,7 +7,7 @@ import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import milu.kiriu2010.gui.model.*
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.es20.ES20Simple01Shader
+import milu.kiriu2010.gui.shader.es20.nvbo.ES20Simple01Shader
 import milu.kiriu2010.math.MyMathUtil
 import kotlin.math.sqrt
 

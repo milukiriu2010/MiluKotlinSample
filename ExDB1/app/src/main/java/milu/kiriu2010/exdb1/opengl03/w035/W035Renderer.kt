@@ -9,7 +9,7 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.es20.ES20Texture01Shader
+import milu.kiriu2010.gui.shader.es20.nvbo.ES20Texture01Shader
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 

@@ -12,6 +12,7 @@ import milu.kiriu2010.exdb1.opengl01.w020.W020Fragment
 import milu.kiriu2010.exdb1.opengl01.w023.W023Fragment
 import milu.kiriu2010.exdb1.opengl01.w024.W024Fragment
 import milu.kiriu2010.exdb1.opengl01.w015.W015Fragment
+import milu.kiriu2010.exdb1.opengl01.w015v.WV015Fragment
 import milu.kiriu2010.exdb1.opengl01.w016.W016Fragment
 import milu.kiriu2010.exdb1.opengl01.w017.W017Fragment
 import milu.kiriu2010.exdb1.opengl01.w021.W021Fragment
@@ -27,7 +28,7 @@ class OpenGL01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W025Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, WV015Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -147,6 +148,16 @@ class OpenGL01Activity : AppCompatActivity() {
                 if (supportFragmentManager.findFragmentByTag("w16") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W016Fragment.newInstance(), "w16")
+                            .commit()
+                }
+                true
+            }
+            // wv015_ポリゴンに色を塗る
+            R.id.opengl_wv015 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv15") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV015Fragment.newInstance(), "wv15")
                             .commit()
                 }
                 true

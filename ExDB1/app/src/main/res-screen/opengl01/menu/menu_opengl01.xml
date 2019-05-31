@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_wv015"
+        android:title="wv015_ポリゴンに色を塗る" />
+    <item
         android:id="@+id/opengl_w025"
         android:title="w025_点光源" />
     <item

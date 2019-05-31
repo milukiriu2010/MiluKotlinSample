@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.mgl01.vbo02
+package milu.kiriu2010.exdb1.opengl01.w015v
 
 import android.content.Context
 import android.opengl.GLES20
@@ -7,27 +7,34 @@ import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import milu.kiriu2010.gui.model.Triangle01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
+import milu.kiriu2010.gui.shader.es20.wvbo.ES20VBOSimple00Shader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 import milu.kiriu2010.gui.vbo.es20.ES20VBOp
+import milu.kiriu2010.gui.vbo.es20.ES20VBOpc
 
 // ----------------------------------------------
-// VBOで描画
+// ポリゴンに色を塗る(頂点色の指定)
 // ----------------------------------------------
-// 三角形(色なし)
+// https://wgld.org/d/webgl/w015.html
+// https://android.googlesource.com/platform/development/+/master/samples/OpenGL/HelloOpenGLES20/src/com/example/android/opengl/MyGLRenderer.java
+// https://android.keicode.com/basics/opengl-drawing-basic-shapes.php
+// https://developer.android.com/training/graphics/opengl/draw
 // ----------------------------------------------
-class ES20VBO02Renderer(ctx: Context): MgRenderer(ctx) {
+class WV015Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画モデル
     private lateinit var model: Triangle01Model
 
     // シェーダ
-    private lateinit var shader: ES20VBO02Shader
+    private lateinit var shader: ES20VBOSimple00Shader
 
     // VBO
     private lateinit var bo: ES20VBOAbs
 
     override fun onDrawFrame(gl: GL10) {
-        // デフォルトバッファを初期化
+        // canvasを初期化
+        // canvasを初期化する色を設定する
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
+        // canvasを初期化する際の深度を設定する
         GLES20.glClearDepthf(1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
@@ -35,13 +42,21 @@ class ES20VBO02Renderer(ctx: Context): MgRenderer(ctx) {
         angle[0] =(angle[0]+1)%360
         val t0 = angle[0].toFloat()
 
+        /*
+        // Create a rotation for the triangle
+        // Use the following code to generate constant rotation.
+        // Leave this code out when using TouchEvents.
+        val time = SystemClock.uptimeMillis() % 10000L;
+        mAngle = (360f/10000f) * time.toFloat();
+        */
+
         Matrix.setIdentityM(matM,0)
         Matrix.setRotateM(matM, 0, t0, 0f, 0f, 1.0f)
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
 
         // Draw triangle
-        shader.drawVIBO(model,bo,matMVP)
+        shader.draw(model,bo,matMVP)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -54,8 +69,9 @@ class ES20VBO02Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig?) {
+
         // シェーダ
-        shader = ES20VBO02Shader()
+        shader = ES20VBOSimple00Shader()
         shader.loadShader()
 
         // モデル生成
@@ -63,13 +79,13 @@ class ES20VBO02Renderer(ctx: Context): MgRenderer(ctx) {
         model.createPath()
 
         // VBO生成
-        bo = ES20VBOp()
+        bo = ES20VBOpc()
         bo.makeVIBO(model)
 
         // カメラの位置
         vecEye[0] = 0f
         vecEye[1] = 1f
-        vecEye[2] = 3f
+        vecEye[2] = 2f
 
         // ビュー座標変換行列
         Matrix.setLookAtM(matV, 0,

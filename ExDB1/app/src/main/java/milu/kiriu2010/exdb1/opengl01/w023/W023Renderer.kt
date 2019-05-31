@@ -7,7 +7,7 @@ import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.es20.ES20SpecularLight01Shader
+import milu.kiriu2010.gui.shader.es20.nvbo.ES20SpecularLight01Shader
 
 // ---------------------------------------------------
 // 反射光によるライティング

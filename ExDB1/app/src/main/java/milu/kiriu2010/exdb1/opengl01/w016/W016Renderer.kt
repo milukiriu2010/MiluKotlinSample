@@ -7,7 +7,7 @@ import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import milu.kiriu2010.gui.model.Triangle01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.es20.ES20Simple00Shader
+import milu.kiriu2010.gui.shader.es20.nvbo.ES20Simple00Shader
 
 // 複数モデルをレンダリング
 class W016Renderer(ctx: Context): MgRenderer(ctx) {

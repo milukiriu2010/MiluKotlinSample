@@ -6,7 +6,7 @@ import android.opengl.Matrix
 import milu.kiriu2010.gui.basic.MyQuaternion
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.es20.ES20PointLight01Shader
+import milu.kiriu2010.gui.shader.es20.nvbo.ES20PointLight01Shader
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
