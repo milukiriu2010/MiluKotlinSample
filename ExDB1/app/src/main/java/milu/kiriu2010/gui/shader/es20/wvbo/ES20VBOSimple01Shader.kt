@@ -85,7 +85,6 @@ class ES20VBOSimple01Shader: ES20MgShader() {
         return this
     }
 
-    // 面塗りつぶし
     fun draw(model: MgModelAbs,
              bo: ES20VBOAbs,
              u_matMVP: FloatArray,
@@ -127,6 +126,7 @@ class ES20VBOSimple01Shader: ES20MgShader() {
 
         // リソース解放
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER,0)
+        GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER,0)
         // ここで呼ぶと描画されない
         //GLES20.glDisableVertexAttribArray(hATTR[0])
     }

@@ -21,6 +21,7 @@ import milu.kiriu2010.exdb1.opengl01.w018v.WV018Fragment
 import milu.kiriu2010.exdb1.opengl01.w019v.WV019Fragment
 import milu.kiriu2010.exdb1.opengl01.w020v.WV020Fragment
 import milu.kiriu2010.exdb1.opengl01.w021.W021Fragment
+import milu.kiriu2010.exdb1.opengl01.w021v.WV021Fragment
 import milu.kiriu2010.exdb1.opengl01.w022.W022Fragment
 import milu.kiriu2010.exdb1.opengl01.w025.W025Fragment
 
@@ -33,7 +34,7 @@ class OpenGL01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, WV020Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, WV021Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -93,6 +94,16 @@ class OpenGL01Activity : AppCompatActivity() {
                 if (supportFragmentManager.findFragmentByTag("w22") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W022Fragment.newInstance(), "w22")
+                            .commit()
+                }
+                true
+            }
+            // 平行光源
+            R.id.opengl_wv021 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv21") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV021Fragment.newInstance(), "wv21")
                             .commit()
                 }
                 true
