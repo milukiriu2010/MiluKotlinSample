@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.mgl00
+package milu.kiriu2010.exdb1.mgl00.nvbo
 
 import android.content.Context
 import android.graphics.BitmapFactory

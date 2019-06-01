@@ -15,7 +15,9 @@ import milu.kiriu2010.exdb1.opengl02.w027v.WV027Fragment
 import milu.kiriu2010.exdb1.opengl02.w028.W028Fragment
 import milu.kiriu2010.exdb1.opengl02.w028v.WV028Fragment
 import milu.kiriu2010.exdb1.opengl02.w029.W029Fragment
+import milu.kiriu2010.exdb1.opengl02.w029v.WV029Fragment
 import milu.kiriu2010.exdb1.opengl02.w030.W030zFragment
+import milu.kiriu2010.exdb1.opengl02.w030v.WV030Fragment
 
 class OpenGL02Activity : AppCompatActivity() {
 
@@ -26,7 +28,7 @@ class OpenGL02Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, WV028Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, WV030Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -51,12 +53,32 @@ class OpenGL02Activity : AppCompatActivity() {
                 finish()
                 true
             }
+            // wv30_ブレンドファクター
+            R.id.opengl_wv030 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv30") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV030Fragment.newInstance(), "wv30")
+                            .commit()
+                }
+                true
+            }
             // w030z_ブレンドファクター
             R.id.opengl_w030 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w030z") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W030zFragment.newInstance(), "w030z")
+                            .commit()
+                }
+                true
+            }
+            // wv29_アルファブレンディング
+            R.id.opengl_wv029 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv29") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV029Fragment.newInstance(), "wv29")
                             .commit()
                 }
                 true

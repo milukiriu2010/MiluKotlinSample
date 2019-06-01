@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.mgl00
+package milu.kiriu2010.exdb1.mgl00.nvbo
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -31,7 +31,7 @@ class DepthCull01Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_mgl00_depth_cull_01, container, false)
 
         myGLES20View = view.findViewById(R.id.myGLES20ViewMGL00)
-        val renderer = DepthCull01Renderer(renderId,context!!)
+        val renderer = DepthCull01Renderer(renderId, context!!)
         myGLES20View.setRenderer(renderer)
         myGLES20View.setOnTouchListener { v, event ->
             // scaleDetectorは、認識されない
