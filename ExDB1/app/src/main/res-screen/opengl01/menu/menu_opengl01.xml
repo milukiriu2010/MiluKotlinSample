@@ -2,6 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_wv025"
+        android:title="wv025_点光源" />
+    <item
+        android:id="@+id/opengl_wv024"
+        android:title="wv024_フォンシェーディング" />
+    <item
+        android:id="@+id/opengl_wv023"
+        android:title="wv023_反射光" />
+    <item
+        android:id="@+id/opengl_wv022"
+        android:title="wv022_環境光" />
+    <item
         android:id="@+id/opengl_wv021"
         android:title="wv021_平行光源" />
     <item

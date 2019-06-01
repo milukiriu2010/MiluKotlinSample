@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl01.w021v
+package milu.kiriu2010.exdb1.opengl01.w023v
 
 import android.content.Context
 import android.opengl.GLES20
@@ -7,23 +7,23 @@ import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
-import milu.kiriu2010.gui.shader.es20.nvbo.ES20DirectionalLight01Shader
-import milu.kiriu2010.gui.shader.es20.wvbo.ES20VBODirectionalLight01Shader
+import milu.kiriu2010.gui.shader.es20.nvbo.ES20SpecularLight01Shader
+import milu.kiriu2010.gui.shader.es20.wvbo.ES20VBOSpecularLight01Shader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 import milu.kiriu2010.gui.vbo.es20.ES20VBOIpnc
 
 // ---------------------------------------------------
-// 平行光源によるライティング
+// 反射光によるライティング
 // ---------------------------------------------------
-// https://wgld.org/d/webgl/w021.html
+// https://wgld.org/d/webgl/w023.html
 // ---------------------------------------------------
-class WV021Renderer(ctx: Context): MgRenderer(ctx) {
+class WV023Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画モデル(トーラス)
     private lateinit var model: Torus01Model
 
-    // シェーダ(平行光源)
-    private lateinit var shader: ES20VBODirectionalLight01Shader
+    // シェーダ(反射光)
+    private lateinit var shader: ES20VBOSpecularLight01Shader
 
     // VBO
     private lateinit var bo: ES20VBOAbs
@@ -50,7 +50,7 @@ class WV021Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
 
         // モデル描画
-        shader.draw(model,bo,matMVP,matI,vecLight)
+        shader.draw(model,bo,matMVP,matI,vecLight,vecEye,vecAmbientColor)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -72,14 +72,20 @@ class WV021Renderer(ctx: Context): MgRenderer(ctx) {
         vecEye[1] = 0f
         vecEye[2] = 20f
 
+        // 環境光
+        vecAmbientColor[0] = 0.1f
+        vecAmbientColor[1] = 0.1f
+        vecAmbientColor[2] = 0.1f
+        vecAmbientColor[3] = 1f
+
         // ビュー座標変換行列
         Matrix.setLookAtM(matV, 0,
                 vecEye[0], vecEye[1], vecEye[2],
                 vecCenter[0], vecCenter[1], vecCenter[2],
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
 
-        // シェーダ(平行光源)
-        shader = ES20VBODirectionalLight01Shader()
+        // シェーダ(反射光)
+        shader = ES20VBOSpecularLight01Shader()
         shader.loadShader()
 
         // 描画モデル(トーラス)

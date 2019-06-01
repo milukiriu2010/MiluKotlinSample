@@ -23,7 +23,11 @@ import milu.kiriu2010.exdb1.opengl01.w020v.WV020Fragment
 import milu.kiriu2010.exdb1.opengl01.w021.W021Fragment
 import milu.kiriu2010.exdb1.opengl01.w021v.WV021Fragment
 import milu.kiriu2010.exdb1.opengl01.w022.W022Fragment
+import milu.kiriu2010.exdb1.opengl01.w022v.WV022Fragment
+import milu.kiriu2010.exdb1.opengl01.w023v.WV023Fragment
+import milu.kiriu2010.exdb1.opengl01.w024v.WV024Fragment
 import milu.kiriu2010.exdb1.opengl01.w025.W025Fragment
+import milu.kiriu2010.exdb1.opengl01.w025v.WV025Fragment
 
 class OpenGL01Activity : AppCompatActivity() {
 
@@ -34,7 +38,7 @@ class OpenGL01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, WV021Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, WV025Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -59,11 +63,31 @@ class OpenGL01Activity : AppCompatActivity() {
                 true
             }
             // 点光源
+            R.id.opengl_wv025 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv25") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV025Fragment.newInstance(), "wv25")
+                            .commit()
+                }
+                true
+            }
+            // 点光源
             R.id.opengl_w025 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w25") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W025Fragment.newInstance(), "w25")
+                            .commit()
+                }
+                true
+            }
+            // フォンシェーディング
+            R.id.opengl_wv024 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv24") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV024Fragment.newInstance(), "wv24")
                             .commit()
                 }
                 true
@@ -79,11 +103,31 @@ class OpenGL01Activity : AppCompatActivity() {
                 true
             }
             // 反射光
+            R.id.opengl_wv023 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv23") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV023Fragment.newInstance(), "wv23")
+                            .commit()
+                }
+                true
+            }
+            // 反射光
             R.id.opengl_w023 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w23") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W023Fragment.newInstance(), "w23")
+                            .commit()
+                }
+                true
+            }
+            // 環境光
+            R.id.opengl_wv022 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv22") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV022Fragment.newInstance(), "wv22")
                             .commit()
                 }
                 true
