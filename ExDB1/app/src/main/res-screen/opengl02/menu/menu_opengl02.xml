@@ -2,8 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/opengl_w030z"
-        android:title="w030z_ブレンドファクター" />
+        android:id="@+id/opengl_wv028"
+        android:title="wv028_テクスチャパラメータ" />
+    <item
+        android:id="@+id/opengl_wv027"
+        android:title="wv027_マルチテクスチャ" />
+    <item
+        android:id="@+id/opengl_wv026"
+        android:title="wv026_テクスチャ" />
+    <item
+        android:id="@+id/opengl_w030"
+        android:title="w030_ブレンドファクター" />
     <item
         android:id="@+id/opengl_w029"
         android:title="w029_アルファブレンディング" />

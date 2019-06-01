@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl02.w030z
+package milu.kiriu2010.exdb1.opengl02.w030
 
 import android.content.Context
 import android.graphics.Bitmap

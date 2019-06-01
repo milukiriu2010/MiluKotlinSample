@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl02.w030z
+package milu.kiriu2010.exdb1.opengl02.w030
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLES20Func
