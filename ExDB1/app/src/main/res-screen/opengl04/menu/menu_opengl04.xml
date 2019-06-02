@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_wv42"
+        android:title="wv42_バンプマッピング" />
+    <item
         android:id="@+id/opengl_w047"
         android:title="w047_動的キューブマッピング" />
     <item

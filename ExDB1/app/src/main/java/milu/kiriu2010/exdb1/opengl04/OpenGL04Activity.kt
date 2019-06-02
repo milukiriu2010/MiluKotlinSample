@@ -8,6 +8,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_open_gl04.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl04.w042.W042Fragment
+import milu.kiriu2010.exdb1.opengl04.w042v.WV042Fragment
 import milu.kiriu2010.exdb1.opengl04.w043.W043Fragment
 import milu.kiriu2010.exdb1.opengl04.w044.W044Fragment
 import milu.kiriu2010.exdb1.opengl04.w045.W045Fragment
@@ -23,7 +24,7 @@ class OpenGL04Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W047Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, WV042Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -94,6 +95,16 @@ class OpenGL04Activity : AppCompatActivity() {
                 if (supportFragmentManager.findFragmentByTag("w043") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W043Fragment.newInstance(), "w043")
+                            .commit()
+                }
+                true
+            }
+            // バンプマッピング
+            R.id.opengl_wv42 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv42") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV042Fragment.newInstance(), "wv42")
                             .commit()
                 }
                 true
