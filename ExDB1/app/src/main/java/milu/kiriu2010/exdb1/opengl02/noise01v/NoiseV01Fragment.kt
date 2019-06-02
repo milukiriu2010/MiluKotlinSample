@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl02.noise01
+package milu.kiriu2010.exdb1.opengl02.noise01v
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,10 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl01.noise01.Noise01Renderer
+import milu.kiriu2010.exdb1.opengl01.noisev01.NoiseV01Renderer
 import milu.kiriu2010.gui.view.MyGLES20View
 
-class Noise01Fragment : Fragment() {
+class NoiseV01Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View
 
@@ -28,7 +28,7 @@ class Noise01Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_gl_noise01, container, false)
 
         myGLES20View = view.findViewById(R.id.myGLES20ViewNoise01)
-        val renderer = Noise01Renderer(context!!)
+        val renderer = NoiseV01Renderer(context!!)
         myGLES20View.setRenderer(renderer)
         myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
@@ -64,7 +64,7 @@ class Noise01Fragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                Noise01Fragment().apply {
+                NoiseV01Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

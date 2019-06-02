@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl01.noise01
+package milu.kiriu2010.exdb1.opengl01.noisev01
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -7,24 +7,29 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import android.os.SystemClock
-import milu.kiriu2010.exdb1.opengl02.noise01.Noise01Shader
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.basic.MyNoiseX
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
+import milu.kiriu2010.gui.shader.es20.wvbo.ES20VBOTexture01Shader
+import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
+import milu.kiriu2010.gui.vbo.es20.ES20VBOIpct
 
 // ---------------------------------------------------
 // パーリンノイズで生成した画像をテクスチャとして貼る
 // ---------------------------------------------------
 // https://wgld.org/d/webgl/w026.html
 // ---------------------------------------------------
-class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
+class NoiseV01Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト
     private lateinit var modelBoard: Board01Model
 
     // シェーダ
-    private lateinit var shader: Noise01Shader
+    private lateinit var shader: ES20VBOTexture01Shader
+
+    // VBO
+    private lateinit var bo: ES20VBOAbs
 
     // ビットマップ配列
     val bmpArray = arrayListOf<Bitmap>()
@@ -96,7 +101,7 @@ class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.translateM(matM,0,x,y,0f)
         Matrix.rotateM(matM,0,t,0f,1f,0f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-        shader.draw(modelBoard,matMVP,0)
+        shader.draw(modelBoard,bo,matMVP,0)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -123,7 +128,7 @@ class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glDepthFunc(GLES20.GL_LEQUAL)
 
         // シェーダ
-        shader = Noise01Shader()
+        shader = ES20VBOTexture01Shader()
         shader.loadShader()
 
         // モデル生成
@@ -135,6 +140,10 @@ class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
                 "colorB" to 1f,
                 "colorA" to 1f
         ))
+
+        // VBO生成
+        bo = ES20VBOIpct()
+        bo.makeVIBO(modelBoard)
 
         // カメラの位置
         vecEye[0] =  0f
@@ -152,5 +161,10 @@ class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun closeShader() {
+        bo.deleteVIBO()
+        shader.deleteShader()
+
+        GLES20.glDeleteTextures(textures.size,textures,0)
+
     }
 }

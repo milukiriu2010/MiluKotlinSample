@@ -33,7 +33,6 @@ class WV039Renderer(ctx: Context): MgRenderer(ctx) {
 
     // VBO(トーラス)
     private lateinit var boTorus: ES20VBOAbs
-
     // VBO(球体)
     private lateinit var boSphere: ES20VBOAbs
 
@@ -106,6 +105,7 @@ class WV039Renderer(ctx: Context): MgRenderer(ctx) {
         //   テクスチャ  :OFF
         Matrix.setIdentityM(matM,0)
         Matrix.rotateM(matM,0,t0,0f,1f,1f)
+        Matrix.invertM(matI,0,matM,0)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         shader.draw(modelTorus,boTorus,matMVP,matI,vecLight,0,1,0,0)
 
@@ -128,6 +128,7 @@ class WV039Renderer(ctx: Context): MgRenderer(ctx) {
         //   テクスチャ  :ON
         Matrix.setIdentityM(matM,0)
         Matrix.scaleM(matM,0,50f,50f,50f)
+        Matrix.invertM(matI,0,matM,0)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         shader.draw(modelSphere,boSphere,matMVP,matI,vecLight,0,0,0,1)
 
@@ -140,6 +141,7 @@ class WV039Renderer(ctx: Context): MgRenderer(ctx) {
         //   テクスチャ  :OFF
         Matrix.setIdentityM(matM,0)
         Matrix.rotateM(matM,0,t0,0f,1f,1f)
+        Matrix.invertM(matI,0,matM,0)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         shader.draw(modelTorus,boTorus,matMVP,matI,vecLight,1,0,0,0)
     }
@@ -219,5 +221,7 @@ class WV039Renderer(ctx: Context): MgRenderer(ctx) {
         boTorus.deleteVIBO()
         boSphere.deleteVIBO()
         shader.deleteShader()
+
+        GLES20.glDeleteTextures(textures.size,textures,0)
     }
 }

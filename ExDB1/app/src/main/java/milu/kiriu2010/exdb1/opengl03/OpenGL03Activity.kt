@@ -23,7 +23,9 @@ import milu.kiriu2010.exdb1.opengl03.w038v.WV038Fragment
 import milu.kiriu2010.exdb1.opengl03.w039.W039Fragment
 import milu.kiriu2010.exdb1.opengl03.w039v.WV039Fragment
 import milu.kiriu2010.exdb1.opengl03.w040.W040Fragment
+import milu.kiriu2010.exdb1.opengl03.w040v.WV040Fragment
 import milu.kiriu2010.exdb1.opengl03.w041.W041Fragment
+import milu.kiriu2010.exdb1.opengl03.w041v.WV041Fragment
 
 class OpenGL03Activity : AppCompatActivity() {
 
@@ -33,7 +35,7 @@ class OpenGL03Activity : AppCompatActivity() {
 
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, WV039Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, WV041Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -59,11 +61,31 @@ class OpenGL03Activity : AppCompatActivity() {
                 true
             }
             // ブラーフィルター
+            R.id.opengl_wv41 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv41") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV041Fragment.newInstance(), "wv41")
+                            .commit()
+                }
+                true
+            }
+            // ブラーフィルター
             R.id.opengl_w041 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w041") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W041Fragment.newInstance(), "w041")
+                            .commit()
+                }
+                true
+            }
+            // フレームバッファ
+            R.id.opengl_wv40 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv40") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV040Fragment.newInstance(), "wv40")
                             .commit()
                 }
                 true

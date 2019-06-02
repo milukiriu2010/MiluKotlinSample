@@ -223,5 +223,7 @@ class WV029Renderer(ctx: Context): MgRenderer(ctx) {
     override fun closeShader() {
         bo.deleteVIBO()
         shader.deleteShader()
+
+        GLES20.glDeleteTextures(textures.size,textures,0)
     }
 }

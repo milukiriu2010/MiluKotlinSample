@@ -17,6 +17,9 @@
         android:id="@+id/opengl_wv026"
         android:title="wv026_テクスチャ" />
     <item
+        android:id="@+id/opengl_noisev01"
+        android:title="noisev01_ノイズテクスチャ" />
+    <item
         android:id="@+id/opengl_w030"
         android:title="w030_ブレンドファクター" />
     <item

@@ -174,5 +174,7 @@ class WV037Renderer(ctx: Context): MgRenderer(ctx) {
         boSphere.deleteVIBO()
         boLine.deleteVIBO()
         shader.deleteShader()
+
+        GLES20.glDeleteTextures(textures.size,textures,0)
     }
 }

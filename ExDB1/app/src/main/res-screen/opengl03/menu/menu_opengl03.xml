@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_wv41"
+        android:title="wv41_ブラーフィルター" />
+    <item
+        android:id="@+id/opengl_wv40"
+        android:title="wv40_フレームバッファ" />
+    <item
         android:id="@+id/opengl_wv39"
         android:title="wv39_ステンシルバッファでアウトライン" />
     <item

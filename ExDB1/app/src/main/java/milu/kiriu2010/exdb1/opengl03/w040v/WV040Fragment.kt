@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl02.noise01
+package milu.kiriu2010.exdb1.opengl03.w040v
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,10 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl01.noise01.Noise01Renderer
 import milu.kiriu2010.gui.view.MyGLES20View
 
-class Noise01Fragment : Fragment() {
+class WV040Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View
 
@@ -25,28 +24,31 @@ class Noise01Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl_noise01, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w15, container, false)
 
-        myGLES20View = view.findViewById(R.id.myGLES20ViewNoise01)
-        val renderer = Noise01Renderer(context!!)
+        myGLES20View = view.findViewById(R.id.myGLES20ViewW15)
+        val renderer = WV040Renderer(context!!)
         myGLES20View.setRenderer(renderer)
         myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
+                    renderer.isRunning = false
                 }
                 MotionEvent.ACTION_DOWN -> {
-                    renderer.isRunning = when (renderer.isRunning) {
-                        true  -> false
-                        false -> true
-                    }
+                    Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
+                    Log.d(javaClass.simpleName,"vw[${myGLES20View.width}]vh[${myGLES20View.height}]")
+                    renderer.isRunning = true
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 else -> {
                 }
             }
             true
         }
+
 
         return view
     }
@@ -64,7 +66,7 @@ class Noise01Fragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                Noise01Fragment().apply {
+                WV040Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }
