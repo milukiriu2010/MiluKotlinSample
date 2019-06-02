@@ -2,6 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_wv39"
+        android:title="wv39_ステンシルバッファでアウトライン" />
+    <item
+        android:id="@+id/opengl_wv38"
+        android:title="wv38_ステンシルバッファ" />
+    <item
+        android:id="@+id/opengl_wv37"
+        android:title="wv37_ポイントスプライト" />
+    <item
+        android:id="@+id/opengl_wv36"
+        android:title="wv36_点や線のレンダリング" />
+    <item
         android:id="@+id/opengl_wv35"
         android:title="wv35_クォータニオン(ビルボード)" />
     <item

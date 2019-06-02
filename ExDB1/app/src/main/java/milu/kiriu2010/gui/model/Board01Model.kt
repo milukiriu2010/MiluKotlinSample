@@ -89,6 +89,11 @@ class Board01Model: MgModelAbs() {
         datPos.addAll(arrayListOf(-1f,-1f,0f))
         datPos.addAll(arrayListOf( 1f,-1f,0f))
 
+        // 法線データ
+        (0..3).forEach {
+            datNor.addAll(arrayListOf(0f,0f,1f))
+        }
+
         // 色データ
         datCol.addAll(arrayListOf(1f,0f,0f,1f))
         datCol.addAll(arrayListOf(0f,1f,0f,1f))

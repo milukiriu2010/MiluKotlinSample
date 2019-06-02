@@ -15,9 +15,13 @@ import milu.kiriu2010.exdb1.opengl03.w034v.WV034Fragment
 import milu.kiriu2010.exdb1.opengl03.w035.W035Fragment
 import milu.kiriu2010.exdb1.opengl03.w035v.WV035Fragment
 import milu.kiriu2010.exdb1.opengl03.w036.W036Fragment
+import milu.kiriu2010.exdb1.opengl03.w036v.WV036Fragment
 import milu.kiriu2010.exdb1.opengl03.w037.W037Fragment
+import milu.kiriu2010.exdb1.opengl03.w037v.WV037Fragment
 import milu.kiriu2010.exdb1.opengl03.w038.W038Fragment
+import milu.kiriu2010.exdb1.opengl03.w038v.WV038Fragment
 import milu.kiriu2010.exdb1.opengl03.w039.W039Fragment
+import milu.kiriu2010.exdb1.opengl03.w039v.WV039Fragment
 import milu.kiriu2010.exdb1.opengl03.w040.W040Fragment
 import milu.kiriu2010.exdb1.opengl03.w041.W041Fragment
 
@@ -29,7 +33,7 @@ class OpenGL03Activity : AppCompatActivity() {
 
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, WV035Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, WV039Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -75,11 +79,31 @@ class OpenGL03Activity : AppCompatActivity() {
                 true
             }
             // ステンシルバッファでアウトライン
+            R.id.opengl_wv39 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv39") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV039Fragment.newInstance(), "wv39")
+                            .commit()
+                }
+                true
+            }
+            // ステンシルバッファでアウトライン
             R.id.opengl_w039 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w039") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W039Fragment.newInstance(), "w039")
+                            .commit()
+                }
+                true
+            }
+            // ステンシルバッファ
+            R.id.opengl_wv38 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv38") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV038Fragment.newInstance(), "wv38")
                             .commit()
                 }
                 true
@@ -95,11 +119,31 @@ class OpenGL03Activity : AppCompatActivity() {
                 true
             }
             // ポイントスプライト
+            R.id.opengl_wv37 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv37") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV037Fragment.newInstance(), "wv37")
+                            .commit()
+                }
+                true
+            }
+            // ポイントスプライト
             R.id.opengl_w037 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w037") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W037Fragment.newInstance(), "w037")
+                            .commit()
+                }
+                true
+            }
+            // 点や線のレンダリング
+            R.id.opengl_wv36 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv36") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV036Fragment.newInstance(), "wv36")
                             .commit()
                 }
                 true

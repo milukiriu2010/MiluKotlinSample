@@ -31,7 +31,6 @@ class WV025Renderer(ctx: Context): MgRenderer(ctx) {
 
     // VBO(トーラス)
     private lateinit var boTorus: ES20VBOAbs
-
     // VBO(球体)
     private lateinit var boSphere: ES20VBOAbs
 
