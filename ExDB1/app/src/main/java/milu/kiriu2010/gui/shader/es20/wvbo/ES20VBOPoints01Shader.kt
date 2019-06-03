@@ -7,23 +7,24 @@ import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
 // ------------------------------------------
-// 特殊効果なし(glDrawElements)
+// GL_POINTSにて描画
 // ------------------------------------------
-// 2019.05.31
-// 2019.06.03 ログ追加
+// 2019.06.03  VBO
 // ------------------------------------------
-class ES20VBOSimple01Shader: ES20MgShader() {
+class ES20VBOPoints01Shader: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """
-            attribute vec3 a_Position;
-            attribute vec4 a_Color;
-            uniform   mat4 u_matMVP;
-            varying   vec4 v_Color;
+            attribute vec3  a_Position;
+            attribute vec4  a_Color;
+            uniform   mat4  u_matMVP;
+            uniform   float u_pointSize;
+            varying   vec4  v_Color;
 
             void main() {
-                v_Color        = a_Color;
-                gl_Position    = u_matMVP * vec4(a_Position,1.0);
+                v_Color      = a_Color;
+                gl_Position  = u_matMVP * vec4(a_Position,1.0);
+                gl_PointSize = u_pointSize;
             }
             """.trimIndent()
 
@@ -56,7 +57,7 @@ class ES20VBOSimple01Shader: ES20MgShader() {
             // attribute属性を有効にする
             // ここで呼ばないと描画されない
             GLES20.glEnableVertexAttribArray(it)
-            MyGLES20Func.checkGlError("a_Position:glEnableVertexAttribArray:${it}")
+            MyGLES20Func.checkGlError("a_Position:glEnableVertexAttribArray")
             // attribute属性を登録
             GLES20.glVertexAttribPointer(it,3,GLES20.GL_FLOAT,false,0,0)
             MyGLES20Func.checkGlError("a_Position:glVertexAttribPointer")
@@ -68,7 +69,7 @@ class ES20VBOSimple01Shader: ES20MgShader() {
             // attribute属性を有効にする
             // ここで呼ばないと描画されない
             GLES20.glEnableVertexAttribArray(it)
-            MyGLES20Func.checkGlError("a_Color:glEnableVertexAttribArray:${it}")
+            MyGLES20Func.checkGlError("a_Color:glEnableVertexAttribArray")
             // attribute属性を登録
             GLES20.glVertexAttribPointer(it,4,GLES20.GL_FLOAT,false,0,0)
             MyGLES20Func.checkGlError("a_Color:glVertexAttribPointer")
@@ -78,10 +79,14 @@ class ES20VBOSimple01Shader: ES20MgShader() {
         // ----------------------------------------------
         // uniformハンドルに値をセット
         // ----------------------------------------------
-        hUNI = IntArray(1)
+        hUNI = IntArray(2)
         // uniform(モデル×ビュー×プロジェクション)
         hUNI[0] = GLES20.glGetUniformLocation(programHandle,"u_matMVP")
         MyGLES20Func.checkGlError("u_matMVP:glGetUniformLocation")
+
+        // uniform(描画する点の大きさ)
+        hUNI[1] = GLES20.glGetUniformLocation(programHandle,"u_pointSize")
+        MyGLES20Func.checkGlError("u_pointSize:glGetUniformLocation")
 
         return this
     }
@@ -89,7 +94,7 @@ class ES20VBOSimple01Shader: ES20MgShader() {
     fun draw(model: MgModelAbs,
              bo: ES20VBOAbs,
              u_matMVP: FloatArray,
-             mode: Int = GLES20.GL_TRIANGLES) {
+             u_pointSize: Float) {
         GLES20.glUseProgram(programHandle)
         MyGLES20Func.checkGlError2("UseProgram",this,model)
 
@@ -107,29 +112,16 @@ class ES20VBOSimple01Shader: ES20MgShader() {
         GLES20.glUniformMatrix4fv(hUNI[0],1,false,u_matMVP,0)
         MyGLES20Func.checkGlError2("u_matMVP",this,model)
 
+        // uniform(描画する点の大きさ)
+        GLES20.glUniform1f(hUNI[1],u_pointSize)
+        MyGLES20Func.checkGlError2("u_pointSize",this,model)
+
         // モデルを描画
-        when (mode) {
-            // 面を描画
-            GLES20.GL_TRIANGLES -> {
-                GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
-            }
-            // 線を描画
-            GLES20.GL_LINES -> {
-                val cnt = model.datPos.size/3
-                GLES20.glDrawArrays(GLES20.GL_LINES,0,cnt)
-            }
-            // 線を描画
-            GLES20.GL_LINE_STRIP -> {
-                val cnt = model.datPos.size/3
-                GLES20.glDrawArrays(GLES20.GL_LINE_STRIP,0,cnt)
-            }
-        }
+        GLES20.glDrawArrays(GLES20.GL_POINTS, 0, model.datPos.size/3)
 
         // リソース解放
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER,0)
         GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER,0)
-        // ここで呼ぶと描画されない
-        //GLES20.glDisableVertexAttribArray(hATTR[0])
     }
 
 }
