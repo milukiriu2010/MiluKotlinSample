@@ -119,6 +119,14 @@ class W045Shader: ES20MgShader() {
         }
         MyGLES20Func.checkGlError2("a_Color",this,model)
 
+        // attribute(テクスチャ座標)
+        model.bufTxc.position(0)
+        GLES20.glGetAttribLocation(programHandle,"a_TextureCoord").also {
+            GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false, 2*4, model.bufTxc)
+            GLES20.glEnableVertexAttribArray(it)
+        }
+        MyGLES20Func.checkGlError2("a_TextureCoord",this,model)
+
         // uniform(モデル)
         GLES20.glGetUniformLocation(programHandle,"u_matM").also {
             GLES20.glUniformMatrix4fv(it,1,false,matM,0)

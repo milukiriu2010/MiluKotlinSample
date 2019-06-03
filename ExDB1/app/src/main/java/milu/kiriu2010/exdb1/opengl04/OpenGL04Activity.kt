@@ -10,10 +10,15 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl04.w042.W042Fragment
 import milu.kiriu2010.exdb1.opengl04.w042v.WV042Fragment
 import milu.kiriu2010.exdb1.opengl04.w043.W043Fragment
+import milu.kiriu2010.exdb1.opengl04.w043v.WV043Fragment
 import milu.kiriu2010.exdb1.opengl04.w044.W044Fragment
+import milu.kiriu2010.exdb1.opengl04.w044v.WV044Fragment
 import milu.kiriu2010.exdb1.opengl04.w045.W045Fragment
+import milu.kiriu2010.exdb1.opengl04.w045v.WV045Fragment
 import milu.kiriu2010.exdb1.opengl04.w046.W046Fragment
+import milu.kiriu2010.exdb1.opengl04.w046v.WV046Fragment
 import milu.kiriu2010.exdb1.opengl04.w047.W047Fragment
+import milu.kiriu2010.exdb1.opengl04.w047v.WV047Fragment
 
 class OpenGL04Activity : AppCompatActivity() {
 
@@ -24,7 +29,7 @@ class OpenGL04Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, WV042Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, WV047Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -50,11 +55,31 @@ class OpenGL04Activity : AppCompatActivity() {
                 true
             }
             // 動的キューブマッピング
+            R.id.opengl_wv47 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv47") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV047Fragment.newInstance(), "wv47")
+                            .commit()
+                }
+                true
+            }
+            // 動的キューブマッピング
             R.id.opengl_w047 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w047") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W047Fragment.newInstance(), "w047")
+                            .commit()
+                }
+                true
+            }
+            // 屈折マッピング
+            R.id.opengl_wv46 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv46") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV046Fragment.newInstance(), "wv46")
                             .commit()
                 }
                 true
@@ -70,6 +95,16 @@ class OpenGL04Activity : AppCompatActivity() {
                 true
             }
             // キューブ環境バンプマッピング
+            R.id.opengl_wv45 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv45") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV045Fragment.newInstance(), "wv45")
+                            .commit()
+                }
+                true
+            }
+            // キューブ環境バンプマッピング
             R.id.opengl_w045 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w045") == null) {
@@ -80,11 +115,31 @@ class OpenGL04Activity : AppCompatActivity() {
                 true
             }
             // キューブ環境マッピング
+            R.id.opengl_wv44 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv44") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV044Fragment.newInstance(), "w44")
+                            .commit()
+                }
+                true
+            }
+            // キューブ環境マッピング
             R.id.opengl_w044 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w044") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W044Fragment.newInstance(), "w044")
+                            .commit()
+                }
+                true
+            }
+            // 視差マッピング
+            R.id.opengl_wv43 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv43") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV043Fragment.newInstance(), "wv43")
                             .commit()
                 }
                 true

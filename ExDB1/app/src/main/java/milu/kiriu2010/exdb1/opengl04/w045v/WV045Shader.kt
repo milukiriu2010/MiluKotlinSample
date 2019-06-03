@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl04.w042v
+package milu.kiriu2010.exdb1.opengl04.w045v
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLES20Func
@@ -6,12 +6,12 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
-// ------------------------------------
-// バンプマッピング
-// ------------------------------------
-// https://wgld.org/d/webgl/w042.html
-// ------------------------------------
-class WV042Shader: ES20MgShader() {
+// -------------------------------------------------
+// キューブ環境バンプマッピング
+// -------------------------------------------------
+// https://wgld.org/d/webgl/w045.html
+// -------------------------------------------------
+class WV045Shader: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -21,39 +21,20 @@ class WV042Shader: ES20MgShader() {
             attribute vec2  a_TextureCoord;
             uniform   mat4  u_matM;
             uniform   mat4  u_matMVP;
-            uniform   mat4  u_matINV;
-            uniform   vec3  u_vecLight;
-            uniform   vec3  u_vecEye;
+            varying   vec3  v_Position;
             varying   vec4  v_Color;
             varying   vec2  v_TextureCoord;
-            varying   vec3  v_vecLight;
-            varying   vec3  v_vecEye;
+            varying   vec3  v_tNormal;
+            varying   vec3  v_tTangent;
 
             void main() {
-                vec3 pos      = (u_matM   * vec4(a_Position,0.0)).xyz;
-                vec3 invEye   = (u_matINV * vec4(u_vecEye,0.0)).xyz;
-                vec3 invLight = (u_matINV * vec4(u_vecLight,0.0)).xyz;
-                vec3 eye      = invEye - pos;
-                vec3 light    = invLight - pos;
-                // 法線ベクトル
-                vec3 n = normalize(a_Normal);
-                // 接線ベクトル
-                // Y軸と法線ベクトルとの間で外積を取ることで算出する
-                vec3 t = normalize(cross(a_Normal,vec3(0.0,1.0,0.0)));
-                // 従法線ベクトル
-                // 接線ベクトルと法線ベクトルとの間で外積をとることで算出する
-                vec3 b = cross(n,t);
-                // 視線ベクトルとライトベクトルを接空間上に変換する
-                v_vecEye.x = dot(t,eye);
-                v_vecEye.y = dot(b,eye);
-                v_vecEye.z = dot(n,eye);
-                normalize(v_vecEye);
-                v_vecLight.x = dot(t,light);
-                v_vecLight.y = dot(b,light);
-                v_vecLight.z = dot(n,light);
-                normalize(v_vecLight);
+                v_Position     = (u_matM * vec4(a_Position,1.0)).xyz;
                 v_Color        = a_Color;
                 v_TextureCoord = a_TextureCoord;
+                v_tNormal      = (u_matM * vec4(a_Normal  ,0.0)).xyz;
+                // 接線ベクトル
+                // = 法線ベクトルとY軸の外積
+                v_tTangent     = cross(v_tNormal,vec3(0.0,1.0,0.0));
                 gl_Position    = u_matMVP * vec4(a_Position,1.0);
             }
             """.trimIndent()
@@ -61,28 +42,35 @@ class WV042Shader: ES20MgShader() {
     // フラグメントシェーダ
     private val scf =
             """
-            precision mediump   float;
+            precision mediump     float;
 
-            uniform   sampler2D u_Texture0;
-            varying   vec4      v_Color;
-            varying   vec2      v_TextureCoord;
-            varying   vec3      v_vecLight;
-            varying   vec3      v_vecEye;
+            uniform   vec3        u_vecEye;
+            uniform   sampler2D   u_normalMap;
+            uniform   samplerCube u_CubeTexture;
+            uniform   int         u_Reflection;
+            varying   vec3        v_Position;
+            varying   vec4        v_Color;
+            varying   vec2        v_TextureCoord;
+            varying   vec3        v_tNormal;
+            varying   vec3        v_tTangent;
 
             void main() {
-                // 法線マップからRGB値を抜き出し、法線として扱う
-                // 法線マップ上の色データは負の値がない(0～1)
-                // 一方、法線は-1～1の範囲をとるので、"２倍して１引く"という処理になっている
-                vec3  mNormal   = (texture2D(u_Texture0, v_TextureCoord) * 2.0 - 1.0).rgb;
-                // 接空間上のライトベクトル
-                vec3  light     = normalize(v_vecLight);
-                // 接空間上の視線ベクトル
-                vec3  eye       = normalize(v_vecEye);
-                vec3  halfLE    = normalize(light+eye);
-                float diffuse   = clamp(dot(mNormal, light), 0.1, 1.0);
-                float specular  = pow(clamp(dot(mNormal,halfLE) ,0.0,1.0), 100.0);
-                vec4  destColor = v_Color * vec4(vec3(diffuse),1.0) + vec4(vec3(specular),1.0);
-                gl_FragColor  = destColor;
+                // 法線と接線ベクトルを使って従法線ベクトルを算出
+                vec3  tBinormal = cross(v_tNormal, v_tTangent);
+                // 法線マップから抜き出したバンプマッピング用の法線情報を
+                // 視線空間上へと変換するために3x3の行列を生成
+                mat3  mView     = mat3(v_tTangent, tBinormal, v_tNormal);
+                vec3  mNormal   = mView * (texture2D(u_normalMap,v_TextureCoord)*2.0-1.0).rgb;
+                vec3  ref;
+                if (bool(u_Reflection)) {
+                    ref = reflect(v_Position - u_vecEye, mNormal);
+                }
+                else {
+                    ref = v_tNormal;
+                }
+                vec4  envColor  = textureCube(u_CubeTexture, ref);
+                vec4  destColor = v_Color * envColor;
+                gl_FragColor    = destColor;
             }
             """.trimIndent()
 
@@ -159,21 +147,20 @@ class WV042Shader: ES20MgShader() {
         hUNI[1] = GLES20.glGetUniformLocation(programHandle,"u_matMVP")
         MyGLES20Func.checkGlError("u_matMVP:glGetUniformLocation")
 
-        // uniform(逆行列)
-        hUNI[2] = GLES20.glGetUniformLocation(programHandle,"u_matINV")
-        MyGLES20Func.checkGlError("u_matINV:glGetUniformLocation")
-
-        // uniform(光源位置)
-        hUNI[3] = GLES20.glGetUniformLocation(programHandle,"u_vecLight")
-        MyGLES20Func.checkGlError("u_vecLight:glGetUniformLocation")
-
         // uniform(視点座標)
-        hUNI[4] = GLES20.glGetUniformLocation(programHandle,"u_vecEye")
+        hUNI[2] = GLES20.glGetUniformLocation(programHandle,"u_vecEye")
         MyGLES20Func.checkGlError("u_vecEye:glGetUniformLocation")
 
-        // uniform(テクスチャユニット)
-        hUNI[5] = GLES20.glGetUniformLocation(programHandle, "u_Texture0")
-        MyGLES20Func.checkGlError("u_Texture0:glGetUniformLocation")
+        // uniform(法線マップテクスチャ)
+        hUNI[3] = GLES20.glGetUniformLocation(programHandle, "u_normalMap")
+
+        // uniform(キューブテクスチャユニット)
+        hUNI[4] = GLES20.glGetUniformLocation(programHandle, "u_CubeTexture")
+        MyGLES20Func.checkGlError("u_CubeTexture:glGetUniformLocation")
+
+        // uniform(反射するかどうか)
+        hUNI[5] = GLES20.glGetUniformLocation(programHandle, "u_Reflection")
+        MyGLES20Func.checkGlError("u_Reflection:glGetUniformLocation")
 
         return this
     }
@@ -182,10 +169,10 @@ class WV042Shader: ES20MgShader() {
              bo: ES20VBOAbs,
              u_matM: FloatArray,
              u_matMVP: FloatArray,
-             u_matI: FloatArray,
-             u_vecLight: FloatArray,
              u_vecEye: FloatArray,
-             u_Texture0: Int) {
+             u_normalMap: Int,
+             u_CubeTexture: Int,
+             u_Reflection: Int) {
 
         GLES20.glUseProgram(programHandle)
         MyGLES20Func.checkGlError2("UseProgram",this,model)
@@ -218,21 +205,25 @@ class WV042Shader: ES20MgShader() {
         GLES20.glUniformMatrix4fv(hUNI[1],1,false,u_matMVP,0)
         MyGLES20Func.checkGlError2("u_matMVP",this,model)
 
-        // uniform(逆行列)
-        GLES20.glUniformMatrix4fv(hUNI[2],1,false,u_matI,0)
-        MyGLES20Func.checkGlError2("u_matINV",this,model)
-
-        // uniform(光源位置)
-        GLES20.glUniform3fv(hUNI[3],1,u_vecLight,0)
-        MyGLES20Func.checkGlError2("u_vecLight",this,model)
-
         // uniform(視点座標)
-        GLES20.glUniform3fv(hUNI[4],1,u_vecEye,0)
+        GLES20.glUniform3fv(hUNI[2],1,u_vecEye,0)
         MyGLES20Func.checkGlError2("u_vecEye",this,model)
 
-        // uniform(テクスチャユニット)
-        GLES20.glUniform1i(hUNI[5], u_Texture0)
-        MyGLES20Func.checkGlError2("u_Texture0",this,model)
+        if ( u_normalMap != -1 ) {
+            // uniform(法線マップテクスチャ)
+            GLES20.glUniform1i(hUNI[3], u_normalMap)
+            MyGLES20Func.checkGlError2("u_normalMap",this,model)
+        }
+
+        if ( u_CubeTexture != -1 ) {
+            // uniform(キューブテクスチャ)
+            GLES20.glUniform1i(hUNI[4], u_CubeTexture)
+            MyGLES20Func.checkGlError2("u_CubeTexture",this,model)
+        }
+
+        // uniform(反射するかどうか)
+        GLES20.glUniform1i(hUNI[5],u_Reflection)
+        MyGLES20Func.checkGlError2("u_Reflection",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

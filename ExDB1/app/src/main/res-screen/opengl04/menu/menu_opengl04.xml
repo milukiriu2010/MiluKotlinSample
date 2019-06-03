@@ -2,6 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_wv47"
+        android:title="wv47_動的キューブマッピング" />
+    <item
+        android:id="@+id/opengl_wv46"
+        android:title="wv46_屈折マッピング" />
+    <item
+        android:id="@+id/opengl_wv45"
+        android:title="wv45_キューブ環境バンプマッピング" />
+    <item
+        android:id="@+id/opengl_wv44"
+        android:title="wv44_キューブ環境マッピング" />
+    <item
+        android:id="@+id/opengl_wv43"
+        android:title="wv43_視差マッピング" />
+    <item
         android:id="@+id/opengl_wv42"
         android:title="wv42_バンプマッピング" />
     <item
