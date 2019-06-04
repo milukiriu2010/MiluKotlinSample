@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/opengl_wv57"
+        android:title="wv57_gaussianフィルタ" />
+    <item
+        android:id="@+id/opengl_wv56"
+        android:title="wv56_laplacianフィルタ" />
+    <item
+        android:id="@+id/opengl_wv55"
+        android:title="wv55_sobelフィルタ" />
+    <item
+        android:id="@+id/opengl_wv54"
+        android:title="wv54_セピア調" />
+    <item
         android:id="@+id/opengl_wv53"
         android:title="wv53_グレースケール" />
     <item

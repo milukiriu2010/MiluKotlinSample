@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl05.w053v
+package milu.kiriu2010.exdb1.opengl05.w054v
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLES20Func
@@ -6,12 +6,8 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
-// -------------------------------------
-// シェーダ(グレースケール)
-// -------------------------------------
-// https://wgld.org/d/webgl/w053.html
-// -------------------------------------
-class WV053ShaderGray: ES20MgShader() {
+// グレースケール用シェーダ
+class WV054ShaderSepia: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -33,6 +29,7 @@ class WV053ShaderGray: ES20MgShader() {
 
             uniform   sampler2D   u_Texture0;
             uniform   int         u_grayScale;
+            uniform   int         u_sepiaScale;
             varying   vec2        v_TexCoord;
 
             // NTSC系加重平均法
@@ -41,11 +38,21 @@ class WV053ShaderGray: ES20MgShader() {
             const float blueScale  = 0.114478;
             const vec3  monochromeScale = vec3(redScale, greenScale, blueScale);
 
+            // セピアは、RGBで表すと(107,74,43)
+            const float sRedScale   = 1.07;
+            const float sGreenScale = 0.74;
+            const float sBlueScale  = 0.43;
+            const vec3  sepiaScale = vec3(sRedScale, sGreenScale, sBlueScale);
+
+            // いったんグレースケール化した後で、RGBの比率でセピア変換する
             void main() {
                 vec4 smpColor = texture2D(u_Texture0, v_TexCoord);
+                float grayColor = dot(smpColor.rgb, monochromeScale);
                 if (bool(u_grayScale)) {
-                    float grayColor = dot(smpColor.rgb, monochromeScale);
                     smpColor = vec4(vec3(grayColor), 1.0);
+                } else if (bool(u_sepiaScale)) {
+                    vec3 monoColor = vec3(grayColor) * sepiaScale;
+                    smpColor = vec4(monoColor, 1.0);
                 }
                 gl_FragColor = smpColor;
             }
@@ -91,13 +98,13 @@ class WV053ShaderGray: ES20MgShader() {
         // ----------------------------------------------
         // uniformハンドルに値をセット
         // ----------------------------------------------
-        hUNI = IntArray(3)
+        hUNI = IntArray(4)
 
         // uniform(モデル×ビュー×プロジェクション)
         hUNI[0] = GLES20.glGetUniformLocation(programHandle,"u_matMVP")
         MyGLES20Func.checkGlError("u_matMVP:glGetUniformLocation")
 
-        // uniform(テクスチャユニット)
+        // テクスチャユニット
         hUNI[1] = GLES20.glGetUniformLocation(programHandle,"u_Texture0")
         MyGLES20Func.checkGlError("u_Texture:glGetUniformLocation")
 
@@ -105,15 +112,19 @@ class WV053ShaderGray: ES20MgShader() {
         hUNI[2] = GLES20.glGetUniformLocation(programHandle, "u_grayScale")
         MyGLES20Func.checkGlError("u_grayScale:glGetUniformLocation")
 
+        // uniform(セピア調にするかどうか)
+        hUNI[3] = GLES20.glGetUniformLocation(programHandle, "u_sepiaScale")
+        MyGLES20Func.checkGlError("u_sepiaScale:glGetUniformLocation")
+
         return this
     }
-
 
     fun draw(model: MgModelAbs,
              bo: ES20VBOAbs,
              u_matMVP: FloatArray,
              u_Texture0: Int,
-             u_grayScale: Int) {
+             u_grayScale: Int,
+             u_sepiaScale: Int) {
 
         GLES20.glUseProgram(programHandle)
         MyGLES20Func.checkGlError2("UseProgram",this,model)
@@ -139,6 +150,10 @@ class WV053ShaderGray: ES20MgShader() {
         // uniform(グレースケールを使うかどうか)
         GLES20.glUniform1i(hUNI[2], u_grayScale)
         MyGLES20Func.checkGlError2("u_grayScale",this,model)
+
+        // uniform(セピア調にするかどうか)
+        GLES20.glUniform1i(hUNI[3], u_sepiaScale)
+        MyGLES20Func.checkGlError2("u_sepiaScale",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

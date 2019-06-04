@@ -20,9 +20,13 @@ import milu.kiriu2010.exdb1.opengl05.w052v.WV052Fragment
 import milu.kiriu2010.exdb1.opengl05.w053.W053Fragment
 import milu.kiriu2010.exdb1.opengl05.w053v.WV053Fragment
 import milu.kiriu2010.exdb1.opengl05.w054.W054Fragment
+import milu.kiriu2010.exdb1.opengl05.w054v.WV054Fragment
 import milu.kiriu2010.exdb1.opengl05.w055.W055Fragment
+import milu.kiriu2010.exdb1.opengl05.w055v.WV055Fragment
 import milu.kiriu2010.exdb1.opengl05.w056.W056Fragment
+import milu.kiriu2010.exdb1.opengl05.w056v.WV056Fragment
 import milu.kiriu2010.exdb1.opengl05.w057.W057Fragment
+import milu.kiriu2010.exdb1.opengl05.w057v.WV057Fragment
 
 class OpenGL05Activity : AppCompatActivity() {
 
@@ -33,7 +37,7 @@ class OpenGL05Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, WV053Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, WV057Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -58,11 +62,31 @@ class OpenGL05Activity : AppCompatActivity() {
                 true
             }
             // gaussianフィルタ
+            R.id.opengl_wv57 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv57") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV057Fragment.newInstance(), "wv57")
+                            .commit()
+                }
+                true
+            }
+            // gaussianフィルタ
             R.id.opengl_w057 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w057") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W057Fragment.newInstance(), "w057")
+                            .commit()
+                }
+                true
+            }
+            // laplacianフィルタ
+            R.id.opengl_wv56 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv56") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV056Fragment.newInstance(), "wv56")
                             .commit()
                 }
                 true
@@ -78,11 +102,31 @@ class OpenGL05Activity : AppCompatActivity() {
                 true
             }
             // sobelフィルタ
+            R.id.opengl_wv55 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv55") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV055Fragment.newInstance(), "wv55")
+                            .commit()
+                }
+                true
+            }
+            // sobelフィルタ
             R.id.opengl_w055 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w055") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W055Fragment.newInstance(), "w055")
+                            .commit()
+                }
+                true
+            }
+            // セピア調
+            R.id.opengl_wv54 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv54") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV054Fragment.newInstance(), "wv54")
                             .commit()
                 }
                 true
