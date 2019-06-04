@@ -2,6 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_wv50"
+        android:title="wv50_光学迷彩" />
+    <item
+        android:id="@+id/opengl_wv49"
+        android:title="wv49_射影テクスチャマッピング" />
+    <item
+        android:id="@+id/opengl_wv48"
+        android:title="wv48_トゥーンレンダリング" />
+    <item
         android:id="@+id/opengl_w057"
         android:title="w057_gaussianフィルタ" />
     <item

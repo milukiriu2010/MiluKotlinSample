@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl04.w047v
+package milu.kiriu2010.exdb1.opengl05.w050v
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLES20Func
@@ -6,30 +6,35 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
-// --------------------------------------
-// シェーダ(キューブマッピング)
-// --------------------------------------
-// WV044Shaderと同じ
-// --------------------------------------
-// https://wgld.org/d/webgl/w047.html
-// --------------------------------------
-class WV047ShaderCubeMap: ES20MgShader() {
+// ---------------------------------------------
+// シェーダ(反射光)
+// ---------------------------------------------
+// ES20VBOSpecularLight01Shaderと同じ
+// ---------------------------------------------
+// https://wgld.org/d/webgl/w050.html
+// ---------------------------------------------
+class WV050ShaderSpecular: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """
             attribute vec3  a_Position;
             attribute vec3  a_Normal;
             attribute vec4  a_Color;
-            uniform   mat4  u_matM;
             uniform   mat4  u_matMVP;
-            varying   vec3  v_Position;
-            varying   vec3  v_Normal;
+            uniform   mat4  u_matINV;
+            uniform   vec3  u_vecLight;
+            uniform   vec3  u_vecEye;
+            uniform   vec4  u_ambientColor;
             varying   vec4  v_Color;
 
             void main() {
-                v_Position      = (u_matM * vec4(a_Position, 1.0)).xyz;
-                v_Normal        = (u_matM * vec4(a_Normal  , 0.0)).xyz;
-                v_Color         = a_Color;
+                vec3   invLight = normalize(u_matINV * vec4(u_vecLight, 0.0)).xyz;
+                vec3   invEye   = normalize(u_matINV * vec4(u_vecEye  , 0.0)).xyz;
+                vec3   halfLE   = normalize(invLight + invEye);
+                float  diffuse  = clamp(dot(a_Normal, invLight), 0.0, 1.0);
+                float  specular = pow(clamp(dot(a_Normal, halfLE), 0.0, 1.0), 50.0);
+                vec4   amb      = a_Color * u_ambientColor;
+                v_Color         = amb * vec4(vec3(diffuse), 1.0) + vec4(vec3(specular), 1.0);
                 gl_Position     = u_matMVP * vec4(a_Position, 1.0);
             }
             """.trimIndent()
@@ -39,32 +44,20 @@ class WV047ShaderCubeMap: ES20MgShader() {
             """
             precision mediump   float;
 
-            uniform   vec3         u_vecEye;
-            uniform   samplerCube  u_CubeTexture;
-            uniform   int          u_Reflection;
-            varying   vec3         v_Position;
-            varying   vec3         v_Normal;
-            varying   vec4         v_Color;
+            varying   vec4      v_Color;
 
             void main() {
-                vec3 ref;
-                if (bool(u_Reflection)) {
-                    ref = reflect(v_Position-u_vecEye, v_Normal);
-                }
-                else {
-                    ref = v_Normal;
-                }
-                vec4 envColor  = textureCube(u_CubeTexture, ref);
-                vec4 destColor = v_Color * envColor;
-                gl_FragColor   = destColor;
+                gl_FragColor  = v_Color;
             }
             """.trimIndent()
 
     override fun loadShader(): ES20MgShader {
         // 頂点シェーダを生成
-        svhandle = MyGLES20Func.loadShader(GLES20.GL_VERTEX_SHADER, scv)
+        val svhandle = MyGLES20Func.loadShader(GLES20.GL_VERTEX_SHADER, scv)
         // フラグメントシェーダを生成
-        sfhandle = MyGLES20Func.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
+        val sfhandle = MyGLES20Func.loadShader(GLES20.GL_FRAGMENT_SHADER, scf)
+
+        // プログラムオブジェクトの生成とリンク
 
         // プログラムオブジェクトの生成とリンク
         programHandle = MyGLES20Func.createProgram(svhandle,sfhandle)
@@ -113,42 +106,41 @@ class WV047ShaderCubeMap: ES20MgShader() {
         // uniformハンドルに値をセット
         // ----------------------------------------------
         hUNI = IntArray(5)
-        // uniform(モデル)
-        hUNI[0] = GLES20.glGetUniformLocation(programHandle,"u_matM")
-        MyGLES20Func.checkGlError("u_matM:glGetUniformLocation")
 
         // uniform(モデル×ビュー×プロジェクション)
-        hUNI[1] = GLES20.glGetUniformLocation(programHandle,"u_matMVP")
+        hUNI[0] = GLES20.glGetUniformLocation(programHandle,"u_matMVP")
         MyGLES20Func.checkGlError("u_matMVP:glGetUniformLocation")
 
+        // uniform(逆行列)
+        hUNI[1] = GLES20.glGetUniformLocation(programHandle,"u_matINV")
+        MyGLES20Func.checkGlError("u_matINV:glGetUniformLocation")
+
+        // uniform(平行光源)
+        hUNI[2] = GLES20.glGetUniformLocation(programHandle,"u_vecLight")
+        MyGLES20Func.checkGlError("u_vecLight:glGetUniformLocation")
+
         // uniform(視点座標)
-        hUNI[2] = GLES20.glGetUniformLocation(programHandle,"u_vecEye")
+        hUNI[3] = GLES20.glGetUniformLocation(programHandle,"u_vecEye")
         MyGLES20Func.checkGlError("u_vecEye:glGetUniformLocation")
 
-        // uniform(キューブテクスチャユニット)
-        hUNI[3] = GLES20.glGetUniformLocation(programHandle, "u_CubeTexture")
-        MyGLES20Func.checkGlError("u_CubeTexture:glGetUniformLocation")
-
-        // uniform(反射するかどうか)
-        hUNI[4] = GLES20.glGetUniformLocation(programHandle, "u_Reflection")
-        MyGLES20Func.checkGlError("u_Reflection:glGetUniformLocation")
+        // uniform(環境光)
+        hUNI[4] = GLES20.glGetUniformLocation(programHandle,"u_ambientColor")
+        MyGLES20Func.checkGlError("u_ambientColor:glGetUniformLocation")
 
         return this
     }
 
     fun draw(model: MgModelAbs,
              bo: ES20VBOAbs,
-             u_matM: FloatArray,
              u_matMVP: FloatArray,
+             u_matI: FloatArray,
+             u_vecLight: FloatArray,
              u_vecEye: FloatArray,
-             u_CubeTexture: Int,
-             u_Reflection: Int,
-             mark: String) {
-
+             u_ambientColor: FloatArray) {
         GLES20.glUseProgram(programHandle)
-        MyGLES20Func.checkGlError2("UseProgram($programHandle)($mark)",this,model)
+        MyGLES20Func.checkGlError2("UseProgram",this,model)
 
-        // attribute(位置)
+        // attribute(頂点)
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER,bo.hVBO[0])
         GLES20.glVertexAttribPointer(hATTR[0],3,GLES20.GL_FLOAT,false,0,0)
         MyGLES20Func.checkGlError2("a_Position",this,model)
@@ -163,27 +155,25 @@ class WV047ShaderCubeMap: ES20MgShader() {
         GLES20.glVertexAttribPointer(hATTR[2],4,GLES20.GL_FLOAT,false,0,0)
         MyGLES20Func.checkGlError2("a_Color",this,model)
 
-        // uniform(モデル)
-        GLES20.glUniformMatrix4fv(hUNI[0],1,false,u_matM,0)
-        MyGLES20Func.checkGlError2("u_matM",this,model)
-
         // uniform(モデル×ビュー×プロジェクション)
-        GLES20.glUniformMatrix4fv(hUNI[1],1,false,u_matMVP,0)
+        GLES20.glUniformMatrix4fv(hUNI[0],1,false,u_matMVP,0)
         MyGLES20Func.checkGlError2("u_matMVP",this,model)
 
+        // uniform(逆行列)
+        GLES20.glUniformMatrix4fv(hUNI[1],1,false,u_matI,0)
+        MyGLES20Func.checkGlError2("u_matINV",this,model)
+
+        // uniform(平行光源)
+        GLES20.glUniform3fv(hUNI[2],1,u_vecLight,0)
+        MyGLES20Func.checkGlError2("u_vecLight",this,model)
+
         // uniform(視点座標)
-        GLES20.glUniform3fv(hUNI[2],1,u_vecEye,0)
+        GLES20.glUniform3fv(hUNI[3],1,u_vecEye,0)
         MyGLES20Func.checkGlError2("u_vecEye",this,model)
 
-        if ( u_CubeTexture != -1 ) {
-            // uniform(キューブテクスチャ)
-            GLES20.glUniform1i(hUNI[3], u_CubeTexture)
-            MyGLES20Func.checkGlError2("u_CubeTexture",this,model)
-        }
-
-        // uniform(反射するかどうか)
-        GLES20.glUniform1i(hUNI[4],u_Reflection)
-        MyGLES20Func.checkGlError2("u_Reflection",this,model)
+        // uniform(環境光)
+        GLES20.glUniform4fv(hUNI[4],1,u_ambientColor,0)
+        MyGLES20Func.checkGlError2("u_ambientColor",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

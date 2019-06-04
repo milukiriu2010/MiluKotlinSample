@@ -8,8 +8,11 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_open_gl05.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl05.w048.W048Fragment
+import milu.kiriu2010.exdb1.opengl05.w048v.WV048Fragment
 import milu.kiriu2010.exdb1.opengl05.w049.W049Fragment
+import milu.kiriu2010.exdb1.opengl05.w049v.WV049Fragment
 import milu.kiriu2010.exdb1.opengl05.w050.W050Fragment
+import milu.kiriu2010.exdb1.opengl05.w050v.WV050Fragment
 import milu.kiriu2010.exdb1.opengl05.w051.W051Fragment
 import milu.kiriu2010.exdb1.opengl05.w052.W052Fragment
 import milu.kiriu2010.exdb1.opengl05.w053.W053Fragment
@@ -27,7 +30,7 @@ class OpenGL05Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W057Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, WV050Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -122,6 +125,16 @@ class OpenGL05Activity : AppCompatActivity() {
                 true
             }
             // 光学迷彩
+            R.id.opengl_wv50 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv50") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV050Fragment.newInstance(), "wv50")
+                            .commit()
+                }
+                true
+            }
+            // 光学迷彩
             R.id.opengl_w050 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w050") == null) {
@@ -132,11 +145,31 @@ class OpenGL05Activity : AppCompatActivity() {
                 true
             }
             // 射影テクスチャマッピング
+            R.id.opengl_wv49 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv49") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV049Fragment.newInstance(), "wv49")
+                            .commit()
+                }
+                true
+            }
+            // 射影テクスチャマッピング
             R.id.opengl_w049 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w049") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W049Fragment.newInstance(), "w049")
+                            .commit()
+                }
+                true
+            }
+            // トゥーンレンダリング
+            R.id.opengl_wv48 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv48") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV048Fragment.newInstance(), "wv48")
                             .commit()
                 }
                 true
