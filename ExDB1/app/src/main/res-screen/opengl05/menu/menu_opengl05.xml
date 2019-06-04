@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/opengl_wv53"
+        android:title="wv53_グレースケール" />
+    <item
+        android:id="@+id/opengl_wv52"
+        android:title="wv52_高解像度シャドウマップ" />
+    <item
+        android:id="@+id/opengl_wv51"
+        android:title="wv51_シャドウマッピング" />
     <item
         android:id="@+id/opengl_wv50"
         android:title="wv50_光学迷彩" />

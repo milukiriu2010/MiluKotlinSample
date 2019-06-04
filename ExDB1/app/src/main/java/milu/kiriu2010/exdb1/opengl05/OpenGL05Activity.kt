@@ -14,8 +14,11 @@ import milu.kiriu2010.exdb1.opengl05.w049v.WV049Fragment
 import milu.kiriu2010.exdb1.opengl05.w050.W050Fragment
 import milu.kiriu2010.exdb1.opengl05.w050v.WV050Fragment
 import milu.kiriu2010.exdb1.opengl05.w051.W051Fragment
+import milu.kiriu2010.exdb1.opengl05.w051v.WV051Fragment
 import milu.kiriu2010.exdb1.opengl05.w052.W052Fragment
+import milu.kiriu2010.exdb1.opengl05.w052v.WV052Fragment
 import milu.kiriu2010.exdb1.opengl05.w053.W053Fragment
+import milu.kiriu2010.exdb1.opengl05.w053v.WV053Fragment
 import milu.kiriu2010.exdb1.opengl05.w054.W054Fragment
 import milu.kiriu2010.exdb1.opengl05.w055.W055Fragment
 import milu.kiriu2010.exdb1.opengl05.w056.W056Fragment
@@ -30,7 +33,7 @@ class OpenGL05Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, WV050Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, WV053Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -95,6 +98,16 @@ class OpenGL05Activity : AppCompatActivity() {
                 true
             }
             // グレースケール
+            R.id.opengl_wv53 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv53") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV053Fragment.newInstance(), "wv53")
+                            .commit()
+                }
+                true
+            }
+            // グレースケール
             R.id.opengl_w053 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w053") == null) {
@@ -105,11 +118,31 @@ class OpenGL05Activity : AppCompatActivity() {
                 true
             }
             // 高解像度車道マップ
+            R.id.opengl_wv52 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv52") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV052Fragment.newInstance(), "wv52")
+                            .commit()
+                }
+                true
+            }
+            // 高解像度車道マップ
             R.id.opengl_w052 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w052") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W052Fragment.newInstance(), "w052")
+                            .commit()
+                }
+                true
+            }
+            // シャドウマッピング
+            R.id.opengl_w051 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv51") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV051Fragment.newInstance(), "wv51")
                             .commit()
                 }
                 true

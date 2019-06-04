@@ -323,5 +323,8 @@ class WV050Renderer(ctx: Context): MgRenderer(ctx) {
         shaderCubeMap.deleteShader()
 
         GLES20.glDeleteTextures(textures.size,textures,0)
+        GLES20.glDeleteTextures(1,frameTexture)
+        GLES20.glDeleteRenderbuffers(1,bufDepthRender)
+        GLES20.glDeleteFramebuffers(1,bufFrame)
     }
 }

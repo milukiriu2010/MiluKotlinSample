@@ -115,7 +115,6 @@ class WV051ShaderScreen: ES20MgShader() {
         // プログラムオブジェクトの生成とリンク
         programHandle = MyGLES20Func.createProgram(svhandle,sfhandle)
 
-
         // ----------------------------------------------
         // attributeハンドルに値をセット
         // ----------------------------------------------
