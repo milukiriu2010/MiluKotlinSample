@@ -14,8 +14,11 @@ import milu.kiriu2010.exdb1.opengl06.w060v.WV060Fragment
 import milu.kiriu2010.exdb1.opengl06.w061.W061Fragment
 import milu.kiriu2010.exdb1.opengl06.w061v.WV061Fragment
 import milu.kiriu2010.exdb1.opengl06.w062.W062Fragment
+import milu.kiriu2010.exdb1.opengl06.w062v.WV062Fragment
 import milu.kiriu2010.exdb1.opengl06.w063.W063Fragment
+import milu.kiriu2010.exdb1.opengl06.w063v.WV063Fragment
 import milu.kiriu2010.exdb1.opengl06.w064.W064Fragment
+import milu.kiriu2010.exdb1.opengl06.w064v.WV064Fragment
 import milu.kiriu2010.exdb1.opengl06.w065.W065Fragment
 import milu.kiriu2010.exdb1.opengl06.w066.W066Fragment
 import milu.kiriu2010.exdb1.opengl06.w067.W067Fragment
@@ -30,7 +33,7 @@ class OpenGL06Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, WV061Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, WV064Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -95,6 +98,16 @@ class OpenGL06Activity : AppCompatActivity() {
                 true
             }
             // リムライティング
+            R.id.opengl_wv64 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv64") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV064Fragment.newInstance(), "wv64")
+                            .commit()
+                }
+                true
+            }
+            // リムライティング
             R.id.opengl_w064 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w064") == null) {
@@ -105,11 +118,31 @@ class OpenGL06Activity : AppCompatActivity() {
                 true
             }
             // 半球ライティング
+            R.id.opengl_wv63 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv63") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV063Fragment.newInstance(), "wv63")
+                            .commit()
+                }
+                true
+            }
+            // 半球ライティング
             R.id.opengl_w063 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w063") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W063Fragment.newInstance(), "w063")
+                            .commit()
+                }
+                true
+            }
+            // ステンシル鏡面反射
+            R.id.opengl_wv62 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv62") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV062Fragment.newInstance(), "wv62")
                             .commit()
                 }
                 true

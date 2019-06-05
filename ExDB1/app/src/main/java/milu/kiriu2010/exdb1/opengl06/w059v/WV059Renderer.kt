@@ -416,6 +416,11 @@ class WV059Renderer(ctx: Context): MgRenderer(ctx) {
         boCubeDepth.deleteVIBO()
         boBoard.deleteVIBO()
 
+        mainShader.deleteShader()
+        depthShader.deleteShader()
+        gaussianShader.deleteShader()
+        finalShader.deleteShader()
+
         GLES20.glDeleteTextures(textures.size,textures,0)
         GLES20.glDeleteTextures(1,frameTexture)
         GLES20.glDeleteRenderbuffers(1,bufDepthRender)

@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl06.w061v
+package milu.kiriu2010.exdb1.opengl06.w063v
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.model.MgModelAbs
@@ -6,12 +6,18 @@ import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
-// -------------------------------------------
+// ----------------------------------------------------------
 // シェーダ(メイン)
-// -------------------------------------------
-// https://wgld.org/d/webgl/w061.html
-// -------------------------------------------
-class WV061ShaderMain: ES20MgShader() {
+// ----------------------------------------------------------
+//   半球ライティング
+//   ３次元空間を１つの球に見立ててライティングを行う
+//   光の乱反射を再現する際に、
+//   上空の方に向いている面は空の色
+//   地面の方を向いている面は地面の色にそれぞれ塗り分ける。
+// ----------------------------------------------------------
+// https://wgld.org/d/webgl/w063.html
+// ----------------------------------------------------------
+class WV063ShaderMain: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -21,19 +27,30 @@ class WV061ShaderMain: ES20MgShader() {
             uniform   mat4  u_matM;
             uniform   mat4  u_matMVP;
             uniform   mat4  u_matINV;
+            uniform   vec3  u_vecSky;
             uniform   vec3  u_vecLight;
             uniform   vec3  u_vecEye;
-            uniform   vec4  u_ambientColor;
+            uniform   vec4  u_colorSky;
+            uniform   vec4  u_colorGround;
             varying   vec4  v_Color;
 
+            // 半球ライティングの式
+            //   = 天空の色 x cos(t) - 地面の色 x cos(t)
+            // 正規化式
+            //   = ((天空の色 x cos(t) - 地面の色 x cos(t)) + 1.0) * 0.5
             void main() {
-                vec3   invLight = normalize(u_matINV * vec4(u_vecLight, 0.0)).xyz;
-                vec3   invEye   = normalize(u_matINV * vec4(u_vecEye  , 0.0)).xyz;
-                vec3   halfLE   = normalize(invLight + invEye);
-                float  diffuse  = clamp(dot(a_Normal,invLight), 0.0, 1.0);
-                float  specular = pow(clamp(dot(a_Normal, halfLE), 0.0, 1.0), 50.0);
-                v_Color         = a_Color * vec4(vec3(diffuse),1.0) + vec4(vec3(specular),1.0) + u_ambientColor;
-                gl_Position     = u_matMVP   * vec4(a_Position, 1.0);
+                vec3   invSky     = normalize(u_matINV * vec4(u_vecSky  , 0.0)).xyz;
+                vec3   invLight   = normalize(u_matINV * vec4(u_vecLight, 0.0)).xyz;
+                vec3   invEye     = normalize(u_matINV * vec4(u_vecEye  , 0.0)).xyz;
+                vec3   halfLE     = normalize(invLight + invEye);
+                float  diffuse    = clamp(dot(a_Normal,invLight), 0.1, 1.0);
+                float  specular   = pow(clamp(dot(a_Normal, halfLE), 0.0, 1.0), 50.0);
+                // 1を足し2で割ることで 0.0～1.0 に収まる。すなわち正規化される。
+                float  hemisphere = (dot(a_Normal,invSky)+1.0)*0.5;
+                // 色の線形合成を行う
+                vec4   ambient    = mix(u_colorGround, u_colorSky, hemisphere);
+                v_Color         = a_Color * vec4(vec3(diffuse),1.0) + vec4(vec3(specular),1.0) + ambient;
+                gl_Position     = u_matMVP * vec4(a_Position, 1.0);
             }
             """.trimIndent()
 
@@ -102,7 +119,7 @@ class WV061ShaderMain: ES20MgShader() {
         // ----------------------------------------------
         // uniformハンドルに値をセット
         // ----------------------------------------------
-        hUNI = IntArray(6)
+        hUNI = IntArray(8)
 
         // uniform(モデル座標変換行列)
         hUNI[0] = GLES20.glGetUniformLocation(programHandle,"u_matM")
@@ -116,17 +133,25 @@ class WV061ShaderMain: ES20MgShader() {
         hUNI[2] = GLES20.glGetUniformLocation(programHandle,"u_matINV")
         MyGLES20Func.checkGlError("u_matINV:glGetUniformLocation")
 
+        // uniform(天空の向き)
+        hUNI[3] = GLES20.glGetUniformLocation(programHandle,"u_vecSky")
+        MyGLES20Func.checkGlError("u_vecSky:glGetUniformLocation")
+
         // uniform(光源位置)
-        hUNI[3] = GLES20.glGetUniformLocation(programHandle,"u_vecLight")
+        hUNI[4] = GLES20.glGetUniformLocation(programHandle,"u_vecLight")
         MyGLES20Func.checkGlError("u_vecLight:glGetUniformLocation")
 
         // uniform(視点座標)
-        hUNI[4] = GLES20.glGetUniformLocation(programHandle,"u_vecEye")
+        hUNI[5] = GLES20.glGetUniformLocation(programHandle,"u_vecEye")
         MyGLES20Func.checkGlError("u_vecEye:glGetUniformLocation")
 
-        // uniform(環境色)
-        hUNI[5] = GLES20.glGetUniformLocation(programHandle, "u_ambientColor")
-        MyGLES20Func.checkGlError("u_ambientColor:glGetUniformLocation")
+        // uniform(天空の色)
+        hUNI[6] = GLES20.glGetUniformLocation(programHandle, "u_colorSky")
+        MyGLES20Func.checkGlError("u_colorSky:glGetUniformLocation")
+
+        // uniform(地面の色)
+        hUNI[7] = GLES20.glGetUniformLocation(programHandle, "u_colorGround")
+        MyGLES20Func.checkGlError("u_colorGround:glGetUniformLocation")
 
         return this
     }
@@ -136,9 +161,11 @@ class WV061ShaderMain: ES20MgShader() {
              u_matM: FloatArray,
              u_matMVP: FloatArray,
              u_matI: FloatArray,
+             u_vecSky: FloatArray,
              u_vecLight: FloatArray,
              u_vecEye: FloatArray,
-             u_ambientColor: FloatArray) {
+             u_colorSky: FloatArray,
+             u_colorGround: FloatArray) {
 
         GLES20.glUseProgram(programHandle)
         MyGLES20Func.checkGlError2("UseProgram",this,model)
@@ -170,17 +197,25 @@ class WV061ShaderMain: ES20MgShader() {
         GLES20.glUniformMatrix4fv(hUNI[2],1,false,u_matI,0)
         MyGLES20Func.checkGlError2("u_matINV",this,model)
 
+        // uniform(天空の向き)
+        GLES20.glUniform3fv(hUNI[3],1,u_vecSky,0)
+        MyGLES20Func.checkGlError2("u_vecSky",this,model)
+
         // uniform(光源位置)
-        GLES20.glUniform3fv(hUNI[3],1,u_vecLight,0)
+        GLES20.glUniform3fv(hUNI[4],1,u_vecLight,0)
         MyGLES20Func.checkGlError2("u_vecLight",this,model)
 
         // uniform(視点座標)
-        GLES20.glUniform3fv(hUNI[4],1,u_vecEye,0)
+        GLES20.glUniform3fv(hUNI[5],1,u_vecEye,0)
         MyGLES20Func.checkGlError2("u_vecEye",this,model)
 
-        // uniform(環境色)
-        GLES20.glUniform4fv(hUNI[5], 1,u_ambientColor,0)
-        MyGLES20Func.checkGlError2("u_ambientColor",this,model)
+        // uniform(天空の色)
+        GLES20.glUniform4fv(hUNI[6], 1,u_colorSky,0)
+        MyGLES20Func.checkGlError2("u_colorSky",this,model)
+
+        // uniform(地面の色)
+        GLES20.glUniform4fv(hUNI[7], 1,u_colorGround,0)
+        MyGLES20Func.checkGlError2("u_colorGround",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

@@ -2,6 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_wv64"
+        android:title="wv64_リムライティング" />
+    <item
+        android:id="@+id/opengl_wv63"
+        android:title="wv63_半球ライティング" />
+    <item
+        android:id="@+id/opengl_wv62"
+        android:title="wv62_ステンシル鏡面反射" />
+    <item
         android:id="@+id/opengl_wv61"
         android:title="wv61_パーティクルフォグ" />
     <item

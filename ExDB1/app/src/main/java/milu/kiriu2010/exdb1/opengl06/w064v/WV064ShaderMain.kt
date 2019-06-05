@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl06.w061v
+package milu.kiriu2010.exdb1.opengl06.w064v
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.model.MgModelAbs
@@ -6,12 +6,12 @@ import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
-// -------------------------------------------
+// -------------------------------------
 // シェーダ(メイン)
-// -------------------------------------------
-// https://wgld.org/d/webgl/w061.html
-// -------------------------------------------
-class WV061ShaderMain: ES20MgShader() {
+// -------------------------------------
+// https://wgld.org/d/webgl/w064.html
+// -------------------------------------
+class WV064ShaderMain: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """
@@ -22,18 +22,42 @@ class WV061ShaderMain: ES20MgShader() {
             uniform   mat4  u_matMVP;
             uniform   mat4  u_matINV;
             uniform   vec3  u_vecLight;
+            // カメラの注視点
+            uniform   vec3  u_vecCenter;
             uniform   vec3  u_vecEye;
-            uniform   vec4  u_ambientColor;
+            uniform   vec4  u_colorRim;
+            // リムライトの強さ係数
+            uniform   float u_rimCoef;
             varying   vec4  v_Color;
 
             void main() {
-                vec3   invLight = normalize(u_matINV * vec4(u_vecLight, 0.0)).xyz;
-                vec3   invEye   = normalize(u_matINV * vec4(u_vecEye  , 0.0)).xyz;
-                vec3   halfLE   = normalize(invLight + invEye);
-                float  diffuse  = clamp(dot(a_Normal,invLight), 0.0, 1.0);
-                float  specular = pow(clamp(dot(a_Normal, halfLE), 0.0, 1.0), 50.0);
-                v_Color         = a_Color * vec4(vec3(diffuse),1.0) + vec4(vec3(specular),1.0) + u_ambientColor;
-                gl_Position     = u_matMVP   * vec4(a_Position, 1.0);
+                vec3   invLight   = normalize(u_matINV * vec4(u_vecLight, 0.0)).xyz;
+                vec3   invEye     = normalize(u_matINV * vec4(u_vecEye  , 0.0)).xyz;
+                vec3   halfLE     = normalize(invLight + invEye);
+                float  diffuse    = clamp(dot(a_Normal,invLight), 0.1, 1.0);
+                float  specular   = pow(clamp(dot(a_Normal, halfLE), 0.0, 1.0), 50.0);
+                // リムライティングの係数
+                // ----------------------------------------------------------------------
+                // 視線ベクトルと法線ベクトルの角度が直角に近づけば近づくほど、
+                // ライティングの係数が大きくなるようにする
+                // ----------------------------------------------------------------------
+                // rimの値が0の場合、
+                // 視線ベクトルとライトベクトルの計算がどのような結果でも
+                // リムライトは当たらない
+                // ----------------------------------------------------------------------
+                // powを使ってコントラストを強くしている
+                // ----------------------------------------------------------------------
+                float  rim        = pow(1.0 - clamp(dot(a_Normal,invEye),0.0,1.0), 5.0);
+                // ----------------------------------------------------------------------
+                // 視線ベクトルとライトベクトルとの間で内積をとることで、
+                // ２つのベクトルがどの程度向かいあっているかを係数化する
+                // ----------------------------------------------------------------------
+                // powを使ってコントラストを強くしている
+                // ----------------------------------------------------------------------
+                float  dotLE      = pow(max(dot(normalize(u_vecCenter-u_vecEye),normalize(u_vecLight)), 0.0), 30.0);
+                vec4   ambient    = u_colorRim * u_rimCoef * rim * dotLE;
+                v_Color         = a_Color * vec4(vec3(diffuse),1.0) + vec4(vec3(specular),1.0) + vec4(ambient.rgb, 1.0);
+                gl_Position     = u_matMVP * vec4(a_Position, 1.0);
             }
             """.trimIndent()
 
@@ -102,7 +126,7 @@ class WV061ShaderMain: ES20MgShader() {
         // ----------------------------------------------
         // uniformハンドルに値をセット
         // ----------------------------------------------
-        hUNI = IntArray(6)
+        hUNI = IntArray(8)
 
         // uniform(モデル座標変換行列)
         hUNI[0] = GLES20.glGetUniformLocation(programHandle,"u_matM")
@@ -120,13 +144,21 @@ class WV061ShaderMain: ES20MgShader() {
         hUNI[3] = GLES20.glGetUniformLocation(programHandle,"u_vecLight")
         MyGLES20Func.checkGlError("u_vecLight:glGetUniformLocation")
 
+        // uniform()
+        hUNI[4] = GLES20.glGetUniformLocation(programHandle,"u_vecCenter")
+        MyGLES20Func.checkGlError("u_vecCenter:glGetUniformLocation")
+
         // uniform(視点座標)
-        hUNI[4] = GLES20.glGetUniformLocation(programHandle,"u_vecEye")
+        hUNI[5] = GLES20.glGetUniformLocation(programHandle,"u_vecEye")
         MyGLES20Func.checkGlError("u_vecEye:glGetUniformLocation")
 
-        // uniform(環境色)
-        hUNI[5] = GLES20.glGetUniformLocation(programHandle, "u_ambientColor")
-        MyGLES20Func.checkGlError("u_ambientColor:glGetUniformLocation")
+        // uniform()
+        hUNI[6] = GLES20.glGetUniformLocation(programHandle, "u_colorRim")
+        MyGLES20Func.checkGlError("u_colorRim:glGetUniformLocation")
+
+        // uniform()
+        hUNI[7] = GLES20.glGetUniformLocation(programHandle, "u_rimCoef")
+        MyGLES20Func.checkGlError("u_rimCoef:glGetUniformLocation")
 
         return this
     }
@@ -137,8 +169,10 @@ class WV061ShaderMain: ES20MgShader() {
              u_matMVP: FloatArray,
              u_matI: FloatArray,
              u_vecLight: FloatArray,
+             u_vecCenter: FloatArray,
              u_vecEye: FloatArray,
-             u_ambientColor: FloatArray) {
+             u_colorRim: FloatArray,
+             u_rimCoef: Float) {
 
         GLES20.glUseProgram(programHandle)
         MyGLES20Func.checkGlError2("UseProgram",this,model)
@@ -174,13 +208,21 @@ class WV061ShaderMain: ES20MgShader() {
         GLES20.glUniform3fv(hUNI[3],1,u_vecLight,0)
         MyGLES20Func.checkGlError2("u_vecLight",this,model)
 
+        // uniform()
+        GLES20.glUniform3fv(hUNI[4],1,u_vecCenter,0)
+        MyGLES20Func.checkGlError2("u_vecCenter",this,model)
+
         // uniform(視点座標)
-        GLES20.glUniform3fv(hUNI[4],1,u_vecEye,0)
+        GLES20.glUniform3fv(hUNI[5],1,u_vecEye,0)
         MyGLES20Func.checkGlError2("u_vecEye",this,model)
 
-        // uniform(環境色)
-        GLES20.glUniform4fv(hUNI[5], 1,u_ambientColor,0)
-        MyGLES20Func.checkGlError2("u_ambientColor",this,model)
+        // uniform()
+        GLES20.glUniform4fv(hUNI[6], 1,u_colorRim,0)
+        MyGLES20Func.checkGlError2("u_colorRim",this,model)
+
+        // uniform()
+        GLES20.glUniform1f(hUNI[7], u_rimCoef)
+        MyGLES20Func.checkGlError2("u_rimCoef",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
