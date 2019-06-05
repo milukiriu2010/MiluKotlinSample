@@ -2,6 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_wv61"
+        android:title="wv61_パーティクルフォグ" />
+    <item
+        android:id="@+id/opengl_wv60"
+        android:title="wv60_フォグ距離" />
+    <item
+        android:id="@+id/opengl_wv59"
+        android:title="wv59_被写界深度" />
+    <item
+        android:id="@+id/opengl_wv58"
+        android:title="wv58_グレアフィルタ" />
+    <item
         android:id="@+id/opengl_w068"
         android:title="w068_ゴッドレイ" />
     <item
