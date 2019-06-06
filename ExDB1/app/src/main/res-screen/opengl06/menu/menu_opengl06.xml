@@ -2,6 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/opengl_wv68"
+        android:title="wv68_ゴッドレイ" />
+    <item
+        android:id="@+id/opengl_wv67"
+        android:title="wv67_ズームブラー" />
+    <item
+        android:id="@+id/opengl_wv66"
+        android:title="wv66_モザイクフィルタ" />
+    <item
+        android:id="@+id/opengl_wv65"
+        android:title="wv65_後光表面化散乱" />
+    <item
         android:id="@+id/opengl_wv64"
         android:title="wv64_リムライティング" />
     <item

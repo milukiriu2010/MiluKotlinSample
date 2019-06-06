@@ -20,9 +20,13 @@ import milu.kiriu2010.exdb1.opengl06.w063v.WV063Fragment
 import milu.kiriu2010.exdb1.opengl06.w064.W064Fragment
 import milu.kiriu2010.exdb1.opengl06.w064v.WV064Fragment
 import milu.kiriu2010.exdb1.opengl06.w065.W065Fragment
+import milu.kiriu2010.exdb1.opengl06.w065v.WV065Fragment
 import milu.kiriu2010.exdb1.opengl06.w066.W066Fragment
+import milu.kiriu2010.exdb1.opengl06.w066v.WV066Fragment
 import milu.kiriu2010.exdb1.opengl06.w067.W067Fragment
+import milu.kiriu2010.exdb1.opengl06.w067v.WV067Fragment
 import milu.kiriu2010.exdb1.opengl06.w068.W068Fragment
+import milu.kiriu2010.exdb1.opengl06.wv068v.WV068Fragment
 
 class OpenGL06Activity : AppCompatActivity() {
 
@@ -33,7 +37,7 @@ class OpenGL06Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, WV064Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, WV068Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -58,11 +62,31 @@ class OpenGL06Activity : AppCompatActivity() {
                 true
             }
             // ゴッドレイ
+            R.id.opengl_wv68 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv68") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV068Fragment.newInstance(), "wv68")
+                            .commit()
+                }
+                true
+            }
+            // ゴッドレイ
             R.id.opengl_w068 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w068") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W068Fragment.newInstance(), "w068")
+                            .commit()
+                }
+                true
+            }
+            // ズームブラー
+            R.id.opengl_wv67 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv67") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV067Fragment.newInstance(), "wv67")
                             .commit()
                 }
                 true
@@ -78,11 +102,31 @@ class OpenGL06Activity : AppCompatActivity() {
                 true
             }
             // モザイクフィルタ
+            R.id.opengl_wv66 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv66") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV066Fragment.newInstance(), "wv66")
+                            .commit()
+                }
+                true
+            }
+            // モザイクフィルタ
             R.id.opengl_w066 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w066") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W066Fragment.newInstance(), "w066")
+                            .commit()
+                }
+                true
+            }
+            // 後光 表面化散乱
+            R.id.opengl_wv65 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv65") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV065Fragment.newInstance(), "wv65")
                             .commit()
                 }
                 true

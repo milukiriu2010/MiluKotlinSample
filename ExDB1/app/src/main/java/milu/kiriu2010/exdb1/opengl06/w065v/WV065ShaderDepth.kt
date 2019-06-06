@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl06.w061v
+package milu.kiriu2010.exdb1.opengl06.w065v
 
 import android.opengl.GLES20
 import milu.kiriu2010.gui.basic.MyGLES20Func
@@ -6,24 +6,30 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
-// ------------------------------------------------------------
-// シェーダ(深度値格納)
-// ------------------------------------------------------------
-// WV059ShaderDepthと同じ
-// ------------------------------------------------------------
-// https://wgld.org/d/webgl/w061.html
-// ------------------------------------------------------------
-class WV061ShaderDepth: ES20MgShader() {
+// ----------------------------------------
+// シェーダ(裏面深度値レンダリング)
+// ----------------------------------------
+// https://wgld.org/d/webgl/w065.html
+// ----------------------------------------
+class WV065ShaderDepth: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """
             attribute vec3  a_Position;
+            uniform   mat4  u_matM;
             uniform   mat4  u_matMVP;
-            varying   vec4  v_Position;
+            uniform   vec3  u_vecEye;
+            varying   vec4  v_Color;
+
+            const float near = 0.1;
+            const float far  = 15.0;
+            const float linearDepth = 1.0/(far-near);
 
             void main() {
-                v_Position  = u_matMVP * vec4(a_Position, 1.0);
-                gl_Position = v_Position;
+                vec3  pos   = (u_matM*vec4(a_Position,1.0)).xyz;
+                float depth = length(u_vecEye-pos) * linearDepth;
+                v_Color     = vec4(vec3(depth), 1.0);
+                gl_Position = u_matMVP * vec4(a_Position,1.0);
             }
             """.trimIndent()
 
@@ -32,34 +38,10 @@ class WV061ShaderDepth: ES20MgShader() {
             """
             precision mediump   float;
 
-            varying   vec4      v_Position;
+            varying vec4 v_Color;
 
-            const float near = 0.1;
-            const float far  = 10.0;
-            const float linearDepth = 1.0/(far-near);
-
-            // 深度値を32ビット精度に変換している
-            vec4 convRGBA(float depth) {
-                // 深度値を255倍し、その小数点以下の数値を抜き出し、次に渡す。
-                // の繰り返し
-                float r = depth;
-                float g = fract(r*255.0);
-                float b = fract(g*255.0);
-                float a = fract(b*255.0);
-                // 誤差を相殺するためのバイアスを各要素にかける
-                float coef = 1.0/255.0;
-                r -= g*coef;
-                g -= b*coef;
-                b -= a*coef;
-                return vec4(r,g,b,a);
-            }
-
-            // 深度値を色情報に格納する
-            // 頂点位置情報を使って深度値に相当する値を算出している
             void main() {
-                float linear    = linearDepth * length(v_Position);
-                vec4  convColor = convRGBA(linear);
-                gl_FragColor    = convColor;
+                gl_FragColor = v_Color;
             }
             """.trimIndent()
 
@@ -91,15 +73,19 @@ class WV061ShaderDepth: ES20MgShader() {
         // ----------------------------------------------
         // uniformハンドルに値をセット
         // ----------------------------------------------
-        hUNI = IntArray(2)
+        hUNI = IntArray(3)
+
+        // uniform(モデル座標変換行列)
+        hUNI[0] = GLES20.glGetUniformLocation(programHandle,"u_matM")
+        MyGLES20Func.checkGlError("u_matM:glGetUniformLocation")
 
         // uniform(モデル×ビュー×プロジェクション)
-        hUNI[0] = GLES20.glGetUniformLocation(programHandle,"u_matMVP")
+        hUNI[1] = GLES20.glGetUniformLocation(programHandle,"u_matMVP")
         MyGLES20Func.checkGlError("u_matMVP:glGetUniformLocation")
 
-        // uniform(深度値オフセット)
-        hUNI[1] = GLES20.glGetUniformLocation(programHandle, "u_depthOffset")
-        MyGLES20Func.checkGlError("u_depthOffset:glGetUniformLocation")
+        // uniform(視点座標)
+        hUNI[2] = GLES20.glGetUniformLocation(programHandle,"u_vecEye")
+        MyGLES20Func.checkGlError("u_vecEye:glGetUniformLocation")
 
         return this
     }
@@ -107,23 +93,28 @@ class WV061ShaderDepth: ES20MgShader() {
 
     fun draw(model: MgModelAbs,
              bo: ES20VBOAbs,
+             u_matM: FloatArray,
              u_matMVP: FloatArray,
-             u_depthOffset: Float) {
+             u_vecEye: FloatArray) {
         GLES20.glUseProgram(programHandle)
-        MyGLES20Func.checkGlError2("UseProgram",this,model)
+        MyGLES20Func.checkGlError2("UseProgram", this,model)
 
         // attribute(頂点)
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER,bo.hVBO[0])
         GLES20.glVertexAttribPointer(hATTR[0],3,GLES20.GL_FLOAT,false,0,0)
         MyGLES20Func.checkGlError2("a_Position",this,model)
 
+        // uniform(モデル座標変換行列)
+        GLES20.glUniformMatrix4fv(hUNI[0],1,false,u_matM,0)
+        MyGLES20Func.checkGlError2("u_matM",this,model)
+
         // uniform(モデル×ビュー×プロジェクション)
-        GLES20.glUniformMatrix4fv(hUNI[0],1,false,u_matMVP,0)
+        GLES20.glUniformMatrix4fv(hUNI[1],1,false,u_matMVP,0)
         MyGLES20Func.checkGlError2("u_matMVP",this,model)
 
-        // uniform(深度値オフセット)
-        GLES20.glUniform1f(hUNI[1], u_depthOffset)
-        MyGLES20Func.checkGlError2("u_depthOffset",this,model)
+        // uniform(視点座標)
+        GLES20.glUniform3fv(hUNI[2],1,u_vecEye,0)
+        MyGLES20Func.checkGlError2("u_vecEye",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

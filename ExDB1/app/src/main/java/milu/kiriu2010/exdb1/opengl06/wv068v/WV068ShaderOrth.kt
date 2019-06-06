@@ -1,29 +1,28 @@
-package milu.kiriu2010.exdb1.opengl06.w061v
+package milu.kiriu2010.exdb1.opengl06.wv068v
 
 import android.opengl.GLES20
-import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.MgModelAbs
+import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
-// ------------------------------------------------------------
-// シェーダ(深度値格納)
-// ------------------------------------------------------------
-// WV059ShaderDepthと同じ
-// ------------------------------------------------------------
-// https://wgld.org/d/webgl/w061.html
-// ------------------------------------------------------------
-class WV061ShaderDepth: ES20MgShader() {
+// ------------------------------------
+// シェーダ(正射影)
+// ------------------------------------
+// https://wgld.org/d/webgl/w068.html
+// ------------------------------------
+class WV068ShaderOrth: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """
             attribute vec3  a_Position;
+            attribute vec2  a_TextureCoord;
             uniform   mat4  u_matMVP;
-            varying   vec4  v_Position;
+            varying   vec2  v_TexCoord;
 
             void main() {
-                v_Position  = u_matMVP * vec4(a_Position, 1.0);
-                gl_Position = v_Position;
+                v_TexCoord  = a_TextureCoord;
+                gl_Position = u_matMVP   * vec4(a_Position, 1.0);
             }
             """.trimIndent()
 
@@ -32,36 +31,14 @@ class WV061ShaderDepth: ES20MgShader() {
             """
             precision mediump   float;
 
-            varying   vec4      v_Position;
+            uniform  sampler2D u_Texture;
+            varying  vec2      v_TexCoord;
 
-            const float near = 0.1;
-            const float far  = 10.0;
-            const float linearDepth = 1.0/(far-near);
-
-            // 深度値を32ビット精度に変換している
-            vec4 convRGBA(float depth) {
-                // 深度値を255倍し、その小数点以下の数値を抜き出し、次に渡す。
-                // の繰り返し
-                float r = depth;
-                float g = fract(r*255.0);
-                float b = fract(g*255.0);
-                float a = fract(b*255.0);
-                // 誤差を相殺するためのバイアスを各要素にかける
-                float coef = 1.0/255.0;
-                r -= g*coef;
-                g -= b*coef;
-                b -= a*coef;
-                return vec4(r,g,b,a);
-            }
-
-            // 深度値を色情報に格納する
-            // 頂点位置情報を使って深度値に相当する値を算出している
             void main() {
-                float linear    = linearDepth * length(v_Position);
-                vec4  convColor = convRGBA(linear);
-                gl_FragColor    = convColor;
+                gl_FragColor = texture2D(u_Texture, v_TexCoord);
             }
             """.trimIndent()
+
 
     override fun loadShader(): ES20MgShader {
         // 頂点シェーダを生成
@@ -75,7 +52,7 @@ class WV061ShaderDepth: ES20MgShader() {
         // ----------------------------------------------
         // attributeハンドルに値をセット
         // ----------------------------------------------
-        hATTR = IntArray(1)
+        hATTR = IntArray(2)
         // 属性(頂点)
         hATTR[0] = GLES20.glGetAttribLocation(programHandle, "a_Position").also {
             // attribute属性を有効にする
@@ -88,6 +65,18 @@ class WV061ShaderDepth: ES20MgShader() {
         }
         MyGLES20Func.checkGlError("a_Position:glGetAttribLocation")
 
+        // 属性(テクスチャ座標)
+        hATTR[1] = GLES20.glGetAttribLocation(programHandle, "a_TextureCoord").also {
+            // attribute属性を有効にする
+            // ここで呼ばないと描画されない
+            GLES20.glEnableVertexAttribArray(it)
+            MyGLES20Func.checkGlError("a_TextureCoord:glEnableVertexAttribArray")
+            // attribute属性を登録
+            GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false,0,0)
+            MyGLES20Func.checkGlError("a_TextureCoord:glVertexAttribPointer")
+        }
+        MyGLES20Func.checkGlError("a_TextureCoord:glGetAttribLocation")
+
         // ----------------------------------------------
         // uniformハンドルに値をセット
         // ----------------------------------------------
@@ -97,18 +86,18 @@ class WV061ShaderDepth: ES20MgShader() {
         hUNI[0] = GLES20.glGetUniformLocation(programHandle,"u_matMVP")
         MyGLES20Func.checkGlError("u_matMVP:glGetUniformLocation")
 
-        // uniform(深度値オフセット)
-        hUNI[1] = GLES20.glGetUniformLocation(programHandle, "u_depthOffset")
-        MyGLES20Func.checkGlError("u_depthOffset:glGetUniformLocation")
+        // uniform(テクスチャユニット)
+        hUNI[1] = GLES20.glGetUniformLocation(programHandle,"u_Texture")
+        MyGLES20Func.checkGlError("u_Texture:glGetUniformLocation")
 
         return this
     }
 
-
     fun draw(model: MgModelAbs,
              bo: ES20VBOAbs,
              u_matMVP: FloatArray,
-             u_depthOffset: Float) {
+             u_Texture: Int) {
+
         GLES20.glUseProgram(programHandle)
         MyGLES20Func.checkGlError2("UseProgram",this,model)
 
@@ -117,13 +106,18 @@ class WV061ShaderDepth: ES20MgShader() {
         GLES20.glVertexAttribPointer(hATTR[0],3,GLES20.GL_FLOAT,false,0,0)
         MyGLES20Func.checkGlError2("a_Position",this,model)
 
+        // attribute(テクスチャ座標)
+        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER,bo.hVBO[1])
+        GLES20.glVertexAttribPointer(hATTR[1],2,GLES20.GL_FLOAT,false,0,0)
+        MyGLES20Func.checkGlError2("a_TextureCoord",this,model)
+
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glUniformMatrix4fv(hUNI[0],1,false,u_matMVP,0)
         MyGLES20Func.checkGlError2("u_matMVP",this,model)
 
-        // uniform(深度値オフセット)
-        GLES20.glUniform1f(hUNI[1], u_depthOffset)
-        MyGLES20Func.checkGlError2("u_depthOffset",this,model)
+        // uniform(テクスチャユニット)
+        GLES20.glUniform1i(hUNI[1],u_Texture)
+        MyGLES20Func.checkGlError2("u_Texture",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

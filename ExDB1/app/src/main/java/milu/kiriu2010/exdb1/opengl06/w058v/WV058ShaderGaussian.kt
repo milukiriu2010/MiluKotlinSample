@@ -159,7 +159,7 @@ class WV058ShaderGaussian: ES20MgShader() {
 
         // uniform(テクスチャユニット)
         hUNI[1] = GLES20.glGetUniformLocation(programHandle,"u_Texture0")
-        MyGLES20Func.checkGlError("u_Texture:glGetUniformLocation")
+        MyGLES20Func.checkGlError("u_Texture0:glGetUniformLocation")
 
         // uniform(gaussianフィルタを使うかどうか)
         hUNI[2] = GLES20.glGetUniformLocation(programHandle, "u_gaussian")
