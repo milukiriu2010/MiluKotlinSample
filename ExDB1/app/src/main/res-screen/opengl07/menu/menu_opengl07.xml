@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/opengl_wv77"
+        android:title="wv77_ラインシェード" />
+    <item
+        android:id="@+id/opengl_wv76"
+        android:title="wv76_ハーフトーンシェーディング" />
+    <item
+        android:id="@+id/opengl_wv72"
+        android:title="wv72_浮動小数点数VTF" />
+    <item
+        android:id="@+id/opengl_wv71"
+        android:title="wv71_頂点テクスチャフェッチ" />
+    <item
+        android:id="@+id/opengl_wv70"
+        android:title="wv70_浮動小数点数テクスチャ" />
+    <item
+        android:id="@+id/opengl_wv69"
+        android:title="wv69_シャドウマッピング(新)" />
     <item
         android:id="@+id/opengl_w077"
         android:title="w077_ラインシェード" />

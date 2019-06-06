@@ -87,7 +87,7 @@ class W077Shader: ES20MgShader() {
              matMVP: FloatArray,
              matINV: FloatArray,
              u_vecLight: FloatArray,
-             u_dotScale: Float) {
+             u_lineScale: Float) {
 
         GLES20.glUseProgram(programHandle)
         MyGLES20Func.checkGlError2("UseProgram",this,model)
@@ -141,10 +141,10 @@ class W077Shader: ES20MgShader() {
         MyGLES20Func.checkGlError2("u_vecLight",this,model)
 
         // uniform()
-        GLES20.glGetUniformLocation(programHandle, "u_dotScale").also {
-            GLES20.glUniform1f(it, u_dotScale)
+        GLES20.glGetUniformLocation(programHandle, "u_lineScale").also {
+            GLES20.glUniform1f(it, u_lineScale)
         }
-        MyGLES20Func.checkGlError2("u_dotScale",this,model)
+        MyGLES20Func.checkGlError2("u_lineScale",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)

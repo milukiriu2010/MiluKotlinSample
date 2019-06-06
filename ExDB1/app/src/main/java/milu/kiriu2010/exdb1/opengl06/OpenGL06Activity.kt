@@ -26,7 +26,7 @@ import milu.kiriu2010.exdb1.opengl06.w066v.WV066Fragment
 import milu.kiriu2010.exdb1.opengl06.w067.W067Fragment
 import milu.kiriu2010.exdb1.opengl06.w067v.WV067Fragment
 import milu.kiriu2010.exdb1.opengl06.w068.W068Fragment
-import milu.kiriu2010.exdb1.opengl06.wv068v.WV068Fragment
+import milu.kiriu2010.exdb1.opengl06.w068v.WV068Fragment
 
 class OpenGL06Activity : AppCompatActivity() {
 

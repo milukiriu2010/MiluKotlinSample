@@ -1,9 +1,7 @@
-package milu.kiriu2010.exdb1.opengl06.wv068v
+package milu.kiriu2010.exdb1.opengl07.w077v
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -13,7 +11,7 @@ import android.widget.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
-class WV068Fragment : Fragment() {
+class WV077Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View
 
@@ -26,26 +24,22 @@ class WV068Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_open_gl_w68, container, false)
+        val view = inflater.inflate(R.layout.fragment_open_gl_w77, container, false)
 
-        myGLES20View = view.findViewById(R.id.myGLES20ViewW68)
-        val renderer = WV068Renderer(context!!)
+        myGLES20View = view.findViewById(R.id.myGLES20ViewW77)
+        val renderer = WV077Renderer(context!!)
         myGLES20View.setRenderer(renderer)
         myGLES20View.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }
                 MotionEvent.ACTION_DOWN -> {
-                    Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
-                    Log.d(javaClass.simpleName,"vw[${myGLES20View.width}]vh[${myGLES20View.height}]")
-                    //render.receiveTouch(event,myGLES20View.width,myGLES20View.height)
-                    renderer.mouseP[0] = event.x
-                    renderer.mouseP[1] = event.y
+                    //Log.d(javaClass.simpleName,"ex[${event.x}]ey[${event.y}]")
+                    //Log.d(javaClass.simpleName,"vw[${myGLES20View.width}]vh[${myGLES20View.height}]")
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    //render.receiveTouch(event,myGLES20View.width,myGLES20View.height)
-                    renderer.mouseP[0] = event.x
-                    renderer.mouseP[1] = event.y
+                    renderer.receiveTouch(event,myGLES20View.width,myGLES20View.height)
                 }
                 else -> {
                 }
@@ -53,17 +47,17 @@ class WV068Fragment : Fragment() {
             true
         }
 
-        val seekBarW68 = view.findViewById<SeekBar>(R.id.seekBarW68)
-        seekBarW68.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
+        val seekBarW77 = view.findViewById<SeekBar>(R.id.seekBarW77)
+        seekBarW77.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                renderer.u_strength = seekBar.progress.toFloat()
+                renderer.u_lineScale = seekBar.progress.toFloat()*0.1f+0.1f
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
-                renderer.u_strength = seekBar.progress.toFloat()
+                renderer.u_lineScale = seekBar.progress.toFloat()*0.1f+0.1f
             }
         })
 
@@ -83,7 +77,7 @@ class WV068Fragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                WV068Fragment().apply {
+                WV077Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

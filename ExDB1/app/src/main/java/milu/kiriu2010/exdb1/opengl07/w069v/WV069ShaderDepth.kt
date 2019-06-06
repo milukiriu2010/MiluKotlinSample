@@ -1,28 +1,29 @@
-package milu.kiriu2010.exdb1.opengl06.wv068v
+package milu.kiriu2010.exdb1.opengl07.w069v
 
 import android.opengl.GLES20
-import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLES20Func
+import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
-// ------------------------------------
-// シェーダ(正射影)
-// ------------------------------------
-// https://wgld.org/d/webgl/w068.html
-// ------------------------------------
-class WV068ShaderOrth: ES20MgShader() {
+// -------------------------------------
+// シェーダ(深度格納用)
+// -------------------------------------
+// w51とは違うらしい
+// -------------------------------------
+// https://wgld.org/d/webgl/w069.html
+// -------------------------------------
+class WV069ShaderDepth: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
             """
             attribute vec3  a_Position;
-            attribute vec2  a_TextureCoord;
             uniform   mat4  u_matMVP;
-            varying   vec2  v_TexCoord;
+            varying   vec4  v_Position;
 
             void main() {
-                v_TexCoord  = a_TextureCoord;
-                gl_Position = u_matMVP   * vec4(a_Position, 1.0);
+                v_Position  = u_matMVP * vec4(a_Position, 1.0);
+                gl_Position = v_Position;
             }
             """.trimIndent()
 
@@ -31,14 +32,14 @@ class WV068ShaderOrth: ES20MgShader() {
             """
             precision mediump   float;
 
-            uniform  sampler2D u_Texture;
-            varying  vec2      v_TexCoord;
+            varying   vec4      v_Position;
 
+            // 深度値を色情報に格納する
             void main() {
-                gl_FragColor = texture2D(u_Texture, v_TexCoord);
+                float depth  = (v_Position.z/v_Position.w+1.0)*0.5;
+                gl_FragColor = vec4(vec3(depth),1.0);
             }
             """.trimIndent()
-
 
     override fun loadShader(): ES20MgShader {
         // 頂点シェーダを生成
@@ -52,7 +53,7 @@ class WV068ShaderOrth: ES20MgShader() {
         // ----------------------------------------------
         // attributeハンドルに値をセット
         // ----------------------------------------------
-        hATTR = IntArray(2)
+        hATTR = IntArray(1)
         // 属性(頂点)
         hATTR[0] = GLES20.glGetAttribLocation(programHandle, "a_Position").also {
             // attribute属性を有効にする
@@ -65,39 +66,22 @@ class WV068ShaderOrth: ES20MgShader() {
         }
         MyGLES20Func.checkGlError("a_Position:glGetAttribLocation")
 
-        // 属性(テクスチャ座標)
-        hATTR[1] = GLES20.glGetAttribLocation(programHandle, "a_TextureCoord").also {
-            // attribute属性を有効にする
-            // ここで呼ばないと描画されない
-            GLES20.glEnableVertexAttribArray(it)
-            MyGLES20Func.checkGlError("a_TextureCoord:glEnableVertexAttribArray")
-            // attribute属性を登録
-            GLES20.glVertexAttribPointer(it,2,GLES20.GL_FLOAT,false,0,0)
-            MyGLES20Func.checkGlError("a_TextureCoord:glVertexAttribPointer")
-        }
-        MyGLES20Func.checkGlError("a_TextureCoord:glGetAttribLocation")
-
         // ----------------------------------------------
         // uniformハンドルに値をセット
         // ----------------------------------------------
-        hUNI = IntArray(2)
+        hUNI = IntArray(1)
 
         // uniform(モデル×ビュー×プロジェクション)
         hUNI[0] = GLES20.glGetUniformLocation(programHandle,"u_matMVP")
         MyGLES20Func.checkGlError("u_matMVP:glGetUniformLocation")
 
-        // uniform(テクスチャユニット)
-        hUNI[1] = GLES20.glGetUniformLocation(programHandle,"u_Texture")
-        MyGLES20Func.checkGlError("u_Texture:glGetUniformLocation")
-
         return this
     }
 
+
     fun draw(model: MgModelAbs,
              bo: ES20VBOAbs,
-             u_matMVP: FloatArray,
-             u_Texture: Int) {
-
+             u_matMVP: FloatArray) {
         GLES20.glUseProgram(programHandle)
         MyGLES20Func.checkGlError2("UseProgram",this,model)
 
@@ -106,18 +90,9 @@ class WV068ShaderOrth: ES20MgShader() {
         GLES20.glVertexAttribPointer(hATTR[0],3,GLES20.GL_FLOAT,false,0,0)
         MyGLES20Func.checkGlError2("a_Position",this,model)
 
-        // attribute(テクスチャ座標)
-        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER,bo.hVBO[1])
-        GLES20.glVertexAttribPointer(hATTR[1],2,GLES20.GL_FLOAT,false,0,0)
-        MyGLES20Func.checkGlError2("a_TextureCoord",this,model)
-
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glUniformMatrix4fv(hUNI[0],1,false,u_matMVP,0)
         MyGLES20Func.checkGlError2("u_matMVP",this,model)
-
-        // uniform(テクスチャユニット)
-        GLES20.glUniform1i(hUNI[1],u_Texture)
-        MyGLES20Func.checkGlError2("u_Texture",this,model)
 
         // モデルを描画
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.datIdx.size, GLES20.GL_UNSIGNED_SHORT, model.bufIdx)
