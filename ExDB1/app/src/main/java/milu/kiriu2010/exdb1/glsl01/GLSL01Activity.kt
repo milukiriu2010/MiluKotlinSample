@@ -6,15 +6,25 @@ import android.view.Menu
 import android.view.MenuItem
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.glsl01.g001.GLSL01Fragment
+import milu.kiriu2010.exdb1.glsl01.g001v.GLSLV01Fragment
 import milu.kiriu2010.exdb1.glsl01.g002.GLSL02Fragment
+import milu.kiriu2010.exdb1.glsl01.g002v.GLSLV02Fragment
 import milu.kiriu2010.exdb1.glsl01.g003.GLSL03Fragment
+import milu.kiriu2010.exdb1.glsl01.g003v.GLSLV03Fragment
 import milu.kiriu2010.exdb1.glsl01.g004.GLSL04Fragment
+import milu.kiriu2010.exdb1.glsl01.g004v.GLSLV04Fragment
 import milu.kiriu2010.exdb1.glsl01.g005.GLSL05Fragment
+import milu.kiriu2010.exdb1.glsl01.g005v.GLSLV05Fragment
 import milu.kiriu2010.exdb1.glsl01.g006.GLSL06Fragment
+import milu.kiriu2010.exdb1.glsl01.g006v.GLSLV06Fragment
 import milu.kiriu2010.exdb1.glsl01.g007.GLSL07Fragment
+import milu.kiriu2010.exdb1.glsl01.g007v.GLSLV07Fragment
 import milu.kiriu2010.exdb1.glsl01.g008.GLSL08Fragment
+import milu.kiriu2010.exdb1.glsl01.g008v.GLSLV08Fragment
 import milu.kiriu2010.exdb1.glsl01.g009.GLSL09Fragment
+import milu.kiriu2010.exdb1.glsl01.g009v.GLSLV09Fragment
 import milu.kiriu2010.exdb1.glsl01.g010.GLSL10Fragment
+import milu.kiriu2010.exdb1.glsl01.g010v.GLSLV10Fragment
 
 class GLSL01Activity : AppCompatActivity() {
 
@@ -25,7 +35,7 @@ class GLSL01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, GLSL10Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, GLSLV10Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -50,11 +60,31 @@ class GLSL01Activity : AppCompatActivity() {
                 true
             }
             // 球体をライティング
+            R.id.glsl_gv10 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("gv10") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSLV10Fragment.newInstance(), "gv10")
+                            .commit()
+                }
+                true
+            }
+            // 球体をライティング
             R.id.glsl_g010 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("g10") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, GLSL10Fragment.newInstance(), "g10")
+                            .commit()
+                }
+                true
+            }
+            // レイマーチングで球体
+            R.id.glsl_gv09 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("gv09") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSLV09Fragment.newInstance(), "gv09")
                             .commit()
                 }
                 true
@@ -69,12 +99,32 @@ class GLSL01Activity : AppCompatActivity() {
                 }
                 true
             }
-            // ノイズ
+            // レイ
+            R.id.glsl_gv08 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("gv08") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSLV08Fragment.newInstance(), "gv08")
+                            .commit()
+                }
+                true
+            }
+            // レイ
             R.id.glsl_g008 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("g08") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, GLSL08Fragment.newInstance(), "g08")
+                            .commit()
+                }
+                true
+            }
+            // ノイズ
+            R.id.glsl_gv07 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("gv07") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSLV07Fragment.newInstance(), "gv07")
                             .commit()
                 }
                 true
@@ -90,11 +140,31 @@ class GLSL01Activity : AppCompatActivity() {
                 true
             }
             // ジュリア集合
+            R.id.glsl_gv06 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("gv06") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSLV06Fragment.newInstance(), "gv06")
+                            .commit()
+                }
+                true
+            }
+            // ジュリア集合
             R.id.glsl_g006 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("g06") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, GLSL06Fragment.newInstance(), "g06")
+                            .commit()
+                }
+                true
+            }
+            // マンデルブロ集合
+            R.id.glsl_gv05 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("gv05") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSLV05Fragment.newInstance(), "gv05")
                             .commit()
                 }
                 true
@@ -110,11 +180,31 @@ class GLSL01Activity : AppCompatActivity() {
                 true
             }
             // 様々な図形
+            R.id.glsl_gv04 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("gv04") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSLV04Fragment.newInstance(), "gv04")
+                            .commit()
+                }
+                true
+            }
+            // 様々な図形
             R.id.glsl_g004 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("g04") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, GLSL04Fragment.newInstance(), "g04")
+                            .commit()
+                }
+                true
+            }
+            // 光の玉
+            R.id.glsl_gv03 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("gv03") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSLV03Fragment.newInstance(), "gv03")
                             .commit()
                 }
                 true
@@ -130,11 +220,31 @@ class GLSL01Activity : AppCompatActivity() {
                 true
             }
             // 同心円
+            R.id.glsl_gv02 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("gv02") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSLV02Fragment.newInstance(), "gv02")
+                            .commit()
+                }
+                true
+            }
+            // 同心円
             R.id.glsl_g002 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("g02") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, GLSL02Fragment.newInstance(), "g02")
+                            .commit()
+                }
+                true
+            }
+            // GLSLのみでレンダリング
+            R.id.glsl_gv01 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("gv01") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, GLSLV01Fragment.newInstance(), "gv01")
                             .commit()
                 }
                 true

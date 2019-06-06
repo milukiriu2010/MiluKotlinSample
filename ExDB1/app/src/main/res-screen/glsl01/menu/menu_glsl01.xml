@@ -2,6 +2,36 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/glsl_gv10"
+        android:title="gv10_球体ライティング" />
+    <item
+        android:id="@+id/glsl_gv09"
+        android:title="gv09_レイマーチングで球体" />
+    <item
+        android:id="@+id/glsl_gv08"
+        android:title="gv08_レイ" />
+    <item
+        android:id="@+id/glsl_gv07"
+        android:title="gv07_ノイズ" />
+    <item
+        android:id="@+id/glsl_gv06"
+        android:title="gv06_ジュリア集合" />
+    <item
+        android:id="@+id/glsl_gv05"
+        android:title="gv05_マンデルブロ集合" />
+    <item
+        android:id="@+id/glsl_gv04"
+        android:title="gv04_様々な図形" />
+    <item
+        android:id="@+id/glsl_gv03"
+        android:title="gv03_光の玉" />
+    <item
+        android:id="@+id/glsl_gv02"
+        android:title="gv02_同心円" />
+    <item
+        android:id="@+id/glsl_gv01"
+        android:title="gv01_GLSL" />
+    <item
         android:id="@+id/glsl_g010"
         android:title="g010_球体ライティング" />
     <item
