@@ -2,6 +2,36 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/glsl_gv20"
+        android:title="gv20_レイマーチングソフトシャドウ" />
+    <item
+        android:id="@+id/glsl_gv19"
+        android:title="gv19_オブジェクトに投影" />
+    <item
+        android:id="@+id/glsl_gv18"
+        android:title="gv18_オブジェクトを行列でねじる" />
+    <item
+        android:id="@+id/glsl_gv17"
+        android:title="gv17_オブジェクトを行列で回転" />
+    <item
+        android:id="@+id/glsl_gv16"
+        android:title="gv16_オブジェクトの重なりをスムース" />
+    <item
+        android:id="@+id/glsl_gv15"
+        android:title="gv15_オブジェクトの重なりを考慮" />
+    <item
+        android:id="@+id/glsl_gv14"
+        android:title="gv14_異なる形状のオブジェクト" />
+    <item
+        android:id="@+id/glsl_gv13"
+        android:title="gv13_ボックスモデルを複製" />
+    <item
+        android:id="@+id/glsl_gv12"
+        android:title="gv12_オブジェクト複製" />
+    <item
+        android:id="@+id/glsl_gv11"
+        android:title="gv11_レイマーチング(視野角)" />
+    <item
         android:id="@+id/glsl_g020"
         android:title="g020_レイマーチングソフトシャドウ" />
     <item

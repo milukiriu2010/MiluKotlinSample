@@ -6,9 +6,13 @@ import android.view.Menu
 import android.view.MenuItem
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl08.w081.W081Fragment
+import milu.kiriu2010.exdb1.opengl08.w081v.WV081Fragment
 import milu.kiriu2010.exdb1.opengl08.w086.W086Fragment
+import milu.kiriu2010.exdb1.opengl08.w086v.WV086Fragment
 import milu.kiriu2010.exdb1.opengl08.w087.W087Fragment
+import milu.kiriu2010.exdb1.opengl08.w087v.WV087Fragment
 import milu.kiriu2010.exdb1.opengl08.w089.W089Fragment
+import milu.kiriu2010.exdb1.opengl08.w089v.WV089Fragment
 
 class OpenGL08Activity : AppCompatActivity() {
 
@@ -19,7 +23,7 @@ class OpenGL08Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, W089Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, WV089Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -45,11 +49,31 @@ class OpenGL08Activity : AppCompatActivity() {
                 true
             }
             // スフィア環境マッピング
+            R.id.opengl_wv89 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv89") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV089Fragment.newInstance(), "wv89")
+                            .commit()
+                }
+                true
+            }
+            // スフィア環境マッピング
             R.id.opengl_w089 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w089") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W089Fragment.newInstance(), "w089")
+                            .commit()
+                }
+                true
+            }
+            // フラットシェーディング
+            R.id.opengl_wv87 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv87") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV087Fragment.newInstance(), "wv87")
                             .commit()
                 }
                 true
@@ -65,11 +89,31 @@ class OpenGL08Activity : AppCompatActivity() {
                 true
             }
             // 描画結果から色を取得
+            R.id.opengl_wv86 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv86") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV086Fragment.newInstance(), "wv86")
+                            .commit()
+                }
+                true
+            }
+            // 描画結果から色を取得
             R.id.opengl_w086 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w086") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, W086Fragment.newInstance(), "w086")
+                            .commit()
+                }
+                true
+            }
+            // VBOを逐次更新
+            R.id.opengl_wv81 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("wv81") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, WV081Fragment.newInstance(), "wv81")
                             .commit()
                 }
                 true
