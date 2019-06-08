@@ -112,14 +112,44 @@ class ES30Va03ShaderA: ES30MgShader() {
             MyGLES30Func.checkGlError("a_TexCoord:glVertexAttribPointer")
         }
         MyGLES30Func.checkGlError("a_TexCoord:glGetAttribLocation")
+
+        // ----------------------------------------------
+        // uniformハンドルに値をセット
+        // ----------------------------------------------
+        hUNI = IntArray(6)
+
+        // uniform(モデル)
+        hUNI[0] = GLES30.glGetUniformLocation(programHandle,"u_matM")
+        MyGLES30Func.checkGlError("u_matM:glGetUniformLocation")
+
+        // uniform(モデル×ビュー×プロジェクション)
+        hUNI[1] = GLES30.glGetUniformLocation(programHandle,"u_matMVP")
+        MyGLES30Func.checkGlError("u_matMVP:glGetUniformLocation")
+
+        // uniform()
+        hUNI[2] = GLES30.glGetUniformLocation(programHandle,"u_matN")
+        MyGLES30Func.checkGlError("u_matN:glGetUniformLocation")
+
+        // uniform(光源位置)
+        hUNI[3] = GLES30.glGetUniformLocation(programHandle,"u_vecLight")
+        MyGLES30Func.checkGlError("u_vecLight:glGetUniformLocation")
+
+        // uniform(視点座標)
+        hUNI[4] = GLES30.glGetUniformLocation(programHandle,"u_vecEye")
+        MyGLES30Func.checkGlError("u_vecEye:glGetUniformLocation")
+
+        // uniform(テクスチャユニット)
+        hUNI[5] = GLES30.glGetUniformLocation(programHandle, "u_Texture")
+        MyGLES30Func.checkGlError("u_Texture:glGetUniformLocation")
+
         return this
     }
 
     fun draw(model: MgModelAbs,
              bo: ES30VBOAbs,
-             matM: FloatArray,
-             matMVP: FloatArray,
-             matN: FloatArray,
+             u_matM: FloatArray,
+             u_matMVP: FloatArray,
+             u_matN: FloatArray,
              u_vecLight: FloatArray,
              u_vecEye: FloatArray,
              u_Texture: Int) {
@@ -143,15 +173,15 @@ class ES30Va03ShaderA: ES30MgShader() {
         MyGLES30Func.checkGlError2("a_TexCoord",this,model)
 
         // uniform(モデル)
-        GLES30.glUniformMatrix4fv(hUNI[0],1,false,matM,0)
+        GLES30.glUniformMatrix4fv(hUNI[0],1,false,u_matM,0)
         MyGLES30Func.checkGlError2("u_matM",this,model)
 
         // uniform(モデル×ビュー×プロジェクション)
-        GLES30.glUniformMatrix4fv(hUNI[1],1,false,matMVP,0)
+        GLES30.glUniformMatrix4fv(hUNI[1],1,false,u_matMVP,0)
         MyGLES30Func.checkGlError2("u_matMVP",this,model)
 
         // uniform()
-        GLES30.glUniformMatrix4fv(hUNI[2],1,false,matN,0)
+        GLES30.glUniformMatrix4fv(hUNI[2],1,false,u_matN,0)
         MyGLES30Func.checkGlError2("u_matN",this,model)
 
         // uniform(光源位置)
@@ -159,11 +189,11 @@ class ES30Va03ShaderA: ES30MgShader() {
         MyGLES30Func.checkGlError2("u_vecLight",this,model)
 
         // uniform(視点座標)
-        GLES30.glUniform3fv(hUNI[3],1,u_vecEye,0)
+        GLES30.glUniform3fv(hUNI[4],1,u_vecEye,0)
         MyGLES30Func.checkGlError2("u_vecEye",this,model)
 
-        // uniform(テクスチャ座標)
-        GLES30.glUniform1i(hUNI[4], u_Texture)
+        // uniform(テクスチャユニット)
+        GLES30.glUniform1i(hUNI[5], u_Texture)
         MyGLES30Func.checkGlError2("u_Texture",this,model)
 
         // モデルを描画

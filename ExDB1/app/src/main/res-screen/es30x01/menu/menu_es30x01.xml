@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/es30_av03"
+        android:title="av03_ES30" />
+    <item
         android:id="@+id/es30_a06"
         android:title="a06_VAO" />
     <item

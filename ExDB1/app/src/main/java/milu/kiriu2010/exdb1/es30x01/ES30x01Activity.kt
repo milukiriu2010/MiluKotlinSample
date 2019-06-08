@@ -7,6 +7,7 @@ import android.view.MenuItem
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.es30x01.rot01es30.ES30Rotate01Fragment
 import milu.kiriu2010.exdb1.es30x01.a03.A03Fragment
+import milu.kiriu2010.exdb1.es30x01.a03v.AV03Fragment
 import milu.kiriu2010.exdb1.es30x01.a04.A04Fragment
 import milu.kiriu2010.exdb1.es30x01.a05.A05Fragment
 import milu.kiriu2010.exdb1.es30x01.a06.A06Fragment
@@ -21,7 +22,7 @@ class ES30x01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, A05Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, AV03Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -72,6 +73,16 @@ class ES30x01Activity : AppCompatActivity() {
                 if (supportFragmentManager.findFragmentByTag("a04") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, A04Fragment.newInstance(), "a04")
+                            .commit()
+                }
+                true
+            }
+            // GLSL ES3.0
+            R.id.es30_a03 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("av03") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, AV03Fragment.newInstance(), "av03")
                             .commit()
                 }
                 true
