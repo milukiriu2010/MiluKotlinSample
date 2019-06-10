@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.es30x01.a03v
+package milu.kiriu2010.exdb1.es30x01.a04v
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -8,7 +8,10 @@ import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLES30Func
 import milu.kiriu2010.gui.model.Board01Model
+import milu.kiriu2010.gui.model.Sphere01Model
+import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
+import milu.kiriu2010.gui.vbo.es20.ES20VBOIp
 import milu.kiriu2010.gui.vbo.es30.ES30VBOAbs
 import milu.kiriu2010.gui.vbo.es30.ES30VBOIp
 import milu.kiriu2010.gui.vbo.es30.ES30VBOIpnt
@@ -17,23 +20,29 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // -----------------------------------------
-// GLSL ES 3.0
+// GLSL ES 3.0(layout)
 // -----------------------------------------
-// https://wgld.org/d/webgl2/w003.html
+// https://wgld.org/d/webgl2/w004.html
 // -----------------------------------------
-class AV03Renderer(ctx: Context): MgRenderer(ctx) {
+class AV04Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(板ポリゴン)
     private lateinit var modelBoard: Board01Model
+    // 描画オブジェクト(トーラス)
+    private lateinit var modelTorus: Torus01Model
+    // 描画オブジェクト(球体)
+    private lateinit var modelSphere: Sphere01Model
 
-    // VBO(フレームバッファ)
-    private lateinit var boFB: ES30VBOAbs
-    // VBO(デフォルトバッファ)
-    private lateinit var boDB: ES30VBOAbs
+    // VBO(板ポリゴン)
+    private lateinit var boBoard: ES30VBOAbs
+    // VBO(トーラス)
+    private lateinit var boTorus: ES30VBOAbs
+    // VBO(球体)
+    private lateinit var boSphere: ES30VBOAbs
 
     // シェーダA
-    private lateinit var shaderA: ES30Va03ShaderA
+    private lateinit var shaderA: ES30Va04ShaderA
     // シェーダB
-    private lateinit var shaderB: ES30Va03ShaderB
+    private lateinit var shaderB: ES30Va04ShaderB
 
     // 画面縦横比
     var ratio: Float = 1f
@@ -88,14 +97,17 @@ class AV03Renderer(ctx: Context): MgRenderer(ctx) {
         GLES30.glActiveTexture(GLES30.GL_TEXTURE0)
         GLES30.glBindTexture(GLES30.GL_TEXTURE_2D,textures[0])
 
-        // 板ポリゴンをレンダリング
+        // 球体をレンダリング
         val matN = FloatArray(16)
         Matrix.setIdentityM(matM,0)
         Matrix.rotateM(matM,0,t0,0f,1f,0f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
         Matrix.invertM(matI,0,matM,0)
         Matrix.transposeM(matN,0,matI,0)
-        shaderA.draw(modelBoard,boFB,matM,matMVP,matN,vecLight,vecEye,0)
+        shaderA.draw(modelSphere,boSphere,matM,matMVP,matN,vecLight,vecEye,0)
+
+        // トーラスをレンダリング
+        shaderA.draw(modelTorus,boTorus,matM,matMVP,matN,vecLight,vecEye,0)
 
         // フレームバッファのバインドを解除
         GLES30.glBindFramebuffer(GLES30.GL_FRAMEBUFFER,0)
@@ -110,7 +122,7 @@ class AV03Renderer(ctx: Context): MgRenderer(ctx) {
         GLES30.glBindTexture(GLES30.GL_TEXTURE_2D,frameTexture[0])
 
         // 板ポリゴンをレンダリング
-        shaderB.draw(modelBoard,boDB,1)
+        shaderB.draw(modelBoard,boBoard,1)
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -139,13 +151,14 @@ class AV03Renderer(ctx: Context): MgRenderer(ctx) {
         // カリングと深度テストを有効にする
         GLES30.glEnable(GLES30.GL_DEPTH_TEST)
         GLES30.glDepthFunc(GLES30.GL_LEQUAL)
+        GLES30.glEnable(GLES30.GL_CULL_FACE)
 
         // シェーダA
-        shaderA = ES30Va03ShaderA()
+        shaderA = ES30Va04ShaderA()
         shaderA.loadShader()
 
         // シェーダB
-        shaderB = ES30Va03ShaderB()
+        shaderB = ES30Va04ShaderB()
         shaderB.loadShader()
 
         // モデル生成(板ポリゴン)
@@ -154,13 +167,34 @@ class AV03Renderer(ctx: Context): MgRenderer(ctx) {
                 "pattern" to 100f
         ))
 
-        // VBO(フレームバッファ)
-        boFB = ES30VBOIpnt()
-        boFB.makeVIBO(modelBoard)
+        // モデル生成(トーラス)
+        modelTorus = Torus01Model()
+        modelTorus.createPath(mapOf(
+                "row"     to 32f,
+                "column"  to 32f,
+                "iradius" to 0.25f,
+                "oradius" to 1.25f
+        ))
 
-        // VBO(デフォルトバッファ)
-        boDB = ES30VBOIp()
-        boDB.makeVIBO(modelBoard)
+        // モデル生成(球体)
+        modelSphere = Sphere01Model()
+        modelSphere.createPath(mapOf(
+                "row"    to 16f,
+                "column" to 16f,
+                "radius" to 0.75f
+        ))
+
+        // VBO(板ポリゴン)
+        boBoard = ES30VBOIp()
+        boBoard.makeVIBO(modelBoard)
+
+        // VBO(トーラス)
+        boTorus = ES30VBOIpnt()
+        boTorus.makeVIBO(modelTorus)
+
+        // VBO(球体)
+        boSphere = ES30VBOIpnt()
+        boSphere.makeVIBO(modelSphere)
 
         // ライトの向き
         vecLight[0] = 5f
@@ -172,8 +206,9 @@ class AV03Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun closeShader() {
-        boFB.deleteVIBO()
-        boDB.deleteVIBO()
+        boBoard.deleteVIBO()
+        boTorus.deleteVIBO()
+        boSphere.deleteVIBO()
         shaderA.deleteShader()
         shaderB.deleteShader()
 

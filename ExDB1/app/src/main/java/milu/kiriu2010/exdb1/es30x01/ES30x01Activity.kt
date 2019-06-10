@@ -9,7 +9,9 @@ import milu.kiriu2010.exdb1.es30x01.rot01es30.ES30Rotate01Fragment
 import milu.kiriu2010.exdb1.es30x01.a03.A03Fragment
 import milu.kiriu2010.exdb1.es30x01.a03v.AV03Fragment
 import milu.kiriu2010.exdb1.es30x01.a04.A04Fragment
+import milu.kiriu2010.exdb1.es30x01.a04v.AV04Fragment
 import milu.kiriu2010.exdb1.es30x01.a05.A05Fragment
+import milu.kiriu2010.exdb1.es30x01.a05v.AV05Fragment
 import milu.kiriu2010.exdb1.es30x01.a06.A06Fragment
 
 class ES30x01Activity : AppCompatActivity() {
@@ -18,11 +20,10 @@ class ES30x01Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_es30x01)
 
-
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, AV03Fragment.newInstance(), "xyz")
+                    .replace(R.id.frameLayout, AV05Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -58,11 +59,31 @@ class ES30x01Activity : AppCompatActivity() {
                 true
             }
             // flat補間
+            R.id.es30_av05 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("av05") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, AV05Fragment.newInstance(), "av05")
+                            .commit()
+                }
+                true
+            }
+            // flat補間
             R.id.es30_a05 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("a05") == null) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, A05Fragment.newInstance(), "a05")
+                            .commit()
+                }
+                true
+            }
+            // GLSL ES3.0 layout
+            R.id.es30_av04 -> {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.findFragmentByTag("av04") == null) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, AV04Fragment.newInstance(), "av04")
                             .commit()
                 }
                 true
@@ -78,7 +99,7 @@ class ES30x01Activity : AppCompatActivity() {
                 true
             }
             // GLSL ES3.0
-            R.id.es30_a03 -> {
+            R.id.es30_av03 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("av03") == null) {
                     supportFragmentManager.beginTransaction()
