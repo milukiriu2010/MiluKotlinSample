@@ -1,7 +1,6 @@
 package milu.kiriu2010.gui.vbo.es30
 
 import android.opengl.GLES30
-import android.util.Log
 import milu.kiriu2010.gui.basic.MyGLES30Func
 import milu.kiriu2010.gui.model.MgModelAbs
 
@@ -18,8 +17,9 @@ import milu.kiriu2010.gui.model.MgModelAbs
 // --------------------------------
 class ES30VAOIpnt: ES30VAOAbs() {
 
-    override fun makeVIBO(model: MgModelAbs) {
-        //Log.d(javaClass.simpleName,"makeVIBO:${model.javaClass.simpleName}")
+    override fun makeVIBO(modelAbs: MgModelAbs) {
+        //Log.d(javaClass.simpleName,"makeVIBO:${modelAbs.javaClass.simpleName}")
+        model = modelAbs
 
         // ------------------------------------------------
         // VAOの生成
@@ -38,10 +38,10 @@ class ES30VAOIpnt: ES30VAOAbs() {
         MyGLES30Func.checkGlError("hVBO:glGenBuffers")
 
         // 位置
-        model.bufPos.position(0)
+        modelAbs.bufPos.position(0)
         GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER,hVBO[0])
         MyGLES30Func.checkGlError("a_Position:glBindBuffer")
-        GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER,model.bufPos.capacity()*4, model.bufPos,usageVBO)
+        GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER,modelAbs.bufPos.capacity()*4, modelAbs.bufPos,usageVBO)
         MyGLES30Func.checkGlError("a_Position:glBufferData")
         GLES30.glEnableVertexAttribArray(0)
         MyGLES30Func.checkGlError("a_Position:glEnableVertexAttribArray")
@@ -50,10 +50,10 @@ class ES30VAOIpnt: ES30VAOAbs() {
         //GLES30.glVertexAttribPointer(0,3,GLES30.GL_FLOAT,false,3*4,0)
 
         // 法線
-        model.bufNor.position(0)
+        modelAbs.bufNor.position(0)
         GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER,hVBO[1])
         MyGLES30Func.checkGlError("a_Normal:glBindBuffer")
-        GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER,model.bufNor.capacity()*4, model.bufNor,usageVBO)
+        GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER,modelAbs.bufNor.capacity()*4, modelAbs.bufNor,usageVBO)
         MyGLES30Func.checkGlError("a_Normal:glBufferData")
         GLES30.glEnableVertexAttribArray(1)
         MyGLES30Func.checkGlError("a_Normal:glEnableVertexAttribArray")
@@ -62,10 +62,10 @@ class ES30VAOIpnt: ES30VAOAbs() {
         //GLES30.glVertexAttribPointer(1,3,GLES30.GL_FLOAT,false,3*4,0)
 
         // テクスチャ座標
-        model.bufTxc.position(0)
+        modelAbs.bufTxc.position(0)
         GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER,hVBO[2])
         MyGLES30Func.checkGlError("a_TexCoord:glBindBuffer")
-        GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER,model.bufTxc.capacity()*4, model.bufTxc,usageVBO)
+        GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER,modelAbs.bufTxc.capacity()*4, modelAbs.bufTxc,usageVBO)
         MyGLES30Func.checkGlError("a_TexCoord:glBufferData")
         GLES30.glEnableVertexAttribArray(2)
         MyGLES30Func.checkGlError("a_TexCoord:glEnableVertexAttribArray")
@@ -80,10 +80,10 @@ class ES30VAOIpnt: ES30VAOAbs() {
         GLES30.glGenBuffers(1, hIBO,0)
         MyGLES30Func.checkGlError("hIBO:glGenBuffers")
 
-        model.bufIdx.position(0)
+        modelAbs.bufIdx.position(0)
         GLES30.glBindBuffer(GLES30.GL_ELEMENT_ARRAY_BUFFER,hIBO[0])
         MyGLES30Func.checkGlError("idx:glBindBuffer")
-        GLES30.glBufferData(GLES30.GL_ELEMENT_ARRAY_BUFFER,model.bufIdx.capacity()*2, model.bufIdx,GLES30.GL_STATIC_DRAW)
+        GLES30.glBufferData(GLES30.GL_ELEMENT_ARRAY_BUFFER,modelAbs.bufIdx.capacity()*2, modelAbs.bufIdx,GLES30.GL_STATIC_DRAW)
         MyGLES30Func.checkGlError("idx:glBufferData")
 
         // リソース解放

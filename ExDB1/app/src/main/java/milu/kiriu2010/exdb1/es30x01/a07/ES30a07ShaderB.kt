@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.es30x01.a06
+package milu.kiriu2010.exdb1.es30x01.a07
 
 import android.opengl.GLES30
 import android.util.Log
@@ -8,12 +8,12 @@ import milu.kiriu2010.gui.shader.es30.ES30MgShader
 import milu.kiriu2010.gui.vbo.es30.ES30VAOAbs
 
 // ------------------------------------
+// VAOとインスタンシング
 // シェーダB
 // ------------------------------------
-// https://wgld.org/d/webgl2/w006.html
-// https://github.com/danginsburg/opengles3-book/blob/master/Android_Java/Chapter_6/VertexArrayObjects/src/com/openglesbook/VertexArrayObjects/VAORenderer.java
+// https://wgld.org/d/webgl2/w007.html
 // ------------------------------------
-class ES30a06ShaderB: ES30MgShader() {
+class ES30a07ShaderB: ES30MgShader() {
     // 頂点シェーダ
     private val scv =
             """#version 300 es
@@ -38,10 +38,10 @@ class ES30a06ShaderB: ES30MgShader() {
 
             in  vec2  v_TexCoord;
 
-            out vec4  o_Color;
+            out vec4  o_FragColor;
 
             void main() {
-                o_Color = texture(u_Texture,v_TexCoord);
+                o_FragColor = texture(u_Texture,v_TexCoord);
             }
             """.trimIndent()
 
@@ -53,21 +53,6 @@ class ES30a06ShaderB: ES30MgShader() {
 
         // プログラムオブジェクトの生成とリンク
         programHandle = MyGLES30Func.createProgram(svhandle,sfhandle)
-
-        /*
-        // ----------------------------------------------
-        // attributeハンドルに値をセット
-        // ----------------------------------------------
-        hATTR = intArrayOf(0)
-        // 属性(頂点)
-        // attribute属性を有効にする
-        // ここで呼ばないと描画されない
-        GLES30.glEnableVertexAttribArray(hATTR[0])
-        MyGLES30Func.checkGlError("a_Position:glEnableVertexAttribArray")
-        // attribute属性を登録
-        GLES30.glVertexAttribPointer(hATTR[0],3,GLES30.GL_FLOAT,false,0,0)
-        MyGLES30Func.checkGlError("a_Position:glVertexAttribPointer")
-        */
 
         // ----------------------------------------------
         // uniformハンドルに値をセット

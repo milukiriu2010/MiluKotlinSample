@@ -11,6 +11,8 @@ import milu.kiriu2010.gui.model.MgModelAbs
 // 2019.06.11 VAO追加
 // --------------------------------------------------------------
 abstract class ES30VAOAbs {
+    // 描画モデル
+    lateinit var model: MgModelAbs
     // VAOのハンドル
     lateinit var hVAO: IntArray
     // VBOのハンドル
@@ -21,7 +23,7 @@ abstract class ES30VAOAbs {
     // VBOバッファにデータを設定するときのusage
     var usageVBO = GLES30.GL_STATIC_DRAW
 
-    abstract fun makeVIBO(model: MgModelAbs)
+    abstract fun makeVIBO(modelAbs: MgModelAbs)
 
     fun deleteVIBO() {
         if (this::hVAO.isInitialized) {

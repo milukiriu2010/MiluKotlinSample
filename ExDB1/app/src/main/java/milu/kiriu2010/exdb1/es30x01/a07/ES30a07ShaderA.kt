@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.es30x01.a06
+package milu.kiriu2010.exdb1.es30x01.a07
 
 import android.opengl.GLES30
 import android.util.Log
@@ -8,12 +8,12 @@ import milu.kiriu2010.gui.shader.es30.ES30MgShader
 import milu.kiriu2010.gui.vbo.es30.ES30VAOAbs
 
 // ------------------------------------
+// VAOとインスタンシング
 // シェーダA
 // ------------------------------------
-// https://wgld.org/d/webgl2/w006.html
-// https://github.com/danginsburg/opengles3-book/blob/master/Android_Java/Chapter_6/VertexArrayObjects/src/com/openglesbook/VertexArrayObjects/VAORenderer.java
+// https://wgld.org/d/webgl2/w007.html
 // ------------------------------------
-class ES30a06ShaderA: ES30MgShader() {
+class ES30a07ShaderA: ES30MgShader() {
     // 頂点シェーダ
     private val scv =
             """#version 300 es
@@ -21,6 +21,7 @@ class ES30a06ShaderA: ES30MgShader() {
             layout (location = 0) in vec3  a_Position;
             layout (location = 1) in vec3  a_Normal;
             layout (location = 2) in vec2  a_TexCoord;
+            layout (location = 3) in vec3  a_Offset;
 
             uniform  mat4  u_matM;
             uniform  mat4  u_matMVP;
@@ -31,10 +32,11 @@ class ES30a06ShaderA: ES30MgShader() {
             out vec2  v_TexCoord;
 
             void main() {
-                v_Position  = (u_matM * vec4(a_Position,1.0)).xyz;
-                v_Normal    = (u_matN * vec4(a_Normal  ,0.0)).xyz;
+                vec3 pos    = a_Position + a_Offset;
+                v_Position  = (u_matM  * vec4(pos     ,1.0)).xyz;
+                v_Normal    = (u_matN  * vec4(a_Normal,0.0)).xyz;
                 v_TexCoord  = a_TexCoord;
-                gl_Position = u_matMVP   * vec4(a_Position, 1.0);
+                gl_Position = u_matMVP * vec4(pos, 1.0);
             }
             """.trimIndent()
 
@@ -52,7 +54,7 @@ class ES30a06ShaderA: ES30MgShader() {
             in  vec3  v_Normal;
             in  vec2  v_TexCoord;
 
-            out vec4  o_Color;
+            out vec4  o_FragColor;
 
             void main() {
                 vec3  light    = normalize(u_vecLight - v_Position);
@@ -62,7 +64,7 @@ class ES30a06ShaderA: ES30MgShader() {
                 float specular = max(dot(light,ref)     ,0.0);
                 specular = pow(specular,20.0);
                 vec4 samplerColor = texture(u_Texture,v_TexCoord);
-                o_Color = vec4(samplerColor.rgb*diffuse + specular, samplerColor.a);
+                o_FragColor = vec4(samplerColor.rgb*diffuse + specular, samplerColor.a);
             }
             """.trimIndent()
 
@@ -75,39 +77,6 @@ class ES30a06ShaderA: ES30MgShader() {
 
         // プログラムオブジェクトの生成とリンク
         programHandle = MyGLES30Func.createProgram(svhandle,sfhandle)
-
-        /*
-        // ----------------------------------------------
-        // attributeハンドルに値をセット
-        // ----------------------------------------------
-        hATTR = intArrayOf(0,1,2)
-        // 属性(頂点)
-        // attribute属性を有効にする
-        // ここで呼ばないと描画されない
-        GLES30.glEnableVertexAttribArray(hATTR[0])
-        MyGLES30Func.checkGlError("a_Position:glEnableVertexAttribArray")
-        // attribute属性を登録
-        GLES30.glVertexAttribPointer(hATTR[0],3,GLES30.GL_FLOAT,false,0,0)
-        MyGLES30Func.checkGlError("a_Position:glVertexAttribPointer")
-
-        // 属性(法線)
-        // attribute属性を有効にする
-        // ここで呼ばないと描画されない
-        GLES30.glEnableVertexAttribArray(hATTR[1])
-        MyGLES30Func.checkGlError("a_Normal:glEnableVertexAttribArray")
-        // attribute属性を登録
-        GLES30.glVertexAttribPointer(hATTR[1],3,GLES30.GL_FLOAT,false,0,0)
-        MyGLES30Func.checkGlError("a_Normal:glVertexAttribPointer")
-
-        // 属性(テクスチャ座標)
-        // attribute属性を有効にする
-        // ここで呼ばないと描画されない
-        GLES30.glEnableVertexAttribArray(hATTR[2])
-        MyGLES30Func.checkGlError("a_TexCoord:glEnableVertexAttribArray")
-        // attribute属性を登録
-        GLES30.glVertexAttribPointer(hATTR[2],2,GLES30.GL_FLOAT,false,0,0)
-        MyGLES30Func.checkGlError("a_TexCoord:glVertexAttribPointer")
-        */
 
         // ----------------------------------------------
         // uniformハンドルに値をセット
@@ -192,9 +161,11 @@ class ES30a06ShaderA: ES30MgShader() {
 
         // モデルを描画
         //GLES30.glDrawElements(GLES30.GL_TRIANGLES, model.datIdx.size, GLES30.GL_UNSIGNED_SHORT, model.bufIdx)
-        GLES30.glDrawElements(GLES30.GL_TRIANGLES, model.datIdx.size, GLES30.GL_UNSIGNED_SHORT, 0)
-        MyGLES30Func.checkGlError2("glDrawElements",this,model)
+        //GLES30.glDrawElements(GLES30.GL_TRIANGLES, model.datIdx.size, GLES30.GL_UNSIGNED_SHORT, 0)
+        //MyGLES30Func.checkGlError2("glDrawElements",this,model)
         //Log.d(javaClass.simpleName,"draw:glDrawElements")
+        GLES30.glDrawElementsInstanced(GLES30.GL_TRIANGLES, model.datIdx.size, GLES30.GL_UNSIGNED_SHORT, 0,model.datOff.size/3)
+        MyGLES30Func.checkGlError2("glDrawElementsInstanced",this,model)
 
         // リソース解放
         //GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER,0)

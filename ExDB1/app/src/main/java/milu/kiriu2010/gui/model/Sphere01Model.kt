@@ -8,15 +8,15 @@ import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
 
-
-// -------------------------------------------
+// -----------------------------------------------------
 // 球
-// -------------------------------------------
+// -----------------------------------------------------
 // 2019.04.27  パターン１
 // 2019.05.12  パターン２
 // 2019.05.21  頂点インデックス修正
 // 2019.05.25  パターン２修正
-// -------------------------------------------
+// 2019.06.11  A成分を指定ありで色を自動生成可能とする
+// -----------------------------------------------------
 class Sphere01Model: MgModelAbs() {
 
     override fun createPath( opt: Map<String,Float> ) {
@@ -65,12 +65,19 @@ class Sphere01Model: MgModelAbs() {
                 var tz = rr * rad * sin(tr)
                 var rx = rr * cos(tr)
                 var rz = rr * sin(tr)
+                // RGBA全成分の指定あり
                 if ( ( color[0] != -1f ) and ( color[1] != -1f ) and ( color[2] != -1f ) and ( color[3] != -1f ) ) {
-                    datCol.addAll(arrayListOf(color[0],color[1],color[2],color[3]))
+                    datCol.addAll(arrayListOf<Float>(color[0],color[1],color[2],color[3]))
                 }
+                // A成分のみ指定あり
+                else if ( ( color[0] == -1f ) and ( color[1] == -1f ) and ( color[2] == -1f ) and ( color[3] != -1f ) ) {
+                    val tc = MgColor.hsva(360/column*ii,1f,1f,color[3])
+                    datCol.addAll(arrayListOf<Float>(tc[0],tc[1],tc[2],tc[3]))
+                }
+                // RGBA全成分の指定なし
                 else {
-                    var tc = MgColor.hsva(360/row*i,1f,1f,1f)
-                    datCol.addAll(arrayListOf(tc[0],tc[1],tc[2],tc[3]))
+                    val tc = MgColor.hsva(360/column*ii,1f,1f,1f)
+                    datCol.addAll(arrayListOf<Float>(tc[0],tc[1],tc[2],tc[3]))
                 }
                 datPos.addAll(arrayListOf(tx,ty,tz))
                 datNor.addAll(arrayListOf(rx,ry,rz))
@@ -102,7 +109,6 @@ class Sphere01Model: MgModelAbs() {
         color[2] = opt["colorB"] ?: -1f
         color[3] = opt["colorA"] ?: -1f
 
-
         var rad = radius * scale
         (0..row).forEach { i ->
             var r = PI.toFloat() / row.toFloat() * i.toFloat()
@@ -115,12 +121,19 @@ class Sphere01Model: MgModelAbs() {
                 var tz = rr * rad * sin(tr)
                 var rx = rr * cos(tr)
                 var rz = rr * sin(tr)
+                // RGBA全成分の指定あり
                 if ( ( color[0] != -1f ) and ( color[1] != -1f ) and ( color[2] != -1f ) and ( color[3] != -1f ) ) {
-                    datCol.addAll(arrayListOf(color[0],color[1],color[2],color[3]))
+                    datCol.addAll(arrayListOf<Float>(color[0],color[1],color[2],color[3]))
                 }
+                // A成分のみ指定あり
+                else if ( ( color[0] == -1f ) and ( color[1] == -1f ) and ( color[2] == -1f ) and ( color[3] != -1f ) ) {
+                    val tc = MgColor.hsva(360/column*ii,1f,1f,color[3])
+                    datCol.addAll(arrayListOf<Float>(tc[0],tc[1],tc[2],tc[3]))
+                }
+                // RGBA全成分の指定なし
                 else {
-                    var tc = MgColor.hsva(360/row*i,1f,1f,1f)
-                    datCol.addAll(arrayListOf(tc[0],tc[1],tc[2],tc[3]))
+                    val tc = MgColor.hsva(360/column*ii,1f,1f,1f)
+                    datCol.addAll(arrayListOf<Float>(tc[0],tc[1],tc[2],tc[3]))
                 }
                 datPos.addAll(arrayListOf(tx,ty,tz))
                 datNor.addAll(arrayListOf(rx,ry,rz))

@@ -245,7 +245,7 @@ class Board01Model: MgModelAbs() {
 
 
     // XY平面(左回り)画像貼り付け
-    //  a03
+    //  a03,a06,a07
     private fun createPathPattern100(opt: Map<String, Float>) {
         // 頂点データ
         datPos.addAll(arrayListOf( 1f, 1f,0f))

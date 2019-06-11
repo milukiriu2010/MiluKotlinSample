@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.es30x01.a06
+package milu.kiriu2010.exdb1.es30x01.a07
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -13,35 +13,33 @@ import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.vbo.es30.ES30VAOIp
-import milu.kiriu2010.gui.vbo.es30.ES30VAOIpnt
+import milu.kiriu2010.gui.vbo.es30.ES30VAOIpnto
 import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // -----------------------------------------
-// GLSL ES 3.0(VAO)
+// VAOとインスタンシング
 // -----------------------------------------
-// https://wgld.org/d/webgl2/w006.html
-// https://github.com/danginsburg/opengles3-book/blob/master/Android_Java/Chapter_6/VertexArrayObjects/src/com/openglesbook/VertexArrayObjects/VAORenderer.java
-// https://www.programcreek.com/java-api-examples/?code=biezhihua/Android_OpenGL_Demo/Android_OpenGL_Demo-master/Learn-OpenGLES-Tutorials/android/AndroidOpenGLESLessons/app/src/main/java/com/learnopengles/android/lesson8/LessonEightRenderer.java#
+// https://wgld.org/d/webgl2/w007.html
 // -----------------------------------------
-class A06Renderer(ctx: Context): MgRenderer(ctx) {
+class A07Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(板ポリゴン)
-    private lateinit var modelBoard: Board01Model
+    private var modelBoard = Board01Model()
     // 描画オブジェクト(トーラス)
-    private lateinit var modelTorus: Torus01Model
+    private var modelTorus = Torus01Model()
     // 描画オブジェクト(球体)
-    private lateinit var modelSphere: Sphere01Model
+    private var modelSphere = Sphere01Model()
 
     // シェーダA
-    private lateinit var shaderA: ES30a06ShaderA
+    private lateinit var shaderA: ES30a07ShaderA
     // シェーダB
-    private lateinit var shaderB: ES30a06ShaderB
+    private lateinit var shaderB: ES30a07ShaderB
 
     // VAO(トーラス)
-    private lateinit var vaoTorus: ES30VAOIpnt
+    private lateinit var vaoTorus: ES30VAOIpnto
     // VAO(球体)
-    private lateinit var vaoSphere: ES30VAOIpnt
+    private lateinit var vaoSphere: ES30VAOIpnto
     // VAO(板ポリゴン)
     private lateinit var vaoBoard: ES30VAOIp
 
@@ -85,10 +83,10 @@ class A06Renderer(ctx: Context): MgRenderer(ctx) {
                 vecEye[0], vecEye[1], vecEye[2],
                 vecCenter[0], vecCenter[1], vecCenter[2],
                 vecEyeUp[0], vecEyeUp[1], vecEyeUp[2])
-        Matrix.perspectiveM(matP,0,60f,ratio,0.1f,20f)
+        Matrix.perspectiveM(matP,0,60f,ratio,0.1f,25f)
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
 
-        // フレームバッファのバインド(マスク用)
+        // フレームバッファのバインド
         GLES30.glBindFramebuffer(GLES30.GL_FRAMEBUFFER,bufFrame[0])
 
         // フレームバッファを初期化
@@ -162,48 +160,52 @@ class A06Renderer(ctx: Context): MgRenderer(ctx) {
         GLES30.glDepthFunc(GLES30.GL_LEQUAL)
         GLES30.glEnable(GLES30.GL_CULL_FACE)
 
+        // シェーダA
+        shaderA = ES30a07ShaderA()
+        shaderA.loadShader()
+
+        // シェーダB
+        shaderB = ES30a07ShaderB()
+        shaderB.loadShader()
+
+        // モデルにオフセットをセット
+        (0..8).forEach {
+            val off = (it-4).toFloat()
+            modelTorus.datOff.addAll(arrayListOf(off,off,off))
+            modelSphere.datOff.addAll(arrayListOf(off,off,off))
+        }
+
         // モデル生成(板ポリゴン)
-        modelBoard = Board01Model()
         modelBoard.createPath(mapOf(
                 "pattern" to 100f
         ))
 
-        // シェーダA
-        shaderA = ES30a06ShaderA()
-        shaderA.loadShader()
-
-        // シェーダB
-        shaderB = ES30a06ShaderB()
-        shaderB.loadShader()
-
         // モデル生成(トーラス)
-        modelTorus = Torus01Model()
         modelTorus.createPath(mapOf(
                 "row"     to 32f,
                 "column"  to 32f,
-                "iradius" to 0.25f,
-                "oradius" to 1.25f
+                "iradius" to 0.1f,
+                "oradius" to 0.5f
         ))
 
         // モデル生成(球体)
-        modelSphere = Sphere01Model()
         modelSphere.createPath(mapOf(
                 "row"    to 16f,
                 "column" to 16f,
-                "radius" to 0.75f
+                "radius" to 0.3f
         ))
 
         // VAO(トーラス)
-        vaoTorus = ES30VAOIpnt()
+        vaoTorus = ES30VAOIpnto()
         vaoTorus.makeVIBO(modelTorus)
         // VAO(球体)
-        vaoSphere = ES30VAOIpnt()
+        vaoSphere = ES30VAOIpnto()
         vaoSphere.makeVIBO(modelSphere)
         // VAO(板ポリゴン)
         vaoBoard = ES30VAOIp()
         vaoBoard.makeVIBO(modelBoard)
 
-        // ライトの向き
+        // 光源位置
         vecLight[0] = 5f
         vecLight[1] = 2f
         vecLight[2] = 5f
