@@ -68,7 +68,7 @@ class ES30Va04ShaderB: ES30MgShader() {
         // ----------------------------------------------
         // uniformハンドルに値をセット
         // ----------------------------------------------
-        hUNI = IntArray(3)
+        hUNI = IntArray(1)
 
         // uniform(テクスチャユニット)
         hUNI[0] = GLES30.glGetUniformLocation(programHandle, "u_Texture")

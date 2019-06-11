@@ -1,9 +1,11 @@
 package milu.kiriu2010.exdb1.es30x01.a06
 
 import android.opengl.GLES30
+import android.util.Log
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLES30Func
 import milu.kiriu2010.gui.shader.es30.ES30MgShader
+import milu.kiriu2010.gui.vbo.es30.ES30VAOAbs
 
 // ------------------------------------
 // シェーダB
@@ -51,28 +53,57 @@ class ES30a06ShaderB: ES30MgShader() {
 
         // プログラムオブジェクトの生成とリンク
         programHandle = MyGLES30Func.createProgram(svhandle,sfhandle)
+
+        /*
+        // ----------------------------------------------
+        // attributeハンドルに値をセット
+        // ----------------------------------------------
+        hATTR = intArrayOf(0)
+        // 属性(頂点)
+        // attribute属性を有効にする
+        // ここで呼ばないと描画されない
+        GLES30.glEnableVertexAttribArray(hATTR[0])
+        MyGLES30Func.checkGlError("a_Position:glEnableVertexAttribArray")
+        // attribute属性を登録
+        GLES30.glVertexAttribPointer(hATTR[0],3,GLES30.GL_FLOAT,false,0,0)
+        MyGLES30Func.checkGlError("a_Position:glVertexAttribPointer")
+        */
+
+        // ----------------------------------------------
+        // uniformハンドルに値をセット
+        // ----------------------------------------------
+        hUNI = IntArray(1)
+
+        // uniform(テクスチャユニット)
+        hUNI[0] = GLES30.glGetUniformLocation(programHandle, "u_Texture")
+        MyGLES30Func.checkGlError("u_Texture:glGetUniformLocation")
+
         return this
     }
 
     fun draw(model: MgModelAbs,
-             vao: A06VaoB,
+             vao: ES30VAOAbs,
              u_Texture: Int) {
+        //Log.d(javaClass.simpleName,"draw:${model.javaClass.simpleName}")
 
         GLES30.glUseProgram(programHandle)
         MyGLES30Func.checkGlError2("UseProgram",this,model)
 
         // VAOをバインド
-        GLES30.glBindVertexArray(vao.mVAOIds[0])
+        GLES30.glBindVertexArray(vao.hVAO[0])
         MyGLES30Func.checkGlError2("BindVertexArray",this,model)
 
         // uniform(テクスチャ座標)
-        GLES30.glGetUniformLocation(programHandle, "u_Texture").also {
-            GLES30.glUniform1i(it, u_Texture)
-        }
+        GLES30.glUniform1i(hUNI[0], u_Texture)
         MyGLES30Func.checkGlError2("u_Texture",this,model)
 
         // モデルを描画
-        GLES30.glDrawElements(GLES30.GL_TRIANGLES, model.datIdx.size, GLES30.GL_UNSIGNED_SHORT, model.bufIdx)
+        //GLES30.glDrawElements(GLES30.GL_TRIANGLES, model.datIdx.size, GLES30.GL_UNSIGNED_SHORT, model.bufIdx)
+        GLES30.glDrawElements(GLES30.GL_TRIANGLES, model.datIdx.size, GLES30.GL_UNSIGNED_SHORT, 0)
+
+        // リソース解放
+        //GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER,0)
+        //GLES30.glBindBuffer(GLES30.GL_ELEMENT_ARRAY_BUFFER,0)
 
         // VAO解放
         GLES30.glBindVertexArray(0)

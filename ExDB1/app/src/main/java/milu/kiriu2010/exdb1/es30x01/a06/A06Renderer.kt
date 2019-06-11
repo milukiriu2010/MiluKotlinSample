@@ -5,12 +5,15 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.opengl.GLES30
 import android.opengl.Matrix
+import android.util.Log
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLES30Func
 import milu.kiriu2010.gui.model.Board01Model
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
+import milu.kiriu2010.gui.vbo.es30.ES30VAOIp
+import milu.kiriu2010.gui.vbo.es30.ES30VAOIpnt
 import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
@@ -36,11 +39,11 @@ class A06Renderer(ctx: Context): MgRenderer(ctx) {
     private lateinit var shaderB: ES30a06ShaderB
 
     // VAO(トーラス)
-    private lateinit var vaoTorus: A06VaoA
+    private lateinit var vaoTorus: ES30VAOIpnt
     // VAO(球体)
-    private lateinit var vaoSphere: A06VaoA
+    private lateinit var vaoSphere: ES30VAOIpnt
     // VAO(板ポリゴン)
-    private lateinit var vaoBoard: A06VaoB
+    private lateinit var vaoBoard: ES30VAOIp
 
     // 画面縦横比
     var ratio: Float = 1f
@@ -70,6 +73,8 @@ class A06Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun onDrawFrame(gl: GL10?) {
+        //Log.d(javaClass.simpleName,"onDrawFrame:start")
+
         angle[0] =(angle[0]+1)%360
         val t0 = angle[0].toFloat()
 
@@ -121,9 +126,13 @@ class A06Renderer(ctx: Context): MgRenderer(ctx) {
 
         // 板ポリゴンをレンダリング
         shaderB.draw(modelBoard,vaoBoard,1)
+
+        //Log.d(javaClass.simpleName,"onDrawFrame:end")
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
+        //Log.d(javaClass.simpleName,"onSurfaceChanged:start")
+
         GLES30.glViewport(0, 0, width, height)
 
         ratio = width.toFloat()/height.toFloat()
@@ -143,6 +152,8 @@ class A06Renderer(ctx: Context): MgRenderer(ctx) {
         // フレームバッファを格納するテクスチャ生成
         GLES30.glGenTextures(1,frameTexture)
         MyGLES30Func.createFrameBuffer(renderW,renderH,0,bufFrame,bufDepthRender,frameTexture)
+
+        //Log.d(javaClass.simpleName,"onSurfaceChanged:end")
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
@@ -183,14 +194,14 @@ class A06Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // VAO(トーラス)
-        vaoTorus = A06VaoA()
-        vaoTorus.createVAO(modelTorus)
+        vaoTorus = ES30VAOIpnt()
+        vaoTorus.makeVIBO(modelTorus)
         // VAO(球体)
-        vaoSphere = A06VaoA()
-        vaoSphere.createVAO(modelSphere)
+        vaoSphere = ES30VAOIpnt()
+        vaoSphere.makeVIBO(modelSphere)
         // VAO(板ポリゴン)
-        vaoBoard = A06VaoB()
-        vaoBoard.createVAO(modelBoard)
+        vaoBoard = ES30VAOIp()
+        vaoBoard.makeVIBO(modelBoard)
 
         // ライトの向き
         vecLight[0] = 5f
@@ -202,5 +213,15 @@ class A06Renderer(ctx: Context): MgRenderer(ctx) {
     }
 
     override fun closeShader() {
+        vaoTorus.deleteVIBO()
+        vaoSphere.deleteVIBO()
+        vaoBoard.deleteVIBO()
+        shaderA.deleteShader()
+        shaderB.deleteShader()
+
+        GLES30.glDeleteTextures(textures.size,textures,0)
+        GLES30.glDeleteTextures(1,frameTexture)
+        GLES30.glDeleteRenderbuffers(1,bufDepthRender)
+        GLES30.glDeleteFramebuffers(1,bufFrame)
     }
 }

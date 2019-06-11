@@ -13,17 +13,18 @@ import java.nio.IntBuffer
 // --------------------------------------------------------------------------
 // 2019.05.28 初回(GLSL ES2.0用をコピー)
 // --------------------------------------------------------------------------
-// from MyGLES20Func
-//   2019.04.27 ビットマップをロードしテクスチャを生成
-//   2019.05.11 OpenGLのエラー状態を出力2
-//   2019.05.18 テクスチャパラメータの設定をしないパラメータ追加
-//   2019.05.19 フレームバッファを生成
-//   2019.05.24 フレームバッファ生成の引数に"浮動小数点数テクスチャ"用を追加
+// from MyGLES30Func
+// 2019.04.27 ビットマップをロードしテクスチャを生成
+// 2019.05.11 OpenGLのエラー状態を出力2
+// 2019.05.18 テクスチャパラメータの設定をしないパラメータ追加
+// 2019.05.19 フレームバッファを生成
+// 2019.05.24 フレームバッファ生成の引数に"浮動小数点数テクスチャ"用を追加
+// 2019.06.11 TAG変更
 // --------------------------------------------------------------------------
 class MyGLES30Func {
 
     companion object {
-        private const val TAG = "MyGLES20Func"
+        private const val TAG = "MyGLES30Func"
 
         // -------------------------------------
         // シェーダをロードする
@@ -63,11 +64,11 @@ class MyGLES30Func {
             val programHandle = GLES30.glCreateProgram().also {
                 // 頂点シェーダをプログラムに追加
                 GLES30.glAttachShader(it,svhandle)
-                MyGLES20Func.printShaderInfoLog(svhandle,"vertex shader")
+                MyGLES30Func.printShaderInfoLog(svhandle,"vertex shader")
 
                 // フラグメントシェーダをプログラムに追加
                 GLES30.glAttachShader(it,sfhandle)
-                MyGLES20Func.printShaderInfoLog(sfhandle,"fragment shader")
+                MyGLES30Func.printShaderInfoLog(sfhandle,"fragment shader")
 
                 // シェーダオブジェクトを削除
                 GLES30.glDeleteShader(svhandle)
@@ -86,7 +87,7 @@ class MyGLES30Func {
                 GLES30.glGetProgramiv(it,GLES30.GL_LINK_STATUS,linkStatus,0)
                 // リンク失敗
                 if (linkStatus[0] == 0) {
-                    MyGLES20Func.printProgramInfoLog(it)
+                    MyGLES30Func.printProgramInfoLog(it)
                     GLES30.glDeleteProgram(it)
                     throw RuntimeException("Error creating program.")
                 }
@@ -166,7 +167,7 @@ class MyGLES30Func {
 
             // テクスチャをバインドする
             GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, textures[id])
-            MyGLES20Func.checkGlError("glBindTexture")
+            MyGLES30Func.checkGlError("glBindTexture")
 
             if ( size > 0 ) {
                 val resizedBmp = Bitmap.createScaledBitmap(bmp,size,size,false)
@@ -195,7 +196,7 @@ class MyGLES30Func {
             // GLES30.glTexImage2Dを使わないやり方
             // ビットマップをテクスチャに設定
             GLUtils.texImage2D(GLES30.GL_TEXTURE_2D, 0, bmp, 0)
-            MyGLES20Func.checkGlError("texImage2D")
+            MyGLES30Func.checkGlError("texImage2D")
             */
 
             // ミップマップを生成
