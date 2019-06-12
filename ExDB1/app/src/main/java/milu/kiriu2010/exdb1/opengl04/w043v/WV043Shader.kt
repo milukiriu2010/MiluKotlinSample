@@ -7,7 +7,7 @@ import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
 // -------------------------------------
-// 視差マッピング
+// シェーダ for 視差マッピング
 // -------------------------------------
 // https://wgld.org/d/webgl/w043.html
 // -------------------------------------
@@ -31,9 +31,9 @@ class WV043Shader: ES20MgShader() {
 
             void main() {
                 vec3 pos      = (u_matM   * vec4(a_Position,0.0)).xyz;
-                vec3 invEye   = (u_matINV * vec4(u_vecEye,0.0)).xyz;
+                vec3 invEye   = (u_matINV * vec4(u_vecEye  ,0.0)).xyz;
                 vec3 invLight = (u_matINV * vec4(u_vecLight,0.0)).xyz;
-                vec3 eye      = invEye - pos;
+                vec3 eye      = invEye   - pos;
                 vec3 light    = invLight - pos;
                 // 法線ベクトル
                 vec3 n = normalize(a_Normal);

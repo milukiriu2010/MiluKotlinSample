@@ -7,7 +7,10 @@ import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
 // -------------------------------------------------
-// キューブ環境バンプマッピング
+// シェーダ for キューブ環境バンプマッピング
+// -------------------------------------------------
+// バンプマッピングでは法線マップを参照するために、
+// 頂点属性としてテクスチャ座標を定義する必要がある
 // -------------------------------------------------
 // https://wgld.org/d/webgl/w045.html
 // -------------------------------------------------
@@ -31,6 +34,7 @@ class WV045Shader: ES20MgShader() {
                 v_Position     = (u_matM * vec4(a_Position,1.0)).xyz;
                 v_Color        = a_Color;
                 v_TextureCoord = a_TextureCoord;
+                // 法線ベクトル
                 v_tNormal      = (u_matM * vec4(a_Normal  ,0.0)).xyz;
                 // 接線ベクトル
                 // = 法線ベクトルとY軸の外積
@@ -51,15 +55,20 @@ class WV045Shader: ES20MgShader() {
             varying   vec3        v_Position;
             varying   vec4        v_Color;
             varying   vec2        v_TextureCoord;
+            // 法線ベクトル
             varying   vec3        v_tNormal;
+            // 接線ベクトル
             varying   vec3        v_tTangent;
 
             void main() {
-                // 法線と接線ベクトルを使って従法線ベクトルを算出
+                // 法線ベクトルと接線ベクトルを使って従法線ベクトルを算出
                 vec3  tBinormal = cross(v_tNormal, v_tTangent);
                 // 法線マップから抜き出したバンプマッピング用の法線情報を
                 // 視線空間上へと変換するために3x3の行列を生成
+                // この行列を法線マップから抜き出した法線ベクトルと掛け合わせることで、
+                // 接空間上にある法線ベクトルを視線空間へ変換する。
                 mat3  mView     = mat3(v_tTangent, tBinormal, v_tNormal);
+                // 法線マップから法線ベクトルを抜き出す＆接空間上の法線ベクトルを視線空間へ変換する
                 vec3  mNormal   = mView * (texture2D(u_normalMap,v_TextureCoord)*2.0-1.0).rgb;
                 vec3  ref;
                 if (bool(u_Reflection)) {
@@ -68,6 +77,9 @@ class WV045Shader: ES20MgShader() {
                 else {
                     ref = v_tNormal;
                 }
+                // キューブマップテクスチャからフラグメントの情報を抜き出す
+                // u_Reflection=1 ⇒ 反射に対応する色
+                // u_Reflection=0 ⇒ 背景の色
                 vec4  envColor  = textureCube(u_CubeTexture, ref);
                 vec4  destColor = v_Color * envColor;
                 gl_FragColor    = destColor;

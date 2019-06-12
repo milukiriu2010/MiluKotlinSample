@@ -71,6 +71,7 @@ class WV047Renderer(ctx: Context): MgRenderer(ctx) {
     // 位置(トーラス用)
     val torusPos = FloatArray(3*6)
     // 環境色(トーラス用)
+    // 実際には、環境光ではなく、モデルの色としてつかっている
     val torusAmb = FloatArray(4*6)
 
     // テクスチャ配列

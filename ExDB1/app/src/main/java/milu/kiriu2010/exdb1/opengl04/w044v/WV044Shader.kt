@@ -7,7 +7,7 @@ import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
 // -------------------------------------------
-// キューブ環境マッピング
+// シェーダ for キューブ環境マッピング
 // -------------------------------------------
 // https://wgld.org/d/webgl/w044.html
 // -------------------------------------------
@@ -24,9 +24,11 @@ class WV044Shader: ES20MgShader() {
             varying   vec3  v_Normal;
             varying   vec4  v_Color;
 
+            // モデル座標変換後にスケーリングを含んでいる場合、
+            // このやり方では問題が発生するらしい。
             void main() {
-                v_Position    = (u_matM * vec4(a_Position,1.0)).xyz;
-                v_Normal      = (u_matM * vec4(a_Normal  ,0.0)).xyz;
+                v_Position    = (u_matM  * vec4(a_Position,1.0)).xyz;
+                v_Normal      = (u_matM  * vec4(a_Normal  ,0.0)).xyz;
                 v_Color       = a_Color;
                 gl_Position   = u_matMVP * vec4(a_Position,1.0);
             }
@@ -58,6 +60,9 @@ class WV044Shader: ES20MgShader() {
                     // 背景をレンダリングする
                     ref = v_Normal;
                 }
+                // キューブマップテクスチャからフラグメントの情報を抜き出す
+                // u_Reflection=1 ⇒ 反射に対応する色
+                // u_Reflection=0 ⇒ 背景の色
                 vec4  envColor  = textureCube(u_CubeTexture, ref);
                 vec4  destColor = v_Color * envColor;
                 gl_FragColor    = destColor;

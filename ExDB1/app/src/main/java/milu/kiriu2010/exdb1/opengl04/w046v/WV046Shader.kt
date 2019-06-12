@@ -7,7 +7,7 @@ import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
 // ----------------------------------------
-// 屈折マッピング
+// シェーダ for 屈折マッピング
 // ----------------------------------------
 // https://wgld.org/d/webgl/w046.html
 // ----------------------------------------

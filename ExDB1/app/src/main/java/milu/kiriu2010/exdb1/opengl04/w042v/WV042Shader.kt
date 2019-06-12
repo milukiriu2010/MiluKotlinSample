@@ -6,11 +6,13 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
-// ------------------------------------
-// バンプマッピング
-// ------------------------------------
+// -------------------------------------------------------
+// シェーダ for バンプマッピング
+// -------------------------------------------------------
+// ライティングは点光源＋フォンシェーディングを用いている
+// -------------------------------------------------------
 // https://wgld.org/d/webgl/w042.html
-// ------------------------------------
+// -------------------------------------------------------
 class WV042Shader: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
@@ -26,24 +28,33 @@ class WV042Shader: ES20MgShader() {
             uniform   vec3  u_vecEye;
             varying   vec4  v_Color;
             varying   vec2  v_TextureCoord;
+            // 接空間上の光ベクトル
             varying   vec3  v_vecLight;
+            // 接空間上の視線ベクトル
             varying   vec3  v_vecEye;
 
             void main() {
                 vec3 pos      = (u_matM   * vec4(a_Position,0.0)).xyz;
-                vec3 invEye   = (u_matINV * vec4(u_vecEye,0.0)).xyz;
+                vec3 invEye   = (u_matINV * vec4(u_vecEye  ,0.0)).xyz;
                 vec3 invLight = (u_matINV * vec4(u_vecLight,0.0)).xyz;
-                vec3 eye      = invEye - pos;
+                vec3 eye      = invEye   - pos;
                 vec3 light    = invLight - pos;
                 // 法線ベクトル
                 vec3 n = normalize(a_Normal);
-                // 接線ベクトル
+                // 接線ベクトル(テクスチャの横方向と平行)
                 // Y軸と法線ベクトルとの間で外積を取ることで算出する
                 vec3 t = normalize(cross(a_Normal,vec3(0.0,1.0,0.0)));
-                // 従法線ベクトル
+                // 従法線ベクトル(テクスチャの縦方向と平行)
                 // 接線ベクトルと法線ベクトルとの間で外積をとることで算出する
                 vec3 b = cross(n,t);
+                // -----------------------------------------------
                 // 視線ベクトルとライトベクトルを接空間上に変換する
+                // この座標変換には内積を用いる
+                // -----------------------------------------------
+                // X要素:接線ベクトル
+                // Y要素:従法線ベクトル
+                // Z要素:法線ベクトル
+                // -----------------------------------------------
                 v_vecEye.x = dot(t,eye);
                 v_vecEye.y = dot(b,eye);
                 v_vecEye.z = dot(n,eye);
@@ -66,7 +77,9 @@ class WV042Shader: ES20MgShader() {
             uniform   sampler2D u_Texture0;
             varying   vec4      v_Color;
             varying   vec2      v_TextureCoord;
+            // 接空間上の光ベクトル
             varying   vec3      v_vecLight;
+            // 接空間上の視線ベクトル
             varying   vec3      v_vecEye;
 
             void main() {
@@ -74,9 +87,9 @@ class WV042Shader: ES20MgShader() {
                 // 法線マップ上の色データは負の値がない(0～1)
                 // 一方、法線は-1～1の範囲をとるので、"２倍して１引く"という処理になっている
                 vec3  mNormal   = (texture2D(u_Texture0, v_TextureCoord) * 2.0 - 1.0).rgb;
-                // 接空間上のライトベクトル
+                // 接空間上のライトベクトルを正規化
                 vec3  light     = normalize(v_vecLight);
-                // 接空間上の視線ベクトル
+                // 接空間上の視線ベクトルを正規化
                 vec3  eye       = normalize(v_vecEye);
                 vec3  halfLE    = normalize(light+eye);
                 float diffuse   = clamp(dot(mNormal, light), 0.1, 1.0);
