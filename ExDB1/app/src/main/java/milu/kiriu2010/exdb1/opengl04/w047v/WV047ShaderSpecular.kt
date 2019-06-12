@@ -134,9 +134,10 @@ class WV047ShaderSpecular: ES20MgShader() {
              u_matI: FloatArray,
              u_vecLight: FloatArray,
              u_vecEye: FloatArray,
-             u_ambientColor: FloatArray) {
+             u_ambientColor: FloatArray,
+             mark: String) {
         GLES20.glUseProgram(programHandle)
-        MyGLES20Func.checkGlError2("UseProgram",this,model)
+        MyGLES20Func.checkGlError2("UseProgram:{$mark}:",this,model)
 
         // attribute(頂点)
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER,bo.hVBO[0])
