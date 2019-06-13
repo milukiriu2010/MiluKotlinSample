@@ -166,7 +166,6 @@
         android:id="@+id/btnOpenGL08"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:text="GL08"
         app:layout_constraintBottom_toBottomOf="@+id/btnOpenGL07"
         app:layout_constraintEnd_toStartOf="@+id/btnES30x01"
@@ -188,12 +187,26 @@
         app:layout_constraintTop_toTopOf="@+id/btnOpenGL08" />
 
     <Button
+        android:id="@+id/btnES30x02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="ES30x02"
+        app:layout_constraintBottom_toBottomOf="@+id/btnMGL01"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnMGL01"
+        app:layout_constraintTop_toTopOf="@+id/btnMGL01" />
+
+    <Button
         android:id="@+id/btnMGL00"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="MGL00"
+        app:layout_constraintEnd_toStartOf="@+id/btnMGL01"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnOpenGL07" />
 
@@ -201,9 +214,10 @@
         android:id="@+id/btnMGL01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:text="MGL01"
         app:layout_constraintBottom_toBottomOf="@+id/btnMGL00"
+        app:layout_constraintEnd_toStartOf="@+id/btnES30x02"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnMGL00"
         app:layout_constraintTop_toTopOf="@+id/btnMGL00" />
 

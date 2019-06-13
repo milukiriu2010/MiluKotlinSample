@@ -25,7 +25,7 @@ class WV051ShaderScreen: ES20MgShader() {
             // 射影テクスチャマッピング用行列
             uniform   mat4  u_matVPT;
             // ライト視点のモデルxビューxプロジェクション座標変換行列
-            uniform   mat4  u_matLight;
+            uniform   mat4  u_matMVP4L;
             varying   vec3  v_Position;
             varying   vec3  v_Normal;
             varying   vec4  v_Color;
@@ -39,7 +39,7 @@ class WV051ShaderScreen: ES20MgShader() {
                 // 影を射影テクスチャマッピングによって投影するために使う
                 v_TexCoord  = u_matVPT   * vec4(v_Position, 1.0);
                 // ライト視点での座標変換行列で変換した頂点座標が格納される
-                v_Depth     = u_matLight * vec4(a_Position, 1.0);
+                v_Depth     = u_matMVP4L * vec4(a_Position, 1.0);
                 gl_Position = u_matMVP   * vec4(a_Position, 1.0);
             }
             """.trimIndent()
@@ -76,7 +76,7 @@ class WV051ShaderScreen: ES20MgShader() {
                 vec3  light      = u_vecEye - v_Position;
                 vec3  invLight   = normalize(u_matINV * vec4(light, 0.0)).xyz;
                 float diffuse    = clamp(dot(v_Normal, invLight), 0.2, 1.0);
-                // フレームバッファに描かれた深度値を読み出し、本来の値を取り出す
+                // フレームバッファに描かれた深度値を読み出し、本来の深度値に戻す
                 float shadow     = restDepth(texture2DProj(u_Texture0, v_TexCoord));
                 vec4  depthColor = vec4(1.0);
                 if (v_Depth.w > 0.0) {
@@ -176,9 +176,9 @@ class WV051ShaderScreen: ES20MgShader() {
         hUNI[3] = GLES20.glGetUniformLocation(programHandle,"u_matVPT")
         MyGLES20Func.checkGlError("u_matVPT:glGetUniformLocation")
 
-        // uniform(ライト視点の座標変換行列)
-        hUNI[4] = GLES20.glGetUniformLocation(programHandle,"u_matLight")
-        MyGLES20Func.checkGlError("u_matLight:glGetUniformLocation")
+        // uniform(ライト視点のモデル×ビュー×プロジェクション座標変換行列)
+        hUNI[4] = GLES20.glGetUniformLocation(programHandle,"u_matMVP4L")
+        MyGLES20Func.checkGlError("u_matMVP4L:glGetUniformLocation")
 
         // uniform(光源位置)
         hUNI[5] = GLES20.glGetUniformLocation(programHandle,"u_vecLight")
@@ -201,7 +201,7 @@ class WV051ShaderScreen: ES20MgShader() {
              u_matMVP: FloatArray,
              u_matI: FloatArray,
              u_matVPT: FloatArray,
-             u_matLight: FloatArray,
+             u_matMVP4L: FloatArray,
              u_vecLight: FloatArray,
              u_Texture0: Int,
              u_depthBuffer: Int) {
@@ -239,9 +239,9 @@ class WV051ShaderScreen: ES20MgShader() {
         GLES20.glUniformMatrix4fv(hUNI[3],1,false,u_matVPT,0)
         MyGLES20Func.checkGlError2("u_matVPT",this,model)
 
-        // uniform(ライト視点の座標変換行列)
-        GLES20.glUniformMatrix4fv(hUNI[4],1,false,u_matLight,0)
-        MyGLES20Func.checkGlError2("u_matLight",this,model)
+        // uniform(ライト視点のモデル×ビュー×プロジェクション座標変換行列)
+        GLES20.glUniformMatrix4fv(hUNI[4],1,false,u_matMVP4L,0)
+        MyGLES20Func.checkGlError2("u_matMVP4L",this,model)
 
         // uniform(光源位置)
         GLES20.glUniform3fv(hUNI[5],1,u_vecLight,0)

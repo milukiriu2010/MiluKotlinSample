@@ -7,7 +7,7 @@ import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
 // -----------------------------------------
-// トゥーンレンダリング
+// シェーダ for トゥーンレンダリング
 // -----------------------------------------
 // https://wgld.org/d/webgl/w048.html
 // -----------------------------------------
@@ -25,6 +25,8 @@ class WV048Shader: ES20MgShader() {
 
             void main() {
                 vec3 pos      = a_Position;
+                // エッジ用モデルを描画する場合、
+                // モデルを法線方向に少しだけ膨らませる。
                 if (bool(u_edge)) {
                     pos += a_Normal * 0.05;
                 }
@@ -56,7 +58,16 @@ class WV048Shader: ES20MgShader() {
                 else {
                     vec3  invLight = normalize(u_matINV * vec4(u_vecLight,0.0)).xyz;
                     float diffuse  = clamp(dot(v_Normal,u_vecLight), 0.0, 1.0);
+                    // -------------------------------------------------------------
                     // 色として出力する変数diffuseの値を、テクスチャの参照に使っている
+                    // -------------------------------------------------------------
+                    // 左が黒で右へ、だんだん白くなっていくテクスチャなので、
+                    // 光が強く当たっているほど右側のテクセルを参照することになり、
+                    // 結果的にモデルの色がそのまま出力される。
+                    // 逆に光が当たっていない部分ほど
+                    // 左側のテクセルを参照することになるので、
+                    // モデルの色が若干暗くなる。
+                    // -------------------------------------------------------------
                     vec4  smpColor = texture2D(u_Texture0, vec2(diffuse,0.0));
                     gl_FragColor   = v_Color * smpColor;
                 }

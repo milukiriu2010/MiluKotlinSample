@@ -6,11 +6,11 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
-// -----------------------------------
-// 射影テクスチャマッピング
-// -----------------------------------
+// --------------------------------------
+// シェーダ for 射影テクスチャマッピング
+// --------------------------------------
 // https://wgld.org/d/webgl/w049.html
-// -----------------------------------
+// --------------------------------------
 class WV049Shader: ES20MgShader() {
     // 頂点シェーダ
     private val scv =

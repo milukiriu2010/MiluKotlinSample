@@ -6,11 +6,14 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
-// ---------------------------------------------
+// -------------------------------------------------------
 // シェーダ(光学迷彩)
-// ---------------------------------------------
+// -------------------------------------------------------
+// 透けて見えるため、反射光によるハイライトは入らない。
+// ハイライトが入ると、ゼリーのような見た目になるらしい。
+// -------------------------------------------------------
 // https://wgld.org/d/webgl/w050.html
-// ---------------------------------------------
+// -------------------------------------------------------
 class WV050ShaderStealth: ES20MgShader() {
     // 頂点シェーダ
     private val scv =
@@ -19,6 +22,7 @@ class WV050ShaderStealth: ES20MgShader() {
             attribute vec3  a_Normal;
             attribute vec4  a_Color;
             uniform   mat4  u_matM;
+            // ビュー×プロジェクション×テクスチャ座標変換行列
             uniform   mat4  u_matVPT;
             uniform   mat4  u_matMVP;
             // テクスチャ座標をずらすために使われる係数
@@ -30,7 +34,13 @@ class WV050ShaderStealth: ES20MgShader() {
                 vec3   pos  = (u_matM * vec4(a_Position, 1.0)).xyz;
                 vec3   nor  = normalize((u_matM * vec4(a_Normal, 1.0)).xyz);
                 v_Color     = a_Color;
+                // ----------------------------------------------------------------------
+                // モデル座標変換行列を掛け合わせた頂点位置と
+                // テクスチャ座標変換行列とをかけあわせることで
+                // テクスチャ座標を取得
+                // ----------------------------------------------------------------------
                 // 係数と法線を掛け合わせた数値を加算することでテクスチャ座標をずらしている
+                // ----------------------------------------------------------------------
                 v_TexCoord  = u_matVPT * vec4(pos + nor * u_coefficient, 1.0);
                 gl_Position = u_matMVP * vec4(a_Position, 1.0);
             }

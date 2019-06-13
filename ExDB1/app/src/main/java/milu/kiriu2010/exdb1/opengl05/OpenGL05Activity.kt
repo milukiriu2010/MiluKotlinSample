@@ -182,7 +182,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 true
             }
             // シャドウマッピング
-            R.id.opengl_w051 -> {
+            R.id.opengl_wv51 -> {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv51") == null) {
                     supportFragmentManager.beginTransaction()

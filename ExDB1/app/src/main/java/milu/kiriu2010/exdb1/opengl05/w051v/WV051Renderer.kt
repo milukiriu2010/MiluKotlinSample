@@ -16,13 +16,23 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import kotlin.math.floor
 
-// -------------------------------------
+// -----------------------------------------------------------
 // シャドウマッピング
-// -------------------------------------
+// -----------------------------------------------------------
+// フレームバッファにライトから見たときの各頂点の深度値を描く
+// 本番のレンダリングを行う際に、
+// フレームバッファから読みだした深度値と
+// 実際にレンダリングしようとしている頂点の深度を比較すれば
+// その頂点が影にあるのかどうかを判別できる
+// -----------------------------------------------------------
+// デプスバッファの値は0.0～1.0の範囲
+// カメラに最も近いところ  ⇒0.0
+// カメラから最も遠いところ⇒1.0
+// -----------------------------------------------------------
 // emuglGLESv2_enc: Out of bounds vertex attribute info: clientArray? 1 attribute 1 vbo 10 allocedBufferSize 48 bufferDataSpecified? 1 wantedStart 0 wantedEnd 13068
-// -------------------------------------
+// -----------------------------------------------------------
 // https://wgld.org/d/webgl/w051.html
-// -------------------------------------
+// -----------------------------------------------------------
 class WV051Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト(トーラス)
@@ -102,7 +112,6 @@ class WV051Renderer(ctx: Context): MgRenderer(ctx) {
     override fun onDrawFrame(gl: GL10?) {
         // 回転角度
         angle[0] =(angle[0]+1)%360
-        val t0 = angle[0].toFloat()
 
         // ビュー×プロジェクション座標変換行列
         vecEye = qtnNow.toVecIII(floatArrayOf(0f,70f,0f))
@@ -163,12 +172,19 @@ class WV051Renderer(ctx: Context): MgRenderer(ctx) {
             val angleT2 =((i%5)*72)%360
             val t1 = angleT1.toFloat()
             val t2 = angleT2.toFloat()
+            // ------------------------
+            // i:0-4 ⇒ ifl: 0.0
+            // i:5-9 ⇒ ifl:-1.0
+            // ------------------------
             val ifl = -floor(i.toFloat()/5f) +1f
             Matrix.setIdentityM(matM,0)
             Matrix.rotateM(matM,0,t2,0f,1f,0f)
             Matrix.translateM(matM,0,0f,ifl*10f+10f,(ifl-2f)*7f)
             Matrix.rotateM(matM,0,t1,1f,1f,0f)
             Matrix.multiplyMM(matMVP4L,0,matVP4L,0,matM,0)
+            // フレームバッファに描く深度値は
+            // ライトの位置を視点としてみたときの各頂点の深度値のため、
+            // ライトからみたモデル×ビュー×プロジェクション座標変換行列を渡している
             shaderDepth.draw(modelTorus,boTorusDepth,matMVP4L,u_depthBuffer)
         }
 
@@ -177,6 +193,9 @@ class WV051Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.translateM(matM,0,0f,-10f,0f)
         Matrix.scaleM(matM,0,30f,0f,30f)
         Matrix.multiplyMM(matMVP4L,0,matVP4L,0,matM,0)
+        // フレームバッファに描く深度値は
+        // ライトの位置を視点としてみたときの各頂点の深度値のため、
+        // ライトからみたモデル×ビュー×プロジェクション座標変換行列を渡している
         shaderDepth.draw(modelBoard,boBoardDepth,matMVP4L,0)
 
         // -----------------------------------------------
@@ -204,6 +223,10 @@ class WV051Renderer(ctx: Context): MgRenderer(ctx) {
             val angleT2 =((i%5)*72)%360
             val t1 = angleT1.toFloat()
             val t2 = angleT2.toFloat()
+            // ------------------------
+            // i:0-4 ⇒ ifl: 0.0
+            // i:5-9 ⇒ ifl:-1.0
+            // ------------------------
             val ifl = -floor(i.toFloat()/5f) +1f
             Matrix.setIdentityM(matM,0)
             Matrix.rotateM(matM,0,t2,0f,1f,0f)

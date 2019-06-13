@@ -18,11 +18,16 @@ import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
-// ---------------------------------------------
+// -----------------------------------------------------------------------------
 // 光学迷彩
-// ---------------------------------------------
+// -----------------------------------------------------------------------------
+// 奥にあるモデルが透けて見えるようにするので、フレームバッファを使う
+// モデルに背景を投影するので、射影テクスチャマッピングを使う
+// 射影テクスチャマッピングだけでは、モデルが背景に完全に溶け込んでしまうので、
+// 投影させるテクスチャの参照座標をモデルの法線を使って少しずつずらす
+// -----------------------------------------------------------------------------
 // https://wgld.org/d/webgl/w050.html
-// ---------------------------------------------
+// -----------------------------------------------------------------------------
 class WV050Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト(立方体)
@@ -194,7 +199,7 @@ class WV050Renderer(ctx: Context): MgRenderer(ctx) {
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,frameTexture[0])
 
-        // 光学迷彩でトーラスモデルをレンダリング
+        // 光学迷彩でトーラスモデルを原点位置にレンダリング
         Matrix.setIdentityM(matM,0)
         Matrix.rotateM(matM,0,t1,1f,0f,1f)
         Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)

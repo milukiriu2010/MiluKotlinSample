@@ -33,7 +33,7 @@ class WV051ShaderDepth: ES20MgShader() {
             uniform   int       u_depthBuffer;
             varying   vec4      v_Position;
 
-            // 深度値を32ビット制度に変換している
+            // 深度値を32ビット精度に変換している
             vec4 convRGBA(float depth) {
                 // 深度値を255倍し、その小数点以下の数値を抜き出し、次に渡す。
                 // の繰り返し

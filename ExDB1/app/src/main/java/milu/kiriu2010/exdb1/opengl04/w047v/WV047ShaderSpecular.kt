@@ -1,6 +1,7 @@
 package milu.kiriu2010.exdb1.opengl04.w047v
 
 import android.opengl.GLES20
+import android.util.Log
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
@@ -59,6 +60,7 @@ class WV047ShaderSpecular: ES20MgShader() {
 
         // プログラムオブジェクトの生成とリンク
         programHandle = MyGLES20Func.createProgram(svhandle,sfhandle)
+        Log.d(javaClass.simpleName,"${javaClass.simpleName}(${programHandle})")
 
         // ----------------------------------------------
         // attributeハンドルに値をセット

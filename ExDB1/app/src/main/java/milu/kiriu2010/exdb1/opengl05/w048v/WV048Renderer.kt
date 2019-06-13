@@ -84,10 +84,12 @@ class WV048Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.invertM(matI,0,matM,0)
 
         // モデルをレンダリング
+        // 表面をモデルの色で描画
         GLES20.glCullFace(GLES20.GL_BACK)
         shader.draw(modelTorus,boTorus,matMVP,matI,vecLight,0,0, floatArrayOf(0f,0f,0f,0f))
 
         // エッジ用モデルをレンダリング
+        // 裏面を黒で描画
         GLES20.glCullFace(GLES20.GL_FRONT)
         shader.draw(modelTorus,boTorus,matMVP,matI,vecLight,0,1, floatArrayOf(0f,0f,0f,1f))
 
@@ -99,10 +101,12 @@ class WV048Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.invertM(matI,0,matM,0)
 
         // モデルをレンダリング
+        // 表面をモデルの色で描画
         GLES20.glCullFace(GLES20.GL_BACK)
         shader.draw(modelSphere,boSphere,matMVP,matI,vecLight,0,0, floatArrayOf(0f,0f,0f,0f))
 
         // エッジ用モデルをレンダリング
+        // 裏面を黒で描画
         GLES20.glCullFace(GLES20.GL_FRONT)
         shader.draw(modelSphere,boSphere,matMVP,matI,vecLight,0,1, floatArrayOf(0f,0f,0f,1f))
     }

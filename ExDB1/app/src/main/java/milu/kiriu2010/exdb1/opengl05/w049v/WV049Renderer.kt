@@ -69,9 +69,9 @@ class WV049Renderer(ctx: Context): MgRenderer(ctx) {
     // テクスチャ配列
     val textures = IntArray(2)
 
-    // ---------------------------------------------
+    // -----------------------------------------------
     // ライトを視点とみなした場合の変換行列として使う
-    // ---------------------------------------------
+    // -----------------------------------------------
     // テクスチャ座標変換行列
     private val matTex = FloatArray(16)
     // ビュー変換行列(ライト視点)
@@ -105,7 +105,6 @@ class WV049Renderer(ctx: Context): MgRenderer(ctx) {
     override fun onDrawFrame(gl: GL10?) {
         // 回転角度
         angle[0] =(angle[0]+1)%360
-        val t0 = angle[0].toFloat()
 
         // canvasを初期化
         GLES20.glClearColor(0.0f, 0.7f, 0.7f, 1.0f)
@@ -143,6 +142,8 @@ class WV049Renderer(ctx: Context): MgRenderer(ctx) {
 
         // ライトから見た座標変換行列を掛け合わせ
         // ビュー×プロジェクション×テクスチャ座標変換行列を求める
+        // すなわち、最終的なテクスチャ射影変換用の行列(matVPT4L)を求める
+        // ここで作成したテクスチャ射影変換用の行列をシェーダに渡す
         val matPT = FloatArray(16)
         Matrix.multiplyMM(matPT,0,matTex,0,matP4L,0)
         Matrix.multiplyMM(matVPT4L,0,matPT,0,matV4L,0)
