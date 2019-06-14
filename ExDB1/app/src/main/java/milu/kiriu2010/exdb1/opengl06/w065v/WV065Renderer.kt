@@ -6,7 +6,7 @@ import android.opengl.GLES20
 import android.opengl.Matrix
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.basic.MyQuaternion
-import milu.kiriu2010.gui.model.Board01Model
+import milu.kiriu2010.gui.model.d2.Board00Model
 import milu.kiriu2010.gui.model.Point01Model
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.model.Torus01Model
@@ -22,7 +22,7 @@ import javax.microedition.khronos.opengles.GL10
 
 // ----------------------------------------
 // emuglGLESv2_enc: device/generic/goldfish-opengl/system/GLESv2_enc/GL2Encoder.cpp:s_glVertexAttribPointer:599
-// WV065ShaderGaussian:a_TexCoord:Board01Model:1281
+// WV065ShaderGaussian:a_TexCoord:Board00Model:1281
 // ----------------------------------------
 // 後光表面化散乱
 // ----------------------------------------
@@ -34,7 +34,7 @@ class WV065Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(球体)
     private lateinit var modelSphere: Sphere01Model
     // 描画オブジェクト(板ポリゴン)
-    private lateinit var modelBoard: Board01Model
+    private lateinit var modelBoard: Board00Model
 
     // VBO(トーラス＋メイン)
     private lateinit var boTorusMain: ES20VBOAbs
@@ -460,7 +460,7 @@ class WV065Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(板ポリゴン)
-        modelBoard = Board01Model()
+        modelBoard = Board00Model()
         modelBoard.createPath(mapOf(
                 "pattern" to 53f
         ))

@@ -4,7 +4,7 @@ import android.content.Context
 import android.opengl.GLES20
 import android.opengl.Matrix
 import android.util.Log
-import milu.kiriu2010.gui.model.Line01Model
+import milu.kiriu2010.gui.model.d2.Line01Model
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import javax.microedition.khronos.egl.EGLConfig

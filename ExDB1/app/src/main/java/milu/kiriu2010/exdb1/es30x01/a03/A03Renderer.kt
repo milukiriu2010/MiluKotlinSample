@@ -7,7 +7,7 @@ import android.opengl.GLES30
 import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLES30Func
-import milu.kiriu2010.gui.model.Board01Model
+import milu.kiriu2010.gui.model.d2.Board00Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
@@ -20,7 +20,7 @@ import javax.microedition.khronos.opengles.GL10
 // -----------------------------------------
 class A03Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(板ポリゴン)
-    private lateinit var modelBoard: Board01Model
+    private lateinit var modelBoard: Board00Model
 
     // シェーダA
     private lateinit var shaderA: ES30a03ShaderA
@@ -141,7 +141,7 @@ class A03Renderer(ctx: Context): MgRenderer(ctx) {
         shaderB.loadShader()
 
         // モデル生成(板ポリゴン)
-        modelBoard = Board01Model()
+        modelBoard = Board00Model()
         modelBoard.createPath(mapOf(
                 "pattern" to 100f
         ))

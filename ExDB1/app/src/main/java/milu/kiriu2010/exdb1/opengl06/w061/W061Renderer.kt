@@ -8,7 +8,7 @@ import android.os.SystemClock
 import android.util.Log
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.basic.MyNoiseX
-import milu.kiriu2010.gui.model.Box01Model
+import milu.kiriu2010.gui.model.d2.Box01Model
 import milu.kiriu2010.gui.model.Particle01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer

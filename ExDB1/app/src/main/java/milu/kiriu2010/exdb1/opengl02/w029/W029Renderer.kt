@@ -9,7 +9,7 @@ import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLES20Func
-import milu.kiriu2010.gui.model.Board01Model
+import milu.kiriu2010.gui.model.d2.Board00Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
 // ----------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ import milu.kiriu2010.gui.renderer.MgRenderer
 class W029Renderer(ctx: Context): MgRenderer(ctx) {
 
     // モデル
-    private lateinit var model: Board01Model
+    private lateinit var model: Board00Model
 
     // シェーダ
     private lateinit var shader: W029Shader
@@ -191,7 +191,7 @@ class W029Renderer(ctx: Context): MgRenderer(ctx) {
         shader.loadShader()
 
         // モデル生成
-        model = Board01Model()
+        model = Board00Model()
         model.createPath(mapOf("pattern" to 29f))
 
         // テクスチャ作成し、idをtexturesに保存

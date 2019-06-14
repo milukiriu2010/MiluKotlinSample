@@ -5,10 +5,9 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.opengl.GLES30
 import android.opengl.Matrix
-import android.util.Log
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLES30Func
-import milu.kiriu2010.gui.model.Board01Model
+import milu.kiriu2010.gui.model.d2.Board00Model
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
@@ -25,7 +24,7 @@ import javax.microedition.khronos.opengles.GL10
 // -----------------------------------------
 class A08Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(板ポリゴン)
-    private var modelBoard = Board01Model()
+    private var modelBoard = Board00Model()
     // 描画オブジェクト(トーラス)
     private var modelTorus = Torus01Model()
     // 描画オブジェクト(球体)

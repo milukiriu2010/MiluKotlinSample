@@ -8,7 +8,7 @@ import android.opengl.Matrix
 import android.util.Log
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLES20Func
-import milu.kiriu2010.gui.model.Line01Model
+import milu.kiriu2010.gui.model.d2.Line01Model
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs

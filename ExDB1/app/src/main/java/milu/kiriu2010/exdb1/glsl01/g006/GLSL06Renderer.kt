@@ -4,9 +4,8 @@ import android.content.Context
 import android.opengl.GLES20
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
-import android.opengl.Matrix
 import android.os.SystemClock
-import milu.kiriu2010.gui.model.Square01Model
+import milu.kiriu2010.gui.model.d2.Square01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
 // ----------------------------------------------

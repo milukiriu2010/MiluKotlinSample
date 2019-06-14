@@ -9,7 +9,7 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl05.w053.W053ShaderScreen
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.color.MgColor
-import milu.kiriu2010.gui.model.Board01Model
+import milu.kiriu2010.gui.model.d2.Board00Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import java.nio.IntBuffer
@@ -25,7 +25,7 @@ class W056Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)
     private lateinit var modelTorus: Torus01Model
     // 描画オブジェクト(板ポリゴン)
-    private lateinit var modelBoard: Board01Model
+    private lateinit var modelBoard: Board00Model
 
     // シェーダ(モデルをレンダリング)
     private lateinit var screenShader: W053ShaderScreen
@@ -193,7 +193,7 @@ class W056Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(板ポリゴン)
-        modelBoard = Board01Model()
+        modelBoard = Board00Model()
         modelBoard.createPath(mapOf(
                 "pattern" to 53f
         ))

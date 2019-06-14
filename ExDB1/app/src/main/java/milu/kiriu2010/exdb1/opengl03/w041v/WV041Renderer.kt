@@ -7,7 +7,7 @@ import android.opengl.GLES20
 import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLES20Func
-import milu.kiriu2010.gui.model.Board01Model
+import milu.kiriu2010.gui.model.d2.Board00Model
 import milu.kiriu2010.gui.model.Sphere01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.vbo.es20.ES20VBOIpc
@@ -26,7 +26,7 @@ class WV041Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(球体)
     private lateinit var modelSphere: Sphere01Model
     // 描画オブジェクト(板ポリゴン)
-    private lateinit var modelBoard: Board01Model
+    private lateinit var modelBoard: Board00Model
 
     // シェーダ(シーン)
     private lateinit var shaderScene: WV041ShaderScene
@@ -203,7 +203,7 @@ class WV041Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(ブラー)
-        modelBoard = Board01Model()
+        modelBoard = Board00Model()
         modelBoard.createPath()
 
         // VBO(球体)

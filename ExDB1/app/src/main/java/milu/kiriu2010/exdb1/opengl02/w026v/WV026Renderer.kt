@@ -9,7 +9,7 @@ import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLES20Func
-import milu.kiriu2010.gui.model.Board01Model
+import milu.kiriu2010.gui.model.d2.Board00Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 import milu.kiriu2010.gui.vbo.es20.ES20VBOIpct
@@ -27,7 +27,7 @@ import milu.kiriu2010.gui.vbo.es20.ES20VBOIpct
 class WV026Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト
-    private lateinit var model: Board01Model
+    private lateinit var model: Board00Model
 
     // シェーダ
     private lateinit var shader: WV026Shader
@@ -92,7 +92,7 @@ class WV026Renderer(ctx: Context): MgRenderer(ctx) {
         shader.loadShader()
 
         // モデル
-        model = Board01Model()
+        model = Board00Model()
         model.createPath(mapOf(
                 "colorR" to 1f,
                 "colorG" to 1f,

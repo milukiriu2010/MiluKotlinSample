@@ -8,7 +8,7 @@ import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.color.MgColor
-import milu.kiriu2010.gui.model.Board01Model
+import milu.kiriu2010.gui.model.d2.Board00Model
 import milu.kiriu2010.gui.model.Cube01Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
@@ -30,7 +30,7 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)
     private lateinit var modelTorus: Torus01Model
     // 描画オブジェクト(板ポリゴン)
-    private lateinit var modelBoard: Board01Model
+    private lateinit var modelBoard: Board00Model
     // 描画オブジェクト(立方体)
     private lateinit var modelCube: Cube01Model
 
@@ -348,7 +348,7 @@ class W059Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(板ポリゴン)
-        modelBoard = Board01Model()
+        modelBoard = Board00Model()
         modelBoard.createPath(mapOf(
                 "pattern" to 53f
         ))

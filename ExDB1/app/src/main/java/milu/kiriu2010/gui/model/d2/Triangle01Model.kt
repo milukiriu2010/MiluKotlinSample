@@ -1,7 +1,6 @@
-package milu.kiriu2010.gui.model
+package milu.kiriu2010.gui.model.d2
 
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
+import milu.kiriu2010.gui.model.MgModelAbs
 
 // https://developer.android.com/training/graphics/opengl/shapes
 class Triangle01Model: MgModelAbs() {

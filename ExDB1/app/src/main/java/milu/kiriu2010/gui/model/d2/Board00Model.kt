@@ -1,4 +1,6 @@
-package milu.kiriu2010.gui.model
+package milu.kiriu2010.gui.model.d2
+
+import milu.kiriu2010.gui.model.MgModelAbs
 
 // --------------------------------------------------
 // 板ポリゴン
@@ -8,7 +10,7 @@ package milu.kiriu2010.gui.model
 // 2019.05.07   1:XY平面(右回り)にテクスチャ座標付与
 // 2019.05.08  62:XY平面(左+右回り)
 // --------------------------------------------------
-class Board01Model: MgModelAbs() {
+class Board00Model: MgModelAbs() {
 
     override fun createPath( opt: Map<String,Float> ) {
         datPos.clear()

@@ -5,7 +5,7 @@ import android.opengl.GLES20
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
-import milu.kiriu2010.gui.model.Triangle01Model
+import milu.kiriu2010.gui.model.d2.Triangle01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 import milu.kiriu2010.gui.vbo.es20.ES20VBOp

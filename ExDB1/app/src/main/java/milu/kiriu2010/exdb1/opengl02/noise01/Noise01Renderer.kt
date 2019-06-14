@@ -10,7 +10,7 @@ import android.os.SystemClock
 import milu.kiriu2010.exdb1.opengl02.noise01.Noise01Shader
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.basic.MyNoiseX
-import milu.kiriu2010.gui.model.Board01Model
+import milu.kiriu2010.gui.model.d2.Board00Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
 // ---------------------------------------------------
@@ -21,7 +21,7 @@ import milu.kiriu2010.gui.renderer.MgRenderer
 class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト
-    private lateinit var modelBoard: Board01Model
+    private lateinit var modelBoard: Board00Model
 
     // シェーダ
     private lateinit var shader: Noise01Shader
@@ -127,7 +127,7 @@ class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
         shader.loadShader()
 
         // モデル生成
-        modelBoard = Board01Model()
+        modelBoard = Board00Model()
         modelBoard.createPath(mapOf(
                 "scale"  to 0.9f,
                 "colorR" to 1f,

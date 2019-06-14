@@ -7,7 +7,7 @@ import android.opengl.Matrix
 import milu.kiriu2010.exdb1.opengl05.w051.W051ShaderDepth
 import milu.kiriu2010.exdb1.opengl05.w051.W051ShaderScreen
 import milu.kiriu2010.gui.basic.MyGLES20Func
-import milu.kiriu2010.gui.model.Board01Model
+import milu.kiriu2010.gui.model.d2.Board00Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import java.nio.IntBuffer
@@ -24,7 +24,7 @@ class W052Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)
     private lateinit var modelTorus: Torus01Model
     // 描画オブジェクト(板ポリゴン)
-    private lateinit var modelBoard: Board01Model
+    private lateinit var modelBoard: Board00Model
 
     // シェーダ(深度値格納用)
     private lateinit var shaderDepth: W051ShaderDepth
@@ -262,7 +262,7 @@ class W052Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(板ポリゴン)
-        modelBoard = Board01Model()
+        modelBoard = Board00Model()
         modelBoard.createPath(mapOf(
                 "pattern" to 51f,
                 "colorR"  to 1f,

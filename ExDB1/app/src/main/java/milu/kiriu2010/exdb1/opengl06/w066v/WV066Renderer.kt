@@ -8,7 +8,7 @@ import android.opengl.Matrix
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.color.MgColor
-import milu.kiriu2010.gui.model.Board01Model
+import milu.kiriu2010.gui.model.d2.Board00Model
 import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
@@ -20,7 +20,7 @@ import javax.microedition.khronos.opengles.GL10
 
 // ---------------------------------------
 // emuglGLESv2_enc: device/generic/goldfish-opengl/system/GLESv2_enc/GL2Encoder.cpp:s_glVertexAttribPointer:599 GL error 0x501
-// WV066ShaderMosaic:a_TexCoord:Board01Model:1281
+// WV066ShaderMosaic:a_TexCoord:Board00Model:1281
 // ---------------------------------------
 // モザイク
 // ---------------------------------------
@@ -30,7 +30,7 @@ class WV066Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)
     private lateinit var modelTorus: Torus01Model
     // 描画オブジェクト(板ポリゴン)
-    private lateinit var modelBoard: Board01Model
+    private lateinit var modelBoard: Board00Model
 
     // VBO(トーラス)
     private lateinit var boTorus: ES20VBOAbs
@@ -196,7 +196,7 @@ class WV066Renderer(ctx: Context): MgRenderer(ctx) {
         ))
 
         // モデル生成(板ポリゴン)
-        modelBoard = Board01Model()
+        modelBoard = Board00Model()
         modelBoard.createPath(mapOf(
                 "pattern" to 53f
         ))

@@ -8,7 +8,7 @@ import android.opengl.Matrix
 import android.util.Log
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.basic.MyGLES20Func
-import milu.kiriu2010.gui.model.Board01Model
+import milu.kiriu2010.gui.model.d2.Board00Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 import milu.kiriu2010.gui.vbo.es20.ES20VBOIpnct
@@ -25,7 +25,7 @@ import javax.microedition.khronos.opengles.GL10
 class WV038Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト
-    private lateinit var model: Board01Model
+    private lateinit var model: Board00Model
 
     // シェーダ
     private lateinit var shader: WV038Shader
@@ -159,7 +159,7 @@ class WV038Renderer(ctx: Context): MgRenderer(ctx) {
         shader.loadShader()
 
         // モデル生成
-        model = Board01Model()
+        model = Board00Model()
         model.createPath(mapOf("pattern" to 29f))
 
         // VBO
