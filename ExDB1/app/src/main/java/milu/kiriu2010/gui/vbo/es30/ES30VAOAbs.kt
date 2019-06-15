@@ -9,6 +9,7 @@ import milu.kiriu2010.gui.model.MgModelAbs
 // 2019.05.31
 // 2019.06.07 バッファにデータを設定するときの変数usageを追加
 // 2019.06.11 VAO追加
+// 2019.06.14 バッファにデータを設定するときの変数名を位置用に変更
 // --------------------------------------------------------------
 abstract class ES30VAOAbs {
     // 描画モデル
@@ -20,8 +21,8 @@ abstract class ES30VAOAbs {
     // IBOのハンドル
     lateinit var hIBO: IntArray
 
-    // VBOバッファにデータを設定するときのusage
-    var usageVBO = GLES30.GL_STATIC_DRAW
+    // VBOバッファにデータを設定するときのusage(位置)
+    var usagePos = GLES30.GL_STATIC_DRAW
 
     abstract fun makeVIBO(modelAbs: MgModelAbs)
 

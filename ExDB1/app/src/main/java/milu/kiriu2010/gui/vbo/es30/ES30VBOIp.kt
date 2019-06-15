@@ -23,7 +23,7 @@ class ES30VBOIp: ES30VBOAbs() {
         // 位置
         model.bufPos.position(0)
         GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER,hVBO[0])
-        GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER,model.bufPos.capacity()*4, model.bufPos,usageVBO)
+        GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER,model.bufPos.capacity()*4, model.bufPos,usagePos)
 
         // ------------------------------------------------
         // IBOの生成

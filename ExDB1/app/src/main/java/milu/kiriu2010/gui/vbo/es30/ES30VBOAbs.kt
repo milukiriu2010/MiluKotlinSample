@@ -15,8 +15,8 @@ abstract class ES30VBOAbs {
     // IBOのハンドル
     lateinit var hIBO: IntArray
 
-    // VBOバッファにデータを設定するときのusage
-    var usageVBO = GLES30.GL_STATIC_DRAW
+    // VBOバッファにデータを設定するときのusage(位置)
+    var usagePos = GLES30.GL_STATIC_DRAW
 
     abstract fun makeVIBO(model: MgModelAbs)
 

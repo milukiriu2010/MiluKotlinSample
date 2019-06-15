@@ -22,7 +22,7 @@ class ES20VBOIp: ES20VBOAbs() {
         // 位置
         model.bufPos.position(0)
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER,hVBO[0])
-        GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER,model.bufPos.capacity()*4, model.bufPos,usageVBO)
+        GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER,model.bufPos.capacity()*4, model.bufPos,usagePos)
 
         // ------------------------------------------------
         // IBOの生成

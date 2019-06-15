@@ -40,7 +40,7 @@ class ES30VAOIp: ES30VAOAbs() {
         modelAbs.bufPos.position(0)
         GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER,hVBO[0])
         MyGLES30Func.checkGlError("a_Position:glBindBuffer")
-        GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER,modelAbs.bufPos.capacity()*4, modelAbs.bufPos,usageVBO)
+        GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER,modelAbs.bufPos.capacity()*4, modelAbs.bufPos,usagePos)
         MyGLES30Func.checkGlError("a_Position:glBufferData")
         GLES30.glEnableVertexAttribArray(0)
         MyGLES30Func.checkGlError("a_Position:glEnableVertexAttribArray")

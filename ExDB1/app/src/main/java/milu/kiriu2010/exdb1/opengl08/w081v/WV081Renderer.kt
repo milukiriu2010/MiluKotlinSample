@@ -98,7 +98,7 @@ class WV081Renderer(ctx: Context): MgRenderer(ctx) {
 
         // VBO(球体)
         boSphere = ES20VBOIp()
-        boSphere.usageVBO = GLES20.GL_DYNAMIC_DRAW
+        boSphere.usagePos = GLES20.GL_DYNAMIC_DRAW
         boSphere.makeVIBO(modelSphere)
 
         // 視点座標
