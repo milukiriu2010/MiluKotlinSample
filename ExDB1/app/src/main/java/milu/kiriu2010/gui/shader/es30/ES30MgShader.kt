@@ -9,6 +9,7 @@ import milu.kiriu2010.gui.basic.MyGLES30Func
 // -----------------------------------------
 // 2019.05.28
 // 2019.06.07 attribute/uniformハンドル追加
+// 2019.06.17 UBIハンドル追加
 // -----------------------------------------
 abstract class ES30MgShader {
     // 頂点シェーダのハンドル
@@ -23,6 +24,8 @@ abstract class ES30MgShader {
     lateinit var hATTR: IntArray
     // uniformのハンドル
     lateinit var hUNI: IntArray
+    // UBIのハンドル(uniform block index)
+    lateinit var hUBI: IntArray
 
     // シェーダを削除
     fun deleteShader() {

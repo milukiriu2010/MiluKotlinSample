@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.Matrix
+import android.util.Log
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.d2.Board00Model
 import milu.kiriu2010.gui.model.Torus01Model
@@ -173,8 +174,8 @@ class WV051Renderer(ctx: Context): MgRenderer(ctx) {
             val t1 = angleT1.toFloat()
             val t2 = angleT2.toFloat()
             // ------------------------
-            // i:0-4 ⇒ ifl: 0.0
-            // i:5-9 ⇒ ifl:-1.0
+            // i:0-4 ⇒ ifl:1.0
+            // i:5-9 ⇒ ifl:0.0
             // ------------------------
             val ifl = -floor(i.toFloat()/5f) +1f
             Matrix.setIdentityM(matM,0)
@@ -217,6 +218,7 @@ class WV051Renderer(ctx: Context): MgRenderer(ctx) {
         // -------------------------------------------------------
         // トーラス描画(10個)
         // -------------------------------------------------------
+        Log.d(javaClass.simpleName,"==============================")
         (0..9).forEach { i ->
             // 回転角度
             val angleT1 =(angle[0]+i*36)%360
@@ -236,6 +238,7 @@ class WV051Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.invertM(matI,0,matM,0)
             Matrix.multiplyMM(matMVP4L,0,matVP4L,0,matM,0)
             shaderScreen.draw(modelTorus,boTorusScreen,matM,matMVP,matI,matVPT,matMVP4L,vecLight,0,u_depthBuffer)
+            Log.d(javaClass.simpleName,"i[$i]ifl[$ifl]")
         }
 
         // 板ポリゴンの描画(底面)

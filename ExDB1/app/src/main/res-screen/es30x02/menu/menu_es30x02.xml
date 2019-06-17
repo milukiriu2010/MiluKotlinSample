@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/es30_a09"
+        android:title="a09_UBO" />
+    <item
         android:id="@+id/es30_a08"
         android:title="a08_gl_VertexID" />
 </menu>

@@ -68,10 +68,12 @@ class WV069ShaderScreen: ES20MgShader() {
                 vec3  light      = u_vecLight - v_Position;
                 vec3  invLight   = normalize(u_matINV * vec4(light, 0.0)).xyz;
                 float diffuse    = clamp(dot(v_Normal, invLight), 0.2, 1.0);
-                // フレームバッファに描かれた深度値を読み出し、本来の値を取り出す
+                // フレームバッファのテクスチャに描かれた深度値を読み出し、本来の値を取り出す
                 float shadow     = texture2DProj(u_Texture0, v_TexCoord).r;
                 vec4  depthColor = vec4(1.0);
                 if (v_Depth.w > 0.0) {
+                    // フレームバッファのテクスチャに描かれた深度値と比較するため
+                    // 深度値-1～1⇒0～1に変換
                     lightCoord = (v_Depth.z/v_Depth.w+1.0)*0.5;
                     // 0.0001は、深度値が完全に一致した場合、
                     // マッハバンドと呼ばれる縞模様が発生するのを避けるための措置
