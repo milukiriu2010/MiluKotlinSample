@@ -89,6 +89,7 @@ class WV059Renderer(ctx: Context): MgRenderer(ctx) {
     val u_weight2 = MyMathUtil.gaussianWeigt(10,45f)
 
     // フォーカスする深度値
+    // -0.425～0.425
     var u_depthOffset = 0f
 
     // 選択値
@@ -228,7 +229,7 @@ class WV059Renderer(ctx: Context): MgRenderer(ctx) {
         gaussianShader.draw(modelBoard,boBoard,matVP4O,0,1,u_weight2,1,renderW.toFloat())
 
         // -----------------------------------------------
-        // 【4:小さくぼやけたシーンをバッファに描く】
+        // 【4:大きくぼやけたシーンをバッファに描く】
         // -----------------------------------------------
 
         // フレームバッファのバインド(3:Blur2)

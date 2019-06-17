@@ -34,6 +34,7 @@ class WV059ShaderDepth: ES20MgShader() {
             //  どこにフォーカスするか、
             //  どの深度にピントを合わせるか
             // を決めるために使う
+            // -0.425～0.425
             uniform   float     u_depthOffset;
             varying   vec4      v_Position;
 

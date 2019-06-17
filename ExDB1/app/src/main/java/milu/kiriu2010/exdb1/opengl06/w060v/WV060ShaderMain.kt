@@ -66,6 +66,8 @@ class WV060ShaderMain: ES20MgShader() {
             varying   float  v_fogFactor;
 
             void main() {
+                // mix(x,y,a)
+                // x(1-a)+y*aを返す(つまり線形補間)
                 gl_FragColor = mix(u_fogColor, v_Color, v_fogFactor);
             }
             """.trimIndent()
