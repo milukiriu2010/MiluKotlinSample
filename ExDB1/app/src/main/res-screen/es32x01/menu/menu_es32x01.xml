@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/es32_cube_rotate01"
+        android:title="回転(立方体)01_ES32" />
+</menu>
