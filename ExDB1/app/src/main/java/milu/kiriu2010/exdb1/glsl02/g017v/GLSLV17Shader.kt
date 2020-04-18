@@ -83,6 +83,8 @@ class GLSLV17Shader: ES20MgShader() {
             }
 
             // cylinder
+            //  r.x: 円柱の太さ
+            //  r.y: 円柱の長さ
             float distFuncCylinder(vec3 p, vec2 r){
                 vec2 d = abs(vec2(length(p.xy), p.z)) - r;
                 return min(max(d.x, d.y), 0.0) + length(max(d, 0.0)) - 0.1;
