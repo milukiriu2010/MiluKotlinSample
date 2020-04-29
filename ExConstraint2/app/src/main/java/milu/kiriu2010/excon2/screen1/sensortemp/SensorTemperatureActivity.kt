@@ -5,11 +5,11 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_sensor_temperature.*
@@ -145,7 +145,7 @@ class SensorTemperatureActivity : AppCompatActivity()
         val sensors = sensorManager.getSensorList(Sensor.TYPE_ALL)
 
         // リサイクラ・ビュー上にセンサ一覧を縦に並べる
-        val layoutManager = LinearLayoutManager( this, LinearLayoutManager.VERTICAL, false )
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerViewMovie.layoutManager = layoutManager
 
         // 可変ではないので、java.lang.UnsupportedOperationException が発生する
@@ -162,7 +162,7 @@ class SensorTemperatureActivity : AppCompatActivity()
         recyclerViewMovie.adapter = adapter
 
         // 区切り線を入れる
-        val itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL )
+        val itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         recyclerViewMovie.addItemDecoration(itemDecoration)
     }
 }

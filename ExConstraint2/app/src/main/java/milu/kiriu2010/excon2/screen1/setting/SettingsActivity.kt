@@ -10,11 +10,11 @@ import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceActivity
 import android.preference.RingtonePreference
-import android.support.v7.preference.ListPreference
-import android.support.v7.preference.Preference
+import androidx.preference.ListPreference
+import androidx.preference.Preference
 //import android.preference.*
-import android.support.v7.preference.PreferenceFragmentCompat
-import android.support.v7.preference.PreferenceManager
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceManager
 import android.text.TextUtils
 import android.view.MenuItem
 import milu.kiriu2010.excon2.R
@@ -291,7 +291,7 @@ class SettingsActivity : PreferenceActivity() {
 
          * @see .sBindPreferenceSummaryToValueListener
          */
-        private fun bindPreferenceSummaryToValue(preference: android.support.v7.preference.Preference) {
+        private fun bindPreferenceSummaryToValue(preference: androidx.preference.Preference) {
             // Set the listener to watch for value changes.
             preference.onPreferenceChangeListener = sBindPreferenceSummaryToValueListener
 

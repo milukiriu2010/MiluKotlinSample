@@ -1,6 +1,6 @@
 package milu.kiriu2010.excon2.screen1.animescale
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -113,7 +113,7 @@ class AnimeScaleActivity : AppCompatActivity() {
                 finish()
                 true
             }
-            else -> return super.onOptionsItemSelected(item)
+            else -> return super.onOptionsItemSelected(item!!)
         }
     }
 }

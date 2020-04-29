@@ -1,6 +1,6 @@
 package milu.kiriu2010.excon2.screen1.fibonnaci
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import milu.kiriu2010.excon2.R
 import kotlinx.android.synthetic.main.activity_fibonnaci.*
@@ -28,13 +28,13 @@ class FibonnaciActivity : AppCompatActivity() {
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState?.putLong("PREVIOUS", number_state)
+        outState.putLong("PREVIOUS", number_state)
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        number_state = savedInstanceState?.getLong("PREVIOUS") ?: return
+        number_state = savedInstanceState.getLong("PREVIOUS")
     }
 }

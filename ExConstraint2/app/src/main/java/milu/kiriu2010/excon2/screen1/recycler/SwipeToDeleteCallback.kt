@@ -3,9 +3,9 @@ package milu.kiriu2010.excon2.screen1.recycler
 import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.ColorDrawable
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ItemTouchHelper
 import milu.kiriu2010.excon2.R
 
 // スワイプでアイテム削除

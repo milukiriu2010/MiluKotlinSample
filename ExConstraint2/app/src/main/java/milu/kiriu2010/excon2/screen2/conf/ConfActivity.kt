@@ -1,6 +1,6 @@
 package milu.kiriu2010.excon2.screen2.conf
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import milu.kiriu2010.excon2.R
 

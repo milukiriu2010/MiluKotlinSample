@@ -3,8 +3,8 @@ package milu.kiriu2010.excon2.screen2.conf
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.v14.preference.SwitchPreference
-import android.support.v7.preference.*
+import androidx.preference.SwitchPreference
+import androidx.preference.*
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View

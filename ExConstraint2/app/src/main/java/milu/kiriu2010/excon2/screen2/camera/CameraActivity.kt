@@ -2,7 +2,7 @@ package milu.kiriu2010.excon2.screen2.camera
 
 import android.content.Intent
 import android.graphics.Bitmap
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_camera.*
 import milu.kiriu2010.excon2.R

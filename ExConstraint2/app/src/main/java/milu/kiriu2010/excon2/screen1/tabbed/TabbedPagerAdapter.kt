@@ -1,8 +1,8 @@
 package milu.kiriu2010.excon2.screen1.tabbed
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 
 class TabbedPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getItem(pos: Int): Fragment {

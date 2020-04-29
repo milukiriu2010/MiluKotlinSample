@@ -2,7 +2,7 @@ package milu.kiriu2010.excon2.screen2.compass
 
 import android.hardware.Sensor
 import android.hardware.SensorEventListener
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import milu.kiriu2010.excon2.R
 import android.hardware.SensorManager

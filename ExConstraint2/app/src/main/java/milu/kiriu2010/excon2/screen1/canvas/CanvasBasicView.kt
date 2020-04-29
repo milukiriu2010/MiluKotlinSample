@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import milu.kiriu2010.excon2.R
 
 
@@ -141,7 +141,7 @@ class CanvasBasicView: View {
         val drawable = ContextCompat.getDrawable(context,R.drawable.ic_android)
         // (100,100)位置にx倍で表示
         // skewX -5.0 - 5.0
-        drawable?.setBounds(100,100,100+(drawable!!.intrinsicWidth*(4+skewX)).toInt(),100+(drawable!!.intrinsicHeight*(4+skewY)).toInt())
+        drawable?.setBounds(100,100,100+(drawable.intrinsicWidth*(4+skewX)).toInt(),100+(drawable.intrinsicHeight*(4+skewY)).toInt())
         drawable?.draw(canvas)
     }
 

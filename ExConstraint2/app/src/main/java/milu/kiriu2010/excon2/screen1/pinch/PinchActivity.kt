@@ -1,6 +1,6 @@
 package milu.kiriu2010.excon2.screen1.pinch
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector

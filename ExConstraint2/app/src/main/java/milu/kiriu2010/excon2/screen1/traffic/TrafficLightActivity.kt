@@ -1,7 +1,7 @@
 package milu.kiriu2010.excon2.screen1.traffic
 
 import android.graphics.drawable.AnimationDrawable
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import milu.kiriu2010.excon2.R
 import kotlinx.android.synthetic.main.activity_traffic_light.*

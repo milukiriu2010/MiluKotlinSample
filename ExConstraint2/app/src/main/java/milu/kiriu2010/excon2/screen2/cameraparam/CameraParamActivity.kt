@@ -3,7 +3,7 @@ package milu.kiriu2010.excon2.screen2.cameraparam
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_camera_param.*
 import milu.kiriu2010.excon2.R
 import android.graphics.BitmapFactory
 import android.media.ImageReader
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.widget.Toast
 
 

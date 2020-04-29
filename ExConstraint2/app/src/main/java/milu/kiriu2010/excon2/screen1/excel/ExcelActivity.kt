@@ -2,7 +2,7 @@ package milu.kiriu2010.excon2.screen1.excel
 
 import android.content.Intent
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_excel.*
 import milu.kiriu2010.excon2.R
@@ -41,7 +41,7 @@ class ExcelActivity : AppCompatActivity() {
             // Excelファイル作成
             createExcel()
 
-            val intent = Intent().apply {
+            Intent().apply {
                 action = Intent.ACTION_SEND
                 type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                 putExtra(Intent.EXTRA_TITLE,"アップロード")
@@ -139,7 +139,7 @@ class ExcelActivity : AppCompatActivity() {
             (0..3).forEach { i ->
                 val sheet: Sheet = book.createSheet()
                 if (sheet is SXSSFSheet) {
-                    (sheet as SXSSFSheet).trackAllColumnsForAutoSizing()
+                    sheet.trackAllColumnsForAutoSizing()
                 }
 
                 //シート名称の設定
@@ -233,7 +233,7 @@ class ExcelActivity : AppCompatActivity() {
                     cell = row.createCell(colNumber++)
                     cell.cellStyle = style_double
                     cell.cellType = CellType.STRING
-                    cell.setCellValue((j + 1) as Double * 1000)
+                    cell.setCellValue((j + 1).toDouble() * 1000)
 
                     cell = row.createCell(colNumber++)
                     cell.cellStyle = style_yen
@@ -243,7 +243,7 @@ class ExcelActivity : AppCompatActivity() {
                     cell = row.createCell(colNumber++)
                     cell.cellStyle = style_percent
                     cell.cellType = CellType.STRING
-                    cell.setCellValue((j + 1) as Double)
+                    cell.setCellValue((j + 1).toDouble())
 
                     cell = row.createCell(colNumber++)
                     cell.cellStyle = style_datetime

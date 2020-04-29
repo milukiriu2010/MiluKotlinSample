@@ -1,6 +1,6 @@
 package milu.kiriu2010.excon2.screen2.dragdrop
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.DragEvent
 import android.view.View
@@ -13,7 +13,7 @@ import android.widget.LinearLayout
 import android.view.ViewGroup
 import android.graphics.PorterDuff
 import android.os.Build
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 import android.util.Log
 
 import milu.kiriu2010.excon2.R

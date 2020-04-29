@@ -1,7 +1,7 @@
 package milu.kiriu2010.excon2.screen1.largebmp
 
 import android.graphics.BitmapFactory
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import milu.kiriu2010.excon2.R

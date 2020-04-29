@@ -2,7 +2,7 @@ package milu.kiriu2010.excon2.screen1.rate
 
 import android.app.ActionBar
 import android.os.AsyncTask
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem

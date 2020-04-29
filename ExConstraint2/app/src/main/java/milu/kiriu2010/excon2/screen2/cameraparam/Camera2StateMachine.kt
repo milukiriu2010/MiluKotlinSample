@@ -19,7 +19,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.media.ImageReader
 import android.os.Handler
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.util.Log
 import android.view.Surface
 import java.util.*

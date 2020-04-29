@@ -2,10 +2,10 @@ package milu.kiriu2010.excon2.screen2.servicelst
 
 import android.app.ActivityManager
 import android.content.Context
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_service_lst.*
 import milu.kiriu2010.excon2.R
@@ -21,7 +21,7 @@ class ServiceLstActivity : AppCompatActivity() {
         val appProcesses = activityManager.runningAppProcesses
 
         // リサイクラービューのレイアウト
-        val layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerViewService.layoutManager = layoutManager
 
         // リサイクラービューのアダプタ

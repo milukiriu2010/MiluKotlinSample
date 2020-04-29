@@ -1,10 +1,10 @@
 package milu.kiriu2010.excon2.screen1.text2speech
 
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_text2_speech.*
 import milu.kiriu2010.excon2.R

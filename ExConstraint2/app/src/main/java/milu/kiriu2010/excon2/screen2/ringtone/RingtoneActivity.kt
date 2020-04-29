@@ -3,7 +3,7 @@ package milu.kiriu2010.excon2.screen2.ringtone
 import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_ringtone.*

@@ -1,6 +1,6 @@
 package milu.kiriu2010.excon2.screen1.animemove
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.animation.*
@@ -132,7 +132,7 @@ class AnimeMoveActivity : AppCompatActivity() {
                 finish()
                 true
             }
-            else -> return super.onOptionsItemSelected(item)
+            else -> return super.onOptionsItemSelected(item!!)
         }
     }
 }
