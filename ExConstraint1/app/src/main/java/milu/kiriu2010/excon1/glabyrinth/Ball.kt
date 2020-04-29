@@ -34,9 +34,9 @@ class Ball(private val ballBitmap: Bitmap, left: Int, top: Int, scale: Float) {
 
     }
 
-    internal fun move(xOffset: Float, yOffset: Float) {
-        var xOffset = xOffset
-        var yOffset = yOffset
+    internal fun move(xOffsetA: Float, yOffsetA: Float) {
+        var xOffset = xOffsetA
+        var yOffset = yOffsetA
 
         var align = if (yOffset >= 0) 1 else -1
         while (!tryMoveVertical(yOffset)) {

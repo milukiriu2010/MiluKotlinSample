@@ -7,8 +7,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
-import android.support.annotation.RequiresApi
-import android.support.v4.app.NotificationCompat
+import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
 import milu.kiriu2010.excon1.R
 import milu.kiriu2010.id.NotificationChannelID
 import milu.kiriu2010.id.NotificationID

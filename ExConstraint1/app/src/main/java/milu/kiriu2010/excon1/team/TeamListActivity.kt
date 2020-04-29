@@ -2,7 +2,7 @@ package milu.kiriu2010.excon1.team
 
 import android.app.Activity
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import milu.kiriu2010.abc.Team

@@ -3,7 +3,7 @@ package milu.kiriu2010.excon1.image
 import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.RadioButton
 import milu.kiriu2010.excon1.R

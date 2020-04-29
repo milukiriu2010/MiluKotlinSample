@@ -2,7 +2,6 @@ package milu.kiriu2010.excon1.glabyrinth
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 object LabyrinthGenerator {
@@ -101,8 +100,8 @@ object LabyrinthGenerator {
 
     }
 
-    private fun setGoalPosition(map: Array<IntArray>, y: Int, x: Int, exam: Array<IntArray>, score: Int): Array<IntArray> {
-        var score = score
+    private fun setGoalPosition(map: Array<IntArray>, y: Int, x: Int, exam: Array<IntArray>, scoreA: Int): Array<IntArray> {
+        var score = scoreA
         score++
 
         if (y < 0 || x < 0 || y >= map.size || x >= map[0].size) {
@@ -136,7 +135,7 @@ object LabyrinthGenerator {
                 if (map[y][x] == POLL) {
 
                     // 壁を作る方向
-                    var directionList: MutableList<Direction>? = null
+                    var directionList: MutableList<Direction>
 
                     // 閉鎖路を防ぐため、２段目以降は上向きに壁を設定しない
                     if (y == 1) {
@@ -184,9 +183,9 @@ object LabyrinthGenerator {
         } while (rand.nextInt(holeCount) != 0)
     }
 
-    private fun setDirection(y: Int, x: Int, direction: Direction, map: Array<IntArray>): Boolean {
-        var y = y
-        var x = x
+    private fun setDirection(yA: Int, xA: Int, direction: Direction, map: Array<IntArray>): Boolean {
+        var y = yA
+        var x = xA
         map[y][x] = WALL
 
         when (direction) {

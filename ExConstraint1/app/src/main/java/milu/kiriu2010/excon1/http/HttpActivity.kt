@@ -2,7 +2,7 @@ package milu.kiriu2010.excon1.http
 
 import android.app.Activity
 import android.os.AsyncTask
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import milu.kiriu2010.excon1.R

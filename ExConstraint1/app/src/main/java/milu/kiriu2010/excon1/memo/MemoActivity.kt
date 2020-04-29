@@ -3,12 +3,12 @@ package milu.kiriu2010.excon1.memo
 import android.Manifest
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v4.widget.DrawerLayout
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.drawerlayout.widget.DrawerLayout
 import android.util.Log
 import android.view.MenuItem
 import milu.kiriu2010.excon1.R

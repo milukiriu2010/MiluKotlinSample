@@ -2,12 +2,12 @@ package milu.kiriu2010.excon1.file
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.LinearLayoutManager
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.Toast
 import milu.kiriu2010.excon1.R
 import kotlinx.android.synthetic.main.activity_file_recycle.*
@@ -21,7 +21,7 @@ class FileRecycleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_file_recycle)
 
-        rvFile.layoutManager = LinearLayoutManager( this, LinearLayoutManager.VERTICAL, false)
+        rvFile.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         if ( hasPermission() ) showFiles()
     }
