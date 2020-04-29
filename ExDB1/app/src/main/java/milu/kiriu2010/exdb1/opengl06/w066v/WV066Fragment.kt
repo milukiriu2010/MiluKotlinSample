@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl06.w066v
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -32,7 +32,7 @@ class WV066Fragment : Fragment() {
         myGLES20View = view.findViewById(R.id.myGLES20ViewW66)
         val renderer = WV066Renderer(context!!)
         myGLES20View.setRenderer(renderer)
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }
@@ -55,7 +55,7 @@ class WV066Fragment : Fragment() {
         val radioButtonW66Texture1 = view.findViewById<RadioButton>(R.id.radioButtonW66Texture1)
         val radioButtonW66Texture2 = view.findViewById<RadioButton>(R.id.radioButtonW66Texture2)
 
-        radioGroupW66.setOnCheckedChangeListener { group, checkedId ->
+        radioGroupW66.setOnCheckedChangeListener { _, checkedId ->
             renderer.textureType = when (checkedId) {
                 radioButtonW66Render.id -> 0
                 radioButtonW66Texture1.id -> 1

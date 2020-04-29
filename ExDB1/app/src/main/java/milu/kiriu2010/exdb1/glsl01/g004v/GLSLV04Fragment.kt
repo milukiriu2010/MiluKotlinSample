@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.glsl01.g004v
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -31,7 +31,7 @@ class GLSLV04Fragment : Fragment() {
         val renderer = GLSLV04Renderer(context!!)
         myGLES20View.setRenderer(renderer)
 
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                     renderer.touchP.x = event.x.toFloat()/renderer.renderW.toFloat()
@@ -63,7 +63,7 @@ class GLSLV04Fragment : Fragment() {
         val radioButtonG04Flower2 = view.findViewById<RadioButton>(R.id.radioButtonG04Flower2)
         val radioButtonG04Fan = view.findViewById<RadioButton>(R.id.radioButtonG04Fan)
 
-        radioGroupG04A.setOnCheckedChangeListener { group, checkedId ->
+        radioGroupG04A.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 radioButtonG04Ring.id      -> {
                     renderer.u_type = 1
@@ -91,7 +91,7 @@ class GLSLV04Fragment : Fragment() {
             }
         }
 
-        radioGroupG04B.setOnCheckedChangeListener { group, checkedId ->
+        radioGroupG04B.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 radioButtonG04Flower1.id    -> {
                     renderer.u_type = 6

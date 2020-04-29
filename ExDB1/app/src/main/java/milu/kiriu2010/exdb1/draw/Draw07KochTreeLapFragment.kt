@@ -4,7 +4,7 @@ package milu.kiriu2010.exdb1.draw
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +36,7 @@ class Draw07KochTreeLapFragment : Fragment() {
         imageView.setImageDrawable(kochTreeLapDrawable)
 
         val radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup)
-        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+        radioGroup.setOnCheckedChangeListener { _, checkedId ->
             if (this::objectAnimator.isInitialized) {
                 objectAnimator.cancel()
             }

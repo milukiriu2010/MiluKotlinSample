@@ -15,9 +15,9 @@ class Square01Model: MgModelAbs() {
         val pattern = opt["pattern"]?.toInt() ?: 18
 
         when ( pattern ) {
-            1 -> createPathPattern1(opt)
-            18 -> createPathPattern18(opt)
-            else -> createPathPattern18(opt)
+            1 -> createPathPattern1()
+            18 -> createPathPattern18()
+            else -> createPathPattern18()
         }
 
         // バッファ割り当て
@@ -25,7 +25,7 @@ class Square01Model: MgModelAbs() {
     }
 
     // g001
-    private fun createPathPattern1(opt: Map<String, Float>) {
+    private fun createPathPattern1() {
         // 頂点データ
         datPos.addAll(arrayListOf(-1f, 1f,0f))
         datPos.addAll(arrayListOf( 1f, 1f,0f))
@@ -38,7 +38,7 @@ class Square01Model: MgModelAbs() {
     }
 
     // w18,19
-    private fun createPathPattern18(opt: Map<String, Float>) {
+    private fun createPathPattern18() {
         // 頂点データ
         datPos.addAll(arrayListOf( 0f, 1f,0f))
         datPos.addAll(arrayListOf( 1f, 0f,0f))

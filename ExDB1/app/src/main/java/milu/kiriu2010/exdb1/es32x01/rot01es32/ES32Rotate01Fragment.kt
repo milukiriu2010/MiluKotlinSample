@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.es32x01.rot01es32
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -29,7 +29,7 @@ class ES32Rotate01Fragment : Fragment() {
         myGLES32View = view.findViewById(R.id.myGLES32ViewA03)
         val renderer = ES32Rotate01Renderer(context!!)
         myGLES32View.setRenderer(renderer)
-        myGLES32View.setOnTouchListener { v, event ->
+        myGLES32View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }

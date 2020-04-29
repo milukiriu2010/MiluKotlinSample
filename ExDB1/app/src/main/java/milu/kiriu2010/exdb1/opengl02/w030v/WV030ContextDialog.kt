@@ -2,7 +2,7 @@ package milu.kiriu2010.exdb1.opengl02.w030v
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,10 +21,10 @@ class WV030ContextDialog: DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            red   = it.getFloat("RED")   ?: 0f
-            green = it.getFloat("GREEN") ?: 0f
-            blue  = it.getFloat("BLUE")  ?: 0f
-            alpha = it.getFloat("ALPHA") ?: 0f
+            red   = it.getFloat("RED")
+            green = it.getFloat("GREEN")
+            blue  = it.getFloat("BLUE")
+            alpha = it.getFloat("ALPHA")
         }
     }
 
@@ -32,7 +32,7 @@ class WV030ContextDialog: DialogFragment() {
         //return super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_open_gl_w30z_context, container, false)
 
-        val ctx = context ?: return view
+        //val ctx = context ?: return view
 
         val seekBarW030ContextRed = view.findViewById<SeekBar>(R.id.seekBarW030ContextRed)
         seekBarW030ContextRed.progress = (red * 10f).toInt()
@@ -120,10 +120,10 @@ class WV030ContextDialog: DialogFragment() {
         fun newInstance(bundle: Bundle) =
                 WV030ContextDialog().apply {
                     arguments = Bundle().also {
-                        it.putFloat("RED"  , bundle.getFloat("RED")   ?: 0f)
-                        it.putFloat("GREEN", bundle.getFloat("GREEN") ?: 0f)
-                        it.putFloat("BLUE" , bundle.getFloat("BLUE")  ?: 0f)
-                        it.putFloat("ALPHA", bundle.getFloat("ALPHA") ?: 0f)
+                        it.putFloat("RED"  , bundle.getFloat("RED"))
+                        it.putFloat("GREEN", bundle.getFloat("GREEN"))
+                        it.putFloat("BLUE" , bundle.getFloat("BLUE"))
+                        it.putFloat("ALPHA", bundle.getFloat("ALPHA"))
                     }
                 }
     }

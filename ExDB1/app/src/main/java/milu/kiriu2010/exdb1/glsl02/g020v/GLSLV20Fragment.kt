@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.glsl02.g020v
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -30,7 +30,7 @@ class GLSLV20Fragment : Fragment() {
         val renderer = GLSLV20Renderer(context!!)
         myGLES20View.setRenderer(renderer)
 
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                     renderer.touchP.x = event.x.toFloat()/renderer.renderW.toFloat()
@@ -49,7 +49,7 @@ class GLSLV20Fragment : Fragment() {
         }
 
         val checkBoxG10 = view.findViewById<CheckBox>(R.id.checkBoxG10)
-        checkBoxG10.setOnCheckedChangeListener { buttonView, isChecked ->
+        checkBoxG10.setOnCheckedChangeListener { _, isChecked ->
             renderer.u_showNormal = when (isChecked) {
                 true  -> 1
                 false -> 0

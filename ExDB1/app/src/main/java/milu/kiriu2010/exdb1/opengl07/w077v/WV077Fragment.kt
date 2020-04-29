@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl07.w077v
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -29,7 +29,7 @@ class WV077Fragment : Fragment() {
         myGLES20View = view.findViewById(R.id.myGLES20ViewW77)
         val renderer = WV077Renderer(context!!)
         myGLES20View.setRenderer(renderer)
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }

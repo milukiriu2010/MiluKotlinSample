@@ -1,8 +1,8 @@
 package milu.kiriu2010.exdb1.scheduler
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.app.AppCompatActivity
 import io.realm.Realm
 import io.realm.kotlin.where
 import milu.kiriu2010.exdb1.R
@@ -26,13 +26,13 @@ class SchedulerActivity : AppCompatActivity() {
         listView.adapter = ScheduleAdapter(schedules)
         
         // アイテムクリックでスケジュール詳細を表示する画面へ遷移
-        listView.setOnItemClickListener { parent, view, position, id ->
+        listView.setOnItemClickListener { parent, _, position, _ ->
             val schedule = parent.getItemAtPosition(position) as Schedule
             // レコードのプライマリキーを渡す
             startActivity<ScheduleEditActivity>( "schedule_id" to schedule.id )
         }
 
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener { _ ->
             //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
             //        .setAction("Action", null).show()
             startActivity<ScheduleEditActivity>()

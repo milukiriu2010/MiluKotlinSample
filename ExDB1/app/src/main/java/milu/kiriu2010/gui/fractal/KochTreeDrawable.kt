@@ -50,7 +50,7 @@ class KochTreeDrawable : Drawable() {
     private fun createKochPath() {
         Log.d(javaClass.simpleName,"----------------------------")
         kochPathLst.clear()
-        kochTreeLst.forEachIndexed { id1, kochTree ->
+        kochTreeLst.forEachIndexed { _, kochTree ->
             // コッホツリー1本
             val kochPath = Path()
             kochTree.forEachIndexed { id2, pair ->
@@ -94,7 +94,7 @@ class KochTreeDrawable : Drawable() {
 
         // コッホツリーの頂点リストを倍にして
         // コッホツリーの頂点リスト(テンポラリ)へ格納
-        kochTreeLst.forEachIndexed { id1, kochTree ->
+        kochTreeLst.forEachIndexed { _, kochTree ->
             tmpKochTreeLst.add(kochTree.toMutableList())
             tmpKochTreeLst.add(kochTree.toMutableList())
         }
@@ -179,7 +179,7 @@ class KochTreeDrawable : Drawable() {
 
      override fun draw(canvas: Canvas) {
         // コッホツリーを描画
-        kochPathLst.forEachIndexed { index, path ->
+        kochPathLst.forEachIndexed { _, path ->
             canvas.drawPath(path,linePaint)
         }
     }

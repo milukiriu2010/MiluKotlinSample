@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.es30x01.a05v
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -29,7 +29,7 @@ class AV05Fragment : Fragment() {
         myGLES30View = view.findViewById(R.id.myGLES30ViewA03)
         val renderer = AV05Renderer(context!!)
         myGLES30View.setRenderer(renderer)
-        myGLES30View.setOnTouchListener { v, event ->
+        myGLES30View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }

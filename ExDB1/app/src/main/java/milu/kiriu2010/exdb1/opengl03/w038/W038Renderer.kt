@@ -59,7 +59,7 @@ class W038Renderer(ctx: Context): MgRenderer(ctx) {
 
         // 回転角度
         angle[0] =(angle[0]+1)%360
-        val t0 = angle[0].toFloat()
+        //val t0 = angle[0].toFloat()
 
         // クォータニオンを行列に適用
         var matQ = qtnNow.toMatIV()

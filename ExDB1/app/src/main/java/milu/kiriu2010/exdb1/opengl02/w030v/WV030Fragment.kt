@@ -3,7 +3,7 @@ package milu.kiriu2010.exdb1.opengl02.w030v
 import android.content.Intent
 import android.opengl.GLES20
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -36,7 +36,7 @@ class WV030Fragment : Fragment() {
         myGLES20View = view.findViewById(R.id.myGLES20ViewW30)
         renderer = WV030Renderer(context!!)
         myGLES20View.setRenderer(renderer)
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                     renderer.isRunning = false
@@ -68,7 +68,7 @@ class WV030Fragment : Fragment() {
 
             val dlg = WV030ContextDialog.newInstance(bundle)
             dlg.setTargetFragment(this,1)
-            dlg.show(fragmentManager,"context clear color")
+            dlg.show(fragmentManager!!,"context clear color")
         }
 
         // ブレンドの色を変更するダイアログを開く
@@ -83,7 +83,7 @@ class WV030Fragment : Fragment() {
 
             val dlg = WV030BlendDialog.newInstance(bundle)
             dlg.setTargetFragment(this,2)
-            dlg.show(fragmentManager,"blend constant color")
+            dlg.show(fragmentManager!!,"blend constant color")
         }
 
         // パラメータを変更するダイアログを開く(テクスチャ)
@@ -112,7 +112,7 @@ class WV030Fragment : Fragment() {
 
             val dlg = WV030ModelDialog.newInstance(bundle)
             dlg.setTargetFragment(this,3)
-            dlg.show(fragmentManager,"Model1")
+            dlg.show(fragmentManager!!,"Model1")
         }
 
         // パラメータを変更するダイアログを開く(板ポリゴン)
@@ -141,23 +141,23 @@ class WV030Fragment : Fragment() {
 
             val dlg = WV030ModelDialog.newInstance(bundle)
             dlg.setTargetFragment(this,4)
-            dlg.show(fragmentManager,"Model2")
+            dlg.show(fragmentManager!!,"Model2")
         }
 
         return view
     }
 
     // ダイアログ上での変更結果をレンダリングに反映
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             // コンテキストの色
             1 -> {
                 Log.d(javaClass.simpleName,"onActivityResult:${requestCode}")
 
-                val red   = data.getFloatExtra("RED",0f)
-                val green = data.getFloatExtra("GREEN",0f)
-                val blue  = data.getFloatExtra("BLUE",0f)
-                val alpha = data.getFloatExtra("ALPHA",0f)
+                val red   = data?.getFloatExtra("RED",0f)   ?: 0f
+                val green = data?.getFloatExtra("GREEN",0f) ?: 0f
+                val blue  = data?.getFloatExtra("BLUE",0f)  ?: 0f
+                val alpha = data?.getFloatExtra("ALPHA",0f) ?: 0f
 
                 renderer.contextColor[0] = red
                 renderer.contextColor[1] = green
@@ -168,10 +168,10 @@ class WV030Fragment : Fragment() {
             2 -> {
                 Log.d(javaClass.simpleName,"onActivityResult:${requestCode}")
 
-                val red   = data.getFloatExtra("RED",0f)
-                val green = data.getFloatExtra("GREEN",0f)
-                val blue  = data.getFloatExtra("BLUE",0f)
-                val alpha = data.getFloatExtra("ALPHA",0f)
+                val red   = data?.getFloatExtra("RED",0f)   ?: 0f
+                val green = data?.getFloatExtra("GREEN",0f) ?: 0f
+                val blue  = data?.getFloatExtra("BLUE",0f)  ?: 0f
+                val alpha = data?.getFloatExtra("ALPHA",0f) ?: 0f
 
                 renderer.blendColor[0] = red
                 renderer.blendColor[1] = green
@@ -182,41 +182,41 @@ class WV030Fragment : Fragment() {
             3 -> {
                 Log.d(javaClass.simpleName,"onActivityResult:${requestCode}")
                 // ブレンド
-                renderer.blend[0] = data.getBooleanExtra("BLEND", false )
+                renderer.blend[0] = data?.getBooleanExtra("BLEND", false ) ?: false
                 // アルファ成分
-                renderer.vertexAplha[0] = data.getFloatExtra("VERTEX_ALPHA", 0f )
+                renderer.vertexAplha[0] = data?.getFloatExtra("VERTEX_ALPHA", 0f ) ?: 0f
                 // 方程式(カラー)
-                renderer.equationColor[0] = data.getIntExtra("EQUATION_COLOR", GLES20.GL_FUNC_ADD )
+                renderer.equationColor[0] = data?.getIntExtra("EQUATION_COLOR", GLES20.GL_FUNC_ADD ) ?: GLES20.GL_FUNC_ADD
                 // 方程式(アルファ)
-                renderer.equationAlpha[0] = data.getIntExtra("EQUATION_ALPHA", GLES20.GL_FUNC_ADD )
+                renderer.equationAlpha[0] = data?.getIntExtra("EQUATION_ALPHA", GLES20.GL_FUNC_ADD ) ?: GLES20.GL_FUNC_ADD
                 // ブレンドファクター(カラー元)
-                renderer.blendFctSCBF[0] = data.getIntExtra("BLEND_FCT_SCBF", GLES20.GL_ONE )
+                renderer.blendFctSCBF[0] = data?.getIntExtra("BLEND_FCT_SCBF", GLES20.GL_ONE ) ?: GLES20.GL_ONE
                 // ブレンドファクター(カラー先)
-                renderer.blendFctDCBF[0] = data.getIntExtra("BLEND_FCT_DCBF", GLES20.GL_ONE )
+                renderer.blendFctDCBF[0] = data?.getIntExtra("BLEND_FCT_DCBF", GLES20.GL_ONE ) ?: GLES20.GL_ONE
                 // ブレンドファクター(アルファ元)
-                renderer.blendFctSABF[0] = data.getIntExtra("BLEND_FCT_SABF", GLES20.GL_ONE )
+                renderer.blendFctSABF[0] = data?.getIntExtra("BLEND_FCT_SABF", GLES20.GL_ONE ) ?: GLES20.GL_ONE
                 // ブレンドファクター(アルファ先)
-                renderer.blendFctDABF[0] = data.getIntExtra("BLEND_FCT_DABF", GLES20.GL_ONE )
+                renderer.blendFctDABF[0] = data?.getIntExtra("BLEND_FCT_DABF", GLES20.GL_ONE ) ?: GLES20.GL_ONE
             }
             // パラメータを変更するダイアログを開く(板ポリゴン)
             4 -> {
                 Log.d(javaClass.simpleName,"onActivityResult:${requestCode}")
                 // ブレンド
-                renderer.blend[1] = data.getBooleanExtra("BLEND", false )
+                renderer.blend[1] = data?.getBooleanExtra("BLEND", false ) ?: false
                 // アルファ成分
-                renderer.vertexAplha[1] = data.getFloatExtra("VERTEX_ALPHA", 0f )
+                renderer.vertexAplha[1] = data?.getFloatExtra("VERTEX_ALPHA", 0f ) ?: 0f
                 // 方程式(カラー)
-                renderer.equationColor[1] = data.getIntExtra("EQUATION_COLOR", GLES20.GL_FUNC_ADD )
+                renderer.equationColor[1] = data?.getIntExtra("EQUATION_COLOR", GLES20.GL_FUNC_ADD ) ?: GLES20.GL_FUNC_ADD
                 // 方程式(アルファ)
-                renderer.equationAlpha[1] = data.getIntExtra("EQUATION_ALPHA", GLES20.GL_FUNC_ADD )
+                renderer.equationAlpha[1] = data?.getIntExtra("EQUATION_ALPHA", GLES20.GL_FUNC_ADD ) ?: GLES20.GL_FUNC_ADD
                 // ブレンドファクター(カラー元)
-                renderer.blendFctSCBF[1] = data.getIntExtra("BLEND_FCT_SCBF", GLES20.GL_ONE )
+                renderer.blendFctSCBF[1] = data?.getIntExtra("BLEND_FCT_SCBF", GLES20.GL_ONE ) ?: GLES20.GL_ONE
                 // ブレンドファクター(カラー先)
-                renderer.blendFctDCBF[1] = data.getIntExtra("BLEND_FCT_DCBF", GLES20.GL_ONE )
+                renderer.blendFctDCBF[1] = data?.getIntExtra("BLEND_FCT_DCBF", GLES20.GL_ONE ) ?: GLES20.GL_ONE
                 // ブレンドファクター(アルファ元)
-                renderer.blendFctSABF[1] = data.getIntExtra("BLEND_FCT_SABF", GLES20.GL_ONE )
+                renderer.blendFctSABF[1] = data?.getIntExtra("BLEND_FCT_SABF", GLES20.GL_ONE ) ?: GLES20.GL_ONE
                 // ブレンドファクター(アルファ先)
-                renderer.blendFctDABF[1] = data.getIntExtra("BLEND_FCT_DABF", GLES20.GL_ONE )
+                renderer.blendFctDABF[1] = data?.getIntExtra("BLEND_FCT_DABF", GLES20.GL_ONE ) ?: GLES20.GL_ONE
             }
             //
             else -> super.onActivityResult(requestCode, resultCode, data)

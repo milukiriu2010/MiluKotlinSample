@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl06.w061
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -30,7 +30,7 @@ class W061Fragment : Fragment() {
         myGLES20View = view.findViewById(R.id.myGLES20ViewW61)
         val renderer = W061Renderer(context!!)
         myGLES20View.setRenderer(renderer)
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }
@@ -49,7 +49,7 @@ class W061Fragment : Fragment() {
         }
 
         val checkBoxW61Fog = view.findViewById<CheckBox>(R.id.checkBoxW61Fog)
-        checkBoxW61Fog.setOnCheckedChangeListener { buttonView, isChecked ->
+        checkBoxW61Fog.setOnCheckedChangeListener { _, isChecked ->
             renderer.u_softParticle = when(isChecked) {
                 true -> 1
                 else -> 0

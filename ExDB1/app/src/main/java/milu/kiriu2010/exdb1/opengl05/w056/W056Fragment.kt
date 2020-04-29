@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl05.w056
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -30,7 +30,7 @@ class W056Fragment : Fragment() {
         myGLES20View = view.findViewById(R.id.myGLES20ViewW56)
         val renderer = W056Renderer(context!!)
         myGLES20View.setRenderer(renderer)
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }
@@ -53,7 +53,7 @@ class W056Fragment : Fragment() {
         val radioButtonW56Texture1 = view.findViewById<RadioButton>(R.id.radioButtonW56Texture1)
         val radioButtonW56Texture2 = view.findViewById<RadioButton>(R.id.radioButtonW56Texture2)
 
-        radioGroupW56.setOnCheckedChangeListener { group, checkedId ->
+        radioGroupW56.setOnCheckedChangeListener { _, checkedId ->
             renderer.textureType = when (checkedId) {
                 radioButtonW56Render.id -> 0
                 radioButtonW56Texture1.id -> 1
@@ -63,7 +63,7 @@ class W056Fragment : Fragment() {
         }
 
         val checkBoxW56Laplacian = view.findViewById<CheckBox>(R.id.checkBoxW56Laplacian)
-        checkBoxW56Laplacian.setOnCheckedChangeListener { buttonView, isChecked ->
+        checkBoxW56Laplacian.setOnCheckedChangeListener { _, isChecked ->
             renderer.u_laplacian = when (isChecked) {
                 true -> 1
                 else -> 0
@@ -71,7 +71,7 @@ class W056Fragment : Fragment() {
         }
 
         val checkBoxW56Gray = view.findViewById<CheckBox>(R.id.checkBoxW56Gray)
-        checkBoxW56Gray.setOnCheckedChangeListener { buttonView, isChecked ->
+        checkBoxW56Gray.setOnCheckedChangeListener { _, isChecked ->
             renderer.u_laplacianGray = when (isChecked) {
                 true -> 1
                 else -> 0

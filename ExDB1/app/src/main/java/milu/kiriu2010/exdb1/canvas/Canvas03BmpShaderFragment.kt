@@ -3,7 +3,7 @@ package milu.kiriu2010.exdb1.canvas
 
 import android.graphics.*
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.*
 import android.widget.ImageButton
@@ -61,7 +61,7 @@ class Canvas03BmpShaderFragment : Fragment()
 
         // サーフェースビューを取得
         surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
-        surfaceViewCanvas.setOnTouchListener ret@ { v, event ->
+        surfaceViewCanvas.setOnTouchListener ret@ { _, event ->
 
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {

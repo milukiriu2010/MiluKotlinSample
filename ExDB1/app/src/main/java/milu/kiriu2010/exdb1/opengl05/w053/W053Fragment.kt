@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl05.w053
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -30,7 +30,7 @@ class W053Fragment : Fragment() {
         myGLES20View = view.findViewById(R.id.myGLES20ViewW53)
         val render = W053Renderer(context!!)
         myGLES20View.setRenderer(render)
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }
@@ -49,7 +49,7 @@ class W053Fragment : Fragment() {
         }
 
         val switchW53 = view.findViewById<Switch>(R.id.switchW53)
-        switchW53.setOnCheckedChangeListener { buttonView, isChecked ->
+        switchW53.setOnCheckedChangeListener { _, isChecked ->
             Log.d(javaClass.simpleName,"W53:switch:${isChecked}")
             when (isChecked) {
                 true -> render.u_grayScale = 1

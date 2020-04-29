@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.mgl00.nvbo
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.*
 import android.widget.*
@@ -21,7 +21,7 @@ class DepthCull01Fragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            renderId = it.getInt(ARG_RENDER_ID) ?: 0
+            renderId = it.getInt(ARG_RENDER_ID)
         }
     }
 
@@ -33,7 +33,7 @@ class DepthCull01Fragment : Fragment() {
         myGLES20View = view.findViewById(R.id.myGLES20ViewMGL00)
         val renderer = DepthCull01Renderer(renderId, context!!)
         myGLES20View.setRenderer(renderer)
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             // scaleDetectorは、認識されない
             scaleDetector.onTouchEvent(event)
             when (event.action) {
@@ -75,19 +75,19 @@ class DepthCull01Fragment : Fragment() {
         // 深度テスト
         val checkBoxDepth = view.findViewById<CheckBox>(R.id.checkBoxDepth)
         checkBoxDepth.isChecked = renderer.isDepth
-        checkBoxDepth.setOnCheckedChangeListener { buttonView, isChecked ->
+        checkBoxDepth.setOnCheckedChangeListener { _, isChecked ->
             renderer.isDepth = isChecked
         }
         // カリング
         val checkBoxCull = view.findViewById<CheckBox>(R.id.checkBoxCull)
         checkBoxCull.isChecked = renderer.isCull
-        checkBoxCull.setOnCheckedChangeListener { buttonView, isChecked ->
+        checkBoxCull.setOnCheckedChangeListener { _, isChecked ->
             renderer.isCull = isChecked
         }
         // 回転
         val checkBoxRotate = view.findViewById<CheckBox>(R.id.checkBoxRotate)
         checkBoxRotate.isChecked = false
-        checkBoxRotate.setOnCheckedChangeListener { buttonView, isChecked ->
+        checkBoxRotate.setOnCheckedChangeListener { _, isChecked ->
             renderer.isRunning = isChecked
         }
 
@@ -136,7 +136,7 @@ class DepthCull01Fragment : Fragment() {
                 radioButtonOrth.isChecked = true
             }
         }
-        radioGroupPersFrus.setOnCheckedChangeListener { group, checkedId ->
+        radioGroupPersFrus.setOnCheckedChangeListener { _, checkedId ->
             renderer.flgPersFrus = when (checkedId) {
                 radioButtonPers.id -> 1
                 radioButtonFrus.id -> 2

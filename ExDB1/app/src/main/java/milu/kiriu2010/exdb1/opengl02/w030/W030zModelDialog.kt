@@ -3,7 +3,7 @@ package milu.kiriu2010.exdb1.opengl02.w030
 import android.content.Intent
 import android.opengl.GLES20
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,23 +35,23 @@ class W030zModelDialog: DialogFragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             // リクエストコード
-            reqCode = it.getInt("REQ_CODE") ?: reqCode
+            reqCode = it.getInt("REQ_CODE")
             // ブレンド
-            blend = it.getBoolean("BLEND") ?: false
+            blend = it.getBoolean("BLEND")
             // アルファ成分
-            vertexAlpha = it.getFloat("VERTEX_ALPHA") ?: 0f
+            vertexAlpha = it.getFloat("VERTEX_ALPHA")
             // 方程式(カラー)
-            equationColor = it.getInt("EQUATION_COLOR") ?: GLES20.GL_FUNC_ADD
+            equationColor = it.getInt("EQUATION_COLOR")
             // 方程式(アルファ)
-            equationAlpha = it.getInt("EQUATION_ALPHA") ?: GLES20.GL_FUNC_ADD
+            equationAlpha = it.getInt("EQUATION_ALPHA")
             // ブレンドファクター(カラー元)
-            blendFctSCBF = it.getInt("BLEND_FCT_SCBF") ?: GLES20.GL_ONE
+            blendFctSCBF = it.getInt("BLEND_FCT_SCBF")
             // ブレンドファクター(カラー先)
-            blendFctDCBF = it.getInt("BLEND_FCT_DCBF") ?: GLES20.GL_ONE
+            blendFctDCBF = it.getInt("BLEND_FCT_DCBF")
             // ブレンドファクター(カラー元)
-            blendFctSABF = it.getInt("BLEND_FCT_SABF") ?: GLES20.GL_ONE
+            blendFctSABF = it.getInt("BLEND_FCT_SABF")
             // ブレンドファクター(カラー先)
-            blendFctDABF = it.getInt("BLEND_FCT_DABF") ?: GLES20.GL_ONE
+            blendFctDABF = it.getInt("BLEND_FCT_DABF")
         }
     }
 
@@ -59,7 +59,7 @@ class W030zModelDialog: DialogFragment() {
         //return super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_open_gl_w30z_model, container, false)
 
-        val ctx = context ?: return view
+        //val ctx = context ?: return view
 
         // 修正対象のモデル
         val textViewW30Model = view.findViewById<TextView>(R.id.textViewW30Model)
@@ -72,7 +72,7 @@ class W030zModelDialog: DialogFragment() {
         // ブレンドするかどうか
         val checkBoxW030Blend = view.findViewById<CheckBox>(R.id.checkBoxW030Blend)
         checkBoxW030Blend.isChecked = blend
-        checkBoxW030Blend.setOnCheckedChangeListener { buttonView, isChecked ->
+        checkBoxW030Blend.setOnCheckedChangeListener { _, isChecked ->
             blend = isChecked
         }
 
@@ -411,23 +411,23 @@ class W030zModelDialog: DialogFragment() {
                 W030zModelDialog().apply {
                     arguments = Bundle().also {
                         // リクエストコード
-                        it.putInt("REQ_CODE", bundle.getInt("REQ_CODE") ?: -1)
+                        it.putInt("REQ_CODE", bundle.getInt("REQ_CODE"))
                         // ブレンド
-                        it.putBoolean("BLEND", bundle.getBoolean("BLEND") ?: false )
+                        it.putBoolean("BLEND", bundle.getBoolean("BLEND"))
                         // アルファ成分
-                        it.putFloat("VERTEX_ALPHA", bundle.getFloat("VERTEX_ALPHA") ?: 0f)
+                        it.putFloat("VERTEX_ALPHA", bundle.getFloat("VERTEX_ALPHA"))
                         // 方程式(カラー)
-                        it.putInt("EQUATION_COLOR", bundle.getInt("EQUATION_COLOR") ?: GLES20.GL_FUNC_ADD )
+                        it.putInt("EQUATION_COLOR", bundle.getInt("EQUATION_COLOR"))
                         // 方程式(アルファ)
-                        it.putInt("EQUATION_ALPHA", bundle.getInt("EQUATION_ALPHA") ?: GLES20.GL_FUNC_ADD )
+                        it.putInt("EQUATION_ALPHA", bundle.getInt("EQUATION_ALPHA"))
                         // ブレンドファクター(カラー元)
-                        it.putInt("BLEND_FCT_SCBF", bundle.getInt("BLEND_FCT_SCBF") ?: GLES20.GL_ONE )
+                        it.putInt("BLEND_FCT_SCBF", bundle.getInt("BLEND_FCT_SCBF"))
                         // ブレンドファクター(カラー先)
-                        it.putInt("BLEND_FCT_DCBF", bundle.getInt("BLEND_FCT_DCBF") ?: GLES20.GL_ONE )
+                        it.putInt("BLEND_FCT_DCBF", bundle.getInt("BLEND_FCT_DCBF"))
                         // ブレンドファクター(アルファ元)
-                        it.putInt("BLEND_FCT_SABF", bundle.getInt("BLEND_FCT_SABF") ?: GLES20.GL_ONE )
+                        it.putInt("BLEND_FCT_SABF", bundle.getInt("BLEND_FCT_SABF"))
                         // ブレンドファクター(アルファ先)
-                        it.putInt("BLEND_FCT_DABF", bundle.getInt("BLEND_FCT_DABF") ?: GLES20.GL_ONE )
+                        it.putInt("BLEND_FCT_DABF", bundle.getInt("BLEND_FCT_DABF"))
                     }
                 }
     }

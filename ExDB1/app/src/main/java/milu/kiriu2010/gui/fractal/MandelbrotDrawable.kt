@@ -3,7 +3,7 @@ package milu.kiriu2010.gui.fractal
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 import milu.kiriu2010.math.Complex
 
 // マンデルブロ集合

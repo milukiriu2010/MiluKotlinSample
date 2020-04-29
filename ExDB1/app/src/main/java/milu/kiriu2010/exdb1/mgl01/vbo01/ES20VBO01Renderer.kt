@@ -70,7 +70,7 @@ class ES20VBO01Renderer(ctx: Context): MgRenderer(ctx) {
         // ----------------------------------------------
         // モデルを単位行列にする
         Matrix.setIdentityM(matM,0)
-        val matA = rotateModel0(matM,x,y,0f,t0)
+        rotateModel0(matM,x,y,0f,t0)
         //rotateModel0(matA.copyOf(),-1f,-1f,-1f,t0)
         //rotateModel0(matA.copyOf(),0f,-1f, 1f,t0)
         //rotateModel0(matA.copyOf(),0f, 1f,-1f,t0)

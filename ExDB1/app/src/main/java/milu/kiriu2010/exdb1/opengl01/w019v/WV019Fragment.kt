@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl01.w019v
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,17 +36,17 @@ class WV019Fragment : Fragment() {
         myGLES20View.setRenderer(renderer)
 
         switchCulling = view.findViewById(R.id.switchCullingW19)
-        switchCulling.setOnCheckedChangeListener { buttonView, isChecked ->
+        switchCulling.setOnCheckedChangeListener { _, isChecked ->
             renderer.culling = isChecked
         }
 
         switchFront = view.findViewById(R.id.switchFrontW19)
-        switchFront.setOnCheckedChangeListener { buttonView, isChecked ->
+        switchFront.setOnCheckedChangeListener { _, isChecked ->
             renderer.frontFace = isChecked
         }
 
         switchDepth = view.findViewById(R.id.switchDepthW19)
-        switchDepth.setOnCheckedChangeListener { buttonView, isChecked ->
+        switchDepth.setOnCheckedChangeListener { _, isChecked ->
             renderer.depthTest = isChecked
         }
 

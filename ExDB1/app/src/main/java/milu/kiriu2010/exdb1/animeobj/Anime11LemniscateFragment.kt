@@ -3,7 +3,7 @@ package milu.kiriu2010.exdb1.animeobj
 
 import android.animation.Animator
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -60,7 +60,7 @@ class Anime11LemniscateFragment : Fragment() {
         imageView = ImageView(context)
         imageView.setImageResource(R.drawable.a_male)
         imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)
-        (view as ViewGroup)?.addView(imageView)
+        (view as ViewGroup).addView(imageView)
 
         // レイアウト・画像サイズ取得
         // エミュレータ(1080x1584) => ButtonNavigationなし

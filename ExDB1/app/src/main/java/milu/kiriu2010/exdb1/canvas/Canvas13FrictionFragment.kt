@@ -4,7 +4,7 @@ package milu.kiriu2010.exdb1.canvas
 import android.graphics.*
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.*
 
@@ -74,7 +74,7 @@ class Canvas13FrictionFragment : Fragment()
         // サーフェースビューを取得
         surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
 
-        surfaceViewCanvas.setOnTouchListener { v, event ->
+        surfaceViewCanvas.setOnTouchListener { _, event ->
             Log.d(javaClass.simpleName, "touch.x[${event.x}]touch.y[${event.y}]")
 
             // タッチしているかどうかを取得
@@ -127,7 +127,7 @@ class Canvas13FrictionFragment : Fragment()
         //val c = 0.05f
         //val c = 0.01f
         // 力(摩擦)
-        var friction = PVector( 0.2f, 1f )
+        //var friction = PVector( 0.2f, 1f )
 
         // 力を加える
         mvLst.forEach {
@@ -173,10 +173,11 @@ class Canvas13FrictionFragment : Fragment()
         // 画像を描画
         mvLst.forEach {
             // 元画像の大きさ
-            val src = Rect(it.il.x.toInt(),
-                    it.il.y.toInt(),
-                    it.il.x.toInt()+bmp.width,
-                    it.il.y.toInt()+bmp.height)
+            //val src = Rect(it.il.x.toInt(),
+            //        it.il.y.toInt(),
+            //        it.il.x.toInt()+bmp.width,
+            //        it.il.y.toInt()+bmp.height)
+
             // 元画像を質量によって大きさを変える
             val dst = Rect(it.il.x.toInt(),
                     it.il.y.toInt(),

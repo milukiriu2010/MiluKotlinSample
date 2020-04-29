@@ -271,7 +271,7 @@ class WV059Renderer(ctx: Context): MgRenderer(ctx) {
         // -------------------------------------------------------
         GLES20.glCullFace(GLES20.GL_BACK)
         (0..9).forEach { i ->
-            val amb = MgColor.hsva(i*40,1f,1f,1f)
+            //val amb = MgColor.hsva(i*40,1f,1f,1f)
             Matrix.setIdentityM(matM,0)
             Matrix.translateM(matM,0,0.2f*i.toFloat(),0f,8.8f-2.2f*i.toFloat())
             Matrix.rotateM(matM,0,angleF[i],1f,1f,0f)

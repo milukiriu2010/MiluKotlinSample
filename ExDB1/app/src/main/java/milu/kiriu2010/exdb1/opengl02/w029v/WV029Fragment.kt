@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl02.w029v
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -31,7 +31,7 @@ class WV029Fragment : Fragment() {
         myGLES20View = view.findViewById(R.id.myGLES20ViewW29)
         val renderer = WV029Renderer(context!!)
         myGLES20View.setRenderer(renderer)
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }
@@ -55,7 +55,7 @@ class WV029Fragment : Fragment() {
         val btnW029PhotoShop = view.findViewById<RadioButton>(R.id.btnW029PhotoShop)
         val btnW029Mult = view.findViewById<RadioButton>(R.id.btnW029Mult)
         radioGroupW029.check(btnW029Transparency.id)
-        radioGroupW029.setOnCheckedChangeListener { group, checkedId ->
+        radioGroupW029.setOnCheckedChangeListener { _, checkedId ->
             renderer.blendType = when (checkedId) {
                 // 通常
                 btnW029Normal.id -> 0

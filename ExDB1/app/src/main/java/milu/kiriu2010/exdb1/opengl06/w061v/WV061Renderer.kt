@@ -253,7 +253,7 @@ class WV061Renderer(ctx: Context): MgRenderer(ctx) {
             Matrix.setIdentityM(matM,0)
             Matrix.translateM(matM,0,offsetPositionX[i],0.5f,offsetPositionZ[i])
             Matrix.multiplyMM(matMVP,0,matVP,0,matM,0)
-            fogShader.draw(modelParticle,boParticle,matM,matMVP,matVPT,
+            fogShader.draw(modelParticle,boParticle,matMVP,matVPT,
                     floatArrayOf(offsetTexCoordS[i],offsetTexCoordT[i]),u_depthCoef,0,1,u_softParticle)
         }
     }

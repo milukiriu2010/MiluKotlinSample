@@ -36,7 +36,7 @@ class WV081Renderer(ctx: Context): MgRenderer(ctx) {
     override fun onDrawFrame(gl: GL10?) {
         angle[0] =(angle[0]+1)%360
         val t0 = angle[0].toFloat()
-        val scale = MyMathUtil.cosf(t0) + 2.0f
+        //val scale = MyMathUtil.cosf(t0) + 2.0f
 
 
         // フレームバッファを初期化

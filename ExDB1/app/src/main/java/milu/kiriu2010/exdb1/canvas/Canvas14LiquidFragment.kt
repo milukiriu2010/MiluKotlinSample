@@ -4,7 +4,7 @@ package milu.kiriu2010.exdb1.canvas
 import android.graphics.*
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.*
 
@@ -84,7 +84,7 @@ class Canvas14LiquidFragment : Fragment()
         // サーフェースビューを取得
         surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
 
-        surfaceViewCanvas.setOnTouchListener { v, event ->
+        surfaceViewCanvas.setOnTouchListener { _, event ->
             Log.d(javaClass.simpleName, "touch.x[${event.x}]touch.y[${event.y}]")
 
             // タッチしているかどうかを取得

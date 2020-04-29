@@ -25,7 +25,7 @@ class Board00Model: MgModelAbs() {
             // XY平面(右回り)
             1 -> createPathPattern1(opt)
             // XY平面(右回り)(アルファブレンディング)
-            29 -> createPathPattern29(opt)
+            29 -> createPathPattern29()
             // XY平面(左回り)
             53 -> createPathPattern53(opt)
             // XY平面(左+右回り)
@@ -35,7 +35,7 @@ class Board00Model: MgModelAbs() {
             // XZ平面(右回り)
             51 -> createPathPattern51(opt)
             // XY平面(左回り)画像貼り付け
-            100 -> createPathPattern100(opt)
+            100 -> createPathPattern100()
             else -> createPathPattern1(opt)
         }
 
@@ -84,7 +84,7 @@ class Board00Model: MgModelAbs() {
     //   アルファブレンディング
     //   ステンシルバッファ
     // w29,w30,w38,w86
-    private fun createPathPattern29(opt: Map<String, Float>) {
+    private fun createPathPattern29() {
         // 頂点データ
         datPos.addAll(arrayListOf(-1f, 1f,0f))
         datPos.addAll(arrayListOf( 1f, 1f,0f))
@@ -248,7 +248,7 @@ class Board00Model: MgModelAbs() {
 
     // XY平面(左回り)画像貼り付け
     //  a03,a06,a07
-    private fun createPathPattern100(opt: Map<String, Float>) {
+    private fun createPathPattern100() {
         // 頂点データ
         datPos.addAll(arrayListOf( 1f, 1f,0f))
         datPos.addAll(arrayListOf(-1f, 1f,0f))

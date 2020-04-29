@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.glsl01.g001v
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -29,7 +29,7 @@ class GLSLV01Fragment : Fragment() {
         val renderer = GLSLV01Renderer(context!!)
         myGLES20View.setRenderer(renderer)
 
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                     renderer.touchP.x = event.x.toFloat()/renderer.renderW.toFloat()

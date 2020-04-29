@@ -2,7 +2,7 @@ package milu.kiriu2010.exdb1.opengl03.w035
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.*
 import android.widget.Switch
@@ -30,7 +30,7 @@ class W035Fragment : Fragment() {
         myGLES20View = view.findViewById(R.id.myGLES20ViewW35)
         val renderer = W035Renderer(context!!)
         myGLES20View.setRenderer(renderer)
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }
@@ -49,7 +49,7 @@ class W035Fragment : Fragment() {
         }
 
         switch = view.findViewById(R.id.switchW35)
-        switch.setOnCheckedChangeListener { buttonView, isChecked ->
+        switch.setOnCheckedChangeListener { _, isChecked ->
             renderer.isBillBoard = isChecked
         }
 

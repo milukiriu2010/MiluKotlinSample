@@ -80,8 +80,8 @@ class DepthCull01Renderer(val modelID: Int,ctx: Context): MgRenderer(ctx) {
         }
         val t1 = angle[0].toFloat()
 
-        val x = MyMathUtil.cosf(t1)
-        val y = MyMathUtil.sinf(t1)
+        //val x = MyMathUtil.cosf(t1)
+        //val y = MyMathUtil.sinf(t1)
 
         // ビュー×プロジェクション
         vecEye = qtnNow.toVecIII(floatArrayOf(0f,0f,10f))

@@ -148,7 +148,7 @@ class TestGLView : GLSurfaceView, GLSurfaceView.Renderer {
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bmp, 0)
 
         bmp!!.recycle()
-        bmp = null
+        //bmp = null
 
         // gl変数texture0に0を設定
         GLES20.glUniform1i(_gl_vars["texture0"] ?: 0, 0)

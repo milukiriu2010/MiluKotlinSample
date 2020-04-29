@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl03.w041v
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -30,7 +30,7 @@ class WV041Fragment : Fragment() {
         myGLES20View = view.findViewById(R.id.myGL02ViewW41)
         val renderer = WV041Renderer(context!!)
         myGLES20View.setRenderer(renderer)
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }
@@ -48,7 +48,7 @@ class WV041Fragment : Fragment() {
             true
         }
         val switchW41 = view.findViewById<Switch>(R.id.switchW41)
-        switchW41.setOnCheckedChangeListener { buttonView, isChecked ->
+        switchW41.setOnCheckedChangeListener { _, isChecked ->
             renderer.isBlur = isChecked
         }
 

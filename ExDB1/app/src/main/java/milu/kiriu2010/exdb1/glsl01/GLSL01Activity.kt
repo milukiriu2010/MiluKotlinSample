@@ -1,6 +1,6 @@
 package milu.kiriu2010.exdb1.glsl01
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -259,7 +259,7 @@ class GLSL01Activity : AppCompatActivity() {
                 }
                 true
             }
-            else -> return super.onOptionsItemSelected(item)
+            else -> return super.onOptionsItemSelected(item!!)
         }
     }
 }

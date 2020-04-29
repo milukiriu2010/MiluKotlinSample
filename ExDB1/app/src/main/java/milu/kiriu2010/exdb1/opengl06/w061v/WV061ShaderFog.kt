@@ -201,7 +201,6 @@ class WV061ShaderFog: ES20MgShader() {
 
     fun draw(model: MgModelAbs,
              bo: ES20VBOAbs,
-             u_matM: FloatArray,
              u_matMVP: FloatArray,
              u_matTex: FloatArray,
              u_offset: FloatArray,

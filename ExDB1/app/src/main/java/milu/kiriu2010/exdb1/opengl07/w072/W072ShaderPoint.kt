@@ -88,11 +88,9 @@ class W072ShaderPoint: ES20MgShader() {
         MyGLES20Func.checkGlError2("a_Index",this,model)
 
         // attribute(インデックス)
-        /*
         GLES20.glGetAttribLocation(programHandle,"a_Index").also {
             GLES20.glVertexAttrib1f(it,a_Index)
         }
-        */
         model.bufIdx.position(0)
         GLES20.glGetAttribLocation(programHandle,"a_Index").also {
             GLES20.glVertexAttribPointer(it,1,GLES20.GL_FLOAT,false, 4, model.bufIdx)

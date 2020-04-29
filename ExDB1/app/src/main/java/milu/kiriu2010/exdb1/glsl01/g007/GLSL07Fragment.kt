@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.glsl01.g007
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -31,7 +31,7 @@ class GLSL07Fragment : Fragment() {
         val renderer = GLSL07Renderer(context!!)
         myGLES20View.setRenderer(renderer)
 
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                     renderer.touchP.x = event.x.toFloat()/renderer.renderW.toFloat()
@@ -52,7 +52,7 @@ class GLSL07Fragment : Fragment() {
         val radioGroupG07 = view.findViewById<RadioGroup>(R.id.radioGroupG07)
         val radioButtonG07Noise = view.findViewById<RadioButton>(R.id.radioButtonG07Noise)
         val radioButtonG07Seamless = view.findViewById<RadioButton>(R.id.radioButtonG07Seamless)
-        radioGroupG07.setOnCheckedChangeListener { group, checkedId ->
+        radioGroupG07.setOnCheckedChangeListener { _, checkedId ->
             renderer.u_noiseType = when (checkedId) {
                 radioButtonG07Noise.id    ->  0
                 radioButtonG07Seamless.id ->  1

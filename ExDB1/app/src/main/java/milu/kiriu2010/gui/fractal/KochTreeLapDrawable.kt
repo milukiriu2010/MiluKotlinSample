@@ -3,7 +3,7 @@ package milu.kiriu2010.gui.fractal
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 import android.util.FloatProperty
 import android.util.Log
 import kotlin.math.*
@@ -158,7 +158,7 @@ class KochTreeLapDrawable : Drawable() {
     private fun createKochPath() {
         Log.d(javaClass.simpleName,"----------------------------")
         kochPathLst.clear()
-        kochTreeLst.forEachIndexed { id1, kochTree ->
+        kochTreeLst.forEachIndexed { _, kochTree ->
             // コッホツリー1本
             val kochPath = Path()
             kochTree.forEachIndexed { id2, pair ->
@@ -203,7 +203,7 @@ class KochTreeLapDrawable : Drawable() {
 
         // コッホツリーの頂点リストを倍にして
         // コッホツリーの頂点リスト(テンポラリ)へ格納
-        kochTreeLst.forEachIndexed { id1, kochTree ->
+        kochTreeLst.forEachIndexed { _, kochTree ->
             tmpKochTreeLst.add(kochTree.toMutableList())
             tmpKochTreeLst.add(kochTree.toMutableList())
         }

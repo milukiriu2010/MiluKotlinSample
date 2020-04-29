@@ -2,7 +2,7 @@ package milu.kiriu2010.exdb1.opengl05.w055
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -32,7 +32,7 @@ class W055Fragment : Fragment() {
         val renderer = W055Renderer(context!!)
 
         myGLES20View.setRenderer(renderer)
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }
@@ -55,7 +55,7 @@ class W055Fragment : Fragment() {
         val radioButtonW55Texture1 = view.findViewById<RadioButton>(R.id.radioButtonW55Texture1)
         val radioButtonW55Texture2 = view.findViewById<RadioButton>(R.id.radioButtonW55Texture2)
 
-        radioGroupW55.setOnCheckedChangeListener { group, checkedId ->
+        radioGroupW55.setOnCheckedChangeListener { _, checkedId ->
             renderer.textureType = when (checkedId) {
                 radioButtonW55Render.id -> 0
                 radioButtonW55Texture1.id -> 1
@@ -65,7 +65,7 @@ class W055Fragment : Fragment() {
         }
 
         val checkBoxW55Sobel = view.findViewById<CheckBox>(R.id.checkBoxW55Sobel)
-        checkBoxW55Sobel.setOnCheckedChangeListener { buttonView, isChecked ->
+        checkBoxW55Sobel.setOnCheckedChangeListener { _, isChecked ->
             renderer.u_sobel = when (isChecked) {
                 true -> 1
                 else -> 0
@@ -73,7 +73,7 @@ class W055Fragment : Fragment() {
         }
 
         val checkBoxW55Gray = view.findViewById<CheckBox>(R.id.checkBoxW55Gray)
-        checkBoxW55Gray.setOnCheckedChangeListener { buttonView, isChecked ->
+        checkBoxW55Gray.setOnCheckedChangeListener { _, isChecked ->
             renderer.u_sobelGray = when (isChecked) {
                 true -> 1
                 else -> 0

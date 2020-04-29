@@ -2,7 +2,7 @@ package milu.kiriu2010.exdb1.opengl03.w036
 
 import android.opengl.GLES20
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -38,7 +38,7 @@ class W036Fragment : Fragment() {
         myGLES20View = view.findViewById(R.id.myGLES20ViewW36)
         val renderer = W036Renderer(context!!)
         myGLES20View.setRenderer(renderer)
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                     renderer.isRunning = false
@@ -78,7 +78,7 @@ class W036Fragment : Fragment() {
         val rbnW36Lines = view.findViewById<RadioButton>(R.id.rbnW36Lines)
         val rbnW36LineStrip = view.findViewById<RadioButton>(R.id.rbnW36LineStrip)
         val rbnW36LineLoop = view.findViewById<RadioButton>(R.id.rbnW36LineLoop)
-        radioGroupW36.setOnCheckedChangeListener { group, checkedId ->
+        radioGroupW36.setOnCheckedChangeListener { _, checkedId ->
             renderer.lineType = when (checkedId) {
                 rbnW36Lines.id     -> GLES20.GL_LINES
                 rbnW36LineStrip.id -> GLES20.GL_LINE_STRIP

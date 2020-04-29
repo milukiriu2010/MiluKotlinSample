@@ -236,7 +236,7 @@ class Icosahedron01Model: MgModelAbs() {
             }
         }
         else {
-            (0..59).forEach { i ->
+            (0..59).forEach { _ ->
                 datCol.addAll(arrayListOf(color[0],color[1],color[2],color[3]))
             }
         }

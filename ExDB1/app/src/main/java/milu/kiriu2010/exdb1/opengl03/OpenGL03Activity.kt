@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl03
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_open_gl03.*
@@ -260,7 +260,7 @@ class OpenGL03Activity : AppCompatActivity() {
                 }
                 true
             }
-            else -> return super.onOptionsItemSelected(item)
+            else -> return super.onOptionsItemSelected(item!!)
         }
     }
 }

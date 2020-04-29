@@ -4,7 +4,7 @@ package milu.kiriu2010.exdb1.canvas
 import android.graphics.*
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.*
 
@@ -105,7 +105,7 @@ class Canvas02RotateYFragment : Fragment()
         canvas.drawColor(Color.WHITE)
 
         // 画像を描画
-        mvLst.forEachIndexed { index, mover ->
+        mvLst.forEachIndexed { _, mover ->
             val tmpX = mover.il.x
             val tmpY = mover.il.y
             val tmpW = mover.widthByRotate()
@@ -152,7 +152,7 @@ class Canvas02RotateYFragment : Fragment()
 
         // 物体を描画する位置の初期値
         // 横：左端　縦：中央(画像の高さ分引き算)
-        var i = 0f
+        //var i = 0f
         mvLst.forEach {
             // 物体の位置
             it.il.x = bmp.width/2f + (1..5).shuffled().first().toFloat()*150f

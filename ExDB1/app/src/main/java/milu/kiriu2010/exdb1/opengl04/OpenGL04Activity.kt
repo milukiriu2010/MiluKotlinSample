@@ -1,8 +1,8 @@
 package milu.kiriu2010.exdb1.opengl04
 
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_open_gl04.*
@@ -174,7 +174,7 @@ class OpenGL04Activity : AppCompatActivity() {
                 }
                 true
             }
-            else -> return super.onOptionsItemSelected(item)
+            else -> return super.onOptionsItemSelected(item!!)
         }
     }
 }

@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl01.w022
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

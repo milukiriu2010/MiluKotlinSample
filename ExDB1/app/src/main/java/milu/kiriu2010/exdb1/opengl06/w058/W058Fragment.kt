@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl06.w058
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -30,7 +30,7 @@ class W058Fragment : Fragment() {
         myGLES20View = view.findViewById(R.id.myGLES20ViewW58)
         val renderer = W058Renderer(context!!)
         myGLES20View.setRenderer(renderer)
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }
@@ -53,7 +53,7 @@ class W058Fragment : Fragment() {
             1 -> true
             else -> false
         }
-        checkBoxW58Glare.setOnCheckedChangeListener { buttonView, isChecked ->
+        checkBoxW58Glare.setOnCheckedChangeListener { _, isChecked ->
             renderer.u_glare = when (isChecked) {
                 true -> 1
                 else -> 0

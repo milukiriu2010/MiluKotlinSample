@@ -1,7 +1,7 @@
 package milu.kiriu2010.exdb1.opengl05.w057v
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -30,7 +30,7 @@ class WV057Fragment : Fragment() {
         myGLES20View = view.findViewById(R.id.myGLES20ViewW57)
         val renderer = WV057Renderer(context!!)
         myGLES20View.setRenderer(renderer)
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }
@@ -52,7 +52,7 @@ class WV057Fragment : Fragment() {
         val radioButtonW57Render = view.findViewById<RadioButton>(R.id.radioButtonW57Render)
         val radioButtonW57Texture1 = view.findViewById<RadioButton>(R.id.radioButtonW57Texture1)
         val radioButtonW57Texture2 = view.findViewById<RadioButton>(R.id.radioButtonW57Texture2)
-        radioGroupW57.setOnCheckedChangeListener { group, checkedId ->
+        radioGroupW57.setOnCheckedChangeListener { _, checkedId ->
             renderer.textureType = when (checkedId) {
                 radioButtonW57Render.id -> 0
                 radioButtonW57Texture1.id -> 1
@@ -66,7 +66,7 @@ class WV057Fragment : Fragment() {
             1 -> true
             else -> false
         }
-        checkBoxW57Gaussian.setOnCheckedChangeListener { buttonView, isChecked ->
+        checkBoxW57Gaussian.setOnCheckedChangeListener { _, isChecked ->
             renderer.u_gaussian = when (isChecked) {
                 true -> 1
                 else -> 0

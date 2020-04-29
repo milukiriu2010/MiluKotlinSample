@@ -5,7 +5,7 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +45,7 @@ class Draw03PolygonLapFragment : Fragment() {
         val polygonLapsDrawable = PolygonLapsDrawable()
         imageView.setImageDrawable(polygonLapsDrawable)
 
-        val dv = 0.01f
+        //val dv = 0.01f
         /* ドットを動かす
         runnable = Runnable {
             if ( polygonLapsDrawable.dotProgress >= 1.0f ) {
@@ -90,7 +90,7 @@ class Draw03PolygonLapFragment : Fragment() {
         */
 
         val radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup)
-        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+        radioGroup.setOnCheckedChangeListener { _, checkedId ->
             if ( this::objectAnimator.isInitialized ) {
                 objectAnimator.cancel()
             }

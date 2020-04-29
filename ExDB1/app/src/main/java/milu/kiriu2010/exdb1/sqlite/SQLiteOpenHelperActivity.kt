@@ -1,6 +1,6 @@
 package milu.kiriu2010.exdb1.sqlite
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button

@@ -190,7 +190,7 @@ class WV047Renderer(ctx: Context): MgRenderer(ctx) {
 
         // スペキュラライティングシェーダを使って
         // トーラスをレンダリング
-        targetArray.forEachIndexed { id, target ->
+        targetArray.forEachIndexed { id, _ ->
             Matrix.setIdentityM(matM,0)
             Matrix.translateM(matM,0,torusPos[0+id*3],torusPos[1+id*3],torusPos[2+id*3])
             Matrix.rotateM(matM,0,t0,camDir[0+id*3],camDir[1+id*3],camDir[2+id*3])

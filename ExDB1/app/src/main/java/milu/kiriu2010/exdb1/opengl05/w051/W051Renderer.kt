@@ -88,7 +88,7 @@ class W051Renderer(ctx: Context): MgRenderer(ctx) {
     override fun onDrawFrame(gl: GL10?) {
         // 回転角度
         angle[0] =(angle[0]+1)%360
-        val t0 = angle[0].toFloat()
+        //val t0 = angle[0].toFloat()
 
         // ビュー×プロジェクション座標変換行列
         vecEye = qtnNow.toVecIII(floatArrayOf(0f,70f,0f))

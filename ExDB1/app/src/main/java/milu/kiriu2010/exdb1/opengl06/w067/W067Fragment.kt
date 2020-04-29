@@ -2,7 +2,7 @@ package milu.kiriu2010.exdb1.opengl06.w067
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -35,7 +35,7 @@ class W067Fragment : Fragment() {
         render.bmpArray.add(bmp0)
         render.bmpArray.add(bmp1)
         myGLES20View.setRenderer(render)
-        myGLES20View.setOnTouchListener { v, event ->
+        myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                 }
@@ -58,7 +58,7 @@ class W067Fragment : Fragment() {
         val radioButtonW67Texture1 = view.findViewById<RadioButton>(R.id.radioButtonW67Texture1)
         val radioButtonW67Texture2 = view.findViewById<RadioButton>(R.id.radioButtonW67Texture2)
 
-        radioGroupW67.setOnCheckedChangeListener { group, checkedId ->
+        radioGroupW67.setOnCheckedChangeListener { _, checkedId ->
             render.textureType = when (checkedId) {
                 radioButtonW67Render.id -> 0
                 radioButtonW67Texture1.id -> 1
