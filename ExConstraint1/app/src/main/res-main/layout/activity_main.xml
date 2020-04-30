@@ -8,13 +8,13 @@
     tools:context="milu.kiriu2010.excon1.MainActivity">
 
     <TextView
-        android:id="@+id/lblFirstName"
+        android:id="@+id/tvA00A"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/LABEL_FIRST_NAME"
+        android:text="@string/TV_A00"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         android:visibility="visible"
         app:layout_constraintHorizontal_bias="0.05"
@@ -24,28 +24,27 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/txtFirstName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:labelFor="@+id/lblFirstName"
-        android:typeface="serif"
-        app:layout_constraintStart_toStartOf="@+id/lblFirstName"
-        app:layout_constraintTop_toBottomOf="@+id/lblFirstName"
-        tools:text="@string/LABEL_FIRST_NAME"
-        android:autofillHints="" />
-
-    <Button
-        android:id="@+id/btnAddUser"
+        android:id="@+id/tvA00B"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/BTN_ADD_USER"
-        app:layout_constraintBottom_toBottomOf="@+id/txtFirstName"
-        app:layout_constraintStart_toEndOf="@+id/txtFirstName"
-        app:layout_constraintTop_toTopOf="@+id/txtFirstName" />
+        android:layout_marginTop="8dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:typeface="serif"
+        app:layout_constraintStart_toStartOf="@+id/tvA00A"
+        app:layout_constraintTop_toBottomOf="@+id/tvA00A" />
+
+    <Button
+        android:id="@+id/btnA00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/BTN_A00"
+        app:layout_constraintBottom_toBottomOf="@+id/tvA00B"
+        app:layout_constraintStart_toEndOf="@+id/tvA00B"
+        app:layout_constraintTop_toTopOf="@+id/tvA00B" />
 
     <TableLayout
         android:layout_width="0dp"
@@ -57,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtFirstName">
+        app:layout_constraintTop_toBottomOf="@+id/tvA00B">
 
 
         <TableRow
@@ -83,7 +82,8 @@
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/BTN_A03" />
+                android:text="@string/BTN_A03"
+                android:textAllCaps="false" />
 
         </TableRow>
 
@@ -92,10 +92,12 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnAlarmClock"
+                android:id="@+id/btnA04"
+                style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Alarm" />
+                android:text="@string/BTN_A04"
+                android:textAllCaps="false" />
 
             <Button
                 android:id="@+id/btnJSON"

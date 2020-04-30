@@ -34,7 +34,7 @@ class MemoActivity : AppCompatActivity(),
     }
 
     // 画面が回転するなど、状態が変化したときに呼ばれる
-    override fun onConfigurationChanged(newConfig: Configuration?) {
+    override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         // 状態の変化をドロワーに伝える
         drawerToggle?.onConfigurationChanged(newConfig)

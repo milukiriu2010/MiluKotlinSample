@@ -33,7 +33,7 @@ class MemoFilesListFragment: Fragment() {
         return view
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
 
         // アクティビティがコールバックを実装していなかったら、例外を投げる

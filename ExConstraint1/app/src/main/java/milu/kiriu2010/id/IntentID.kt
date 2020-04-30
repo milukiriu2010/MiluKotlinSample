@@ -1,14 +1,15 @@
 package milu.kiriu2010.id
 
 enum class IntentID( val value: Int ) {
-    ID_USER_ADD(1),
+    ID_A00(0),
     ID_A02(2),
     ID_A03(3),
+    ID_A04(4),
 
 
     ID_TEAM(200),
     ID_IMAGE(300),
-    ID_TEAM_LIST(4),
+    ID_TEAM_LIST(400),
     ID_XML(5),
     ID_JSON(7),
     ID_CLOCK(9),
@@ -21,6 +22,5 @@ enum class IntentID( val value: Int ) {
     ID_SLIDE(16),
     ID_COUNT_DOWN(17),
     ID_SAINT_TROPEZ(18),
-    ID_ALARM_CLOCK(19),
     ID_NOTIFY(20)
 }

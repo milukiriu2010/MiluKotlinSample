@@ -6,6 +6,9 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
+// ----------------------------------------------
+// 指定したURLにアクセスし情報を取得する
+// ----------------------------------------------
 class HttpGet {
     fun doGet( url: URL) : String{
         Log.v( this.javaClass.toString(), "=== HttpGet start ================" )

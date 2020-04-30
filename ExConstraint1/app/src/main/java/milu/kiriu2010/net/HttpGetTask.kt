@@ -5,11 +5,11 @@ import android.util.Log
 
 import java.net.URL
 
-// --------------------------------------------
-// 指定したURLにアクセスし情報を取得する
-// --------------------------------------------
+// ----------------------------------------------
+// 指定したURLにアクセスし情報をバックグランドで取得する
+// ----------------------------------------------
 // http://www.programing-style.com/android/android-api/android-httpurlconnection-get-text/
-// --------------------------------------------
+// ----------------------------------------------
 class HttpGetTask: AsyncTask<URL,Unit,String>() {
 
     override fun doInBackground(vararg params: URL?): String {

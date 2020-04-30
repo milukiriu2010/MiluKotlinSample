@@ -9,9 +9,9 @@ import android.util.Log
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import kotlinx.android.synthetic.main.activity_main.*
-import milu.kiriu2010.abc.AppConst
+import milu.kiriu2010.excon1.a00.A00Const
 import milu.kiriu2010.excon1.accball.AccBallActivity
-import milu.kiriu2010.excon1.alarm.AlarmClockActivity
+import milu.kiriu2010.excon1.a04.A04Activity
 import milu.kiriu2010.excon1.clock.WorldClockActivity
 import milu.kiriu2010.excon1.countdown.CountDownActivity
 import milu.kiriu2010.excon1.counter.CounterActivity
@@ -27,8 +27,8 @@ import milu.kiriu2010.excon1.memo.MemoActivity
 import milu.kiriu2010.excon1.notify.NotifyActivity
 import milu.kiriu2010.excon1.saintropez.SaintTropezActivity
 import milu.kiriu2010.excon1.slide.SlideShowActivity
-import milu.kiriu2010.excon1.team.TeamListActivity
-import milu.kiriu2010.excon1.team.UserAddActivity
+import milu.kiriu2010.excon1.a00.TeamListActivity
+import milu.kiriu2010.excon1.a00.A00Activity
 import milu.kiriu2010.excon1.a03.A03Activity
 import milu.kiriu2010.excon1.a03.RecycleTimeZoneActivity
 import milu.kiriu2010.id.IntentID
@@ -38,33 +38,35 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        this.setTextFirstName()
+        this.setTVA00B()
 
         this.setAction()
     }
 
-    private fun setTextFirstName(){
-        // https://techacademy.jp/magazine/4773
-        //lblFirstName.setTypeface(Typeface.DEFAULT, Typeface.BOLD)
-        val pref: SharedPreferences = getApplicationContext().getSharedPreferences(AppConst.PREF_USER_FIRST_NAME.toString(), Context.MODE_PRIVATE)
-        val firstName = pref.getString( AppConst.KEY_USER_FIRST_NAME.toString(), "" )
-        txtFirstName.setText(firstName)
+    // 共有プリファレンスの値をロードし、テキストボックスに設定する
+    private fun setTVA00B(){
+        val pref: SharedPreferences = getApplicationContext().getSharedPreferences(A00Const.PREF_A00.toString(), Context.MODE_PRIVATE)
+        val str = pref.getString( A00Const.KEY_A00.toString(), "" )
+        tvA00B.setText(str)
     }
 
 
     private fun setAction() {
-        btnAddUser.setOnClickListener{
-            val intent = Intent( this, UserAddActivity::class.java )
-            val strFirstName = txtFirstName.text ?: "<arere>"
-            Log.d(this.javaClass.name, strFirstName.toString() )
-            intent.putExtra("firstName", strFirstName.toString() )
+        // "ユーザ登録"ボタンを押下
+        btnA00.setOnClickListener{
+            // テキストボックスに入力した名前をA00Activityに渡す
+            val intent = Intent( this, A00Activity::class.java )
+            val str = tvA00B.text ?: "<arere>"
+            Log.d(this.javaClass.name, str.toString() )
+            intent.putExtra("a00", str.toString() )
 
-            val pref: SharedPreferences = getApplicationContext().getSharedPreferences(AppConst.PREF_USER_FIRST_NAME.toString(), Context.MODE_PRIVATE)
+            // テキストボックスに入力した内容を共有プリファレンスに格納する
+            val pref: SharedPreferences = getApplicationContext().getSharedPreferences(A00Const.PREF_A00.toString(), Context.MODE_PRIVATE)
             val editor : Editor = pref.edit()
-            editor.putString( AppConst.KEY_USER_FIRST_NAME.toString(), strFirstName.toString() )
+            editor.putString( A00Const.KEY_A00.toString(), str.toString() )
             editor.apply()
 
-            startActivityForResult( intent, IntentID.ID_USER_ADD.value )
+            startActivityForResult( intent, IntentID.ID_A00.value )
         }
 
         // http://www.vogella.com/tutorials/AndroidIntent/article.html
@@ -85,6 +87,12 @@ class MainActivity : AppCompatActivity() {
         btnA03.setOnClickListener {
             val intent = Intent( this, A03Activity::class.java )
             startActivityForResult( intent, IntentID.ID_A03.value )
+        }
+
+        // アラーム
+        btnA04.setOnClickListener {
+            val intent = Intent( this, A04Activity::class.java )
+            startActivityForResult( intent, IntentID.ID_A04.value )
         }
 
         btnImage.setOnClickListener{
@@ -156,12 +164,6 @@ class MainActivity : AppCompatActivity() {
         btnSaintTropez.setOnClickListener {
             val intent = Intent( this, SaintTropezActivity::class.java )
             startActivityForResult( intent, IntentID.ID_SAINT_TROPEZ.value )
-        }
-
-        btnAlarmClock.transformationMethod = null
-        btnAlarmClock.setOnClickListener {
-            val intent = Intent( this, AlarmClockActivity::class.java )
-            startActivityForResult( intent, IntentID.ID_ALARM_CLOCK.value )
         }
 
         // 通知

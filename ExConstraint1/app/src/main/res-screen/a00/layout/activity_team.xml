@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="milu.kiriu2010.excon1.team.TeamActivity">
+    tools:context="milu.kiriu2010.excon1.a00.TeamActivity">
 
     <TextView
         android:id="@+id/textType"

@@ -12,7 +12,7 @@ import java.lang.RuntimeException
 
 class ButtonFragment: Fragment() {
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if ( context !is OnButtonClickListener) {
             throw RuntimeException("リスナーを実装してください")
