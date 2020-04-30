@@ -36,7 +36,7 @@ class TeamListActivity : AppCompatActivity() {
             startActivityForResult( intent, IntentID.ID_TEAM.value )
         }
 
-        btnBack.setOnClickListener {
+        btnA02A.setOnClickListener {
             setResult(Activity.RESULT_OK)
             finish()
         }

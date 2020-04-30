@@ -58,7 +58,7 @@ class DownloadService : Service() {
 
         startForeground(NotificationID.ID_DOWNLOAD.id, builder.build())
         url.httpDownload()
-                .destination { response, url ->
+                .destination { _, _ ->
                     // /data/user/0/milu.kiriu2010.excon1/cache/MiluDBViewer3192732266843548202.zip
                     val tempFile = File.createTempFile("MiluDBViewer", ".zip")
                     Log.d( javaClass.simpleName, "tempFile[${tempFile.absolutePath}]")
@@ -79,7 +79,7 @@ class DownloadService : Service() {
                     //stopForeground(true)
                     stopForeground(Service.STOP_FOREGROUND_DETACH)
 
-                    val (res, err) = result
+                    //val (res, err) = result
 
                     val completeNotification = NotificationCompat.Builder(this,NotificationChannelID.ID_DOWNLOAD.id)
                             .apply {

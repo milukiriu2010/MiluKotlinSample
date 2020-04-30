@@ -1,47 +1,29 @@
 package milu.kiriu2010.net
 
 import android.os.AsyncTask
+import android.util.Log
 
 import java.net.URL
 
+// --------------------------------------------
+// 指定したURLにアクセスし情報を取得する
+// --------------------------------------------
 // http://www.programing-style.com/android/android-api/android-httpurlconnection-get-text/
+// --------------------------------------------
 class HttpGetTask: AsyncTask<URL,Unit,String>() {
 
     override fun doInBackground(vararg params: URL?): String {
+        Log.d(this.javaClass.toString(), "HttpGetTask::doInBackground start." )
         val httpGet = HttpGet()
-        return httpGet.doGet(params[0]!!)
-        /*
-        val result = StringBuilder()
-        val url = params[0]
-        var con: HttpURLConnection? = null
+        val strGet = httpGet.doGet(params[0]!!)
+        Log.d(this.javaClass.toString(), "HttpGetTask::doInBackground strGet=[${strGet}]" )
+        return strGet
+    }
 
-        try{
-            con = url?.openConnection() as HttpURLConnection
-            con.connect()
+    override fun onPostExecute(result: String?) {
+        Log.d(this.javaClass.toString(), "HttpGetTask::onPostExecute start." )
+        Log.d(this.javaClass.toString(), "Result:${result}" )
 
-            val status = con.getResponseCode()
-            if ( status == HttpURLConnection.HTTP_OK ) {
-                val ins = con.inputStream
-                //val encoding = con.contentEncoding
-                //val inReader = InputStreamReader( ins, encoding )
-                val inReader = InputStreamReader( ins )
-                val bufReader = BufferedReader(inReader)
-                var line: String? = null
-                while({ line = bufReader.readLine(); line } != null) {
-                    result.append(line);
-                }
-                bufReader.close()
-                inReader.close()
-                ins.close()
-            }
-
-            return result.toString()
-        } catch( ex: Exception ){
-            ex.printStackTrace()
-            return result.toString()
-        } finally{
-            con?.disconnect()
-        }
-        */
+        super.onPostExecute(result)
     }
 }

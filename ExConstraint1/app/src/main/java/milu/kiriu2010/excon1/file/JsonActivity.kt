@@ -24,7 +24,7 @@ class JsonActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
 
-        btnBack.setOnClickListener {
+        btnA02A.setOnClickListener {
             setResult(Activity.RESULT_OK)
             finish()
         }

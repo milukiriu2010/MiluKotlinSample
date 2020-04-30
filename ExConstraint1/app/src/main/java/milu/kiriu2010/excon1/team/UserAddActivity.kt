@@ -24,7 +24,7 @@ class UserAddActivity : AppCompatActivity() {
         Toast.makeText(this, strFirstName, Toast.LENGTH_LONG )
         Log.d("bXXXXXXXXXXXX:", strFirstName )
 
-        btnBack.setOnClickListener {
+        btnA02A.setOnClickListener {
             setResult(Activity.RESULT_OK)
             finish()
         }

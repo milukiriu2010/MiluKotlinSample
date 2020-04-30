@@ -34,17 +34,17 @@
         <activity android:name=".team.TeamListActivity" />
         <activity android:name=".file.XMLActivity" />
         <activity
-            android:name=".http.HttpActivity"
+            android:name=".a02.A02Activity"
             android:label="@string/title_activity_http_get"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".file.JsonActivity"
             android:label="@string/title_activity_json"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".timezone.ListTimeZoneActivity" />
+        <activity android:name=".a03.A03Activity" />
         <activity android:name=".clock.WorldClockActivity" />
-        <activity android:name=".timezone.TimeZoneSelectActivity" />
-        <activity android:name=".timezone.RecycleTimeZoneActivity" />
+        <activity android:name=".a03.TimeZoneSelectActivity" />
+        <activity android:name=".a03.RecycleTimeZoneActivity" />
         <activity android:name=".file.FileRecycleActivity" />
         <activity android:name=".counter.CounterActivity" />
         <activity android:name=".memo.MemoActivity" />

@@ -28,7 +28,7 @@ class TeamActivity : AppCompatActivity() {
             else -> View.INVISIBLE
         }
 
-        btnBack.setOnClickListener {
+        btnA02A.setOnClickListener {
             setResult(Activity.RESULT_OK)
             finish()
         }

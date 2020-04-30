@@ -21,7 +21,7 @@ import milu.kiriu2010.excon1.file.XMLActivity
 import milu.kiriu2010.excon1.gaction.GactionActivity
 import milu.kiriu2010.excon1.glabyrinth.GlabyrinthActivity
 import milu.kiriu2010.excon1.gshooting.GshootingActivity
-import milu.kiriu2010.excon1.http.HttpActivity
+import milu.kiriu2010.excon1.a02.A02Activity
 import milu.kiriu2010.excon1.image.ImageActivity
 import milu.kiriu2010.excon1.memo.MemoActivity
 import milu.kiriu2010.excon1.notify.NotifyActivity
@@ -29,8 +29,8 @@ import milu.kiriu2010.excon1.saintropez.SaintTropezActivity
 import milu.kiriu2010.excon1.slide.SlideShowActivity
 import milu.kiriu2010.excon1.team.TeamListActivity
 import milu.kiriu2010.excon1.team.UserAddActivity
-import milu.kiriu2010.excon1.timezone.ListTimeZoneActivity
-import milu.kiriu2010.excon1.timezone.RecycleTimeZoneActivity
+import milu.kiriu2010.excon1.a03.A03Activity
+import milu.kiriu2010.excon1.a03.RecycleTimeZoneActivity
 import milu.kiriu2010.id.IntentID
 
 class MainActivity : AppCompatActivity() {
@@ -68,11 +68,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         // http://www.vogella.com/tutorials/AndroidIntent/article.html
-        // start browser
-        btnBrowse.setOnClickListener{
+        // ブラウザを起動する
+        btnA01.setOnClickListener{
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse("https://sourceforge.net/projects/miludbviewer/files/?source=navbar")
             startActivity(intent)
+        }
+
+        // マンチェスターの天気予報を取得する
+        btnA02.setOnClickListener {
+            val intent = Intent( this, A02Activity::class.java )
+            startActivityForResult( intent, IntentID.ID_A02.value )
+        }
+
+        // タイムゾーンの一覧をリスト表示する
+        btnA03.setOnClickListener {
+            val intent = Intent( this, A03Activity::class.java )
+            startActivityForResult( intent, IntentID.ID_A03.value )
         }
 
         btnImage.setOnClickListener{
@@ -90,19 +102,9 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult( intent, IntentID.ID_XML.value )
         }
 
-        btnHTTP.setOnClickListener {
-            val intent = Intent( this, HttpActivity::class.java )
-            startActivityForResult( intent, IntentID.ID_HTTP.value )
-        }
-
         btnJSON.setOnClickListener {
             val intent = Intent( this, JsonActivity::class.java )
             startActivityForResult( intent, IntentID.ID_JSON.value )
-        }
-
-        btnTimeZone.setOnClickListener {
-            val intent = Intent( this, ListTimeZoneActivity::class.java )
-            startActivityForResult( intent, IntentID.ID_TIMEZONE.value )
         }
 
         btnClock.setOnClickListener {
@@ -185,22 +187,5 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent( this, GlabyrinthActivity::class.java )
             startActivity(intent)
         }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        /*
-        when ( requestCode ){
-            IntentID.ID_USER_ADD.value  -> ""
-            IntentID.ID_IMAGE.value      -> ""
-            IntentID.ID_TEAM_LIST.value -> ""
-            IntentID.ID_XML.value        -> ""
-            IntentID.ID_HTTP.value       -> ""
-            IntentID.ID_JSON.value       -> ""
-            IntentID.ID_TIMEZONE.value  -> ""
-            IntentID.ID_TIMEZONE_RV.value  -> ""
-        }
-        */
-        //if ( resultCode == Activity.RESULT_OK )
-        super.onActivityResult(requestCode, resultCode, data)
     }
 }

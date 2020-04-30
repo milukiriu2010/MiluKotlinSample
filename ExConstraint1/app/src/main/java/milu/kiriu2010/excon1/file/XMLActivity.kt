@@ -15,7 +15,7 @@ class XMLActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_xml)
 
-        btnBack.setOnClickListener {
+        btnA02A.setOnClickListener {
             setResult(Activity.RESULT_OK)
             finish()
         }

@@ -11,8 +11,8 @@
         android:id="@+id/lblFirstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/LABEL_FIRST_NAME"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
@@ -25,8 +25,8 @@
 
     <EditText
         android:id="@+id/txtFirstName"
-        android:layout_width="191dp"
-        android:layout_height="41dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -34,7 +34,8 @@
         android:typeface="serif"
         app:layout_constraintStart_toStartOf="@+id/lblFirstName"
         app:layout_constraintTop_toBottomOf="@+id/lblFirstName"
-        tools:text="@string/LABEL_FIRST_NAME" />
+        tools:text="@string/LABEL_FIRST_NAME"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/btnAddUser"
@@ -64,22 +65,25 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnBrowse"
+                android:id="@+id/btnA01"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/BTN_BROWSE" />
+                android:text="@string/BTN_A01" />
 
             <Button
-                android:id="@+id/btnHTTP"
+                android:id="@+id/btnA02"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/BTN_HTTP" />
+                android:text="@string/BTN_A02" />
 
             <Button
-                android:id="@+id/btnTimeZone"
+                android:id="@+id/btnA03"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="TimeZone(ListView)" />
+                android:text="@string/BTN_A03" />
 
         </TableRow>
 

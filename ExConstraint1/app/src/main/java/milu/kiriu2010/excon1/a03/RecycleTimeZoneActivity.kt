@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1.timezone
+package milu.kiriu2010.excon1.a03
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
@@ -38,7 +38,7 @@ class RecycleTimeZoneActivity : AppCompatActivity() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SampleViewHolder {
-            val view = inflater.inflate(R.layout.list_time_zone_row, parent, false)
+            val view = inflater.inflate(R.layout.adapter_a03, parent, false)
             val viewHolder = SampleViewHolder(view)
 
             view.setOnClickListener{
@@ -58,7 +58,7 @@ class RecycleTimeZoneActivity : AppCompatActivity() {
         }
 
         class SampleViewHolder(view: View): RecyclerView.ViewHolder(view){
-            val timeZone = view.findViewById<TextView>(R.id.timeZone)
+            val timeZone = view.findViewById<TextView>(R.id.tvA03)
         }
     }
 }

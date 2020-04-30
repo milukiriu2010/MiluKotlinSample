@@ -39,9 +39,9 @@ class MyIntentService : IntentService("MyIntentService") {
                 handleActionFoo(param1, param2)
             }
             ACTION_BAZ -> {
-                val param1 = intent.getStringExtra(EXTRA_PARAM1)
-                val param2 = intent.getStringExtra(EXTRA_PARAM2)
-                handleActionBaz(param1, param2)
+                //val param1 = intent.getStringExtra(EXTRA_PARAM1)
+                //val param2 = intent.getStringExtra(EXTRA_PARAM2)
+                //handleActionBaz(param1, param2)
             }
         }
     }
@@ -91,8 +91,8 @@ class MyIntentService : IntentService("MyIntentService") {
      * Handle action Baz in the provided background thread with the provided
      * parameters.
      */
-    private fun handleActionBaz(param1: String, param2: String) {
-    }
+    //private fun handleActionBaz(param1: String, param2: String) {
+    //}
 
     companion object {
         /**

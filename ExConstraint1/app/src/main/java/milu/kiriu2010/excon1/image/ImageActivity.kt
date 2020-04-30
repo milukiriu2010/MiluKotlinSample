@@ -1,7 +1,6 @@
 package milu.kiriu2010.excon1.image
 
 import android.app.Activity
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,7 +23,7 @@ class ImageActivity : AppCompatActivity() {
         }
 
 
-        btnBack.setOnClickListener {
+        btnA02A.setOnClickListener {
             setResult(Activity.RESULT_OK)
             finish()
         }

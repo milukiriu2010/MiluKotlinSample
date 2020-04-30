@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import milu.kiriu2010.id.IntentID
 import milu.kiriu2010.excon1.R
-import milu.kiriu2010.excon1.timezone.TimeZoneAdapter
-import milu.kiriu2010.excon1.timezone.TimeZoneSelectActivity
+import milu.kiriu2010.excon1.a03.TimeZoneAdapter
+import milu.kiriu2010.excon1.a03.TimeZoneSelectActivity
 import kotlinx.android.synthetic.main.activity_world_clock.*
 import java.util.*
 
