@@ -20,7 +20,7 @@ class VoiceInputActivity : AppCompatActivity() {
         setContentView(R.layout.activity_voice_input)
 
         // 音声入力開始
-        btnSpeech.setOnClickListener {
+        btA01.setOnClickListener {
             try {
                 // 音声認識の準備
                 val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)

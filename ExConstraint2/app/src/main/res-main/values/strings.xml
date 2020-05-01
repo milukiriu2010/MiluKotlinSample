@@ -1,10 +1,16 @@
 <resources>
     <string name="app_name">ExCon2</string>
     <string name="BTN_A0X">A0X</string>
-    <string name="BTN_A1X">A0X</string>
+    <string name="BTN_A1X">A1X</string>
+    <string name="BTN_A01">読上げ</string>
 
     <string name="RB_A0XA">Female</string>
     <string name="RB_A0XB">Male</string>
+
+    <string name="TV_A01A">かーめーはーめーはーー</string>
+    <string name="TV_A01AH">読み上げるテキストを入力してください</string>
+    <string name="TV_A01B">声の高さ</string>
+    <string name="TV_A01C">読み上げ速度</string>
 
 
     <string name="BTN_GET">Get</string>

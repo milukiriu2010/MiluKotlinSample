@@ -39,7 +39,7 @@ import milu.kiriu2010.excon2.a0x.sensorstep.SensorStepActivity
 import milu.kiriu2010.excon2.a0x.sensortemp.SensorTemperatureActivity
 import milu.kiriu2010.excon2.a0x.setting.SettingsActivity
 import milu.kiriu2010.excon2.a0x.tabbed.TabbedActivity
-import milu.kiriu2010.excon2.a0x.text2speech.Text2SpeechActivity
+import milu.kiriu2010.excon2.a0x.a01.A01Activity
 import milu.kiriu2010.excon2.a0x.voiceinput.VoiceInputActivity
 import milu.kiriu2010.id.IntentID
 
@@ -73,6 +73,12 @@ class A0xActivity : AppCompatActivity() {
         rgA0X.setOnCheckedChangeListener { _, checkedId ->
                 val radio: RadioButton = findViewById(checkedId)
                 Toast.makeText(applicationContext, "On checked change : ${radio.text}", Toast.LENGTH_LONG).show()
+        }
+
+        // テキスト→音声変換
+        btnA01.setOnClickListener {
+            val intent = Intent(this, A01Activity::class.java )
+            this.startActivity( intent )
         }
 
         btnRATE.transformationMethod = null
@@ -115,13 +121,6 @@ class A0xActivity : AppCompatActivity() {
         btnCM.setOnClickListener {
             val intent = Intent(this, ContextMenuActivity::class.java )
             this.startActivityForResult( intent, IntentID.ID_CONTEXT_MENU.value )
-        }
-
-        // テキスト→音声変換
-        btnText2Speech.transformationMethod = null
-        btnText2Speech.setOnClickListener {
-            val intent = Intent(this, Text2SpeechActivity::class.java )
-            this.startActivity( intent )
         }
 
         btnSTOPWATCH.transformationMethod = null

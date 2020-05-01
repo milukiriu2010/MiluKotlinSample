@@ -8,7 +8,7 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "milu.kiriu2010.excon2"
-        minSdkVersion 23
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -23,10 +23,10 @@ android {
     sourceSets {
         main {
             res.srcDirs += 'src/main/res-main'
-            file('src/main/res-screen1')
+            file('src/main/res-a0x')
                     .listFiles()
                     .each { res.srcDirs += it.path }
-            file('src/main/res-screen2')
+            file('src/main/res-a1x')
                     .listFiles()
                     .each { res.srcDirs += it.path }
         }

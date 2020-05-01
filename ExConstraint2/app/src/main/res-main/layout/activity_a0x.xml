@@ -58,6 +58,17 @@
     </RadioGroup>
 
     <Button
+        android:id="@+id/btnA01"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_oval"
+        android:text="読上げ"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgA0X" />
+
+    <Button
         android:id="@+id/btnRATE"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -105,17 +116,6 @@
         app:layout_constraintTop_toBottomOf="@+id/btnCustomAction" />
 
     <Button
-        android:id="@+id/btnText2Speech"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/button_oval"
-        android:text="読上げ"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rgA0X" />
-
-    <Button
         android:id="@+id/btnSTOPWATCH"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -127,8 +127,8 @@
         app:layout_constraintBottom_toTopOf="@+id/btnDICE"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnText2Speech"
-        app:layout_constraintTop_toTopOf="@+id/btnText2Speech"
+        app:layout_constraintStart_toEndOf="@+id/btnA01"
+        app:layout_constraintTop_toTopOf="@+id/btnA01"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
@@ -149,9 +149,9 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/button_black"
         android:text="@string/BTN_DICE"
-        app:layout_constraintEnd_toEndOf="@+id/btnText2Speech"
-        app:layout_constraintStart_toStartOf="@+id/btnText2Speech"
-        app:layout_constraintTop_toBottomOf="@+id/btnText2Speech" />
+        app:layout_constraintEnd_toEndOf="@+id/btnA01"
+        app:layout_constraintStart_toStartOf="@+id/btnA01"
+        app:layout_constraintTop_toBottomOf="@+id/btnA01" />
 
     <Button
         android:id="@+id/btnLargeBmp"

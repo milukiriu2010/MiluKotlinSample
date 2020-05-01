@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnSpeech"
+        android:id="@+id/btA01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -38,7 +38,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="取消"
-        app:layout_constraintStart_toEndOf="@+id/btnSpeech"
+        app:layout_constraintStart_toEndOf="@+id/btA01"
         app:layout_constraintTop_toBottomOf="@+id/editTextVoiceInput" />
 
     <Button

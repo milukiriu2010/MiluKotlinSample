@@ -66,7 +66,7 @@
         <activity android:name=".a0x.sensorstep.SensorStepActivity" />
         <activity android:name=".a0x.sensorprox.SensorProxActivity" />
         <activity android:name=".a0x.sensorori.SensorOriActivity" />
-        <activity android:name=".a0x.text2speech.Text2SpeechActivity" />
+        <activity android:name=".a0x.a01.A01Activity" />
         <activity android:name=".a0x.voiceinput.VoiceInputActivity" />
         <activity android:name=".a0x.excel.ExcelActivity" />
         <activity android:name=".a1x.conf.ConfActivity" />

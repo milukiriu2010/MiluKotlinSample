@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon2.a0x.text2speech
+package milu.kiriu2010.excon2.a0x.a01
 
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -6,37 +6,38 @@ import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import androidx.appcompat.app.AlertDialog
 import android.widget.SeekBar
-import kotlinx.android.synthetic.main.activity_text2_speech.*
+import kotlinx.android.synthetic.main.activity_a01.*
 import milu.kiriu2010.excon2.R
 import java.util.*
 
-class Text2SpeechActivity : AppCompatActivity()
+// "テキスト⇒音声"に変換
+class A01Activity : AppCompatActivity()
     , TextToSpeech.OnInitListener
     , SeekBar.OnSeekBarChangeListener {
 
+    // テキスト読み上げリソース
     private lateinit var tts: TextToSpeech
 
     // 声の高さ
     private var pitch = 1.0f
+    // 読み上げ速度
     private var rate = 1.0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_text2_speech)
+        setContentView(R.layout.activity_a01)
 
         tts = TextToSpeech(this,this)
 
-        // 読み上げるテキスト
-        editTextSpeech.setText( "かーーめーーはーーめーーはーーーー" )
+        // 声の高さを設定する
+        sbA01B.setOnSeekBarChangeListener(this)
 
-        // 声の高さ
-        seekBarPitch.setOnSeekBarChangeListener(this)
-
-        // 読み上げ速度
-        seekBarRate.setOnSeekBarChangeListener(this)
+        // 読み上げ速度を設定する
+        sbA01C.setOnSeekBarChangeListener(this)
 
         // テキストを読み上げる
-        btnSpeech.setOnClickListener {
+        btA01.setOnClickListener {
+            // 声の高さを設定する
             if (tts.setPitch(pitch) == TextToSpeech.ERROR) {
                 AlertDialog.Builder(this)
                         .setTitle("エラー")
@@ -44,6 +45,7 @@ class Text2SpeechActivity : AppCompatActivity()
                         .setPositiveButton("OK",null)
                         .show()
             }
+            // 読み上げ速度を設定する
             if (tts.setSpeechRate(rate) == TextToSpeech.ERROR) {
                 AlertDialog.Builder(this)
                         .setTitle("エラー")
@@ -52,20 +54,21 @@ class Text2SpeechActivity : AppCompatActivity()
                         .show()
             }
 
-            //val sp = editTextSpeech.text as SpannableString
-            //if (sp.toString().length > 0) {
-            if (editTextSpeech.text.toString().length > 0) {
+            if (tvA01A.text.toString().length > 0) {
                 // 読み上げ中ならストップ
                 if(tts.isSpeaking) {
                     tts.stop()
                 }
-                // テキスト読み上げ
+                // テキスト読み上げ実施
+                tts.speak(tvA01A.text.toString(), TextToSpeech.QUEUE_FLUSH, null, "messageID")
+                /*
                 if (Build.VERSION.SDK_INT >= 21){
-                    tts.speak(editTextSpeech.text.toString(), TextToSpeech.QUEUE_FLUSH, null, "messageID")
+                    tts.speak(tvA01A.text.toString(), TextToSpeech.QUEUE_FLUSH, null, "messageID")
                 }
                 else {
-                    tts.speak(editTextSpeech.text.toString(), TextToSpeech.QUEUE_FLUSH, null)
+                    tts.speak(tvA01A.text.toString(), TextToSpeech.QUEUE_FLUSH, null)
                 }
+                */
             }
 
         }
@@ -74,10 +77,11 @@ class Text2SpeechActivity : AppCompatActivity()
 
     override fun onDestroy() {
         super.onDestroy()
-        // リソースを解放
+        // テキスト読み上げリソースを解放
         tts.shutdown()
     }
 
+    // テキストを読み上げるための初期化を実施する
     // TextToSpeech.OnInitListener
     override fun onInit(status: Int) {
         if ( status == TextToSpeech.SUCCESS ) {
@@ -104,14 +108,20 @@ class Text2SpeechActivity : AppCompatActivity()
         }
     }
 
+    // シークバーのカーソル位置が変更されると呼び出される
+    // SeekBar.OnSeekBarChangeListener
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-        pitch = seekBarPitch.progress.toFloat()/5f
-        rate = seekBarRate.progress.toFloat()/5f
+        // 声の高さを設定する
+        pitch = sbA01B.progress.toFloat()/5f
+        // 読み上げ速度を設定する
+        rate = sbA01C.progress.toFloat()/5f
     }
 
+    // SeekBar.OnSeekBarChangeListener
     override fun onStartTrackingTouch(seekBar: SeekBar?) {
     }
 
+    // SeekBar.OnSeekBarChangeListener
     override fun onStopTrackingTouch(seekBar: SeekBar?) {
     }
 
