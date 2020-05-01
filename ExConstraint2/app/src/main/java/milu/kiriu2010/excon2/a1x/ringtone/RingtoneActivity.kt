@@ -20,7 +20,7 @@ class RingtoneActivity : AppCompatActivity() {
         setContentView(R.layout.activity_ringtone)
 
         // 再生開始
-        btnStart.setOnClickListener {
+        btnA02A.setOnClickListener {
             // 現在設定されている着信音を選択する
             //val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
             //val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)

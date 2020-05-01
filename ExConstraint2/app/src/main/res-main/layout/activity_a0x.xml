@@ -64,9 +64,36 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/button_oval"
-        android:text="読上げ"
+        android:text="@string/BTN_A01"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rgA0X" />
+
+    <Button
+        android:id="@+id/btnA02"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_chocolate"
+        android:text="@string/BTN_A02"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnDICE"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/btnA01"
+        app:layout_constraintTop_toTopOf="@+id/btnA01"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnCustomAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/BTN_CUSTOM_ACTION"
+        app:layout_constraintBottom_toTopOf="@+id/btnWebSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/btnA02" />
 
     <Button
         android:id="@+id/btnRATE"
@@ -114,33 +141,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/btnCustomAction"
         app:layout_constraintTop_toBottomOf="@+id/btnCustomAction" />
-
-    <Button
-        android:id="@+id/btnSTOPWATCH"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/button_chocolate"
-        android:text="@string/BTN_STOP_WATCH"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btnDICE"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnA01"
-        app:layout_constraintTop_toTopOf="@+id/btnA01"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/btnCustomAction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/BTN_CUSTOM_ACTION"
-        app:layout_constraintBottom_toTopOf="@+id/btnWebSearch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/btnSTOPWATCH" />
 
     <Button
         android:id="@+id/btnDICE"
@@ -211,7 +211,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnScanBarcode"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btnSTOPWATCH"
+        app:layout_constraintStart_toStartOf="@+id/btnA02"
         app:layout_constraintTop_toTopOf="@+id/btnDICE"
         app:layout_constraintVertical_bias="1.0" />
 

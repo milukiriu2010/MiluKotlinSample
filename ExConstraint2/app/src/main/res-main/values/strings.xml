@@ -3,6 +3,10 @@
     <string name="BTN_A0X">A0X</string>
     <string name="BTN_A1X">A1X</string>
     <string name="BTN_A01">読上げ</string>
+    <string name="BTN_A02">StopWatch</string>
+    <string name="BTN_A02A">START</string>
+    <string name="BTN_A02B">STOP</string>
+    <string name="BTN_A02C">RESET</string>
 
     <string name="RB_A0XA">Female</string>
     <string name="RB_A0XB">Male</string>
@@ -12,21 +16,19 @@
     <string name="TV_A01B">声の高さ</string>
     <string name="TV_A01C">読み上げ速度</string>
 
+    <string name="TV_A02">00:00:00</string>
+
 
     <string name="BTN_GET">Get</string>
     <string name="BTN_DOM">DOM</string>
     <string name="BTN_RECYCLE">Recycler</string>
     <string name="BTN_RATE">Rating Bar</string>
-    <string name="BTN_START">START</string>
     <string name="BTN_SEEK">Seek</string>
     <string name="BTN_CM">Context Menu</string>
     <string name="BTN_CELSIUS">Celsius</string>
     <string name="BTN_FAHRENHEIT">Fahrenheit</string>
     <string name="BTN_CALC">Calc</string>
     <string name="BTN_TEMPERATURE">C/F</string>
-    <string name="BTN_STOP">Stop</string>
-    <string name="BTN_RESET">Reset</string>
-    <string name="BTN_STOP_WATCH">StopWatch</string>
     <string name="MENU_ADD">add</string>
     <string name="MENU_RESET">reset</string>
     <string name="MENU_ABOUT">about</string>

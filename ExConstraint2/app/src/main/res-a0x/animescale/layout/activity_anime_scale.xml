@@ -8,12 +8,12 @@
     tools:context=".a0x.animescale.AnimeScaleActivity">
 
     <Button
-        android:id="@+id/btnStart"
+        android:id="@+id/btnA02A"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/BTN_START"
+        android:text="@string/BTN_A02A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

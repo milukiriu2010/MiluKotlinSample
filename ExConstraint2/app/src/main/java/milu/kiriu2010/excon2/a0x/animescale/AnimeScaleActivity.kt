@@ -53,7 +53,7 @@ class AnimeScaleActivity : AppCompatActivity() {
 
 
         // STARTボタンをクリックすると、アニメーションを開始する
-        btnStart.setOnClickListener {
+        btnA02A.setOnClickListener {
             val scale = ScaleAnimation(
                     1.0f,
                     4.0f,

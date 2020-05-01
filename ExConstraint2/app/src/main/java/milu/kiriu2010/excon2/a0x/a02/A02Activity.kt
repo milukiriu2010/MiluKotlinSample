@@ -1,50 +1,52 @@
-package milu.kiriu2010.excon2.a0x.stopwatch
+package milu.kiriu2010.excon2.a0x.a02
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import milu.kiriu2010.excon2.R
-import kotlinx.android.synthetic.main.activity_stop_watch.*
+import kotlinx.android.synthetic.main.activity_a02.*
 
-class StopWatchActivity : AppCompatActivity() {
+// ストップウォッチ
+class A02Activity : AppCompatActivity() {
 
     val handler = Handler()
+    // ストップウォッチの経過時間
     var timeValue = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_stop_watch)
+        setContentView(R.layout.activity_a02)
 
         // 1秒ごとに処理を実行
         val runnable = object: Runnable{
             override fun run() {
-                this@StopWatchActivity.timeValue++
+                this@A02Activity.timeValue++
                 // TextViewを更新
                 // ?.letを用いて、nullではない場合のみ更新
-                this@StopWatchActivity.timeToText(timeValue)?.let {
-                    txtTIME.text = it
+                this@A02Activity.timeToText(timeValue)?.let {
+                    tvA02.text = it
                 }
                 // 1秒後に再び、自分自身(Runnable)を呼び出す
                 handler.postDelayed(this,1000)
             }
         }
 
-        // ストップウォッチ開始
-        btnStart.setOnClickListener {
+        // ストップウォッチ：開始
+        btnA02A.setOnClickListener {
             handler.post(runnable)
         }
 
-        // ストップウォッチ停止
-        btnSTOP.setOnClickListener {
+        // ストップウォッチ：停止
+        btnA02B.setOnClickListener {
             handler.removeCallbacks(runnable)
         }
 
-        // ストップウォッチーリセット
-        btnRESET.setOnClickListener {
+        // ストップウォッチ：リセット
+        btnA02C.setOnClickListener {
             handler.removeCallbacks(runnable)
             timeValue = 0
-            this@StopWatchActivity.timeToText()?.let {
-                txtTIME.text = it
+            this@A02Activity.timeToText()?.let {
+                tvA02.text = it
             }
         }
     }

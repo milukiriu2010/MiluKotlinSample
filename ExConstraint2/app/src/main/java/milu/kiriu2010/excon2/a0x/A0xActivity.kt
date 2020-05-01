@@ -20,7 +20,7 @@ import milu.kiriu2010.excon2.a0x.rate.RateActivity
 import milu.kiriu2010.excon2.a0x.recycler.RecycleActivity
 import milu.kiriu2010.excon2.a0x.scan.ScanBarcodeActivity
 import milu.kiriu2010.excon2.a0x.seek.SeekActivity
-import milu.kiriu2010.excon2.a0x.stopwatch.StopWatchActivity
+import milu.kiriu2010.excon2.a0x.a02.A02Activity
 import milu.kiriu2010.excon2.a0x.temperature.TemperatureActivity
 import milu.kiriu2010.excon2.a0x.traffic.TrafficLightActivity
 import milu.kiriu2010.excon2.a0x.websearch.WebSearchActivity
@@ -81,6 +81,12 @@ class A0xActivity : AppCompatActivity() {
             this.startActivity( intent )
         }
 
+        // ストップウォッチ
+        btnA02.setOnClickListener {
+            val intent = Intent(this, A02Activity::class.java )
+            this.startActivityForResult( intent, IntentID.ID_STOP_WATCH.value )
+        }
+
         btnRATE.transformationMethod = null
         btnRATE.setOnClickListener{
             val intent = Intent(this, RateActivity::class.java )
@@ -121,12 +127,6 @@ class A0xActivity : AppCompatActivity() {
         btnCM.setOnClickListener {
             val intent = Intent(this, ContextMenuActivity::class.java )
             this.startActivityForResult( intent, IntentID.ID_CONTEXT_MENU.value )
-        }
-
-        btnSTOPWATCH.transformationMethod = null
-        btnSTOPWATCH.setOnClickListener {
-            val intent = Intent(this, StopWatchActivity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_STOP_WATCH.value )
         }
 
         btnCustomAction.transformationMethod = null

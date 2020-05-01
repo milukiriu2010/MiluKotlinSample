@@ -40,7 +40,7 @@ class AnimeMoveActivity : AppCompatActivity() {
         factor = "%1$1d.%2$1d".format( numPickerA1.value, numPickerB1.value ).toFloat()
 
         // ボタンをクリックすると、移動を開始する
-        btnStart.setOnClickListener {
+        btnA02A.setOnClickListener {
             imageViewAnime.animate().apply {
                 imageViewAnime.x = 0f
                 imageViewAnime.y = 0f

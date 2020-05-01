@@ -36,7 +36,7 @@
         <activity android:name=".a0x.seek.SeekActivity" />
         <activity android:name=".a0x.contextmenu.ContextMenuActivity" />
         <activity android:name=".a0x.temperature.TemperatureActivity" />
-        <activity android:name=".a0x.stopwatch.StopWatchActivity" />
+        <activity android:name=".a0x.a02.A02Activity" />
         <activity
             android:name=".a0x.customactionbar.CustomActionBarActivity"
             android:theme="@style/CustomTheme" />

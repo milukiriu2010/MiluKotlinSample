@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".a0x.stopwatch.StopWatchActivity">
+    tools:context=".a0x.a02.A02Activity">
 
     <TextView
-        android:id="@+id/txtTIME"
+        android:id="@+id/tvA02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center"
-        android:text="00:00:00"
+        android:text="@string/TV_A02"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,31 +24,40 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnStart"
-        android:layout_width="116dp"
+        android:id="@+id/btnA02A"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/BTN_START"
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_A02A"
+        app:layout_constraintEnd_toStartOf="@+id/btnA02B"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTIME"
+        app:layout_constraintTop_toBottomOf="@+id/tvA02"
         app:layout_constraintVertical_chainStyle="spread" />
 
     <Button
-        android:id="@+id/btnSTOP"
-        android:layout_width="116dp"
+        android:id="@+id/btnA02B"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/BTN_STOP"
-        app:layout_constraintStart_toEndOf="@+id/btnStart"
-        app:layout_constraintTop_toTopOf="@+id/btnStart" />
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_A02B"
+        app:layout_constraintEnd_toStartOf="@+id/btnA02C"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnA02A"
+        app:layout_constraintTop_toTopOf="@+id/btnA02A" />
 
     <Button
-        android:id="@+id/btnRESET"
-        android:layout_width="109dp"
+        android:id="@+id/btnA02C"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="@string/BTN_RESET"
-        app:layout_constraintStart_toEndOf="@+id/btnSTOP"
-        app:layout_constraintTop_toTopOf="@+id/btnSTOP" />
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_A02C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnA02B"
+        app:layout_constraintTop_toTopOf="@+id/btnA02B" />
 </androidx.constraintlayout.widget.ConstraintLayout>

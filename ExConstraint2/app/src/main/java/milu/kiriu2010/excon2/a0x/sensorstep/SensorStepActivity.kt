@@ -33,7 +33,7 @@ class SensorStepActivity : AppCompatActivity()
 
         val sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         // センサーの監視を開始する
-        btnStart.setOnClickListener {
+        btnA02A.setOnClickListener {
             stepInitCnt = -1
             dataStep.text = "0"
             stepAcclCnt = 0

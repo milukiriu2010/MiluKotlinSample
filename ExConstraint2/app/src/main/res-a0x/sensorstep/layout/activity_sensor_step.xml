@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dataStepTotal" />
 
     <Button
-        android:id="@+id/btnStart"
+        android:id="@+id/btnA02A"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -63,5 +63,5 @@
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnStart" />
+        app:layout_constraintTop_toBottomOf="@+id/btnA02A" />
 </androidx.constraintlayout.widget.ConstraintLayout>
