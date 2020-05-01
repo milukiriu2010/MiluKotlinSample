@@ -7,4 +7,4 @@
     android:choiceMode="singleChoice"
     android:divider="@android:color/transparent"
     android:dividerHeight="0dp"
-    tools:context=".screen1.navidrawer.NavigationDrawerFragment" />
+    tools:context=".a0x.navidrawer.NavigationDrawerFragment" />

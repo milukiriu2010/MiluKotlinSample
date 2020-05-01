@@ -27,58 +27,58 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".screen1.MainActivity" />
-        <activity android:name=".screen1.recycler.RecycleActivity" />
+        <activity android:name=".a0x.A0xActivity" />
+        <activity android:name=".a0x.recycler.RecycleActivity" />
         <activity
-            android:name=".screen1.rate.RateActivity"
+            android:name=".a0x.rate.RateActivity"
             android:theme="@style/CustomTheme" />
-        <activity android:name=".screen1.animescale.AnimeScaleActivity" />
-        <activity android:name=".screen1.seek.SeekActivity" />
-        <activity android:name=".screen1.contextmenu.ContextMenuActivity" />
-        <activity android:name=".screen1.temperature.TemperatureActivity" />
-        <activity android:name=".screen1.stopwatch.StopWatchActivity" />
+        <activity android:name=".a0x.animescale.AnimeScaleActivity" />
+        <activity android:name=".a0x.seek.SeekActivity" />
+        <activity android:name=".a0x.contextmenu.ContextMenuActivity" />
+        <activity android:name=".a0x.temperature.TemperatureActivity" />
+        <activity android:name=".a0x.stopwatch.StopWatchActivity" />
         <activity
-            android:name=".screen1.customactionbar.CustomActionBarActivity"
+            android:name=".a0x.customactionbar.CustomActionBarActivity"
             android:theme="@style/CustomTheme" />
-        <activity android:name=".screen1.dice.DiceRollerActivity" />
-        <activity android:name=".screen1.largebmp.LargeBmpActivity" />
-        <activity android:name=".screen1.traffic.TrafficLightActivity" />
-        <activity android:name=".screen1.fibonnaci.FibonnaciActivity" />
-        <activity android:name=".screen1.scan.ScanBarcodeActivity" />
-        <activity android:name=".screen1.websearch.WebSearchActivity" />
-        <activity android:name=".screen1.pinch.PinchActivity" />
-        <activity android:name=".screen1.sensortemp.SensorTemperatureActivity" />
-        <activity android:name=".screen1.sensorlight.SensorLightActivity" />
-        <activity android:name=".screen1.animemove.AnimeMoveActivity" />
-        <activity android:name=".screen1.canvas.CanvasActivity" />
+        <activity android:name=".a0x.dice.DiceRollerActivity" />
+        <activity android:name=".a0x.largebmp.LargeBmpActivity" />
+        <activity android:name=".a0x.traffic.TrafficLightActivity" />
+        <activity android:name=".a0x.fibonnaci.FibonnaciActivity" />
+        <activity android:name=".a0x.scan.ScanBarcodeActivity" />
+        <activity android:name=".a0x.websearch.WebSearchActivity" />
+        <activity android:name=".a0x.pinch.PinchActivity" />
+        <activity android:name=".a0x.sensortemp.SensorTemperatureActivity" />
+        <activity android:name=".a0x.sensorlight.SensorLightActivity" />
+        <activity android:name=".a0x.animemove.AnimeMoveActivity" />
+        <activity android:name=".a0x.canvas.CanvasActivity" />
         <activity
-            android:name=".screen1.tabbed.TabbedActivity"
+            android:name=".a0x.tabbed.TabbedActivity"
             android:label="@string/title_activity_tabbed" />
         <activity
-            android:name=".screen1.navibottom.BottomNaviActivity"
+            android:name=".a0x.navibottom.BottomNaviActivity"
             android:label="@string/title_activity_bottom_navi" />
         <activity
-            android:name=".screen1.navidrawer.NaviDrawerActivity"
+            android:name=".a0x.navidrawer.NaviDrawerActivity"
             android:label="@string/title_activity_navi_drawer" />
         <activity
-            android:name=".screen1.setting.SettingsActivity"
+            android:name=".a0x.setting.SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".screen1.sensorstep.SensorStepActivity" />
-        <activity android:name=".screen1.sensorprox.SensorProxActivity" />
-        <activity android:name=".screen1.sensorori.SensorOriActivity" />
-        <activity android:name=".screen1.text2speech.Text2SpeechActivity" />
-        <activity android:name=".screen1.voiceinput.VoiceInputActivity" />
-        <activity android:name=".screen1.excel.ExcelActivity" />
-        <activity android:name=".screen2.conf.ConfActivity" />
-        <activity android:name=".screen2.Main2Activity" />
-        <activity android:name=".screen2.gallery2.Gallery2Activity" />
-        <activity android:name=".screen2.camera.CameraActivity" />
-        <activity android:name=".screen2.cameraparam.CameraParamActivity" />
-        <activity android:name=".screen2.dragdrop.DragDropActivity" />
-        <activity android:name=".screen2.bearing.BearingActivity" />
-        <activity android:name=".screen2.compass.CompassActivity" />
-        <activity android:name=".screen2.servicelst.ServiceLstActivity" />
-        <activity android:name=".screen2.ringtone.RingtoneActivity"></activity>
+        <activity android:name=".a0x.sensorstep.SensorStepActivity" />
+        <activity android:name=".a0x.sensorprox.SensorProxActivity" />
+        <activity android:name=".a0x.sensorori.SensorOriActivity" />
+        <activity android:name=".a0x.text2speech.Text2SpeechActivity" />
+        <activity android:name=".a0x.voiceinput.VoiceInputActivity" />
+        <activity android:name=".a0x.excel.ExcelActivity" />
+        <activity android:name=".a1x.conf.ConfActivity" />
+        <activity android:name=".a1x.A1XActivity" />
+        <activity android:name=".a1x.gallery2.Gallery2Activity" />
+        <activity android:name=".a1x.camera.CameraActivity" />
+        <activity android:name=".a1x.cameraparam.CameraParamActivity" />
+        <activity android:name=".a1x.dragdrop.DragDropActivity" />
+        <activity android:name=".a1x.bearing.BearingActivity" />
+        <activity android:name=".a1x.compass.CompassActivity" />
+        <activity android:name=".a1x.servicelst.ServiceLstActivity" />
+        <activity android:name=".a1x.ringtone.RingtoneActivity"></activity>
     </application>
 
 </manifest>

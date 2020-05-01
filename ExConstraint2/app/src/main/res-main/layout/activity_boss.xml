@@ -7,22 +7,22 @@
     tools:context=".BossActivity">
 
     <Button
-        android:id="@+id/btnMain"
+        android:id="@+id/btnA0X"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Main"
+        android:text="@string/BTN_A0X"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnMain2"
+        android:id="@+id/btnA1X"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Main2"
-        app:layout_constraintStart_toEndOf="@+id/btnMain"
+        android:text="@string/BTN_A1X"
+        app:layout_constraintStart_toEndOf="@+id/btnA0X"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

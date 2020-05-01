@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <milu.kiriu2010.excon2.screen1.sensorlight.LightView
+    <milu.kiriu2010.excon2.a0x.sensorlight.LightView
         android:id="@+id/viewLight"
         android:layout_width="wrap_content"
         android:layout_height="0dp"

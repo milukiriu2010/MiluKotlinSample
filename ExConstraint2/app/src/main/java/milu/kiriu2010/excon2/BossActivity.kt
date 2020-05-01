@@ -4,8 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_boss.*
-import milu.kiriu2010.excon2.screen1.MainActivity
-import milu.kiriu2010.excon2.screen2.Main2Activity
+import milu.kiriu2010.excon2.a0x.A0xActivity
+import milu.kiriu2010.excon2.a1x.A1XActivity
 
 class BossActivity : AppCompatActivity() {
 
@@ -13,17 +13,15 @@ class BossActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_boss)
 
-        // メイン画面を表示
-        btnMain.transformationMethod = null
-        btnMain.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+        // A0X画面を表示
+        btnA0X.setOnClickListener {
+            val intent = Intent(this, A0xActivity::class.java)
             startActivity(intent)
         }
 
-        // メイン画面2を表示
-        btnMain2.transformationMethod = null
-        btnMain2.setOnClickListener {
-            val intent = Intent(this, Main2Activity::class.java)
+        // A1X画面を表示
+        btnA1X.setOnClickListener {
+            val intent = Intent(this, A1XActivity::class.java)
             startActivity(intent)
         }
     }

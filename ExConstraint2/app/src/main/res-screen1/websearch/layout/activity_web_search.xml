@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="milu.kiriu2010.excon2.screen1.websearch.WebSearchActivity">
+    tools:context="milu.kiriu2010.excon2.a0x.websearch.WebSearchActivity">
 
     <TextView
         android:id="@+id/tvSearchFor"

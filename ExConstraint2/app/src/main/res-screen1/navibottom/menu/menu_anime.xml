@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".screen1.navibottom.BottomNaviActivity">
+    tools:context=".a0x.navibottom.BottomNaviActivity">
 
     <item
         android:id="@+id/anime_07_asteroid"

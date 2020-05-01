@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".screen1.MainActivity">
+    tools:context=".a0x.A0xActivity">
 
     <item
         android:id="@+id/menuCF"

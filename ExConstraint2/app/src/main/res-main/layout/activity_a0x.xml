@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvA0XA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/layer_frame1"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="TRUE" />
+
+    <TextView
+        android:id="@+id/tvA0XB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/layer_frame2"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/tvA0XA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvA0XA"
+        app:layout_constraintTop_toTopOf="@+id/tvA0XA"
+        tools:text="TRUE" />
+
+    <RadioGroup
+        android:id="@+id/rgA0X"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvA0XA">
+
+        <RadioButton
+            android:id="@+id/rbA0XA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/female"
+            android:text="@string/RB_A0XA"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/rbA0XB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/male"
+
+            android:checked="true"
+            android:text="@string/RB_A0XB"></RadioButton>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnRATE"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/BTN_RATE"
+        app:layout_constraintEnd_toEndOf="@+id/btnTrafficLight"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnTrafficLight"
+        app:layout_constraintTop_toBottomOf="@+id/btnTrafficLight" />
+
+    <Button
+        android:id="@+id/btnRecycle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/BTN_RECYCLE"
+        app:layout_constraintEnd_toEndOf="@+id/btnCM"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnCM"
+        app:layout_constraintTop_toBottomOf="@+id/btnCM" />
+
+    <Button
+        android:id="@+id/btnANIME"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Anime Scale"
+        app:layout_constraintEnd_toEndOf="@+id/btnRATE"
+        app:layout_constraintStart_toStartOf="@+id/btnRATE"
+        app:layout_constraintTop_toBottomOf="@+id/btnRATE" />
+
+    <Button
+        android:id="@+id/btnExcel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Excel"
+        app:layout_constraintStart_toStartOf="@+id/btnVoiceInput"
+        app:layout_constraintTop_toBottomOf="@+id/btnVoiceInput" />
+
+    <Button
+        android:id="@+id/btnCM"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:text="@string/BTN_CM"
+        app:layout_constraintEnd_toEndOf="@+id/btnCustomAction"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/btnCustomAction"
+        app:layout_constraintTop_toBottomOf="@+id/btnCustomAction" />
+
+    <Button
+        android:id="@+id/btnText2Speech"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_oval"
+        android:text="読上げ"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgA0X" />
+
+    <Button
+        android:id="@+id/btnSTOPWATCH"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_chocolate"
+        android:text="@string/BTN_STOP_WATCH"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnDICE"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/btnText2Speech"
+        app:layout_constraintTop_toTopOf="@+id/btnText2Speech"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnCustomAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/BTN_CUSTOM_ACTION"
+        app:layout_constraintBottom_toTopOf="@+id/btnWebSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/btnSTOPWATCH" />
+
+    <Button
+        android:id="@+id/btnDICE"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_black"
+        android:text="@string/BTN_DICE"
+        app:layout_constraintEnd_toEndOf="@+id/btnText2Speech"
+        app:layout_constraintStart_toStartOf="@+id/btnText2Speech"
+        app:layout_constraintTop_toBottomOf="@+id/btnText2Speech" />
+
+    <Button
+        android:id="@+id/btnLargeBmp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/BTN_LARGE_BMP"
+        app:layout_constraintBottom_toBottomOf="@+id/btnVoiceInput"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/btnFibonnaci"
+        app:layout_constraintTop_toBottomOf="@+id/btnScanBarcode"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnTrafficLight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/BTN_TRAFFIC_LIGHT"
+        app:layout_constraintEnd_toEndOf="@+id/btnRecycle"
+        app:layout_constraintStart_toStartOf="@+id/btnRecycle"
+        app:layout_constraintTop_toBottomOf="@+id/btnRecycle" />
+
+    <Button
+        android:id="@+id/btnVoiceInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="音声入力"
+        app:layout_constraintEnd_toEndOf="@+id/btnScanBarcode"
+        app:layout_constraintStart_toStartOf="@+id/btnScanBarcode"
+        app:layout_constraintTop_toBottomOf="@+id/btnScanBarcode" />
+
+    <Button
+        android:id="@+id/btnFibonnaci"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Fibonnaci"
+        app:layout_constraintBottom_toBottomOf="@+id/btnScanBarcode"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/btnWebSearch"
+        app:layout_constraintTop_toTopOf="@+id/btnScanBarcode"
+        app:layout_constraintVertical_bias="0.727" />
+
+    <Button
+        android:id="@+id/btnScanBarcode"
+        android:layout_width="86dp"
+        android:layout_height="wrap_content"
+        android:text="Scan"
+        app:layout_constraintEnd_toEndOf="@+id/btnDICE"
+        app:layout_constraintStart_toStartOf="@+id/btnDICE"
+        app:layout_constraintTop_toBottomOf="@+id/btnDICE" />
+
+    <Button
+        android:id="@+id/btnWebSearch"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:text="WebSearch"
+        app:layout_constraintBottom_toTopOf="@+id/btnScanBarcode"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnSTOPWATCH"
+        app:layout_constraintTop_toTopOf="@+id/btnDICE"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnPinch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pinch"
+        app:layout_constraintStart_toStartOf="@+id/btnExcel"
+        app:layout_constraintTop_toBottomOf="@+id/btnExcel" />
+
+    <Button
+        android:id="@+id/btnSensorTemperature"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="温度センサ"
+        app:layout_constraintBottom_toTopOf="@+id/btnPinch"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toEndOf="@+id/btnVoiceInput"
+        app:layout_constraintTop_toBottomOf="@+id/btnVoiceInput"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnSensorLight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="照度センサ"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPinch"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnSensorTemperature"
+        app:layout_constraintTop_toTopOf="@+id/btnPinch"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnAnimeMove"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Anime Move"
+        app:layout_constraintEnd_toEndOf="@+id/btnANIME"
+        app:layout_constraintStart_toStartOf="@+id/btnANIME"
+        app:layout_constraintTop_toBottomOf="@+id/btnANIME" />
+
+    <Button
+        android:id="@+id/btnCanvas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Canvas"
+        app:layout_constraintEnd_toStartOf="@+id/btnSensorLight"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnPinch"
+        app:layout_constraintTop_toBottomOf="@+id/btnPinch" />
+
+    <Button
+        android:id="@+id/btnTabbed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tabbed"
+        app:layout_constraintEnd_toEndOf="@+id/btnCanvas"
+        app:layout_constraintStart_toStartOf="@+id/btnCanvas"
+        app:layout_constraintTop_toBottomOf="@+id/btnCanvas" />
+
+    <Button
+        android:id="@+id/btnBottomNavi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Bottom Navi"
+        app:layout_constraintEnd_toEndOf="@+id/btnAnimeMove"
+        app:layout_constraintStart_toStartOf="@+id/btnAnimeMove"
+        app:layout_constraintTop_toBottomOf="@+id/btnAnimeMove" />
+
+    <Button
+        android:id="@+id/btnNaviDrawer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Navi Drawer"
+        app:layout_constraintEnd_toEndOf="@+id/btnBottomNavi"
+        app:layout_constraintStart_toStartOf="@+id/btnBottomNavi"
+        app:layout_constraintTop_toBottomOf="@+id/btnBottomNavi" />
+
+    <Button
+        android:id="@+id/btnSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="設定"
+        app:layout_constraintEnd_toEndOf="@+id/btnTabbed"
+        app:layout_constraintStart_toStartOf="@+id/btnTabbed"
+        app:layout_constraintTop_toBottomOf="@+id/btnTabbed" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="211dp" />
+
+    <Button
+        android:id="@+id/btnSensorStep"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="歩行センサ"
+        app:layout_constraintBottom_toTopOf="@+id/btnTabbed"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/btnSensorLight"
+        app:layout_constraintTop_toTopOf="@+id/btnCanvas" />
+
+    <Button
+        android:id="@+id/btnSensorProx"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="近接センサ"
+        app:layout_constraintBottom_toTopOf="@+id/btnSetting"
+        app:layout_constraintEnd_toEndOf="@+id/btnSensorStep"
+        app:layout_constraintStart_toStartOf="@+id/btnSensorStep"
+        app:layout_constraintTop_toTopOf="@+id/btnTabbed" />
+
+    <Button
+        android:id="@+id/btnSensorOri"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="傾きセンサ"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSetting"
+        app:layout_constraintEnd_toEndOf="@+id/btnSensorProx"
+        app:layout_constraintStart_toStartOf="@+id/btnSensorProx"
+        app:layout_constraintTop_toTopOf="@+id/btnSetting" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

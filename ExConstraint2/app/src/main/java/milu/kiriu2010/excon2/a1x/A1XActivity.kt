@@ -1,0 +1,89 @@
+package milu.kiriu2010.excon2.a1x
+
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_a1x.*
+import milu.kiriu2010.excon2.R
+import milu.kiriu2010.excon2.a1x.bearing.BearingActivity
+import milu.kiriu2010.excon2.a1x.camera.CameraActivity
+import milu.kiriu2010.excon2.a1x.cameraparam.CameraParamActivity
+import milu.kiriu2010.excon2.a1x.compass.CompassActivity
+import milu.kiriu2010.excon2.a1x.conf.ConfActivity
+import milu.kiriu2010.excon2.a1x.dragdrop.DragDropActivity
+import milu.kiriu2010.excon2.a1x.gallery2.Gallery2Activity
+import milu.kiriu2010.excon2.a1x.ringtone.RingtoneActivity
+import milu.kiriu2010.excon2.a1x.servicelst.ServiceLstActivity
+
+class A1XActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_a1x)
+
+        // 設定画面
+        btnConf.transformationMethod = null
+        btnConf.setOnClickListener {
+            val intent = Intent(this,ConfActivity::class.java)
+            startActivity(intent)
+        }
+
+        // ギャラリー表示
+        btnGallery.transformationMethod = null
+        btnGallery.setOnClickListener {
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_PICK
+            startActivity(intent)
+        }
+
+        // ギャラリー表示２
+        btnGallery2.setOnClickListener {
+            val intent = Intent(this, Gallery2Activity::class.java)
+            startActivity(intent)
+        }
+
+        // カメラ起動
+        btnCamera.setOnClickListener {
+            val intent = Intent(this, CameraActivity::class.java)
+            startActivity(intent)
+        }
+
+        // カメラ２
+        btnCameraParam.setOnClickListener {
+            val intent = Intent(this, CameraParamActivity::class.java)
+            startActivity(intent)
+        }
+
+        // ドラッグ＆ドロップ
+        btnDragDrop.setOnClickListener {
+            val intent = Intent(this, DragDropActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Bearing
+        btnBearing.setOnClickListener {
+            val intent = Intent(this, BearingActivity::class.java)
+            startActivity(intent)
+        }
+
+        // コンパス
+        btnCompass.setOnClickListener {
+            val intent = Intent(this, CompassActivity::class.java)
+            startActivity(intent)
+        }
+
+        // サービス一覧
+        btnServiceLst.setOnClickListener {
+            val intent = Intent(this, ServiceLstActivity::class.java)
+            startActivity(intent)
+        }
+
+        // 着信音
+        btnRingtone.setOnClickListener {
+            val intent = Intent(this, RingtoneActivity::class.java)
+            startActivity(intent)
+        }
+
+    }
+}

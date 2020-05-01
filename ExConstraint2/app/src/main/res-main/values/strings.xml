@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">ExCon2</string>
+    <string name="BTN_A0X">A0X</string>
+    <string name="BTN_A1X">A0X</string>
+
+    <string name="RB_A0XA">Female</string>
+    <string name="RB_A0XB">Male</string>
+
+
     <string name="BTN_GET">Get</string>
     <string name="BTN_DOM">DOM</string>
     <string name="BTN_RECYCLE">Recycler</string>

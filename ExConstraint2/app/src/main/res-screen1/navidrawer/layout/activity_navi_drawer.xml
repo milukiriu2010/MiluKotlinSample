@@ -4,7 +4,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen1.navidrawer.NaviDrawerActivity">
+    tools:context=".a0x.navidrawer.NaviDrawerActivity">
 
     <!-- As the main content view, the view below consumes the entire
          space available using match_parent in both dimensions. -->
@@ -17,7 +17,7 @@
          the container. -->
     <fragment
         android:id="@+id/navigation_drawer"
-        android:name="milu.kiriu2010.excon2.screen1.navidrawer.NavigationDrawerFragment"
+        android:name="milu.kiriu2010.excon2.a0x.navidrawer.NavigationDrawerFragment"
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"

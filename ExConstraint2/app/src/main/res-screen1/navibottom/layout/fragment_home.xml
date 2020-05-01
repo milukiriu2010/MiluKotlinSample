@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen1.navibottom.HomeFragment">
+    tools:context=".a0x.navibottom.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

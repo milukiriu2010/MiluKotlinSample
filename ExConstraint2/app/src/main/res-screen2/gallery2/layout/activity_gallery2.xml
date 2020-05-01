@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen2.gallery2.Gallery2Activity">
+    tools:context=".a1x.gallery2.Gallery2Activity">
 
     <Button
         android:id="@+id/btnGallery2"
