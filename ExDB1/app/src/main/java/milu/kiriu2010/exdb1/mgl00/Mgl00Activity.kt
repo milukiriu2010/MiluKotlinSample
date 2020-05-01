@@ -48,7 +48,7 @@ class Mgl00Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mgl00)
 
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        nvA0X.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         if (supportFragmentManager.findFragmentByTag("Home") == null) {
             supportFragmentManager.beginTransaction()

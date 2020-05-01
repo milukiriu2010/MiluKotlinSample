@@ -51,7 +51,7 @@
         <activity android:name=".sqlite.SQLiteOpenHelperActivity" />
         <activity android:name=".scheduler.ScheduleEditActivity" />
         <activity
-            android:name=".animeobj.AnimeObjActivity"
+            android:name=".a0x.A0XActivity"
             android:label="@string/title_activity_anime_obj" />
         <activity
             android:name=".draw.DrawActivity"

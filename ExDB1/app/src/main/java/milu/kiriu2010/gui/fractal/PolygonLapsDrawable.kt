@@ -30,13 +30,13 @@ class PolygonLapsDrawable : Drawable() {
             // 1より大きいと1
             // を返す
             field = value.coerceIn(0f, 1f)
-            callback.invalidateDrawable(this)
+            callback?.invalidateDrawable(this)
         }
 
     var dotProgress = 0f
         set(value) {
             field = value.coerceIn(0f, 1f)
-            callback.invalidateDrawable(this)
+            callback?.invalidateDrawable(this)
         }
 
     private val polygons = listOf(
@@ -146,9 +146,11 @@ class PolygonLapsDrawable : Drawable() {
 
     override fun getOpacity() = PixelFormat.TRANSLUCENT
 
-    override fun setColorFilter(colorFilter: ColorFilter) {
-        linePaint.colorFilter = colorFilter
-        dotPaint.colorFilter = colorFilter
+    override fun setColorFilter(colorFilter: ColorFilter?) {
+        colorFilter?.let {
+            linePaint.colorFilter = it
+            dotPaint.colorFilter = it
+        }
     }
 
     override fun getIntrinsicWidth() = width

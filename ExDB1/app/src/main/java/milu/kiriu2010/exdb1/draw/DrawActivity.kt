@@ -46,7 +46,7 @@ class DrawActivity : AppCompatActivity() {
         setContentView(R.layout.activity_draw)
 
         // ナビゲーションボタンのリスナーを設定する
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        nvA0X.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         // 初期表示のフラグメントを設定
         if (supportFragmentManager.findFragmentByTag("Home") == null) {

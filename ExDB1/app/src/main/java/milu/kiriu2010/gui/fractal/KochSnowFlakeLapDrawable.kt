@@ -34,13 +34,13 @@ class KochSnowFlakeLapDrawable: Drawable() {
             // 1より大きいと1
             // を返す
             field = value.coerceIn(0f, 1f)
-            callback.invalidateDrawable(this)
+            callback?.invalidateDrawable(this)
         }
 
     var dotProgress = 0f
         set(value) {
             field = value.coerceIn(0f, 1f)
-            callback.invalidateDrawable(this)
+            callback?.invalidateDrawable(this)
         }
 
     private val cornerEffect = CornerPathEffect(8f)

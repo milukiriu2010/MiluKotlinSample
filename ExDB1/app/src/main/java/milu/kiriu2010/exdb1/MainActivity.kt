@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
-import milu.kiriu2010.exdb1.animeobj.AnimeObjActivity
+import milu.kiriu2010.exdb1.a0x.A0XActivity
 import milu.kiriu2010.exdb1.basic.BasicActivity
 import milu.kiriu2010.exdb1.canvas.CanvasActivity
 import milu.kiriu2010.exdb1.draw.DrawActivity
@@ -35,9 +35,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // オブジェクトのアニメーションを表示するページへ遷移
-        btnAnimeObj.transformationMethod = null
-        btnAnimeObj.setOnClickListener {
-            val intent = Intent(this,AnimeObjActivity::class.java)
+        btnA0X.setOnClickListener {
+            val intent = Intent(this,A0XActivity::class.java)
             startActivity(intent)
         }
 

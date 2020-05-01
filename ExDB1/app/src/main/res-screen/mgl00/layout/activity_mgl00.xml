@@ -10,7 +10,7 @@
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigation"
+        android:id="@+id/nvA0X"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
@@ -22,7 +22,7 @@
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/flA0X"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"

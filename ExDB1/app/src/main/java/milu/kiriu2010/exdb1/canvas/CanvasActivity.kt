@@ -45,7 +45,7 @@ class CanvasActivity : AppCompatActivity() {
         setContentView(R.layout.activity_canvas)
 
         // ナビゲーションボタンのリスナーを設定する
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        nvA0X.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         // 初期表示用のフラグメントを設定
         if (supportFragmentManager.findFragmentByTag("Home") == null) {
