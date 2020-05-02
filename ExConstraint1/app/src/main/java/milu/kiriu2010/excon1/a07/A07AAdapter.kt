@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1.a03
+package milu.kiriu2010.excon1.a07
 
 import android.content.Context
 import android.icu.util.TimeZone
@@ -10,11 +10,19 @@ import android.widget.TextClock
 import android.widget.TextView
 import milu.kiriu2010.excon1.R
 
+// アダプタにタイムゾーン情報を表示する
 // TimeZone.getAvailableIDs() => 24
-class TimeZoneAdapter(private val context: Context,
-                       private val timeZones: Array<String> = TimeZone.getAvailableIDs() ) : BaseAdapter() {
+class A07AAdapter(private val context: Context,
+                  private val timeZones: Array<String> = TimeZone.getAvailableIDs() ) : BaseAdapter() {
     private val inflater = LayoutInflater.from(context)
 
+    private fun createView( parent: ViewGroup? ): View {
+        val view = inflater.inflate(R.layout.adapter_a07a, parent, false )
+        view.tag = ViewHolder(view)
+        return view
+    }
+
+    // アダプタ位置に対応するタイムゾーン情報を表示
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view = convertView ?: createView(parent)
 
@@ -35,14 +43,8 @@ class TimeZoneAdapter(private val context: Context,
 
     override fun getCount(): Int = timeZones.size
 
-    private fun createView( parent: ViewGroup? ): View {
-        val view = inflater.inflate(R.layout.list_time_zone_row_for_worldclock, parent, false )
-        view.tag = ViewHolder(view)
-        return view
-    }
-
     private class ViewHolder( view: View ) {
-        val name = view.findViewById<TextView>(R.id.txtTimeZone)
-        val clock = view.findViewById<TextClock>(R.id.txtClock)
+        val name = view.findViewById<TextView>(R.id.tvA07)
+        val clock = view.findViewById<TextClock>(R.id.clA07)
     }
 }

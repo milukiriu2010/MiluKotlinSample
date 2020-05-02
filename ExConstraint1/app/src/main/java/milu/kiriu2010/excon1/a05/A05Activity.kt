@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1.file
+package milu.kiriu2010.excon1.a05
 
 import android.app.Activity
 import android.os.Bundle
@@ -7,36 +7,36 @@ import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import milu.kiriu2010.excon1.R
 
-import kotlinx.android.synthetic.main.activity_json.*
-import kotlinx.android.synthetic.main.content_json.*
+import kotlinx.android.synthetic.main.activity_a05.*
+import kotlinx.android.synthetic.main.layout_a05.*
 import org.json.JSONObject
 import java.io.File
 
-class JsonActivity : AppCompatActivity() {
+// --------------------------------------
+// リソースのJSONをロードする
+// --------------------------------------
+// レイアウトを別ファイルにする例も付与
+// --------------------------------------
+class A05Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_json)
-        setSupportActionBar(toolbar)
+        setContentView(R.layout.activity_a05)
+        setSupportActionBar(tbA05)
 
-        fab.setOnClickListener { view ->
+        // フローティングボタンをクリックすると、一番下にメッセージが表示される
+        fabA05.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
 
-        btnA02A.setOnClickListener {
-            setResult(Activity.RESULT_OK)
-            finish()
-        }
-
-        btnJSON.setOnClickListener() {
-           txtJSON.text = this.loadJSON()
-        }
+        // JSONを読み込み、内容を表示
+        tvA05.text = this.loadJSON()
     }
 
     private fun loadJSON() : String {
         val sb = StringBuffer()
-        val istream = this.resources.openRawResource(R.raw.color)
+        val istream = this.resources.openRawResource(R.raw.json_a05)
         val reader = istream.bufferedReader()
         val iterator = reader.lineSequence().iterator()
         while ( iterator.hasNext() ) {

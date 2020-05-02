@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1.file
+package milu.kiriu2010.excon1.a05
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity

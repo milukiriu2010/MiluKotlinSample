@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1.clock
+package milu.kiriu2010.excon1.a07
 
 import android.app.Activity
 import android.content.Context
@@ -7,23 +7,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import milu.kiriu2010.id.IntentID
 import milu.kiriu2010.excon1.R
-import milu.kiriu2010.excon1.a03.TimeZoneAdapter
-import milu.kiriu2010.excon1.a03.TimeZoneSelectActivity
-import kotlinx.android.synthetic.main.activity_world_clock.*
+import kotlinx.android.synthetic.main.activity_a07.*
 import java.util.*
 
-class WorldClockActivity : AppCompatActivity() {
+// 時刻表示
+// 表示するタイムゾーンを追加しリスト表示する
+class A07Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_world_clock)
+        setContentView(R.layout.activity_a07)
 
+        // 現在のタイムゾーンを初期表示
         val timeZone = TimeZone.getDefault()
-        txtTimeZone.text = timeZone.displayName
+        tvA07.text = timeZone.displayName
 
-        btnAdd.setOnClickListener {
-            val intent = Intent( this, TimeZoneSelectActivity::class.java)
-            startActivityForResult(intent, IntentID.ID_TIMEZONE_SELECT.value)
+        // 表示するタイムゾーンを追加
+        btnA07A.setOnClickListener {
+            val intent = Intent( this, A07AActivity::class.java)
+            startActivityForResult(intent, IntentID.ID_A07A.value)
         }
 
         this.showWorldClocks()
@@ -32,8 +34,10 @@ class WorldClockActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        // 選択したタイムゾーンを共有プリファレンスに格納し、
+        // タイムゾーン一覧に表示する
         if (
-                (requestCode == IntentID.ID_TIMEZONE_SELECT.value) &&
+                (requestCode == IntentID.ID_A07A.value) &&
                 ( resultCode == Activity.RESULT_OK ) &&
                 ( data != null )
                 ) {
@@ -50,12 +54,13 @@ class WorldClockActivity : AppCompatActivity() {
         }
     }
 
+    // 共有プリファレンスに格納されたタイムゾーン一覧を表示
     private fun showWorldClocks(){
         val pref = getSharedPreferences("prefs", Context.MODE_PRIVATE )
         val timeZones = pref.getStringSet( "time_zone", setOf() )
 
         timeZones?.let {
-            lvClock.adapter = TimeZoneAdapter(this, it.toTypedArray() )
+            lvA07.adapter = A07AAdapter(this, it.toTypedArray())
         }
     }
 }

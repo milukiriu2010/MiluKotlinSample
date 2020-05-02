@@ -1,26 +1,28 @@
-package milu.kiriu2010.excon1.a03
+package milu.kiriu2010.excon1.a07
 
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import milu.kiriu2010.excon1.R
-import kotlinx.android.synthetic.main.activity_time_zone_select.*
+import kotlinx.android.synthetic.main.activity_a07a.*
 
-class TimeZoneSelectActivity : AppCompatActivity() {
+// タイムゾーンを一覧表示
+class A07AActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_time_zone_select)
+        setContentView(R.layout.activity_a07a)
 
         // tap "Cancel" button
         setResult(Activity.RESULT_CANCELED)
 
-        val adapter = TimeZoneAdapter(this)
-        lvClock.adapter = adapter
+        // タイムゾーンを表示するアダプタ
+        val adapter = A07AAdapter(this)
+        lvA07A.adapter = adapter
 
-
-        lvClock.setOnItemClickListener { _, _, position, _ ->
+        // タイムゾーンをクリックすると、前のアクティビティに、そのタイムゾーンを追加する
+        lvA07A.setOnItemClickListener { _, _, position, _ ->
             val timeZone = adapter.getItem(position) as String
 
             val result = Intent()

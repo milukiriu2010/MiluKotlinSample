@@ -1,20 +1,33 @@
 <resources>
     <string name="app_name">ExCon1</string>
     <string name="BTN_A00">Add User</string>
+    <string name="TV_A00">Name</string>
+
     <string name="BTN_A00A">Get(Async)</string>
     <string name="BTN_A00B">Get(NoSync)</string>
     <string name="BTN_A00C">Clear</string>
+
     <string name="BTN_A01">BROWSE</string>
+
     <string name="BTN_A02">HTTP</string>
     <string name="BTN_A02A">BACK</string>
     <string name="BTN_A02B">GET</string>
+    <string name="TITLE_A02">HTTP</string>
+
     <string name="BTN_A03">TimeZone(ListView)</string>
+
     <string name="BTN_A04">Alarm</string>
     <string name="BTN_A04A">Set Alarm</string>
     <string name="BTN_A04B">Cancel Alarm</string>
     <string name="IV_A04">Alarm</string>
-    <string name="TV_A00">Name</string>
 
+    <string name="BTN_A05">Json</string>
+    <string name="TITLE_A05">JSON</string>
+
+    <string name="BTN_A06">Count Down</string>
+
+    <string name="BTN_A07">Clock</string>
+    <string name="BTN_A07A">Add</string>
 
     <string name="BTN_BACK">Back</string>
     <string name="BTN_SAX">SAX</string>
@@ -26,13 +39,8 @@
     <string name="BTN_RED">Red</string>
     <string name="BTN_TEAM_LIST">TeamList</string>
     <string name="BTN_XML">XML</string>
-    <string name="title_activity_http_get">HttpGetActivity</string>
-    <string name="title_activity_json">JsonActivity</string>
-    <string name="BTN_JSON">Json</string>
     <string name="BTN_TIMEZONE">TimeZone</string>
-    <string name="BTN_CLOCK">Clock</string>
     <string name="BTN">Add</string>
-    <string name="BTN_ADD">Add</string>
     <string name="BTN_TIMEZONE_RV">TimeZone(RV)</string>
     <string name="BTN_FILE">File</string>
     <string name="last_modified">%1$tm月%1$td日 %1$tH時%1$tM分</string>

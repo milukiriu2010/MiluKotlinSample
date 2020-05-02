@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1.file
+package milu.kiriu2010.excon1.a05
 
 import android.Manifest
 import android.content.pm.PackageManager

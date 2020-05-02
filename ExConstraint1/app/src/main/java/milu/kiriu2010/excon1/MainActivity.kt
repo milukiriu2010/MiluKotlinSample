@@ -12,12 +12,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 import milu.kiriu2010.excon1.a00.A00Const
 import milu.kiriu2010.excon1.accball.AccBallActivity
 import milu.kiriu2010.excon1.a04.A04Activity
-import milu.kiriu2010.excon1.clock.WorldClockActivity
-import milu.kiriu2010.excon1.countdown.CountDownActivity
+import milu.kiriu2010.excon1.a07.A07Activity
+import milu.kiriu2010.excon1.a06.A06Activity
 import milu.kiriu2010.excon1.counter.CounterActivity
-import milu.kiriu2010.excon1.file.FileRecycleActivity
-import milu.kiriu2010.excon1.file.JsonActivity
-import milu.kiriu2010.excon1.file.XMLActivity
+import milu.kiriu2010.excon1.a05.FileRecycleActivity
+import milu.kiriu2010.excon1.a05.A05Activity
+import milu.kiriu2010.excon1.a05.XMLActivity
 import milu.kiriu2010.excon1.gaction.GactionActivity
 import milu.kiriu2010.excon1.glabyrinth.GlabyrinthActivity
 import milu.kiriu2010.excon1.gshooting.GshootingActivity
@@ -89,10 +89,28 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult( intent, IntentID.ID_A03.value )
         }
 
-        // アラーム
+        // アラーム：時間がきたらダイアログが表示される
         btnA04.setOnClickListener {
             val intent = Intent( this, A04Activity::class.java )
             startActivityForResult( intent, IntentID.ID_A04.value )
+        }
+
+        // リソースのJSONをロードする
+        btnA05.setOnClickListener {
+            val intent = Intent( this, A05Activity::class.java )
+            startActivityForResult( intent, IntentID.ID_A05.value )
+        }
+
+        // カウントダウン
+        btnA06.setOnClickListener {
+            val intent = Intent( this, A06Activity::class.java )
+            startActivityForResult( intent, IntentID.ID_A06.value )
+        }
+
+        // 時刻表示
+        btnA07.setOnClickListener {
+            val intent = Intent( this, A07Activity::class.java )
+            startActivityForResult( intent, IntentID.ID_A07.value )
         }
 
         btnImage.setOnClickListener{
@@ -108,16 +126,6 @@ class MainActivity : AppCompatActivity() {
         btnXML.setOnClickListener {
             val intent = Intent( this, XMLActivity::class.java )
             startActivityForResult( intent, IntentID.ID_XML.value )
-        }
-
-        btnJSON.setOnClickListener {
-            val intent = Intent( this, JsonActivity::class.java )
-            startActivityForResult( intent, IntentID.ID_JSON.value )
-        }
-
-        btnClock.setOnClickListener {
-            val intent = Intent( this, WorldClockActivity::class.java )
-            startActivityForResult( intent, IntentID.ID_CLOCK.value )
         }
 
         btnTimeZoneRV.setOnClickListener {
@@ -152,12 +160,6 @@ class MainActivity : AppCompatActivity() {
         btnSlide.setOnClickListener {
             val intent = Intent( this, SlideShowActivity::class.java )
             startActivityForResult( intent, IntentID.ID_SLIDE.value )
-        }
-
-        btnCountDown.transformationMethod = null
-        btnCountDown.setOnClickListener {
-            val intent = Intent( this, CountDownActivity::class.java )
-            startActivityForResult( intent, IntentID.ID_COUNT_DOWN.value )
         }
 
         btnSaintTropez.transformationMethod = null

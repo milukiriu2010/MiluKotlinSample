@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="milu.kiriu2010.excon1.clock.WorldClockActivity">
+    tools:context="milu.kiriu2010.excon1.a07.A07Activity">
 
     <Button
-        android:id="@+id/btnAdd"
+        android:id="@+id/btnA07A"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/BTN_ADD"
+        android:text="@string/BTN_A07A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextClock
-        android:id="@+id/txtClock"
+        android:id="@+id/clA07"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -33,20 +33,20 @@
         tools:text="10:00" />
 
     <TextView
-        android:id="@+id/txtTimeZone"
+        android:id="@+id/tvA07"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtClock"
-        app:layout_constraintEnd_toStartOf="@+id/txtClock"
+        app:layout_constraintBottom_toTopOf="@+id/clA07"
+        app:layout_constraintEnd_toStartOf="@+id/clA07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="日本標準時" />
 
     <ListView
-        android:id="@+id/lvClock"
+        android:id="@+id/lvA07"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
@@ -54,8 +54,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtClock"
-        tools:listitem="@layout/list_time_zone_row_for_worldclock">
+        app:layout_constraintTop_toBottomOf="@+id/clA07"
+        tools:listitem="@layout/adapter_a07a">
 
     </ListView>
 

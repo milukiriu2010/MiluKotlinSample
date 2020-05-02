@@ -1,53 +1,62 @@
-package milu.kiriu2010.excon1.countdown
+package milu.kiriu2010.excon1.a06
 
 import android.media.AudioAttributes
-import android.media.AudioManager
 import android.media.SoundPool
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import milu.kiriu2010.excon1.R
-import kotlinx.android.synthetic.main.activity_count_down.*
+import kotlinx.android.synthetic.main.activity_a06.*
 
-class CountDownActivity : AppCompatActivity() {
+// カウントダウン
+class A06Activity : AppCompatActivity() {
 
     private lateinit var soundPool: SoundPool
     private var soundResId = 0
 
-    inner class MyCountDownTimer(millisInFuture: Long, countDownInterval: Long): CountDownTimer(millisInFuture, countDownInterval) {
+    inner class MyCountDownTimer(
+            millisInFuture: Long,
+            countDownInterval: Long
+    ): CountDownTimer(millisInFuture, countDownInterval) {
         var isRunning = false
 
+        // タイマーの残り時間が０になると、音がなる
         override fun onFinish() {
-            timerText.text = "0:00"
+            tvA06.text = "0:00"
             soundPool.play(soundResId,1.0f,100f,0,0,1.0f)
         }
 
+        // タイマーの残り時間を表示
         override fun onTick(millisUntilFinished: Long) {
             val minute = millisUntilFinished/1000L/60L
             val second = millisUntilFinished/1000L%60L
-            timerText.text = "%1d:%2$02d".format(minute,second)
+            tvA06.text = "%1d:%2$02d".format(minute,second)
         }
 
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_count_down)
+        setContentView(R.layout.activity_a06)
 
-        timerText.text = "3:00"
-        val timer = MyCountDownTimer(3*60*1000,100)
-        playStop.setOnClickListener {
+        tvA06.text = "1:00"
+        // タイマー設定(1分)
+        val timer = MyCountDownTimer(1*60*1000,100)
+
+        // タイマー開始・停止を実施する
+        fabA06.setOnClickListener {
             when (timer.isRunning) {
+                // タイマー停止
                 true -> timer.apply {
                     isRunning = false
                     cancel()
-                    playStop.setImageResource(R.drawable.ic_play_arrow_black_24dp)
+                    fabA06.setImageResource(R.drawable.ic_a06a)
                 }
+                // タイマー開始
                 false -> timer.apply {
                     isRunning = true
                     start()
-                    playStop.setImageResource(R.drawable.ic_stop_black_24dp)
+                    fabA06.setImageResource(R.drawable.ic_a06b)
                 }
             }
         }
@@ -55,6 +64,7 @@ class CountDownActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        /*
         soundPool =
                 if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP ) {
                     @Suppress("DEPRECATION")
@@ -69,7 +79,17 @@ class CountDownActivity : AppCompatActivity() {
                             .setAudioAttributes(audioAttributes)
                             .build()
                 }
-        soundResId = soundPool.load(this, R.raw.bellsound,1)
+
+         */
+        // オーディオファイルをロードする
+        val audioAttributes = AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ALARM)
+                .build()
+        soundPool = SoundPool.Builder()
+                .setMaxStreams(1)
+                .setAudioAttributes(audioAttributes)
+                .build()
+        soundResId = soundPool.load(this, R.raw.sound_a06,1)
     }
 
     override fun onPause() {

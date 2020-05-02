@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ExCon1</string>
+
     <string name="BTN_A00">ユーザ登録</string>
+    <string name="TV_A00">名前</string>
+
     <string name="BTN_A00A">取得(Async)</string>
     <string name="BTN_A00B">取得(NoSync)</string>
     <string name="BTN_A00C">クリア</string>
+
     <string name="BTN_A01">ブラウズ</string>
+
     <string name="BTN_A02">HTTP</string>
     <string name="BTN_A02A">戻る</string>
     <string name="BTN_A02B">取得</string>
+    <string name="TITLE_A02">HTTP</string>
+
     <string name="BTN_A03">TimeZone(ListView)</string>
+
     <string name="BTN_A04">アラーム</string>
     <string name="BTN_A04A">アラームをセットする</string>
     <string name="BTN_A04B">アラームを取り消す</string>
     <string name="IV_A04">アラーム</string>
-    <string name="TV_A00">名前</string>
 
+    <string name="BTN_A05">Json</string>
+    <string name="TITLE_A05">JSON</string>
 
+    <string name="BTN_A06">カウントダウン</string>
+
+    <string name="BTN_A07">時計</string>
+    <string name="BTN_A07A">追加</string>
 
     <string name="BTN_BACK">戻る</string>
     <string name="LABEL_NAME">名前</string>
@@ -27,10 +40,6 @@
     <string name="BTN_BLUE">青</string>
     <string name="BTN_RED">赤</string>
     <string name="BTN_TEAM_LIST">チームリスト</string>
-    <string name="BTN_HTTP">Http</string>
-    <string name="BTN_JSON">Json</string>
     <string name="BTN_TIMEZONE">TimeZone</string>
-    <string name="BTN_CLOCK">Clock</string>
     <string name="BTN">Add</string>
-    <string name="BTN_ADD">Add</string>
 </resources>
