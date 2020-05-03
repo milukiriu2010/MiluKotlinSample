@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- フォーカス状態 -->
+    <!-- うまく動いてない
+    <item
+        android:state_focused="true"
+        android:state_enabled="true"
+        android:state_pressed="false">
+        <shape android:shape="oval">
+            <solid android:color="#21ffd3"/>
+        </shape>
+    </item>
+    -->
+    <!-- 押下状態 -->
+    <item
+        android:state_pressed="true">
+        <shape android:shape="oval">
+            <!-- darkturquoise -->
+            <!-- lightseagreen(20b2aa) -->
+            <gradient
+                android:angle="135"
+                android:startColor="#00ced1"
+                android:endColor="#ffffff"
+                android:type="linear"/>
+        </shape>
+    </item>
+    <!-- 通常状態 -->
+    <item
+        android:state_pressed="false">
+        <shape android:shape="oval">
+            <!-- turquoise -->
+            <!-- mediumturquoise(48d1cc) -->
+            <gradient
+                android:angle="315"
+                android:startColor="#40e0d0"
+                android:endColor="#ffffff"
+                android:type="linear"/>
+        </shape>
+    </item>
+</selector>

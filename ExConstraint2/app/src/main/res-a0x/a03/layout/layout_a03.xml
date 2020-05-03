@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TableRow
+    <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -15,7 +16,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:background="@android:color/transparent"
-            android:contentDescription="@string/TV_A03A"
+            android:contentDescription="@string/IV_A03A"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/ic_a03a" />
 
@@ -36,7 +37,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:background="@android:color/transparent"
-            android:contentDescription="@string/TV_A03B"
+            android:contentDescription="@string/IV_A03B"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/ic_a03b" />
     </TableRow>

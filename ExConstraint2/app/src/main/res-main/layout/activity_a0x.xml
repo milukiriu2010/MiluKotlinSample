@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/button_oval"
+        android:background="@drawable/ic_a01z"
         android:text="@string/BTN_A01"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rgA0X" />
@@ -73,11 +73,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/button_chocolate"
+        android:background="@drawable/ic_a02z"
         android:text="@string/BTN_A02"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btnDICE"
+        app:layout_constraintBottom_toTopOf="@+id/btnA04"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/btnA01"
@@ -94,6 +94,17 @@
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/btnA02" />
+
+    <Button
+        android:id="@+id/btnA04"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ic_a04z"
+        android:text="@string/BTN_A04"
+        app:layout_constraintEnd_toEndOf="@+id/btnA01"
+        app:layout_constraintStart_toStartOf="@+id/btnA01"
+        app:layout_constraintTop_toBottomOf="@+id/btnA01" />
 
     <Button
         android:id="@+id/btnRATE"
@@ -143,17 +154,6 @@
         app:layout_constraintTop_toBottomOf="@+id/btnA03" />
 
     <Button
-        android:id="@+id/btnDICE"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/button_black"
-        android:text="@string/BTN_DICE"
-        app:layout_constraintEnd_toEndOf="@+id/btnA01"
-        app:layout_constraintStart_toStartOf="@+id/btnA01"
-        app:layout_constraintTop_toBottomOf="@+id/btnA01" />
-
-    <Button
         android:id="@+id/btnLargeBmp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -199,9 +199,9 @@
         android:layout_width="86dp"
         android:layout_height="wrap_content"
         android:text="Scan"
-        app:layout_constraintEnd_toEndOf="@+id/btnDICE"
-        app:layout_constraintStart_toStartOf="@+id/btnDICE"
-        app:layout_constraintTop_toBottomOf="@+id/btnDICE" />
+        app:layout_constraintEnd_toEndOf="@+id/btnA04"
+        app:layout_constraintStart_toStartOf="@+id/btnA04"
+        app:layout_constraintTop_toBottomOf="@+id/btnA04" />
 
     <Button
         android:id="@+id/btnWebSearch"
@@ -212,7 +212,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btnA02"
-        app:layout_constraintTop_toTopOf="@+id/btnDICE"
+        app:layout_constraintTop_toTopOf="@+id/btnA04"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button

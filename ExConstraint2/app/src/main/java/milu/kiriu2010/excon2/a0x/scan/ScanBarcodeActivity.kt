@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import milu.kiriu2010.id.IntentID
+import milu.kiriu2010.excon2.id.IntentID
 import milu.kiriu2010.excon2.R
 import kotlinx.android.synthetic.main.activity_scan_barcode.*
 

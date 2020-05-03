@@ -20,8 +20,11 @@
 
     <string name="BTN_A03">Custom Bar</string>
     <string name="TV_A03">Custom ActionBar</string>
-    <string name="TV_A03A">戻る</string>
-    <string name="TV_A03B">進</string>
+    <string name="IV_A03A">戻る</string>
+    <string name="IV_A03B">進む</string>
+
+    <string name="BTN_A04">Dice</string>
+    <string name="IV_A04">Press for Dice Roll</string>
 
     <string name="BTN_GET">Get</string>
     <string name="BTN_DOM">DOM</string>
@@ -39,7 +42,6 @@
     <string name="MENU_EXIT">exit</string>
     <string name="MENU_SETTINGS">Settings</string>
     <string name="MENU_LOAD">Load</string>
-    <string name="BTN_DICE">Dice</string>
     <string name="BTN_LARGE_BMP">Large Bmp</string>
     <string name="BTN_TRAFFIC_LIGHT">Traffic</string>
 </resources>

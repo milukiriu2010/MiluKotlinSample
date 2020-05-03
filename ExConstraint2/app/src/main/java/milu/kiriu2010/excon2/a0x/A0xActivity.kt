@@ -12,7 +12,7 @@ import android.widget.Toast
 import milu.kiriu2010.excon2.a0x.animescale.AnimeScaleActivity
 import milu.kiriu2010.excon2.a0x.contextmenu.ContextMenuActivity
 import milu.kiriu2010.excon2.a0x.a03.A03Activity
-import milu.kiriu2010.excon2.a0x.dice.DiceRollerActivity
+import milu.kiriu2010.excon2.a0x.a04.A04Activity
 import milu.kiriu2010.excon2.a0x.fibonnaci.FibonnaciActivity
 import milu.kiriu2010.excon2.a0x.largebmp.LargeBmpActivity
 import milu.kiriu2010.excon2.a0x.pinch.PinchActivity
@@ -41,7 +41,7 @@ import milu.kiriu2010.excon2.a0x.setting.SettingsActivity
 import milu.kiriu2010.excon2.a0x.tabbed.TabbedActivity
 import milu.kiriu2010.excon2.a0x.a01.A01Activity
 import milu.kiriu2010.excon2.a0x.voiceinput.VoiceInputActivity
-import milu.kiriu2010.id.IntentID
+import milu.kiriu2010.excon2.id.IntentID
 
 class A0xActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,13 +84,19 @@ class A0xActivity : AppCompatActivity() {
         // ストップウォッチ
         btnA02.setOnClickListener {
             val intent = Intent(this, A02Activity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_STOP_WATCH.value )
+            this.startActivityForResult( intent, IntentID.ID_A02.value )
         }
 
         // アクションバーをカスタマイズ
         btnA03.setOnClickListener {
             val intent = Intent(this, A03Activity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_CUSTOM_ACTION.value )
+            this.startActivityForResult( intent, IntentID.ID_A03.value )
+        }
+
+        // サイコロを振る
+        btnA04.setOnClickListener {
+            val intent = Intent(this, A04Activity::class.java )
+            this.startActivityForResult( intent, IntentID.ID_A04.value )
         }
 
         btnRATE.transformationMethod = null
@@ -133,12 +139,6 @@ class A0xActivity : AppCompatActivity() {
         btnCM.setOnClickListener {
             val intent = Intent(this, ContextMenuActivity::class.java )
             this.startActivityForResult( intent, IntentID.ID_CONTEXT_MENU.value )
-        }
-
-        btnDICE.transformationMethod = null
-        btnDICE.setOnClickListener {
-            val intent = Intent(this, DiceRollerActivity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_DICE.value )
         }
 
         btnLargeBmp.transformationMethod = null
