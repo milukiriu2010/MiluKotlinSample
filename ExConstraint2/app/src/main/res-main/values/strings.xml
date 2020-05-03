@@ -18,6 +18,10 @@
 
     <string name="TV_A02">00:00:00</string>
 
+    <string name="BTN_A03">Custom Bar</string>
+    <string name="TV_A03">Custom ActionBar</string>
+    <string name="TV_A03A">戻る</string>
+    <string name="TV_A03B">進</string>
 
     <string name="BTN_GET">Get</string>
     <string name="BTN_DOM">DOM</string>
@@ -35,7 +39,6 @@
     <string name="MENU_EXIT">exit</string>
     <string name="MENU_SETTINGS">Settings</string>
     <string name="MENU_LOAD">Load</string>
-    <string name="BTN_CUSTOM_ACTION">Custom ActionBar</string>
     <string name="BTN_DICE">Dice</string>
     <string name="BTN_LARGE_BMP">Large Bmp</string>
     <string name="BTN_TRAFFIC_LIGHT">Traffic</string>

@@ -11,7 +11,7 @@ import android.widget.RadioButton
 import android.widget.Toast
 import milu.kiriu2010.excon2.a0x.animescale.AnimeScaleActivity
 import milu.kiriu2010.excon2.a0x.contextmenu.ContextMenuActivity
-import milu.kiriu2010.excon2.a0x.customactionbar.CustomActionBarActivity
+import milu.kiriu2010.excon2.a0x.a03.A03Activity
 import milu.kiriu2010.excon2.a0x.dice.DiceRollerActivity
 import milu.kiriu2010.excon2.a0x.fibonnaci.FibonnaciActivity
 import milu.kiriu2010.excon2.a0x.largebmp.LargeBmpActivity
@@ -87,6 +87,12 @@ class A0xActivity : AppCompatActivity() {
             this.startActivityForResult( intent, IntentID.ID_STOP_WATCH.value )
         }
 
+        // アクションバーをカスタマイズ
+        btnA03.setOnClickListener {
+            val intent = Intent(this, A03Activity::class.java )
+            this.startActivityForResult( intent, IntentID.ID_CUSTOM_ACTION.value )
+        }
+
         btnRATE.transformationMethod = null
         btnRATE.setOnClickListener{
             val intent = Intent(this, RateActivity::class.java )
@@ -127,12 +133,6 @@ class A0xActivity : AppCompatActivity() {
         btnCM.setOnClickListener {
             val intent = Intent(this, ContextMenuActivity::class.java )
             this.startActivityForResult( intent, IntentID.ID_CONTEXT_MENU.value )
-        }
-
-        btnCustomAction.transformationMethod = null
-        btnCustomAction.setOnClickListener {
-            val intent = Intent(this, CustomActionBarActivity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_CUSTOM_ACTION.value )
         }
 
         btnDICE.transformationMethod = null

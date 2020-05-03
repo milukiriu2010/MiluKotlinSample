@@ -1,30 +1,32 @@
-package milu.kiriu2010.excon2.a0x.customactionbar
+package milu.kiriu2010.excon2.a0x.a03
 
 import android.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import milu.kiriu2010.excon2.R
-import milu.kiriu2010.excon2.R.layout.action_bar_layout_custom
-import kotlinx.android.synthetic.main.action_bar_layout_custom.*
+import milu.kiriu2010.excon2.R.layout.layout_a03
+import kotlinx.android.synthetic.main.layout_a03.*
 
+// アクションバーをカスタマイズ
 // https://www.journaldev.com/9952/android-custom-action-bar-example-tutorial
-class CustomActionBarActivity : AppCompatActivity() {
+class A03Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_custom_action_bar)
+        setContentView(R.layout.activity_a03)
 
+        // カスタマイズされたアクションバーを表示するためのおまじない
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setDisplayShowCustomEnabled(true)
-        supportActionBar?.setCustomView(action_bar_layout_custom)
+        supportActionBar?.setCustomView(layout_a03)
         //val view: View? = supportActionBar?.customView
 
-        // Back Button
-        action_bar_back.setOnClickListener { finish() }
+        // 戻るボタンクリック
+        ivA03A.setOnClickListener { finish() }
 
-        // Forward Button
-        action_bar_forward.setOnClickListener {
+        // 進ボタンクリック
+        ivA03B.setOnClickListener {
             Toast.makeText( this, "Forward Button is clicked.", Toast.LENGTH_LONG).show()
         }
     }

@@ -10,32 +10,34 @@
         android:layout_height="match_parent">
 
         <ImageButton
-            android:id="@+id/action_bar_back"
+            android:id="@+id/ivA03A"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:background="@android:color/transparent"
+            android:contentDescription="@string/TV_A03A"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/back" />
+            app:srcCompat="@drawable/ic_a03a" />
 
         <TextView
-            android:id="@+id/tvActionBar"
+            android:id="@+id/tvA03"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:padding="10dp"
-            android:text="@string/app_name"
+            android:text="@string/TV_A03"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textStyle="bold" />
 
         <ImageButton
-            android:id="@+id/action_bar_forward"
+            android:id="@+id/ivA03B"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:background="@android:color/transparent"
+            android:contentDescription="@string/TV_A03B"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/forward" />
+            app:srcCompat="@drawable/ic_a03b" />
     </TableRow>
 </TableLayout>

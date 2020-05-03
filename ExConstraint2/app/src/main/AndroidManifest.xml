@@ -38,7 +38,7 @@
         <activity android:name=".a0x.temperature.TemperatureActivity" />
         <activity android:name=".a0x.a02.A02Activity" />
         <activity
-            android:name=".a0x.customactionbar.CustomActionBarActivity"
+            android:name=".a0x.a03.A03Activity"
             android:theme="@style/CustomTheme" />
         <activity android:name=".a0x.dice.DiceRollerActivity" />
         <activity android:name=".a0x.largebmp.LargeBmpActivity" />

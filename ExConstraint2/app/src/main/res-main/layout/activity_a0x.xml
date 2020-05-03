@@ -85,10 +85,10 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/btnCustomAction"
+        android:id="@+id/btnA03"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/BTN_CUSTOM_ACTION"
+        android:text="@string/BTN_A03"
         app:layout_constraintBottom_toTopOf="@+id/btnWebSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
@@ -137,10 +137,10 @@
         android:layout_width="0dp"
         android:layout_height="49dp"
         android:text="@string/BTN_CM"
-        app:layout_constraintEnd_toEndOf="@+id/btnCustomAction"
+        app:layout_constraintEnd_toEndOf="@+id/btnA03"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/btnCustomAction"
-        app:layout_constraintTop_toBottomOf="@+id/btnCustomAction" />
+        app:layout_constraintStart_toStartOf="@+id/btnA03"
+        app:layout_constraintTop_toBottomOf="@+id/btnA03" />
 
     <Button
         android:id="@+id/btnDICE"
