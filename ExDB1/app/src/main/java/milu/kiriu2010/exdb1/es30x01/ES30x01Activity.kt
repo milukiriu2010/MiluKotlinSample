@@ -24,7 +24,7 @@ class ES30x01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, A07Fragment.newInstance(), "xyz")
+                    .replace(R.id.flES30x01, A07Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -54,7 +54,7 @@ class ES30x01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("a07") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, A07Fragment.newInstance(), "a07")
+                            .replace(R.id.flES30x01, A07Fragment.newInstance(), "a07")
                             .commit()
                 }
                 true
@@ -64,7 +64,7 @@ class ES30x01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("a06") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, A06Fragment.newInstance(), "a06")
+                            .replace(R.id.flES30x01, A06Fragment.newInstance(), "a06")
                             .commit()
                 }
                 true
@@ -74,7 +74,7 @@ class ES30x01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("av05") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, AV05Fragment.newInstance(), "av05")
+                            .replace(R.id.flES30x01, AV05Fragment.newInstance(), "av05")
                             .commit()
                 }
                 true
@@ -84,7 +84,7 @@ class ES30x01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("a05") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, A05Fragment.newInstance(), "a05")
+                            .replace(R.id.flES30x01, A05Fragment.newInstance(), "a05")
                             .commit()
                 }
                 true
@@ -94,7 +94,7 @@ class ES30x01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("av04") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, AV04Fragment.newInstance(), "av04")
+                            .replace(R.id.flES30x01, AV04Fragment.newInstance(), "av04")
                             .commit()
                 }
                 true
@@ -104,7 +104,7 @@ class ES30x01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("a04") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, A04Fragment.newInstance(), "a04")
+                            .replace(R.id.flES30x01, A04Fragment.newInstance(), "a04")
                             .commit()
                 }
                 true
@@ -114,7 +114,7 @@ class ES30x01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("av03") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, AV03Fragment.newInstance(), "av03")
+                            .replace(R.id.flES30x01, AV03Fragment.newInstance(), "av03")
                             .commit()
                 }
                 true
@@ -124,7 +124,7 @@ class ES30x01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("a03") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, A03Fragment.newInstance(), "a03")
+                            .replace(R.id.flES30x01, A03Fragment.newInstance(), "a03")
                             .commit()
                 }
                 true
@@ -134,7 +134,7 @@ class ES30x01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("rot01es30") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, ES30Rotate01Fragment.newInstance(), "rot01es30")
+                            .replace(R.id.flES30x01, ES30Rotate01Fragment.newInstance(), "rot01es30")
                             .commit()
                 }
                 true

@@ -17,7 +17,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Home") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(), "Home")
+                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(), "Home")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
@@ -26,7 +26,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Home") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(), "Home")
+                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(), "Home")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
@@ -35,7 +35,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Home") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(), "Home")
+                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(), "Home")
                             .commit()
                 }
                 return@OnNavigationItemSelectedListener true
@@ -48,11 +48,11 @@ class Mgl00Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mgl00)
 
-        nvA0X.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        nvMGL00.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         if (supportFragmentManager.findFragmentByTag("Home") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(), "Home")
+                    .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(), "Home")
                     .commit()
         }
 
@@ -82,7 +82,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Torus01Model") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(6), "Torus01Model")
+                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(6), "Torus01Model")
                             .commit()
                 }
                 true
@@ -92,7 +92,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Sphere01Model") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(5), "Sphere01Model")
+                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(5), "Sphere01Model")
                             .commit()
                 }
                 true
@@ -102,7 +102,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Icosahedron01Model") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(4), "Icosahedron01Model")
+                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(4), "Icosahedron01Model")
                             .commit()
                 }
                 true
@@ -112,7 +112,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Dodecahedron01Model") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(3), "Dodecahedron01Model")
+                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(3), "Dodecahedron01Model")
                             .commit()
                 }
                 true
@@ -122,7 +122,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Octahedron01Model") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(2), "Octahedron01Model")
+                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(2), "Octahedron01Model")
                             .commit()
                 }
                 true
@@ -132,7 +132,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Cube01Model") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(1), "Cube01Model")
+                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(1), "Cube01Model")
                             .commit()
                 }
                 true
@@ -142,7 +142,7 @@ class Mgl00Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Tetrahedron01Model") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, DepthCull01Fragment.newInstance(), "Tetrahedron01Model")
+                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(), "Tetrahedron01Model")
                             .commit()
                 }
                 true

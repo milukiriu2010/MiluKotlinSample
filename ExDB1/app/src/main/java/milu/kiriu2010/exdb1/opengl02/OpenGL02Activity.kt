@@ -29,7 +29,7 @@ class OpenGL02Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, WV030Fragment.newInstance(), "xyz")
+                    .replace(R.id.flGL02, WV030Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -59,7 +59,7 @@ class OpenGL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv30") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV030Fragment.newInstance(), "wv30")
+                            .replace(R.id.flGL02, WV030Fragment.newInstance(), "wv30")
                             .commit()
                 }
                 true
@@ -69,7 +69,7 @@ class OpenGL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w030z") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W030zFragment.newInstance(), "w030z")
+                            .replace(R.id.flGL02, W030zFragment.newInstance(), "w030z")
                             .commit()
                 }
                 true
@@ -79,7 +79,7 @@ class OpenGL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv29") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV029Fragment.newInstance(), "wv29")
+                            .replace(R.id.flGL02, WV029Fragment.newInstance(), "wv29")
                             .commit()
                 }
                 true
@@ -89,7 +89,7 @@ class OpenGL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w029") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W029Fragment.newInstance(), "w029")
+                            .replace(R.id.flGL02, W029Fragment.newInstance(), "w029")
                             .commit()
                 }
                 true
@@ -99,7 +99,7 @@ class OpenGL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv28") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV028Fragment.newInstance(), "wv28")
+                            .replace(R.id.flGL02, WV028Fragment.newInstance(), "wv28")
                             .commit()
                 }
                 true
@@ -109,7 +109,7 @@ class OpenGL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w028") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W028Fragment.newInstance(), "w028")
+                            .replace(R.id.flGL02, W028Fragment.newInstance(), "w028")
                             .commit()
                 }
                 true
@@ -119,7 +119,7 @@ class OpenGL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv27") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV027Fragment.newInstance(), "w27")
+                            .replace(R.id.flGL02, WV027Fragment.newInstance(), "w27")
                             .commit()
                 }
                 true
@@ -129,7 +129,7 @@ class OpenGL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w027") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W027Fragment.newInstance(), "w027")
+                            .replace(R.id.flGL02, W027Fragment.newInstance(), "w027")
                             .commit()
                 }
                 true
@@ -139,7 +139,7 @@ class OpenGL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv26") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV026Fragment.newInstance(), "wv26")
+                            .replace(R.id.flGL02, WV026Fragment.newInstance(), "wv26")
                             .commit()
                 }
                 true
@@ -149,7 +149,7 @@ class OpenGL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w026") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W026Fragment.newInstance(), "w026")
+                            .replace(R.id.flGL02, W026Fragment.newInstance(), "w026")
                             .commit()
                 }
                 true
@@ -159,7 +159,7 @@ class OpenGL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("noisev01") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, NoiseV01Fragment.newInstance(), "noisev01")
+                            .replace(R.id.flGL02, NoiseV01Fragment.newInstance(), "noisev01")
                             .commit()
                 }
                 true
@@ -169,7 +169,7 @@ class OpenGL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("noise01") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Noise01Fragment.newInstance(), "noise01")
+                            .replace(R.id.flGL02, Noise01Fragment.newInstance(), "noise01")
                             .commit()
                 }
                 true
@@ -179,7 +179,7 @@ class OpenGL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("jayce07") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Jayce07Fragment.newInstance(), "jayce07")
+                            .replace(R.id.flGL02, Jayce07Fragment.newInstance(), "jayce07")
                             .commit()
                 }
                 true
@@ -189,7 +189,7 @@ class OpenGL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("Labo01") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, TestGLFragment.newInstance(), "Labo01")
+                            .replace(R.id.flGL02, TestGLFragment.newInstance(), "Labo01")
                             .commit()
                 }
                 true

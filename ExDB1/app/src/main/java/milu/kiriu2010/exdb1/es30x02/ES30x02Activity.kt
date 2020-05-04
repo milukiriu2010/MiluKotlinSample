@@ -17,7 +17,7 @@ class ES30x02Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, A09Fragment.newInstance(), "xyz")
+                    .replace(R.id.flES30x02, A09Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -46,7 +46,7 @@ class ES30x02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("a09") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, A09Fragment.newInstance(), "a09")
+                            .replace(R.id.flES30x02, A09Fragment.newInstance(), "a09")
                             .commit()
                 }
                 true
@@ -56,7 +56,7 @@ class ES30x02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("a08") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, A08Fragment.newInstance(), "a08")
+                            .replace(R.id.flES30x02, A08Fragment.newInstance(), "a08")
                             .commit()
                 }
                 true

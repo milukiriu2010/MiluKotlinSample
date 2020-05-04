@@ -8,7 +8,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_a0x.*
 import milu.kiriu2010.exdb1.R
 
-// アニメ描画を実施するアクティビティ
+// オブジェクトのアニメーションを表示するアクティビティ
 class A0XActivity : AppCompatActivity() {
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -51,7 +51,7 @@ class A0XActivity : AppCompatActivity() {
         // 初期表示のフラグメントを設定
         if ( supportFragmentManager.findFragmentByTag("Home") == null ) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.flA0X, HomeFragment.newInstance(), "Home")
+                    .replace(R.id.flA0X, A01Fragment.newInstance(), "Home")
                     .commit()
         }
 
@@ -68,9 +68,9 @@ class A0XActivity : AppCompatActivity() {
     }
 
     // アクションバーのアイコンがタップされると呼ばれる
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return when (item?.itemId) {
-        // 前画面に戻る
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            // 前画面に戻る
             android.R.id.home -> {
                 finish()
                 true
@@ -183,7 +183,7 @@ class A0XActivity : AppCompatActivity() {
                 }
                 true
             }
-            else -> return super.onOptionsItemSelected(item!!)
+            else -> return super.onOptionsItemSelected(item)
         }
     }
 }

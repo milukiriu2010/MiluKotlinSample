@@ -54,13 +54,13 @@
             android:name=".a0x.A0XActivity"
             android:label="@string/title_activity_anime_obj" />
         <activity
-            android:name=".draw.DrawActivity"
+            android:name=".a1x.A1XActivity"
             android:label="@string/title_activity_draw" />
         <activity
-            android:name=".canvas.CanvasActivity"
+            android:name=".a2x.A2XActivity"
             android:label="@string/title_activity_canvas" />
         <activity
-            android:name=".basic.BasicActivity"
+            android:name=".a3x.A3XActivity"
             android:label="@string/title_activity_basic" />
         <activity
             android:name=".opengl02.OpenGL02Activity"

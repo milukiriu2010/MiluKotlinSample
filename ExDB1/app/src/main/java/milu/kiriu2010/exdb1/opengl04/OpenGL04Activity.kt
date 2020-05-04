@@ -29,7 +29,7 @@ class OpenGL04Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, WV047Fragment.newInstance(), "xyz")
+                    .replace(R.id.flGL04, WV047Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -59,7 +59,7 @@ class OpenGL04Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv47") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV047Fragment.newInstance(), "wv47")
+                            .replace(R.id.flGL04, WV047Fragment.newInstance(), "wv47")
                             .commit()
                 }
                 true
@@ -69,7 +69,7 @@ class OpenGL04Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w047") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W047Fragment.newInstance(), "w047")
+                            .replace(R.id.flGL04, W047Fragment.newInstance(), "w047")
                             .commit()
                 }
                 true
@@ -79,7 +79,7 @@ class OpenGL04Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv46") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV046Fragment.newInstance(), "wv46")
+                            .replace(R.id.flGL04, WV046Fragment.newInstance(), "wv46")
                             .commit()
                 }
                 true
@@ -89,7 +89,7 @@ class OpenGL04Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w046") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W046Fragment.newInstance(), "w046")
+                            .replace(R.id.flGL04, W046Fragment.newInstance(), "w046")
                             .commit()
                 }
                 true
@@ -99,7 +99,7 @@ class OpenGL04Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv45") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV045Fragment.newInstance(), "wv45")
+                            .replace(R.id.flGL04, WV045Fragment.newInstance(), "wv45")
                             .commit()
                 }
                 true
@@ -109,7 +109,7 @@ class OpenGL04Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w045") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W045Fragment.newInstance(), "w045")
+                            .replace(R.id.flGL04, W045Fragment.newInstance(), "w045")
                             .commit()
                 }
                 true
@@ -119,7 +119,7 @@ class OpenGL04Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv44") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV044Fragment.newInstance(), "w44")
+                            .replace(R.id.flGL04, WV044Fragment.newInstance(), "w44")
                             .commit()
                 }
                 true
@@ -129,7 +129,7 @@ class OpenGL04Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w044") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W044Fragment.newInstance(), "w044")
+                            .replace(R.id.flGL04, W044Fragment.newInstance(), "w044")
                             .commit()
                 }
                 true
@@ -139,7 +139,7 @@ class OpenGL04Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv43") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV043Fragment.newInstance(), "wv43")
+                            .replace(R.id.flGL04, WV043Fragment.newInstance(), "wv43")
                             .commit()
                 }
                 true
@@ -149,7 +149,7 @@ class OpenGL04Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w043") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W043Fragment.newInstance(), "w043")
+                            .replace(R.id.flGL04, W043Fragment.newInstance(), "w043")
                             .commit()
                 }
                 true
@@ -159,7 +159,7 @@ class OpenGL04Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv42") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV042Fragment.newInstance(), "wv42")
+                            .replace(R.id.flGL04, WV042Fragment.newInstance(), "wv42")
                             .commit()
                 }
                 true
@@ -169,7 +169,7 @@ class OpenGL04Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w042") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W042Fragment.newInstance(), "w042")
+                            .replace(R.id.flGL04, W042Fragment.newInstance(), "w042")
                             .commit()
                 }
                 true

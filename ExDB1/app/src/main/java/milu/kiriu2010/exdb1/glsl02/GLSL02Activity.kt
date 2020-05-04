@@ -35,7 +35,7 @@ class GLSL02Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, GLSLV20Fragment.newInstance(), "xyz")
+                    .replace(R.id.flGLSL02, GLSLV20Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -64,7 +64,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("gv20") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSLV20Fragment.newInstance(), "gv20")
+                            .replace(R.id.flGLSL02, GLSLV20Fragment.newInstance(), "gv20")
                             .commit()
                 }
                 true
@@ -74,7 +74,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("g20") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSL20Fragment.newInstance(), "g20")
+                            .replace(R.id.flGLSL02, GLSL20Fragment.newInstance(), "g20")
                             .commit()
                 }
                 true
@@ -84,7 +84,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("gv19") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSLV19Fragment.newInstance(), "gv19")
+                            .replace(R.id.flGLSL02, GLSLV19Fragment.newInstance(), "gv19")
                             .commit()
                 }
                 true
@@ -94,7 +94,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("g19") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSL19Fragment.newInstance(), "g19")
+                            .replace(R.id.flGLSL02, GLSL19Fragment.newInstance(), "g19")
                             .commit()
                 }
                 true
@@ -104,7 +104,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("gv18") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSLV18Fragment.newInstance(), "gv18")
+                            .replace(R.id.flGLSL02, GLSLV18Fragment.newInstance(), "gv18")
                             .commit()
                 }
                 true
@@ -114,7 +114,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("g18") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSL18Fragment.newInstance(), "g18")
+                            .replace(R.id.flGLSL02, GLSL18Fragment.newInstance(), "g18")
                             .commit()
                 }
                 true
@@ -124,7 +124,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("gv17") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSLV17Fragment.newInstance(), "gv17")
+                            .replace(R.id.flGLSL02, GLSLV17Fragment.newInstance(), "gv17")
                             .commit()
                 }
                 true
@@ -134,7 +134,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("g17") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSL17Fragment.newInstance(), "g17")
+                            .replace(R.id.flGLSL02, GLSL17Fragment.newInstance(), "g17")
                             .commit()
                 }
                 true
@@ -144,7 +144,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("gv16") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSLV16Fragment.newInstance(), "gv16")
+                            .replace(R.id.flGLSL02, GLSLV16Fragment.newInstance(), "gv16")
                             .commit()
                 }
                 true
@@ -154,7 +154,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("g16") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSL16Fragment.newInstance(), "g16")
+                            .replace(R.id.flGLSL02, GLSL16Fragment.newInstance(), "g16")
                             .commit()
                 }
                 true
@@ -164,7 +164,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("gv15") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSLV15Fragment.newInstance(), "gv15")
+                            .replace(R.id.flGLSL02, GLSLV15Fragment.newInstance(), "gv15")
                             .commit()
                 }
                 true
@@ -174,7 +174,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("g15") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSL15Fragment.newInstance(), "g15")
+                            .replace(R.id.flGLSL02, GLSL15Fragment.newInstance(), "g15")
                             .commit()
                 }
                 true
@@ -184,7 +184,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("gv14") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSLV14Fragment.newInstance(), "gv14")
+                            .replace(R.id.flGLSL02, GLSLV14Fragment.newInstance(), "gv14")
                             .commit()
                 }
                 true
@@ -194,7 +194,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("g14") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSL14Fragment.newInstance(), "g14")
+                            .replace(R.id.flGLSL02, GLSL14Fragment.newInstance(), "g14")
                             .commit()
                 }
                 true
@@ -204,7 +204,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("gv13") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSLV13Fragment.newInstance(), "gv13")
+                            .replace(R.id.flGLSL02, GLSLV13Fragment.newInstance(), "gv13")
                             .commit()
                 }
                 true
@@ -214,7 +214,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("g13") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSL13Fragment.newInstance(), "g13")
+                            .replace(R.id.flGLSL02, GLSL13Fragment.newInstance(), "g13")
                             .commit()
                 }
                 true
@@ -224,7 +224,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("gv12") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSLV12Fragment.newInstance(), "gv12")
+                            .replace(R.id.flGLSL02, GLSLV12Fragment.newInstance(), "gv12")
                             .commit()
                 }
                 true
@@ -234,7 +234,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("g12") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSL12Fragment.newInstance(), "g12")
+                            .replace(R.id.flGLSL02, GLSL12Fragment.newInstance(), "g12")
                             .commit()
                 }
                 true
@@ -244,7 +244,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("gv11") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSLV11Fragment.newInstance(), "gv11")
+                            .replace(R.id.flGLSL02, GLSLV11Fragment.newInstance(), "gv11")
                             .commit()
                 }
                 true
@@ -254,7 +254,7 @@ class GLSL02Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("g11") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, GLSL11Fragment.newInstance(), "g11")
+                            .replace(R.id.flGLSL02, GLSL11Fragment.newInstance(), "g11")
                             .commit()
                 }
                 true

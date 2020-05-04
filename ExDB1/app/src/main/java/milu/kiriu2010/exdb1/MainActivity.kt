@@ -7,9 +7,9 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import milu.kiriu2010.exdb1.a0x.A0XActivity
-import milu.kiriu2010.exdb1.basic.BasicActivity
-import milu.kiriu2010.exdb1.canvas.CanvasActivity
-import milu.kiriu2010.exdb1.draw.DrawActivity
+import milu.kiriu2010.exdb1.a3x.A3XActivity
+import milu.kiriu2010.exdb1.a2x.A2XActivity
+import milu.kiriu2010.exdb1.a1x.A1XActivity
 import milu.kiriu2010.exdb1.es30x01.ES30x01Activity
 import milu.kiriu2010.exdb1.es30x02.ES30x02Activity
 import milu.kiriu2010.exdb1.es32x01.ES32x01Activity
@@ -41,22 +41,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         // shapeを用いたサンプルを表示するページへ遷移
-        btnDraw.setOnClickListener {
-            val intent = Intent(this, DrawActivity::class.java)
+        btnA1X.setOnClickListener {
+            val intent = Intent(this, A1XActivity::class.java)
             startActivity(intent)
         }
 
         // Canvas上のオブジェクトのアニメーションを表示するページへ遷移
         btnCanvas.transformationMethod = null
         btnCanvas.setOnClickListener {
-            val intent = Intent(this, CanvasActivity::class.java)
+            val intent = Intent(this, A2XActivity::class.java)
             startActivity(intent)
         }
 
         // 描画基本ページへ遷移
         btnBasic.transformationMethod = null
         btnBasic.setOnClickListener {
-            val intent = Intent(this, BasicActivity::class.java)
+            val intent = Intent(this, A3XActivity::class.java)
             startActivity(intent)
         }
 

@@ -37,7 +37,7 @@ class OpenGL05Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, WV057Fragment.newInstance(), "xyz")
+                    .replace(R.id.flGL05, WV057Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -66,7 +66,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv57") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV057Fragment.newInstance(), "wv57")
+                            .replace(R.id.flGL05, WV057Fragment.newInstance(), "wv57")
                             .commit()
                 }
                 true
@@ -76,7 +76,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w057") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W057Fragment.newInstance(), "w057")
+                            .replace(R.id.flGL05, W057Fragment.newInstance(), "w057")
                             .commit()
                 }
                 true
@@ -86,7 +86,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv56") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV056Fragment.newInstance(), "wv56")
+                            .replace(R.id.flGL05, WV056Fragment.newInstance(), "wv56")
                             .commit()
                 }
                 true
@@ -96,7 +96,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w056") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W056Fragment.newInstance(), "w056")
+                            .replace(R.id.flGL05, W056Fragment.newInstance(), "w056")
                             .commit()
                 }
                 true
@@ -106,7 +106,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv55") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV055Fragment.newInstance(), "wv55")
+                            .replace(R.id.flGL05, WV055Fragment.newInstance(), "wv55")
                             .commit()
                 }
                 true
@@ -116,7 +116,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w055") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W055Fragment.newInstance(), "w055")
+                            .replace(R.id.flGL05, W055Fragment.newInstance(), "w055")
                             .commit()
                 }
                 true
@@ -126,7 +126,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv54") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV054Fragment.newInstance(), "wv54")
+                            .replace(R.id.flGL05, WV054Fragment.newInstance(), "wv54")
                             .commit()
                 }
                 true
@@ -136,7 +136,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w054") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W054Fragment.newInstance(), "w054")
+                            .replace(R.id.flGL05, W054Fragment.newInstance(), "w054")
                             .commit()
                 }
                 true
@@ -146,7 +146,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv53") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV053Fragment.newInstance(), "wv53")
+                            .replace(R.id.flGL05, WV053Fragment.newInstance(), "wv53")
                             .commit()
                 }
                 true
@@ -156,7 +156,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w053") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W053Fragment.newInstance(), "w053")
+                            .replace(R.id.flGL05, W053Fragment.newInstance(), "w053")
                             .commit()
                 }
                 true
@@ -166,7 +166,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv52") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV052Fragment.newInstance(), "wv52")
+                            .replace(R.id.flGL05, WV052Fragment.newInstance(), "wv52")
                             .commit()
                 }
                 true
@@ -176,7 +176,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w052") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W052Fragment.newInstance(), "w052")
+                            .replace(R.id.flGL05, W052Fragment.newInstance(), "w052")
                             .commit()
                 }
                 true
@@ -186,7 +186,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv51") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV051Fragment.newInstance(), "wv51")
+                            .replace(R.id.flGL05, WV051Fragment.newInstance(), "wv51")
                             .commit()
                 }
                 true
@@ -196,7 +196,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w051") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W051Fragment.newInstance(), "w051")
+                            .replace(R.id.flGL05, W051Fragment.newInstance(), "w051")
                             .commit()
                 }
                 true
@@ -206,7 +206,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv50") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV050Fragment.newInstance(), "wv50")
+                            .replace(R.id.flGL05, WV050Fragment.newInstance(), "wv50")
                             .commit()
                 }
                 true
@@ -216,7 +216,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w050") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W050Fragment.newInstance(), "w050")
+                            .replace(R.id.flGL05, W050Fragment.newInstance(), "w050")
                             .commit()
                 }
                 true
@@ -226,7 +226,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv49") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV049Fragment.newInstance(), "wv49")
+                            .replace(R.id.flGL05, WV049Fragment.newInstance(), "wv49")
                             .commit()
                 }
                 true
@@ -236,7 +236,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w049") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W049Fragment.newInstance(), "w049")
+                            .replace(R.id.flGL05, W049Fragment.newInstance(), "w049")
                             .commit()
                 }
                 true
@@ -246,7 +246,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv48") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV048Fragment.newInstance(), "wv48")
+                            .replace(R.id.flGL05, WV048Fragment.newInstance(), "wv48")
                             .commit()
                 }
                 true
@@ -256,7 +256,7 @@ class OpenGL05Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w048") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W048Fragment.newInstance(), "w048")
+                            .replace(R.id.flGL05, W048Fragment.newInstance(), "w048")
                             .commit()
                 }
                 true

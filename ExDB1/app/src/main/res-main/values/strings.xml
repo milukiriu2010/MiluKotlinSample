@@ -1,6 +1,17 @@
 <resources>
     <string name="app_name">ExDB1</string>
     <string name="BTN_A0X">Anime</string>
-
     <string name="ITEM_A01">左⇒右</string>
+
+    <string name="ITEM_A03A">パスエフェクト</string>
+
+
+    <string name="BTN_A1X">Draw</string>
+    <string name="BTN_A11">Button</string>
+    <string name="TV_A11A">ABCabcあいう</string>
+    <string name="TV_A11B">ABCabcあいう</string>
+    <string name="TV_A11C">ABCabcあいう</string>
+    <string name="TV_A11D">ABCabcあいう</string>
+    <string name="IV_A11">Android</string>
+
 </resources>

@@ -23,7 +23,7 @@ class OpenGL08Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, WV089Fragment.newInstance(), "xyz")
+                    .replace(R.id.flGL08, WV089Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -53,7 +53,7 @@ class OpenGL08Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv89") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV089Fragment.newInstance(), "wv89")
+                            .replace(R.id.flGL08, WV089Fragment.newInstance(), "wv89")
                             .commit()
                 }
                 true
@@ -63,7 +63,7 @@ class OpenGL08Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w089") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W089Fragment.newInstance(), "w089")
+                            .replace(R.id.flGL08, W089Fragment.newInstance(), "w089")
                             .commit()
                 }
                 true
@@ -73,7 +73,7 @@ class OpenGL08Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv87") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV087Fragment.newInstance(), "wv87")
+                            .replace(R.id.flGL08, WV087Fragment.newInstance(), "wv87")
                             .commit()
                 }
                 true
@@ -83,7 +83,7 @@ class OpenGL08Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w087") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W087Fragment.newInstance(), "w087")
+                            .replace(R.id.flGL08, W087Fragment.newInstance(), "w087")
                             .commit()
                 }
                 true
@@ -93,7 +93,7 @@ class OpenGL08Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv86") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV086Fragment.newInstance(), "wv86")
+                            .replace(R.id.flGL08, WV086Fragment.newInstance(), "wv86")
                             .commit()
                 }
                 true
@@ -103,7 +103,7 @@ class OpenGL08Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w086") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W086Fragment.newInstance(), "w086")
+                            .replace(R.id.flGL08, W086Fragment.newInstance(), "w086")
                             .commit()
                 }
                 true
@@ -113,7 +113,7 @@ class OpenGL08Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("wv81") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, WV081Fragment.newInstance(), "wv81")
+                            .replace(R.id.flGL08, WV081Fragment.newInstance(), "wv81")
                             .commit()
                 }
                 true
@@ -123,7 +123,7 @@ class OpenGL08Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("w081") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, W081Fragment.newInstance(), "w081")
+                            .replace(R.id.flGL08, W081Fragment.newInstance(), "w081")
                             .commit()
                 }
                 true

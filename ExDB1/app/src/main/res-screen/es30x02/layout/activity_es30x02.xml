@@ -7,7 +7,7 @@
     tools:context=".es30x02.ES30x02Activity">
 
     <FrameLayout
-        android:id="@+id/flA0X"
+        android:id="@+id/flES30x02"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"

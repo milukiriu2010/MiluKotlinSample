@@ -19,7 +19,7 @@ class Mgl01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, ES20VBO02Fragment.newInstance(), "xyz")
+                    .replace(R.id.flMGL01, ES20VBO02Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -48,7 +48,7 @@ class Mgl01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("vbo02") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, ES20VBO02Fragment.newInstance(), "vbo02")
+                            .replace(R.id.flMGL01, ES20VBO02Fragment.newInstance(), "vbo02")
                             .commit()
                 }
                 true
@@ -58,7 +58,7 @@ class Mgl01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("vbo01") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, ES20VBO01Fragment.newInstance(), "vbo01")
+                            .replace(R.id.flMGL01, ES20VBO01Fragment.newInstance(), "vbo01")
                             .commit()
                 }
                 true
@@ -68,7 +68,7 @@ class Mgl01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("rot02") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, CubeRotate02Fragment.newInstance(), "rot02")
+                            .replace(R.id.flMGL01, CubeRotate02Fragment.newInstance(), "rot02")
                             .commit()
                 }
                 true
@@ -78,7 +78,7 @@ class Mgl01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("rot01") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, Rotate01Fragment.newInstance(), "rot01")
+                            .replace(R.id.flMGL01, Rotate01Fragment.newInstance(), "rot01")
                             .commit()
                 }
                 true

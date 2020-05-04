@@ -16,7 +16,7 @@ class ES32x01Activity : AppCompatActivity() {
         supportFragmentManager.popBackStack()
         if (supportFragmentManager.findFragmentByTag("xyz") == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, ES32Rotate01Fragment.newInstance(), "xyz")
+                    .replace(R.id.flES32x01, ES32Rotate01Fragment.newInstance(), "xyz")
                     .commit()
         }
 
@@ -45,7 +45,7 @@ class ES32x01Activity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 if (supportFragmentManager.findFragmentByTag("rot01es32") == null) {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.frameLayout, ES32Rotate01Fragment.newInstance(), "rot01es32")
+                            .replace(R.id.flES32x01, ES32Rotate01Fragment.newInstance(), "rot01es32")
                             .commit()
                 }
                 true
