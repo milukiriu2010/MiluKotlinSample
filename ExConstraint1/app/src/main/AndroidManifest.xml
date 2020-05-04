@@ -55,7 +55,7 @@
         <activity android:name=".a05.FileRecycleActivity" />
         <activity android:name=".counter.CounterActivity" />
         <activity android:name=".a03.RecycleTimeZoneActivity" />
-        <activity android:name=".memo.MemoActivity" />
+        <activity android:name=".a08.A08Activity" />
         <activity android:name=".accball.AccBallActivity" />
         <activity android:name=".slide.SlideShowActivity" />
         <activity

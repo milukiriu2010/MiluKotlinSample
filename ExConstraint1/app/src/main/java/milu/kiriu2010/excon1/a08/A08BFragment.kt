@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1.memo
+package milu.kiriu2010.excon1.a08
 
 import android.content.Context
 import android.os.Bundle
@@ -9,11 +9,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import milu.kiriu2010.file.getFiles
 import milu.kiriu2010.excon1.R
 import java.io.File
 
-class MemoFilesListFragment: Fragment() {
+// メモ一覧表示用フラグメント
+class A08BFragment: Fragment() {
     private lateinit var recycleView: RecyclerView
 
     // メモをタップしたときのコールバックインターフェース
@@ -22,9 +22,10 @@ class MemoFilesListFragment: Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View {
-        val view = inflater.inflate(R.layout.fragment_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_a08b, container, false)
 
-        recycleView = view.findViewById(R.id.filesList)
+        // メモ一覧を表示するリサイクラービュー
+        recycleView = view.findViewById(R.id.rvA08A)
         // 縦方向に並べてリストを表示するレイアウトマネージャを設定
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recycleView.layoutManager = layoutManager
@@ -46,9 +47,8 @@ class MemoFilesListFragment: Fragment() {
     fun show() {
         val ctx = context ?: return
         // ファイルの一覧を表示するためのアダプター
-        val adapter = MemoFilesAdapter(ctx, getFiles()) { file ->
-
-            Log.d(javaClass.toString(), "=== MemoFilesListFragment show ===")
+        val adapter = A08BAdapter(ctx, getFiles(ctx)) { file ->
+            Log.d(javaClass.toString(), "=== A08BFragment show ===")
             // タップされたら、コールバックを呼ぶ
             (context as OnFileSelectListener).onFileSelected(file)
         }

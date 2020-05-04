@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1.memo
+package milu.kiriu2010.excon1.a08
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
@@ -9,24 +9,27 @@ import android.widget.TextView
 import milu.kiriu2010.excon1.R
 import java.io.File
 
-class MemoFilesAdapter(private val context: Context,
+// メモ一覧表示用アダプタ
+class A08BAdapter(private val context: Context,
                         // ファイルの一覧
-                       private val files: List<File>,
+                  private val files: List<File>,
                        // タップ時のコールバック
-                       private val onFileClicked: (File) -> Unit
-                       ) : RecyclerView.Adapter<MemoFilesAdapter.FileViewHolder>() {
+                  private val onFileClicked: (File) -> Unit
+                       ) : RecyclerView.Adapter<A08BAdapter.FileViewHolder>() {
     private val inflater = LayoutInflater.from(context)
 
     class FileViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        val title = view.findViewById<TextView>(R.id.title)
-        val updatedTime = view.findViewById<TextView>(R.id.lastModified)
+        // メモのファイル名
+        val title = view.findViewById<TextView>(R.id.tvA08B)
+        // メモの最終更新時刻
+        val updatedTime = view.findViewById<TextView>(R.id.tvA08C)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FileViewHolder {
-        val view = inflater.inflate(R.layout.list_memo_row, parent, false )
+        val view = inflater.inflate(R.layout.adapter_a08b, parent, false )
         val viewHolder = FileViewHolder(view)
 
+        // 一覧に表示されたメモをクリックすると、ファイルを読み込む
         view.setOnClickListener {
             //　タップされた位置に対応したメモを得る
             val file = files[viewHolder.adapterPosition]
@@ -41,10 +44,10 @@ class MemoFilesAdapter(private val context: Context,
 
     override fun onBindViewHolder(holder: FileViewHolder, position: Int) {
         val file = files[position]
-        // ファイル名の表示
+        // ファイル名
         holder.title.text = file.name
-        // 最終更新日時の表示
-        holder.updatedTime.text = context.getString(R.string.last_modified,file.lastModified())
+        // ファイルの最終更新日時
+        holder.updatedTime.text = context.getString(R.string.FMT_A08,file.lastModified())
     }
 
 }

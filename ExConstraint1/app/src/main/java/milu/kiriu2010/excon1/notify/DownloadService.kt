@@ -10,8 +10,8 @@ import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import android.util.Log
 import milu.kiriu2010.excon1.R
-import milu.kiriu2010.id.NotificationChannelID
-import milu.kiriu2010.id.NotificationID
+import milu.kiriu2010.excon1.id.NotificationChannelID
+import milu.kiriu2010.excon1.id.NotificationID
 import java.io.File
 import com.github.kittinunf.fuel.httpDownload
 

@@ -15,9 +15,9 @@ import androidx.core.app.NotificationCompat
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_notify.*
 import milu.kiriu2010.excon1.R
-import milu.kiriu2010.id.NotificationChannelID
-import milu.kiriu2010.id.NotificationRequestCode
-import milu.kiriu2010.id.NotificationID
+import milu.kiriu2010.excon1.id.NotificationChannelID
+import milu.kiriu2010.excon1.id.NotificationRequestCode
+import milu.kiriu2010.excon1.id.NotificationID
 
 class NotifyActivity : AppCompatActivity() {
     private lateinit var notificationManager: NotificationManager

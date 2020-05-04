@@ -1,4 +1,4 @@
-package milu.kiriu2010.id
+package milu.kiriu2010.excon1.id
 
 enum class NotificationChannelID(val id: String) {
     // NotifyActitivityで作成している通知チャネル

@@ -31,6 +31,11 @@
     <string name="BTN_A07">時計</string>
     <string name="BTN_A07A">追加</string>
 
+    <string name="BTN_A08">メモ</string>
+    <string name="BTN_A08A">保存</string>
+    <string name="TV_A08A">メモ</string>
+    <string name="FMT_A08">%1$tY年%1$tm月%1$td日 %1$tH時%1$tM分</string>
+
     <string name="BTN_BACK">戻る</string>
     <string name="LABEL_NAME">名前</string>
     <string name="BTN_SAX">SAX</string>

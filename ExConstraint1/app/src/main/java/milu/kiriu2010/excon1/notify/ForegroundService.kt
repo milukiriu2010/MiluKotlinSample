@@ -10,8 +10,8 @@ import android.os.IBinder
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import milu.kiriu2010.excon1.R
-import milu.kiriu2010.id.NotificationChannelID
-import milu.kiriu2010.id.NotificationID
+import milu.kiriu2010.excon1.id.NotificationChannelID
+import milu.kiriu2010.excon1.id.NotificationID
 
 // https://qiita.com/naoi/items/03e76d10948fe0d45597
 class ForegroundService : Service() {

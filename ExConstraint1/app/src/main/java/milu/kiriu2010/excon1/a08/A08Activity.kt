@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1.memo
+package milu.kiriu2010.excon1.a08
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -14,9 +14,10 @@ import android.view.MenuItem
 import milu.kiriu2010.excon1.R
 import java.io.File
 
-class MemoActivity : AppCompatActivity(),
-        MemoFilesListFragment.OnFileSelectListener,
-        InputFragment.OnFileOutputListener {
+// メモ
+class A08Activity : AppCompatActivity(),
+        A08BFragment.OnFileSelectListener,
+        A08AFragment.OnFileOutputListener {
     // ナビゲーションドロワーの状態操作用オブジェクト
     private var drawerToggle: ActionBarDrawerToggle? = null
 
@@ -59,7 +60,7 @@ class MemoActivity : AppCompatActivity(),
     }
 
     // オプションメニューがタップされたときに呼ばれる
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // ドロワーに伝える
         if ( drawerToggle?.onOptionsItemSelected(item) == true ) {
             return true
@@ -71,10 +72,10 @@ class MemoActivity : AppCompatActivity(),
 
     // レイアウトを行うためのメソッド
     private fun setViews() {
-        setContentView(R.layout.activity_memo)
+        setContentView(R.layout.activity_a08)
 
         // レイアウトからドロワーを探す
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+        val drawerLayout = findViewById<DrawerLayout>(R.id.dlA08)
 
         // レイアウト中にドロワーがある場合にだけ行う処理
         if ( drawerLayout != null ) {
@@ -105,14 +106,18 @@ class MemoActivity : AppCompatActivity(),
         }
     }
 
+    // メモ入力用フラグメントに保存されたメモを開く
+    // ただし、ドロワーは自分で閉じないといけない
     override fun onFileSelected(file: File) {
-        Log.d(javaClass.toString(), "=== MemoActivity onFileSelected ===")
-        val fragment = supportFragmentManager.findFragmentById(R.id.input) as InputFragment
+        Log.d(javaClass.simpleName, "=== onFileSelected ===")
+        val fragment = supportFragmentManager.findFragmentById(R.id.frgA08A) as A08AFragment
         fragment.show(file)
     }
 
+    // メモ入力用フラグメントにて"保存"を押下すると、ファイルを保存する
     override fun onFileOutput() {
-        val fragment = supportFragmentManager.findFragmentById(R.id.list) as MemoFilesListFragment
+        Log.d(javaClass.simpleName, "=== onFileOutput ===")
+        val fragment = supportFragmentManager.findFragmentById(R.id.frgA08B) as A08BFragment
         fragment.show()
     }
 }

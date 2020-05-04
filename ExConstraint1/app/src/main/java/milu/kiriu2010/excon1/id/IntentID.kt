@@ -1,4 +1,4 @@
-package milu.kiriu2010.id
+package milu.kiriu2010.excon1.id
 
 enum class IntentID( val value: Int ) {
     ID_A00(0),
@@ -9,16 +9,16 @@ enum class IntentID( val value: Int ) {
     ID_A06(6),
     ID_A07(9),
     ID_A07A(10),
+    ID_A08(11),
 
 
     ID_TEAM(200),
     ID_IMAGE(300),
     ID_TEAM_LIST(400),
     ID_XML(500),
-    ID_TIMEZONE_RV(11),
+    ID_TIMEZONE_RV(110),
     ID_FILE_RV(12),
     ID_COUNTER(13),
-    ID_MEMO(14),
     ID_ACC_BALL(15),
     ID_SLIDE(16),
     ID_SAINT_TROPEZ(18),

@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import milu.kiriu2010.id.IntentID
+import milu.kiriu2010.excon1.id.IntentID
 import milu.kiriu2010.excon1.R
 import kotlinx.android.synthetic.main.activity_a07.*
 import java.util.*

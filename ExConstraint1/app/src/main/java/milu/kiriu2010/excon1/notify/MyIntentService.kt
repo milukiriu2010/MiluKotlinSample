@@ -11,8 +11,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import android.util.Log
 import milu.kiriu2010.excon1.R
-import milu.kiriu2010.id.NotificationChannelID
-import milu.kiriu2010.id.NotificationID
+import milu.kiriu2010.excon1.id.NotificationChannelID
+import milu.kiriu2010.excon1.id.NotificationID
 
 // TODO: Rename actions, choose action names that describe tasks that this
 // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS

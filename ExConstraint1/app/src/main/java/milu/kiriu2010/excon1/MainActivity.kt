@@ -23,7 +23,7 @@ import milu.kiriu2010.excon1.glabyrinth.GlabyrinthActivity
 import milu.kiriu2010.excon1.gshooting.GshootingActivity
 import milu.kiriu2010.excon1.a02.A02Activity
 import milu.kiriu2010.excon1.image.ImageActivity
-import milu.kiriu2010.excon1.memo.MemoActivity
+import milu.kiriu2010.excon1.a08.A08Activity
 import milu.kiriu2010.excon1.notify.NotifyActivity
 import milu.kiriu2010.excon1.saintropez.SaintTropezActivity
 import milu.kiriu2010.excon1.slide.SlideShowActivity
@@ -31,7 +31,7 @@ import milu.kiriu2010.excon1.a00.TeamListActivity
 import milu.kiriu2010.excon1.a00.A00Activity
 import milu.kiriu2010.excon1.a03.A03Activity
 import milu.kiriu2010.excon1.a03.RecycleTimeZoneActivity
-import milu.kiriu2010.id.IntentID
+import milu.kiriu2010.excon1.id.IntentID
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,6 +113,12 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult( intent, IntentID.ID_A07.value )
         }
 
+        // メモ
+        btnA08.setOnClickListener {
+            val intent = Intent( this, A08Activity::class.java )
+            startActivityForResult( intent, IntentID.ID_A08.value )
+        }
+
         btnImage.setOnClickListener{
             val intent = Intent( this, ImageActivity::class.java )
             startActivityForResult( intent, IntentID.ID_IMAGE.value )
@@ -142,12 +148,6 @@ class MainActivity : AppCompatActivity() {
         btnCounter.setOnClickListener {
             val intent = Intent( this, CounterActivity::class.java )
             startActivityForResult( intent, IntentID.ID_COUNTER.value )
-        }
-
-        btnMemo.transformationMethod = null
-        btnMemo.setOnClickListener {
-            val intent = Intent( this, MemoActivity::class.java )
-            startActivityForResult( intent, IntentID.ID_MEMO.value )
         }
 
         btnAccBall.transformationMethod = null
