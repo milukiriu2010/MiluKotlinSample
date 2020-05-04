@@ -91,11 +91,11 @@ class Canvas03BmpShaderFragment : Fragment()
         holder.addCallback(this)
 
         val imageButtonR = view.findViewById<ImageButton>(R.id.imageButtonR)
-        imageButtonR.setOnClickListener { changeDrawPaint( R.drawable.android1_red ) }
+        imageButtonR.setOnClickListener { changeDrawPaint( R.drawable.ic_a11e_red ) }
         val imageButtonG = view.findViewById<ImageButton>(R.id.imageButtonG)
-        imageButtonG.setOnClickListener { changeDrawPaint( R.drawable.android1_green ) }
+        imageButtonG.setOnClickListener { changeDrawPaint( R.drawable.ic_a11e_green ) }
         val imageButtonB = view.findViewById<ImageButton>(R.id.imageButtonB)
-        imageButtonB.setOnClickListener { changeDrawPaint( R.drawable.android1_blue ) }
+        imageButtonB.setOnClickListener { changeDrawPaint( R.drawable.ic_a11e_blue ) }
         val imageButtonC = view.findViewById<ImageButton>(R.id.imageButtonC)
         imageButtonC.setOnClickListener {
             drawPaint.apply {

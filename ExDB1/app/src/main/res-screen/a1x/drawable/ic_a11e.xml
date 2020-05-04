@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <bitmap android:src="@drawable/android1_red"
+        <bitmap android:src="@drawable/ic_a11e_red"
             android:gravity="center" />
     </item>
     <item android:top="50dp" android:left="50dp">
-        <bitmap android:src="@drawable/android1_green"
+        <bitmap android:src="@drawable/ic_a11e_green"
             android:gravity="center" />
     </item>
     <item android:top="100dp" android:left="100dp">
-        <bitmap android:src="@drawable/android1_blue"
+        <bitmap android:src="@drawable/ic_a11e_blue"
             android:gravity="center" />
     </item>
 </layer-list>

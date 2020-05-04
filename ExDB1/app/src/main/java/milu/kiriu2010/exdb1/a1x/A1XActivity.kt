@@ -15,11 +15,7 @@ class A1XActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA1X, DrawHomeFragment.newInstance(), "Home")
-                            .commit()
-                }
+                changeFragment("Home")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
@@ -50,11 +46,7 @@ class A1XActivity : AppCompatActivity() {
         nvA1X.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         // 初期表示のフラグメントを設定
-        if (supportFragmentManager.findFragmentByTag("Home") == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.flA1X, A11Fragment.newInstance(), "Home")
-                    .commit()
-        }
+        changeFragment("Home")
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -161,14 +153,32 @@ class A1XActivity : AppCompatActivity() {
                 true
             }
             // 影付きボタン
-            R.id.draw_01 -> {
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.flA1X, A11Fragment.newInstance())
-                        .commit()
+            R.id.item_a11 -> {
+                changeFragment("a11")
                 true
             }
             else -> return super.onOptionsItemSelected(item)
         }
     }
 
+    // 表示するフラグメントを切り替える
+    private fun changeFragment(tag: String) {
+        val fragment = when (tag) {
+            // 影付きボタン
+            "a11" -> A11Fragment.newInstance()
+            // 影付きボタン
+            "Home" -> A11Fragment.newInstance()
+            // 影付きボタン
+            else -> A11Fragment.newInstance()
+        }
+
+        // 現在表示しているフラグメントをスタックから外す
+        supportFragmentManager.popBackStack()
+        // 選択したフラグメントを表示する
+        if ( supportFragmentManager.findFragmentByTag(tag) == null ) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.flA1X, fragment, tag)
+                    .commit()
+        }
+    }
 }

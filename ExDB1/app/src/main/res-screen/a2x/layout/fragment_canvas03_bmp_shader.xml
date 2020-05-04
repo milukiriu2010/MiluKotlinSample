@@ -25,7 +25,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/android1_red" />
+        app:srcCompat="@drawable/ic_a11e_red" />
 
     <ImageButton
         android:id="@+id/imageButtonG"
@@ -36,7 +36,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageButtonR"
-        app:srcCompat="@drawable/android1_green" />
+        app:srcCompat="@drawable/ic_a11e_green" />
 
     <ImageButton
         android:id="@+id/imageButtonB"
@@ -47,7 +47,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageButtonG"
-        app:srcCompat="@drawable/android1_blue" />
+        app:srcCompat="@drawable/ic_a11e_blue" />
 
     <ImageButton
         android:id="@+id/imageButtonC"

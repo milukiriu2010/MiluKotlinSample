@@ -14,11 +14,7 @@ class A0XActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                if ( supportFragmentManager.findFragmentByTag("Home") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA0X, HomeFragment.newInstance(), "Home")
-                            .commit()
-                }
+                changeFragment("Home")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
@@ -49,11 +45,7 @@ class A0XActivity : AppCompatActivity() {
         nvA0X.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         // 初期表示のフラグメントを設定
-        if ( supportFragmentManager.findFragmentByTag("Home") == null ) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.flA0X, A01Fragment.newInstance(), "Home")
-                    .commit()
-        }
+        changeFragment("Home")
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -176,14 +168,29 @@ class A0XActivity : AppCompatActivity() {
             }
             // 左⇒右へアニメーション
             R.id.item_a01 -> {
-                if ( supportFragmentManager.findFragmentByTag("Anime1LR") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA0X, A01Fragment.newInstance(), "Anime1LR")
-                            .commit()
-                }
+                changeFragment("a01")
                 true
             }
             else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun changeFragment(tag: String) {
+        val fragment = when (tag) {
+            // 左⇒右へアニメーション
+            "a01" -> A01Fragment.newInstance()
+            // 左⇒右へアニメーション
+            "Home" -> A01Fragment.newInstance()
+            // 左⇒右へアニメーション
+            else -> A01Fragment.newInstance()
+        }
+        // 現在表示しているフラグメントをスタックから外す
+        supportFragmentManager.popBackStack()
+        // 選択したフラグメントを表示する
+        if ( supportFragmentManager.findFragmentByTag(tag) == null ) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.flA0X, fragment, tag)
+                    .commit()
         }
     }
 }

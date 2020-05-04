@@ -29,7 +29,7 @@
         android:id="@+id/tvA11B"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/abc2"
+        android:background="@drawable/ic_a11b"
         android:text="@string/TV_A11B"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/tvA11C"
@@ -44,7 +44,7 @@
         android:id="@+id/tvA11C"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/abc3"
+        android:background="@drawable/ic_a11c"
         android:text="@string/TV_A11C"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/tvA11D"
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/abc4"
+        android:background="@drawable/ic_a11d"
         android:text="@string/TV_A11D"
         android:textColor="@android:color/white"
         android:textSize="24sp"
@@ -82,7 +82,7 @@
         android:contentDescription="@string/IV_A11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/android1" />
+        app:srcCompat="@drawable/ic_a11e" />
 
     <Button
         android:id="@+id/btnA11"
@@ -90,9 +90,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:drawableLeft="@drawable/button_image"
+        android:drawableStart="@drawable/ic_a11f_android"
         android:text="@string/BTN_A11"
-        android:textColor="@drawable/button_text"
+        android:textColor="@drawable/ic_a11f_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
