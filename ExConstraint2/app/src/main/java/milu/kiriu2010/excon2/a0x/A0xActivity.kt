@@ -2,6 +2,7 @@ package milu.kiriu2010.excon2.a0x
 
 import android.content.Intent
 import android.content.pm.ApplicationInfo
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,20 +11,20 @@ import android.view.MenuItem
 import android.widget.RadioButton
 import android.widget.Toast
 import milu.kiriu2010.excon2.a0x.animescale.AnimeScaleActivity
-import milu.kiriu2010.excon2.a0x.contextmenu.ContextMenuActivity
+import milu.kiriu2010.excon2.a0x.a06.A06Activity
 import milu.kiriu2010.excon2.a0x.a03.A03Activity
 import milu.kiriu2010.excon2.a0x.a04.A04Activity
-import milu.kiriu2010.excon2.a0x.fibonnaci.FibonnaciActivity
+import milu.kiriu2010.excon2.a0x.a08.A08Activity
 import milu.kiriu2010.excon2.a0x.largebmp.LargeBmpActivity
 import milu.kiriu2010.excon2.a0x.pinch.PinchActivity
 import milu.kiriu2010.excon2.a0x.rate.RateActivity
 import milu.kiriu2010.excon2.a0x.recycler.RecycleActivity
-import milu.kiriu2010.excon2.a0x.scan.ScanBarcodeActivity
+import milu.kiriu2010.excon2.a0x.a07.A07Activity
 import milu.kiriu2010.excon2.a0x.seek.SeekActivity
 import milu.kiriu2010.excon2.a0x.a02.A02Activity
 import milu.kiriu2010.excon2.a0x.temperature.TemperatureActivity
 import milu.kiriu2010.excon2.a0x.traffic.TrafficLightActivity
-import milu.kiriu2010.excon2.a0x.websearch.WebSearchActivity
+import milu.kiriu2010.excon2.a0x.a05.A05Activity
 import kotlinx.android.synthetic.main.activity_a0x.*
 import milu.kiriu2010.excon2.BuildConfig
 import milu.kiriu2010.excon2.R
@@ -62,12 +63,16 @@ class A0xActivity : AppCompatActivity() {
 
         // debugモード/releaseモード　どちらでコンパイルしているか表示
         // コンパイル時に自動的に生成されるBuildConfigクラスをもとに判断
+        // "Build Clean"すると認識されず赤になるので、おすすめしない
         if (BuildConfig.DEBUG) {
             tvA0XB.setText("DEBUG")
         }
         else {
             tvA0XB.setText("RELEASE")
         }
+
+        // 動作しているOSのバージョン
+        tvA0XC.text = Build.VERSION.SDK_INT.toString()
 
         // 女or男のラジオボタンをクリックするとツールチップ表示する
         rgA0X.setOnCheckedChangeListener { _, checkedId ->
@@ -97,6 +102,30 @@ class A0xActivity : AppCompatActivity() {
         btnA04.setOnClickListener {
             val intent = Intent(this, A04Activity::class.java )
             this.startActivityForResult( intent, IntentID.ID_A04.value )
+        }
+
+        // Web検索
+        btnA05.setOnClickListener {
+            val intent = Intent(this, A05Activity::class.java )
+            this.startActivityForResult( intent, IntentID.ID_A05.value )
+        }
+
+        // コンテキストメニュー
+        btnA06.setOnClickListener {
+            val intent = Intent(this, A06Activity::class.java )
+            this.startActivityForResult( intent, IntentID.ID_A06.value )
+        }
+
+        // QRコード/バーコードスキャン
+        btnA07.setOnClickListener {
+            val intent = Intent(this, A07Activity::class.java )
+            this.startActivityForResult( intent, IntentID.ID_A07.value )
+        }
+
+        // フィボナッチ数列
+        btnA08.setOnClickListener {
+            val intent = Intent(this, A08Activity::class.java )
+            this.startActivityForResult( intent, IntentID.ID_A08.value )
         }
 
         btnRATE.transformationMethod = null
@@ -134,13 +163,6 @@ class A0xActivity : AppCompatActivity() {
             this.startActivity( intent )
         }
 
-        // コンテキストメニュー
-        btnCM.transformationMethod = null
-        btnCM.setOnClickListener {
-            val intent = Intent(this, ContextMenuActivity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_CONTEXT_MENU.value )
-        }
-
         btnLargeBmp.transformationMethod = null
         btnLargeBmp.setOnClickListener {
             val intent = Intent(this, LargeBmpActivity::class.java )
@@ -160,23 +182,6 @@ class A0xActivity : AppCompatActivity() {
             this.startActivity(intent)
         }
 
-        btnFibonnaci.transformationMethod = null
-        btnFibonnaci.setOnClickListener {
-            val intent = Intent(this, FibonnaciActivity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_FIBONNACI.value )
-        }
-
-        btnScanBarcode.transformationMethod = null
-        btnScanBarcode.setOnClickListener {
-            val intent = Intent(this, ScanBarcodeActivity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_SCAN_BARCODE.value )
-        }
-
-        btnWebSearch.transformationMethod = null
-        btnWebSearch.setOnClickListener {
-            val intent = Intent(this, WebSearchActivity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_WEB_SEARCH.value )
-        }
 
         // ピンチ　イン・アウト
         btnPinch.transformationMethod = null

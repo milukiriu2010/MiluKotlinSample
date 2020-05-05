@@ -9,10 +9,12 @@
         android:id="@+id/tvA0XA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/layer_frame1"
         android:textColor="@android:color/white"
+        app:layout_constraintEnd_toStartOf="@+id/tvA0XB"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="TRUE" />
@@ -25,10 +27,23 @@
         android:background="@drawable/layer_frame2"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/tvA0XA"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvA0XC"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tvA0XA"
         app:layout_constraintTop_toTopOf="@+id/tvA0XA"
         tools:text="TRUE" />
+
+    <TextView
+        android:id="@+id/tvA0XC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvA0XB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvA0XB"
+        app:layout_constraintTop_toTopOf="@+id/tvA0XB"
+        tools:text="20" />
 
     <RadioGroup
         android:id="@+id/rgA0X"
@@ -89,7 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/BTN_A03"
-        app:layout_constraintBottom_toTopOf="@+id/btnWebSearch"
+        app:layout_constraintBottom_toTopOf="@+id/btnA05"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -107,6 +122,37 @@
         app:layout_constraintTop_toBottomOf="@+id/btnA01" />
 
     <Button
+        android:id="@+id/btnA05"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/BTN_A05"
+        app:layout_constraintBottom_toTopOf="@+id/btnA07"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnA02"
+        app:layout_constraintTop_toTopOf="@+id/btnA04"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnA06"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:text="@string/BTN_A06"
+        app:layout_constraintEnd_toEndOf="@+id/btnA03"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/btnA03"
+        app:layout_constraintTop_toBottomOf="@+id/btnA03" />
+
+    <Button
+        android:id="@+id/btnA07"
+        android:layout_width="86dp"
+        android:layout_height="wrap_content"
+        android:text="@string/BTN_A07"
+        app:layout_constraintEnd_toEndOf="@+id/btnA04"
+        app:layout_constraintStart_toStartOf="@+id/btnA04"
+        app:layout_constraintTop_toBottomOf="@+id/btnA04" />
+
+    <Button
         android:id="@+id/btnRATE"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -121,10 +167,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/BTN_RECYCLE"
-        app:layout_constraintEnd_toEndOf="@+id/btnCM"
+        app:layout_constraintEnd_toEndOf="@+id/btnA06"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btnCM"
-        app:layout_constraintTop_toBottomOf="@+id/btnCM" />
+        app:layout_constraintStart_toStartOf="@+id/btnA06"
+        app:layout_constraintTop_toBottomOf="@+id/btnA06" />
 
     <Button
         android:id="@+id/btnANIME"
@@ -144,24 +190,14 @@
         app:layout_constraintTop_toBottomOf="@+id/btnVoiceInput" />
 
     <Button
-        android:id="@+id/btnCM"
-        android:layout_width="0dp"
-        android:layout_height="49dp"
-        android:text="@string/BTN_CM"
-        app:layout_constraintEnd_toEndOf="@+id/btnA03"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/btnA03"
-        app:layout_constraintTop_toBottomOf="@+id/btnA03" />
-
-    <Button
         android:id="@+id/btnLargeBmp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/BTN_LARGE_BMP"
         app:layout_constraintBottom_toBottomOf="@+id/btnVoiceInput"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/btnFibonnaci"
-        app:layout_constraintTop_toBottomOf="@+id/btnScanBarcode"
+        app:layout_constraintStart_toStartOf="@+id/btnA08"
+        app:layout_constraintTop_toBottomOf="@+id/btnA07"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
@@ -179,41 +215,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="音声入力"
-        app:layout_constraintEnd_toEndOf="@+id/btnScanBarcode"
-        app:layout_constraintStart_toStartOf="@+id/btnScanBarcode"
-        app:layout_constraintTop_toBottomOf="@+id/btnScanBarcode" />
+        app:layout_constraintEnd_toEndOf="@+id/btnA07"
+        app:layout_constraintStart_toStartOf="@+id/btnA07"
+        app:layout_constraintTop_toBottomOf="@+id/btnA07" />
 
     <Button
-        android:id="@+id/btnFibonnaci"
+        android:id="@+id/btnA08"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Fibonnaci"
-        app:layout_constraintBottom_toBottomOf="@+id/btnScanBarcode"
+        android:text="@string/BTN_A08"
+        app:layout_constraintBottom_toBottomOf="@+id/btnA07"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/btnWebSearch"
-        app:layout_constraintTop_toTopOf="@+id/btnScanBarcode"
+        app:layout_constraintStart_toStartOf="@+id/btnA05"
+        app:layout_constraintTop_toTopOf="@+id/btnA07"
         app:layout_constraintVertical_bias="0.727" />
-
-    <Button
-        android:id="@+id/btnScanBarcode"
-        android:layout_width="86dp"
-        android:layout_height="wrap_content"
-        android:text="Scan"
-        app:layout_constraintEnd_toEndOf="@+id/btnA04"
-        app:layout_constraintStart_toStartOf="@+id/btnA04"
-        app:layout_constraintTop_toBottomOf="@+id/btnA04" />
-
-    <Button
-        android:id="@+id/btnWebSearch"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:text="WebSearch"
-        app:layout_constraintBottom_toTopOf="@+id/btnScanBarcode"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btnA02"
-        app:layout_constraintTop_toTopOf="@+id/btnA04"
-        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btnPinch"

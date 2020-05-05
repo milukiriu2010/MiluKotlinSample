@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="milu.kiriu2010.excon2.a0x.a05.A05Activity">
+
+    <TextView
+        android:id="@+id/tvA05A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/TV_A05A"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/tvA05B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/TV_A05A"
+        android:inputType="textPersonName"
+        android:labelFor="@id/tvA05A"
+        android:text="@string/TV_A05B"
+        app:layout_constraintStart_toStartOf="@+id/tvA05A"
+        app:layout_constraintTop_toBottomOf="@+id/tvA05A" />
+
+    <ImageView
+        android:id="@+id/ivA05"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/ic_a05b"
+        android:contentDescription="@string/IV_A05"
+        app:layout_constraintStart_toStartOf="@+id/tvA05B"
+        app:layout_constraintTop_toBottomOf="@+id/tvA05B"
+        app:srcCompat="@drawable/ic_a05a" />
+</androidx.constraintlayout.widget.ConstraintLayout>

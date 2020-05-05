@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_boss.*
 import milu.kiriu2010.excon2.a0x.A0xActivity
-import milu.kiriu2010.excon2.a1x.A1XActivity
+import milu.kiriu2010.excon2.b0x.B0XActivity
 
 class BossActivity : AppCompatActivity() {
 
@@ -20,8 +20,8 @@ class BossActivity : AppCompatActivity() {
         }
 
         // A1X画面を表示
-        btnA1X.setOnClickListener {
-            val intent = Intent(this, A1XActivity::class.java)
+        btnB0X.setOnClickListener {
+            val intent = Intent(this, B0XActivity::class.java)
             startActivity(intent)
         }
     }

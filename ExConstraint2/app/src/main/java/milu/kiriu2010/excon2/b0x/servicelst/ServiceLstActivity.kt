@@ -1,0 +1,34 @@
+package milu.kiriu2010.excon2.b0x.servicelst
+
+import android.app.ActivityManager
+import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_service_lst.*
+import milu.kiriu2010.excon2.R
+
+class ServiceLstActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_service_lst)
+
+        val activityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        // 起動中のアプリプロセスを取得
+        val appProcesses = activityManager.runningAppProcesses
+
+        // リサイクラービューのレイアウト
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recyclerViewService.layoutManager = layoutManager
+
+        // リサイクラービューのアダプタ
+        val adapter = ServiceRecyclerViewAdapter(this, appProcesses)
+        recyclerViewService.adapter = adapter
+
+        // 枠線
+        val itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        recyclerViewService.addItemDecoration(itemDecoration)
+    }
+}

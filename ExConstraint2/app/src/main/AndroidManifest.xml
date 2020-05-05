@@ -34,7 +34,7 @@
             android:theme="@style/CustomTheme" />
         <activity android:name=".a0x.animescale.AnimeScaleActivity" />
         <activity android:name=".a0x.seek.SeekActivity" />
-        <activity android:name=".a0x.contextmenu.ContextMenuActivity" />
+        <activity android:name=".a0x.a06.A06Activity" />
         <activity android:name=".a0x.temperature.TemperatureActivity" />
         <activity android:name=".a0x.a02.A02Activity" />
         <activity
@@ -43,9 +43,9 @@
         <activity android:name=".a0x.a04.A04Activity" />
         <activity android:name=".a0x.largebmp.LargeBmpActivity" />
         <activity android:name=".a0x.traffic.TrafficLightActivity" />
-        <activity android:name=".a0x.fibonnaci.FibonnaciActivity" />
-        <activity android:name=".a0x.scan.ScanBarcodeActivity" />
-        <activity android:name=".a0x.websearch.WebSearchActivity" />
+        <activity android:name=".a0x.a08.A08Activity" />
+        <activity android:name=".a0x.a07.A07Activity" />
+        <activity android:name=".a0x.a05.A05Activity" />
         <activity android:name=".a0x.pinch.PinchActivity" />
         <activity android:name=".a0x.sensortemp.SensorTemperatureActivity" />
         <activity android:name=".a0x.sensorlight.SensorLightActivity" />
@@ -69,16 +69,16 @@
         <activity android:name=".a0x.a01.A01Activity" />
         <activity android:name=".a0x.voiceinput.VoiceInputActivity" />
         <activity android:name=".a0x.excel.ExcelActivity" />
-        <activity android:name=".a1x.conf.ConfActivity" />
-        <activity android:name=".a1x.A1XActivity" />
-        <activity android:name=".a1x.gallery2.Gallery2Activity" />
-        <activity android:name=".a1x.camera.CameraActivity" />
-        <activity android:name=".a1x.cameraparam.CameraParamActivity" />
-        <activity android:name=".a1x.dragdrop.DragDropActivity" />
-        <activity android:name=".a1x.bearing.BearingActivity" />
-        <activity android:name=".a1x.compass.CompassActivity" />
-        <activity android:name=".a1x.servicelst.ServiceLstActivity" />
-        <activity android:name=".a1x.ringtone.RingtoneActivity"></activity>
+        <activity android:name=".b0x.conf.ConfActivity" />
+        <activity android:name=".b0x.B0XActivity" />
+        <activity android:name=".b0x.gallery2.Gallery2Activity" />
+        <activity android:name=".b0x.camera.CameraActivity" />
+        <activity android:name=".b0x.cameraparam.CameraParamActivity" />
+        <activity android:name=".b0x.dragdrop.DragDropActivity" />
+        <activity android:name=".b0x.bearing.BearingActivity" />
+        <activity android:name=".b0x.compass.CompassActivity" />
+        <activity android:name=".b0x.servicelst.ServiceLstActivity" />
+        <activity android:name=".b0x.ringtone.RingtoneActivity"></activity>
     </application>
 
 </manifest>

@@ -26,7 +26,7 @@ android {
             file('src/main/res-a0x')
                     .listFiles()
                     .each { res.srcDirs += it.path }
-            file('src/main/res-a1x')
+            file('src/main/res-b0x')
                     .listFiles()
                     .each { res.srcDirs += it.path }
         }
