@@ -14,18 +14,16 @@ import milu.kiriu2010.exdb1.opengl08.w087v.WV087Fragment
 import milu.kiriu2010.exdb1.opengl08.w089.W089Fragment
 import milu.kiriu2010.exdb1.opengl08.w089v.WV089Fragment
 
+// https://wgld.org/sitemap.html
+// w80以降
 class OpenGL08Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_open_gl08)
 
-        supportFragmentManager.popBackStack()
-        if (supportFragmentManager.findFragmentByTag("xyz") == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.flGL08, WV089Fragment.newInstance(), "xyz")
-                    .commit()
-        }
+        // 初期表示のフラグメントを設定
+        changeFragment("wv81")
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -48,87 +46,80 @@ class OpenGL08Activity : AppCompatActivity() {
                 finish()
                 true
             }
-            // スフィア環境マッピング
+            // スフィア環境マッピング:VBO未使用
             R.id.opengl_wv89 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv89") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL08, WV089Fragment.newInstance(), "wv89")
-                            .commit()
-                }
+                changeFragment("wv89")
                 true
             }
-            // スフィア環境マッピング
+            // スフィア環境マッピング:VBO未使用
             R.id.opengl_w089 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w089") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL08, W089Fragment.newInstance(), "w089")
-                            .commit()
-                }
+                changeFragment("w089")
                 true
             }
-            // フラットシェーディング
+            // フラットシェーディング:VBO使用
             R.id.opengl_wv87 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv87") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL08, WV087Fragment.newInstance(), "wv87")
-                            .commit()
-                }
+                changeFragment("wv87")
                 true
             }
-            // フラットシェーディング
+            // フラットシェーディング:VBO未使用
             R.id.opengl_w087 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w087") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL08, W087Fragment.newInstance(), "w087")
-                            .commit()
-                }
+                changeFragment("w087")
                 true
             }
-            // 描画結果から色を取得
+            // 描画結果から色を取得:VBO使用
             R.id.opengl_wv86 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv86") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL08, WV086Fragment.newInstance(), "wv86")
-                            .commit()
-                }
+                changeFragment("wv86")
                 true
             }
-            // 描画結果から色を取得
+            // 描画結果から色を取得:VBO未使用
             R.id.opengl_w086 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w086") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL08, W086Fragment.newInstance(), "w086")
-                            .commit()
-                }
+                changeFragment("w086")
                 true
             }
-            // VBOを逐次更新
+            // VBOを逐次更新:VBO使用
             R.id.opengl_wv81 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv81") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL08, WV081Fragment.newInstance(), "wv81")
-                            .commit()
-                }
+                changeFragment("wv81")
                 true
             }
-            // VBOを逐次更新
+            // VBOを逐次更新:VBO未使用
             R.id.opengl_w081 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w081") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL08, W081Fragment.newInstance(), "w081")
-                            .commit()
-                }
+                changeFragment("w081")
                 true
             }
             else -> return super.onOptionsItemSelected(item!!)
+        }
+    }
+
+    // 表示するフラグメントを切り替える
+    private fun changeFragment(tag: String) {
+        val fragment = when (tag) {
+            // VBOを逐次更新:VBO未使用
+            "w081" -> W081Fragment.newInstance()
+            // VBOを逐次更新:VBO使用
+            "wv81" -> WV081Fragment.newInstance()
+            // 描画結果から色を取得:VBO未使用
+            "w086" -> W086Fragment.newInstance()
+            // 描画結果から色を取得:VBO使用
+            "wv86" -> WV086Fragment.newInstance()
+            // フラットシェーディング:VBO未使用
+            "w087" -> W087Fragment.newInstance()
+            // フラットシェーディング:VBO使用
+            "wv87" -> WV087Fragment.newInstance()
+            // スフィア環境マッピング:VBO未使用
+            "w089" -> W089Fragment.newInstance()
+            // スフィア環境マッピング:VBO使用
+            "wv89" -> WV089Fragment.newInstance()
+            // VBOを逐次更新:VBO使用
+            else -> WV081Fragment.newInstance()
+        }
+
+        // 現在表示しているフラグメントをスタックから外す
+        supportFragmentManager.popBackStack()
+        // 選択したフラグメントを表示する
+        if ( supportFragmentManager.findFragmentByTag(tag) == null ) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.flGL08, fragment, tag)
+                    .commit()
         }
     }
 }

@@ -9,7 +9,8 @@ import android.view.*
 
 import milu.kiriu2010.exdb1.R
 
-class BasicHomeFragment : Fragment()
+// SurfaceView上にパスエフェクトを描画
+class D01Fragment : Fragment()
         , SurfaceHolder.Callback {
 
     // 描画に使うサーフェースビュー
@@ -43,10 +44,10 @@ class BasicHomeFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_basic_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_d01, container, false)
 
         // サーフェースビューを取得
-        surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
+        surfaceViewCanvas = view.findViewById(R.id.svD01)
 
         val holder = surfaceViewCanvas.holder
         holder.addCallback(this)
@@ -75,7 +76,7 @@ class BasicHomeFragment : Fragment()
         // パス円
         val pathCircle = Path()
         // CCW => 反時計回り
-        pathCircle.addCircle(10f,10f,10f,Path.Direction.CCW)
+        pathCircle.addCircle(10f,10f,10f, Path.Direction.CCW)
 
         // 円弧
         val pathArc = Path()
@@ -83,7 +84,7 @@ class BasicHomeFragment : Fragment()
 
         // 四角
         val pathRect = Path()
-        pathRect.addRect(RectF(0f,0f,20f,20f),Path.Direction.CCW)
+        pathRect.addRect(RectF(0f,0f,20f,20f), Path.Direction.CCW)
 
         // --------------------------------------------------------------------
         // 通常の実線
@@ -124,31 +125,31 @@ class BasicHomeFragment : Fragment()
         // --------------------------------------------------------------------
 
         // 50ごと,位相0 円線
-        val pathDashPathEffect1 = PathDashPathEffect(pathCircle,50f,0f,PathDashPathEffect.Style.ROTATE)
+        val pathDashPathEffect1 = PathDashPathEffect(pathCircle,50f,0f, PathDashPathEffect.Style.ROTATE)
         linePaint.setPathEffect(pathDashPathEffect1)
         n = 6f
         canvas.drawLine(marginW,n*marginH,sw-marginW,n*marginH,linePaint)
 
         // 100ごと,位相0 円線
-        val pathDashPathEffect2 = PathDashPathEffect(pathCircle,100f,0f,PathDashPathEffect.Style.ROTATE)
+        val pathDashPathEffect2 = PathDashPathEffect(pathCircle,100f,0f, PathDashPathEffect.Style.ROTATE)
         linePaint.setPathEffect(pathDashPathEffect2)
         n = 7f
         canvas.drawLine(marginW,n*marginH,sw-marginW,n*marginH,linePaint)
 
         // 100ごと,位相-10 円線(右に10ずれる)
-        val pathDashPathEffect3 = PathDashPathEffect(pathCircle,100f,-10f,PathDashPathEffect.Style.ROTATE)
+        val pathDashPathEffect3 = PathDashPathEffect(pathCircle,100f,-10f, PathDashPathEffect.Style.ROTATE)
         linePaint.setPathEffect(pathDashPathEffect3)
         n = 8f
         canvas.drawLine(marginW,n*marginH,sw-marginW,n*marginH,linePaint)
 
         // 100ごと,位相-10 円弧線(右に10ずれる)
-        val pathDashPathEffect4 = PathDashPathEffect(pathArc,100f,-10f,PathDashPathEffect.Style.ROTATE)
+        val pathDashPathEffect4 = PathDashPathEffect(pathArc,100f,-10f, PathDashPathEffect.Style.ROTATE)
         linePaint.setPathEffect(pathDashPathEffect4)
         n = 9f
         canvas.drawLine(marginW,n*marginH,sw-marginW,n*marginH,linePaint)
 
         // 100ごと,位相-10 四角線(右に10ずれる)
-        val pathDashPathEffect5 = PathDashPathEffect(pathRect,100f,-10f,PathDashPathEffect.Style.ROTATE)
+        val pathDashPathEffect5 = PathDashPathEffect(pathRect,100f,-10f, PathDashPathEffect.Style.ROTATE)
         linePaint.setPathEffect(pathDashPathEffect5)
         n = 10f
         canvas.drawLine(marginW,n*marginH,sw-marginW,n*marginH,linePaint)
@@ -182,8 +183,6 @@ class BasicHomeFragment : Fragment()
         n = 15f
         canvas.drawLine(marginW,n*marginH,sw-marginW,n*marginH,linePaint)
 
-
-
         // --------------------------------------------------------------------
 
         surfaceViewCanvas.holder.unlockCanvasAndPost(canvas)
@@ -204,7 +203,7 @@ class BasicHomeFragment : Fragment()
     companion object {
         @JvmStatic
         fun newInstance() =
-                BasicHomeFragment().apply {
+                D01Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

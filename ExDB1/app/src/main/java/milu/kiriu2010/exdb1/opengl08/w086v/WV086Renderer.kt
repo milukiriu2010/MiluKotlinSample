@@ -12,7 +12,7 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // ------------------------------------
-// 描画結果から色を取得
+// 描画結果から色を取得:VBO使用
 // ------------------------------------
 // https://wgld.org/d/webgl/w086.html
 // ------------------------------------

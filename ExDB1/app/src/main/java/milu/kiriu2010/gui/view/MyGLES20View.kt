@@ -4,6 +4,7 @@ import android.content.Context
 import android.opengl.GLSurfaceView
 import android.util.AttributeSet
 
+// OpenGL 2.0用の描画ビュー
 class MyGLES20View: GLSurfaceView {
     constructor(ctx: Context): super(ctx) {
 

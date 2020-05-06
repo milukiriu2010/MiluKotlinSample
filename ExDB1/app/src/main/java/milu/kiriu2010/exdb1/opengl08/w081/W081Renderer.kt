@@ -10,7 +10,7 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // ------------------------------------
-// VBOを逐次更新
+// VBOを逐次更新:VBO未使用
 // ------------------------------------
 // https://wgld.org/d/webgl/w081.html
 // ------------------------------------
@@ -58,7 +58,6 @@ class W081Renderer(ctx: Context): MgRenderer(ctx) {
         Matrix.multiplyMM(matV,0,matV,0,matQ,0)
         Matrix.perspectiveM(matP,0,90f,ratio,0.1f,15f)
         Matrix.multiplyMM(matVP,0,matP,0,matV,0)
-
 
         // -------------------------------------------------------
         // モデル描画

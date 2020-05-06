@@ -11,6 +11,11 @@ import android.widget.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// --------------------------------------
+// シェーダ(フラットシェーディング):VBO使用
+// --------------------------------------
+// https://wgld.org/d/webgl/w087.html
+// --------------------------------------
 class WV087Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

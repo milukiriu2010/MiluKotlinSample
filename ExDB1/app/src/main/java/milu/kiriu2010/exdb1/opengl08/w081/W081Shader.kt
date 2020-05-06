@@ -6,7 +6,7 @@ import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
 // ------------------------------------
-// シェーダ(VBOを逐次更新)
+// シェーダ(VBOを逐次更新):VBO未使用
 // ------------------------------------
 // https://wgld.org/d/webgl/w081.html
 // ------------------------------------
@@ -46,7 +46,7 @@ class W081Shader: ES20MgShader() {
     }
 
     fun draw(model: MgModelAbs,
-             matMVP: FloatArray,
+             u_matMVP: FloatArray,
              u_pointSize: Float) {
 
         GLES20.glUseProgram(programHandle)
@@ -64,7 +64,7 @@ class W081Shader: ES20MgShader() {
 
         // uniform(モデル×ビュー×プロジェクション)
         GLES20.glGetUniformLocation(programHandle,"u_matMVP").also {
-            GLES20.glUniformMatrix4fv(it,1,false,matMVP,0)
+            GLES20.glUniformMatrix4fv(it,1,false,u_matMVP,0)
         }
         MyGLES20Func.checkGlError2("u_matMVP",this,model)
 

@@ -10,7 +10,7 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // --------------------------------------
-// シェーダ(フラットシェーディング)
+// シェーダ(フラットシェーディング):VBO未使用
 // --------------------------------------
 // https://wgld.org/d/webgl/w087.html
 // --------------------------------------

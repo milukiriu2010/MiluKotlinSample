@@ -11,6 +11,11 @@ import android.widget.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ------------------------------------
+// 描画結果から色を取得:VBO使用
+// ------------------------------------
+// https://wgld.org/d/webgl/w086.html
+// ------------------------------------
 class WV086Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

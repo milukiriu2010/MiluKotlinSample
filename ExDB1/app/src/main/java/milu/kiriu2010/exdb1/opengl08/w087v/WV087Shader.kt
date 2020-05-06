@@ -7,7 +7,7 @@ import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
 // --------------------------------------
-// シェーダ(フラットシェーダ)
+// シェーダ(フラットシェーダ):VBO使用
 // --------------------------------------
 // https://wgld.org/d/webgl/w087.html
 // --------------------------------------

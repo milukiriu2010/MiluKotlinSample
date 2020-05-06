@@ -11,6 +11,11 @@ import android.widget.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ------------------------------------
+// VBOを逐次更新:VBO使用
+// ------------------------------------
+// https://wgld.org/d/webgl/w081.html
+// ------------------------------------
 class WV081Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View
@@ -47,6 +52,7 @@ class WV081Fragment : Fragment() {
             true
         }
 
+        // 描画点のサイズを変更する
         val seekBarW81 = view.findViewById<SeekBar>(R.id.seekBarW81)
         seekBarW81.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {

@@ -5,7 +5,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_a3x.*
+import kotlinx.android.synthetic.main.activity_d0x.*
 import milu.kiriu2010.exdb1.R
 
 class D0XActivity : AppCompatActivity() {
@@ -13,27 +13,15 @@ class D0XActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA3X, BasicHomeFragment.newInstance(), "Home")
-                            .commit()
-                }
+                changeFragment("Home")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                if (supportFragmentManager.findFragmentByTag("Navi") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA3X, BasicNaviFragment.newInstance(), "Navi")
-                            .commit()
-                }
+                changeFragment("Navi")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA3X, BasicHomeFragment.newInstance(), "Home")
-                            .commit()
-                }
+                changeFragment("Notifiation")
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -42,17 +30,13 @@ class D0XActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_a3x)
+        setContentView(R.layout.activity_d0x)
 
         // ナビゲーションボタンのリスナーを設定する
-        nvA3X.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        nvD0X.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         // 初期表示のフラグメントを設定
-        if (supportFragmentManager.findFragmentByTag("Home") == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.flA3X, BasicHomeFragment.newInstance(), "Home")
-                    .commit()
-        }
+        changeFragment("d01")
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -62,7 +46,7 @@ class D0XActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_a3x,menu)
+        menuInflater.inflate(R.menu.menu_d0x,menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -74,16 +58,31 @@ class D0XActivity : AppCompatActivity() {
                 finish()
                 true
             }
-            // パスイフェクト
-            R.id.item_a03a -> {
-                if (supportFragmentManager.findFragmentByTag("Basic01PathEffect") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA3X, Basic01PathEffectFragment.newInstance(), "Basic01PathEffect")
-                            .commit()
-                }
+            // パスエフェクト
+            R.id.item_d01 -> {
+                changeFragment("d01")
                 true
             }
             else -> return super.onOptionsItemSelected(item!!)
+        }
+    }
+
+    // 表示するフラグメントを切り替える
+    private fun changeFragment(tag: String) {
+        val fragment = when (tag) {
+            // パスエフェクト
+            "d01" -> D01Fragment.newInstance()
+            // パスエフェクト
+            else -> D01Fragment.newInstance()
+        }
+
+        // 現在表示しているフラグメントをスタックから外す
+        supportFragmentManager.popBackStack()
+        // 選択したフラグメントを表示する
+        if ( supportFragmentManager.findFragmentByTag(tag) == null ) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.flD0X, fragment, tag)
+                    .commit()
         }
     }
 }

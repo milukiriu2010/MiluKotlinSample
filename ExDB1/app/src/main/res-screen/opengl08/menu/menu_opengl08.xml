@@ -3,26 +3,26 @@
 
     <item
         android:id="@+id/opengl_wv89"
-        android:title="wv89_スフィア環境マッピング" />
+        android:title="@string/ITEM_WV89" />
     <item
         android:id="@+id/opengl_wv87"
-        android:title="wv87_フラットシェーディング" />
+        android:title="@string/ITEM_Wv87" />
     <item
         android:id="@+id/opengl_wv86"
-        android:title="wv86_描画結果から色を取得" />
+        android:title="@string/ITEM_WV86" />
     <item
         android:id="@+id/opengl_wv81"
-        android:title="wv81_VBOを逐次更新" />
+        android:title="@string/ITEM_WV81" />
     <item
         android:id="@+id/opengl_w089"
-        android:title="w089_スフィア環境マッピング" />
+        android:title="@string/ITEM_W089" />
     <item
         android:id="@+id/opengl_w087"
-        android:title="w087_フラットシェーディング" />
+        android:title="@string/ITEM_W087" />
     <item
         android:id="@+id/opengl_w086"
-        android:title="w086_描画結果から色を取得" />
+        android:title="@string/ITEM_W086" />
     <item
         android:id="@+id/opengl_w081"
-        android:title="w081_VBOを逐次更新" />
+        android:title="@string/ITEM_W081" />
 </menu>

@@ -12,7 +12,7 @@ import java.nio.ByteOrder
 import java.nio.FloatBuffer
 
 // ------------------------------------
-// シェーダ(VBOを逐次更新)
+// シェーダ(VBOを逐次更新):VBO使用
 // ------------------------------------
 // https://wgld.org/d/webgl/w081.html
 // ------------------------------------
@@ -48,7 +48,6 @@ class WV081Shader: ES20MgShader() {
 
         // プログラムオブジェクトの生成とリンク
         programHandle = MyGLES20Func.createProgram(svhandle,sfhandle)
-
 
         // ----------------------------------------------
         // attributeハンドルに値をセット

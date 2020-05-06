@@ -17,6 +17,16 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!-- android:icon="@mipmap/ic_launcher" -->
+        <!-- android:roundIcon="@mipmap/ic_launcher_round" -->
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".a0x.A0XActivity"
@@ -32,33 +42,23 @@
             android:label="@string/BTN_D0X" />
 
 
-        <activity android:name=".es32x01.ES32x01Activity"></activity>
-        <activity android:name=".es30x02.ES30x02Activity" /> <!-- android:icon="@mipmap/ic_launcher" -->
-        <!-- android:roundIcon="@mipmap/ic_launcher_round" -->
+        <activity android:name=".es32x01.ES32x01Activity" />
+        <activity android:name=".es30x02.ES30x02Activity" />
         <activity
             android:name=".es30x01.ES30x01Activity"
             android:hardwareAccelerated="false" />
-        <activity android:name=".opengl08.OpenGL08Activity" />
-        <activity android:name=".glsl02.GLSL02Activity" />
-        <activity android:name=".glsl01.GLSL01Activity" />
-        <activity android:name=".opengl07.OpenGL07Activity" />
-        <activity android:name=".opengl06.OpenGL06Activity" />
-        <activity
-            android:name=".opengl05.OpenGL05Activity"
-            android:label="@string/title_activity_open_gl05" />
-        <activity
-            android:name=".opengl04.OpenGL04Activity"
-            android:label="@string/title_activity_open_gl04" />
         <activity
             android:name=".opengl01.OpenGL01Activity"
             android:label="@string/title_activity_open_gl" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".opengl02.OpenGL02Activity" />
+        <activity android:name=".opengl03.OpenGL03Activity" />
+        <activity android:name=".opengl04.OpenGL04Activity" />
+        <activity android:name=".opengl05.OpenGL05Activity" />
+        <activity android:name=".opengl06.OpenGL06Activity" />
+        <activity android:name=".opengl07.OpenGL07Activity" />
+        <activity android:name=".opengl08.OpenGL08Activity" />
+        <activity android:name=".glsl01.GLSL01Activity" />
+        <activity android:name=".glsl02.GLSL02Activity" />
         <activity
             android:name=".scheduler.SchedulerActivity"
             android:label="@string/title_activity_scheduler"
@@ -66,14 +66,8 @@
         <activity android:name=".sqlite.SQLiteOpenHelperActivity" />
         <activity android:name=".scheduler.ScheduleEditActivity" />
         <activity
-            android:name=".opengl02.OpenGL02Activity"
-            android:label="@string/title_activity_open_gl02" />
-        <activity
             android:name=".mgl01.Mgl01Activity"
             android:label="@string/title_activity_mgl01" />
-        <activity
-            android:name=".opengl03.OpenGL03Activity"
-            android:label="@string/title_activity_open_gl03" />
         <activity
             android:name=".mgl00.Mgl00Activity"
             android:label="@string/title_activity_mgl00" />
