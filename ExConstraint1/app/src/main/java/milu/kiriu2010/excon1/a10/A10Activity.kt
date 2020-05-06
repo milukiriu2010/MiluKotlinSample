@@ -1,26 +1,27 @@
-package milu.kiriu2010.excon1.slide
+package milu.kiriu2010.excon1.a10
 
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.widget.ImageView
-import kotlinx.android.synthetic.main.activity_slide_show.*
+import kotlinx.android.synthetic.main.activity_a10.*
 import milu.kiriu2010.excon1.R
 import kotlin.concurrent.timer
 
-class SlideShowActivity : AppCompatActivity() {
+// スライドショー
+class A10Activity : AppCompatActivity() {
     private val imgLst = listOf(
-            R.drawable.slide00,
-            R.drawable.slide01,
-            R.drawable.slide02,
-            R.drawable.slide03,
-            R.drawable.slide04,
-            R.drawable.slide05,
-            R.drawable.slide06,
-            R.drawable.slide07,
-            R.drawable.slide08,
-            R.drawable.slide09
+            R.drawable.a10_slide00,
+            R.drawable.a10_slide01,
+            R.drawable.a10_slide02,
+            R.drawable.a10_slide03,
+            R.drawable.a10_slide04,
+            R.drawable.a10_slide05,
+            R.drawable.a10_slide06,
+            R.drawable.a10_slide07,
+            R.drawable.a10_slide08,
+            R.drawable.a10_slide09
     )
 
     private var position = 0
@@ -32,12 +33,13 @@ class SlideShowActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_slide_show)
+        setContentView(R.layout.activity_a10)
 
         imageSwitcher.setFactory { ImageView(this) }
         imageSwitcher.setImageResource(imgLst[0])
 
-        imageView.setOnClickListener {
+        // 画像をクリックすると、アニメーションを実行する
+        ivA10.setOnClickListener {
             it.animate().apply {
                 duration = 3000L
                 // 5回転
@@ -57,13 +59,15 @@ class SlideShowActivity : AppCompatActivity() {
             }
         }
 
-        prevButton.setOnClickListener {
+        // 前ボタン
+        btnA10A.setOnClickListener {
             imageSwitcher.setInAnimation(this, android.R.anim.fade_in )
             imageSwitcher.setOutAnimation(this,android.R.anim.fade_out )
             movePosition(-1)
         }
 
-        nextButton.setOnClickListener {
+        // 次ボタン
+        btnA10B.setOnClickListener {
             imageSwitcher.setInAnimation(this, android.R.anim.slide_in_left )
             imageSwitcher.setOutAnimation(this,android.R.anim.slide_out_right )
             movePosition(1)
@@ -75,7 +79,8 @@ class SlideShowActivity : AppCompatActivity() {
             }
         }
 
-        slideshowButton.setOnClickListener {
+        // スライドショーが流れているときは、音楽を流す
+        btnA10C.setOnClickListener {
             isSlideshow = !isSlideshow
 
             when (isSlideshow) {
@@ -87,7 +92,7 @@ class SlideShowActivity : AppCompatActivity() {
             }
         }
 
-        player = MediaPlayer.create(this, R.raw.getdown)
+        player = MediaPlayer.create(this, R.raw.audio_a10)
         player.isLooping = true
     }
 

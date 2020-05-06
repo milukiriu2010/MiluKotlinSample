@@ -36,6 +36,14 @@
     <string name="TV_A08A">メモ</string>
     <string name="FMT_A08">%1$tY年%1$tm月%1$td日 %1$tH時%1$tM分</string>
 
+    <string name="BTN_A09">加速度センサ</string>
+
+    <string name="BTN_A10">スライド</string>
+    <string name="BTN_A10A">&lt;</string>
+    <string name="BTN_A10B">&gt;</string>
+    <string name="BTN_A10C">スライドショー</string>
+    <string name="IV_A10">A10</string>
+
     <string name="BTN_BACK">戻る</string>
     <string name="LABEL_NAME">名前</string>
     <string name="BTN_SAX">SAX</string>

@@ -7,9 +7,11 @@ enum class IntentID( val value: Int ) {
     ID_A04(4),
     ID_A05(5),
     ID_A06(6),
-    ID_A07(9),
-    ID_A07A(10),
-    ID_A08(11),
+    ID_A07(7),
+    ID_A07A(70),
+    ID_A08(8),
+    ID_A09(9),
+    ID_A10(10),
 
 
     ID_TEAM(200),
@@ -17,10 +19,8 @@ enum class IntentID( val value: Int ) {
     ID_TEAM_LIST(400),
     ID_XML(500),
     ID_TIMEZONE_RV(110),
-    ID_FILE_RV(12),
+    ID_FILE_RV(120),
     ID_COUNTER(13),
-    ID_ACC_BALL(15),
-    ID_SLIDE(16),
     ID_SAINT_TROPEZ(18),
     ID_NOTIFY(20)
 }

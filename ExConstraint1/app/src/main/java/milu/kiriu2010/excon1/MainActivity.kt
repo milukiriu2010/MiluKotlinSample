@@ -10,7 +10,7 @@ import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import kotlinx.android.synthetic.main.activity_main.*
 import milu.kiriu2010.excon1.a00.A00Const
-import milu.kiriu2010.excon1.accball.AccBallActivity
+import milu.kiriu2010.excon1.a09.A09Activity
 import milu.kiriu2010.excon1.a04.A04Activity
 import milu.kiriu2010.excon1.a07.A07Activity
 import milu.kiriu2010.excon1.a06.A06Activity
@@ -26,7 +26,7 @@ import milu.kiriu2010.excon1.image.ImageActivity
 import milu.kiriu2010.excon1.a08.A08Activity
 import milu.kiriu2010.excon1.notify.NotifyActivity
 import milu.kiriu2010.excon1.saintropez.SaintTropezActivity
-import milu.kiriu2010.excon1.slide.SlideShowActivity
+import milu.kiriu2010.excon1.a10.A10Activity
 import milu.kiriu2010.excon1.a00.TeamListActivity
 import milu.kiriu2010.excon1.a00.A00Activity
 import milu.kiriu2010.excon1.a03.A03Activity
@@ -119,6 +119,18 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult( intent, IntentID.ID_A08.value )
         }
 
+        // 加速度センサ
+        btnA09.setOnClickListener {
+            val intent = Intent( this, A09Activity::class.java )
+            startActivityForResult( intent, IntentID.ID_A09.value )
+        }
+
+        // スライドショー
+        btnA10.setOnClickListener {
+            val intent = Intent( this, A10Activity::class.java )
+            startActivityForResult( intent, IntentID.ID_A10.value )
+        }
+
         btnImage.setOnClickListener{
             val intent = Intent( this, ImageActivity::class.java )
             startActivityForResult( intent, IntentID.ID_IMAGE.value )
@@ -148,18 +160,6 @@ class MainActivity : AppCompatActivity() {
         btnCounter.setOnClickListener {
             val intent = Intent( this, CounterActivity::class.java )
             startActivityForResult( intent, IntentID.ID_COUNTER.value )
-        }
-
-        btnAccBall.transformationMethod = null
-        btnAccBall.setOnClickListener {
-            val intent = Intent( this, AccBallActivity::class.java )
-            startActivityForResult( intent, IntentID.ID_ACC_BALL.value )
-        }
-
-        btnSlide.transformationMethod = null
-        btnSlide.setOnClickListener {
-            val intent = Intent( this, SlideShowActivity::class.java )
-            startActivityForResult( intent, IntentID.ID_SLIDE.value )
         }
 
         btnSaintTropez.transformationMethod = null

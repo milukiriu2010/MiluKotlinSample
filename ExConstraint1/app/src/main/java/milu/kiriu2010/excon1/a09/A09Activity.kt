@@ -1,5 +1,6 @@
-package milu.kiriu2010.excon1.accball
+package milu.kiriu2010.excon1.a09
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.graphics.Color
@@ -12,9 +13,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.SurfaceHolder
 import milu.kiriu2010.excon1.R
-import kotlinx.android.synthetic.main.activity_acc_ball.*
+import kotlinx.android.synthetic.main.activity_a09.*
 
-class AccBallActivity : AppCompatActivity(), SensorEventListener, SurfaceHolder.Callback {
+// 加速度センサ
+class A09Activity : AppCompatActivity(),
+        SensorEventListener,
+        SurfaceHolder.Callback {
 
     // サーフェースビューの幅
     private var surfaceWidth: Int = 0
@@ -37,8 +41,8 @@ class AccBallActivity : AppCompatActivity(), SensorEventListener, SurfaceHolder.
     // 前回時間の保持
     private var time: Long = 0L
 
-    // SurfaceHolder.Callback
     // ボール位置の初期設定
+    // SurfaceHolder.Callback
     override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
         surfaceWidth = width
         surfaceHeight = height
@@ -47,12 +51,14 @@ class AccBallActivity : AppCompatActivity(), SensorEventListener, SurfaceHolder.
         ballY = (height/2).toFloat()
     }
 
+    // センサ停止
     // SurfaceHolder.Callback
     override fun surfaceDestroyed(holder: SurfaceHolder?) {
         val sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensorManager.unregisterListener(this)
     }
 
+    // センサ起動
     // SurfaceHolder.Callback
     override fun surfaceCreated(holder: SurfaceHolder?) {
         val sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -70,8 +76,10 @@ class AccBallActivity : AppCompatActivity(), SensorEventListener, SurfaceHolder.
         if ( event == null ) return
 
         if ( time == 0L ) time = System.currentTimeMillis()
+        // 加速度センサの情報を取得
         if ( event.sensor.type == Sensor.TYPE_ACCELEROMETER ) {
-            textView.text = """
+            // 加速度センサの値を表示
+            tvA09.text = """
                 |x = ${event.values[0]}
                 |y = ${event.values[1]}
                 |z = ${event.values[2]}
@@ -120,22 +128,23 @@ class AccBallActivity : AppCompatActivity(), SensorEventListener, SurfaceHolder.
         }
     }
 
+    @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 画面が回転しないようにする
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        setContentView(R.layout.activity_acc_ball)
+        setContentView(R.layout.activity_a09)
 
-        val holder = surfaceView.holder
+        val holder = svA09.holder
         holder.addCallback(this)
     }
 
     // ボールの位置をサーフェスビューに描画する
     private fun drawCanvas() {
-        val canvas = surfaceView.holder.lockCanvas()
+        val canvas = svA09.holder.lockCanvas()
         canvas.drawColor(Color.YELLOW)
         canvas.drawCircle(ballX, ballY, radius, Paint().apply{ color = Color.MAGENTA })
-        surfaceView.holder.unlockCanvasAndPost(canvas)
+        svA09.holder.unlockCanvasAndPost(canvas)
     }
 }
 
@@ -157,7 +166,7 @@ class AccBallActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_acc_ball)
+        setContentView(R.layout.activity_a09)
     }
 
     // センサーの監視を開始する

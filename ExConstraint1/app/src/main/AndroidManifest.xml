@@ -56,8 +56,8 @@
         <activity android:name=".counter.CounterActivity" />
         <activity android:name=".a03.RecycleTimeZoneActivity" />
         <activity android:name=".a08.A08Activity" />
-        <activity android:name=".accball.AccBallActivity" />
-        <activity android:name=".slide.SlideShowActivity" />
+        <activity android:name=".a09.A09Activity" />
+        <activity android:name=".a10.A10Activity" />
         <activity
             android:name=".saintropez.SaintTropezActivity"
             android:theme="@style/AppTheme.AppThemeSaintTropez" />

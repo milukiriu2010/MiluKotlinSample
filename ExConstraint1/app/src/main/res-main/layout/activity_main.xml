@@ -133,13 +133,13 @@
                 android:id="@+id/btnA08"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Memo" />
+                android:text="@string/BTN_A08" />
 
             <Button
-                android:id="@+id/btnAccBall"
+                android:id="@+id/btnA09"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="加速度センサ" />
+                android:text="@string/BTN_A09" />
 
         </TableRow>
 
@@ -148,7 +148,7 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnSlide"
+                android:id="@+id/btnA10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Slide" />
