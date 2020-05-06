@@ -6,14 +6,22 @@
     <string name="ITEM_A03A">パスエフェクト</string>
 
 
-    <string name="BTN_A1X">Draw</string>
-    <string name="BTN_A11">Button</string>
-    <string name="TV_A11A">ABCabcあいう</string>
-    <string name="TV_A11B">ABCabcあいう</string>
-    <string name="TV_A11C">ABCabcあいう</string>
-    <string name="TV_A11D">ABCabcあいう</string>
-    <string name="IV_A11">Android</string>
+    <string name="BTN_B0X">Draw</string>
+    <string name="BTN_B01">Button</string>
+    <string name="TV_B01A">ABCabcあいう</string>
+    <string name="TV_B01B">ABCabcあいう</string>
+    <string name="TV_B01C">ABCabcあいう</string>
+    <string name="TV_B01D">ABCabcあいう</string>
+    <string name="IV_B01">Android</string>
 
-    <string name="ITEM_A11">影付きボタン</string>
+    <string name="ITEM_B01">影付きボタン</string>
+    <string name="ITEM_B02">枠アニメ</string>
+
+
+    <string name="BTN_C0X">Canvas</string>
+    <string name="ITEM_C01">左⇒右</string>
+
+
+    <string name="BTN_D0X">Basic</string>
 
 </resources>

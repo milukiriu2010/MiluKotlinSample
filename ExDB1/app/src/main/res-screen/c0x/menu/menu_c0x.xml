@@ -1,0 +1,61 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="milu.kiriu2010.exdb1.a2x.C0XActivity">
+
+    <item
+        android:id="@+id/canvas_15_attract"
+        android:orderInCategory="100"
+        android:title="引力"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/canvas_14_liquid"
+        android:orderInCategory="100"
+        android:title="液体"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/canvas_13_friction"
+        android:orderInCategory="100"
+        android:title="摩擦"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/canvas_12_force"
+        android:orderInCategory="100"
+        android:title="力"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/canvas_11_accel_touch_multi"
+        android:orderInCategory="100"
+        android:title="タッチ方向加速(複数)"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/canvas_10_accel_touch"
+        android:orderInCategory="100"
+        android:title="タッチ方向加速"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/canvas_09_baloon"
+        android:orderInCategory="100"
+        android:title="バルーン"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/canvas_04_polygon"
+        android:orderInCategory="100"
+        android:title="多角形"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/canvas_03_bmp_shader"
+        android:orderInCategory="100"
+        android:title="画像(シェーダ)"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/canvas_02_rotatey"
+        android:orderInCategory="100"
+        android:title="回転(Y軸)"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_c01"
+        android:orderInCategory="100"
+        android:title="@string/ITEM_C01"
+        app:showAsAction="never" />
+</menu>

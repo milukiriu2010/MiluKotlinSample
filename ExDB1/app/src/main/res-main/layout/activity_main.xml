@@ -14,22 +14,48 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/BTN_A0X"
-        app:layout_constraintEnd_toStartOf="@+id/btnA1X"
+        app:layout_constraintEnd_toStartOf="@+id/btnB0X"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnA1X"
+        android:id="@+id/btnB0X"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/BTN_A1X"
+        android:text="@string/BTN_B0X"
         app:layout_constraintBottom_toBottomOf="@+id/btnA0X"
-        app:layout_constraintEnd_toStartOf="@+id/btnCanvas"
+        app:layout_constraintEnd_toStartOf="@+id/btnC0X"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnA0X"
         app:layout_constraintTop_toTopOf="@+id/btnA0X" />
+
+    <Button
+        android:id="@+id/btnC0X"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_C0X"
+        app:layout_constraintBottom_toBottomOf="@+id/btnB0X"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnB0X"
+        app:layout_constraintTop_toTopOf="@+id/btnB0X" />
+
+    <Button
+        android:id="@+id/btnD0X"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_D0X"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnA0X" />
 
     <Button
         android:id="@+id/btnOpenGL"
@@ -42,32 +68,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btnOpenGL02"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBasic" />
-
-    <Button
-        android:id="@+id/btnCanvas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Canvas"
-        app:layout_constraintBottom_toBottomOf="@+id/btnA1X"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnA1X"
-        app:layout_constraintTop_toTopOf="@+id/btnA1X" />
-
-    <Button
-        android:id="@+id/btnBasic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Basic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnA0X" />
+        app:layout_constraintTop_toBottomOf="@+id/btnD0X" />
 
     <Button
         android:id="@+id/btnOpenGL01"
@@ -80,7 +81,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btnOpenGL02"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBasic" />
+        app:layout_constraintTop_toBottomOf="@+id/btnD0X" />
 
     <Button
         android:id="@+id/btnOpenGL02"
