@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/hyottoko" />
 
     <TextView
-        android:id="@+id/textViewMovie"
+        android:id="@+id/tvA09"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

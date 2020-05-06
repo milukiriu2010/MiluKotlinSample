@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon2.a0x.recycler
+package milu.kiriu2010.excon2.a0x.a09
 
 import android.content.Context
 import android.graphics.*
@@ -15,12 +15,12 @@ import milu.kiriu2010.excon2.R
 // https://akira-watson.com/android/itemtouchhelper.html
 abstract class SwipeToDeleteCallback(
         context: Context,
-        val adapter: MoviesAdapter)
+        val adapter: A09Adapter)
     // 第１引数はアイテムをドラックする方向
     // 第２引数はアイテムをスワイプする方向
     : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT )  {
 
-    private val deleteIcon = ContextCompat.getDrawable(context, R.drawable.ic_delete_white_24dp)
+    private val deleteIcon = ContextCompat.getDrawable(context, R.drawable.ic_a09)
     private val intrinsicWidth: Int = deleteIcon?.intrinsicWidth ?: 0
     private val intrinsicHeight: Int = deleteIcon?.intrinsicHeight ?: 0
     private val background = ColorDrawable()

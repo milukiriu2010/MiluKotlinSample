@@ -11,26 +11,27 @@ import android.view.MenuItem
 import android.widget.RadioButton
 import android.widget.Toast
 import milu.kiriu2010.excon2.a0x.animescale.AnimeScaleActivity
-import milu.kiriu2010.excon2.a0x.a06.A06Activity
+import milu.kiriu2010.excon2.a0x.a01.A01Activity
+import milu.kiriu2010.excon2.a0x.a02.A02Activity
 import milu.kiriu2010.excon2.a0x.a03.A03Activity
 import milu.kiriu2010.excon2.a0x.a04.A04Activity
+import milu.kiriu2010.excon2.a0x.a05.A05Activity
+import milu.kiriu2010.excon2.a0x.a06.A06Activity
+import milu.kiriu2010.excon2.a0x.a07.A07Activity
 import milu.kiriu2010.excon2.a0x.a08.A08Activity
+import milu.kiriu2010.excon2.a0x.a09.A09Activity
 import milu.kiriu2010.excon2.a0x.largebmp.LargeBmpActivity
 import milu.kiriu2010.excon2.a0x.pinch.PinchActivity
 import milu.kiriu2010.excon2.a0x.rate.RateActivity
-import milu.kiriu2010.excon2.a0x.recycler.RecycleActivity
-import milu.kiriu2010.excon2.a0x.a07.A07Activity
 import milu.kiriu2010.excon2.a0x.seek.SeekActivity
-import milu.kiriu2010.excon2.a0x.a02.A02Activity
 import milu.kiriu2010.excon2.a0x.temperature.TemperatureActivity
 import milu.kiriu2010.excon2.a0x.traffic.TrafficLightActivity
-import milu.kiriu2010.excon2.a0x.a05.A05Activity
 import kotlinx.android.synthetic.main.activity_a0x.*
 import milu.kiriu2010.excon2.BuildConfig
 import milu.kiriu2010.excon2.R
 import milu.kiriu2010.excon2.a0x.animemove.AnimeMoveActivity
 import milu.kiriu2010.excon2.a0x.canvas.CanvasActivity
-import milu.kiriu2010.excon2.a0x.excel.ExcelActivity
+import milu.kiriu2010.excon2.a0x.a13.A13Activity
 import milu.kiriu2010.excon2.a0x.navibottom.BottomNaviActivity
 import milu.kiriu2010.excon2.a0x.navidrawer.NaviDrawerActivity
 import milu.kiriu2010.excon2.a0x.sensorlight.SensorLightActivity
@@ -40,7 +41,6 @@ import milu.kiriu2010.excon2.a0x.sensorstep.SensorStepActivity
 import milu.kiriu2010.excon2.a0x.sensortemp.SensorTemperatureActivity
 import milu.kiriu2010.excon2.a0x.setting.SettingsActivity
 import milu.kiriu2010.excon2.a0x.tabbed.TabbedActivity
-import milu.kiriu2010.excon2.a0x.a01.A01Activity
 import milu.kiriu2010.excon2.a0x.voiceinput.VoiceInputActivity
 import milu.kiriu2010.excon2.id.IntentID
 
@@ -128,18 +128,23 @@ class A0xActivity : AppCompatActivity() {
             this.startActivityForResult( intent, IntentID.ID_A08.value )
         }
 
+        // リサイクラービュー
+        btnA09.setOnClickListener{
+            val intent = Intent(this, A09Activity::class.java )
+            this.startActivityForResult( intent, IntentID.ID_A09.value )
+        }
+
+        // エクセル－アップロード
+        btnA13.setOnClickListener {
+            val intent = Intent(this, A13Activity::class.java )
+            this.startActivity( intent )
+        }
+
         btnRATE.transformationMethod = null
         btnRATE.setOnClickListener{
             val intent = Intent(this, RateActivity::class.java )
 
             this.startActivityForResult( intent, IntentID.ID_RATE.value )
-        }
-
-        btnRecycle.transformationMethod = null
-        btnRecycle.setOnClickListener{
-            val intent = Intent(this, RecycleActivity::class.java )
-
-            this.startActivityForResult( intent, IntentID.ID_RECYCLE.value )
         }
 
         // https://stackoverflow.com/questions/26958909/why-is-my-button-text-forced-to-all-caps-on-lollipop
@@ -154,13 +159,6 @@ class A0xActivity : AppCompatActivity() {
         btnAnimeMove.setOnClickListener {
             val intent = Intent( this, AnimeMoveActivity::class.java )
             this.startActivity(intent)
-        }
-
-        // エクセル－アップロード
-        btnExcel.transformationMethod = null
-        btnExcel.setOnClickListener {
-            val intent = Intent(this, ExcelActivity::class.java )
-            this.startActivity( intent )
         }
 
         btnLargeBmp.transformationMethod = null

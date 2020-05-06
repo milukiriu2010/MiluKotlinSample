@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon2.a0x.recycler
+package milu.kiriu2010.excon2.a0x.a09
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,53 +7,49 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ItemTouchHelper
 import android.view.View
-import kotlinx.android.synthetic.main.activity_recycle.*
-import milu.kiriu2010.abc.Movie
+import kotlinx.android.synthetic.main.activity_a09.*
 import milu.kiriu2010.excon2.R
 
+// リサイクラービュー
+// スワイプでアイテムを削除
 // https://www.androidhive.info/2016/01/android-working-with-recycler-view/
-class RecycleActivity : AppCompatActivity() {
+class A09Activity : AppCompatActivity() {
     private val movieList:MutableList<Movie> = mutableListOf()
-    //lateinit private var recyclerView: RecyclerView
-    lateinit private var mAdapter: MoviesAdapter
+    lateinit private var mAdapter: A09Adapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recycle)
+        setContentView(R.layout.activity_a09)
 
-        textViewMovie.visibility = View.GONE
+        // 映画リストがある間は、"データがない"旨を表示するビューは非表示とする
+        tvA09.visibility = View.GONE
 
-        this.mAdapter = MoviesAdapter(this.movieList, this)
+        // 映画リストを表示するアダプタ
+        this.mAdapter = A09Adapter(this.movieList, this)
         val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
-        recyclerViewMovie.layoutManager = mLayoutManager
-        recyclerViewMovie.itemAnimator = DefaultItemAnimator()
-        recyclerViewMovie.adapter = this.mAdapter
+        rvA09.layoutManager = mLayoutManager
+        rvA09.itemAnimator = DefaultItemAnimator()
+        rvA09.adapter = this.mAdapter
 
+        // スワイプ時の動作を定義するオブジェクト
+        // スワイプするとデータを削除する
         val swipeHandler = object: SwipeToDeleteCallback(this, mAdapter) {
-            /*
-            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-                val fromPos = viewHolder.adapterPosition
-                val toPos = target.adapterPosition
-                mAdapter.notifyItemMoved(fromPos,toPos)
-                return true
-            }
-            */
-
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val adapter = recyclerViewMovie.adapter as MoviesAdapter
+                val adapter = rvA09.adapter as A09Adapter
                 val pos = viewHolder.adapterPosition
                 adapter.removeAt(pos)
 
                 // 表示アイテム数が０になったら、"データがない"旨を表示
                 if ( adapter.moviesList.size == 0 ) {
-                    textViewMovie.visibility = View.VISIBLE
-                    recyclerViewMovie.visibility = View.GONE
+                    tvA09.visibility = View.VISIBLE
+                    rvA09.visibility = View.GONE
                 }
             }
         }
 
+        // スワイプ時の動作とリサイクラービューを結びつける
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
-        itemTouchHelper.attachToRecyclerView(recyclerViewMovie)
+        itemTouchHelper.attachToRecyclerView(rvA09)
 
         this.prepareMovieData()
     }

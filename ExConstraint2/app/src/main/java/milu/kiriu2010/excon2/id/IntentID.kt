@@ -9,9 +9,9 @@ enum class IntentID(val value: Int) {
     ID_A07(7),
     ID_A07A(70),
     ID_A08(8),
+    ID_A09(9),
 
 
-    ID_RECYCLE(10),
     ID_RATE(20),
     ID_ANIME(30),
     ID_SEEK(40),

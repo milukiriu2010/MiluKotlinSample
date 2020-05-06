@@ -46,9 +46,19 @@
     <string name="BTN_A08A">Next</string>
     <string name="TV_A08A">Next Fibonnaci Number</string>
 
+    <string name="BTN_A09">Recycler</string>
+    <string name="TV_A09">データがありません</string>
+
+
+
+
+
+
+    <string name="BTN_A13">Excel</string>
+    <string name="BTN_A13A">Upload</string>
+
     <string name="BTN_GET">Get</string>
     <string name="BTN_DOM">DOM</string>
-    <string name="BTN_RECYCLE">Recycler</string>
     <string name="BTN_RATE">Rating Bar</string>
     <string name="BTN_SEEK">Seek</string>
     <string name="BTN_CELSIUS">Celsius</string>

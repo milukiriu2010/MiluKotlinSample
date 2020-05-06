@@ -1,10 +1,10 @@
-package milu.kiriu2010.excon2.a0x.excel
+package milu.kiriu2010.excon2.a0x.a13
 
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_excel.*
+import kotlinx.android.synthetic.main.activity_a13.*
 import milu.kiriu2010.excon2.R
 import org.apache.poi.xssf.streaming.SXSSFWorkbook
 import java.io.FileNotFoundException
@@ -18,25 +18,32 @@ import java.lang.StringBuilder
 import java.util.*
 import kotlin.math.log
 
-
-class ExcelActivity : AppCompatActivity() {
+// エクセル－アップロード
+// といっても、Excel作成するところでエラーになる
+// ------------------------------------------------
+// どうやらApache POIはAndroid上で動作しないらしい
+// https://stackoverflow.com/questions/34644528/noclassdeffounderror-failed-resolution-of-ljavax-xml-stream-xmleventfactory-wi
+// ------------------------------------------------
+class A13Activity : AppCompatActivity() {
 
     // Excelのヘッダ
-    private val LIST_ALPHA = arrayOf("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")
+    private val LIST_ALPHA = arrayOf(
+            "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+            "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
+            "U", "V", "W", "X", "Y", "Z")
 
     // Excel保存先ファイル
     private lateinit var file: File
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_excel)
+        setContentView(R.layout.activity_a13)
 
         // アップロード
-        btnUpload.setOnClickListener {
+        btnA13A.setOnClickListener {
 
             // Excelファイル保存先ファイル名
-            file = File(this.filesDir, "out.xlsx")
+            file = File(this.filesDir, "ExCon2_a10.xlsx")
 
             // Excelファイル作成
             createExcel()
@@ -62,7 +69,8 @@ class ExcelActivity : AppCompatActivity() {
         logArray.forEach {
             sb.append( "log2(%d)=%.7f\n".format(it,log(it.toDouble(),2.0)) )
         }
-        textViewMath.setText(sb.toString())
+        // 数値計算結果を表示
+        tvA13.setText(sb.toString())
     }
 
     @Throws(FileNotFoundException::class,IOException::class)

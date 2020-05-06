@@ -77,7 +77,7 @@
         app:layout_constraintTop_toTopOf="@+id/dataPressure" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewMovie"
+        android:id="@+id/rvA09"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"

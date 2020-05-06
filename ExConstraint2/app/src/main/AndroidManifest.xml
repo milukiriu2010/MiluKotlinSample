@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".a0x.A0xActivity" />
-        <activity android:name=".a0x.recycler.RecycleActivity" />
+        <activity android:name=".a0x.a09.A09Activity" />
         <activity
             android:name=".a0x.rate.RateActivity"
             android:theme="@style/CustomTheme" />
@@ -68,7 +68,7 @@
         <activity android:name=".a0x.sensorori.SensorOriActivity" />
         <activity android:name=".a0x.a01.A01Activity" />
         <activity android:name=".a0x.voiceinput.VoiceInputActivity" />
-        <activity android:name=".a0x.excel.ExcelActivity" />
+        <activity android:name=".a0x.a13.A13Activity" />
         <activity android:name=".b0x.conf.ConfActivity" />
         <activity android:name=".b0x.B0XActivity" />
         <activity android:name=".b0x.gallery2.Gallery2Activity" />

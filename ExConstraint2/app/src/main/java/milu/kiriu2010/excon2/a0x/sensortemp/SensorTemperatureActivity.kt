@@ -146,7 +146,7 @@ class SensorTemperatureActivity : AppCompatActivity()
 
         // リサイクラ・ビュー上にセンサ一覧を縦に並べる
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        recyclerViewMovie.layoutManager = layoutManager
+        rvA09.layoutManager = layoutManager
 
         // 可変ではないので、java.lang.UnsupportedOperationException が発生する
         //sensors.sortBy{ it.stringType }
@@ -159,10 +159,10 @@ class SensorTemperatureActivity : AppCompatActivity()
 
         // センサ一覧を表示するためのアダプタを設定
         val adapter = SensorAdapter(this, sensorLst)
-        recyclerViewMovie.adapter = adapter
+        rvA09.adapter = adapter
 
         // 区切り線を入れる
         val itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        recyclerViewMovie.addItemDecoration(itemDecoration)
+        rvA09.addItemDecoration(itemDecoration)
     }
 }
