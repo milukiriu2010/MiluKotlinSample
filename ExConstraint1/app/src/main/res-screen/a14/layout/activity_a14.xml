@@ -4,47 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="milu.kiriu2010.excon1.a05.XMLActivity">
+    tools:context="milu.kiriu2010.excon1.a14.A14Activity">
 
     <Button
-        android:id="@+id/btnSAX"
+        android:id="@+id/btnA14SAX"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/BTN_SAX"
+        android:text="@string/BTN_A14_SAX"
+        app:layout_constraintEnd_toStartOf="@+id/btnA14DOM"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnDOM"
+        android:id="@+id/btnA14DOM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/BTN_DOM"
-        app:layout_constraintStart_toEndOf="@+id/btnSAX"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnA02A"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/BTN_BACK"
-        app:layout_constraintStart_toEndOf="@+id/btnDOM"
+        android:text="@string/BTN_A14_DOM"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnA14SAX"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtXML"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:id="@+id/tvA14"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSAX"
-        tools:text="dummy" />
+        app:layout_constraintTop_toBottomOf="@+id/btnA14SAX"
+        tools:text="XMLの内容" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -177,22 +177,24 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnImage"
+                android:id="@+id/btnA13"
+                style="@android:style/Widget.Material.Button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/BTN_IMAGE" />
+                android:text="@string/BTN_A13" />
 
             <Button
-                android:id="@+id/btnXML"
+                android:id="@+id/btnA14"
+                style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/BTN_XML" />
+                android:text="@string/BTN_A14" />
 
             <Button
-                android:id="@+id/btnTeamLst"
+                android:id="@+id/btnA15"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/BTN_TEAM_LIST" />
+                android:text="@string/BTN_A15" />
 
         </TableRow>
 

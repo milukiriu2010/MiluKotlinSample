@@ -9,26 +9,26 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menuItemLunch"
-        android:title="ランチ" >
-        <menu >
+        android:title="@string/ITEM_A12_LUNCH">
+        <menu>
             <item
                 android:id="@+id/menuItemLunch01"
-                android:title="エビフライと牛ロースステーキ" />
+                android:title="@string/ITEM_A12_LUNCH1" />
             <item
                 android:id="@+id/menuItemLunch02"
-                android:title="鶏の赤ワイン煮" />
+                android:title="@string/ITEM_A12_LUNCH2" />
         </menu>
     </item>
     <item
         android:id="@+id/menuItemDinner"
-        android:title="ディナー" >
-        <menu >
+        android:title="@string/ITEM_A12_DINNER">
+        <menu>
             <item
                 android:id="@+id/menuItemDinner01"
-                android:title="海の幸コース" />
+                android:title="@string/ITEM_A12_DINNER1" />
             <item
                 android:id="@+id/menuItemDinner02"
-                android:title="牛フィレ肉のセット" />
+                android:title="@string/ITEM_A12_DINNER2" />
         </menu>
     </item>
 </menu>

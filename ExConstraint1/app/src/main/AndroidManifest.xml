@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".a00.A00Activity" />
-        <activity android:name=".a05.XMLActivity" />
+        <activity android:name=".a14.A14Activity" />
         <activity
             android:name=".a02.A02Activity"
             android:label="@string/TITLE_A02"
@@ -50,7 +50,7 @@
 
 
         <activity android:name=".a00.TeamActivity" />
-        <activity android:name=".image.ImageActivity" />
+        <activity android:name=".a13.A13Activity" />
         <activity android:name=".a00.TeamListActivity" />
         <activity android:name=".a11.A11Activity" />
         <activity android:name=".counter.CounterActivity" />

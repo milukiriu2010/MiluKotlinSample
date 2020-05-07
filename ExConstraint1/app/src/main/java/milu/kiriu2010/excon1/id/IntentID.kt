@@ -12,15 +12,15 @@ enum class IntentID( val value: Int ) {
     ID_A08(8),
     ID_A09(9),
     ID_A10(10),
+    ID_A11(11),
+    ID_A12(12),
+    ID_A13(13),
+    ID_A14(14),
 
 
     ID_TEAM(200),
-    ID_IMAGE(300),
     ID_TEAM_LIST(400),
-    ID_XML(500),
     ID_TIMEZONE_RV(110),
-    ID_FILE_RV(120),
     ID_COUNTER(13),
-    ID_SAINT_TROPEZ(18),
     ID_NOTIFY(20)
 }

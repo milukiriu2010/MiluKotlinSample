@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/a12_sms"
+        android:title="@string/ITEM_A12_SMS" />
+    <item
+        android:id="@+id/a12_mail"
+        android:title="@string/ITEM_A12_MAIL" />
+    <item
+        android:id="@+id/share"
+        android:title="@string/ITEM_A12_SHARE" />
+    <item
+        android:id="@+id/browse"
+        android:title="@string/ITEM_A12_BROWSE" />
+</menu>

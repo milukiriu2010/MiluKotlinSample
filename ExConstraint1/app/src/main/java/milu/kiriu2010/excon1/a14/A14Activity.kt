@@ -1,38 +1,35 @@
-package milu.kiriu2010.excon1.a05
+package milu.kiriu2010.excon1.a14
 
-import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import milu.kiriu2010.excon1.R
 import milu.kiriu2010.xml.MyXMLParse
-import kotlinx.android.synthetic.main.activity_xml.*
+import kotlinx.android.synthetic.main.activity_a14.*
 import org.xmlpull.v1.XmlPullParser
 
-class XMLActivity : AppCompatActivity() {
+// リソースのXMLファイルを読み込む
+class A14Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_xml)
+        setContentView(R.layout.activity_a14)
 
-        btnA02A.setOnClickListener {
-            setResult(Activity.RESULT_OK)
-            finish()
+        // SAX方式でXMLを読み込む
+        btnA14SAX.setOnClickListener{
+            tvA14.text = this.loadXMLbySAX()
         }
 
-        btnSAX.setOnClickListener{
-            txtXML.text = this.loadXMLbySAX()
-        }
-
-        btnDOM.setOnClickListener{
-            txtXML.text = this.loadXMLbyDOM()
+        // DOM方式でXMLを読み込む
+        btnA14DOM.setOnClickListener{
+            tvA14.text = this.loadXMLbyDOM()
         }
 
     }
 
     private fun loadXMLbySAX() : String {
         val foodLst = mutableListOf<String>()
-        val xpp = this.resources.getXml(R.xml.myxml)
+        val xpp = this.resources.getXml(R.xml.xml_a14)
         xpp.next()
         var eventType = xpp.eventType
         var foodSection = false

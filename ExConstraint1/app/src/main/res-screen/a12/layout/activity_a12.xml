@@ -24,11 +24,11 @@
             android:orientation="vertical" >
 
             <ImageView
-                android:id="@+id/ivTopPage"
+                android:id="@+id/ivA12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                app:srcCompat="@drawable/toppage" />
+                app:srcCompat="@drawable/ic_a12_toppage" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

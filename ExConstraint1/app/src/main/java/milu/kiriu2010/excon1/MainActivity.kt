@@ -17,12 +17,12 @@ import milu.kiriu2010.excon1.a06.A06Activity
 import milu.kiriu2010.excon1.counter.CounterActivity
 import milu.kiriu2010.excon1.a11.A11Activity
 import milu.kiriu2010.excon1.a05.A05Activity
-import milu.kiriu2010.excon1.a05.XMLActivity
+import milu.kiriu2010.excon1.a14.A14Activity
 import milu.kiriu2010.excon1.gaction.GactionActivity
 import milu.kiriu2010.excon1.glabyrinth.GlabyrinthActivity
 import milu.kiriu2010.excon1.gshooting.GshootingActivity
 import milu.kiriu2010.excon1.a02.A02Activity
-import milu.kiriu2010.excon1.image.ImageActivity
+import milu.kiriu2010.excon1.a13.A13Activity
 import milu.kiriu2010.excon1.a08.A08Activity
 import milu.kiriu2010.excon1.notify.NotifyActivity
 import milu.kiriu2010.excon1.a12.A12Activity
@@ -134,28 +134,30 @@ class MainActivity : AppCompatActivity() {
         // Android上のファイルシステムを一覧表示
         btnA11.setOnClickListener {
             val intent = Intent( this, A11Activity::class.java )
-            startActivityForResult( intent, IntentID.ID_FILE_RV.value )
+            startActivityForResult( intent, IntentID.ID_A11.value )
         }
 
         // スクロールビューの練習
         btnA12.setOnClickListener {
             val intent = Intent( this, A12Activity::class.java )
-            startActivityForResult( intent, IntentID.ID_SAINT_TROPEZ.value )
+            startActivityForResult( intent, IntentID.ID_A12.value )
         }
 
-        btnImage.setOnClickListener{
-            val intent = Intent( this, ImageActivity::class.java )
-            startActivityForResult( intent, IntentID.ID_IMAGE.value )
+        // ラジオボタンで選択した画像リソースを読み込む
+        btnA13.setOnClickListener{
+            val intent = Intent( this, A13Activity::class.java )
+            startActivityForResult( intent, IntentID.ID_A13.value )
         }
 
-        btnTeamLst.setOnClickListener {
+        // リソースのXMLファイルを読み込む
+        btnA14.setOnClickListener {
+            val intent = Intent( this, A14Activity::class.java )
+            startActivityForResult( intent, IntentID.ID_A14.value )
+        }
+
+        btnA15.setOnClickListener {
             val intent = Intent( this, TeamListActivity::class.java )
             startActivityForResult( intent, IntentID.ID_TEAM_LIST.value )
-        }
-
-        btnXML.setOnClickListener {
-            val intent = Intent( this, XMLActivity::class.java )
-            startActivityForResult( intent, IntentID.ID_XML.value )
         }
 
         btnTimeZoneRV.setOnClickListener {

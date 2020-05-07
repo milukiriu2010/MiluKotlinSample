@@ -47,16 +47,31 @@
     <string name="BTN_A11">File</string>
 
     <string name="BTN_A12">Saint Tropez</string>
+    <string name="ITEM_A12_LUNCH">Lunch</string>
+    <string name="ITEM_A12_LUNCH1">エビフライと牛ロースステーキ</string>
+    <string name="ITEM_A12_LUNCH2">鶏の赤ワイン煮</string>
+    <string name="ITEM_A12_DINNER">Dinner</string>
+    <string name="ITEM_A12_DINNER1">海の幸コース</string>
+    <string name="ITEM_A12_DINNER2">牛フィレ肉のセット</string>
+    <string name="ITEM_A12_SMS">SMSで予約</string>
+    <string name="ITEM_A12_MAIL">メールで予約</string>
+    <string name="ITEM_A12_SHARE">共有する</string>
+    <string name="ITEM_A12_BROWSE">ウェブサイトを開く</string>
+
+    <string name="BTN_A13">画像</string>
+    <string name="RB_A13_BLUE">青</string>
+    <string name="RB_A13_RED">赤</string>
+    <string name="IV_A13">青</string>
+
+    <string name="BTN_A14">XML</string>
+    <string name="BTN_A14_SAX">SAX</string>
+    <string name="BTN_A14_DOM">DOM</string>
+
+    <string name="BTN_A15">チームリスト</string>
+
 
     <string name="BTN_BACK">戻る</string>
     <string name="LABEL_NAME">名前</string>
-    <string name="BTN_SAX">SAX</string>
-    <string name="BTN_DOM">DOM</string>
-    <string name="BTN_IMAGE">画像</string>
-    <string name="IMG_BLUE">青</string>
-    <string name="BTN_BLUE">青</string>
-    <string name="BTN_RED">赤</string>
-    <string name="BTN_TEAM_LIST">チームリスト</string>
     <string name="BTN_TIMEZONE">TimeZone</string>
     <string name="BTN">Add</string>
 </resources>

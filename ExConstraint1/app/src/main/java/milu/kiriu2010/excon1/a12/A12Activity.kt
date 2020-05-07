@@ -18,35 +18,35 @@ class A12Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_a12)
         // トップ画像を長押しするとコンテキストメニューを表示
-        registerForContextMenu(ivTopPage)
+        registerForContextMenu(ivA12)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //return super.onCreateOptionsMenu(menu)
-        menuInflater.inflate(R.menu.menu_saint_tropez, menu)
+        menuInflater.inflate(R.menu.menu_a12, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.menuItemTop -> {
-                ivTopPage.setImageResource(R.drawable.toppage)
+                ivA12.setImageResource(R.drawable.ic_a12_toppage)
                 return true
             }
             R.id.menuItemLunch01 -> {
-                ivTopPage.setImageResource(R.drawable.lunch01)
+                ivA12.setImageResource(R.drawable.ic_a12_lunch01)
                 return true
             }
             R.id.menuItemLunch02 -> {
-                ivTopPage.setImageResource(R.drawable.dinner01)
+                ivA12.setImageResource(R.drawable.ic_a12_dinner01)
                 return true
             }
             R.id.menuItemDinner01 -> {
-                ivTopPage.setImageResource(R.drawable.dinner01)
+                ivA12.setImageResource(R.drawable.ic_a12_dinner01)
                 return true
             }
             R.id.menuItemDinner02 -> {
-                ivTopPage.setImageResource(R.drawable.dinner02)
+                ivA12.setImageResource(R.drawable.ic_a12_dinner02)
                 return true
             }
         }
@@ -57,12 +57,12 @@ class A12Activity : AppCompatActivity() {
     // コンテキストメニューをXMLから割り当てる
     override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
         super.onCreateContextMenu(menu, v, menuInfo)
-        menuInflater.inflate(R.menu.menu_saint_tropez_context,menu)
+        menuInflater.inflate(R.menu.menu_a12_context,menu)
     }
 
     override fun onContextItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.sms -> {
+            R.id.a12_sms -> {
                 val number = "999-9999-9999"
                 val uri = Uri.parse("sms:$number")
                 var intent = Intent(Intent.ACTION_VIEW)
@@ -71,7 +71,7 @@ class A12Activity : AppCompatActivity() {
                 startActivity(intent)
                 return true
             }
-            R.id.mail -> {
+            R.id.a12_mail -> {
                 val email: String = "nobody@example.com"
                 val subject: String = "予約問い合わせ"
                 val text: String = "以下の通り予約希望します"
