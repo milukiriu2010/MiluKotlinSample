@@ -42,6 +42,10 @@
     <string name="BTN_A10C">Slide Show</string>
     <string name="IV_A10">A10</string>
 
+    <string name="BTN_A11">File</string>
+
+    <string name="BTN_A12">Saint Tropez</string>
+
     <string name="BTN_BACK">Back</string>
     <string name="BTN_SAX">SAX</string>
     <string name="BTN_DOM">DOM</string>
@@ -55,6 +59,5 @@
     <string name="BTN_TIMEZONE">TimeZone</string>
     <string name="BTN">Add</string>
     <string name="BTN_TIMEZONE_RV">TimeZone(RV)</string>
-    <string name="BTN_FILE">File</string>
     <string name="top_page">TOP PAGE</string>
 </resources>

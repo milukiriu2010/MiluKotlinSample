@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1.a05
+package milu.kiriu2010.excon1.a11
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -10,24 +10,25 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.Toast
 import milu.kiriu2010.excon1.R
-import kotlinx.android.synthetic.main.activity_file_recycle.*
+import kotlinx.android.synthetic.main.activity_a11.*
 import java.io.File
 
-class FileRecycleActivity : AppCompatActivity() {
+// Android上のファイルシステムを一覧表示
+class A11Activity : AppCompatActivity() {
     // 表示中のディレクトリ
     private var currentDir: File = Environment.getExternalStorageDirectory()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_file_recycle)
+        setContentView(R.layout.activity_a11)
 
-        rvFile.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvA11.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         if ( hasPermission() ) showFiles()
     }
 
     private fun showFiles() {
-        val adapter = FileAdapter(this, currentDir.listFiles().toList()) { file ->
+        val adapter = A11Adapter(this, currentDir.listFiles()!!.toList()) { file ->
             if (file.isDirectory) {
                 currentDir = file
                 showFiles()
@@ -36,7 +37,7 @@ class FileRecycleActivity : AppCompatActivity() {
             }
         }
 
-        rvFile.adapter = adapter
+        rvA11.adapter = adapter
         // アプリバーに表示中のディレクトリのパスを表示する
         title = currentDir.path
     }
@@ -63,7 +64,7 @@ class FileRecycleActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if ( currentDir != Environment.getExternalStorageDirectory() ) {
-            currentDir = currentDir.parentFile
+            currentDir = currentDir.parentFile!!
             showFiles()
         }
         else {

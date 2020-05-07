@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1.a05
+package milu.kiriu2010.excon1.a11
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
@@ -9,15 +9,16 @@ import android.widget.TextView
 import milu.kiriu2010.excon1.R
 import java.io.File
 
-class FileAdapter(context: Context,
-                   private val files: List<File>,
-                   private val onClick : (File) -> Unit)
-    : RecyclerView.Adapter<FileAdapter.FileViewHolder>() {
+// Android上のファイルシステムを一覧表示に使うアダプタ
+class A11Adapter(context: Context,
+                 private val files: List<File>,
+                 private val onClick : (File) -> Unit)
+    : RecyclerView.Adapter<A11Adapter.FileViewHolder>() {
 
     private val inflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FileViewHolder {
-        val view = inflater.inflate(R.layout.list_file_row, parent, false)
+        val view = inflater.inflate(R.layout.adapter_a11, parent, false)
         val viewHolder = FileViewHolder(view)
 
         view.setOnClickListener {
@@ -33,6 +34,6 @@ class FileAdapter(context: Context,
     }
 
     class FileViewHolder(view : View) : RecyclerView.ViewHolder(view) {
-        val fileName = view.findViewById<TextView>(R.id.txtFile)
+        val fileName = view.findViewById<TextView>(R.id.tvA11)
     }
 }

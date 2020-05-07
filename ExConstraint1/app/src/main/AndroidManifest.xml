@@ -52,14 +52,14 @@
         <activity android:name=".a00.TeamActivity" />
         <activity android:name=".image.ImageActivity" />
         <activity android:name=".a00.TeamListActivity" />
-        <activity android:name=".a05.FileRecycleActivity" />
+        <activity android:name=".a11.A11Activity" />
         <activity android:name=".counter.CounterActivity" />
         <activity android:name=".a03.RecycleTimeZoneActivity" />
         <activity android:name=".a08.A08Activity" />
         <activity android:name=".a09.A09Activity" />
         <activity android:name=".a10.A10Activity" />
         <activity
-            android:name=".saintropez.SaintTropezActivity"
+            android:name=".a12.A12Activity"
             android:theme="@style/AppTheme.AppThemeSaintTropez" />
 
         <activity android:name=".notify.NotifyActivity" />

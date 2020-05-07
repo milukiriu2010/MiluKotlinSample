@@ -131,12 +131,14 @@
 
             <Button
                 android:id="@+id/btnA08"
+                style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/BTN_A08" />
 
             <Button
                 android:id="@+id/btnA09"
+                style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/BTN_A09" />
@@ -149,21 +151,24 @@
 
             <Button
                 android:id="@+id/btnA10"
+                style="@android:style/Widget.Button.Inset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Slide" />
+                android:text="@string/BTN_A10" />
 
             <Button
-                android:id="@+id/btnFileRV"
+                android:id="@+id/btnA11"
+                style="@android:style/Widget.DeviceDefault.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/BTN_FILE" />
+                android:text="@string/BTN_A11" />
 
             <Button
-                android:id="@+id/btnSaintTropez"
+                android:id="@+id/btnA12"
+                style="@android:style/Widget.Holo.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Saint Tropez" />
+                android:text="@string/BTN_A12" />
 
         </TableRow>
 

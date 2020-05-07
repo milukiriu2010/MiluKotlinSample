@@ -44,6 +44,10 @@
     <string name="BTN_A10C">スライドショー</string>
     <string name="IV_A10">A10</string>
 
+    <string name="BTN_A11">File</string>
+
+    <string name="BTN_A12">Saint Tropez</string>
+
     <string name="BTN_BACK">戻る</string>
     <string name="LABEL_NAME">名前</string>
     <string name="BTN_SAX">SAX</string>

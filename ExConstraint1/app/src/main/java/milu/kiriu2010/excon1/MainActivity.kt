@@ -15,7 +15,7 @@ import milu.kiriu2010.excon1.a04.A04Activity
 import milu.kiriu2010.excon1.a07.A07Activity
 import milu.kiriu2010.excon1.a06.A06Activity
 import milu.kiriu2010.excon1.counter.CounterActivity
-import milu.kiriu2010.excon1.a05.FileRecycleActivity
+import milu.kiriu2010.excon1.a11.A11Activity
 import milu.kiriu2010.excon1.a05.A05Activity
 import milu.kiriu2010.excon1.a05.XMLActivity
 import milu.kiriu2010.excon1.gaction.GactionActivity
@@ -25,7 +25,7 @@ import milu.kiriu2010.excon1.a02.A02Activity
 import milu.kiriu2010.excon1.image.ImageActivity
 import milu.kiriu2010.excon1.a08.A08Activity
 import milu.kiriu2010.excon1.notify.NotifyActivity
-import milu.kiriu2010.excon1.saintropez.SaintTropezActivity
+import milu.kiriu2010.excon1.a12.A12Activity
 import milu.kiriu2010.excon1.a10.A10Activity
 import milu.kiriu2010.excon1.a00.TeamListActivity
 import milu.kiriu2010.excon1.a00.A00Activity
@@ -131,6 +131,18 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult( intent, IntentID.ID_A10.value )
         }
 
+        // Android上のファイルシステムを一覧表示
+        btnA11.setOnClickListener {
+            val intent = Intent( this, A11Activity::class.java )
+            startActivityForResult( intent, IntentID.ID_FILE_RV.value )
+        }
+
+        // スクロールビューの練習
+        btnA12.setOnClickListener {
+            val intent = Intent( this, A12Activity::class.java )
+            startActivityForResult( intent, IntentID.ID_SAINT_TROPEZ.value )
+        }
+
         btnImage.setOnClickListener{
             val intent = Intent( this, ImageActivity::class.java )
             startActivityForResult( intent, IntentID.ID_IMAGE.value )
@@ -151,21 +163,10 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult( intent, IntentID.ID_TIMEZONE_RV.value )
         }
 
-        btnFileRV.setOnClickListener {
-            val intent = Intent( this, FileRecycleActivity::class.java )
-            startActivityForResult( intent, IntentID.ID_FILE_RV.value )
-        }
-
         btnCounter.transformationMethod = null
         btnCounter.setOnClickListener {
             val intent = Intent( this, CounterActivity::class.java )
             startActivityForResult( intent, IntentID.ID_COUNTER.value )
-        }
-
-        btnSaintTropez.transformationMethod = null
-        btnSaintTropez.setOnClickListener {
-            val intent = Intent( this, SaintTropezActivity::class.java )
-            startActivityForResult( intent, IntentID.ID_SAINT_TROPEZ.value )
         }
 
         // 通知

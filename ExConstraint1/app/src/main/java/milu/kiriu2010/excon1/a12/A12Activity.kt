@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1.saintropez
+package milu.kiriu2010.excon1.a12
 
 import android.content.Intent
 import android.net.Uri
@@ -9,13 +9,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import milu.kiriu2010.excon1.R
-import kotlinx.android.synthetic.main.activity_saint_tropez.*
+import kotlinx.android.synthetic.main.activity_a12.*
 
-class SaintTropezActivity : AppCompatActivity() {
+// スクロールビューの練習
+class A12Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_saint_tropez)
+        setContentView(R.layout.activity_a12)
         // トップ画像を長押しするとコンテキストメニューを表示
         registerForContextMenu(ivTopPage)
     }
