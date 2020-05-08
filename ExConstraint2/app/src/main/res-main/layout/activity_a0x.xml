@@ -87,6 +87,7 @@
         android:id="@+id/btnA02"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/ic_a02z"
         android:text="@string/BTN_A02"
@@ -136,7 +137,7 @@
     <Button
         android:id="@+id/btnA06"
         android:layout_width="0dp"
-        android:layout_height="49dp"
+        android:layout_height="wrap_content"
         android:text="@string/BTN_A06"
         app:layout_constraintEnd_toEndOf="@+id/btnA03"
         app:layout_constraintHorizontal_bias="1.0"
@@ -175,82 +176,73 @@
         app:layout_constraintTop_toBottomOf="@+id/btnA06" />
 
     <Button
-        android:id="@+id/btnA13"
+        android:id="@+id/btnA10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/BTN_A13"
-        app:layout_constraintStart_toStartOf="@+id/btnVoiceInput"
-        app:layout_constraintTop_toBottomOf="@+id/btnVoiceInput" />
+        android:layout_marginTop="4dp"
+        android:text="@string/BTN_A10"
+        app:layout_constraintEnd_toEndOf="@+id/btnA07"
+        app:layout_constraintStart_toStartOf="@+id/btnA07"
+        app:layout_constraintTop_toBottomOf="@+id/btnA07" />
 
     <Button
-        android:id="@+id/btnRATE"
+        android:id="@+id/btnA11"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/BTN_RATE"
-        app:layout_constraintEnd_toEndOf="@+id/btnTrafficLight"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btnTrafficLight"
-        app:layout_constraintTop_toBottomOf="@+id/btnTrafficLight" />
-
-    <Button
-        android:id="@+id/btnANIME"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Anime Scale"
-        app:layout_constraintEnd_toEndOf="@+id/btnRATE"
-        app:layout_constraintStart_toStartOf="@+id/btnRATE"
-        app:layout_constraintTop_toBottomOf="@+id/btnRATE" />
-
-    <Button
-        android:id="@+id/btnLargeBmp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/BTN_LARGE_BMP"
-        app:layout_constraintBottom_toBottomOf="@+id/btnVoiceInput"
+        android:text="@string/BTN_A11"
+        app:layout_constraintBottom_toBottomOf="@+id/btnA10"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/btnA08"
         app:layout_constraintTop_toBottomOf="@+id/btnA07"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/btnTrafficLight"
+        android:id="@+id/btnA12"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/BTN_TRAFFIC_LIGHT"
+        android:text="@string/BTN_A12"
         app:layout_constraintEnd_toEndOf="@+id/btnA09"
         app:layout_constraintStart_toStartOf="@+id/btnA09"
         app:layout_constraintTop_toBottomOf="@+id/btnA09" />
 
     <Button
-        android:id="@+id/btnVoiceInput"
+        android:id="@+id/btnA13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="音声入力"
-        app:layout_constraintEnd_toEndOf="@+id/btnA07"
-        app:layout_constraintStart_toStartOf="@+id/btnA07"
-        app:layout_constraintTop_toBottomOf="@+id/btnA07" />
+        android:layout_marginTop="8dp"
+        android:text="@string/BTN_A13"
+        app:layout_constraintEnd_toEndOf="@+id/btnA10"
+        app:layout_constraintStart_toStartOf="@+id/btnA10"
+        app:layout_constraintTop_toBottomOf="@+id/btnA10" />
 
     <Button
-        android:id="@+id/btnPinch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pinch"
-        app:layout_constraintStart_toStartOf="@+id/btnA13"
-        app:layout_constraintTop_toBottomOf="@+id/btnA13" />
-
-    <Button
-        android:id="@+id/btnSensorTemperature"
+        android:id="@+id/btnA14"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="温度センサ"
-        app:layout_constraintBottom_toTopOf="@+id/btnPinch"
+        android:text="@string/BTN_A14"
+        app:layout_constraintBottom_toTopOf="@+id/btnA16"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toEndOf="@+id/btnVoiceInput"
-        app:layout_constraintTop_toBottomOf="@+id/btnVoiceInput"
+        app:layout_constraintStart_toStartOf="@+id/btnA11"
+        app:layout_constraintTop_toBottomOf="@+id/btnA10"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnA15"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/BTN_A15"
+        app:layout_constraintEnd_toEndOf="@+id/btnA12"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnA12"
+        app:layout_constraintTop_toBottomOf="@+id/btnA12" />
+
+    <Button
+        android:id="@+id/btnA16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/BTN_A16"
+        app:layout_constraintStart_toStartOf="@+id/btnA13"
+        app:layout_constraintTop_toBottomOf="@+id/btnA13" />
 
     <Button
         android:id="@+id/btnSensorLight"
@@ -258,12 +250,41 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="照度センサ"
-        app:layout_constraintBottom_toBottomOf="@+id/btnPinch"
+        app:layout_constraintBottom_toBottomOf="@+id/btnA16"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btnSensorTemperature"
-        app:layout_constraintTop_toTopOf="@+id/btnPinch"
+        app:layout_constraintStart_toStartOf="@+id/btnA14"
+        app:layout_constraintTop_toTopOf="@+id/btnA16"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnANIME"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Anime Scale"
+        app:layout_constraintEnd_toEndOf="@+id/btnA15"
+        app:layout_constraintStart_toStartOf="@+id/btnA15"
+        app:layout_constraintTop_toBottomOf="@+id/btnA15" />
+
+    <Button
+        android:id="@+id/btnCanvas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Canvas"
+        app:layout_constraintEnd_toStartOf="@+id/btnSensorLight"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnA16"
+        app:layout_constraintTop_toBottomOf="@+id/btnA16" />
+
+    <Button
+        android:id="@+id/btnSensorStep"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="歩行センサ"
+        app:layout_constraintBottom_toTopOf="@+id/btnTabbed"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/btnSensorLight"
+        app:layout_constraintTop_toTopOf="@+id/btnCanvas" />
 
     <Button
         android:id="@+id/btnAnimeMove"
@@ -275,16 +296,6 @@
         app:layout_constraintTop_toBottomOf="@+id/btnANIME" />
 
     <Button
-        android:id="@+id/btnCanvas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Canvas"
-        app:layout_constraintEnd_toStartOf="@+id/btnSensorLight"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btnPinch"
-        app:layout_constraintTop_toBottomOf="@+id/btnPinch" />
-
-    <Button
         android:id="@+id/btnTabbed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -292,6 +303,16 @@
         app:layout_constraintEnd_toEndOf="@+id/btnCanvas"
         app:layout_constraintStart_toStartOf="@+id/btnCanvas"
         app:layout_constraintTop_toBottomOf="@+id/btnCanvas" />
+
+    <Button
+        android:id="@+id/btnSensorProx"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="近接センサ"
+        app:layout_constraintBottom_toTopOf="@+id/btnSetting"
+        app:layout_constraintEnd_toEndOf="@+id/btnSensorStep"
+        app:layout_constraintStart_toStartOf="@+id/btnSensorStep"
+        app:layout_constraintTop_toTopOf="@+id/btnTabbed" />
 
     <Button
         android:id="@+id/btnBottomNavi"
@@ -326,26 +347,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="211dp" />
-
-    <Button
-        android:id="@+id/btnSensorStep"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="歩行センサ"
-        app:layout_constraintBottom_toTopOf="@+id/btnTabbed"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/btnSensorLight"
-        app:layout_constraintTop_toTopOf="@+id/btnCanvas" />
-
-    <Button
-        android:id="@+id/btnSensorProx"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="近接センサ"
-        app:layout_constraintBottom_toTopOf="@+id/btnSetting"
-        app:layout_constraintEnd_toEndOf="@+id/btnSensorStep"
-        app:layout_constraintStart_toStartOf="@+id/btnSensorStep"
-        app:layout_constraintTop_toTopOf="@+id/btnTabbed" />
 
     <Button
         android:id="@+id/btnSensorOri"

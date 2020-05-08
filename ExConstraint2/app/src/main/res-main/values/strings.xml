@@ -49,17 +49,27 @@
     <string name="BTN_A09">Recycler</string>
     <string name="TV_A09">データがありません</string>
 
+    <string name="BTN_A10">音声入力</string>
 
 
+
+    <string name="BTN_A11">Large Bmp</string>
+
+    <string name="BTN_A12">Traffic</string>
 
 
 
     <string name="BTN_A13">Excel</string>
     <string name="BTN_A13A">Upload</string>
 
+    <string name="BTN_A14">温度センサ</string>
+
+    <string name="BTN_A15">Rating Bar</string>
+
+    <string name="BTN_A16">Pinch</string>
+
     <string name="BTN_GET">Get</string>
     <string name="BTN_DOM">DOM</string>
-    <string name="BTN_RATE">Rating Bar</string>
     <string name="BTN_SEEK">Seek</string>
     <string name="BTN_CELSIUS">Celsius</string>
     <string name="BTN_FAHRENHEIT">Fahrenheit</string>
@@ -71,6 +81,4 @@
     <string name="MENU_EXIT">exit</string>
     <string name="MENU_SETTINGS">Settings</string>
     <string name="MENU_LOAD">Load</string>
-    <string name="BTN_LARGE_BMP">Large Bmp</string>
-    <string name="BTN_TRAFFIC_LIGHT">Traffic</string>
 </resources>

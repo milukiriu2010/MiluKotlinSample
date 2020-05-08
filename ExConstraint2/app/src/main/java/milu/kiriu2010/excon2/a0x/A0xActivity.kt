@@ -140,8 +140,8 @@ class A0xActivity : AppCompatActivity() {
             this.startActivity( intent )
         }
 
-        btnRATE.transformationMethod = null
-        btnRATE.setOnClickListener{
+        btnA15.transformationMethod = null
+        btnA15.setOnClickListener{
             val intent = Intent(this, RateActivity::class.java )
 
             this.startActivityForResult( intent, IntentID.ID_RATE.value )
@@ -161,29 +161,29 @@ class A0xActivity : AppCompatActivity() {
             this.startActivity(intent)
         }
 
-        btnLargeBmp.transformationMethod = null
-        btnLargeBmp.setOnClickListener {
+        btnA11.transformationMethod = null
+        btnA11.setOnClickListener {
             val intent = Intent(this, LargeBmpActivity::class.java )
             this.startActivityForResult( intent, IntentID.ID_LARGE_BMP.value )
         }
 
-        btnTrafficLight.transformationMethod = null
-        btnTrafficLight.setOnClickListener {
+        btnA12.transformationMethod = null
+        btnA12.setOnClickListener {
             val intent = Intent(this, TrafficLightActivity::class.java )
             this.startActivityForResult( intent, IntentID.ID_TRAFFIC_LIGHT.value )
         }
 
         // 音声入力
-        btnVoiceInput.transformationMethod = null
-        btnVoiceInput.setOnClickListener {
+        btnA10.transformationMethod = null
+        btnA10.setOnClickListener {
             val intent = Intent(this, VoiceInputActivity::class.java)
             this.startActivity(intent)
         }
 
 
         // ピンチ　イン・アウト
-        btnPinch.transformationMethod = null
-        btnPinch.setOnClickListener {
+        btnA16.transformationMethod = null
+        btnA16.setOnClickListener {
             val intent = Intent( this, PinchActivity::class.java )
             this.startActivity( intent )
         }
@@ -224,7 +224,7 @@ class A0xActivity : AppCompatActivity() {
         }
 
         // 温度センサ
-        btnSensorTemperature.setOnClickListener {
+        btnA14.setOnClickListener {
             val intent = Intent( this, SensorTemperatureActivity::class.java )
             this.startActivity( intent )
         }

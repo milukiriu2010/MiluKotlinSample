@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/simple_clown" />
 
     <Button
-        android:id="@+id/btnLargeBmp"
+        android:id="@+id/btnA11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"

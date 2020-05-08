@@ -20,7 +20,7 @@ class LargeBmpActivity : AppCompatActivity() {
 
         Log.d(this.javaClass.toString(), "=== onCreate ===" )
 
-        btnLargeBmp.setOnClickListener {
+        btnA11.setOnClickListener {
             Log.d(this.javaClass.toString(), "=== btnLargeBmp.setOnClickListener ===" )
             // First decode with inJustDecodeBounds=true to check dimensions
             val options = BitmapFactory.Options()
