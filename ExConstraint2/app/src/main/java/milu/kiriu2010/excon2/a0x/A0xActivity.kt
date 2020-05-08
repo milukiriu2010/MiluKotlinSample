@@ -20,12 +20,12 @@ import milu.kiriu2010.excon2.a0x.a06.A06Activity
 import milu.kiriu2010.excon2.a0x.a07.A07Activity
 import milu.kiriu2010.excon2.a0x.a08.A08Activity
 import milu.kiriu2010.excon2.a0x.a09.A09Activity
-import milu.kiriu2010.excon2.a0x.largebmp.LargeBmpActivity
-import milu.kiriu2010.excon2.a0x.pinch.PinchActivity
-import milu.kiriu2010.excon2.a0x.rate.RateActivity
+import milu.kiriu2010.excon2.a0x.a11.A11Activity
+import milu.kiriu2010.excon2.a0x.a16.A16Activity
+import milu.kiriu2010.excon2.a0x.a15.A15Activity
 import milu.kiriu2010.excon2.a0x.seek.SeekActivity
 import milu.kiriu2010.excon2.a0x.temperature.TemperatureActivity
-import milu.kiriu2010.excon2.a0x.traffic.TrafficLightActivity
+import milu.kiriu2010.excon2.a0x.a12.A12Activity
 import kotlinx.android.synthetic.main.activity_a0x.*
 import milu.kiriu2010.excon2.BuildConfig
 import milu.kiriu2010.excon2.R
@@ -34,14 +34,14 @@ import milu.kiriu2010.excon2.a0x.canvas.CanvasActivity
 import milu.kiriu2010.excon2.a0x.a13.A13Activity
 import milu.kiriu2010.excon2.a0x.navibottom.BottomNaviActivity
 import milu.kiriu2010.excon2.a0x.navidrawer.NaviDrawerActivity
-import milu.kiriu2010.excon2.a0x.sensorlight.SensorLightActivity
+import milu.kiriu2010.excon2.a0x.a17.A17Activity
 import milu.kiriu2010.excon2.a0x.sensorori.SensorOriActivity
 import milu.kiriu2010.excon2.a0x.sensorprox.SensorProxActivity
 import milu.kiriu2010.excon2.a0x.sensorstep.SensorStepActivity
-import milu.kiriu2010.excon2.a0x.sensortemp.SensorTemperatureActivity
+import milu.kiriu2010.excon2.a0x.a14.A14Activity
 import milu.kiriu2010.excon2.a0x.setting.SettingsActivity
 import milu.kiriu2010.excon2.a0x.tabbed.TabbedActivity
-import milu.kiriu2010.excon2.a0x.voiceinput.VoiceInputActivity
+import milu.kiriu2010.excon2.a0x.a10.A10Activity
 import milu.kiriu2010.excon2.id.IntentID
 
 class A0xActivity : AppCompatActivity() {
@@ -134,17 +134,53 @@ class A0xActivity : AppCompatActivity() {
             this.startActivityForResult( intent, IntentID.ID_A09.value )
         }
 
+        // 音声入力
+        btnA10.setOnClickListener {
+            val intent = Intent(this, A10Activity::class.java)
+            this.startActivity(intent)
+        }
+
+        // 大きな画像をロードする
+        btnA11.setOnClickListener {
+            val intent = Intent(this, A11Activity::class.java )
+            this.startActivityForResult( intent, IntentID.ID_A11.value )
+        }
+
+        // 信号のアニメーション
+        btnA12.setOnClickListener {
+            val intent = Intent(this, A12Activity::class.java )
+            this.startActivityForResult( intent, IntentID.ID_A12.value )
+        }
+
         // エクセル－アップロード
         btnA13.setOnClickListener {
             val intent = Intent(this, A13Activity::class.java )
             this.startActivity( intent )
         }
 
-        btnA15.transformationMethod = null
-        btnA15.setOnClickListener{
-            val intent = Intent(this, RateActivity::class.java )
+        // 温度センサ
+        btnA14.setOnClickListener {
+            val intent = Intent( this, A14Activity::class.java )
+            this.startActivity( intent )
+        }
 
-            this.startActivityForResult( intent, IntentID.ID_RATE.value )
+        // レーティングバー
+        btnA15.setOnClickListener{
+            val intent = Intent(this, A15Activity::class.java )
+            this.startActivityForResult( intent, IntentID.ID_A15.value )
+        }
+
+        // ピンチ　イン・アウト
+        btnA16.transformationMethod = null
+        btnA16.setOnClickListener {
+            val intent = Intent( this, A16Activity::class.java )
+            this.startActivity( intent )
+        }
+
+        // 照度センサ
+        btnA17.setOnClickListener {
+            val intent = Intent( this, A17Activity::class.java)
+            this.startActivity(intent)
         }
 
         // https://stackoverflow.com/questions/26958909/why-is-my-button-text-forced-to-all-caps-on-lollipop
@@ -161,32 +197,6 @@ class A0xActivity : AppCompatActivity() {
             this.startActivity(intent)
         }
 
-        btnA11.transformationMethod = null
-        btnA11.setOnClickListener {
-            val intent = Intent(this, LargeBmpActivity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_LARGE_BMP.value )
-        }
-
-        btnA12.transformationMethod = null
-        btnA12.setOnClickListener {
-            val intent = Intent(this, TrafficLightActivity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_TRAFFIC_LIGHT.value )
-        }
-
-        // 音声入力
-        btnA10.transformationMethod = null
-        btnA10.setOnClickListener {
-            val intent = Intent(this, VoiceInputActivity::class.java)
-            this.startActivity(intent)
-        }
-
-
-        // ピンチ　イン・アウト
-        btnA16.transformationMethod = null
-        btnA16.setOnClickListener {
-            val intent = Intent( this, PinchActivity::class.java )
-            this.startActivity( intent )
-        }
 
         // キャンバス
         btnCanvas.transformationMethod = null
@@ -220,18 +230,6 @@ class A0xActivity : AppCompatActivity() {
         btnSetting.transformationMethod = null
         btnSetting.setOnClickListener {
             val intent = Intent( this, SettingsActivity::class.java)
-            this.startActivity(intent)
-        }
-
-        // 温度センサ
-        btnA14.setOnClickListener {
-            val intent = Intent( this, SensorTemperatureActivity::class.java )
-            this.startActivity( intent )
-        }
-
-        // 照度センサ
-        btnSensorLight.setOnClickListener {
-            val intent = Intent( this, SensorLightActivity::class.java)
             this.startActivity(intent)
         }
 

@@ -10,14 +10,14 @@ enum class IntentID(val value: Int) {
     ID_A07A(70),
     ID_A08(8),
     ID_A09(9),
+    ID_A11(11),
+    ID_A12(12),
+    ID_A15(15),
 
 
-    ID_RATE(20),
     ID_ANIME(30),
     ID_SEEK(40),
     ID_TEMPERATURE(60),
-    ID_LARGE_BMP(10),
-    ID_TRAFFIC_LIGHT(11),
     ID_PINCH(16),
     ID_SENSOR_TEMPERATURE(17)
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".a0x.a10.A10Activity">
+
+    <EditText
+        android:id="@+id/tvA10"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:autofillHints="@string/TV_A10"
+        android:ems="10"
+        android:hint="@string/TV_A10"
+        android:inputType="textMultiLine"
+        android:lines="8"
+        android:maxLines="20"
+        android:minLines="10"
+        android:singleLine="false"
+        android:text="@string/TV_A10"
+        app:layout_constraintBottom_toTopOf="@+id/btnA10A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnA10A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/BTN_A10A"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnA10B"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvA10" />
+
+    <Button
+        android:id="@+id/btnA10B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_A10B"
+        app:layout_constraintBottom_toBottomOf="@+id/btnA10A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnA10A"
+        app:layout_constraintTop_toTopOf="@+id/btnA10A" />
+</androidx.constraintlayout.widget.ConstraintLayout>

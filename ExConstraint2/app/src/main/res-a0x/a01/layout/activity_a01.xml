@@ -77,7 +77,7 @@
         app:layout_constraintTop_toTopOf="@+id/tvA01C" />
 
     <Button
-        android:id="@+id/btA01"
+        android:id="@+id/btnA01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

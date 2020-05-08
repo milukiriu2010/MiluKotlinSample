@@ -1,6 +1,5 @@
 package milu.kiriu2010.excon2.a0x.a01
 
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
@@ -36,7 +35,7 @@ class A01Activity : AppCompatActivity()
         sbA01C.setOnSeekBarChangeListener(this)
 
         // テキストを読み上げる
-        btA01.setOnClickListener {
+        btnA01.setOnClickListener {
             // 声の高さを設定する
             if (tts.setPitch(pitch) == TextToSpeech.ERROR) {
                 AlertDialog.Builder(this)

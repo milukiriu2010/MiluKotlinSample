@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".a0x.a14.A14Activity">
+
+    <TextView
+        android:id="@+id/tvA14_DataTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="20" />
+
+    <TextView
+        android:id="@+id/tvA14_LabelTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TV_A14_LABEL_TEMP"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvA14_DataTemp"
+        app:layout_constraintStart_toEndOf="@+id/tvA14_DataTemp"
+        app:layout_constraintTop_toTopOf="@+id/tvA14_DataTemp"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tvA14_DataHumi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/tvA14_LabelTemp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="100" />
+
+    <TextView
+        android:id="@+id/tvA14_LabelHumi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TV_A14_LABEL_HUMI"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvA14_DataHumi"
+        app:layout_constraintStart_toEndOf="@+id/tvA14_DataHumi"
+        app:layout_constraintTop_toTopOf="@+id/tvA14_DataHumi" />
+
+    <TextView
+        android:id="@+id/tvA14_DataPres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/tvA14_LabelHumi"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1000" />
+
+    <TextView
+        android:id="@+id/tvA14_LabelPres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TV_A14_LABEL_PRES"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvA14_DataPres"
+        app:layout_constraintStart_toEndOf="@+id/tvA14_DataPres"
+        app:layout_constraintTop_toTopOf="@+id/tvA14_DataPres" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvA14"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvA14_DataTemp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

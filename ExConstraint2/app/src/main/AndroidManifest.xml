@@ -30,7 +30,7 @@
         <activity android:name=".a0x.A0xActivity" />
         <activity android:name=".a0x.a09.A09Activity" />
         <activity
-            android:name=".a0x.rate.RateActivity"
+            android:name=".a0x.a15.A15Activity"
             android:theme="@style/CustomTheme" />
         <activity android:name=".a0x.animescale.AnimeScaleActivity" />
         <activity android:name=".a0x.seek.SeekActivity" />
@@ -41,14 +41,14 @@
             android:name=".a0x.a03.A03Activity"
             android:theme="@style/CustomTheme" />
         <activity android:name=".a0x.a04.A04Activity" />
-        <activity android:name=".a0x.largebmp.LargeBmpActivity" />
-        <activity android:name=".a0x.traffic.TrafficLightActivity" />
+        <activity android:name=".a0x.a11.A11Activity" />
+        <activity android:name=".a0x.a12.A12Activity" />
         <activity android:name=".a0x.a08.A08Activity" />
         <activity android:name=".a0x.a07.A07Activity" />
         <activity android:name=".a0x.a05.A05Activity" />
-        <activity android:name=".a0x.pinch.PinchActivity" />
-        <activity android:name=".a0x.sensortemp.SensorTemperatureActivity" />
-        <activity android:name=".a0x.sensorlight.SensorLightActivity" />
+        <activity android:name=".a0x.a16.A16Activity" />
+        <activity android:name=".a0x.a14.A14Activity" />
+        <activity android:name=".a0x.a17.A17Activity" />
         <activity android:name=".a0x.animemove.AnimeMoveActivity" />
         <activity android:name=".a0x.canvas.CanvasActivity" />
         <activity
@@ -67,7 +67,7 @@
         <activity android:name=".a0x.sensorprox.SensorProxActivity" />
         <activity android:name=".a0x.sensorori.SensorOriActivity" />
         <activity android:name=".a0x.a01.A01Activity" />
-        <activity android:name=".a0x.voiceinput.VoiceInputActivity" />
+        <activity android:name=".a0x.a10.A10Activity" />
         <activity android:name=".a0x.a13.A13Activity" />
         <activity android:name=".b0x.conf.ConfActivity" />
         <activity android:name=".b0x.B0XActivity" />

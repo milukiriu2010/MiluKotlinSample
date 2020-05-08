@@ -245,11 +245,11 @@
         app:layout_constraintTop_toBottomOf="@+id/btnA13" />
 
     <Button
-        android:id="@+id/btnSensorLight"
+        android:id="@+id/btnA17"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="照度センサ"
+        android:text="@string/BTN_A17"
         app:layout_constraintBottom_toBottomOf="@+id/btnA16"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.0"
@@ -271,7 +271,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Canvas"
-        app:layout_constraintEnd_toStartOf="@+id/btnSensorLight"
+        app:layout_constraintEnd_toStartOf="@+id/btnA17"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btnA16"
         app:layout_constraintTop_toBottomOf="@+id/btnA16" />
@@ -283,7 +283,7 @@
         android:text="歩行センサ"
         app:layout_constraintBottom_toTopOf="@+id/btnTabbed"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/btnSensorLight"
+        app:layout_constraintStart_toStartOf="@+id/btnA17"
         app:layout_constraintTop_toTopOf="@+id/btnCanvas" />
 
     <Button

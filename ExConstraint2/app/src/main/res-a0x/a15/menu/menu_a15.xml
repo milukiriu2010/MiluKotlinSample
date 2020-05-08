@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itemA15A"
+        android:orderInCategory="100"
+        android:title="@string/ITEM_A15A"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/itemA15B"
+        android:icon="@android:drawable/ic_popup_sync"
+        android:orderInCategory="200"
+        android:title="@string/ITEM_A15B"
+        app:showAsAction="ifRoom" />
+</menu>
