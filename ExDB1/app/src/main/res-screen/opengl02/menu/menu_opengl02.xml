@@ -15,7 +15,7 @@
         android:title="wv027_マルチテクスチャ" />
     <item
         android:id="@+id/opengl_wv026"
-        android:title="wv026_テクスチャ" />
+        android:title="@string/ITEM_OPEN_GL_wv026" />
     <item
         android:id="@+id/opengl_noisev01"
         android:title="noisev01_ノイズテクスチャ" />
@@ -33,7 +33,7 @@
         android:title="w027_マルチテクスチャ" />
     <item
         android:id="@+id/opengl_w026"
-        android:title="w026_テクスチャ" />
+        android:title="@string/ITEM_OPEN_GL_w026" />
     <item
         android:id="@+id/opengl_noise01"
         android:title="noise01_ノイズテクスチャ" />

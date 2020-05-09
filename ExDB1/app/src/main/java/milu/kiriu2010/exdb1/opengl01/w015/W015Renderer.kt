@@ -9,12 +9,15 @@ import milu.kiriu2010.gui.model.d2.Triangle01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.shader.es20.nvbo.ES20Simple00Shader
 
-// ポリゴンに色を塗る(頂点色の指定)
+// ----------------------------------------------
+// ポリゴンに色を塗る(頂点色の指定):VBOなし
+// OpenGL ES 2.0
 // ----------------------------------------------
 // https://wgld.org/d/webgl/w015.html
 // https://android.googlesource.com/platform/development/+/master/samples/OpenGL/HelloOpenGLES20/src/com/example/android/opengl/MyGLRenderer.java
 // https://android.keicode.com/basics/opengl-drawing-basic-shapes.php
 // https://developer.android.com/training/graphics/opengl/draw
+// ----------------------------------------------
 class W015Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画モデル
     private lateinit var drawObj: Triangle01Model

@@ -10,12 +10,12 @@ import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.shader.es20.nvbo.ES20Simple00Shader
 import milu.kiriu2010.math.MyMathUtil
 
-// 移動・回転・拡大縮小
-// --------------------------------------------------------
+// ----------------------------------------------
+// 移動・回転・拡大縮小:VBOなし
+// OpenGL ES 2.0
+// ----------------------------------------------
 // https://wgld.org/d/webgl/w017.html
-// https://android.googlesource.com/platform/development/+/master/samples/OpenGL/HelloOpenGLES20/src/com/example/android/opengl/MyGLRenderer.java
-// https://android.keicode.com/basics/opengl-drawing-basic-shapes.php
-// https://developer.android.com/training/graphics/opengl/draw
+// ----------------------------------------------
 class W017Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画モデル

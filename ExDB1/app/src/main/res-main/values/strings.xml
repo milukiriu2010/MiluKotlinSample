@@ -33,15 +33,5 @@
     <string name="BTN_GL07">GL07</string>
 
     <string name="BTN_GL08">GL08</string>
-    <string name="ITEM_W081">w081_VBOを逐次更新</string>
-    <string name="ITEM_W086">w086_描画結果から色を取得</string>
-    <string name="ITEM_W087">w087_フラットシェーディング</string>
-    <string name="ITEM_W089">w089_スフィア環境マッピング</string>
-    <string name="ITEM_WV81">wv81_VBOを逐次更新</string>
-    <string name="ITEM_WV86">wv86_描画結果から色を取得</string>
-    <string name="ITEM_Wv87">wv87_フラットシェーディング</string>
-    <string name="ITEM_WV89">wv89_スフィア環境マッピング</string>
-    <string name="TV_W81">描画点サイズ(10–40)</string>
-    <string name="TV_W86">RGBA</string>
 
 </resources>

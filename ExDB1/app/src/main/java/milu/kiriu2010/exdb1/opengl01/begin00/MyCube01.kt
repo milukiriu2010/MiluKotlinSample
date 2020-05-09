@@ -5,7 +5,7 @@ import java.nio.ByteOrder
 import java.nio.FloatBuffer
 import javax.microedition.khronos.opengles.GL10
 
-
+// 立方体
 class MyCube01 {
 
     private val mVertexBuffer: FloatBuffer

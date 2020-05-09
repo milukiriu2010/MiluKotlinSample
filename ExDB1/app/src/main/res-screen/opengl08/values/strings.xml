@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ITEM_W081">w081_VBOを逐次更新</string>
+    <string name="ITEM_W086">w086_描画結果から色を取得</string>
+    <string name="ITEM_W087">w087_フラットシェーディング</string>
+    <string name="ITEM_W089">w089_スフィア環境マッピング</string>
+    <string name="ITEM_WV81">wv81_VBOを逐次更新</string>
+    <string name="ITEM_WV86">wv86_描画結果から色を取得</string>
+    <string name="ITEM_Wv87">wv87_フラットシェーディング</string>
+    <string name="ITEM_WV89">wv89_スフィア環境マッピング</string>
+    <string name="TV_W81">描画点サイズ(10–40)</string>
+    <string name="TV_W86">RGBA</string>
+
+    <string name="w89_texture0">Texture0</string>
+    <string name="w89_texture1">Texture1</string>
+    <string name="w89_texture2">Texture2</string>
+    <string name="w89_texture3">Texture3</string>
+    <string name="w89_texture4">Texture4</string>
+    <string name="w89_texture5">Texture5</string>
+    <string name="w89_texture6">Texture6</string>
+    <string name="w89_texture7">Texture7</string>
+
+    <string-array name="w89list">
+        <item>@string/w89_texture0</item>
+        <item>@string/w89_texture1</item>
+        <item>@string/w89_texture2</item>
+        <item>@string/w89_texture3</item>
+        <item>@string/w89_texture4</item>
+        <item>@string/w89_texture5</item>
+        <item>@string/w89_texture6</item>
+        <item>@string/w89_texture7</item>
+    </string-array>
+
+</resources>

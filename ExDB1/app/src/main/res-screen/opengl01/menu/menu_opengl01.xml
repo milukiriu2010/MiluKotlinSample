@@ -24,16 +24,16 @@
         android:title="wv019_カリングと深度テスト" />
     <item
         android:id="@+id/opengl_wv018"
-        android:title="wv018_インデックスバッファ" />
+        android:title="@string/ITEM_OPEN_GL_wv018" />
     <item
         android:id="@+id/opengl_wv017"
-        android:title="wv017_移動・回転・拡大/縮小" />
+        android:title="@string/ITEM_OPEN_GL_wv017" />
     <item
         android:id="@+id/opengl_wv016"
-        android:title="wv016_複数モデルレンダリング" />
+        android:title="@string/ITEM_OPEN_GL_wv016" />
     <item
         android:id="@+id/opengl_wv015"
-        android:title="wv015_ポリゴンに色を塗る" />
+        android:title="@string/ITEM_OPEN_GL_wv015" />
     <item
         android:id="@+id/opengl_w025"
         android:title="w025_点光源" />
@@ -57,17 +57,17 @@
         android:title="w019_カリングと深度テスト" />
     <item
         android:id="@+id/opengl_w018"
-        android:title="w018_インデックスバッファ" />
+        android:title="@string/ITEM_OPEN_GL_w018" />
     <item
         android:id="@+id/opengl_w017"
-        android:title="w017_移動・回転・拡大/縮小" />
+        android:title="@string/ITEM_OPEN_GL_w017" />
     <item
         android:id="@+id/opengl_w016"
-        android:title="w016_複数モデルレンダリング" />
+        android:title="@string/ITEM_OPEN_GL_w016" />
     <item
         android:id="@+id/opengl_w015"
-        android:title="w015_ポリゴンに色を塗る" />
+        android:title="@string/ITEM_OPEN_GL_w015" />
     <item
         android:id="@+id/opengl_begin00"
-        android:title="OpenGL1.0" />
+        android:title="@string/ITEM_BEGIN00" />
 </menu>

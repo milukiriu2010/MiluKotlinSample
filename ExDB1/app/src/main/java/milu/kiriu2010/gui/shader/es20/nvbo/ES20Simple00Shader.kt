@@ -5,6 +5,10 @@ import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
+// --------------------------------
+// 特殊効果なし(DrawArrays):VBOなし
+// OpenGL ES 2.0で描画
+// --------------------------------
 class ES20Simple00Shader: ES20MgShader() {
     // 頂点シェーダ
     private val scv =

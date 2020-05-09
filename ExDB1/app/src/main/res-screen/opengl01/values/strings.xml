@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ITEM_BEGIN00">OpenGL1.0</string>
+    <string name="ITEM_OPEN_GL_w015">w015_ポリゴンに色を塗る</string>
+    <string name="ITEM_OPEN_GL_wv015">wv015_ポリゴンに色を塗る</string>
+    <string name="ITEM_OPEN_GL_w016">w016_複数モデルレンダリング</string>
+    <string name="ITEM_OPEN_GL_wv016">wv016_複数モデルレンダリング</string>
+    <string name="ITEM_OPEN_GL_w017">w017_移動・回転・拡大/縮小</string>
+    <string name="ITEM_OPEN_GL_wv017">wv017_移動・回転・拡大/縮小</string>
+    <string name="ITEM_OPEN_GL_w018">w018_インデックスバッファ</string>
+    <string name="ITEM_OPEN_GL_wv018">wv018_インデックスバッファ</string>
+
+    <string name="SW_W19_CULL">Culling</string>
+    <string name="SW_W19_FRONT">Front Face(CW)</string>
+    <string name="SW_W19_DEPTH">Depth</string>
+</resources>

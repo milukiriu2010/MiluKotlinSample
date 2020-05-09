@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES10View
 
+// OpenGL ES 1.0で描画
 class OpenGL10Fragment : Fragment() {
 
     private lateinit var myGLES10View: MyGLES10View

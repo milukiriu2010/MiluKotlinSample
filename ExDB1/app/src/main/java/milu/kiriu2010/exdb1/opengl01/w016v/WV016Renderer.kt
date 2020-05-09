@@ -11,11 +11,12 @@ import milu.kiriu2010.gui.shader.es20.wvbo.ES20VBOSimple00Shader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 import milu.kiriu2010.gui.vbo.es20.ES20VBOpc
 
-// ------------------------------------
-// 複数モデルをレンダリング
-// ------------------------------------
+// ----------------------------------------------
+// 複数モデルをレンダリング:VBOなし
+// OpenGL ES 2.0
+// ----------------------------------------------
 // https://wgld.org/d/webgl/w016.html
-// ------------------------------------
+// ----------------------------------------------
 class WV016Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画モデル

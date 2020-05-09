@@ -17,6 +17,10 @@ import android.util.AttributeSet
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
+// ----------------------------------------------
+// テクスチャ用画像をプログラムで生成しOpenGLを使って描画
+// OpenGL ES 2.0
+// ----------------------------------------------
 class TestGLView : GLSurfaceView, GLSurfaceView.Renderer {
 
     private var _gl_prog: Int = 0
@@ -37,7 +41,6 @@ class TestGLView : GLSurfaceView, GLSurfaceView.Renderer {
             : super(ctx, attrs) {
 
     }
-
 
     init {
         // OpenGL ES 2
@@ -83,8 +86,27 @@ class TestGLView : GLSurfaceView, GLSurfaceView.Renderer {
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        val vs_code = "attribute vec2 A_position;attribute vec2 A_texture_uv;varying vec2 V_texture_uv;void main(void){gl_Position = vec4(A_position, 0.0, 1.0);V_texture_uv = A_texture_uv;}"
-        val fs_code = "precision mediump float;uniform sampler2D texture0;varying vec2 V_texture_uv;	void main() {	gl_FragColor = texture2D(texture0, V_texture_uv);}"
+        val vs_code =
+                """
+                attribute vec2 A_position;
+                attribute vec2 A_texture_uv;
+                varying vec2 V_texture_uv;
+                
+                void main(void){
+                    gl_Position = vec4(A_position, 0.0, 1.0);
+                    V_texture_uv = A_texture_uv;
+                }
+                """
+        val fs_code =
+                """
+                precision mediump float;
+                uniform sampler2D texture0;
+                varying vec2 V_texture_uv;
+                
+                void main() {	
+                    gl_FragColor = texture2D(texture0, V_texture_uv);
+                }
+                """
 
         val v_shader = GLES20.glCreateShader(GLES20.GL_VERTEX_SHADER)
         val f_shader = GLES20.glCreateShader(GLES20.GL_FRAGMENT_SHADER)

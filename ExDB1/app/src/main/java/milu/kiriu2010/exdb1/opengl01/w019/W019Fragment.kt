@@ -10,6 +10,11 @@ import android.widget.Switch
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ---------------------------------------------
+// カリングと深度テスト:VBOなし
+// ---------------------------------------------
+// https://wgld.org/d/webgl/w019.html
+// ---------------------------------------------
 class W019Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

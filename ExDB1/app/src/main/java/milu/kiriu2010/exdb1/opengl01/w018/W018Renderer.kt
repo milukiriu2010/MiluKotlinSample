@@ -9,9 +9,12 @@ import milu.kiriu2010.gui.model.d2.Square01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.shader.es20.nvbo.ES20Simple01Shader
 
-// インデックスバッファ
+// ----------------------------------------------
+// インデックスバッファ:VBOなし
+// OpenGL ES 2.0
 // ----------------------------------------------
 // https://wgld.org/d/webgl/w018.html
+// ----------------------------------------------
 class W018Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画モデル

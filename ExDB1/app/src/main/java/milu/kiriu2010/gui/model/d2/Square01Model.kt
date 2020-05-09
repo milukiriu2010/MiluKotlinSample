@@ -2,7 +2,12 @@ package milu.kiriu2010.gui.model.d2
 
 import milu.kiriu2010.gui.model.MgModelAbs
 
+// --------------------------------------------------------------
+// 四角形
+// 頂点の重複宣言を避けるためインデックスバッファを利用している
+// --------------------------------------------------------------
 // https://developer.android.com/training/graphics/opengl/shapes
+// --------------------------------------------------------------
 class Square01Model: MgModelAbs() {
 
     override fun createPath( opt: Map<String,Float> ) {

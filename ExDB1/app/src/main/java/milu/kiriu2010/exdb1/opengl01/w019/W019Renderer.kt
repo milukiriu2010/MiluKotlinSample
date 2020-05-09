@@ -10,9 +10,11 @@ import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.shader.es20.nvbo.ES20Simple01Shader
 import milu.kiriu2010.math.MyMathUtil
 
-// カリングと深度テスト
+// ---------------------------------------------
+// カリングと深度テスト:VBOなし
 // ---------------------------------------------
 // https://wgld.org/d/webgl/w019.html
+// ---------------------------------------------
 class W019Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画モデル

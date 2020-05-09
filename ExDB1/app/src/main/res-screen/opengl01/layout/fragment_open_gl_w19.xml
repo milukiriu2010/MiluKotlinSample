@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -28,7 +27,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Culling"
+        android:text="@string/SW_W19_CULL"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myGLES20ViewW19" />
@@ -38,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Front Face(CW)"
+        android:text="@string/SW_W19_FRONT"
         app:layout_constraintBottom_toBottomOf="@+id/switchCullingW19"
         app:layout_constraintStart_toEndOf="@+id/switchCullingW19"
         app:layout_constraintTop_toTopOf="@+id/switchCullingW19" />
@@ -49,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Depth"
+        android:text="@string/SW_W19_DEPTH"
         app:layout_constraintBottom_toBottomOf="@+id/switchFrontW19"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/switchFrontW19"

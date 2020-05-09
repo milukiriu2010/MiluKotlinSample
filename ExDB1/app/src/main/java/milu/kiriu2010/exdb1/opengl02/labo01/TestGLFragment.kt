@@ -8,6 +8,10 @@ import android.view.ViewGroup
 
 import milu.kiriu2010.exdb1.R
 
+// ----------------------------------------------
+// テクスチャ用画像をプログラムで生成しOpenGLを使って描画
+// OpenGL ES 2.0
+// ----------------------------------------------
 class TestGLFragment : Fragment() {
 
     private lateinit var testGLView: TestGLView

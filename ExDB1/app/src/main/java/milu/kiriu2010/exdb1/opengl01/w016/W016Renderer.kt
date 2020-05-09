@@ -9,7 +9,12 @@ import milu.kiriu2010.gui.model.d2.Triangle01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.shader.es20.nvbo.ES20Simple00Shader
 
-// 複数モデルをレンダリング
+// ----------------------------------------------
+// 複数モデルをレンダリング:VBOなし
+// OpenGL ES 2.0
+// ----------------------------------------------
+// https://wgld.org/d/webgl/w016.html
+// ----------------------------------------------
 class W016Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画モデル

@@ -5,8 +5,10 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.GLU
 
+// OpenGL ES 1.0 で描画
 // https://android.keicode.com/basics/opengl-drawing-basic-shapes.php
 class MyCube01Renderer: GLSurfaceView.Renderer {
+    // 立方体
     private val cube = MyCube01()
 
     override fun onDrawFrame(gl: GL10) {

@@ -26,12 +26,8 @@ class OpenGL02Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_open_gl02)
 
-        supportFragmentManager.popBackStack()
-        if (supportFragmentManager.findFragmentByTag("xyz") == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.flGL02, WV030Fragment.newInstance(), "xyz")
-                    .commit()
-        }
+        // 初期表示のフラグメントを設定
+        changeFragment("wv026")
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -134,24 +130,16 @@ class OpenGL02Activity : AppCompatActivity() {
                 }
                 true
             }
-            // wv026_テクスチャ
+            // w026_テクスチャ:VBOあり
+            // OpenGL ES 2.0
             R.id.opengl_wv026 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv26") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL02, WV026Fragment.newInstance(), "wv26")
-                            .commit()
-                }
+                changeFragment("wv026")
                 true
             }
-            // w026_テクスチャ
+            // w026_テクスチャ:VBOなし
+            // OpenGL ES 2.0
             R.id.opengl_w026 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w026") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL02, W026Fragment.newInstance(), "w026")
-                            .commit()
-                }
+                changeFragment("w026")
                 true
             }
             // noisev01_ノイズテクスチャ
@@ -195,6 +183,29 @@ class OpenGL02Activity : AppCompatActivity() {
                 true
             }
             else -> return super.onOptionsItemSelected(item!!)
+        }
+    }
+
+    // 表示するフラグメントを切り替える
+    private fun changeFragment(tag: String) {
+        val fragment = when (tag) {
+            // w026_テクスチャ:VBOあり
+            // OpenGL ES 2.0
+            "wv026" -> WV026Fragment.newInstance()
+            // w026_テクスチャ:VBOなし
+            // OpenGL ES 2.0
+            "w026" -> W026Fragment.newInstance()
+            // w026_テクスチャ:VBOなし
+            // OpenGL ES 2.0
+            else -> W026Fragment.newInstance()
+        }
+        // 現在表示しているフラグメントをスタックから外す
+        supportFragmentManager.popBackStack()
+        // 選択したフラグメントを表示する
+        if ( supportFragmentManager.findFragmentByTag(tag) == null ) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.flGL02, fragment, tag)
+                    .commit()
         }
     }
 }
