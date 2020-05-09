@@ -7,7 +7,7 @@ import android.view.animation.*
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_anime_move.*
 import milu.kiriu2010.excon2.R
-import milu.kiriu2010.excon2.a0x.animescale.HesitateInterpolator
+import milu.kiriu2010.excon2.a0x.a18.HesitateInterpolator
 
 class AnimeMoveActivity : AppCompatActivity() {
 
@@ -24,32 +24,32 @@ class AnimeMoveActivity : AppCompatActivity() {
         }
 
         // 補完スピナーに補完一覧を設定
-        spinnerInterpolator.adapter = ArrayAdapter.createFromResource(this, R.array.interpolators, android.R.layout.simple_spinner_item )
+        spA18.adapter = ArrayAdapter.createFromResource(this, R.array.a18_interpolators, android.R.layout.simple_spinner_item )
 
         // 補完のファクターを設定
         // 数値１桁目
-        numPickerA1.maxValue = 9
-        numPickerA1.minValue = 0
-        numPickerA1.value    = factor.toInt()
+        npA18A.maxValue = 9
+        npA18A.minValue = 0
+        npA18A.value    = factor.toInt()
         // 小数点１桁目
-        numPickerB1.maxValue = 9
-        numPickerB1.minValue = 0
-        numPickerB1.value    = ((factor*10)%10).toInt()
+        npA18B.maxValue = 9
+        npA18B.minValue = 0
+        npA18B.value    = ((factor*10)%10).toInt()
 
         // アニメーションに使うfactorを取得
-        factor = "%1$1d.%2$1d".format( numPickerA1.value, numPickerB1.value ).toFloat()
+        factor = "%1$1d.%2$1d".format( npA18A.value, npA18B.value ).toFloat()
 
         // ボタンをクリックすると、移動を開始する
         btnA02A.setOnClickListener {
-            imageViewAnime.animate().apply {
-                imageViewAnime.x = 0f
-                imageViewAnime.y = 0f
+            ivA18.animate().apply {
+                ivA18.x = 0f
+                ivA18.y = 0f
 
                 // アニメーションを行う時間を設定
                 duration = 1000
 
                 // アニメーションの補完方法を設定
-                interpolator = when (spinnerInterpolator.selectedItem) {
+                interpolator = when (spA18.selectedItem) {
                     "LinearInterpolator" -> LinearInterpolator()
                     "AccelerateInterpolator" -> AccelerateInterpolator(factor)
                     "DecelerateInterpolator" -> DecelerateInterpolator(factor)
@@ -69,14 +69,14 @@ class AnimeMoveActivity : AppCompatActivity() {
 
         // ボタンをクリックすると、回転を開始する
         btnRotate.setOnClickListener {
-            imageViewAnime.animate().apply {
-                imageViewAnime.rotation = 0f
+            ivA18.animate().apply {
+                ivA18.rotation = 0f
 
                 // アニメーションを行う時間を設定
                 duration = 1000
 
                 // アニメーションの補完方法を設定
-                interpolator = when (spinnerInterpolator.selectedItem) {
+                interpolator = when (spA18.selectedItem) {
                     "LinearInterpolator" -> LinearInterpolator()
                     "AccelerateInterpolator" -> AccelerateInterpolator(factor)
                     "DecelerateInterpolator" -> DecelerateInterpolator(factor)
@@ -97,14 +97,14 @@ class AnimeMoveActivity : AppCompatActivity() {
 
         // ボタンをクリックすると、透過を開始する
         btnAlpha.setOnClickListener {
-            imageViewAnime.animate().apply {
-                imageViewAnime.alpha = 1.0f
+            ivA18.animate().apply {
+                ivA18.alpha = 1.0f
 
                 // アニメーションを行う時間を設定
                 duration = 1000
 
                 // アニメーションの補完方法を設定
-                interpolator = when (spinnerInterpolator.selectedItem) {
+                interpolator = when (spA18.selectedItem) {
                     "LinearInterpolator" -> LinearInterpolator()
                     "AccelerateInterpolator" -> AccelerateInterpolator(factor)
                     "DecelerateInterpolator" -> DecelerateInterpolator(factor)

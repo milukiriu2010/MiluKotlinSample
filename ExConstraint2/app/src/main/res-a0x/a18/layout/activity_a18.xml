@@ -2,81 +2,80 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layoutTop"
+    android:id="@+id/clA18"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".a0x.animescale.AnimeScaleActivity">
+    tools:context=".a0x.a18.A18Activity">
 
     <Button
-        android:id="@+id/btnA02A"
+        android:id="@+id/btnA18A"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/BTN_A02A"
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_A18A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageViewAnime"
+        android:id="@+id/ivA18"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:contentDescription="@string/BTN_A18"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/layer_maeno" />
+        app:layout_constraintTop_toBottomOf="@+id/npA18R"
+        app:srcCompat="@drawable/layer_a18" />
 
     <Spinner
-        android:id="@+id/spinnerInterpolator"
+        android:id="@+id/spA18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnA18A"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <NumberPicker
-        android:id="@+id/numPickerA1"
+        android:id="@+id/npA18A"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerInterpolator" />
+        app:layout_constraintTop_toBottomOf="@+id/spA18" />
 
-    <NumberPicker
-        android:id="@+id/numPickerB1"
+    <TextView
+        android:id="@+id/tvA18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/numPickerA1"
-        app:layout_constraintStart_toEndOf="@+id/labelPoint"
-        app:layout_constraintTop_toTopOf="@+id/numPickerA1"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/TV_A18"
+        app:layout_constraintBottom_toBottomOf="@+id/npA18A"
+        app:layout_constraintStart_toEndOf="@+id/npA18A"
+        app:layout_constraintTop_toTopOf="@+id/npA18A" />
+
+    <NumberPicker
+        android:id="@+id/npA18B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/npA18A"
+        app:layout_constraintStart_toEndOf="@+id/tvA18"
+        app:layout_constraintTop_toTopOf="@+id/npA18A"
         app:layout_constraintVertical_bias="0.0" />
 
     <NumberPicker
-        android:id="@+id/numPickerRepeat"
+        android:id="@+id/npA18R"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/labelPoint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="●"
-        app:layout_constraintBottom_toBottomOf="@+id/numPickerA1"
-        app:layout_constraintStart_toEndOf="@+id/numPickerA1"
-        app:layout_constraintTop_toTopOf="@+id/numPickerA1" />
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnA18A" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

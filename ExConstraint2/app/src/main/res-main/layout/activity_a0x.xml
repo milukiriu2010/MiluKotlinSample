@@ -258,19 +258,19 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/btnANIME"
+        android:id="@+id/btnA18"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Anime Scale"
+        android:text="@string/BTN_A18"
         app:layout_constraintEnd_toEndOf="@+id/btnA15"
         app:layout_constraintStart_toStartOf="@+id/btnA15"
         app:layout_constraintTop_toBottomOf="@+id/btnA15" />
 
     <Button
-        android:id="@+id/btnCanvas"
+        android:id="@+id/btnA19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Canvas"
+        android:text="@string/BTN_A19"
         app:layout_constraintEnd_toStartOf="@+id/btnA17"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btnA16"
@@ -284,25 +284,25 @@
         app:layout_constraintBottom_toTopOf="@+id/btnTabbed"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/btnA17"
-        app:layout_constraintTop_toTopOf="@+id/btnCanvas" />
+        app:layout_constraintTop_toTopOf="@+id/btnA19" />
 
     <Button
         android:id="@+id/btnAnimeMove"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Anime Move"
-        app:layout_constraintEnd_toEndOf="@+id/btnANIME"
-        app:layout_constraintStart_toStartOf="@+id/btnANIME"
-        app:layout_constraintTop_toBottomOf="@+id/btnANIME" />
+        app:layout_constraintEnd_toEndOf="@+id/btnA18"
+        app:layout_constraintStart_toStartOf="@+id/btnA18"
+        app:layout_constraintTop_toBottomOf="@+id/btnA18" />
 
     <Button
         android:id="@+id/btnTabbed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tabbed"
-        app:layout_constraintEnd_toEndOf="@+id/btnCanvas"
-        app:layout_constraintStart_toStartOf="@+id/btnCanvas"
-        app:layout_constraintTop_toBottomOf="@+id/btnCanvas" />
+        app:layout_constraintEnd_toEndOf="@+id/btnA19"
+        app:layout_constraintStart_toStartOf="@+id/btnA19"
+        app:layout_constraintTop_toBottomOf="@+id/btnA19" />
 
     <Button
         android:id="@+id/btnSensorProx"

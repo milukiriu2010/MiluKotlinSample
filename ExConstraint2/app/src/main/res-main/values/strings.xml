@@ -71,7 +71,7 @@
     <string name="TV_A14_LABEL_TYPE">Type</string>
     <string name="TV_A14_LABEL_Name">Name</string>
 
-    <string name="BTN_A15">Rating Bar</string>
+    <string name="BTN_A15">Rating</string>
     <string name="ITEM_A15A">Setting</string>
     <string name="ITEM_A15B">Load</string>
 
@@ -80,6 +80,12 @@
 
     <string name="BTN_A17">照度センサ</string>
     <string name="TV_A17">10000</string>
+
+    <string name="BTN_A18">Scale</string>
+    <string name="BTN_A18A">開始</string>
+    <string name="TV_A18">●</string>
+
+    <string name="BTN_A19">Canvas</string>
 
     <string name="BTN_GET">Get</string>
     <string name="BTN_DOM">DOM</string>

@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import milu.kiriu2010.excon2.R
-import milu.kiriu2010.excon2.a0x.canvas.CanvasBasicView
+import milu.kiriu2010.excon2.a0x.a19.CanvasBasicView
 
 /**
  * A simple [Fragment] subclass.

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="interpolators">
+    <string-array name="a18_interpolators">
         <item>LinearInterpolator</item>
         <item>AccelerateInterpolator</item>
         <item>DecelerateInterpolator</item>

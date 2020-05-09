@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import milu.kiriu2010.excon2.R
-import milu.kiriu2010.excon2.a0x.canvas.CanvasBasicView
+import milu.kiriu2010.excon2.a0x.a19.CanvasBasicView
 
 /**
  * A simple [Fragment] subclass.
@@ -40,7 +40,7 @@ class CanvasFragment1 : Fragment()
         canvasBasicView1 = view.findViewById(R.id.canvasBasicView1)
         canvasBasicView1.mode = mode
 
-        seekBarX = view.findViewById(R.id.seekBarX)
+        seekBarX = view.findViewById(R.id.sbA19X)
         /*
         seekBarX.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -59,7 +59,7 @@ class CanvasFragment1 : Fragment()
         })
         */
 
-        seekBarY = view.findViewById(R.id.seekBarY)
+        seekBarY = view.findViewById(R.id.sbA19Y)
         /*
         seekBarY.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {

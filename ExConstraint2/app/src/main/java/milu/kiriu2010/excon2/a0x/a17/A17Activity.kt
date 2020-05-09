@@ -84,7 +84,7 @@ class A17Activity : AppCompatActivity()
 
     // アクションバーのアイコンがタップされると呼ばれる
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item?.itemId) {
+        return when (item.itemId) {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()

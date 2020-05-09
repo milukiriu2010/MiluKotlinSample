@@ -7,8 +7,8 @@ import android.util.Log
 import milu.kiriu2010.excon2.R
 import kotlinx.android.synthetic.main.activity_a11.*
 
-// 久しぶりにやったが、ロードできなかった
 // 大きな画像をロードする
+// ivA11のlayout_width,layout_height=0dpにするとロードできない
 // http://tekeye.uk/android/examples/android-bitmap-loading
 class A11Activity : AppCompatActivity() {
 

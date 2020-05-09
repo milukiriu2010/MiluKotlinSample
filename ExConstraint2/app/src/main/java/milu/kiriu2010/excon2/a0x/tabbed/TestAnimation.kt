@@ -2,7 +2,7 @@ package milu.kiriu2010.excon2.a0x.tabbed
 
 import android.view.animation.Animation
 import android.view.animation.Transformation
-import milu.kiriu2010.excon2.a0x.canvas.CanvasBasicView
+import milu.kiriu2010.excon2.a0x.a19.CanvasBasicView
 
 // https://akira-watson.com/android/canvas-animation.html
 class TestAnimation(

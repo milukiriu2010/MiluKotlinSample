@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon2.a0x.animescale
+package milu.kiriu2010.excon2.a0x.a18
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,9 +7,10 @@ import android.view.MenuItem
 import android.view.animation.*
 import android.widget.ArrayAdapter
 import milu.kiriu2010.excon2.R
-import kotlinx.android.synthetic.main.activity_anime_scale.*
+import kotlinx.android.synthetic.main.activity_a18.*
 
-class AnimeScaleActivity : AppCompatActivity() {
+// 関数を使ったサイズ変更するアニメーション
+class A18Activity : AppCompatActivity() {
 
     var factor = 0.5f
 
@@ -25,7 +26,7 @@ class AnimeScaleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_anime_scale)
+        setContentView(R.layout.activity_a18)
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -34,26 +35,26 @@ class AnimeScaleActivity : AppCompatActivity() {
         }
 
         // 補完スピナーに補完一覧を設定
-        spinnerInterpolator.adapter = ArrayAdapter.createFromResource(this, R.array.interpolators, android.R.layout.simple_spinner_item )
+        spA18.adapter = ArrayAdapter.createFromResource(this, R.array.a18_interpolators, android.R.layout.simple_spinner_item )
 
         // 補完のファクターを設定
         // 数値１桁目
-        numPickerA1.maxValue = 9
-        numPickerA1.minValue = 0
-        numPickerA1.value    = factor.toInt()
+        npA18A.maxValue = 9
+        npA18A.minValue = 0
+        npA18A.value    = factor.toInt()
         // 小数点１桁目
-        numPickerB1.maxValue = 9
-        numPickerB1.minValue = 0
-        numPickerB1.value    = ((factor*10)%10).toInt()
+        npA18B.maxValue = 9
+        npA18B.minValue = 0
+        npA18B.value    = ((factor*10)%10).toInt()
 
         // リピート回数を設定
-        numPickerRepeat.maxValue = 2
-        numPickerRepeat.minValue = 0
-        numPickerRepeat.value    = repeat
+        npA18R.maxValue = 2
+        npA18R.minValue = 0
+        npA18R.value    = repeat
 
 
         // STARTボタンをクリックすると、アニメーションを開始する
-        btnA02A.setOnClickListener {
+        btnA18A.setOnClickListener {
             val scale = ScaleAnimation(
                     1.0f,
                     4.0f,
@@ -65,16 +66,16 @@ class AnimeScaleActivity : AppCompatActivity() {
                     0.5f
             )
 
-            Log.d( javaClass.simpleName, "${spinnerInterpolator.selectedItem}")
+            Log.d( javaClass.simpleName, "${spA18.selectedItem}")
 
             // アニメーションに使うfactorを取得
-            factor = "%1$1d.%2$1d".format( numPickerA1.value, numPickerB1.value ).toFloat()
+            factor = "%1$1d.%2$1d".format( npA18A.value, npA18B.value ).toFloat()
 
             // アニメーションを行う時間を設定
             scale.duration = 1000;
             // アニメーションの補完方法を設定
             //scale.interpolator = CycleInterpolator(0.5f)
-            scale.interpolator = when (spinnerInterpolator.selectedItem) {
+            scale.interpolator = when (spA18.selectedItem) {
                 "LinearInterpolator" -> LinearInterpolator()
                 "AccelerateInterpolator" -> AccelerateInterpolator(factor)
                 "DecelerateInterpolator" -> DecelerateInterpolator(factor)
@@ -88,11 +89,11 @@ class AnimeScaleActivity : AppCompatActivity() {
                 else -> LinearInterpolator()
             }
             // リピート回数を設定
-            scale.repeatCount = numPickerRepeat.value
+            scale.repeatCount = npA18R.value
             // アニメーションが終わっても元の表示に戻らないようにする
             scale.fillAfter = true
             // アニメーションのスタート
-            imageViewAnime.startAnimation(scale)
+            ivA18.startAnimation(scale)
         }
     }
 
@@ -101,8 +102,8 @@ class AnimeScaleActivity : AppCompatActivity() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
 
-        lw = layoutTop.width
-        lh = layoutTop.height
+        lw = clA18.width
+        lh = clA18.height
     }
 
     // アクションバーのアイコンがタップされると呼ばれる

@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon2.a0x.canvas
+package milu.kiriu2010.excon2.a0x.a19
 
 import android.content.Context
 import android.graphics.*
@@ -7,7 +7,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import milu.kiriu2010.excon2.R
 
-
+// ドロイド君を表示するカスタマイズビュー
 class CanvasBasicView: View {
     private val mPaint = Paint()
 
@@ -50,7 +50,7 @@ class CanvasBasicView: View {
         // 画像(100x100)を描画
         // xy方向でゆがみを設定する
         canvas.save()
-        val bmp = BitmapFactory.decodeResource(resources, R.drawable.android)
+        val bmp = BitmapFactory.decodeResource(resources, R.drawable.ic_a19)
         canvas.drawBitmap(bmp, 300f, 0f, mPaint)
 
         canvas.translate(300f, 500f)
@@ -75,7 +75,7 @@ class CanvasBasicView: View {
 
     private fun drawMode2(canvas: Canvas) {
         // 画像(100x100)を描画
-        val bmp = BitmapFactory.decodeResource(resources, R.drawable.android)
+        val bmp = BitmapFactory.decodeResource(resources, R.drawable.ic_a19)
 
         // 左上1/4
         val srcRect1 = Rect(0, 0, bmp.width / 2, bmp.height / 2)
@@ -114,7 +114,7 @@ class CanvasBasicView: View {
 
     private fun drawMode5(canvas: Canvas) {
         // saveLayerで領域の一部をクリッピング
-        val bmp = BitmapFactory.decodeResource(resources, R.drawable.android)
+        val bmp = BitmapFactory.decodeResource(resources, R.drawable.ic_a19)
         val bounds = RectF(0f, 0f, 300f, 300f)
         canvas.saveLayer(bounds, mPaint)
 
@@ -130,15 +130,15 @@ class CanvasBasicView: View {
     private fun drawMode6(canvas: Canvas) {
         // 画像(SVG)を描画
         // java.lang.NullPointerException: Attempt to invoke virtual method 'boolean android.graphics.Bitmap.isRecycled()' on a null object reference
-        // val bmp = BitmapFactory.decodeResource(resources, R.drawable.ic_android)
+        // val bmp = BitmapFactory.decodeResource(resources, R.drawable.xic_a19)
         // 何も表氏されない
-        //val drawable = ContextCompat.getDrawable(context,R.drawable.ic_android)
+        //val drawable = ContextCompat.getDrawable(context,R.drawable.xic_a19)
         //val bmp = Bitmap.createBitmap(drawable!!.intrinsicWidth, drawable!!.intrinsicHeight, Bitmap.Config.ARGB_8888)
         //Log.d( javaClass.simpleName, "dw[${drawable.intrinsicWidth}]/dh[${drawable.intrinsicHeight}]")
         //Log.d( javaClass.simpleName, "bw[${bmp.width}]/h[${bmp.height}]")
         //canvas.drawBitmap(bmp, 300f, 300f, mPaint)
 
-        val drawable = ContextCompat.getDrawable(context,R.drawable.ic_android)
+        val drawable = ContextCompat.getDrawable(context,R.drawable.ic_a19)
         // (100,100)位置にx倍で表示
         // skewX -5.0 - 5.0
         drawable?.setBounds(100,100,100+(drawable.intrinsicWidth*(4+skewX)).toInt(),100+(drawable.intrinsicHeight*(4+skewY)).toInt())

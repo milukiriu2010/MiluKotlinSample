@@ -10,7 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.RadioButton
 import android.widget.Toast
-import milu.kiriu2010.excon2.a0x.animescale.AnimeScaleActivity
+import milu.kiriu2010.excon2.a0x.a18.A18Activity
 import milu.kiriu2010.excon2.a0x.a01.A01Activity
 import milu.kiriu2010.excon2.a0x.a02.A02Activity
 import milu.kiriu2010.excon2.a0x.a03.A03Activity
@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.activity_a0x.*
 import milu.kiriu2010.excon2.BuildConfig
 import milu.kiriu2010.excon2.R
 import milu.kiriu2010.excon2.a0x.animemove.AnimeMoveActivity
-import milu.kiriu2010.excon2.a0x.canvas.CanvasActivity
+import milu.kiriu2010.excon2.a0x.a19.A19Activity
 import milu.kiriu2010.excon2.a0x.a13.A13Activity
 import milu.kiriu2010.excon2.a0x.navibottom.BottomNaviActivity
 import milu.kiriu2010.excon2.a0x.navidrawer.NaviDrawerActivity
@@ -183,12 +183,16 @@ class A0xActivity : AppCompatActivity() {
             this.startActivity(intent)
         }
 
-        // https://stackoverflow.com/questions/26958909/why-is-my-button-text-forced-to-all-caps-on-lollipop
-        // large => small caps
-        btnANIME.transformationMethod = null
-        btnANIME.setOnClickListener{
-            val intent = Intent(this, AnimeScaleActivity::class.java )
+        // 関数を使ったサイズ変更するアニメーション
+        btnA18.setOnClickListener{
+            val intent = Intent(this, A18Activity::class.java )
             this.startActivityForResult( intent, IntentID.ID_ANIME.value )
+        }
+
+        // キャンバス
+        btnA19.setOnClickListener {
+            val intent = Intent(this,A19Activity::class.java)
+            this.startActivity(intent)
         }
 
         btnAnimeMove.transformationMethod = null
@@ -197,13 +201,6 @@ class A0xActivity : AppCompatActivity() {
             this.startActivity(intent)
         }
 
-
-        // キャンバス
-        btnCanvas.transformationMethod = null
-        btnCanvas.setOnClickListener {
-            val intent = Intent(this,CanvasActivity::class.java)
-            this.startActivity(intent)
-        }
 
         // Tabbed
         btnTabbed.transformationMethod = null
