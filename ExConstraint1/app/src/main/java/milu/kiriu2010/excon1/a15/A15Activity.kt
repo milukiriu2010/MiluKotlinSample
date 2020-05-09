@@ -1,6 +1,5 @@
-package milu.kiriu2010.excon1.a00
+package milu.kiriu2010.excon1.a15
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,14 +9,15 @@ import milu.kiriu2010.abc.TeamBaseBall
 import milu.kiriu2010.abc.TeamSoccer
 import milu.kiriu2010.excon1.id.IntentID
 import milu.kiriu2010.excon1.R
-import kotlinx.android.synthetic.main.activity_team_list.*
+import kotlinx.android.synthetic.main.activity_a15.*
 
-class TeamListActivity : AppCompatActivity() {
+// アクティビティ間のSerializableデータ授受:送信側
+class A15Activity : AppCompatActivity() {
     private val teamLst: MutableList<Team> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_team_list)
+        setContentView(R.layout.activity_a15)
 
         this.createTeamLst()
 
@@ -28,17 +28,12 @@ class TeamListActivity : AppCompatActivity() {
 
     private fun setAction()
     {
-        lvTeamLst.setOnItemClickListener { _, _, position, _ ->
-            val intent = Intent( this, TeamActivity::class.java )
+        lvA15.setOnItemClickListener { _, _, position, _ ->
+            val intent = Intent( this, A15RActivity::class.java )
             val team : Team = this.teamLst[position]
             intent.putExtra( "team", team )
 
-            startActivityForResult( intent, IntentID.ID_TEAM.value )
-        }
-
-        btnA02A.setOnClickListener {
-            setResult(Activity.RESULT_OK)
-            finish()
+            startActivityForResult( intent, IntentID.ID_A15A.value )
         }
     }
 
@@ -91,7 +86,7 @@ class TeamListActivity : AppCompatActivity() {
                 this.teamLst
         )
 
-        lvTeamLst.adapter = adapter
+        lvA15.adapter = adapter
     }
 
 

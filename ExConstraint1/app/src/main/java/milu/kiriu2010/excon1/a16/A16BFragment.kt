@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1.counter
+package milu.kiriu2010.excon1.a16
 
 import android.content.Context
 import android.os.Bundle
@@ -10,7 +10,9 @@ import android.widget.Button
 import milu.kiriu2010.excon1.R
 import java.lang.RuntimeException
 
-class ButtonFragment: Fragment() {
+// カウントアップする側のフラグメント
+// ボタンを押してカウントアップする
+class A16BFragment: Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -21,7 +23,7 @@ class ButtonFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater.inflate(R.layout.fragment_button, container,false )
+        val view = inflater.inflate(R.layout.fragment_a16b, container,false )
         /*
         button.setOnClickListener {
             val listener = context as? OnButtonClickListener
@@ -29,7 +31,7 @@ class ButtonFragment: Fragment() {
         }
         */
 
-        view.findViewById<Button>(R.id.button)
+        view.findViewById<Button>(R.id.btnA16B)
                 .setOnClickListener {
                     val listener = context as? OnButtonClickListener
                     listener?.onButtonClicked()

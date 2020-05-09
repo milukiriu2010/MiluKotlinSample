@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
+import android.os.VibrationEffect
 import android.os.Vibrator;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -89,7 +90,8 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback 
                     missile.hit()
                     bullet.hit()
 
-                    vibrator.vibrate(VIBRATION_LENGTH_HIT_MISSILE)
+                    //vibrator.vibrate(VIBRATION_LENGTH_HIT_MISSILE)
+                    vibrator.vibrate(VibrationEffect.createOneShot(VIBRATION_LENGTH_HIT_MISSILE, VibrationEffect.DEFAULT_AMPLITUDE))
 
                     score += 10
                 }
@@ -116,7 +118,8 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback 
             }
 
             if (gameOver) {
-                vibrator.vibrate(VIBRATION_LENGTH_HIT_DROID)
+                //vibrator.vibrate(VIBRATION_LENGTH_HIT_DROID)
+                vibrator.vibrate(VibrationEffect.createOneShot(VIBRATION_LENGTH_HIT_DROID, VibrationEffect.DEFAULT_AMPLITUDE))
                 handlerX.post { callback!!.onGameOver(score) }
 
                 break

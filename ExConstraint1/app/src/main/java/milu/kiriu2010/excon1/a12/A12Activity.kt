@@ -27,8 +27,8 @@ class A12Activity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.menuItemTop -> {
                 ivA12.setImageResource(R.drawable.ic_a12_toppage)
                 return true
@@ -60,8 +60,8 @@ class A12Activity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_a12_context,menu)
     }
 
-    override fun onContextItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.a12_sms -> {
                 val number = "999-9999-9999"
                 val uri = Uri.parse("sms:$number")

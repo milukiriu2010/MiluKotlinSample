@@ -1,14 +1,15 @@
-package milu.kiriu2010.excon1.counter
+package milu.kiriu2010.excon1.a16
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import milu.kiriu2010.excon1.R
 
-class CounterActivity : AppCompatActivity(), ButtonFragment.OnButtonClickListener {
+// フラグメントの練習
+class A16Activity : AppCompatActivity(), A16BFragment.OnButtonClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_counter)
+        setContentView(R.layout.activity_a16)
 
         if ( savedInstanceState == null ) {
 
@@ -18,7 +19,7 @@ class CounterActivity : AppCompatActivity(), ButtonFragment.OnButtonClickListene
                 supportFragmentManager.beginTransaction()
                         // Counter用のフラグメントを生成&追加し、counterに"0"を設定する
                         //.add(R.id.containerFragment, newLabelFragment(0), "labelFragment")
-                        .replace(R.id.frameLabel, newLabelFragment(0), "labelFragment")
+                        .replace(R.id.flA16, newLabelFragment(0), "labelFragment")
                         // 貼り付けを実行
                         .commit()
             }
@@ -26,7 +27,7 @@ class CounterActivity : AppCompatActivity(), ButtonFragment.OnButtonClickListene
     }
 
     override fun onButtonClicked() {
-        val fragment = supportFragmentManager.findFragmentByTag("labelFragment") as LabelFragment
+        val fragment = supportFragmentManager.findFragmentByTag("labelFragment") as A16LFragment
         fragment.update()
     }
 }

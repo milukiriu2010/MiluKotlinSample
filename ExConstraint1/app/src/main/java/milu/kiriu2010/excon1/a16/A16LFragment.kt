@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1.counter
+package milu.kiriu2010.excon1.a16
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import milu.kiriu2010.excon1.R
 
-class LabelFragment: Fragment() {
+class A16LFragment: Fragment() {
     private var counter = 0
     private lateinit var counterLabel: TextView
 
@@ -23,7 +23,7 @@ class LabelFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_label, container, false )
-        counterLabel = view.findViewById(R.id.counterLabel)
+        counterLabel = view.findViewById(R.id.tvA16)
         // ここをコメントアウトしないと、
         // ボタンを押しても, 0がずっと残る
         // しかし、コメントアウトすると、
@@ -43,8 +43,8 @@ class LabelFragment: Fragment() {
     }
 }
 
-fun newLabelFragment(value: Int): LabelFragment {
-    val fragment = LabelFragment()
+fun newLabelFragment(value: Int): A16LFragment {
+    val fragment = A16LFragment()
 
     val args = Bundle()
     args.putInt("counter",value)

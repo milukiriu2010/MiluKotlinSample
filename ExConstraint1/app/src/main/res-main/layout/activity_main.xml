@@ -192,6 +192,7 @@
 
             <Button
                 android:id="@+id/btnA15"
+                style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/BTN_A15" />
@@ -203,17 +204,19 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnCounter"
+                android:id="@+id/btnA16"
+                style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Counter" />
+                android:text="@string/BTN_A16" />
 
             <Button
-                android:id="@+id/btnTimeZoneRV"
+                android:id="@+id/btnA17"
+                style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:text="TimeZone(RecyclerView)" />
+                android:text="@string/BTN_A17" />
         </TableRow>
 
         <TableRow
@@ -228,15 +231,17 @@
 
             <Button
                 android:id="@+id/btnGaction"
+                style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="GAction" />
+                android:text="@string/BTN_GACTION" />
 
             <Button
                 android:id="@+id/btnGshooting"
+                style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="GShooting" />
+                android:text="@string/BTN_GSHOOT" />
 
         </TableRow>
 
@@ -248,7 +253,7 @@
                 android:id="@+id/btnGlabyrinth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="GLabyrinth" />
+                android:text="@string/BTN_GLABYRINTH" />
         </TableRow>
     </TableLayout>
 

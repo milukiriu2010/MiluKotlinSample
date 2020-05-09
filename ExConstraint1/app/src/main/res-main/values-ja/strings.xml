@@ -69,6 +69,14 @@
 
     <string name="BTN_A15">チームリスト</string>
 
+    <string name="BTN_A16">カウンタ</string>
+    <string name="BTN_A16A">カウントアップ</string>
+
+    <string name="BTN_A17">TimeZone(RV)</string>
+
+    <string name="BTN_GACTION">ジャンプ</string>
+    <string name="BTN_GSHOOT">シューティング</string>
+    <string name="BTN_GLABYRINTH">迷路</string>
 
     <string name="BTN_BACK">戻る</string>
     <string name="LABEL_NAME">名前</string>

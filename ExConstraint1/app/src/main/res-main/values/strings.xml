@@ -67,11 +67,18 @@
 
     <string name="BTN_A15">TeamList</string>
 
+    <string name="BTN_A16">Counter</string>
+    <string name="BTN_A16A">Count Up</string>
+
+    <string name="BTN_A17">TimeZone(RV)</string>
+
+    <string name="BTN_GACTION">Jump</string>
+    <string name="BTN_GSHOOT">Shooting</string>
+    <string name="BTN_GLABYRINTH">LabyRinth</string>
 
     <string name="BTN_BACK">Back</string>
     <string name="LABEL_NAME">Name</string>
     <string name="BTN_TIMEZONE">TimeZone</string>
     <string name="BTN">Add</string>
-    <string name="BTN_TIMEZONE_RV">TimeZone(RV)</string>
     <string name="top_page">TOP PAGE</string>
 </resources>
