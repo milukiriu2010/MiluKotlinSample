@@ -3,6 +3,11 @@ package milu.kiriu2010.exdb1.mgl01.vbo01
 import android.opengl.GLES20
 import milu.kiriu2010.gui.model.MgModelAbs
 
+// ---------------------------------------
+// VBOで立方体を描画
+// 思ったようにいってないが、虹色になってる
+// OpenGL ES 2.0
+// ---------------------------------------
 class ES20VBO01viBO {
     // VBOのハンドル
     lateinit var hVBO: IntArray

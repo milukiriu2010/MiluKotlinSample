@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/mgl01_vbo02"
-        android:title="VBO(三角形(白))" />
+        android:title="@string/MGL01_VBO_02" />
     <item
         android:id="@+id/mgl01_vbo01"
-        android:title="VBO" />
+        android:title="@string/MGL01_VBO_01" />
     <item
         android:id="@+id/mgl01_cube_rotate02"
-        android:title="回転(立方体)02" />
+        android:title="@string/MGL01_ROTATE_02" />
     <item
         android:id="@+id/mgl01_cube_rotate01"
-        android:title="回転(立方体)01" />
+        android:title="@string/MGL01_ROTATE_01" />
 </menu>

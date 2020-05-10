@@ -11,7 +11,11 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
-
+// ---------------------------------------
+// VBOで立方体を描画
+// 思ったようにいってないが、虹色になってる
+// OpenGL ES 2.0
+// ---------------------------------------
 class ES20VBO01Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

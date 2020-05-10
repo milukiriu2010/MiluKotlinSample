@@ -11,7 +11,13 @@ import milu.kiriu2010.gui.shader.es20.nvbo.ES20Simple01Shader
 import milu.kiriu2010.math.MyMathUtil
 import kotlin.math.sqrt
 
-
+// -----------------------------
+// 回転(立方体)01
+// ５つの立方体が回転する
+// -----------------------------
+// VBOなし
+// OpenGL ES 2.0
+// -----------------------------
 class CubeRotate02Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画モデル(静止している立方体)
@@ -23,8 +29,6 @@ class CubeRotate02Renderer(ctx: Context): MgRenderer(ctx) {
 
     // シェーダ(特殊効果なし)
     private lateinit var shaderSimple: ES20Simple01Shader
-
-    private val sqrt2 = sqrt(2f)
 
     override fun onDrawFrame(gl: GL10) {
 

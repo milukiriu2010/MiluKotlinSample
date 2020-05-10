@@ -24,12 +24,8 @@ class OpenGL07Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_open_gl07)
 
-        supportFragmentManager.popBackStack()
-        if (supportFragmentManager.findFragmentByTag("xyz") == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.flGL07, WV077Fragment.newInstance(), "xyz")
-                    .commit()
-        }
+        // 初期表示のフラグメントを設定
+        changeFragment("wv077")
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -51,24 +47,16 @@ class OpenGL07Activity : AppCompatActivity() {
                 finish()
                 true
             }
-            // ラインシェード
+            // w077_ラインシェード:VBOあり
+            // OpenGL ES 2.0
             R.id.opengl_wv77 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv77") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL07, WV077Fragment.newInstance(), "wv77")
-                            .commit()
-                }
+                changeFragment("wv077")
                 true
             }
-            // ラインシェード
+            // w077_ラインシェード:VBOなし
+            // OpenGL ES 2.0
             R.id.opengl_w077 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w077") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL07, W077Fragment.newInstance(), "w077")
-                            .commit()
-                }
+                changeFragment("w077")
                 true
             }
             // ハーフトーンシェーディング
@@ -172,6 +160,30 @@ class OpenGL07Activity : AppCompatActivity() {
                 true
             }
             else -> return super.onOptionsItemSelected(item!!)
+        }
+    }
+
+    // 表示するフラグメントを切り替える
+    private fun changeFragment(tag: String) {
+        val fragment = when (tag) {
+            // w077_ラインシェード:VBOあり
+            // OpenGL ES 2.0
+            "wv077" -> WV077Fragment.newInstance()
+            // w077_ラインシェード:VBOなし
+            // OpenGL ES 2.0
+            "w077" -> W077Fragment.newInstance()
+            // w077_ラインシェード:VBOなし
+            // OpenGL ES 2.0
+            else -> W077Fragment.newInstance()
+        }
+
+        // 現在表示しているフラグメントをスタックから外す
+        supportFragmentManager.popBackStack()
+        // 選択したフラグメントを表示する
+        if ( supportFragmentManager.findFragmentByTag(tag) == null ) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.flGL07, fragment, tag)
+                    .commit()
         }
     }
 }

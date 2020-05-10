@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="MGL00_CB_DEPTH">Depth</string>
+    <string name="MGL00_CB_CULL">Cull</string>
+    <string name="MGL00_CB_ROTATE">Rotate</string>
+
+    <string name="MGL00_RB_PERS">Perspective</string>
+    <string name="MGL00_RB_FRUS">Frustum</string>
+    <string name="MGL00_RB_ORTH">Ortho</string>
+
+    <string name="MGL00_TV_FOV">Fov</string>
+    <string name="MGL00_TV_NEAR">Near</string>
+    <string name="MGL00_TV_FAR">Far</string>
+
+    <string name="MGL00_MODEL_TETRAHEDRON">正四面体</string>
+    <string name="MGL00_MODEL_CUBE">立方体</string>
+    <string name="MGL00_MODEL_OCTAHEDRON">正八面体</string>
+    <string name="MGL00_MODEL_DODECAHEDRON">正十二面体</string>
+    <string name="MGL00_MODEL_ICOSAHEDRON">正二十面体</string>
+    <string name="MGL00_MODEL_SPHERE">球</string>
+    <string name="MGL00_MODEL_TORUS">トーラス</string>
+</resources>

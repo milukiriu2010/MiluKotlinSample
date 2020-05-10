@@ -11,7 +11,13 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
-
+// -----------------------------
+// 回転(立方体)01
+// ５つの立方体が回転する
+// -----------------------------
+// VBOなし
+// OpenGL ES 2.0
+// -----------------------------
 class CubeRotate02Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

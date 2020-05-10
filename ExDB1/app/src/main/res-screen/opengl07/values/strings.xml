@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ITEM_W070">w070_浮動小数点数テクスチャ</string>
+    <string name="ITEM_WV70">wv70_浮動小数点数テクスチャ</string>
+    <string name="ITEM_W071">w071_頂点テクスチャフェッチ</string>
+    <string name="ITEM_WV71">wv71_頂点テクスチャフェッチ</string>
+    <string name="ITEM_W072">w072_浮動小数点数VTF</string>
+    <string name="ITEM_WV72">wv72_浮動小数点数VTF</string>
+    <string name="ITEM_W076">w076_ハーフトーンシェーディング</string>
+    <string name="ITEM_WV76">wv76_ハーフトーンシェーディング</string>
+    <string name="ITEM_W077">w077_ラインシェード</string>
+    <string name="ITEM_WV77">wv77_ラインシェード</string>
+
+
+    <string name="TV_W76">ドットサイズ(0.1–1.1)</string>
+    <string name="TV_W77">ラインサイズ(0.1–1.1)</string>
+</resources>

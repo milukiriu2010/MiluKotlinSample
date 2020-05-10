@@ -6,7 +6,8 @@ import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
 // --------------------------------------
-// 平行光源
+// 平行光源:VBOなし
+// OpenGL ES 2.0
 // --------------------------------------
 // 2019.05.13 コメント追加
 // 2019.05.22 リソース解放

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="MGL01_ROTATE_01">回転(立方体)01</string>
+    <string name="MGL01_ROTATE_02">回転(立方体)02</string>
+    <string name="MGL01_VBO_01">VBO(立方体)</string>
+    <string name="MGL01_VBO_02">VBO(三角形(白))</string>
+</resources>

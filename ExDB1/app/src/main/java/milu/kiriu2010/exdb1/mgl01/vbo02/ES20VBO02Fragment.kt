@@ -11,7 +11,10 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
-
+// ----------------------------------------------
+// VBOで三角形(色なし)を描画
+// OpenGL ES 2.0
+// ----------------------------------------------
 class ES20VBO02Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

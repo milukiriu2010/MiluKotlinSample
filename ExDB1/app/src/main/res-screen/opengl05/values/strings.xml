@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ITEM_W058">w058_グレアフィルタ</string>
+    <string name="ITEM_WV58">wv58_グレアフィルタ</string>
+    <string name="ITEM_W059">w059_被写界深度</string>
+    <string name="ITEM_WV59">wv59_被写界深度</string>
+</resources>

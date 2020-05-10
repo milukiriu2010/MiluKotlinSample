@@ -5,10 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <milu.kiriu2010.exdb1.opengl.MyGLES20View
-        android:id="@+id/myGLES20ViewMGL00"
+    <milu.kiriu2010.gui.view.MyGLES20View
+        android:id="@+id/myGLES20ViewMGL01"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"

@@ -10,18 +10,17 @@ import milu.kiriu2010.exdb1.mgl01.rot02.CubeRotate02Fragment
 import milu.kiriu2010.exdb1.mgl01.vbo01.ES20VBO01Fragment
 import milu.kiriu2010.exdb1.mgl01.vbo02.ES20VBO02Fragment
 
+// -------------------------------------------
+// OpenGL いろいろ実験
+// -------------------------------------------
 class Mgl01Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mgl01)
 
-        supportFragmentManager.popBackStack()
-        if (supportFragmentManager.findFragmentByTag("xyz") == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.flMGL01, ES20VBO02Fragment.newInstance(), "xyz")
-                    .commit()
-        }
+        // 初期表示のフラグメントを設定
+        changeFragment("vbo01")
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -44,46 +43,60 @@ class Mgl01Activity : AppCompatActivity() {
                 true
             }
             // VBO(三角形(白))
+            // OpenGL ES 2.0
             R.id.mgl01_vbo02 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("vbo02") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flMGL01, ES20VBO02Fragment.newInstance(), "vbo02")
-                            .commit()
-                }
+                changeFragment("vbo02")
                 true
             }
-            // VBO
+            // VBO(立方体)
+            // OpenGL ES 2.0
             R.id.mgl01_vbo01 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("vbo01") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flMGL01, ES20VBO01Fragment.newInstance(), "vbo01")
-                            .commit()
-                }
+                changeFragment("vbo01")
                 true
             }
-            // 回転(立方体)02
+            // 回転(立方体)02:VBOなし
+            // OpenGL ES 2.0
             R.id.mgl01_cube_rotate02 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("rot02") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flMGL01, CubeRotate02Fragment.newInstance(), "rot02")
-                            .commit()
-                }
+                changeFragment("rot02")
                 true
             }
-            // 回転(立方体)01
+            // 回転(立方体)01:VBOなし
+            // OpenGL ES 2.0
             R.id.mgl01_cube_rotate01 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("rot01") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flMGL01, Rotate01Fragment.newInstance(), "rot01")
-                            .commit()
-                }
+                changeFragment("rot01")
                 true
             }
             else -> return super.onOptionsItemSelected(item!!)
+        }
+    }
+
+    // 表示するフラグメントを切り替える
+    private fun changeFragment(tag: String) {
+        val fragment = when (tag) {
+            // VBO(三角形(白))
+            // OpenGL ES 2.0
+            "vbo02" -> ES20VBO02Fragment.newInstance()
+            // VBO(立方体)
+            // OpenGL ES 2.0
+            "vbo01" -> ES20VBO01Fragment.newInstance()
+            // 回転(立方体)02:VBOなし
+            // OpenGL ES 2.0
+            "rot02" -> CubeRotate02Fragment.newInstance()
+            // 回転(立方体)01:VBOなし
+            // OpenGL ES 2.0
+            "rot01" -> Rotate01Fragment.newInstance()
+            // 回転(立方体)01:VBOなし
+            // OpenGL ES 2.0
+            else -> Rotate01Fragment.newInstance()
+        }
+
+        // 現在表示しているフラグメントをスタックから外す
+        supportFragmentManager.popBackStack()
+        // 選択したフラグメントを表示する
+        if ( supportFragmentManager.findFragmentByTag(tag) == null ) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.flMGL01, fragment, tag)
+                    .commit()
         }
     }
 }

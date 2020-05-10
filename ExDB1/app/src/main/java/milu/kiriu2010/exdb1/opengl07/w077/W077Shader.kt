@@ -6,7 +6,8 @@ import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
 // --------------------------------------
-// シェーダ(ラインシェード)
+// シェーダ(ラインシェード):VBOなし
+// OpenGL ES 2.0
 // --------------------------------------
 // https://wgld.org/d/webgl/w077.html
 // --------------------------------------

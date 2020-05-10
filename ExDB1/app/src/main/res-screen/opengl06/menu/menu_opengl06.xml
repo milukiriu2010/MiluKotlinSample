@@ -24,16 +24,16 @@
         android:title="wv62_ステンシル鏡面反射" />
     <item
         android:id="@+id/opengl_wv61"
-        android:title="wv61_パーティクルフォグ" />
+        android:title="@string/ITEM_W061" />
     <item
         android:id="@+id/opengl_wv60"
-        android:title="wv60_フォグ距離" />
+        android:title="@string/ITEM_WV60" />
     <item
         android:id="@+id/opengl_wv59"
-        android:title="wv59_被写界深度" />
+        android:title="@string/ITEM_WV59" />
     <item
         android:id="@+id/opengl_wv58"
-        android:title="wv58_グレアフィルタ" />
+        android:title="@string/ITEM_WV58" />
     <item
         android:id="@+id/opengl_w068"
         android:title="w068_ゴッドレイ" />
@@ -57,14 +57,14 @@
         android:title="w062_ステンシル鏡面反射" />
     <item
         android:id="@+id/opengl_w061"
-        android:title="w061_パーティクルフォグ" />
+        android:title="@string/ITEM_W061" />
     <item
         android:id="@+id/opengl_w060"
-        android:title="w060_フォグ距離" />
+        android:title="@string/ITEM_W060" />
     <item
         android:id="@+id/opengl_w059"
-        android:title="w059_被写界深度" />
+        android:title="@string/ITEM_W059" />
     <item
         android:id="@+id/opengl_w058"
-        android:title="w058_グレアフィルタ" />
+        android:title="@string/ITEM_W058" />
 </menu>

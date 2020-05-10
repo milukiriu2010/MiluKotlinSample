@@ -19,8 +19,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <CheckBox
+        android:id="@+id/cbDepthMGL00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/MGL00_CB_DEPTH"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myGLES20ViewMGL00" />
+
+    <CheckBox
+        android:id="@+id/cbCullMGL00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/MGL00_CB_CULL"
+        app:layout_constraintBottom_toBottomOf="@+id/cbDepthMGL00"
+        app:layout_constraintStart_toEndOf="@+id/cbDepthMGL00"
+        app:layout_constraintTop_toTopOf="@+id/cbDepthMGL00" />
+
+    <CheckBox
+        android:id="@+id/cbRotateMGL00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/MGL00_CB_ROTATE"
+        app:layout_constraintBottom_toBottomOf="@+id/cbCullMGL00"
+        app:layout_constraintStart_toEndOf="@+id/cbCullMGL00"
+        app:layout_constraintTop_toTopOf="@+id/cbCullMGL00" />
+
     <Spinner
-        android:id="@+id/spinnerShader"
+        android:id="@+id/spShaderMGL00"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -28,73 +58,54 @@
         android:spinnerMode="dialog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxDepth" />
-
-    <CheckBox
-        android:id="@+id/checkBoxDepth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Depth"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myGLES20ViewMGL00" />
-
-    <CheckBox
-        android:id="@+id/checkBoxCull"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Cull"
-        app:layout_constraintBottom_toBottomOf="@+id/checkBoxDepth"
-        app:layout_constraintStart_toEndOf="@+id/checkBoxDepth"
-        app:layout_constraintTop_toTopOf="@+id/checkBoxDepth" />
-
-    <CheckBox
-        android:id="@+id/checkBoxRotate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Rotate"
-        app:layout_constraintBottom_toBottomOf="@+id/checkBoxCull"
-        app:layout_constraintStart_toEndOf="@+id/checkBoxCull"
-        app:layout_constraintTop_toTopOf="@+id/checkBoxCull" />
+        app:layout_constraintTop_toBottomOf="@+id/cbDepthMGL00" />
 
     <RadioGroup
-        android:id="@+id/radioGroupPersFrus"
+        android:id="@+id/rgPersFrusMGL00"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerShader">
+        app:layout_constraintTop_toBottomOf="@+id/spShaderMGL00">
 
         <RadioButton
-            android:id="@+id/radioButtonPers"
+            android:id="@+id/rbPersMGL00"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Perspective" />
+            android:text="@string/MGL00_RB_PERS" />
 
         <RadioButton
-            android:id="@+id/radioButtonFrus"
+            android:id="@+id/rbFrusMGL00"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Frustum" />
+            android:text="@string/MGL00_RB_FRUS" />
 
         <RadioButton
-            android:id="@+id/radioButtonOrth"
+            android:id="@+id/rbOrthMGL00"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ortho" />
+            android:text="@string/MGL00_RB_ORTH" />
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/tvFovMGL00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/MGL00_TV_FOV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgPersFrusMGL00" />
+
     <SeekBar
-        android:id="@+id/seekBarFov"
+        android:id="@+id/sbFovMGL00"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -102,33 +113,23 @@
         android:layout_marginEnd="8dp"
         android:max="180"
         android:progress="45"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewFov"
+        app:layout_constraintBottom_toBottomOf="@+id/tvFovMGL00"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewFov"
-        app:layout_constraintTop_toTopOf="@+id/textViewFov" />
+        app:layout_constraintStart_toEndOf="@+id/tvFovMGL00"
+        app:layout_constraintTop_toTopOf="@+id/tvFovMGL00" />
 
     <TextView
-        android:id="@+id/textViewFov"
+        android:id="@+id/tvNearMGL00"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Fov"
+        android:text="@string/MGL00_TV_NEAR"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupPersFrus" />
-
-    <TextView
-        android:id="@+id/textViewNear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Near"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFov" />
+        app:layout_constraintTop_toBottomOf="@+id/tvFovMGL00" />
 
     <SeekBar
-        android:id="@+id/seekBarNear"
+        android:id="@+id/sbNearMGL00"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -136,23 +137,23 @@
         android:layout_marginEnd="8dp"
         android:max="20"
         android:progress="1"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewNear"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNearMGL00"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewNear"
-        app:layout_constraintTop_toTopOf="@+id/textViewNear" />
+        app:layout_constraintStart_toEndOf="@+id/tvNearMGL00"
+        app:layout_constraintTop_toTopOf="@+id/tvNearMGL00" />
 
     <TextView
-        android:id="@+id/textViewFar"
+        android:id="@+id/tvFarMGL00"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Far"
+        android:text="@string/MGL00_TV_FAR"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNear" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNearMGL00" />
 
     <SeekBar
-        android:id="@+id/seekBarFar"
+        android:id="@+id/sbFarMGL00"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -160,9 +161,9 @@
         android:layout_marginEnd="8dp"
         android:max="50"
         android:progress="10"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewFar"
+        app:layout_constraintBottom_toBottomOf="@+id/tvFarMGL00"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewFar"
-        app:layout_constraintTop_toTopOf="@+id/textViewFar" />
+        app:layout_constraintStart_toEndOf="@+id/tvFarMGL00"
+        app:layout_constraintTop_toTopOf="@+id/tvFarMGL00" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

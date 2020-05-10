@@ -10,7 +10,9 @@ import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.math.MyMathUtil
 
 // ---------------------------------------
-// VBOで描画
+// VBOで立方体を描画
+// 思ったようにいってないが、虹色になってる
+// OpenGL ES 2.0
 // ---------------------------------------
 // http://junkcode.aakaka.com/archives/211
 // https://gist.github.com/axm/7463023#file-fborenderer-java

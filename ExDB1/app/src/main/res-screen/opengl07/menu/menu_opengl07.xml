@@ -2,38 +2,38 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/opengl_wv77"
-        android:title="wv77_ラインシェード" />
+        android:title="@string/ITEM_WV77" />
     <item
         android:id="@+id/opengl_wv76"
-        android:title="wv76_ハーフトーンシェーディング" />
+        android:title="@string/ITEM_W076" />
     <item
         android:id="@+id/opengl_wv72"
-        android:title="wv72_浮動小数点数VTF" />
+        android:title="@string/ITEM_WV72" />
     <item
         android:id="@+id/opengl_wv71"
-        android:title="wv71_頂点テクスチャフェッチ" />
+        android:title="@string/ITEM_WV71" />
     <item
         android:id="@+id/opengl_wv70"
-        android:title="wv70_浮動小数点数テクスチャ" />
+        android:title="@string/ITEM_WV70" />
     <item
         android:id="@+id/opengl_wv69"
-        android:title="wv69_シャドウマッピング(新)" />
+        android:title="@string/ITEM_WV69" />
     <item
         android:id="@+id/opengl_w077"
-        android:title="w077_ラインシェード" />
+        android:title="@string/ITEM_W077" />
     <item
         android:id="@+id/opengl_w076"
-        android:title="w076_ハーフトーンシェーディング" />
+        android:title="@string/ITEM_W076" />
     <item
         android:id="@+id/opengl_w072"
-        android:title="w072_浮動小数点数VTF" />
+        android:title="@string/ITEM_W072" />
     <item
         android:id="@+id/opengl_w071"
-        android:title="w071_頂点テクスチャフェッチ" />
+        android:title="@string/ITEM_W071" />
     <item
         android:id="@+id/opengl_w070"
-        android:title="w070_浮動小数点数テクスチャ" />
+        android:title="@string/ITEM_W070" />
     <item
         android:id="@+id/opengl_w069"
-        android:title="w069_シャドウマッピング(新)" />
+        android:title="@string/ITEM_W069" />
 </menu>

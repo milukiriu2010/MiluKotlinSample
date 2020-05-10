@@ -11,9 +11,8 @@ import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 import milu.kiriu2010.gui.vbo.es20.ES20VBOp
 
 // ----------------------------------------------
-// VBOで描画
-// ----------------------------------------------
-// 三角形(色なし)
+// VBOで三角形(色なし)を描画
+// OpenGL ES 2.0
 // ----------------------------------------------
 class ES20VBO02Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画モデル

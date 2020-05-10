@@ -3,23 +3,23 @@
 
     <item
         android:id="@+id/opengl_torus01"
-        android:title="トーラス" />
+        android:title="@string/MGL00_MODEL_TORUS" />
     <item
         android:id="@+id/opengl_sphere01"
-        android:title="球" />
+        android:title="@string/MGL00_MODEL_SPHERE" />
     <item
         android:id="@+id/opengl_icosahedron01"
-        android:title="正二十面体" />
+        android:title="@string/MGL00_MODEL_ICOSAHEDRON" />
     <item
         android:id="@+id/opengl_dodecahedron01"
-        android:title="正十二面体" />
+        android:title="@string/MGL00_MODEL_DODECAHEDRON" />
     <item
         android:id="@+id/opengl_octahedron01"
-        android:title="正八面体" />
+        android:title="@string/MGL00_MODEL_OCTAHEDRON" />
     <item
         android:id="@+id/opengl_cube01"
-        android:title="立方体" />
+        android:title="@string/MGL00_MODEL_CUBE" />
     <item
         android:id="@+id/opengl_tetrahedron01"
-        android:title="正四面体" />
+        android:title="@string/MGL00_MODEL_TETRAHEDRON" />
 </menu>

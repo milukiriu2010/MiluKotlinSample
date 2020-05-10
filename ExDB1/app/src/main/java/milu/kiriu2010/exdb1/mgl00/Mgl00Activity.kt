@@ -9,52 +9,30 @@ import kotlinx.android.synthetic.main.activity_mgl00.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.mgl00.nvbo.DepthCull01Fragment
 
+// -------------------------------------------
+// 立体描画
+// (0) 正四面体
+// (1) 立方体
+// (2) 正八面体
+// (3) 正十二面体
+// (4) 正二十面体
+// (5) 球
+// (6) トーラス
+// -------------------------------------------
+// (1) Depth/Cull
+// (2) Perspective/Frustum/Ortho
+// (3) Fov/Near/Far
+// VBOなし
+// OpenGL ES 2.0
+// -------------------------------------------
 class Mgl00Activity : AppCompatActivity() {
-
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.navigation_home -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(), "Home")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_dashboard -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(), "Home")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_notifications -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Home") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(), "Home")
-                            .commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mgl00)
 
-        nvMGL00.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
-        if (supportFragmentManager.findFragmentByTag("Home") == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(), "Home")
-                    .commit()
-        }
+        // 初期表示のフラグメントを設定
+        changeFragment(0)
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -77,77 +55,54 @@ class Mgl00Activity : AppCompatActivity() {
                 finish()
                 true
             }
-            // トーラス
+            // 6:トーラス
             R.id.opengl_torus01 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Torus01Model") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(6), "Torus01Model")
-                            .commit()
-                }
+                changeFragment(6)
                 true
             }
-            // 球
+            // 5:球
             R.id.opengl_sphere01 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Sphere01Model") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(5), "Sphere01Model")
-                            .commit()
-                }
+                changeFragment(5)
                 true
             }
-            // 正二十面体
+            // 4:正二十面体
             R.id.opengl_icosahedron01 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Icosahedron01Model") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(4), "Icosahedron01Model")
-                            .commit()
-                }
+                changeFragment(4)
                 true
             }
-            // 正十二面体
+            // 3:正十二面体
             R.id.opengl_dodecahedron01 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Dodecahedron01Model") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(3), "Dodecahedron01Model")
-                            .commit()
-                }
+                changeFragment(3)
                 true
             }
-            // 正八面体
+            // 2:正八面体
             R.id.opengl_octahedron01 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Octahedron01Model") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(2), "Octahedron01Model")
-                            .commit()
-                }
+                changeFragment(2)
                 true
             }
-            // 立方体
+            // 1:立方体
             R.id.opengl_cube01 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Cube01Model") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(1), "Cube01Model")
-                            .commit()
-                }
+                changeFragment(1)
                 true
             }
-            // 正四面体
+            // 0:正四面体
             R.id.opengl_tetrahedron01 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("Tetrahedron01Model") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(), "Tetrahedron01Model")
-                            .commit()
-                }
+                changeFragment(0)
                 true
             }
             else -> return super.onOptionsItemSelected(item!!)
+        }
+    }
+
+    // 表示するフラグメントを切り替える
+    private fun changeFragment(mode: Int) {
+        // 現在表示しているフラグメントをスタックから外す
+        supportFragmentManager.popBackStack()
+        // 選択したフラグメントを表示する
+        if ( supportFragmentManager.findFragmentByTag("model" + mode ) == null ) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.flMGL00, DepthCull01Fragment.newInstance(mode), "model" + mode)
+                    .commit()
         }
     }
 }

@@ -16,7 +16,22 @@ import milu.kiriu2010.gui.shader.es20.nvbo.ES20Simple01Shader
 import milu.kiriu2010.gui.shader.es20.nvbo.ES20Texture01Shader
 import milu.kiriu2010.math.MyMathUtil
 
-
+// -------------------------------------------
+// 立体描画
+// (0) 正四面体
+// (1) 立方体
+// (2) 正八面体
+// (3) 正十二面体
+// (4) 正二十面体
+// (5) 球
+// (6) トーラス
+// -------------------------------------------
+// (1) Depth/Cull
+// (2) Perspective/Frustum/Ortho
+// (3) Fov/Near/Far
+// VBOなし
+// OpenGL ES 2.0
+// -------------------------------------------
 class DepthCull01Renderer(val modelID: Int,ctx: Context): MgRenderer(ctx) {
 
     // 描画モデル

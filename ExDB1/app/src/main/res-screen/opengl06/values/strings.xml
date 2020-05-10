@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ITEM_W060">w060_フォグ距離</string>
+    <string name="ITEM_WV60">wv60_フォグ距離</string>
+    <string name="ITEM_W061">w061_パーティクルフォグ</string>
+    <string name="ITEM_WV61">wv61_パーティクルフォグ</string>
+    <string name="ITEM_W069">w069_シャドウマッピング(新)</string>
+    <string name="ITEM_WV69">wv69_シャドウマッピング(新)</string>
+
+    <string name="TV_W69">光源位置補正係数(20–40)</string>
+</resources>
