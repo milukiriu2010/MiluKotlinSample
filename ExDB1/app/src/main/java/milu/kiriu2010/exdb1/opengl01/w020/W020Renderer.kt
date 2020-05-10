@@ -9,9 +9,12 @@ import milu.kiriu2010.gui.model.Torus01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.shader.es20.nvbo.ES20Simple01Shader
 
-// トーラスの描画
+// --------------------------------------------------
+// トーラスの描画:VBOなし
+// OpenGL ES 2.0
 // --------------------------------------------------
 // https://wgld.org/d/webgl/w020.html
+// --------------------------------------------------
 class W020Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画モデル(トーラス)
     private lateinit var drawObj: Torus01Model

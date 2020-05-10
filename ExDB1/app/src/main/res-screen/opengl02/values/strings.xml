@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="ITEM_OPEN_GL_w020">w020_トーラス</string>
+    <string name="ITEM_OPEN_GL_wv020">wv020_トーラス</string>
+    <string name="ITEM_OPEN_GL_w021">w021_平行光源</string>
+    <string name="ITEM_OPEN_GL_wv021">wv021_平行光源</string>
+    <string name="ITEM_OPEN_GL_w022">w022_環境光</string>
+    <string name="ITEM_OPEN_GL_wv022">wv022_環境光</string>
+    <string name="ITEM_OPEN_GL_w023">w023_反射光</string>
+    <string name="ITEM_OPEN_GL_wv023">wv023_反射光</string>
+    <string name="ITEM_OPEN_GL_w024">w024_フォンシェーディング</string>
+    <string name="ITEM_OPEN_GL_wv024">wv024_フォンシェーディング</string>
+    <string name="ITEM_OPEN_GL_w025">w025_点光源</string>
+    <string name="ITEM_OPEN_GL_wv025">wv025_点光源</string>
     <string name="ITEM_OPEN_GL_w026">w026_テクスチャ</string>
     <string name="ITEM_OPEN_GL_wv026">wv026_テクスチャ</string>
 </resources>

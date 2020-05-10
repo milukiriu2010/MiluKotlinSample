@@ -9,6 +9,8 @@
     <string name="ITEM_OPEN_GL_wv017">wv017_移動・回転・拡大/縮小</string>
     <string name="ITEM_OPEN_GL_w018">w018_インデックスバッファ</string>
     <string name="ITEM_OPEN_GL_wv018">wv018_インデックスバッファ</string>
+    <string name="ITEM_OPEN_GL_w019">w019_カリングと深度テスト</string>
+    <string name="ITEM_OPEN_GL_wv019">wv019_カリングと深度テスト</string>
 
     <string name="SW_W19_CULL">Culling</string>
     <string name="SW_W19_FRONT">Front Face(CW)</string>

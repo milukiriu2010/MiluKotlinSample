@@ -3,25 +3,25 @@
 
     <item
         android:id="@+id/opengl_wv025"
-        android:title="wv025_点光源" />
+        android:title="@string/ITEM_OPEN_GL_wv025" />
     <item
         android:id="@+id/opengl_wv024"
-        android:title="wv024_フォンシェーディング" />
+        android:title="@string/ITEM_OPEN_GL_wv024" />
     <item
         android:id="@+id/opengl_wv023"
-        android:title="wv023_反射光" />
+        android:title="@string/ITEM_OPEN_GL_wv023" />
     <item
         android:id="@+id/opengl_wv022"
-        android:title="wv022_環境光" />
+        android:title="@string/ITEM_OPEN_GL_wv022" />
     <item
         android:id="@+id/opengl_wv021"
-        android:title="wv021_平行光源" />
+        android:title="@string/ITEM_OPEN_GL_wv021" />
     <item
         android:id="@+id/opengl_wv020"
-        android:title="wv020_トーラス" />
+        android:title="@string/ITEM_OPEN_GL_wv020" />
     <item
         android:id="@+id/opengl_wv019"
-        android:title="wv019_カリングと深度テスト" />
+        android:title="@string/ITEM_OPEN_GL_wv019" />
     <item
         android:id="@+id/opengl_wv018"
         android:title="@string/ITEM_OPEN_GL_wv018" />
@@ -36,25 +36,25 @@
         android:title="@string/ITEM_OPEN_GL_wv015" />
     <item
         android:id="@+id/opengl_w025"
-        android:title="w025_点光源" />
+        android:title="@string/ITEM_OPEN_GL_w025" />
     <item
         android:id="@+id/opengl_w024"
-        android:title="w024_フォンシェーディング" />
+        android:title="@string/ITEM_OPEN_GL_w024" />
     <item
         android:id="@+id/opengl_w023"
-        android:title="w023_反射光" />
+        android:title="@string/ITEM_OPEN_GL_w023" />
     <item
         android:id="@+id/opengl_w022"
-        android:title="w022_環境光" />
+        android:title="@string/ITEM_OPEN_GL_w022" />
     <item
         android:id="@+id/opengl_w021"
-        android:title="w021_平行光源" />
+        android:title="@string/ITEM_OPEN_GL_w021" />
     <item
         android:id="@+id/opengl_w020"
-        android:title="w020_トーラス" />
+        android:title="@string/ITEM_OPEN_GL_w020" />
     <item
         android:id="@+id/opengl_w019"
-        android:title="w019_カリングと深度テスト" />
+        android:title="@string/ITEM_OPEN_GL_w019" />
     <item
         android:id="@+id/opengl_w018"
         android:title="@string/ITEM_OPEN_GL_w018" />

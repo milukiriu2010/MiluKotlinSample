@@ -33,11 +33,8 @@ class OpenGL03Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_open_gl03)
 
-        if (supportFragmentManager.findFragmentByTag("xyz") == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.flGL03, WV041Fragment.newInstance(), "xyz")
-                    .commit()
-        }
+        // 初期表示のフラグメントを設定
+        changeFragment("wv032")
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -240,27 +237,43 @@ class OpenGL03Activity : AppCompatActivity() {
                 }
                 true
             }
-            // クォータニオン
+            // w032_クォータニオン:VBOあり
+            // OpenGL ES 2.0
             R.id.opengl_wv32 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv32") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL03, WV032Fragment.newInstance(), "wv32")
-                            .commit()
-                }
+                changeFragment("wv032")
                 true
             }
-            // クォータニオン
+            // w032_クォータニオン:VBOなし
+            // OpenGL ES 2.0
             R.id.opengl_w032 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w032") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL03, W032Fragment.newInstance(), "w032")
-                            .commit()
-                }
+                changeFragment("w032")
                 true
             }
             else -> return super.onOptionsItemSelected(item!!)
+        }
+    }
+
+    // 表示するフラグメントを切り替える
+    private fun changeFragment(tag: String) {
+        val fragment = when (tag) {
+            // w032_クォータニオン:VBOあり
+            // OpenGL ES 2.0
+            "wv032" -> WV032Fragment.newInstance()
+            // w032_クォータニオン:VBOなし
+            // OpenGL ES 2.0
+            "w032" -> W032Fragment.newInstance()
+            // w032_クォータニオン:VBOなし
+            // OpenGL ES 2.0
+            else -> W032Fragment.newInstance()
+        }
+
+        // 現在表示しているフラグメントをスタックから外す
+        supportFragmentManager.popBackStack()
+        // 選択したフラグメントを表示する
+        if ( supportFragmentManager.findFragmentByTag(tag) == null ) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.flGL03, fragment, tag)
+                    .commit()
         }
     }
 }

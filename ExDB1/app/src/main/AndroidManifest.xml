@@ -43,13 +43,11 @@
 
 
         <activity android:name=".es32x01.ES32x01Activity" />
-        <activity android:name=".es30x02.ES30x02Activity" />
         <activity
             android:name=".es30x01.ES30x01Activity"
             android:hardwareAccelerated="false" />
-        <activity
-            android:name=".opengl01.OpenGL01Activity"
-            android:label="@string/title_activity_open_gl" />
+        <activity android:name=".es30x02.ES30x02Activity" />
+        <activity android:name=".opengl01.OpenGL01Activity" />
         <activity android:name=".opengl02.OpenGL02Activity" />
         <activity android:name=".opengl03.OpenGL03Activity" />
         <activity android:name=".opengl04.OpenGL04Activity" />

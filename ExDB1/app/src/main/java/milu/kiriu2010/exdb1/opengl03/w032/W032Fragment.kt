@@ -11,7 +11,13 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
-
+// ---------------------------------------
+// クォータニオン
+//   カメラの位置を回転させる
+// OpenGL ES 2.0
+// ---------------------------------------
+// https://wgld.org/d/webgl/w032.html
+// ---------------------------------------
 class W032Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

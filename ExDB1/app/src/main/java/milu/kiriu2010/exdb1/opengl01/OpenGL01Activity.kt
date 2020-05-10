@@ -158,24 +158,16 @@ class OpenGL01Activity : AppCompatActivity() {
                 }
                 true
             }
-            // wv020_トーラス
+            // w020_トーラス:VBOあり
+            // OpenGL ES 2.0
             R.id.opengl_wv020 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv20") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL01, WV020Fragment.newInstance(), "wv20")
-                            .commit()
-                }
+                changeFragment("wv020")
                 true
             }
-            // w020_トーラス
+            // w020_トーラス:VBOなし
+            // OpenGL ES 2.0
             R.id.opengl_w020 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w20") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL01, W020Fragment.newInstance(), "w20")
-                            .commit()
-                }
+                changeFragment("w020")
                 true
             }
             // w019_カリングと深度テスト:VBOあり
@@ -250,6 +242,12 @@ class OpenGL01Activity : AppCompatActivity() {
     // 表示するフラグメントを切り替える
     private fun changeFragment(tag: String) {
         val fragment = when (tag) {
+            // w020_トーラス:VBOあり
+            // OpenGL ES 2.0
+            "wv020" -> WV020Fragment.newInstance()
+            // w020_トーラス:VBOなし
+            // OpenGL ES 2.0
+            "w020" -> W020Fragment.newInstance()
             // w019_カリングと深度テスト:VBOあり
             // OpenGL ES 2.0
             "wv019" -> WV019Fragment.newInstance()

@@ -5,7 +5,6 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_draw">DrawActivity</string>
     <string name="hello_blank_fragment">Hello World!!</string>
-    <string name="title_activity_open_gl">OpenGLActivity</string>
     <string name="title_activity_mgl00">Mgl00Activity</string>
     <string name="title_activity_mgl01">Mgl01Activity</string>
 
