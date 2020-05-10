@@ -11,16 +11,8 @@ import android.widget.ImageView
 
 import milu.kiriu2010.exdb1.R
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [Anime2RectangleFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [Anime2RectangleFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class Anime02RectangleFragment : Fragment() {
+// 長方形の動きをするアニメーション
+class A02Fragment : Fragment() {
     private lateinit var imageView: ImageView
 
     private var isCalculated = false
@@ -34,7 +26,7 @@ class Anime02RectangleFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_anime02_rectangle, container, false)
+        val view = inflater.inflate(R.layout.fragment_a0x, container, false)
 
         // 画像をレイアウトに配置
         imageView = ImageView(context)
@@ -155,16 +147,9 @@ class Anime02RectangleFragment : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment Anime2RectangleFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                Anime02RectangleFragment().apply {
+                A02Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

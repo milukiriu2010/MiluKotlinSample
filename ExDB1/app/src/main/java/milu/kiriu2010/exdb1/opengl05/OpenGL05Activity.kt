@@ -34,12 +34,8 @@ class OpenGL05Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_open_gl05)
 
-        supportFragmentManager.popBackStack()
-        if (supportFragmentManager.findFragmentByTag("xyz") == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.flGL05, WV057Fragment.newInstance(), "xyz")
-                    .commit()
-        }
+        // 初期表示のフラグメントを設定
+        changeFragment("wv050")
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -201,24 +197,16 @@ class OpenGL05Activity : AppCompatActivity() {
                 }
                 true
             }
-            // 光学迷彩
+            // w050_光学迷彩:VBOあり
+            // OpenGL ES 2.0
             R.id.opengl_wv50 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv50") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL05, WV050Fragment.newInstance(), "wv50")
-                            .commit()
-                }
+                changeFragment("wv050")
                 true
             }
-            // 光学迷彩
+            // w050_光学迷彩:VBOなし
+            // OpenGL ES 2.0
             R.id.opengl_w050 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w050") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL05, W050Fragment.newInstance(), "w050")
-                            .commit()
-                }
+                changeFragment("w050")
                 true
             }
             // 射影テクスチャマッピング
@@ -262,6 +250,30 @@ class OpenGL05Activity : AppCompatActivity() {
                 true
             }
             else -> return super.onOptionsItemSelected(item!!)
+        }
+    }
+
+    // 表示するフラグメントを切り替える
+    private fun changeFragment(tag: String) {
+        val fragment = when (tag) {
+            // w050_光学迷彩:VBOあり
+            // OpenGL ES 2.0
+            "wv050" -> WV050Fragment.newInstance()
+            // w050_光学迷彩:VBOなし
+            // OpenGL ES 2.0
+            "w050" -> W050Fragment.newInstance()
+            // w050_光学迷彩:VBOなし
+            // OpenGL ES 2.0
+            else -> W050Fragment.newInstance()
+        }
+
+        // 現在表示しているフラグメントをスタックから外す
+        supportFragmentManager.popBackStack()
+        // 選択したフラグメントを表示する
+        if ( supportFragmentManager.findFragmentByTag(tag) == null ) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.flGL05, fragment, tag)
+                    .commit()
         }
     }
 }

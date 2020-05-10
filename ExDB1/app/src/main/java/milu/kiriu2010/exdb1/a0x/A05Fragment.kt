@@ -1,5 +1,6 @@
 package milu.kiriu2010.exdb1.a0x
 
+
 import android.animation.Animator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,16 +15,8 @@ import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [Anime4RotateFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [Anime4RotateFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class Anime04RotateFragment : Fragment() {
+// 8の字アニメーション
+class A05Fragment : Fragment() {
 
     private lateinit var imageView: ImageView
 
@@ -38,7 +31,7 @@ class Anime04RotateFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_anime04_rotate, container, false)
+        val view = inflater.inflate(R.layout.fragment_a0x, container, false)
 
         // 画像をレイアウトに配置
         imageView = ImageView(context)
@@ -62,7 +55,7 @@ class Anime04RotateFragment : Fragment() {
             val ih = imageView.height.toFloat()
 
             // 半径
-            val radius = 200.0f
+            val radius = 300.0f
 
             // 中心
             val centerX = lw / 2 - iw / 2
@@ -79,14 +72,16 @@ class Anime04RotateFragment : Fragment() {
             imageView.x = centerX + (radius * cos(0.0)).toFloat()
             imageView.y = centerY + (radius * sin(0.0)).toFloat()
 
+            // 8の字
+            // x = cos(a)
+            // y = sin(2a)
+
             // 画像の幅分横に移動
             val duration = 100L
             val animator = imageView.animate()
                     .setDuration(duration)
                     .x(centerX + (radius * cos(angleZ / 180 * PI)).toFloat())
-                    .y(centerY + (radius * sin(angleZ / 180 * PI)).toFloat())
-                    //.rotationBy(angle)
-                    //.rotationXBy(angle)
+                    .y(centerY + (radius * sin(2*angleZ / 180 * PI)).toFloat())
                     .rotationYBy(angleY)
             // リピートする
             animator.setListener(object : Animator.AnimatorListener {
@@ -100,9 +95,7 @@ class Anime04RotateFragment : Fragment() {
                     imageView.animate()
                             .setDuration(duration)
                             .x(centerX + (radius * cos(angleZ / 180 * PI)).toFloat())
-                            .y(centerY + (radius * sin(angleZ / 180 * PI)).toFloat())
-                            //.rotationBy(angle)
-                            //.rotationXBy(angle)
+                            .y(centerY + (radius * sin(2*angleZ / 180 * PI)).toFloat())
                             .rotationYBy(angleY)
                 }
 
@@ -117,17 +110,11 @@ class Anime04RotateFragment : Fragment() {
         return view
     }
 
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment Anime4RotateFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                Anime04RotateFragment().apply {
+                A05Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

@@ -1,6 +1,5 @@
 package milu.kiriu2010.exdb1.a0x
 
-
 import android.animation.Animator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,20 +11,33 @@ import android.widget.ImageView
 
 import milu.kiriu2010.exdb1.R
 import kotlin.math.PI
-import kotlin.math.cos
 import kotlin.math.sin
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Anime07AsteroidFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class Anime07AsteroidFragment : Fragment() {
+// リサージュ
+class A10Fragment : Fragment() {
 
     private lateinit var imageView: ImageView
 
     private var isCalculated = false
+
+    // 半径
+    private val radius = 300.0f
+    private var a = 3.0f
+    private var b = 4.0f
+
+    // 中心
+    private var centerX = 0.0f
+    private var centerY = 0.0f
+
+    // 回転角度(Y軸)
+    private val angleY = 10.0f
+    // 回転角度(Z軸)
+    private var angleZ = 0.0f
+    // 回転角度(Z軸)差分
+    private var angleZd = 10.0f
+
+    // アニメーションする時間
+    val duration = 100L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +48,7 @@ class Anime07AsteroidFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_anime07_asteroid, container, false)
+        val view = inflater.inflate(R.layout.fragment_a0x, container, false)
 
         // 画像をレイアウトに配置
         imageView = ImageView(context)
@@ -59,34 +71,24 @@ class Anime07AsteroidFragment : Fragment() {
             val iw = imageView.width.toFloat()
             val ih = imageView.height.toFloat()
 
-            // 半径
-            val radius = 300.0f
-
             // 中心
-            val centerX = lw/2 - iw/2
-            val centerY = lh / 2 - ih / 2
+            centerX = lw/2 - iw/2
+            centerY = lh / 2 - ih / 2
 
-            // 回転角度(Y軸)
-            val angleY = 10.0f
-            // 回転角度(Z軸)
-            var angleZ = 0.0f
-            // 回転角度(Z軸)差分
-            var angleZd = 10.0f
+            // 縦横真ん中を初期表示位置とする
+            imageView.x = centerX + (radius * sin(0.0)).toFloat()
+            imageView.y = centerY + (radius * sin(0.0)).toFloat()
 
-            // 縦横真ん中からアステロイド曲線の左端にずらして表示
-            imageView.x = centerX + (radius * cos(0.0) * cos(0.0) * cos(0.0)).toFloat()
-            imageView.y = centerY + (radius * sin(0.0) * sin(0.0) * sin(0.0)).toFloat()
-
-            // アステロイド曲線
-            // x = a * cos(b) * cos(b) * cos(b)
-            // y = a * sin(b) * sin(b) * sin(b)
+            // リサージュ曲線
+            // x = A * sin(at+c)
+            // y = B * sin(bt)
 
             // 画像の幅分横に移動
-            val duration = 100L
+            //val duration = 100L
             val animator = imageView.animate()
                     .setDuration(duration)
-                    .x(centerX + (radius * cos(angleZ/180* PI) * cos(angleZ/180* PI) * cos(angleZ/180* PI) ).toFloat())
-                    .y(centerY + (radius * sin(angleZ/180* PI) * sin(angleZ/180* PI) * sin(angleZ/180* PI) ).toFloat())
+                    .x(centerX + (radius * sin(a*angleZ/180* PI)).toFloat())
+                    .y(centerY + (radius * sin(b*angleZ/180* PI)).toFloat())
                     .rotationYBy(angleY)
             // リピートする
             animator.setListener(object : Animator.AnimatorListener {
@@ -94,15 +96,7 @@ class Anime07AsteroidFragment : Fragment() {
                 }
 
                 override fun onAnimationEnd(animation: Animator?) {
-                    Log.d(javaClass.simpleName, "onAnimationEnd")
-                    angleZ += angleZd
-                    angleZ %= 360
-
-                    imageView.animate()
-                            .setDuration(duration)
-                            .x(centerX + (radius * cos(angleZ/180* PI) * cos(angleZ/180* PI) * cos(angleZ/180* PI) ).toFloat())
-                            .y(centerY + (radius * sin(angleZ/180* PI) * sin(angleZ/180* PI) * sin(angleZ/180* PI) ).toFloat())
-                            .rotationYBy(angleY)
+                    moveNext()
                 }
 
                 override fun onAnimationCancel(animation: Animator?) {
@@ -116,20 +110,32 @@ class Anime07AsteroidFragment : Fragment() {
         return view
     }
 
+    private fun moveNext() {
+        angleZ += angleZd
+        /*
+        // 5回転したら逆回し
+        if ( angleZ.toInt()%1800 == 0 ) {
+            angleZd = -1 * angleZd
+        }
+        */
+        angleZ %= 360
+
+        Log.d(javaClass.simpleName, "moveNext:x[${imageView.x}]y[${imageView.y}]angleZ[$angleZ]angleZd[$angleZd]")
+
+        imageView.animate()
+                .setDuration(duration)
+                .x(centerX + (radius * sin(a*angleZ/180*PI)).toFloat())
+                .y(centerY + (radius * sin(b*angleZ/180*PI)).toFloat())
+                .rotationYBy(angleY)
+    }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment Anime07AsteroidFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                Anime07AsteroidFragment().apply {
+                A10Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }
     }
+
 }

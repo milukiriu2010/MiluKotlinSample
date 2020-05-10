@@ -28,7 +28,7 @@ class A01Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_a01, container, false)
+        val view = inflater.inflate(R.layout.fragment_a0x, container, false)
 
         // アニメーションする画像をレイアウトに配置
         imageView = ImageView(context)

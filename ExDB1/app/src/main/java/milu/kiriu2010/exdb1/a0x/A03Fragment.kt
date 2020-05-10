@@ -12,13 +12,8 @@ import android.widget.ImageView
 
 import milu.kiriu2010.exdb1.R
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Anime3BounceFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class Anime03BounceFragment : Fragment() {
+// バウンスするアニメーション
+class A03Fragment : Fragment() {
     private lateinit var imageView: ImageView
 
     private var isCalculated = false
@@ -32,7 +27,7 @@ class Anime03BounceFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_anime03_bounce, container, false)
+        val view = inflater.inflate(R.layout.fragment_a0x, container, false)
 
         // 画像をレイアウトに配置
         imageView = ImageView(context)
@@ -135,16 +130,9 @@ class Anime03BounceFragment : Fragment() {
 
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment Anime3BounceFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                Anime03BounceFragment().apply {
+                A03Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

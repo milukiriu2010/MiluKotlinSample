@@ -7,7 +7,8 @@ import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
 // ---------------------------------------------
-// シェーダ(キューブマップ環境マッピング)
+// シェーダ(キューブマップ環境マッピング):VBOあり
+//// OpenGL ES 2.0
 // ---------------------------------------------
 // WV044Shaderと同じ
 // WV047Shaderと同じ

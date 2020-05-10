@@ -3,16 +3,16 @@
 
     <item
         android:id="@+id/opengl_wv030"
-        android:title="wv030_ブレンドファクター" />
+        android:title="@string/ITEM_OPEN_GL_wv030" />
     <item
         android:id="@+id/opengl_wv029"
-        android:title="wv029_アルファブレンディング" />
+        android:title="@string/ITEM_OPEN_GL_wv029" />
     <item
         android:id="@+id/opengl_wv028"
-        android:title="wv028_テクスチャパラメータ" />
+        android:title="@string/ITEM_OPEN_GL_wv028" />
     <item
         android:id="@+id/opengl_wv027"
-        android:title="wv027_マルチテクスチャ" />
+        android:title="@string/ITEM_OPEN_GL_wv027" />
     <item
         android:id="@+id/opengl_wv026"
         android:title="@string/ITEM_OPEN_GL_wv026" />
@@ -21,16 +21,16 @@
         android:title="noisev01_ノイズテクスチャ" />
     <item
         android:id="@+id/opengl_w030"
-        android:title="w030_ブレンドファクター" />
+        android:title="@string/ITEM_OPEN_GL_w030" />
     <item
         android:id="@+id/opengl_w029"
-        android:title="w029_アルファブレンディング" />
+        android:title="@string/ITEM_OPEN_GL_w029" />
     <item
         android:id="@+id/opengl_w028"
-        android:title="w028_テクスチャパラメータ" />
+        android:title="@string/ITEM_OPEN_GL_w028" />
     <item
         android:id="@+id/opengl_w027"
-        android:title="w027_マルチテクスチャ" />
+        android:title="@string/ITEM_OPEN_GL_w027" />
     <item
         android:id="@+id/opengl_w026"
         android:title="@string/ITEM_OPEN_GL_w026" />

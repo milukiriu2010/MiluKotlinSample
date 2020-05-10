@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ITEM_A01">左⇒右</string>
+    <string name="ITEM_A02">長方形</string>
+    <string name="ITEM_A03">バウンス</string>
+    <string name="ITEM_A04">回転</string>
+    <string name="ITEM_A05">８の字</string>
+    <string name="ITEM_A06">サイクロイド</string>
+    <string name="ITEM_A07">アステロイド</string>
+    <string name="ITEM_A08">カージオイド</string>
+    <string name="ITEM_A09">ベルヌーイ</string>
+    <string name="ITEM_A10">リサージュ</string>
+    <string name="ITEM_A11">レムニスケート</string>
+    <string name="ITEM_A12">インボリュート</string>
+</resources>

@@ -14,23 +14,15 @@ class A0XActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                changeFragment("Home")
+                changeFragment("a01")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                if ( supportFragmentManager.findFragmentByTag("Dashboard") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA0X, DashboardFragment.newInstance(), "Dashboard")
-                            .commit()
-                }
+                changeFragment("a07")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                if ( supportFragmentManager.findFragmentByTag("Notification") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA0X, NotificationFragment.newInstance(), "Notification")
-                            .commit()
-                }
+                changeFragment("a05")
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -45,7 +37,7 @@ class A0XActivity : AppCompatActivity() {
         nvA0X.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         // 初期表示のフラグメントを設定
-        changeFragment("Home")
+        changeFragment("a01")
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -67,103 +59,59 @@ class A0XActivity : AppCompatActivity() {
                 finish()
                 true
             }
-        // インボリュート
-            R.id.anime_12_involute -> {
-                if ( supportFragmentManager.findFragmentByTag("Anime12Involute") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA0X, Anime12InvoluteFragment.newInstance(), "Anime12Involute")
-                            .commit()
-                }
+            // インボリュート
+            R.id.item_a12 -> {
+                changeFragment("a12")
                 true
             }
-        // レムニスケート
-            R.id.anime_11_lemniscate -> {
-                if ( supportFragmentManager.findFragmentByTag("Anime11Lemniscate") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA0X, Anime11LemniscateFragment.newInstance(), "Anime11Lemniscate")
-                            .commit()
-                }
+            // レムニスケート
+            R.id.item_a11 -> {
+                changeFragment("a11")
                 true
             }
-        // リサージュ
-            R.id.anime_10_lissajous -> {
-                if ( supportFragmentManager.findFragmentByTag("Anime10Lissajous") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA0X, Anime10LissajousFragment.newInstance(), "Anime10Lissajous")
-                            .commit()
-                }
+            // リサージュ
+            R.id.item_a10 -> {
+                changeFragment("a10")
                 true
             }
-        // ベルヌーイ
-            R.id.anime_09_bernoulli -> {
-                if ( supportFragmentManager.findFragmentByTag("Anime09Bernoulli") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA0X, Anime09BernoulliFragment.newInstance(), "Anime09Bernoulli")
-                            .commit()
-                }
+            // ベルヌーイ
+            R.id.item_a09 -> {
+                changeFragment("a09")
                 true
             }
-        // カージオイド
-            R.id.anime_08_cardioid -> {
-                if ( supportFragmentManager.findFragmentByTag("Anime08Cardioid") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA0X, Anime08CardioidFragment.newInstance(), "Anime08Cardioid")
-                            .commit()
-                }
+            // カージオイド
+            R.id.item_a08 -> {
+                changeFragment("a08")
                 true
             }
-        // アステロイド
-            R.id.anime_07_asteroid -> {
-                if ( supportFragmentManager.findFragmentByTag("Anime07Asteroid") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA0X, Anime07AsteroidFragment.newInstance(), "Anime07Asteroid")
-                            .commit()
-                }
+            // アステロイド
+            R.id.item_a07 -> {
+                changeFragment("a07")
                 true
             }
-        // サイクロイド
-            R.id.anime_06_cycloid -> {
-                if ( supportFragmentManager.findFragmentByTag("Anime06Cycloid") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA0X, Anime06CycloidFragment.newInstance(), "Anime06Cycloid")
-                            .commit()
-                }
+            // サイクロイド
+            R.id.item_a06 -> {
+                changeFragment("a06")
                 true
             }
-        // 8の字
-            R.id.anime_5_eight -> {
-                if ( supportFragmentManager.findFragmentByTag("Anime5Eight") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA0X, Anime05EightFragment.newInstance(), "Anime5Eight")
-                            .commit()
-                }
+            // 8の字アニメーション
+            R.id.item_a05 -> {
+                changeFragment("a05")
                 true
             }
-        // "回転"
-            R.id.anime_4_rotate -> {
-                if ( supportFragmentManager.findFragmentByTag("Anime4Rotate") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA0X, Anime04RotateFragment.newInstance(), "Anime4Rotate")
-                            .commit()
-                }
+            // 回転するアニメーション
+            R.id.item_a04 -> {
+                changeFragment("a04")
                 true
             }
-        // "バウンス"
-            R.id.anime_3_bounce -> {
-                if ( supportFragmentManager.findFragmentByTag("Anime3Bounce") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA0X, Anime03BounceFragment.newInstance(), "Anime3Bounce")
-                            .commit()
-                }
+            // バウンスするアニメーション
+            R.id.item_a03 -> {
+                changeFragment("a03")
                 true
             }
-        // "長方形"
-            R.id.anime_2_rectangle -> {
-                if ( supportFragmentManager.findFragmentByTag("Anime2Rectangle") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flA0X, Anime02RectangleFragment.newInstance(), "Anime2Rectangle")
-                            .commit()
-                }
+            // 長方形の動きをするアニメーション
+            R.id.item_a02 -> {
+                changeFragment("a02")
                 true
             }
             // 左⇒右へアニメーション
@@ -177,10 +125,30 @@ class A0XActivity : AppCompatActivity() {
 
     private fun changeFragment(tag: String) {
         val fragment = when (tag) {
+            // インボリュート
+            "a12" -> A12Fragment.newInstance()
+            // レムニスケート
+            "a11" -> A11Fragment.newInstance()
+            // リサージュ
+            "a10" -> A10Fragment.newInstance()
+            // ベルヌーイ
+            "a09" -> A09Fragment.newInstance()
+            // カージオイド
+            "a08" -> A08Fragment.newInstance()
+            // アステロイド
+            "a07" -> A07Fragment.newInstance()
+            // サイクロイド
+            "a06" -> A06Fragment.newInstance()
+            // 8の字アニメーション
+            "a05" -> A05Fragment.newInstance()
+            // 回転するアニメーション
+            "a04" -> A04Fragment.newInstance()
+            // バウンスするアニメーション
+            "a03" -> A03Fragment.newInstance()
+            // 長方形の動きをするアニメーション
+            "a02" -> A02Fragment.newInstance()
             // 左⇒右へアニメーション
             "a01" -> A01Fragment.newInstance()
-            // 左⇒右へアニメーション
-            "Home" -> A01Fragment.newInstance()
             // 左⇒右へアニメーション
             else -> A01Fragment.newInstance()
         }

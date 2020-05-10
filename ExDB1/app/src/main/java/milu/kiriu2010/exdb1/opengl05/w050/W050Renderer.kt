@@ -17,7 +17,8 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // ---------------------------------------------
-// 光学迷彩
+// 光学迷彩:VBOなし
+// OpenGL ES 2.0
 // ---------------------------------------------
 // https://wgld.org/d/webgl/w050.html
 // ---------------------------------------------

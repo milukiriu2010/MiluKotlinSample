@@ -34,12 +34,8 @@ class OpenGL06Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_open_gl06)
 
-        supportFragmentManager.popBackStack()
-        if (supportFragmentManager.findFragmentByTag("xyz") == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.flGL06, WV068Fragment.newInstance(), "xyz")
-                    .commit()
-        }
+        // 初期表示のフラグメントを設定
+        changeFragment("wv060")
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -221,24 +217,16 @@ class OpenGL06Activity : AppCompatActivity() {
                 }
                 true
             }
-            // フォグ距離
+            // w060_フォグ距離:VBOあり
+            // OpenGL ES 2.0
             R.id.opengl_wv60 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv60") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL06, WV060Fragment.newInstance(), "wv60")
-                            .commit()
-                }
+                changeFragment("wv060")
                 true
             }
-            // フォグ距離
+            // w060_フォグ距離:VBOなし
+            // OpenGL ES 2.0
             R.id.opengl_w060 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w060") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL06, W060Fragment.newInstance(), "w060")
-                            .commit()
-                }
+                changeFragment("w060")
                 true
             }
             // 被写界深度
@@ -285,4 +273,27 @@ class OpenGL06Activity : AppCompatActivity() {
         }
     }
 
+    // 表示するフラグメントを切り替える
+    private fun changeFragment(tag: String) {
+        val fragment = when (tag) {
+            // w060_フォグ距離:VBOあり
+            // OpenGL ES 2.0
+            "wv060" -> WV060Fragment.newInstance()
+            // w060_フォグ距離:VBOなし
+            // OpenGL ES 2.0
+            "w060" -> W060Fragment.newInstance()
+            // w060_フォグ距離:VBOなし
+            // OpenGL ES 2.0
+            else -> W060Fragment.newInstance()
+        }
+
+        // 現在表示しているフラグメントをスタックから外す
+        supportFragmentManager.popBackStack()
+        // 選択したフラグメントを表示する
+        if ( supportFragmentManager.findFragmentByTag(tag) == null ) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.flGL06, fragment, tag)
+                    .commit()
+        }
+    }
 }

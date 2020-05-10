@@ -15,17 +15,30 @@ import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Anime08CardioidFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class Anime08CardioidFragment : Fragment() {
+// インボリュート
+class A12Fragment : Fragment() {
 
     private lateinit var imageView: ImageView
 
     private var isCalculated = false
+
+    // 半径
+    private val radius = 10.0f
+
+
+    // 中心
+    private var centerX = 0.0f
+    private var centerY = 0.0f
+
+    // 回転角度(Y軸)
+    private val angleY = 10.0f
+    // 回転角度(Z軸)
+    private var angleZ = 0.0f
+    // 回転角度(Z軸)差分
+    private var angleZd = 10.0f
+
+    // アニメーションする時間
+    val duration = 100L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,14 +49,13 @@ class Anime08CardioidFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_anime08_cardioid, container, false)
+        val view = inflater.inflate(R.layout.fragment_a0x, container, false)
 
         // 画像をレイアウトに配置
         imageView = ImageView(context)
         imageView.setImageResource(R.drawable.a_male)
         imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)
         (view as ViewGroup).addView(imageView)
-
 
         // レイアウト・画像サイズ取得
         // エミュレータ(1080x1584) => ButtonNavigationなし
@@ -60,34 +72,24 @@ class Anime08CardioidFragment : Fragment() {
             val iw = imageView.width.toFloat()
             val ih = imageView.height.toFloat()
 
-            // 半径
-            val radius = 300.0f
-
             // 中心
-            val centerX = lw/2 - iw/2
-            val centerY = lh / 2 - ih / 2
+            centerX = lw/2 - iw/2
+            centerY = lh / 2 - ih / 2
 
-            // 回転角度(Y軸)
-            val angleY = 10.0f
-            // 回転角度(Z軸)
-            var angleZ = 0.0f
-            // 回転角度(Z軸)差分
-            var angleZd = 10.0f
+            // 縦横真ん中を初期表示位置とする
+            imageView.x = centerX + radius * ( cos(angleZ/180* PI) + (angleZ/180* PI) * sin(angleZ/180* PI) ).toFloat()
+            imageView.y = centerY + radius * ( sin(angleZ/180* PI) - (angleZ/180* PI) * cos(angleZ/180* PI) ).toFloat()
 
-            // 縦横真ん中から半径分左にずらして表示
-            imageView.x = centerX - radius + (radius * (1+cos(0.0)) * cos(0.0)).toFloat()
-            imageView.y = centerY + (radius * (1+cos(0.0)) * sin(0.0)).toFloat()
-
-            // カージオイド曲線
-            // x = a * (1+cos(b)) * cos(b)
-            // y = a * (1+cos(b)) * sin(b)
+            // インボリュート曲線
+            // x = r * ( cos(t) + t*sin(t) )
+            // y = r * ( sin(t) - t*cos(t) )
 
             // 画像の幅分横に移動
-            val duration = 100L
+            //val duration = 100L
             val animator = imageView.animate()
                     .setDuration(duration)
-                    .x(centerX - radius + (radius * (1+cos(angleZ/180* PI)) * cos(angleZ/180* PI) ).toFloat())
-                    .y(centerY + (radius * (1+cos(angleZ/180* PI)) * sin(angleZ/180* PI) ).toFloat())
+                    .x(centerX + radius * ( cos(angleZ/180* PI) + (angleZ/180* PI) * sin(angleZ/180* PI) ).toFloat())
+                    .y(centerY + radius * ( sin(angleZ/180* PI) - (angleZ/180* PI) * cos(angleZ/180* PI) ).toFloat())
                     .rotationYBy(angleY)
             // リピートする
             animator.setListener(object : Animator.AnimatorListener {
@@ -95,15 +97,7 @@ class Anime08CardioidFragment : Fragment() {
                 }
 
                 override fun onAnimationEnd(animation: Animator?) {
-                    Log.d(javaClass.simpleName, "onAnimationEnd")
-                    angleZ += angleZd
-                    angleZ %= 360
-
-                    imageView.animate()
-                            .setDuration(duration)
-                            .x(centerX - radius + (radius * (1+cos(angleZ/180* PI)) * cos(angleZ/180* PI) ).toFloat())
-                            .y(centerY + (radius * (1+cos(angleZ/180* PI)) * sin(angleZ/180* PI) ).toFloat())
-                            .rotationYBy(angleY)
+                    moveNext()
                 }
 
                 override fun onAnimationCancel(animation: Animator?) {
@@ -117,18 +111,27 @@ class Anime08CardioidFragment : Fragment() {
         return view
     }
 
+    private fun moveNext() {
+        angleZ += angleZd
+        // 5回転したら逆回し
+        if ( angleZ.toInt()%1800 == 0 ) {
+            angleZd = -1 * angleZd
+        }
+        //angleZ %= 360
+
+        Log.d(javaClass.simpleName, "moveNext:x[${imageView.x}]y[${imageView.y}]angleZ[$angleZ]angleZd[$angleZd]")
+
+        imageView.animate()
+                .setDuration(duration)
+                .x(centerX + radius * ( cos(angleZ/180*PI) + (angleZ/180*PI) * sin(angleZ/180*PI) ).toFloat())
+                .y(centerY + radius * ( sin(angleZ/180*PI) - (angleZ/180*PI) * cos(angleZ/180*PI) ).toFloat())
+                .rotationYBy(angleY)
+    }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment Anime08CardioidFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                Anime08CardioidFragment().apply {
+                A12Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

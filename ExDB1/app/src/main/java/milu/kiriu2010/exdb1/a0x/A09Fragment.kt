@@ -1,5 +1,6 @@
 package milu.kiriu2010.exdb1.a0x
 
+
 import android.animation.Animator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,22 +13,33 @@ import android.widget.ImageView
 import milu.kiriu2010.exdb1.R
 import kotlin.math.PI
 import kotlin.math.cos
+import kotlin.math.exp
 import kotlin.math.sin
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [Anime06CycloidFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [Anime06CycloidFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class Anime06CycloidFragment : Fragment() {
+// ベルヌーイ
+class A09Fragment : Fragment() {
 
     private lateinit var imageView: ImageView
 
     private var isCalculated = false
+
+    // 半径
+    private val radius = 2.0f
+    private var b = 0.2f
+
+    // 中心
+    private var centerX = 0.0f
+    private var centerY = 0.0f
+
+    // 回転角度(Y軸)
+    private val angleY = 10.0f
+    // 回転角度(Z軸)
+    private var angleZ = 0.0f
+    // 回転角度(Z軸)差分
+    private var angleZd = 10.0f
+
+    // アニメーションする時間
+    val duration = 100L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +50,7 @@ class Anime06CycloidFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_anime06_cycloid, container, false)
-
+        val view = inflater.inflate(R.layout.fragment_a0x, container, false)
 
         // 画像をレイアウトに配置
         imageView = ImageView(context)
@@ -63,33 +74,34 @@ class Anime06CycloidFragment : Fragment() {
             val ih = imageView.height.toFloat()
 
             // 半径
-            val radius = 100.0f
+            //val radius = 2.0f
+            //var b = 0.2f
 
             // 中心
-            val centerX = lw/2 - iw/2 - (radius * ( 2* PI - sin(2* PI) ).toFloat())/2
-            val centerY = lh / 2 - ih / 2
+            centerX = lw/2 - iw/2
+            centerY = lh / 2 - ih / 2
 
             // 回転角度(Y軸)
-            val angleY = 10.0f
+            //val angleY = 10.0f
             // 回転角度(Z軸)
-            var angleZ = 10.0f
+            //var angleZ = 0.0f
             // 回転角度(Z軸)差分
-            var angleZd = 10.0f
+            //var angleZd = 10.0f
 
-            // 縦横真ん中からサイクロイド曲線の半分左にずらして表示
-            imageView.x = centerX + (radius * cos(0.0)).toFloat()
-            imageView.y = centerY + (radius * sin(0.0)).toFloat()
+            // 縦横真ん中を初期表示位置とする
+            imageView.x = centerX + (radius * exp(0.0) * cos(0.0)).toFloat()
+            imageView.y = centerY + (radius * exp(0.0) * sin(0.0)).toFloat()
 
-            // サイクロイド曲線
-            // x = a * ( b - sin(b) )
-            // y = a * ( 1 - cos(b) )
+            // ベルヌーイ螺旋曲線
+            // x = a * exp(b) * cos(b)
+            // y = a * exp(b) * sin(b)
 
             // 画像の幅分横に移動
-            val duration = 100L
+            //val duration = 100L
             val animator = imageView.animate()
                     .setDuration(duration)
-                    .x(centerX + (radius * ( angleZ/180* PI - sin(angleZ/180* PI) ).toFloat()) )
-                    .y(centerY + (radius * ( 1 - cos(angleZ/180* PI)).toFloat()) )
+                    .x(centerX + (radius * exp(b*angleZ/180* PI) * cos(angleZ/180* PI)).toFloat())
+                    .y(centerY + (radius * exp(b*angleZ/180* PI) * sin(angleZ/180* PI)).toFloat())
                     .rotationYBy(angleY)
             // リピートする
             animator.setListener(object : Animator.AnimatorListener {
@@ -97,22 +109,7 @@ class Anime06CycloidFragment : Fragment() {
                 }
 
                 override fun onAnimationEnd(animation: Animator?) {
-                    Log.d(javaClass.simpleName, "onAnimationEnd")
-                    if ( angleZ >= 0 && angleZ <= 360 && angleZd > 0) {
-                    }
-                    else if ( angleZ >= 360 && angleZd > 0) {
-                        angleZd = -10.0f
-                    }
-                    else if ( angleZ <= 0 && angleZd < 0) {
-                        angleZd = 10.0f
-                    }
-                    angleZ += angleZd
-
-                    imageView.animate()
-                            .setDuration(duration)
-                            .x(centerX + (radius * ( angleZ/180* PI - sin(angleZ/180* PI) ).toFloat()) )
-                            .y(centerY + (radius * ( 1 - cos(angleZ/180* PI)).toFloat()) )
-                            .rotationYBy(angleY)
+                    moveNext()
                 }
 
                 override fun onAnimationCancel(animation: Animator?) {
@@ -126,17 +123,26 @@ class Anime06CycloidFragment : Fragment() {
         return view
     }
 
+    private fun moveNext() {
+        angleZ += angleZd
+        // 5回転したら逆回し
+        if ( angleZ.toInt()%1800 == 0 ) {
+            angleZd = -1 * angleZd
+        }
+
+        Log.d(javaClass.simpleName, "moveNext:x[${imageView.x}]y[${imageView.y}]angleZ[$angleZ]angleZd[$angleZd]")
+
+        imageView.animate()
+                .setDuration(duration)
+                .x(centerX + (radius * exp(b*angleZ/180*PI) * cos(angleZ/180*PI)).toFloat())
+                .y(centerY + (radius * exp(b*angleZ/180*PI) * sin(angleZ/180*PI)).toFloat())
+                .rotationYBy(angleY)
+    }
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment Anime06CycloidFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                Anime06CycloidFragment().apply {
+                A09Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

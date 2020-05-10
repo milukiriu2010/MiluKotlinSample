@@ -15,21 +15,15 @@ import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Anime12InvoluteFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class Anime12InvoluteFragment : Fragment() {
+// レムニスケート
+class A11Fragment : Fragment() {
 
     private lateinit var imageView: ImageView
 
     private var isCalculated = false
 
     // 半径
-    private val radius = 10.0f
-
+    private val radius = 300.0f
 
     // 中心
     private var centerX = 0.0f
@@ -45,6 +39,7 @@ class Anime12InvoluteFragment : Fragment() {
     // アニメーションする時間
     val duration = 100L
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -54,7 +49,7 @@ class Anime12InvoluteFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_anime12_involute, container, false)
+        val view = inflater.inflate(R.layout.fragment_a0x, container, false)
 
         // 画像をレイアウトに配置
         imageView = ImageView(context)
@@ -82,19 +77,19 @@ class Anime12InvoluteFragment : Fragment() {
             centerY = lh / 2 - ih / 2
 
             // 縦横真ん中を初期表示位置とする
-            imageView.x = centerX + radius * ( cos(angleZ/180* PI) + (angleZ/180* PI) * sin(angleZ/180* PI) ).toFloat()
-            imageView.y = centerY + radius * ( sin(angleZ/180* PI) - (angleZ/180* PI) * cos(angleZ/180* PI) ).toFloat()
+            imageView.x = centerX + radius
+            imageView.y = centerY
 
-            // インボリュート曲線
-            // x = r * ( cos(t) + t*sin(t) )
-            // y = r * ( sin(t) - t*cos(t) )
+            // レムにスケート曲線
+            // x = r * cos(t)/(1+sin(t)^2)
+            // y = r * sin(t)cos(t)/(1+sin(t)^2)
 
             // 画像の幅分横に移動
             //val duration = 100L
             val animator = imageView.animate()
                     .setDuration(duration)
-                    .x(centerX + radius * ( cos(angleZ/180* PI) + (angleZ/180* PI) * sin(angleZ/180* PI) ).toFloat())
-                    .y(centerY + radius * ( sin(angleZ/180* PI) - (angleZ/180* PI) * cos(angleZ/180* PI) ).toFloat())
+                    .x(centerX + (radius * cos(angleZ/180* PI) /(1f+ sin(angleZ/180* PI) * sin(angleZ/180* PI))).toFloat())
+                    .y(centerY + (radius * sin(angleZ/180* PI) * cos(angleZ/180* PI) /(1f+ sin(angleZ/180* PI) * sin(angleZ/180* PI))).toFloat())
                     .rotationYBy(angleY)
             // リピートする
             animator.setListener(object : Animator.AnimatorListener {
@@ -118,32 +113,27 @@ class Anime12InvoluteFragment : Fragment() {
 
     private fun moveNext() {
         angleZ += angleZd
+        /*
         // 5回転したら逆回し
         if ( angleZ.toInt()%1800 == 0 ) {
             angleZd = -1 * angleZd
         }
-        //angleZ %= 360
+        */
+        angleZ %= 360
 
         Log.d(javaClass.simpleName, "moveNext:x[${imageView.x}]y[${imageView.y}]angleZ[$angleZ]angleZd[$angleZd]")
 
         imageView.animate()
                 .setDuration(duration)
-                .x(centerX + radius * ( cos(angleZ/180*PI) + (angleZ/180*PI) * sin(angleZ/180*PI) ).toFloat())
-                .y(centerY + radius * ( sin(angleZ/180*PI) - (angleZ/180*PI) * cos(angleZ/180*PI) ).toFloat())
+                .x(centerX + (radius * cos(angleZ/180*PI)/(1f+sin(angleZ/180*PI)*sin(angleZ/180*PI))).toFloat())
+                .y(centerY + (radius * sin(angleZ/180*PI) * cos(angleZ/180*PI)/(1f+sin(angleZ/180*PI)*sin(angleZ/180*PI))).toFloat())
                 .rotationYBy(angleY)
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment Anime12InvoluteFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                Anime12InvoluteFragment().apply {
+                A11Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

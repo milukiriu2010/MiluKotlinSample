@@ -4,59 +4,59 @@
     tools:context="milu.kiriu2010.exdb1.a0x.A0XActivity">
 
     <item
-        android:id="@+id/anime_12_involute"
+        android:id="@+id/item_a12"
         android:orderInCategory="100"
-        android:title="インボリュート"
+        android:title="@string/ITEM_A12"
         app:showAsAction="never" />
     <item
-        android:id="@+id/anime_11_lemniscate"
+        android:id="@+id/item_a11"
         android:orderInCategory="100"
-        android:title="レムニスケート"
+        android:title="@string/ITEM_A11"
         app:showAsAction="never" />
     <item
-        android:id="@+id/anime_10_lissajous"
+        android:id="@+id/item_a10"
         android:orderInCategory="100"
-        android:title="リサージュ"
+        android:title="@string/ITEM_A10"
         app:showAsAction="never" />
     <item
-        android:id="@+id/anime_09_bernoulli"
+        android:id="@+id/item_a09"
         android:orderInCategory="100"
-        android:title="ベルヌーイ"
+        android:title="@string/ITEM_A09"
         app:showAsAction="never" />
     <item
-        android:id="@+id/anime_08_cardioid"
+        android:id="@+id/item_a08"
         android:orderInCategory="100"
-        android:title="カージオイド"
+        android:title="@string/ITEM_A08"
         app:showAsAction="never" />
     <item
-        android:id="@+id/anime_07_asteroid"
+        android:id="@+id/item_a07"
         android:orderInCategory="100"
-        android:title="アステロイド"
+        android:title="@string/ITEM_A07"
         app:showAsAction="never" />
     <item
-        android:id="@+id/anime_06_cycloid"
+        android:id="@+id/item_a06"
         android:orderInCategory="100"
-        android:title="サイクロイド"
+        android:title="@string/ITEM_A06"
         app:showAsAction="never" />
     <item
-        android:id="@+id/anime_5_eight"
+        android:id="@+id/item_a05"
         android:orderInCategory="100"
-        android:title="８の字"
+        android:title="@string/ITEM_A05"
         app:showAsAction="never" />
     <item
-        android:id="@+id/anime_4_rotate"
+        android:id="@+id/item_a04"
         android:orderInCategory="100"
-        android:title="回転"
+        android:title="@string/ITEM_A04"
         app:showAsAction="never" />
     <item
-        android:id="@+id/anime_3_bounce"
+        android:id="@+id/item_a03"
         android:orderInCategory="100"
-        android:title="バウンス"
+        android:title="@string/ITEM_A03"
         app:showAsAction="never" />
     <item
-        android:id="@+id/anime_2_rectangle"
+        android:id="@+id/item_a02"
         android:orderInCategory="100"
-        android:title="長方形"
+        android:title="@string/ITEM_A02"
         app:showAsAction="never" />
     <item
         android:id="@+id/item_a01"

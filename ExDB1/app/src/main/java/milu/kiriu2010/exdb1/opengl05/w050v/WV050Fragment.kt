@@ -12,6 +12,12 @@ import android.widget.SeekBar
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ---------------------------------------------
+// 光学迷彩:VBOあり
+// OpenGL ES 2.0
+// ---------------------------------------------
+// https://wgld.org/d/webgl/w050.html
+// ---------------------------------------------
 class WV050Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

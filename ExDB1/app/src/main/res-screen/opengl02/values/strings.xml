@@ -14,4 +14,10 @@
     <string name="ITEM_OPEN_GL_wv025">wv025_点光源</string>
     <string name="ITEM_OPEN_GL_w026">w026_テクスチャ</string>
     <string name="ITEM_OPEN_GL_wv026">wv026_テクスチャ</string>
+    <string name="ITEM_OPEN_GL_w027">w027_マルチテクスチャ</string>
+    <string name="ITEM_OPEN_GL_wv027">wv027_マルチテクスチャ</string>
+    <string name="ITEM_OPEN_GL_w028">w028_テクスチャパラメータ</string>
+    <string name="ITEM_OPEN_GL_wv028">wv028_テクスチャパラメータ</string>
+    <string name="ITEM_OPEN_GL_w029">w029_アルファブレンディング"</string>
+    <string name="ITEM_OPEN_GL_wv029">wv029_アルファブレンディング"</string>
 </resources>
