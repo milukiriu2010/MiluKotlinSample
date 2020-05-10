@@ -11,7 +11,7 @@ import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_a19.*
 import milu.kiriu2010.excon2.R
 
-// キャンバス
+// キャンバス(SKEW)
 class A19Activity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {

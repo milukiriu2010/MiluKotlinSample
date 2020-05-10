@@ -4,98 +4,105 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".a0x.animemove.AnimeMoveActivity">
+    tools:context=".a0x.a21.A21Activity">
 
     <Button
-        android:id="@+id/btnAlpha"
+        android:id="@+id/btnA21A_MOVE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="透過度"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRotate" />
-
-    <Button
-        android:id="@+id/btnRotate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="回転"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnA02A" />
-
-    <Button
-        android:id="@+id/btnA02A"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="移動"
+        android:text="@string/BTN_A21A_MOVE"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btnA21B_ROTATE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_A21B_ROTATE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnA21A_MOVE" />
+
+    <Button
+        android:id="@+id/btnA21C_ALPHA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_A21C_ALPHA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnA21B_ROTATE" />
+
+    <Button
+        android:id="@+id/btnA21D_ORG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_A21D_ORG"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnA21C_ALPHA" />
+
     <ImageView
-        android:id="@+id/ivA18"
+        android:id="@+id/ivA21"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:contentDescription="@string/BTN_A21"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/layer_a18" />
+        app:srcCompat="@drawable/layer_a21" />
 
     <Spinner
-        android:id="@+id/spA18"
+        android:id="@+id/spA21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/npA18B"
+        app:layout_constraintBottom_toTopOf="@+id/npA21B"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <NumberPicker
-        android:id="@+id/npA18A"
+        android:id="@+id/npA21A"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="224dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/npA18B"
+        app:layout_constraintBottom_toBottomOf="@+id/npA21B"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/npA18B" />
+        app:layout_constraintTop_toTopOf="@+id/npA21B" />
 
     <NumberPicker
-        android:id="@+id/npA18B"
+        android:id="@+id/npA21B"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="4dp"
-        android:text="TextView"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvA18" />
+        app:layout_constraintStart_toEndOf="@+id/tvA21" />
 
     <NumberPicker
-        android:id="@+id/npA18R"
+        android:id="@+id/npA21R"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:text="TextView"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvA18"
+        android:id="@+id/tvA21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="●"
-        app:layout_constraintBottom_toBottomOf="@+id/npA18A"
-        app:layout_constraintStart_toEndOf="@+id/npA18A"
-        app:layout_constraintTop_toTopOf="@+id/npA18A" />
+        android:layout_marginBottom="8dp"
+        android:text="@string/TV_A21"
+        app:layout_constraintBottom_toBottomOf="@+id/npA21A"
+        app:layout_constraintStart_toEndOf="@+id/npA21A"
+        app:layout_constraintTop_toTopOf="@+id/npA21A" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

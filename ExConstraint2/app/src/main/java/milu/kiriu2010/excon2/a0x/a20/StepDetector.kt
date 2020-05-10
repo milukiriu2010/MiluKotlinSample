@@ -1,5 +1,6 @@
-package milu.kiriu2010.excon2.a0x.sensorstep
+package milu.kiriu2010.excon2.a0x.a20
 
+// 加速度センサを用いて、歩行数を計測している
 class StepDetector {
     private val ACCEL_RING_SIZE = 50
     private val VEL_RING_SIZE = 10

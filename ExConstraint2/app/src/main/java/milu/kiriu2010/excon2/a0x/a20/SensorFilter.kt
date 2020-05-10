@@ -1,5 +1,6 @@
-package milu.kiriu2010.excon2.a0x.sensorstep
+package milu.kiriu2010.excon2.a0x.a20
 
+// StepDetectorから使われている
 class SensorFilter {
     companion object {
         fun sum(array: FloatArray): Float {

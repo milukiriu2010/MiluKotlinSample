@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.viewpager.widget.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    android:id="@+id/vpA22"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".a0x.tabbed.TabbedActivity" />
+    tools:context=".a0x.a22.A22Activity" />

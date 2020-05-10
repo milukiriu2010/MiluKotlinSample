@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camere" />
 
-    <!-- android:roundIcon="@mipmap/ic_launcher_round" -->
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_main"
@@ -18,6 +17,7 @@
         android:roundIcon="@drawable/ic_main"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!-- android:roundIcon="@mipmap/ic_launcher_round" -->
         <activity
             android:name=".BossActivity"
             android:theme="@style/Theme.ChildTranslucent">
@@ -28,32 +28,34 @@
             </intent-filter>
         </activity>
         <activity android:name=".a0x.A0xActivity" />
-        <activity android:name=".a0x.a09.A09Activity" />
-        <activity
-            android:name=".a0x.a15.A15Activity"
-            android:theme="@style/CustomTheme" />
-        <activity android:name=".a0x.a18.A18Activity" />
-        <activity android:name=".a0x.seek.SeekActivity" />
-        <activity android:name=".a0x.a06.A06Activity" />
-        <activity android:name=".a0x.temperature.TemperatureActivity" />
+        <activity android:name=".a0x.a01.A01Activity" />
         <activity android:name=".a0x.a02.A02Activity" />
         <activity
             android:name=".a0x.a03.A03Activity"
             android:theme="@style/CustomTheme" />
         <activity android:name=".a0x.a04.A04Activity" />
+        <activity android:name=".a0x.a05.A05Activity" />
+        <activity android:name=".a0x.a06.A06Activity" />
+        <activity android:name=".a0x.a07.A07Activity" />
+        <activity android:name=".a0x.a08.A08Activity" />
+        <activity android:name=".a0x.a09.A09Activity" />
+        <activity android:name=".a0x.a10.A10Activity" />
         <activity android:name=".a0x.a11.A11Activity" />
         <activity android:name=".a0x.a12.A12Activity" />
-        <activity android:name=".a0x.a08.A08Activity" />
-        <activity android:name=".a0x.a07.A07Activity" />
-        <activity android:name=".a0x.a05.A05Activity" />
-        <activity android:name=".a0x.a16.A16Activity" />
+        <activity android:name=".a0x.a13.A13Activity" />
         <activity android:name=".a0x.a14.A14Activity" />
-        <activity android:name=".a0x.a17.A17Activity" />
-        <activity android:name=".a0x.animemove.AnimeMoveActivity" />
-        <activity android:name=".a0x.a19.A19Activity" />
         <activity
-            android:name=".a0x.tabbed.TabbedActivity"
-            android:label="@string/title_activity_tabbed" />
+            android:name=".a0x.a15.A15Activity"
+            android:theme="@style/CustomTheme" />
+        <activity android:name=".a0x.a16.A16Activity" />
+        <activity android:name=".a0x.a17.A17Activity" />
+        <activity android:name=".a0x.a18.A18Activity" />
+        <activity android:name=".a0x.a19.A19Activity" />
+        <activity android:name=".a0x.a20.A20Activity" />
+        <activity android:name=".a0x.a21.A21Activity" />
+        <activity android:name=".a0x.a22.A22Activity" />
+        <activity android:name=".a0x.seek.SeekActivity" />
+        <activity android:name=".a0x.temperature.TemperatureActivity" />
         <activity
             android:name=".a0x.navibottom.BottomNaviActivity"
             android:label="@string/title_activity_bottom_navi" />
@@ -63,12 +65,8 @@
         <activity
             android:name=".a0x.setting.SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".a0x.sensorstep.SensorStepActivity" />
         <activity android:name=".a0x.sensorprox.SensorProxActivity" />
         <activity android:name=".a0x.sensorori.SensorOriActivity" />
-        <activity android:name=".a0x.a01.A01Activity" />
-        <activity android:name=".a0x.a10.A10Activity" />
-        <activity android:name=".a0x.a13.A13Activity" />
         <activity android:name=".b0x.conf.ConfActivity" />
         <activity android:name=".b0x.B0XActivity" />
         <activity android:name=".b0x.gallery2.Gallery2Activity" />

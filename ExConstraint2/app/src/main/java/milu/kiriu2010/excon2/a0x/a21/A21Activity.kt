@@ -1,21 +1,22 @@
-package milu.kiriu2010.excon2.a0x.animemove
+package milu.kiriu2010.excon2.a0x.a21
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.animation.*
 import android.widget.ArrayAdapter
-import kotlinx.android.synthetic.main.activity_anime_move.*
+import kotlinx.android.synthetic.main.activity_a21.*
 import milu.kiriu2010.excon2.R
 import milu.kiriu2010.excon2.a0x.a18.HesitateInterpolator
 
-class AnimeMoveActivity : AppCompatActivity() {
+// アニメ(移動/回転/透明)
+class A21Activity : AppCompatActivity() {
 
     var factor = 0.5f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_anime_move)
+        setContentView(R.layout.activity_a21)
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -24,32 +25,32 @@ class AnimeMoveActivity : AppCompatActivity() {
         }
 
         // 補完スピナーに補完一覧を設定
-        spA18.adapter = ArrayAdapter.createFromResource(this, R.array.a18_interpolators, android.R.layout.simple_spinner_item )
+        spA21.adapter = ArrayAdapter.createFromResource(this, R.array.a21_interpolators, android.R.layout.simple_spinner_item )
 
         // 補完のファクターを設定
         // 数値１桁目
-        npA18A.maxValue = 9
-        npA18A.minValue = 0
-        npA18A.value    = factor.toInt()
+        npA21A.maxValue = 9
+        npA21A.minValue = 0
+        npA21A.value    = factor.toInt()
         // 小数点１桁目
-        npA18B.maxValue = 9
-        npA18B.minValue = 0
-        npA18B.value    = ((factor*10)%10).toInt()
+        npA21B.maxValue = 9
+        npA21B.minValue = 0
+        npA21B.value    = ((factor*10)%10).toInt()
 
         // アニメーションに使うfactorを取得
-        factor = "%1$1d.%2$1d".format( npA18A.value, npA18B.value ).toFloat()
+        factor = "%1$1d.%2$1d".format( npA21A.value, npA21B.value ).toFloat()
 
         // ボタンをクリックすると、移動を開始する
-        btnA02A.setOnClickListener {
-            ivA18.animate().apply {
-                ivA18.x = 0f
-                ivA18.y = 0f
+        btnA21A_MOVE.setOnClickListener {
+            ivA21.animate().apply {
+                ivA21.x = 0f
+                ivA21.y = 0f
 
                 // アニメーションを行う時間を設定
                 duration = 1000
 
                 // アニメーションの補完方法を設定
-                interpolator = when (spA18.selectedItem) {
+                interpolator = when (spA21.selectedItem) {
                     "LinearInterpolator" -> LinearInterpolator()
                     "AccelerateInterpolator" -> AccelerateInterpolator(factor)
                     "DecelerateInterpolator" -> DecelerateInterpolator(factor)
@@ -68,15 +69,15 @@ class AnimeMoveActivity : AppCompatActivity() {
         }
 
         // ボタンをクリックすると、回転を開始する
-        btnRotate.setOnClickListener {
-            ivA18.animate().apply {
-                ivA18.rotation = 0f
+        btnA21B_ROTATE.setOnClickListener {
+            ivA21.animate().apply {
+                ivA21.rotation = 0f
 
                 // アニメーションを行う時間を設定
                 duration = 1000
 
                 // アニメーションの補完方法を設定
-                interpolator = when (spA18.selectedItem) {
+                interpolator = when (spA21.selectedItem) {
                     "LinearInterpolator" -> LinearInterpolator()
                     "AccelerateInterpolator" -> AccelerateInterpolator(factor)
                     "DecelerateInterpolator" -> DecelerateInterpolator(factor)
@@ -96,15 +97,15 @@ class AnimeMoveActivity : AppCompatActivity() {
         }
 
         // ボタンをクリックすると、透過を開始する
-        btnAlpha.setOnClickListener {
-            ivA18.animate().apply {
-                ivA18.alpha = 1.0f
+        btnA21C_ALPHA.setOnClickListener {
+            ivA21.animate().apply {
+                ivA21.alpha = 1.0f
 
                 // アニメーションを行う時間を設定
                 duration = 1000
 
                 // アニメーションの補完方法を設定
-                interpolator = when (spA18.selectedItem) {
+                interpolator = when (spA21.selectedItem) {
                     "LinearInterpolator" -> LinearInterpolator()
                     "AccelerateInterpolator" -> AccelerateInterpolator(factor)
                     "DecelerateInterpolator" -> DecelerateInterpolator(factor)
@@ -121,6 +122,13 @@ class AnimeMoveActivity : AppCompatActivity() {
                 // 透明にする
                 alpha( 0f )
             }
+        }
+
+        // ボタンをクリックすると元に戻る
+        btnA21D_ORG.setOnClickListener {
+            ivA21.x = 0f
+            ivA21.y = 0f
+            ivA21.alpha = 1f
         }
     }
 

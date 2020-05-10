@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".a0x.a20.A20Activity">
+
+    <TextView
+        android:id="@+id/tvA20_STEPNL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/TV_A20_STEPNL"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/tvA20_STEPND"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvA20_STEPND"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvA20_STEPNL"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvA20_STEPNL"
+        app:layout_constraintTop_toTopOf="@+id/tvA20_STEPNL"
+        tools:text="100" />
+
+    <TextView
+        android:id="@+id/tvA20_STEPTL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/TV_A20_STEPTL"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/tvA20_STEPTD"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvA20_STEPNL" />
+
+    <TextView
+        android:id="@+id/tvA20_STEPTD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvA20_STEPTL"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvA20_STEPTL"
+        app:layout_constraintTop_toTopOf="@+id/tvA20_STEPTL"
+        tools:text="100" />
+
+    <TextView
+        android:id="@+id/tvA20_ACCLL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/TV_A20_ACCELL"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/tvA20_ACCLD"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvA20_STEPTL" />
+
+    <TextView
+        android:id="@+id/tvA20_ACCLD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvA20_ACCLL"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvA20_ACCLL"
+        app:layout_constraintTop_toTopOf="@+id/tvA20_ACCLL"
+        tools:text="100" />
+
+    <Button
+        android:id="@+id/btnA20A_START"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/BTN_A20A_START"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toStartOf="@+id/btnA20B_STOP"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvA20_ACCLL" />
+
+    <Button
+        android:id="@+id/btnA20B_STOP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_A20B_STOP"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/btnA20A_START"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnA20A_START"
+        app:layout_constraintTop_toTopOf="@+id/btnA20A_START" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

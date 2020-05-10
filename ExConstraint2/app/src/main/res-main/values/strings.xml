@@ -42,7 +42,7 @@
     <string name="TV_A07B">結果</string>
     <string name="TV_A07C">https://www.vector.co.jp/vpack/filearea/winnt/net/network/</string>
 
-    <string name="BTN_A08">Fibonnaci</string>
+    <string name="BTN_A08">Fibon</string>
     <string name="BTN_A08A">Next</string>
     <string name="TV_A08A">Next Fibonnaci Number</string>
 
@@ -85,7 +85,26 @@
     <string name="BTN_A18A">開始</string>
     <string name="TV_A18">●</string>
 
-    <string name="BTN_A19">Canvas</string>
+    <string name="BTN_A19">Skew</string>
+
+    <string name="BTN_A20">歩行センサ</string>
+    <string name="BTN_A20A_START">開始</string>
+    <string name="BTN_A20B_STOP">停止</string>
+    <string name="TV_A20_STEPNL">歩行数(今回)</string>
+    <string name="TV_A20_STEPTL">歩行数(総数)</string>
+    <string name="TV_A20_ACCELL">歩行数(加速度)</string>
+
+    <string name="BTN_A21">移動/回転/透明</string>
+    <string name="BTN_A21A_MOVE">移動</string>
+    <string name="BTN_A21B_ROTATE">回転</string>
+    <string name="BTN_A21C_ALPHA">透明</string>
+    <string name="BTN_A21D_ORG">元へ</string>
+    <string name="TV_A21">●</string>
+
+    <string name="BTN_A22">Pager</string>
+    <string name="ITEM_A22A">Setting</string>
+    <string name="TV_A22">Section[%1$d]</string>
+
 
     <string name="BTN_GET">Get</string>
     <string name="BTN_DOM">DOM</string>

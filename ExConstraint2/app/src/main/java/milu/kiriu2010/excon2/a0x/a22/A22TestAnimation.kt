@@ -1,11 +1,12 @@
-package milu.kiriu2010.excon2.a0x.tabbed
+package milu.kiriu2010.excon2.a0x.a22
 
 import android.view.animation.Animation
 import android.view.animation.Transformation
 import milu.kiriu2010.excon2.a0x.a19.CanvasBasicView
 
+// 上から下に落ちるアニメーション
 // https://akira-watson.com/android/canvas-animation.html
-class TestAnimation(
+class A22TestAnimation(
         var canvasBasicView: CanvasBasicView,
         var currentPosition: Int = 0,
         var endPosition: Int = 0 )

@@ -7,7 +7,7 @@
     tools:context=".a0x.a19.A19Activity">
 
     <milu.kiriu2010.excon2.a0x.a19.CanvasBasicView
-        android:id="@+id/canvasBasicView1"
+        android:id="@+id/cvA22"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <SeekBar
-        android:id="@+id/sbA19X"
+        android:id="@+id/sbA22X"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -24,11 +24,11 @@
         android:layout_marginStart="8dp"
         android:max="100"
         android:progress="50"
-        app:layout_constraintBottom_toTopOf="@+id/sbA19Y"
+        app:layout_constraintBottom_toTopOf="@+id/sbA22Y"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
     <SeekBar
-        android:id="@+id/sbA19Y"
+        android:id="@+id/sbA22Y"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

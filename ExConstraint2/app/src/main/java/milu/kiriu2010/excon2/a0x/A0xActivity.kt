@@ -29,7 +29,7 @@ import milu.kiriu2010.excon2.a0x.a12.A12Activity
 import kotlinx.android.synthetic.main.activity_a0x.*
 import milu.kiriu2010.excon2.BuildConfig
 import milu.kiriu2010.excon2.R
-import milu.kiriu2010.excon2.a0x.animemove.AnimeMoveActivity
+import milu.kiriu2010.excon2.a0x.a21.A21Activity
 import milu.kiriu2010.excon2.a0x.a19.A19Activity
 import milu.kiriu2010.excon2.a0x.a13.A13Activity
 import milu.kiriu2010.excon2.a0x.navibottom.BottomNaviActivity
@@ -37,10 +37,10 @@ import milu.kiriu2010.excon2.a0x.navidrawer.NaviDrawerActivity
 import milu.kiriu2010.excon2.a0x.a17.A17Activity
 import milu.kiriu2010.excon2.a0x.sensorori.SensorOriActivity
 import milu.kiriu2010.excon2.a0x.sensorprox.SensorProxActivity
-import milu.kiriu2010.excon2.a0x.sensorstep.SensorStepActivity
+import milu.kiriu2010.excon2.a0x.a20.A20Activity
 import milu.kiriu2010.excon2.a0x.a14.A14Activity
 import milu.kiriu2010.excon2.a0x.setting.SettingsActivity
-import milu.kiriu2010.excon2.a0x.tabbed.TabbedActivity
+import milu.kiriu2010.excon2.a0x.a22.A22Activity
 import milu.kiriu2010.excon2.a0x.a10.A10Activity
 import milu.kiriu2010.excon2.id.IntentID
 
@@ -189,23 +189,27 @@ class A0xActivity : AppCompatActivity() {
             this.startActivityForResult( intent, IntentID.ID_ANIME.value )
         }
 
-        // キャンバス
+        // キャンバス(SKEW)
         btnA19.setOnClickListener {
             val intent = Intent(this,A19Activity::class.java)
             this.startActivity(intent)
         }
 
-        btnAnimeMove.transformationMethod = null
-        btnAnimeMove.setOnClickListener {
-            val intent = Intent( this, AnimeMoveActivity::class.java )
+        // 歩行センサ
+        btnA20.setOnClickListener {
+            val intent = Intent( this, A20Activity::class.java)
             this.startActivity(intent)
         }
 
+        // アニメ(移動/回転/透明)
+        btnA21.setOnClickListener {
+            val intent = Intent( this, A21Activity::class.java )
+            this.startActivity(intent)
+        }
 
-        // Tabbed
-        btnTabbed.transformationMethod = null
-        btnTabbed.setOnClickListener {
-            val intent = Intent(this, TabbedActivity::class.java)
+        // ページャ
+        btnA22.setOnClickListener {
+            val intent = Intent(this, A22Activity::class.java)
             this.startActivity(intent)
         }
 
@@ -227,12 +231,6 @@ class A0xActivity : AppCompatActivity() {
         btnSetting.transformationMethod = null
         btnSetting.setOnClickListener {
             val intent = Intent( this, SettingsActivity::class.java)
-            this.startActivity(intent)
-        }
-
-        // 歩行センサ
-        btnSensorStep.setOnClickListener {
-            val intent = Intent( this, SensorStepActivity::class.java)
             this.startActivity(intent)
         }
 

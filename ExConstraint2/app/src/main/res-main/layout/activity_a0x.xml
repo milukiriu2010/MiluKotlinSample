@@ -74,7 +74,7 @@
 
     <Button
         android:id="@+id/btnA01"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -85,10 +85,10 @@
 
     <Button
         android:id="@+id/btnA02"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/ic_a02z"
         android:text="@string/BTN_A02"
         android:textAppearance="@style/TextAppearance.AppCompat"
@@ -113,7 +113,7 @@
 
     <Button
         android:id="@+id/btnA04"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@drawable/ic_a04z"
@@ -124,8 +124,10 @@
 
     <Button
         android:id="@+id/btnA05"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/BTN_A05"
         app:layout_constraintBottom_toTopOf="@+id/btnA07"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -136,8 +138,9 @@
 
     <Button
         android:id="@+id/btnA06"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/BTN_A06"
         app:layout_constraintEnd_toEndOf="@+id/btnA03"
         app:layout_constraintHorizontal_bias="1.0"
@@ -146,7 +149,7 @@
 
     <Button
         android:id="@+id/btnA07"
-        android:layout_width="86dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/BTN_A07"
@@ -156,8 +159,10 @@
 
     <Button
         android:id="@+id/btnA08"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/BTN_A08"
         app:layout_constraintBottom_toBottomOf="@+id/btnA07"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -167,8 +172,9 @@
 
     <Button
         android:id="@+id/btnA09"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/BTN_A09"
         app:layout_constraintEnd_toEndOf="@+id/btnA06"
         app:layout_constraintHorizontal_bias="0.0"
@@ -179,7 +185,7 @@
         android:id="@+id/btnA10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:text="@string/BTN_A10"
         app:layout_constraintEnd_toEndOf="@+id/btnA07"
         app:layout_constraintStart_toStartOf="@+id/btnA07"
@@ -187,8 +193,10 @@
 
     <Button
         android:id="@+id/btnA11"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/BTN_A11"
         app:layout_constraintBottom_toBottomOf="@+id/btnA10"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -198,8 +206,9 @@
 
     <Button
         android:id="@+id/btnA12"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/BTN_A12"
         app:layout_constraintEnd_toEndOf="@+id/btnA09"
         app:layout_constraintStart_toStartOf="@+id/btnA09"
@@ -217,8 +226,10 @@
 
     <Button
         android:id="@+id/btnA14"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/BTN_A14"
         app:layout_constraintBottom_toTopOf="@+id/btnA16"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -230,6 +241,7 @@
         android:id="@+id/btnA15"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/BTN_A15"
         app:layout_constraintEnd_toEndOf="@+id/btnA12"
         app:layout_constraintHorizontal_bias="0.0"
@@ -240,15 +252,18 @@
         android:id="@+id/btnA16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/BTN_A16"
+        app:layout_constraintEnd_toEndOf="@+id/btnA13"
         app:layout_constraintStart_toStartOf="@+id/btnA13"
         app:layout_constraintTop_toBottomOf="@+id/btnA13" />
 
     <Button
         android:id="@+id/btnA17"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/BTN_A17"
         app:layout_constraintBottom_toBottomOf="@+id/btnA16"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -261,6 +276,7 @@
         android:id="@+id/btnA18"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/BTN_A18"
         app:layout_constraintEnd_toEndOf="@+id/btnA15"
         app:layout_constraintStart_toStartOf="@+id/btnA15"
@@ -270,6 +286,7 @@
         android:id="@+id/btnA19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/BTN_A19"
         app:layout_constraintEnd_toStartOf="@+id/btnA17"
         app:layout_constraintHorizontal_bias="0.0"
@@ -277,29 +294,32 @@
         app:layout_constraintTop_toBottomOf="@+id/btnA16" />
 
     <Button
-        android:id="@+id/btnSensorStep"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="歩行センサ"
-        app:layout_constraintBottom_toTopOf="@+id/btnTabbed"
+        android:id="@+id/btnA20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_A20"
+        app:layout_constraintBottom_toTopOf="@+id/btnA22"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/btnA17"
         app:layout_constraintTop_toTopOf="@+id/btnA19" />
 
     <Button
-        android:id="@+id/btnAnimeMove"
-        android:layout_width="0dp"
+        android:id="@+id/btnA21"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Anime Move"
+        android:layout_marginTop="8dp"
+        android:text="@string/BTN_A21"
         app:layout_constraintEnd_toEndOf="@+id/btnA18"
         app:layout_constraintStart_toStartOf="@+id/btnA18"
         app:layout_constraintTop_toBottomOf="@+id/btnA18" />
 
     <Button
-        android:id="@+id/btnTabbed"
+        android:id="@+id/btnA22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tabbed"
+        android:text="@string/BTN_A22"
         app:layout_constraintEnd_toEndOf="@+id/btnA19"
         app:layout_constraintStart_toStartOf="@+id/btnA19"
         app:layout_constraintTop_toBottomOf="@+id/btnA19" />
@@ -310,23 +330,25 @@
         android:layout_height="0dp"
         android:text="近接センサ"
         app:layout_constraintBottom_toTopOf="@+id/btnSetting"
-        app:layout_constraintEnd_toEndOf="@+id/btnSensorStep"
-        app:layout_constraintStart_toStartOf="@+id/btnSensorStep"
-        app:layout_constraintTop_toTopOf="@+id/btnTabbed" />
+        app:layout_constraintEnd_toEndOf="@+id/btnA20"
+        app:layout_constraintStart_toStartOf="@+id/btnA20"
+        app:layout_constraintTop_toTopOf="@+id/btnA22" />
 
     <Button
         android:id="@+id/btnBottomNavi"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Bottom Navi"
-        app:layout_constraintEnd_toEndOf="@+id/btnAnimeMove"
-        app:layout_constraintStart_toStartOf="@+id/btnAnimeMove"
-        app:layout_constraintTop_toBottomOf="@+id/btnAnimeMove" />
+        app:layout_constraintEnd_toEndOf="@+id/btnA21"
+        app:layout_constraintStart_toStartOf="@+id/btnA21"
+        app:layout_constraintTop_toBottomOf="@+id/btnA21" />
 
     <Button
         android:id="@+id/btnNaviDrawer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Navi Drawer"
         app:layout_constraintEnd_toEndOf="@+id/btnBottomNavi"
         app:layout_constraintStart_toStartOf="@+id/btnBottomNavi"
@@ -337,9 +359,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="設定"
-        app:layout_constraintEnd_toEndOf="@+id/btnTabbed"
-        app:layout_constraintStart_toStartOf="@+id/btnTabbed"
-        app:layout_constraintTop_toBottomOf="@+id/btnTabbed" />
+        app:layout_constraintEnd_toEndOf="@+id/btnA22"
+        app:layout_constraintStart_toStartOf="@+id/btnA22"
+        app:layout_constraintTop_toBottomOf="@+id/btnA22" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

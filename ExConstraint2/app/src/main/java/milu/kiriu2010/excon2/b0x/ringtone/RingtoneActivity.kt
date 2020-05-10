@@ -45,7 +45,7 @@ class RingtoneActivity : AppCompatActivity() {
         }
 
         // 再生停止
-        btnStop.setOnClickListener {
+        btnA20B_STOP.setOnClickListener {
             // 停止
             ringTone.stop()
         }

@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon2.a0x.sensorstep
+package milu.kiriu2010.excon2.a0x.a20
 
 import android.content.Context
 import android.hardware.Sensor
@@ -8,10 +8,11 @@ import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import kotlinx.android.synthetic.main.activity_sensor_step.*
+import kotlinx.android.synthetic.main.activity_a20.*
 import milu.kiriu2010.excon2.R
 
-class SensorStepActivity : AppCompatActivity()
+// 歩行センサ
+class A20Activity : AppCompatActivity()
         , SensorEventListener
         , StepListener {
 
@@ -26,55 +27,47 @@ class SensorStepActivity : AppCompatActivity()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sensor_step)
+        setContentView(R.layout.activity_a20)
 
         // 歩行検知
         simpleStepDetector.registerListener(this)
 
         val sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         // センサーの監視を開始する
-        btnA02A.setOnClickListener {
+        btnA20A_START.setOnClickListener {
             stepInitCnt = -1
-            dataStep.text = "0"
+            tvA20_STEPND.text = "0"
             stepAcclCnt = 0
-            dataStepAccl.text = "0"
+            tvA20_ACCLD.text = "0"
 
             // 歩行センサ
-            var sensorStep: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
+            val sensorStep: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
             // 歩行センサあり
             if ( sensorStep != null ) {
                 sensorManager.registerListener( this, sensorStep, SensorManager.SENSOR_DELAY_FASTEST)
             }
             // 歩行センサなし
             else {
-                dataStep.text = "×"
-                dataStepTotal.text = "×"
+                tvA20_STEPND.text = "×"
+                tvA20_STEPTD.text = "×"
             }
 
             // 加速度センサ
-            var sensorAccl: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+            val sensorAccl: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
             // 加速度センサあり
             if ( sensorAccl != null ) {
                 sensorManager.registerListener(this, sensorAccl, SensorManager.SENSOR_DELAY_FASTEST)
             }
             // 加速度センサなし
             else {
-                dataStepAccl.text = "×"
+                tvA20_ACCLD.text = "×"
             }
         }
 
         // センサーの監視を終了する
-        btnStop.setOnClickListener {
+        btnA20B_STOP.setOnClickListener {
             sensorManager.unregisterListener(this)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
@@ -92,8 +85,8 @@ class SensorStepActivity : AppCompatActivity()
                     stepInitCnt = stepCnt
                 }
 
-                dataStep.text = (stepCnt-stepInitCnt).toString()
-                dataStepTotal.text = stepCnt.toString()
+                tvA20_STEPND.text = (stepCnt-stepInitCnt).toString()
+                tvA20_STEPTD.text = stepCnt.toString()
             }
             // 加速度センサ
             Sensor.TYPE_ACCELEROMETER -> {
@@ -105,7 +98,7 @@ class SensorStepActivity : AppCompatActivity()
     // StepListener
     override fun step(timeNs: Long) {
         stepAcclCnt++
-        dataStepAccl.text = stepAcclCnt.toString()
+        tvA20_ACCLD.text = stepAcclCnt.toString()
     }
 
 }
