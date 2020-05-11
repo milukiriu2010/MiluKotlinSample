@@ -44,7 +44,9 @@
 
     <string name="BTN_A11">File</string>
 
+
     <string name="BTN_A12">Saint Tropez</string>
+    <string name="ITEM_A12_TOP">TOP PAGE</string>
     <string name="ITEM_A12_LUNCH">Lunch</string>
     <string name="ITEM_A12_LUNCH1">エビフライと牛ロースステーキ</string>
     <string name="ITEM_A12_LUNCH2">鶏の赤ワイン煮</string>
@@ -72,13 +74,27 @@
 
     <string name="BTN_A17">TimeZone(RV)</string>
 
+    <string name="BTN_A18">Notify</string>
+    <string name="BTN_NOTIFY">通知</string>
+    <string name="BTN_NOTIFY_START_SERVICE">startServiceによる開始</string>
+    <string name="BTN_NOTIFY_DOWNLOAD">Download</string>
+    <string name="BTN_NOTIFY_INTENT_START">IntentService開始</string>
+    <string name="BTN_NOTIFY_INTENT_STOP">IntentService停止</string>
+    <string name="LABEL_TITLE_A18">通知タイトル</string>
+    <string name="LABEL_CONTENT_A18">通知内容</string>
+    <string name="LABEL_DELAY_A18">〇秒後通知</string>
+    <string name="DATA_TITLE_A18">たいとる</string>
+    <string name="DATA_CONTENT_A18">えへへ</string>
+    <string name="DATA_DELAY_A18">10</string>
+    <string name="A18_RB_NORMAL">Normal</string>
+    <string name="A18_RB_PICTURE">Picture</string>
+    <string name="A18_RB_TEXT">Text</string>
+    <string name="A18_RB_INBOX">Inbox</string>
+    <string name="A18_RB_PROGRESS">Progress</string>
+
+
     <string name="BTN_GACTION">Jump</string>
     <string name="BTN_GSHOOT">Shooting</string>
     <string name="BTN_GLABYRINTH">LabyRinth</string>
 
-    <string name="BTN_BACK">Back</string>
-    <string name="LABEL_NAME">Name</string>
-    <string name="BTN_TIMEZONE">TimeZone</string>
-    <string name="BTN">Add</string>
-    <string name="top_page">TOP PAGE</string>
 </resources>

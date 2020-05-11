@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1.notify
+package milu.kiriu2010.excon1.a18
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -13,56 +13,39 @@ import android.os.Handler
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import android.util.Log
-import kotlinx.android.synthetic.main.activity_notify.*
+import kotlinx.android.synthetic.main.activity_a18.*
 import milu.kiriu2010.excon1.R
-import milu.kiriu2010.excon1.id.NotificationChannelID
-import milu.kiriu2010.excon1.id.NotificationRequestCode
-import milu.kiriu2010.excon1.id.NotificationID
 
-class NotifyActivity : AppCompatActivity() {
+// 通知
+class A18Activity : AppCompatActivity() {
     private lateinit var notificationManager: NotificationManager
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_notify)
+        setContentView(R.layout.activity_a18)
 
         // 通知チャネルの作成
         createChannel()
-
 
         // "通知"ボタンをクリック
         btnNotify.setOnClickListener {
             val handler = Handler()
             // 10秒後に通知を実施
-            handler.postDelayed(NotifyHandler(),1000 * dataDelay.text.toString().toLong() )
+            handler.postDelayed(NotifyHandler(),1000 * dataDelayA18.text.toString().toLong() )
         }
 
         // "startServiceによる開始"ボタンをクリック
         btnNotifyStartService.setOnClickListener {
-            val intent = Intent(this,ForegroundService::class.java)
-            if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ) {
-                // minSdkVersion >= 26
-                startForegroundService(intent)
-            }
-            else {
-                // minSdkVersion < 26
-                startService(intent)
-            }
+            val intent = Intent(this,A18ForegroundService::class.java)
+            startForegroundService(intent)
         }
 
         // "Download"ボタンをクリック
         btnNotifyDownload.transformationMethod = null
         btnNotifyDownload.setOnClickListener {
-            val intent = Intent(this,DownloadService::class.java)
-            if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ) {
-                // minSdkVersion >= 26
-                startForegroundService(intent)
-            }
-            else {
-                // minSdkVersion < 26
-                startService(intent)
-            }
+            val intent = Intent(this,A18DownloadService::class.java)
+            startForegroundService(intent)
         }
 
         // "IntentService開始"ボタンをクリック
@@ -97,14 +80,12 @@ class NotifyActivity : AppCompatActivity() {
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         // 通知チャネルはAndroid 8.0で導入された機能
-        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ) {
-            val channel = NotificationChannel(NotificationChannelID.ID_NEW_ARTICLE.id, "新着記事", NotificationManager.IMPORTANCE_DEFAULT)
+        val channel = NotificationChannel(A18NotificationChannelID.ID_NEW_ARTICLE.id, "新着記事", NotificationManager.IMPORTANCE_DEFAULT)
 
-            channel.description = "新着記事を通知するためのチャネルです"
-            channel.enableVibration(true)
-            channel.setShowBadge(true)
-            notificationManager.createNotificationChannel(channel)
-        }
+        channel.description = "新着記事を通知するためのチャネルです"
+        channel.enableVibration(true)
+        channel.setShowBadge(true)
+        notificationManager.createNotificationChannel(channel)
     }
 
     // 通知を実施
@@ -112,30 +93,30 @@ class NotifyActivity : AppCompatActivity() {
         Log.d( javaClass.simpleName, "sendNotify")
 
         // 通知タップ時に開かれる画面へのインテント
-        val intent = Intent(this, NotifyActivity::class.java)
+        val intent = Intent(this, A18Activity::class.java)
         // ペンディングインテントに詰める
-        val pendingIntent = PendingIntent.getActivity(this,NotificationRequestCode.ID_NEW_ARTICLE.code, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = PendingIntent.getActivity(this, A18NotificationRequestCode.ID_NEW_ARTICLE.code, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         // NotificationCompat.Builderオブジェクトを生成
-        val builder = NotificationCompat.Builder(this,NotificationChannelID.ID_NEW_ARTICLE.id)
+        val builder = NotificationCompat.Builder(this, A18NotificationChannelID.ID_NEW_ARTICLE.id)
 
         when (radioGroupNotificationStyle.checkedRadioButtonId) {
             // BigPictureStyleによる通知
-            R.id.radioButtonPicture -> {
+            R.id.radioButtonPictureA18 -> {
                 NotificationCompat.BigPictureStyle(builder)
-                        .bigPicture(BitmapFactory.decodeResource(resources,R.drawable.cat))
+                        .bigPicture(BitmapFactory.decodeResource(resources,R.drawable.a18_cat))
                         .setBigContentTitle("BigPictureStyle")
                         .setSummaryText("BigPictureStyleの表示例")
             }
             // BigTextStyleによる通知
-            R.id.radioButtonText -> {
+            R.id.radioButtonTextA18 -> {
                 NotificationCompat.BigTextStyle(builder)
                         .bigText("abcde\nfghij\nklmno\n")
                         .setBigContentTitle("BigTextStyle")
                         .setSummaryText("BigTextStyleの表示例")
             }
             // InboxStyleによる通知
-            R.id.radioButtonInbox -> {
+            R.id.radioButtonInboxA18 -> {
                 NotificationCompat.InboxStyle(builder)
                         .setBigContentTitle("本日の予定")
                         .addLine("  7:00 起床")
@@ -149,13 +130,13 @@ class NotifyActivity : AppCompatActivity() {
 
         // 通知の設定を行い、Notificationオブジェクトを生成する
         val notification = builder.setSmallIcon(android.R.drawable.ic_media_play)
-                .setContentTitle(dataTitle.text)
-                .setContentText(dataContent.text)
+                .setContentTitle(dataTitleA18.text)
+                .setContentText(dataContentA18.text)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
                 .build()
         // 通知を行う
-        notificationManager.notify(NotificationID.ID_NEW_ARTICLE.id, notification)
+        notificationManager.notify(A18NotificationID.ID_NEW_ARTICLE.id, notification)
     }
 
     // 〇秒後に通知を発行するときに用いる

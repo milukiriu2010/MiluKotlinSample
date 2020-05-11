@@ -5,7 +5,7 @@
     <item
         android:id="@+id/menuItemTop"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/top_page"
+        android:title="@string/ITEM_A12_TOP"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menuItemLunch"

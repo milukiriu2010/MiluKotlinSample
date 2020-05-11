@@ -1,7 +1,7 @@
-package milu.kiriu2010.excon1.id
+package milu.kiriu2010.excon1.a18
 
-enum class NotificationChannelID(val id: String) {
-    // NotifyActitivityで作成している通知チャネル
+enum class A18NotificationChannelID(val id: String) {
+    // A18Actitivityで作成している通知チャネル
     ID_NEW_ARTICLE("new articles"),
     // ForegoundServiceで作成している通知チャネル
     ID_FOREGROUND("casareal_foreground"),

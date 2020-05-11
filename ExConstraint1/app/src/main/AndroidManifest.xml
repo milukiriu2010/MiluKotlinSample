@@ -10,7 +10,7 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:icon="@drawable/cat"
+        android:icon="@drawable/a18_cat"
         android:label="@string/app_name"
         android:largeHeap="true"
 
@@ -62,18 +62,18 @@
             android:name=".a12.A12Activity"
             android:theme="@style/AppTheme.AppThemeSaintTropez" />
 
-        <activity android:name=".notify.NotifyActivity" />
+        <activity android:name=".a18.A18Activity" />
 
         <service
-            android:name=".notify.ForegroundService"
+            android:name=".a18.A18ForegroundService"
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".notify.DownloadService"
+            android:name=".a18.A18DownloadService"
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".notify.MyIntentService"
+            android:name=".a18.MyIntentService"
             android:exported="false" />
 
         <activity android:name=".gaction.GactionActivity" />

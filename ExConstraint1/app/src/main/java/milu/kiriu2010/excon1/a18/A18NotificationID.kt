@@ -1,6 +1,6 @@
-package milu.kiriu2010.excon1.id
+package milu.kiriu2010.excon1.a18
 
-enum class NotificationID(val id: Int) {
+enum class A18NotificationID(val id: Int) {
     ID_NEW_ARTICLE(1),
     ID_FOREGROUND(2),
     ID_DOWNLOAD(3),

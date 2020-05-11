@@ -24,7 +24,7 @@ import milu.kiriu2010.excon1.gshooting.GshootingActivity
 import milu.kiriu2010.excon1.a02.A02Activity
 import milu.kiriu2010.excon1.a13.A13Activity
 import milu.kiriu2010.excon1.a08.A08Activity
-import milu.kiriu2010.excon1.notify.NotifyActivity
+import milu.kiriu2010.excon1.a18.A18Activity
 import milu.kiriu2010.excon1.a12.A12Activity
 import milu.kiriu2010.excon1.a10.A10Activity
 import milu.kiriu2010.excon1.a15.A15Activity
@@ -174,9 +174,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         // 通知
-        btnNotify.setOnClickListener {
-            val intent = Intent( this, NotifyActivity::class.java )
-            startActivityForResult( intent, IntentID.ID_NOTIFY.value )
+        btnA18.setOnClickListener {
+            val intent = Intent( this, A18Activity::class.java )
+            startActivity( intent )
         }
 
         // ジャンプアクション

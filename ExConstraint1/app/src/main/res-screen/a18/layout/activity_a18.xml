@@ -4,78 +4,84 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".notify.NotifyActivity">
+    tools:context=".a18.A18Activity">
 
     <TextView
-        android:id="@+id/labelTitle"
+        android:id="@+id/labelTitleA18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
-        android:text="通知タイトル"
+        android:text="@string/LABEL_TITLE_A18"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/dataTitle"
+        android:id="@+id/dataTitleA18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:autofillHints="@string/DATA_TITLE_A18"
         android:ems="10"
+        android:hint="@string/DATA_TITLE_A18"
         android:inputType="textPersonName"
-        android:text="たいとる"
-        app:layout_constraintBottom_toBottomOf="@+id/labelTitle"
+        android:text="@string/DATA_TITLE_A18"
+        app:layout_constraintBottom_toBottomOf="@+id/labelTitleA18"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/labelTitle"
-        app:layout_constraintTop_toTopOf="@+id/labelTitle" />
+        app:layout_constraintStart_toEndOf="@+id/labelTitleA18"
+        app:layout_constraintTop_toTopOf="@+id/labelTitleA18" />
 
     <TextView
-        android:id="@+id/labelContent"
+        android:id="@+id/labelContentA18"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="通知内容"
-        app:layout_constraintEnd_toEndOf="@+id/labelTitle"
-        app:layout_constraintStart_toEndOf="@+id/labelTitle"
-        app:layout_constraintStart_toStartOf="@+id/labelTitle"
-        app:layout_constraintTop_toBottomOf="@+id/labelTitle" />
+        android:text="@string/LABEL_CONTENT_A18"
+        app:layout_constraintEnd_toEndOf="@+id/labelTitleA18"
+        app:layout_constraintStart_toEndOf="@+id/labelTitleA18"
+        app:layout_constraintStart_toStartOf="@+id/labelTitleA18"
+        app:layout_constraintTop_toBottomOf="@+id/labelTitleA18" />
 
     <EditText
-        android:id="@+id/dataContent"
+        android:id="@+id/dataContentA18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:autofillHints="@string/DATA_CONTENT_A18"
         android:ems="10"
+        android:hint="@string/DATA_CONTENT_A18"
         android:inputType="textPersonName"
-        android:text="えへへ"
-        app:layout_constraintBottom_toBottomOf="@+id/labelContent"
+        android:text="@string/DATA_CONTENT_A18"
+        app:layout_constraintBottom_toBottomOf="@+id/labelContentA18"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/labelContent"
-        app:layout_constraintTop_toTopOf="@+id/labelContent" />
+        app:layout_constraintStart_toEndOf="@+id/labelContentA18"
+        app:layout_constraintTop_toTopOf="@+id/labelContentA18" />
 
     <TextView
-        android:id="@+id/labelDelay"
+        android:id="@+id/labelDelayA18"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="〇秒後通知"
-        app:layout_constraintEnd_toEndOf="@+id/labelContent"
+        android:text="@string/LABEL_DELAY_A18"
+        app:layout_constraintEnd_toEndOf="@+id/labelContentA18"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/labelContent"
-        app:layout_constraintTop_toBottomOf="@+id/labelContent" />
+        app:layout_constraintStart_toStartOf="@+id/labelContentA18"
+        app:layout_constraintTop_toBottomOf="@+id/labelContentA18" />
 
     <EditText
-        android:id="@+id/dataDelay"
+        android:id="@+id/dataDelayA18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:autofillHints="@string/DATA_DELAY_A18"
         android:ems="10"
+        android:hint="@string/DATA_DELAY_A18"
         android:inputType="numberSigned"
-        android:text="10"
-        app:layout_constraintBottom_toBottomOf="@+id/labelDelay"
+        android:text="@string/DATA_DELAY_A18"
+        app:layout_constraintBottom_toBottomOf="@+id/labelDelayA18"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/labelDelay"
-        app:layout_constraintTop_toTopOf="@+id/labelDelay" />
+        app:layout_constraintStart_toEndOf="@+id/labelDelayA18"
+        app:layout_constraintTop_toTopOf="@+id/labelDelayA18" />
 
     <RadioGroup
         android:id="@+id/radioGroupNotificationStyle"
@@ -88,55 +94,55 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelDelay">
+        app:layout_constraintTop_toBottomOf="@+id/labelDelayA18">
 
         <RadioButton
-            android:id="@+id/radioButtonNormal"
+            android:id="@+id/radioButtonNormalA18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
-            android:text="Normal" />
+            android:text="@string/A18_RB_NORMAL" />
 
         <RadioButton
-            android:id="@+id/radioButtonPicture"
+            android:id="@+id/radioButtonPictureA18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Picture" />
+            android:text="@string/A18_RB_PICTURE" />
 
         <RadioButton
-            android:id="@+id/radioButtonText"
+            android:id="@+id/radioButtonTextA18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Text" />
+            android:text="@string/A18_RB_TEXT" />
 
         <RadioButton
-            android:id="@+id/radioButtonInbox"
+            android:id="@+id/radioButtonInboxA18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Inbox"
+            android:text="@string/A18_RB_INBOX"
             tools:layout_editor_absoluteX="45dp"
             tools:layout_editor_absoluteY="310dp" />
 
         <RadioButton
-            android:id="@+id/radioButtonProgress"
+            android:id="@+id/radioButtonProgressA18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Progress" />
+            android:text="@string/A18_RB_PROGRESS" />
     </RadioGroup>
 
     <Button
         android:id="@+id/btnNotify"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="通知"
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_NOTIFY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupNotificationStyle" />
@@ -145,10 +151,10 @@
         android:id="@+id/btnNotifyStartService"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="startServiceによる開始"
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_NOTIFY_START_SERVICE"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.833"
         app:layout_constraintStart_toStartOf="parent"
@@ -158,10 +164,10 @@
         android:id="@+id/btnNotifyDownload"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Download"
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_NOTIFY_DOWNLOAD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -173,7 +179,7 @@
         android:layout_height="46dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="IntentService開始"
+        android:text="@string/BTN_NOTIFY_INTENT_START"
         app:layout_constraintEnd_toStartOf="@+id/btnNotifyIntentStop"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -183,9 +189,9 @@
         android:id="@+id/btnNotifyIntentStop"
         android:layout_width="0dp"
         android:layout_height="46dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="IntentService停止"
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_NOTIFY_INTENT_STOP"
         app:layout_constraintBottom_toBottomOf="@+id/btnNotifyIntentStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon1.notify
+package milu.kiriu2010.excon1.a18
 
 import android.app.IntentService
 import android.app.NotificationChannel
@@ -11,8 +11,6 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import android.util.Log
 import milu.kiriu2010.excon1.R
-import milu.kiriu2010.excon1.id.NotificationChannelID
-import milu.kiriu2010.excon1.id.NotificationID
 
 // TODO: Rename actions, choose action names that describe tasks that this
 // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
@@ -23,12 +21,6 @@ private const val ACTION_BAZ = "milu.kiriu2010.excon1.notify.action.BAZ"
 private const val EXTRA_PARAM1 = "milu.kiriu2010.excon1.notify.extra.PARAM1"
 private const val EXTRA_PARAM2 = "milu.kiriu2010.excon1.notify.extra.PARAM2"
 
-/**
- * An [IntentService] subclass for handling asynchronous task requests in
- * a service on a separate handler thread.
- * TODO: Customize class - update intent actions, extra parameters and static
- * helper methods.
- */
 class MyIntentService : IntentService("MyIntentService") {
 
     override fun onHandleIntent(intent: Intent?) {
@@ -36,7 +28,7 @@ class MyIntentService : IntentService("MyIntentService") {
             ACTION_FOO -> {
                 val param1 = intent.getStringExtra(EXTRA_PARAM1)
                 val param2 = intent.getStringExtra(EXTRA_PARAM2)
-                handleActionFoo(param1, param2)
+                handleActionFoo(param1!!, param2!!)
             }
             ACTION_BAZ -> {
                 //val param1 = intent.getStringExtra(EXTRA_PARAM1)
@@ -52,22 +44,20 @@ class MyIntentService : IntentService("MyIntentService") {
      */
     private fun handleActionFoo(param1: String, param2: String) {
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ) {
-            val name = "通知のタイトル的情報を設定"
-            val notifyDescription = "この通知の詳細情報を設定します"
+        val name = "通知のタイトル的情報を設定"
+        val notifyDescription = "この通知の詳細情報を設定します"
 
-            if (manager.getNotificationChannel(NotificationChannelID.ID_MY_INTENTSERVICE.id) == null) {
-                val mChannel = NotificationChannel(NotificationChannelID.ID_MY_INTENTSERVICE.id, name, NotificationManager.IMPORTANCE_HIGH)
-                mChannel.apply {
-                    description = notifyDescription
-                }
-                manager.createNotificationChannel(mChannel)
+        if (manager.getNotificationChannel(A18NotificationChannelID.ID_MY_INTENTSERVICE.id) == null) {
+            val mChannel = NotificationChannel(A18NotificationChannelID.ID_MY_INTENTSERVICE.id, name, NotificationManager.IMPORTANCE_HIGH)
+            mChannel.apply {
+                description = notifyDescription
             }
+            manager.createNotificationChannel(mChannel)
         }
 
         // 通知を作成
         val notification = NotificationCompat
-                .Builder(this, NotificationChannelID.ID_MY_INTENTSERVICE.id).apply {
+                .Builder(this, A18NotificationChannelID.ID_MY_INTENTSERVICE.id).apply {
                     setContentTitle("通知のタイトル(MyIntentService:${param1})")
                     setContentText("MyIntentService({$param2})完了")
                     setSmallIcon(R.mipmap.ic_launcher)
@@ -80,7 +70,7 @@ class MyIntentService : IntentService("MyIntentService") {
                     }
                     Log.d(javaClass.simpleName, "MyIntentService is done.")
                     // 通知する
-                    NotificationManagerCompat.from(this).notify(NotificationID.ID_MY_INTENTSERVICE.id, notification)
+                    NotificationManagerCompat.from(this).notify(A18NotificationID.ID_MY_INTENTSERVICE.id, notification)
                 }
         ).start()
         // 通知する
@@ -95,13 +85,6 @@ class MyIntentService : IntentService("MyIntentService") {
     //}
 
     companion object {
-        /**
-         * Starts this service to perform action Foo with the given parameters. If
-         * the service is already performing a task this action will be queued.
-         *
-         * @see IntentService
-         */
-        // TODO: Customize helper method
         @RequiresApi(Build.VERSION_CODES.O)
         @JvmStatic
         fun startActionFoo(context: Context, param1: String, param2: String) {
