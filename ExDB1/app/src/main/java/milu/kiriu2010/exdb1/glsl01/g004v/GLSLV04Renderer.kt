@@ -11,9 +11,11 @@ import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 import milu.kiriu2010.gui.vbo.es20.ES20VBOIp
 
 // ----------------------------------------------
-// 様々な図形を描く
+// 様々な図形を描く:VBOあり
+// OpenGL ES 2.0
 // ----------------------------------------------
 // https://wgld.org/d/glsl/g004.html
+// ----------------------------------------------
 class GLSLV04Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画モデル
     private lateinit var model: Square01Model

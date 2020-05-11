@@ -3,29 +3,29 @@
 
     <item
         android:id="@+id/es30_a07"
-        android:title="a07_インスタンシング" />
+        android:title="@string/ITEM_ES30_A07" />
     <item
         android:id="@+id/es30_a06"
-        android:title="a06_VAO" />
+        android:title="@string/ITEM_ES30_A06" />
     <item
         android:id="@+id/es30_av05"
-        android:title="av05_flat補間" />
+        android:title="@string/ITEM_ES30_AV05" />
     <item
         android:id="@+id/es30_av04"
-        android:title="av04_ES30_layout" />
+        android:title="@string/ITEM_ES30_AV04" />
     <item
         android:id="@+id/es30_av03"
-        android:title="av03_ES30" />
+        android:title="@string/ITEM_ES30_AV03" />
     <item
         android:id="@+id/es30_a05"
-        android:title="a05_flat補間" />
+        android:title="@string/ITEM_ES30_A05" />
     <item
         android:id="@+id/es30_a04"
-        android:title="a04_ES30_layout" />
+        android:title="@string/ITEM_ES30_A04" />
     <item
         android:id="@+id/es30_a03"
-        android:title="a03_ES30" />
+        android:title="@string/ITEM_ES30_A03" />
     <item
         android:id="@+id/es30_cube_rotate01"
-        android:title="回転(立方体)01_ES30" />
+        android:title="@string/ITEM_ES30_CUBE_ROTATE01" />
 </menu>

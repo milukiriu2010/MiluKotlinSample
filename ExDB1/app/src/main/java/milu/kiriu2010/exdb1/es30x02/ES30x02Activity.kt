@@ -8,18 +8,21 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.es30x02.a08.A08Fragment
 import milu.kiriu2010.exdb1.es30x02.a09.A09Fragment
 
+// -------------------------------------
+// OpenGL ES 3.0サンプル
+// -------------------------------------
+// https://wgld.org/d/webgl2/w008.html
+// ～
+// https://wgld.org/d/webgl2/w009.html
+// -------------------------------------
 class ES30x02Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_es30x02)
 
-        supportFragmentManager.popBackStack()
-        if (supportFragmentManager.findFragmentByTag("xyz") == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.flES30x02, A09Fragment.newInstance(), "xyz")
-                    .commit()
-        }
+        // 初期表示のフラグメントを設定
+        changeFragment("a08")
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -41,27 +44,44 @@ class ES30x02Activity : AppCompatActivity() {
                 finish()
                 true
             }
+            // できてない
             // UBO
+            // OpenGL ES 3.0
             R.id.es30_a09 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("a09") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flES30x02, A09Fragment.newInstance(), "a09")
-                            .commit()
-                }
+                changeFragment("a09")
                 true
             }
             // gl_VertexIDとgl_InstanceID
+            // OpenGL ES 3.0
             R.id.es30_a08 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("a08") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flES30x02, A08Fragment.newInstance(), "a08")
-                            .commit()
-                }
+                changeFragment("a08")
                 true
             }
             else -> return super.onOptionsItemSelected(item!!)
+        }
+    }
+
+    // 表示するフラグメントを切り替える
+    private fun changeFragment(tag: String) {
+        val fragment = when (tag) {
+            // UBO
+            // OpenGL ES 3.0
+            "a09" -> A09Fragment.newInstance()
+            // gl_VertexIDとgl_InstanceID
+            // OpenGL ES 3.0
+            "a08" -> A08Fragment.newInstance()
+            // gl_VertexIDとgl_InstanceID
+            // OpenGL ES 3.0
+            else -> A08Fragment.newInstance()
+        }
+
+        // 現在表示しているフラグメントをスタックから外す
+        supportFragmentManager.popBackStack()
+        // 選択したフラグメントを表示する
+        if ( supportFragmentManager.findFragmentByTag(tag) == null ) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.flES30x02, fragment, tag)
+                    .commit()
         }
     }
 }

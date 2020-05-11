@@ -11,9 +11,11 @@ import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 import milu.kiriu2010.gui.vbo.es20.ES20VBOIp
 
 // ----------------------------------------------
-// オーブ(光の玉)
+// オーブ(光の玉):VBOあり
+// OpenGL ES 2.0
 // ----------------------------------------------
 // https://wgld.org/d/glsl/g003.html
+// ----------------------------------------------
 class GLSLV03Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画モデル
     private lateinit var model: Square01Model

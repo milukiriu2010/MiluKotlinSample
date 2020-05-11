@@ -19,6 +19,7 @@ import javax.microedition.khronos.opengles.GL10
 
 // -----------------------------------------
 // gl_VertexIDとgl_InstanceID
+// OpenGL ES 3.0
 // -----------------------------------------
 // https://wgld.org/d/webgl2/w008.html
 // -----------------------------------------

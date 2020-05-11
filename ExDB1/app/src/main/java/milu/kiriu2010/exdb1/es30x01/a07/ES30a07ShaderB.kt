@@ -9,6 +9,7 @@ import milu.kiriu2010.gui.vbo.es30.ES30VAOAbs
 
 // ------------------------------------
 // VAOとインスタンシング
+// OpenGL ES 3.0
 // シェーダB
 // ------------------------------------
 // https://wgld.org/d/webgl2/w007.html

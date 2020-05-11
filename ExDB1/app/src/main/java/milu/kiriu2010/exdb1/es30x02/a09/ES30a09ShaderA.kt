@@ -7,6 +7,7 @@ import milu.kiriu2010.gui.vbo.es30.ES30VAOAbs
 
 // ------------------------------------
 // UBO
+// OpenGL ES 3.0
 // シェーダA
 // ------------------------------------
 // https://wgld.org/d/webgl2/w009.html

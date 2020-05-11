@@ -9,6 +9,10 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES30View
 
+// ----------------------------------------------
+// 回転(立方体)01_ES30:VBOなし
+// OpenGL ES 3.0
+// ----------------------------------------------
 class ES30Rotate01Fragment : Fragment() {
 
     private lateinit var myGLES30View: MyGLES30View

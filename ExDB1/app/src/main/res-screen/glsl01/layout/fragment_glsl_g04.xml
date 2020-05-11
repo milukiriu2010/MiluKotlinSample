@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <!-- TODO: Update blank fragment layout -->
 
     <milu.kiriu2010.gui.view.MyGLES20View
         android:id="@+id/myGLES20ViewG04"
@@ -34,35 +31,35 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
-            android:text="輪" />
+            android:text="@string/RB_G04_RING" />
 
         <RadioButton
             android:id="@+id/radioButtonG04RingTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="輪(時間)" />
+            android:text="@string/RB_G04_RINGTIME" />
 
         <RadioButton
             android:id="@+id/radioButtonG04Gradation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="グラデーション" />
+            android:text="@string/RB_G04_GRADATION" />
 
         <RadioButton
             android:id="@+id/radioButtonG04Cone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="円錐を真上から見る" />
+            android:text="@string/RB_G04_CONE" />
 
         <RadioButton
             android:id="@+id/radioButtonG04ZoomLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="放射状のライン" />
+            android:text="@string/RB_G04_ZOOMLINE" />
 
     </RadioGroup>
 
@@ -81,28 +78,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="花その１" />
+            android:text="@string/RB_G04_FLOWER1" />
 
         <RadioButton
             android:id="@+id/radioButtonG04Wave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="波打つリング" />
+            android:text="@string/RB_G04_WAVE" />
 
         <RadioButton
             android:id="@+id/radioButtonG04Flower2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="花その２" />
+            android:text="@string/RB_G04_FLOWER2" />
 
         <RadioButton
             android:id="@+id/radioButtonG04Fan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="ファン" />
+            android:text="@string/RB_G04_FAN" />
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

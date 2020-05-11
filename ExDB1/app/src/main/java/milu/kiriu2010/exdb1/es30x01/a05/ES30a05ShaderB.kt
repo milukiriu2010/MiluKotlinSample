@@ -5,11 +5,13 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.basic.MyGLES30Func
 import milu.kiriu2010.gui.shader.es30.ES30MgShader
 
-// ------------------------------------
+// -----------------------------------------
+// GLSL ES 3.0(flat補間):VBOなし
+// OpenGL ES 3.0
 // シェーダB
-// ------------------------------------
+// -----------------------------------------
 // https://wgld.org/d/webgl2/w005.html
-// ------------------------------------
+// -----------------------------------------
 class ES30a05ShaderB: ES30MgShader() {
     // 頂点シェーダ
     private val scv =

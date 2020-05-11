@@ -19,8 +19,10 @@ import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
+// できてない
 // -----------------------------------------
-// gl_VertexIDとgl_InstanceID
+// UBO
+// OpenGL ES 3.0
 // -----------------------------------------
 // https://wgld.org/d/webgl2/w008.html
 // -----------------------------------------

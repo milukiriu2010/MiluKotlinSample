@@ -11,6 +11,12 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES30View
 
+// -----------------------------------------
+// GLSL ES 3.0(layout):VBOなし
+// OpenGL ES 3.0
+// -----------------------------------------
+// https://wgld.org/d/webgl2/w004.html
+// -----------------------------------------
 class A04Fragment : Fragment() {
 
     private lateinit var myGLES30View: MyGLES30View

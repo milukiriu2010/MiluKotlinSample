@@ -13,11 +13,12 @@ import java.nio.IntBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
-// -----------------------------------------
-// GLSL ES 3.0
-// -----------------------------------------
+// ----------------------------------------------
+// GLSL ES 3.0:VBOなし
+// OpenGL ES 3.0
+// ----------------------------------------------
 // https://wgld.org/d/webgl2/w003.html
-// -----------------------------------------
+// ----------------------------------------------
 class A03Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(板ポリゴン)
     private lateinit var modelBoard: Board00Model

@@ -12,6 +12,12 @@ import android.widget.RadioGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ----------------------------------------------
+// フラグメントシェーダ ノイズ:VBOあり
+// OpenGL ES 2.0
+// ----------------------------------------------
+// https://wgld.org/d/glsl/g007.html
+// ----------------------------------------------
 class GLSLV07Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

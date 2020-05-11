@@ -5,9 +5,12 @@ import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
-// ---------------------------------------
-// ジュリア集合
-// ---------------------------------------
+// ----------------------------------------------
+// ジュリア集合:VBOなし
+// OpenGL ES 2.0
+// ----------------------------------------------
+// https://wgld.org/d/glsl/g006.html
+// ----------------------------------------------
 class GLSL06Shader: ES20MgShader() {
     // 頂点シェーダ
     private val scv =

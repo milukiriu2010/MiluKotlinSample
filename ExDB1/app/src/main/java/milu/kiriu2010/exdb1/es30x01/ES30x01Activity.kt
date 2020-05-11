@@ -15,18 +15,21 @@ import milu.kiriu2010.exdb1.es30x01.a05v.AV05Fragment
 import milu.kiriu2010.exdb1.es30x01.a06.A06Fragment
 import milu.kiriu2010.exdb1.es30x01.a07.A07Fragment
 
+// -------------------------------------
+// OpenGL ES 3.0サンプル
+// -------------------------------------
+// https://wgld.org/d/webgl2/w003.html
+// ～
+// https://wgld.org/d/webgl2/w007.html
+// -------------------------------------
 class ES30x01Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_es30x01)
 
-        supportFragmentManager.popBackStack()
-        if (supportFragmentManager.findFragmentByTag("xyz") == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.flES30x01, A07Fragment.newInstance(), "xyz")
-                    .commit()
-        }
+        // 初期表示のフラグメントを設定
+        changeFragment("av03")
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -34,7 +37,6 @@ class ES30x01Activity : AppCompatActivity() {
             //setHomeButtonEnabled(true)
         }
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_es30x01, menu)
@@ -50,96 +52,105 @@ class ES30x01Activity : AppCompatActivity() {
                 true
             }
             // インスタンシング
+            // OpenGL ES 3.0
             R.id.es30_a07 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("a07") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flES30x01, A07Fragment.newInstance(), "a07")
-                            .commit()
-                }
+                changeFragment("a07")
                 true
             }
             // VAO
+            // OpenGL ES 3.0
             R.id.es30_a06 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("a06") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flES30x01, A06Fragment.newInstance(), "a06")
-                            .commit()
-                }
+                changeFragment("a06")
                 true
             }
-            // flat補間
+            // flat補間:VBOあり
+            // OpenGL ES 3.0
             R.id.es30_av05 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("av05") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flES30x01, AV05Fragment.newInstance(), "av05")
-                            .commit()
-                }
+                changeFragment("av05")
                 true
             }
-            // flat補間
+            // flat補間:VBOなし
+            // OpenGL ES 3.0
             R.id.es30_a05 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("a05") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flES30x01, A05Fragment.newInstance(), "a05")
-                            .commit()
-                }
+                changeFragment("a05")
                 true
             }
-            // GLSL ES3.0 layout
+            // GLSL ES 3.0 layout:VBOあり
+            // OpenGL ES 3.0
             R.id.es30_av04 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("av04") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flES30x01, AV04Fragment.newInstance(), "av04")
-                            .commit()
-                }
+                changeFragment("av04")
                 true
             }
-            // GLSL ES3.0 layout
+            // GLSL ES 3.0 layout:VBOなし
+            // OpenGL ES 3.0
             R.id.es30_a04 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("a04") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flES30x01, A04Fragment.newInstance(), "a04")
-                            .commit()
-                }
+                changeFragment("a04")
                 true
             }
-            // GLSL ES3.0
+            // GLSL ES 3.0:VBOあり
+            // OpenGL ES 3.0
             R.id.es30_av03 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("av03") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flES30x01, AV03Fragment.newInstance(), "av03")
-                            .commit()
-                }
+                changeFragment("av03")
                 true
             }
-            // GLSL ES3.0
+            // GLSL ES 3.0:VBOなし
+            // OpenGL ES 3.0
             R.id.es30_a03 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("a03") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flES30x01, A03Fragment.newInstance(), "a03")
-                            .commit()
-                }
+                changeFragment("a03")
                 true
             }
-            // 回転(立方体)01_ES30
+            // 回転(立方体)01_ES30:VBOなし
+            // OpenGL ES 3.0
             R.id.es30_cube_rotate01 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("rot01es30") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flES30x01, ES30Rotate01Fragment.newInstance(), "rot01es30")
-                            .commit()
-                }
+                changeFragment("rot01es30")
                 true
             }
             else -> return super.onOptionsItemSelected(item!!)
+        }
+    }
+
+    // 表示するフラグメントを切り替える
+    private fun changeFragment(tag: String) {
+        val fragment = when (tag) {
+            // インスタンシング
+            // OpenGL ES 3.0
+            "a07" -> A07Fragment.newInstance()
+            // VAO
+            // OpenGL ES 3.0
+            "a06" -> A06Fragment.newInstance()
+            // flat補間:VBOあり
+            // OpenGL ES 3.0
+            "av05" -> AV05Fragment.newInstance()
+            // flat補間:VBOなし
+            // OpenGL ES 3.0
+            "a05" -> A05Fragment.newInstance()
+            // GLSL ES 3.0 layout:VBOあり
+            // OpenGL ES 3.0
+            "av04" -> AV04Fragment.newInstance()
+            // GLSL ES 3.0 layout:VBOなし
+            // OpenGL ES 3.0
+            "a04" -> A04Fragment.newInstance()
+            // GLSL ES 3.0:VBOあり
+            // OpenGL ES 3.0
+            "av03" -> AV03Fragment.newInstance()
+            // GLSL ES 3.0:VBOなし
+            // OpenGL ES 3.0
+            "a03" -> A03Fragment.newInstance()
+            // 回転(立方体)01_ES30:VBOなし
+            // OpenGL ES 3.0
+            "rot01es30" -> ES30Rotate01Fragment.newInstance()
+            // GLSL ES 3.0:VBOなし
+            // OpenGL ES 3.0
+            else -> A03Fragment.newInstance()
+        }
+
+        // 現在表示しているフラグメントをスタックから外す
+        supportFragmentManager.popBackStack()
+        // 選択したフラグメントを表示する
+        if ( supportFragmentManager.findFragmentByTag(tag) == null ) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.flES30x01, fragment, tag)
+                    .commit()
         }
     }
 }

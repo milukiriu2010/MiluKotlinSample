@@ -7,12 +7,17 @@ import milu.kiriu2010.gui.basic.MyGLES30Func
 import milu.kiriu2010.gui.shader.es30.ES30MgShader
 import milu.kiriu2010.gui.vbo.es30.ES30VAOAbs
 
-// ------------------------------------
+// -----------------------------------------
+// GLSL ES 3.0(VAO)
+// OpenGL ES 3.0
+// -----------------------------------------
+// https://wgld.org/d/webgl2/w006.html
+// -----------------------------------------
 // シェーダA
-// ------------------------------------
+// -----------------------------------------
 // https://wgld.org/d/webgl2/w006.html
 // https://github.com/danginsburg/opengles3-book/blob/master/Android_Java/Chapter_6/VertexArrayObjects/src/com/openglesbook/VertexArrayObjects/VAORenderer.java
-// ------------------------------------
+// -----------------------------------------
 class ES30a06ShaderA: ES30MgShader() {
     // 頂点シェーダ
     private val scv =

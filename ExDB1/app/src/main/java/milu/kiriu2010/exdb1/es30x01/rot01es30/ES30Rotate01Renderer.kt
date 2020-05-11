@@ -11,7 +11,10 @@ import milu.kiriu2010.gui.shader.es30.ES30Simple01Shader
 import milu.kiriu2010.math.MyMathUtil
 import kotlin.math.sqrt
 
-
+// ----------------------------------------------
+// 回転(立方体)01_ES30:VBOなし
+// OpenGL ES 3.0
+// ----------------------------------------------
 class ES30Rotate01Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画モデル(静止している立方体)

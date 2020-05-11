@@ -11,10 +11,12 @@ import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 import milu.kiriu2010.gui.vbo.es20.ES20VBOIp
 
 // ----------------------------------------------
-// 同心円を描く
+// 同心円を描く:VBOあり
 // 時間経過とマウスカーソル座標を利用したサンプル
+// OpenGL ES 2.0
 // ----------------------------------------------
 // https://wgld.org/d/glsl/g002.html
+// ----------------------------------------------
 class GLSLV02Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画モデル
     private lateinit var model: Square01Model

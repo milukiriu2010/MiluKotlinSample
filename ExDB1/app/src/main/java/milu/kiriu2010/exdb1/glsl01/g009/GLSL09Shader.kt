@@ -6,7 +6,8 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
 // -------------------------------------------
-// レイマーチングで球体を描く
+// レイマーチングで球体を描く:VBOなし
+// OpenGL ES 2.0
 // -------------------------------------------
 // https://wgld.org/d/glsl/g009.html
 // -------------------------------------------

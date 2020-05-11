@@ -16,7 +16,8 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // -----------------------------------------
-// GLSL ES 3.0(flat補間)
+// GLSL ES 3.0(flat補間):VBOなし
+// OpenGL ES 3.0
 // -----------------------------------------
 // https://wgld.org/d/webgl2/w005.html
 // -----------------------------------------

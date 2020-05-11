@@ -9,9 +9,11 @@ import milu.kiriu2010.gui.model.d2.Square01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
 // ----------------------------------------------
-// オーブ(光の玉)
+// オーブ(光の玉):VBOなし
+// OpenGL ES 2.0
 // ----------------------------------------------
 // https://wgld.org/d/glsl/g003.html
+// ----------------------------------------------
 class GLSL03Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画モデル
     private lateinit var model: Square01Model

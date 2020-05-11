@@ -10,6 +10,12 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// -------------------------------------------
+// レイマーチングで球体を描く:VBOあり
+// OpenGL ES 2.0
+// -------------------------------------------
+// https://wgld.org/d/glsl/g009.html
+// -------------------------------------------
 class GLSLV09Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

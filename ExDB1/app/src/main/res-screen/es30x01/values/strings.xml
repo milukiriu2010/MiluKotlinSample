@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ITEM_ES30_CUBE_ROTATE01">回転(立方体)01_ES30</string>
+    <string name="ITEM_ES30_A03">a03_ES30</string>
+    <string name="ITEM_ES30_AV03">av03_ES30</string>
+    <string name="ITEM_ES30_A04">a04_ES30_layout</string>
+    <string name="ITEM_ES30_AV04">av04_ES30_layout</string>
+    <string name="ITEM_ES30_A05">a05_flat補間</string>
+    <string name="ITEM_ES30_AV05">av05_flat補間</string>
+    <string name="ITEM_ES30_A06">a06_VAO</string>
+    <string name="ITEM_ES30_A07">a07_インスタンシング</string>
+</resources>

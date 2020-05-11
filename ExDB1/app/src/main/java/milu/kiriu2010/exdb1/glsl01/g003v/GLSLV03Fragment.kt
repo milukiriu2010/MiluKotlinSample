@@ -10,6 +10,12 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ----------------------------------------------
+// オーブ(光の玉):VBOあり
+// OpenGL ES 2.0
+// ----------------------------------------------
+// https://wgld.org/d/glsl/g003.html
+// ----------------------------------------------
 class GLSLV03Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

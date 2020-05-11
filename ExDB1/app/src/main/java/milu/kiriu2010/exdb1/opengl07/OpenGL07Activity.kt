@@ -18,6 +18,13 @@ import milu.kiriu2010.exdb1.opengl07.w076v.WV076Fragment
 import milu.kiriu2010.exdb1.opengl07.w077.W077Fragment
 import milu.kiriu2010.exdb1.opengl07.w077v.WV077Fragment
 
+// -------------------------------------
+// OpenGL ES 2.0サンプル
+// -------------------------------------
+// https://wgld.org/d/webgl/w070.html
+// ～
+// https://wgld.org/d/webgl/w079.html
+// -------------------------------------
 class OpenGL07Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -3,5 +3,5 @@
 
     <item
         android:id="@+id/es32_cube_rotate01"
-        android:title="回転(立方体)01_ES32" />
+        android:title="@string/ITEM_ES32_CUBE_ROTATE01" />
 </menu>

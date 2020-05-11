@@ -11,6 +11,12 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES30View
 
+// -----------------------------------------
+// VAOとインスタンシング
+// OpenGL ES 3.0
+// -----------------------------------------
+// https://wgld.org/d/webgl2/w007.html
+// -----------------------------------------
 class A07Fragment : Fragment() {
 
     private lateinit var myGLES30View: MyGLES30View

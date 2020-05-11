@@ -10,9 +10,12 @@ import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 import milu.kiriu2010.gui.vbo.es20.ES20VBOIp
 
-// GLSLだけでレンダリング
+// ----------------------------------------------
+// GLSLだけでレンダリング:VBOあり
+// OpenGL ES 2.0
 // ----------------------------------------------
 // https://wgld.org/d/glsl/g001.html
+// ----------------------------------------------
 class GLSLV01Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画モデル
     private lateinit var model: Square01Model

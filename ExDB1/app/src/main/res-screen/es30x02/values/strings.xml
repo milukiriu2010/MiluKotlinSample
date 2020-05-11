@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ITEM_ES30_A08">a08_gl_VertexID</string>
+    <string name="ITEM_ES30_A09">a09_UBO</string>
+</resources>

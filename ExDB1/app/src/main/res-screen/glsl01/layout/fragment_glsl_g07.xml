@@ -38,14 +38,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
-            android:text="ノイズ" />
+            android:text="@string/RB_G07_NOISE" />
 
         <RadioButton
             android:id="@+id/radioButtonG07Seamless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="シームレスなノイズ" />
+            android:text="@string/RB_G07_SEAMLESS" />
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

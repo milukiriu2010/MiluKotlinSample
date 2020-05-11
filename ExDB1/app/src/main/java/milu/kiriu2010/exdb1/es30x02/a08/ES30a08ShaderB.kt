@@ -9,6 +9,7 @@ import milu.kiriu2010.gui.vbo.es30.ES30VAOAbs
 
 // ------------------------------------
 // gl_VertexIDとgl_InstanceID
+// OpenGL ES 3.0
 // シェーダB
 // ------------------------------------
 // https://wgld.org/d/webgl2/w008.html

@@ -19,8 +19,10 @@ import javax.microedition.khronos.opengles.GL10
 
 // -----------------------------------------
 // GLSL ES 3.0(VAO)
+// OpenGL ES 3.0
 // -----------------------------------------
 // https://wgld.org/d/webgl2/w006.html
+// -----------------------------------------
 // https://github.com/danginsburg/opengles3-book/blob/master/Android_Java/Chapter_6/VertexArrayObjects/src/com/openglesbook/VertexArrayObjects/VAORenderer.java
 // https://www.programcreek.com/java-api-examples/?code=biezhihua/Android_OpenGL_Demo/Android_OpenGL_Demo-master/Learn-OpenGLES-Tutorials/android/AndroidOpenGLESLessons/app/src/main/java/com/learnopengles/android/lesson8/LessonEightRenderer.java#
 // -----------------------------------------

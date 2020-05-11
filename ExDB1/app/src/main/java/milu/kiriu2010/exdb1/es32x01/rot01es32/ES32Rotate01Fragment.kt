@@ -11,6 +11,10 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES32View
 
+// ------------------------------------------
+// 特殊効果なし:VAO
+// OpenGL ES 3.2
+// ------------------------------------------
 class ES32Rotate01Fragment : Fragment() {
 
     private lateinit var myGLES32View: MyGLES32View

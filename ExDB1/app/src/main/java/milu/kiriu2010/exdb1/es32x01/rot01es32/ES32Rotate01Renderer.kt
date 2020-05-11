@@ -12,7 +12,10 @@ import milu.kiriu2010.gui.vbo.es32.ES32VAOIpc
 import milu.kiriu2010.math.MyMathUtil
 import kotlin.math.sqrt
 
-
+// ------------------------------------------
+// 特殊効果なし:VAO
+// OpenGL ES 3.2
+// ------------------------------------------
 class ES32Rotate01Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画モデル(静止している立方体)

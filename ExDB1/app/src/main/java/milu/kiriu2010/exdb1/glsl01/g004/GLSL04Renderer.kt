@@ -9,9 +9,11 @@ import milu.kiriu2010.gui.model.d2.Square01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
 // ----------------------------------------------
-// 様々な図形を描く
+// 様々な図形を描く:VBOなし
+// OpenGL ES 2.0
 // ----------------------------------------------
 // https://wgld.org/d/glsl/g004.html
+// ----------------------------------------------
 class GLSL04Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画モデル
     private lateinit var model: Square01Model

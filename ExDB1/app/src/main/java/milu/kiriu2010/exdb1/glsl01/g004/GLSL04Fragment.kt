@@ -12,6 +12,12 @@ import android.widget.RadioGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ----------------------------------------------
+// 様々な図形を描く:VBOなし
+// OpenGL ES 2.0
+// ----------------------------------------------
+// https://wgld.org/d/glsl/g004.html
+// ----------------------------------------------
 class GLSL04Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

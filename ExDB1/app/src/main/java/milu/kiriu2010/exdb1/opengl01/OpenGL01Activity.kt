@@ -29,6 +29,13 @@ import milu.kiriu2010.exdb1.opengl01.w024v.WV024Fragment
 import milu.kiriu2010.exdb1.opengl01.w025.W025Fragment
 import milu.kiriu2010.exdb1.opengl01.w025v.WV025Fragment
 
+// -------------------------------------
+// OpenGL ES 2.0サンプル
+// -------------------------------------
+// https://wgld.org/d/webgl/w015.html
+// ～
+// https://wgld.org/d/webgl/w019.html
+// -------------------------------------
 class OpenGL01Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

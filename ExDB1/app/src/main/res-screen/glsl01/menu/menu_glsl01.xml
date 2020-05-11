@@ -3,62 +3,62 @@
 
     <item
         android:id="@+id/glsl_gv10"
-        android:title="gv10_球体ライティング" />
+        android:title="@string/ITEM_GLSL_GV10" />
     <item
         android:id="@+id/glsl_gv09"
-        android:title="gv09_レイマーチングで球体" />
+        android:title="@string/ITEM_GLSL_GV09" />
     <item
         android:id="@+id/glsl_gv08"
-        android:title="gv08_レイ" />
+        android:title="@string/ITEM_GLSL_GV08" />
     <item
         android:id="@+id/glsl_gv07"
-        android:title="gv07_ノイズ" />
+        android:title="@string/ITEM_GLSL_GV07" />
     <item
         android:id="@+id/glsl_gv06"
-        android:title="gv06_ジュリア集合" />
+        android:title="@string/ITEM_GLSL_GV06" />
     <item
         android:id="@+id/glsl_gv05"
-        android:title="gv05_マンデルブロ集合" />
+        android:title="@string/ITEM_GLSL_GV05" />
     <item
         android:id="@+id/glsl_gv04"
-        android:title="gv04_様々な図形" />
+        android:title="@string/ITEM_GLSL_GV04" />
     <item
         android:id="@+id/glsl_gv03"
-        android:title="gv03_光の玉" />
+        android:title="@string/ITEM_GLSL_GV03" />
     <item
         android:id="@+id/glsl_gv02"
-        android:title="gv02_同心円" />
+        android:title="@string/ITEM_GLSL_GV02" />
     <item
         android:id="@+id/glsl_gv01"
-        android:title="gv01_GLSL" />
+        android:title="@string/ITEM_GLSL_GV01" />
     <item
         android:id="@+id/glsl_g010"
-        android:title="g010_球体ライティング" />
+        android:title="@string/ITEM_GLSL_G010" />
     <item
         android:id="@+id/glsl_g009"
-        android:title="g009_レイマーチングで球体" />
+        android:title="@string/ITEM_GLSL_G009" />
     <item
         android:id="@+id/glsl_g008"
-        android:title="g008_レイ" />
+        android:title="@string/ITEM_GLSL_G008" />
     <item
         android:id="@+id/glsl_g007"
-        android:title="g007_ノイズ" />
+        android:title="@string/ITEM_GLSL_G007" />
     <item
         android:id="@+id/glsl_g006"
-        android:title="g006_ジュリア集合" />
+        android:title="@string/ITEM_GLSL_G006" />
     <item
         android:id="@+id/glsl_g005"
-        android:title="g005_マンデルブロ集合" />
+        android:title="@string/ITEM_GLSL_G005" />
     <item
         android:id="@+id/glsl_g004"
-        android:title="g004_様々な図形" />
+        android:title="@string/ITEM_GLSL_G004" />
     <item
         android:id="@+id/glsl_g003"
-        android:title="g003_光の玉" />
+        android:title="@string/ITEM_GLSL_G003" />
     <item
         android:id="@+id/glsl_g002"
-        android:title="g002_同心円" />
+        android:title="@string/ITEM_GLSL_G002" />
     <item
         android:id="@+id/glsl_g001"
-        android:title="g001_GLSL" />
+        android:title="@string/ITEM_GLSL_G001" />
 </menu>

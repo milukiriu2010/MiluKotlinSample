@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ITEM_GLSL_G001">g001_GLSL</string>
+    <string name="ITEM_GLSL_GV01">gv01_GLSL</string>
+    <string name="ITEM_GLSL_G002">g002_同心円</string>
+    <string name="ITEM_GLSL_GV02">gv02_同心円</string>
+    <string name="ITEM_GLSL_G003">g003_光の玉</string>
+    <string name="ITEM_GLSL_GV03">gv03_光の玉</string>
+    <string name="ITEM_GLSL_G004">g004_様々な図形</string>
+    <string name="ITEM_GLSL_GV04">gv04_様々な図形</string>
+    <string name="ITEM_GLSL_G005">g005_マンデルブロ集合</string>
+    <string name="ITEM_GLSL_GV05">gv05_マンデルブロ集合</string>
+    <string name="ITEM_GLSL_G006">g006_ジュリア集合</string>
+    <string name="ITEM_GLSL_GV06">gv06_ジュリア集合</string>
+    <string name="ITEM_GLSL_G007">g007_ノイズ</string>
+    <string name="ITEM_GLSL_GV07">gv07_ノイズ</string>
+    <string name="ITEM_GLSL_G008">g008_レイ</string>
+    <string name="ITEM_GLSL_GV08">gv08_レイ</string>
+    <string name="ITEM_GLSL_G009">g009_レイマーチングで球体</string>
+    <string name="ITEM_GLSL_GV09">gv09_レイマーチングで球体</string>
+    <string name="ITEM_GLSL_G010">g010_球体ライティング</string>
+    <string name="ITEM_GLSL_GV10">gv10_球体ライティング</string>
+
+    <string name="TV_G02_SPEED">Speed</string>
+    <string name="TV_G02_GAP">Gap</string>
+
+    <string name="RB_G04_RING">輪</string>
+    <string name="RB_G04_RINGTIME">輪(時間)</string>
+    <string name="RB_G04_GRADATION">グラデーション</string>
+    <string name="RB_G04_CONE">円錐を真上から見る</string>
+    <string name="RB_G04_ZOOMLINE">放射状のライン</string>
+    <string name="RB_G04_FLOWER1">花その１</string>
+    <string name="RB_G04_WAVE">波打つリング</string>
+    <string name="RB_G04_FLOWER2">花その２</string>
+    <string name="RB_G04_FAN">ファン</string>
+
+    <string name="RB_G07_NOISE">ノイズ</string>
+    <string name="RB_G07_SEAMLESS">シームレスなノイズ</string>
+
+    <string name="CB_G10">法線</string>
+</resources>

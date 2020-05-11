@@ -26,18 +26,22 @@ import milu.kiriu2010.exdb1.glsl01.g009v.GLSLV09Fragment
 import milu.kiriu2010.exdb1.glsl01.g010.GLSL10Fragment
 import milu.kiriu2010.exdb1.glsl01.g010v.GLSLV10Fragment
 
+// -------------------------------------
+// GLSL
+// OpenGL ES 2.0
+// -------------------------------------
+// https://wgld.org/d/glsl/g001.html
+// ～
+// https://wgld.org/d/glsl/g010.html
+// -------------------------------------
 class GLSL01Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_glsl01)
 
-        supportFragmentManager.popBackStack()
-        if (supportFragmentManager.findFragmentByTag("xyz") == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.flGLSL01, GLSLV10Fragment.newInstance(), "xyz")
-                    .commit()
-        }
+        // 初期表示のフラグメントを設定
+        changeFragment("gv01")
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -59,207 +63,205 @@ class GLSL01Activity : AppCompatActivity() {
                 finish()
                 true
             }
-            // 球体をライティング
+            // 球体をライティング:VBOあり
+            // OpenGL ES 2.0
             R.id.glsl_gv10 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("gv10") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSLV10Fragment.newInstance(), "gv10")
-                            .commit()
-                }
+                changeFragment("gv10")
                 true
             }
-            // 球体をライティング
+            // 球体をライティング:VBOなし
+            // OpenGL ES 2.0
             R.id.glsl_g010 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("g10") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSL10Fragment.newInstance(), "g10")
-                            .commit()
-                }
+                changeFragment("g10")
                 true
             }
-            // レイマーチングで球体
+            // レイマーチングで球体:VBOあり
+            // OpenGL ES 2.0
             R.id.glsl_gv09 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("gv09") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSLV09Fragment.newInstance(), "gv09")
-                            .commit()
-                }
+                changeFragment("gv09")
                 true
             }
-            // レイマーチングで球体
+            // レイマーチングで球体:VBOなし
+            // OpenGL ES 2.0
             R.id.glsl_g009 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("g09") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSL09Fragment.newInstance(), "g09")
-                            .commit()
-                }
+                changeFragment("g09")
                 true
             }
-            // レイ
+            // レイ:VBOあり
+            // OpenGL ES 2.0
             R.id.glsl_gv08 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("gv08") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSLV08Fragment.newInstance(), "gv08")
-                            .commit()
-                }
+                changeFragment("gv08")
                 true
             }
-            // レイ
+            // レイ:VBOなし
+            // OpenGL ES 2.0
             R.id.glsl_g008 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("g08") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSL08Fragment.newInstance(), "g08")
-                            .commit()
-                }
+                changeFragment("g08")
                 true
             }
-            // ノイズ
+            // ノイズ:VBOあり
+            // OpenGL ES 2.0
             R.id.glsl_gv07 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("gv07") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSLV07Fragment.newInstance(), "gv07")
-                            .commit()
-                }
+                changeFragment("gv07")
                 true
             }
-            // ノイズ
+            // ノイズ:VBOなし
+            // OpenGL ES 2.0
             R.id.glsl_g007 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("g07") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSL07Fragment.newInstance(), "g07")
-                            .commit()
-                }
+                changeFragment("g07")
                 true
             }
-            // ジュリア集合
+            // ジュリア集合:VBOあり
+            // OpenGL ES 2.0
             R.id.glsl_gv06 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("gv06") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSLV06Fragment.newInstance(), "gv06")
-                            .commit()
-                }
+                changeFragment("gv06")
                 true
             }
-            // ジュリア集合
+            // ジュリア集合:VBOなし
+            // OpenGL ES 2.0
             R.id.glsl_g006 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("g06") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSL06Fragment.newInstance(), "g06")
-                            .commit()
-                }
+                changeFragment("g06")
                 true
             }
-            // マンデルブロ集合
+            // マンデルブロ集合:VBOあり
+            // OpenGL ES 2.0
             R.id.glsl_gv05 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("gv05") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSLV05Fragment.newInstance(), "gv05")
-                            .commit()
-                }
+                changeFragment("gv05")
                 true
             }
-            // マンデルブロ集合
+            // マンデルブロ集合:VBOなし
+            // OpenGL ES 2.0
             R.id.glsl_g005 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("g05") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSL05Fragment.newInstance(), "g05")
-                            .commit()
-                }
+                changeFragment("g05")
                 true
             }
-            // 様々な図形
+            // 様々な図形:VBOあり
+            // OpenGL ES 2.0
             R.id.glsl_gv04 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("gv04") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSLV04Fragment.newInstance(), "gv04")
-                            .commit()
-                }
+                changeFragment("gv04")
                 true
             }
-            // 様々な図形
+            // 様々な図形:VBOなし
+            // OpenGL ES 2.0
             R.id.glsl_g004 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("g04") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSL04Fragment.newInstance(), "g04")
-                            .commit()
-                }
+                changeFragment("g04")
                 true
             }
-            // 光の玉
+            // 光の玉:VBOあり
+            // OpenGL ES 2.0
             R.id.glsl_gv03 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("gv03") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSLV03Fragment.newInstance(), "gv03")
-                            .commit()
-                }
+                changeFragment("gv03")
                 true
             }
-            // 光の玉
+            // 光の玉:VBOなし
+            // OpenGL ES 2.0
             R.id.glsl_g003 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("g03") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSL03Fragment.newInstance(), "g03")
-                            .commit()
-                }
+                changeFragment("g03")
                 true
             }
-            // 同心円
+            // 同心円:VBOあり
+            // OpenGL ES 2.0
             R.id.glsl_gv02 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("gv02") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSLV02Fragment.newInstance(), "gv02")
-                            .commit()
-                }
+                changeFragment("gv02")
                 true
             }
-            // 同心円
+            // 同心円:VBOなし
+            // OpenGL ES 2.0
             R.id.glsl_g002 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("g02") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSL02Fragment.newInstance(), "g02")
-                            .commit()
-                }
+                changeFragment("g02")
                 true
             }
-            // GLSLのみでレンダリング
+            // GLSLだけでレンダリング:VBOあり
+            // OpenGL ES 2.0
             R.id.glsl_gv01 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("gv01") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSLV01Fragment.newInstance(), "gv01")
-                            .commit()
-                }
+                changeFragment("gv01")
                 true
             }
-            // GLSLのみでレンダリング
+            // GLSLだけでレンダリング:VBOなし
+            // OpenGL ES 2.0
             R.id.glsl_g001 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("g01") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGLSL01, GLSL01Fragment.newInstance(), "g01")
-                            .commit()
-                }
+                changeFragment("g01")
                 true
             }
             else -> return super.onOptionsItemSelected(item!!)
+        }
+    }
+
+    // 表示するフラグメントを切り替える
+    private fun changeFragment(tag: String) {
+        val fragment = when (tag) {
+            // 球体をライティング:VBOあり
+            // OpenGL ES 2.0
+            "gv10" -> GLSLV10Fragment.newInstance()
+            // 球体をライティング:VBOなし
+            // OpenGL ES 2.0
+            "g10" -> GLSL10Fragment.newInstance()
+            // レイマーチングで球体:VBOなし
+            // OpenGL ES 2.0
+            "gv09" -> GLSLV09Fragment.newInstance()
+            // レイマーチングで球体:VBOなし
+            // OpenGL ES 2.0
+            "g09" -> GLSL09Fragment.newInstance()
+            // レイ:VBOあり
+            // OpenGL ES 2.0
+            "gv08" -> GLSLV08Fragment.newInstance()
+            // レイ:VBOなし
+            // OpenGL ES 2.0
+            "g08" -> GLSL08Fragment.newInstance()
+            // ノイズ:VBOあり
+            // OpenGL ES 2.0
+            "gv07" -> GLSLV07Fragment.newInstance()
+            // ノイズ:VBOなし
+            // OpenGL ES 2.0
+            "g07" -> GLSL07Fragment.newInstance()
+            // ジュリア集合:VBOあり
+            // OpenGL ES 2.0
+            "gv06" -> GLSLV06Fragment.newInstance()
+            // ジュリア集合:VBOなし
+            // OpenGL ES 2.0
+            "g06" -> GLSL06Fragment.newInstance()
+            // マンデルブロ集合:VBOあり
+            // OpenGL ES 2.0
+            "gv05" -> GLSLV05Fragment.newInstance()
+            // マンデルブロ集合:VBOなし
+            // OpenGL ES 2.0
+            "g05" -> GLSL05Fragment.newInstance()
+            // 様々な図形:VBOあり
+            // OpenGL ES 2.0
+            "gv04" -> GLSLV04Fragment.newInstance()
+            // 様々な図形:VBOなし
+            // OpenGL ES 2.0
+            "g04" -> GLSL04Fragment.newInstance()
+            // 光の玉:VBOあり
+            // OpenGL ES 2.0
+            "gv03" -> GLSLV03Fragment.newInstance()
+            // 光の玉:VBOなし
+            // OpenGL ES 2.0
+            "g03" -> GLSL03Fragment.newInstance()
+            // 同心円:VBOあり
+            // OpenGL ES 2.0
+            "gv02" -> GLSLV02Fragment.newInstance()
+            // 同心円:VBOなし
+            // OpenGL ES 2.0
+            "g02" -> GLSL02Fragment.newInstance()
+            // GLSLのみでレンダリング:VBOあり
+            // OpenGL ES 2.0
+            "gv01" -> GLSLV01Fragment.newInstance()
+            // GLSLのみでレンダリング:VBOなし
+            // OpenGL ES 2.0
+            "g01" -> GLSL01Fragment.newInstance()
+            // GLSLのみでレンダリング:VBOなし
+            // OpenGL ES 2.0
+            else -> GLSL01Fragment.newInstance()
+        }
+
+        // 現在表示しているフラグメントをスタックから外す
+        supportFragmentManager.popBackStack()
+        // 選択したフラグメントを表示する
+        if ( supportFragmentManager.findFragmentByTag(tag) == null ) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.flGLSL01, fragment, tag)
+                    .commit()
         }
     }
 }
