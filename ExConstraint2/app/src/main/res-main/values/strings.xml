@@ -105,6 +105,7 @@
     <string name="ITEM_A22A">Setting</string>
     <string name="TV_A22">Section[%1$d]</string>
 
+    <string name="BTN_A23">近接センサ</string>
 
     <string name="BTN_GET">Get</string>
     <string name="BTN_DOM">DOM</string>

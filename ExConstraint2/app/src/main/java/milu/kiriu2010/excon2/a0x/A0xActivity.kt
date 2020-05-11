@@ -10,7 +10,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.RadioButton
 import android.widget.Toast
-import milu.kiriu2010.excon2.a0x.a18.A18Activity
 import milu.kiriu2010.excon2.a0x.a01.A01Activity
 import milu.kiriu2010.excon2.a0x.a02.A02Activity
 import milu.kiriu2010.excon2.a0x.a03.A03Activity
@@ -20,28 +19,28 @@ import milu.kiriu2010.excon2.a0x.a06.A06Activity
 import milu.kiriu2010.excon2.a0x.a07.A07Activity
 import milu.kiriu2010.excon2.a0x.a08.A08Activity
 import milu.kiriu2010.excon2.a0x.a09.A09Activity
+import milu.kiriu2010.excon2.a0x.a10.A10Activity
 import milu.kiriu2010.excon2.a0x.a11.A11Activity
-import milu.kiriu2010.excon2.a0x.a16.A16Activity
+import milu.kiriu2010.excon2.a0x.a12.A12Activity
+import milu.kiriu2010.excon2.a0x.a13.A13Activity
+import milu.kiriu2010.excon2.a0x.a14.A14Activity
 import milu.kiriu2010.excon2.a0x.a15.A15Activity
+import milu.kiriu2010.excon2.a0x.a16.A16Activity
+import milu.kiriu2010.excon2.a0x.a17.A17Activity
+import milu.kiriu2010.excon2.a0x.a18.A18Activity
+import milu.kiriu2010.excon2.a0x.a19.A19Activity
+import milu.kiriu2010.excon2.a0x.a20.A20Activity
+import milu.kiriu2010.excon2.a0x.a21.A21Activity
+import milu.kiriu2010.excon2.a0x.a22.A22Activity
+import milu.kiriu2010.excon2.a0x.a23.A23Activity
 import milu.kiriu2010.excon2.a0x.seek.SeekActivity
 import milu.kiriu2010.excon2.a0x.temperature.TemperatureActivity
-import milu.kiriu2010.excon2.a0x.a12.A12Activity
 import kotlinx.android.synthetic.main.activity_a0x.*
 import milu.kiriu2010.excon2.BuildConfig
 import milu.kiriu2010.excon2.R
-import milu.kiriu2010.excon2.a0x.a21.A21Activity
-import milu.kiriu2010.excon2.a0x.a19.A19Activity
-import milu.kiriu2010.excon2.a0x.a13.A13Activity
-import milu.kiriu2010.excon2.a0x.navibottom.BottomNaviActivity
 import milu.kiriu2010.excon2.a0x.navidrawer.NaviDrawerActivity
-import milu.kiriu2010.excon2.a0x.a17.A17Activity
 import milu.kiriu2010.excon2.a0x.sensorori.SensorOriActivity
-import milu.kiriu2010.excon2.a0x.sensorprox.SensorProxActivity
-import milu.kiriu2010.excon2.a0x.a20.A20Activity
-import milu.kiriu2010.excon2.a0x.a14.A14Activity
 import milu.kiriu2010.excon2.a0x.setting.SettingsActivity
-import milu.kiriu2010.excon2.a0x.a22.A22Activity
-import milu.kiriu2010.excon2.a0x.a10.A10Activity
 import milu.kiriu2010.excon2.id.IntentID
 
 class A0xActivity : AppCompatActivity() {
@@ -213,10 +212,9 @@ class A0xActivity : AppCompatActivity() {
             this.startActivity(intent)
         }
 
-        // Bottom Navigation
-        btnBottomNavi.transformationMethod = null
-        btnBottomNavi.setOnClickListener {
-            val intent = Intent( this, BottomNaviActivity::class.java)
+        // 近接センサ
+        btnA23.setOnClickListener {
+            val intent = Intent( this, A23Activity::class.java)
             this.startActivity(intent)
         }
 
@@ -231,12 +229,6 @@ class A0xActivity : AppCompatActivity() {
         btnSetting.transformationMethod = null
         btnSetting.setOnClickListener {
             val intent = Intent( this, SettingsActivity::class.java)
-            this.startActivity(intent)
-        }
-
-        // 近接センサ
-        btnSensorProx.setOnClickListener {
-            val intent = Intent( this, SensorProxActivity::class.java)
             this.startActivity(intent)
         }
 

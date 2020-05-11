@@ -325,43 +325,37 @@
         app:layout_constraintTop_toBottomOf="@+id/btnA19" />
 
     <Button
-        android:id="@+id/btnSensorProx"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="近接センサ"
-        app:layout_constraintBottom_toTopOf="@+id/btnSetting"
+        android:id="@+id/btnA23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/BTN_A23"
         app:layout_constraintEnd_toEndOf="@+id/btnA20"
         app:layout_constraintStart_toStartOf="@+id/btnA20"
         app:layout_constraintTop_toTopOf="@+id/btnA22" />
 
     <Button
-        android:id="@+id/btnBottomNavi"
-        android:layout_width="0dp"
+        android:id="@+id/btnSensorOri"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Bottom Navi"
-        app:layout_constraintEnd_toEndOf="@+id/btnA21"
-        app:layout_constraintStart_toStartOf="@+id/btnA21"
-        app:layout_constraintTop_toBottomOf="@+id/btnA21" />
+        android:text="傾きセンサ"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnA23" />
 
     <Button
         android:id="@+id/btnNaviDrawer"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="Navi Drawer"
-        app:layout_constraintEnd_toEndOf="@+id/btnBottomNavi"
-        app:layout_constraintStart_toStartOf="@+id/btnBottomNavi"
-        app:layout_constraintTop_toBottomOf="@+id/btnBottomNavi" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/btnSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="設定"
-        app:layout_constraintEnd_toEndOf="@+id/btnA22"
-        app:layout_constraintStart_toStartOf="@+id/btnA22"
-        app:layout_constraintTop_toBottomOf="@+id/btnA22" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -369,15 +363,5 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="211dp" />
-
-    <Button
-        android:id="@+id/btnSensorOri"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="傾きセンサ"
-        app:layout_constraintBottom_toBottomOf="@+id/btnSetting"
-        app:layout_constraintEnd_toEndOf="@+id/btnSensorProx"
-        app:layout_constraintStart_toStartOf="@+id/btnSensorProx"
-        app:layout_constraintTop_toTopOf="@+id/btnSetting" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

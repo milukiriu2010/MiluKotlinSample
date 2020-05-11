@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon2.a0x.sensorprox
+package milu.kiriu2010.excon2.a0x.a23
 
 import android.content.Context
 import android.hardware.Sensor
@@ -8,14 +8,15 @@ import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import kotlinx.android.synthetic.main.activity_sensor_prox.*
+import kotlinx.android.synthetic.main.activity_a23.*
 import milu.kiriu2010.excon2.R
 
-class SensorProxActivity : AppCompatActivity() , SensorEventListener {
+// 近接センサ
+class A23Activity : AppCompatActivity() , SensorEventListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sensor_prox)
+        setContentView(R.layout.activity_a23)
     }
 
     // センサーの監視を開始する
@@ -31,7 +32,7 @@ class SensorProxActivity : AppCompatActivity() , SensorEventListener {
         }
         // 近接センサなし
         else {
-            dataProx.text = "×"
+            dataA23.text = "×"
         }
     }
 
@@ -53,6 +54,6 @@ class SensorProxActivity : AppCompatActivity() , SensorEventListener {
         // どうやら
         // 0:近いとき
         // 5:遠いとき
-        dataProx.text = event.values[0].toString()
+        dataA23.text = event.values[0].toString()
     }
 }

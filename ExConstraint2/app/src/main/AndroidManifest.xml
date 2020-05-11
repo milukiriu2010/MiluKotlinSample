@@ -54,18 +54,15 @@
         <activity android:name=".a0x.a20.A20Activity" />
         <activity android:name=".a0x.a21.A21Activity" />
         <activity android:name=".a0x.a22.A22Activity" />
+        <activity android:name=".a0x.a23.A23Activity" />
         <activity android:name=".a0x.seek.SeekActivity" />
         <activity android:name=".a0x.temperature.TemperatureActivity" />
-        <activity
-            android:name=".a0x.navibottom.BottomNaviActivity"
-            android:label="@string/title_activity_bottom_navi" />
         <activity
             android:name=".a0x.navidrawer.NaviDrawerActivity"
             android:label="@string/title_activity_navi_drawer" />
         <activity
             android:name=".a0x.setting.SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".a0x.sensorprox.SensorProxActivity" />
         <activity android:name=".a0x.sensorori.SensorOriActivity" />
         <activity android:name=".b0x.conf.ConfActivity" />
         <activity android:name=".b0x.B0XActivity" />
