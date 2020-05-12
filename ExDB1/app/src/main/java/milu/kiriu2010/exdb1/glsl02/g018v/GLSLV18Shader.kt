@@ -7,7 +7,8 @@ import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
 // -------------------------------------------
-// オブジェクトを行列でねじる
+// オブジェクトを行列でねじる:VBOあり
+// OpenGL ES 2.0
 // -------------------------------------------
 // https://wgld.org/d/glsl/g018.html
 // -------------------------------------------

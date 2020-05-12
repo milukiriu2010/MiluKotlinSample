@@ -11,6 +11,12 @@ import android.widget.CheckBox
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// -------------------------------------------
+// オブジェクトを行列でねじる:VBOあり
+// OpenGL ES 2.0
+// -------------------------------------------
+// https://wgld.org/d/glsl/g018.html
+// -------------------------------------------
 class GLSLV18Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

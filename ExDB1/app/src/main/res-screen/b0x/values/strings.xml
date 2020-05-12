@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="BTN_B01">Button</string>
+    <string name="TV_B01A">ABCabcあいう</string>
+    <string name="TV_B01B">ABCabcあいう</string>
+    <string name="TV_B01C">ABCabcあいう</string>
+    <string name="TV_B01D">ABCabcあいう</string>
+    <string name="IV_B01">Android</string>
+
+    <string name="IV_B03">ポリゴンラップ</string>
+    <string name="RB_B03A">線アニメーション</string>
+    <string name="RB_B03B">ドットアニメーション</string>
+
+    <string name="ITEM_B01">影付きボタン</string>
+    <string name="ITEM_B02">枠アニメ</string>
+    <string name="ITEM_B03">ポリゴンラップ</string>
+    <string name="ITEM_B04">コッホ雪片</string>
+    <string name="ITEM_B05">コッホ雪片ラップ</string>
+    <string name="ITEM_B06">コッホツリー</string>
+    <string name="ITEM_B07">コッホツリーラップ</string>
+    <string name="ITEM_B08">マンデルブロ</string>
+    <string name="ITEM_B09">ドラゴン曲線</string>
+    <string name="ITEM_B10">ジュリア集合</string>
+    <string name="ITEM_B11">シェルピンスキー・カーペット</string>
+    <string name="ITEM_B12">シェルピンスキー三角形</string>
+    <string name="ITEM_B13">高木曲線</string>
+
+</resources>

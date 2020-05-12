@@ -3,62 +3,62 @@
 
     <item
         android:id="@+id/glsl_gv20"
-        android:title="gv20_レイマーチングソフトシャドウ" />
+        android:title="@string/ITEM_GLSL_GV20" />
     <item
         android:id="@+id/glsl_gv19"
-        android:title="gv19_オブジェクトに投影" />
+        android:title="@string/ITEM_GLSL_GV19" />
     <item
         android:id="@+id/glsl_gv18"
-        android:title="gv18_オブジェクトを行列でねじる" />
+        android:title="@string/ITEM_GLSL_GV18" />
     <item
         android:id="@+id/glsl_gv17"
-        android:title="gv17_オブジェクトを行列で回転" />
+        android:title="@string/ITEM_GLSL_GV17" />
     <item
         android:id="@+id/glsl_gv16"
-        android:title="gv16_オブジェクトの重なりをスムース" />
+        android:title="@string/ITEM_GLSL_GV16" />
     <item
         android:id="@+id/glsl_gv15"
-        android:title="gv15_オブジェクトの重なりを考慮" />
+        android:title="@string/ITEM_GLSL_GV15" />
     <item
         android:id="@+id/glsl_gv14"
-        android:title="gv14_異なる形状のオブジェクト" />
+        android:title="@string/ITEM_GLSL_GV14" />
     <item
         android:id="@+id/glsl_gv13"
-        android:title="gv13_ボックスモデルを複製" />
+        android:title="@string/ITEM_GLSL_GV13" />
     <item
         android:id="@+id/glsl_gv12"
-        android:title="gv12_オブジェクト複製" />
+        android:title="@string/ITEM_GLSL_GV12" />
     <item
         android:id="@+id/glsl_gv11"
-        android:title="gv11_レイマーチング(視野角)" />
+        android:title="@string/ITEM_GLSL_GV11" />
     <item
         android:id="@+id/glsl_g020"
-        android:title="g020_レイマーチングソフトシャドウ" />
+        android:title="@string/ITEM_GLSL_G020" />
     <item
         android:id="@+id/glsl_g019"
-        android:title="g019_オブジェクトに投影" />
+        android:title="@string/ITEM_GLSL_G019" />
     <item
         android:id="@+id/glsl_g018"
-        android:title="g018_オブジェクトを行列でねじる" />
+        android:title="@string/ITEM_GLSL_G018" />
     <item
         android:id="@+id/glsl_g017"
-        android:title="g017_オブジェクトを行列で回転" />
+        android:title="@string/ITEM_GLSL_G017" />
     <item
         android:id="@+id/glsl_g016"
-        android:title="g016_オブジェクトの重なりをスムース" />
+        android:title="@string/ITEM_GLSL_G016" />
     <item
         android:id="@+id/glsl_g015"
-        android:title="g015_オブジェクトの重なりを考慮" />
+        android:title="@string/ITEM_GLSL_G015" />
     <item
         android:id="@+id/glsl_g014"
-        android:title="g014_異なる形状のオブジェクト" />
+        android:title="@string/ITEM_GLSL_G014" />
     <item
         android:id="@+id/glsl_g013"
-        android:title="g013_ボックスモデルを複製" />
+        android:title="@string/ITEM_GLSL_G013" />
     <item
         android:id="@+id/glsl_g012"
-        android:title="g012_オブジェクト複製" />
+        android:title="@string/ITEM_GLSL_G012" />
     <item
         android:id="@+id/glsl_g011"
-        android:title="g011_レイマーチング(視野角)" />
+        android:title="@string/ITEM_GLSL_G011" />
 </menu>

@@ -1,28 +1,10 @@
 <resources>
     <string name="app_name">ExDB1</string>
     <string name="BTN_A0X">Anime</string>
-
-
-
-
     <string name="BTN_B0X">Draw</string>
-    <string name="BTN_B01">Button</string>
-    <string name="TV_B01A">ABCabcあいう</string>
-    <string name="TV_B01B">ABCabcあいう</string>
-    <string name="TV_B01C">ABCabcあいう</string>
-    <string name="TV_B01D">ABCabcあいう</string>
-    <string name="IV_B01">Android</string>
-
-    <string name="ITEM_B01">影付きボタン</string>
-    <string name="ITEM_B02">枠アニメ</string>
-
-
     <string name="BTN_C0X">Canvas</string>
-    <string name="ITEM_C01">左⇒右</string>
-
-
     <string name="BTN_D0X">Basic</string>
-    <string name="ITEM_D01">パスエフェクト</string>
+
 
     <string name="BTN_GL01">GL01</string>
     <string name="BTN_GL02">GL02</string>
@@ -31,7 +13,14 @@
     <string name="BTN_GL05">GL05</string>
     <string name="BTN_GL06">GL06</string>
     <string name="BTN_GL07">GL07</string>
-
     <string name="BTN_GL08">GL08</string>
+
+    <string name="BTN_ES30X01">ES30x01</string>
+    <string name="BTN_ES30X02">ES30x02</string>
+    <string name="BTN_ES32X01">ES32x01</string>
+    <string name="BTN_MGL_00">MGL00</string>
+    <string name="BTN_MGL_01">MGL01</string>
+    <string name="BTN_GLSL_01">GLSL01</string>
+    <string name="BTN_GLSL_02">GLSL02</string>
 
 </resources>

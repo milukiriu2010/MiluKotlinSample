@@ -6,7 +6,8 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
 // -------------------------------------------
-// オブジェクトを行列で回転
+// オブジェクトを行列で回転:VBOなし
+// OpenGL ES 2.0
 // -------------------------------------------
 // https://wgld.org/d/glsl/g017.html
 // -------------------------------------------

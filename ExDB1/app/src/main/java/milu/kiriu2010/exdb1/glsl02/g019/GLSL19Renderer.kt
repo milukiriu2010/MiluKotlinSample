@@ -9,7 +9,8 @@ import milu.kiriu2010.gui.model.d2.Square01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
 // -------------------------------------------
-// ２次元エフェクトやテクスチャを投影
+// ２次元エフェクトやテクスチャを投影:VBOなし
+// OpenGL ES 2.0
 // -------------------------------------------
 // https://wgld.org/d/glsl/g019.html
 // -------------------------------------------

@@ -12,6 +12,7 @@ import milu.kiriu2010.gui.decorate.Deco03ConstraintLayout
 import milu.kiriu2010.gui.decorate.DecorateTextView
 import milu.kiriu2010.gui.decorate.DecorateView
 
+// 枠アニメ
 class B02Fragment : Fragment() {
 
     // レイアウト

@@ -7,7 +7,8 @@ import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
 // -------------------------------------------
-// オブジェクトを行列で回転
+// オブジェクトを行列で回転:VBOあり
+// OpenGL ES 2.0
 // -------------------------------------------
 // https://wgld.org/d/glsl/g017.html
 // -------------------------------------------

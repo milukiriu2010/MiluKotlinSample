@@ -9,7 +9,8 @@ import milu.kiriu2010.gui.model.d2.Square01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
 // -------------------------------------------
-// オブジェクトの結合をスムースにする
+// オブジェクトの結合をスムースにする:VBOなし
+// OpenGL ES 2.0
 // -------------------------------------------
 // https://wgld.org/d/glsl/g016.html
 // -------------------------------------------

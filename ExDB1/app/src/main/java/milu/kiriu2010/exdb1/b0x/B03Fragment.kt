@@ -16,13 +16,8 @@ import android.widget.RadioGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.fractal.PolygonLapsDrawable
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Draw03PolygonLapFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class Draw03PolygonLapFragment : Fragment() {
+// ポリゴンラップ
+class B03Fragment : Fragment() {
 
     val handler = Handler()
 
@@ -39,9 +34,9 @@ class Draw03PolygonLapFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_draw03_polygon_lap, container, false)
+        val view = inflater.inflate(R.layout.fragment_b03, container, false)
 
-        val imageView = view.findViewById<ImageView>(R.id.imageView)
+        val imageView = view.findViewById<ImageView>(R.id.ivB03)
         val polygonLapsDrawable = PolygonLapsDrawable()
         imageView.setImageDrawable(polygonLapsDrawable)
 
@@ -89,16 +84,18 @@ class Draw03PolygonLapFragment : Fragment() {
         }.start()
         */
 
-        val radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup)
+        val radioGroup = view.findViewById<RadioGroup>(R.id.rgB03)
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             if ( this::objectAnimator.isInitialized ) {
                 objectAnimator.cancel()
             }
 
             objectAnimator = when (checkedId) {
-                R.id.rbtnLine -> {
+                // 線アニメーション
+                R.id.rbB03A -> {
                     ObjectAnimator.ofFloat(polygonLapsDrawable, PolygonLapsDrawable.PROGRESS, 0f,1f)
                 }
+                // ドットアニメーション
                 else -> {
                     // ドットのアニメーション時は、ライン全体が描かれるようにする
                     // と、思ったけど、そうは問屋が卸さないらしい。
@@ -122,7 +119,7 @@ class Draw03PolygonLapFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                Draw03PolygonLapFragment().apply {
+                B03Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

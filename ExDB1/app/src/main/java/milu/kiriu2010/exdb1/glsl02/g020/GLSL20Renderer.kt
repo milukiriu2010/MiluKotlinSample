@@ -9,7 +9,8 @@ import milu.kiriu2010.gui.model.d2.Square01Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
 // -------------------------------------------
-// レイマーチングソフトシャドウ
+// レイマーチングソフトシャドウ:VBOなし
+// OpenGL ES 2.0
 // -------------------------------------------
 // https://wgld.org/d/glsl/g020.html
 // -------------------------------------------

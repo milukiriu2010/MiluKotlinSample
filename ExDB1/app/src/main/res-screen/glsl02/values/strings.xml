@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ITEM_GLSL_G011">g011_レイマーチング(視野角)</string>
+    <string name="ITEM_GLSL_GV11">gv11_レイマーチング(視野角)</string>
+    <string name="ITEM_GLSL_G012">g012_オブジェクト複製</string>
+    <string name="ITEM_GLSL_GV12">gv12_オブジェクト複製</string>
+    <string name="ITEM_GLSL_G013">g013_ボックスモデルを複製</string>
+    <string name="ITEM_GLSL_GV13">gv13_ボックスモデルを複製</string>
+    <string name="ITEM_GLSL_G014">g014_異なる形状のオブジェクト</string>
+    <string name="ITEM_GLSL_GV14">gv14_異なる形状のオブジェクト</string>
+    <string name="ITEM_GLSL_G015">g015_オブジェクトの重なりを考慮</string>
+    <string name="ITEM_GLSL_GV15">gv15_オブジェクトの重なりを考慮</string>
+    <string name="ITEM_GLSL_G016">g016_オブジェクトの重なりをスムース</string>
+    <string name="ITEM_GLSL_GV16">gv16_オブジェクトの重なりをスムース</string>
+    <string name="ITEM_GLSL_G017">g017_オブジェクトを行列で回転</string>
+    <string name="ITEM_GLSL_GV17">gv17_オブジェクトを行列で回転</string>
+    <string name="ITEM_GLSL_G018">g018_オブジェクトを行列でねじる</string>
+    <string name="ITEM_GLSL_GV18">gv18_オブジェクトを行列でねじる</string>
+    <string name="ITEM_GLSL_G019">g019_オブジェクトに投影</string>
+    <string name="ITEM_GLSL_GV19">gv19_オブジェクトに投影</string>
+    <string name="ITEM_GLSL_G020">g020_レイマーチングソフトシャドウ</string>
+    <string name="ITEM_GLSL_GV20">gv20_レイマーチングソフトシャドウ</string>
+</resources>

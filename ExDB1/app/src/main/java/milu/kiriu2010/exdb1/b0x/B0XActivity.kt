@@ -15,23 +15,15 @@ class B0XActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                changeFragment("Home")
+                changeFragment("b01")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                if (supportFragmentManager.findFragmentByTag("Navi") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flB0X, DrawNaviFragment.newInstance(), "Navi")
-                            .commit()
-                }
+                changeFragment("b02")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                if (supportFragmentManager.findFragmentByTag("Notify") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flB0X, DrawNotifyFragment.newInstance(), "Notify")
-                            .commit()
-                }
+                changeFragment("b03")
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -46,7 +38,7 @@ class B0XActivity : AppCompatActivity() {
         nvB0X.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         // 初期表示のフラグメントを設定
-        changeFragment("Home")
+        changeFragment("b02")
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -69,80 +61,78 @@ class B0XActivity : AppCompatActivity() {
                 true
             }
             // 高木曲線
-            R.id.draw_13_takagi_curve -> {
+            R.id.item_b13 -> {
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.flB0X, Draw13TakagiCurveFragment.newInstance())
                         .commit()
                 true
             }
             // シェルピンスキー三角形
-            R.id.draw_12_sierpin_ski_triangle -> {
+            R.id.item_b12 -> {
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.flB0X, Draw12SierpinSkiTriangleFragment.newInstance())
                         .commit()
                 true
             }
             // シェルピンスキー・カーペット
-            R.id.draw_11_sierpin_ski_carpet -> {
+            R.id.item_b11 -> {
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.flB0X, Draw11SierpinSkiCarpetFragment.newInstance())
                         .commit()
                 true
             }
             // ジュリア集合
-            R.id.draw_10_juliaset -> {
+            R.id.item_b10 -> {
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.flB0X, Draw10JuliaSetFragment.newInstance())
                         .commit()
                 true
             }
             // ドラゴン曲線
-            R.id.draw_09_dragoncurv -> {
+            R.id.item_b09 -> {
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.flB0X, Draw09DragonCurvFragment.newInstance())
                         .commit()
                 true
             }
             // マンデルブロ
-            R.id.draw_08_mandelbrot -> {
+            R.id.item_b08 -> {
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.flB0X, Draw08MandelBrotFragment.newInstance())
                         .commit()
                 true
             }
             // コッホツリーラップ
-            R.id.draw_07_koch_tree_lap -> {
+            R.id.item_b07 -> {
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.flB0X, Draw07KochTreeLapFragment.newInstance())
                         .commit()
                 true
             }
             // コッホツリー
-            R.id.draw_06_koch_tree -> {
+            R.id.item_b06 -> {
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.flB0X, Draw06KochTreeFragment.newInstance())
                         .commit()
                 true
             }
             // コッホ雪片ラップ
-            R.id.draw_05_koch_snowflake_lap -> {
+            R.id.item_b05 -> {
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.flB0X, Draw05SnowFlakeLapFragment.newInstance())
                         .commit()
                 true
             }
             // コッホ雪片
-            R.id.draw_04_koch_snowflake -> {
+            R.id.item_b04 -> {
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.flB0X, Draw04SnowFlakeFragment.newInstance())
                         .commit()
                 true
             }
             // ポリゴンラップ
-            R.id.draw_03_polygon_lap -> {
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.flB0X, Draw03PolygonLapFragment.newInstance())
-                        .commit()
+            R.id.item_b03 -> {
+                changeFragment("b03")
                 true
             }
             // 枠アニメ
@@ -166,8 +156,8 @@ class B0XActivity : AppCompatActivity() {
             "b01" -> B01Fragment.newInstance()
             // 枠アニメ
             "b02" -> B02Fragment.newInstance()
-            // 影付きボタン
-            "Home" -> B02Fragment.newInstance()
+            // ポリゴンラップ
+            "b03" -> B03Fragment.newInstance()
             // 影付きボタン
             else -> B01Fragment.newInstance()
         }

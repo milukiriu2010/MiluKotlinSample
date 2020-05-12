@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/draw_13_takagi_curve"
-        android:title="高木曲線" />
+        android:id="@+id/item_b13"
+        android:title="@string/ITEM_B13" />
     <item
-        android:id="@+id/draw_12_sierpin_ski_triangle"
-        android:title="シェルピンスキー三角形" />
+        android:id="@+id/item_b12"
+        android:title="@string/ITEM_B12" />
     <item
-        android:id="@+id/draw_11_sierpin_ski_carpet"
-        android:title="シェルピンスキー・カーペット" />
+        android:id="@+id/item_b11"
+        android:title="@string/ITEM_B11" />
     <item
-        android:id="@+id/draw_10_juliaset"
-        android:title="ジュリア集合" />
+        android:id="@+id/item_b10"
+        android:title="@string/ITEM_B10" />
     <item
-        android:id="@+id/draw_09_dragoncurv"
-        android:title="ドラゴン曲線" />
+        android:id="@+id/item_b09"
+        android:title="@string/ITEM_B09" />
     <item
-        android:id="@+id/draw_08_mandelbrot"
-        android:title="マンデルブロ" />
+        android:id="@+id/item_b08"
+        android:title="@string/ITEM_B08" />
     <item
-        android:id="@+id/draw_07_koch_tree_lap"
-        android:title="コッホツリーラップ" />
+        android:id="@+id/item_b07"
+        android:title="@string/ITEM_B07" />
     <item
-        android:id="@+id/draw_06_koch_tree"
-        android:title="コッホツリー" />
+        android:id="@+id/item_b06"
+        android:title="@string/ITEM_B06" />
     <item
-        android:id="@+id/draw_05_koch_snowflake_lap"
-        android:title="コッホ雪片ラップ" />
+        android:id="@+id/item_b05"
+        android:title="@string/ITEM_B05" />
     <item
-        android:id="@+id/draw_04_koch_snowflake"
-        android:title="コッホ雪片" />
+        android:id="@+id/item_b04"
+        android:title="@string/ITEM_B04" />
     <item
-        android:id="@+id/draw_03_polygon_lap"
-        android:title="ポリゴンラップ" />
+        android:id="@+id/item_b03"
+        android:title="@string/ITEM_B03" />
     <item
         android:id="@+id/item_b02"
-        android:title="枠アニメ" />
+        android:title="@string/ITEM_B02" />
     <item
         android:id="@+id/item_b01"
         android:title="@string/ITEM_B01" />

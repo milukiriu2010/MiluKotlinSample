@@ -11,6 +11,12 @@ import android.widget.CheckBox
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// -------------------------------------------
+// オブジェクトの結合をスムースにする:VBOあり
+// OpenGL ES 2.0
+// -------------------------------------------
+// https://wgld.org/d/glsl/g016.html
+// -------------------------------------------
 class GLSLV16Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View
