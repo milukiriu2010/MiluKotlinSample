@@ -21,7 +21,7 @@ import java.nio.ByteOrder
 // テクスチャ用画像をプログラムで生成しOpenGLを使って描画
 // OpenGL ES 2.0
 // ----------------------------------------------
-class TestGLView : GLSurfaceView, GLSurfaceView.Renderer {
+class Labo01View : GLSurfaceView, GLSurfaceView.Renderer {
 
     private var _gl_prog: Int = 0
     private var _gl_vars: MutableMap<String, Int> = mutableMapOf()

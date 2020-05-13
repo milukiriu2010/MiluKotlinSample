@@ -15,7 +15,8 @@ import android.widget.RadioGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.fractal.KochSnowFlakeLapDrawable
 
-class Draw05SnowFlakeLapFragment : Fragment() {
+// コッホ雪片ラップ
+class B05Fragment : Fragment() {
 
     private lateinit var objectAnimator: ObjectAnimator
 
@@ -28,20 +29,20 @@ class Draw05SnowFlakeLapFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_draw05_snow_flake_lap, container, false)
+        val view = inflater.inflate(R.layout.fragment_b05, container, false)
 
         val imageView = view.findViewById<ImageView>(R.id.imageView)
         val kochSnowFlakeLapDrawable = KochSnowFlakeLapDrawable()
         imageView.setImageDrawable(kochSnowFlakeLapDrawable)
 
-        val radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup)
+        val radioGroup = view.findViewById<RadioGroup>(R.id.rgB05)
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             if ( this::objectAnimator.isInitialized ) {
                 objectAnimator.cancel()
             }
 
             objectAnimator = when (checkedId) {
-                R.id.rbtnLine -> {
+                R.id.rbB05Line -> {
                     ObjectAnimator.ofFloat(kochSnowFlakeLapDrawable, KochSnowFlakeLapDrawable.PROGRESS, 0f,1f)
                 }
                 else -> {
@@ -67,7 +68,7 @@ class Draw05SnowFlakeLapFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                Draw05SnowFlakeLapFragment().apply {
+                B05Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

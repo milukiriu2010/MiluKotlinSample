@@ -18,7 +18,7 @@
         android:title="@string/ITEM_OPEN_GL_wv026" />
     <item
         android:id="@+id/opengl_noisev01"
-        android:title="noisev01_ノイズテクスチャ" />
+        android:title="@string/ITEM_NOISEV01" />
     <item
         android:id="@+id/opengl_w030"
         android:title="@string/ITEM_OPEN_GL_w030" />
@@ -36,11 +36,11 @@
         android:title="@string/ITEM_OPEN_GL_w026" />
     <item
         android:id="@+id/opengl_noise01"
-        android:title="noise01_ノイズテクスチャ" />
+        android:title="@string/ITEM_NOISE01" />
     <item
         android:id="@+id/opengl_jayce07"
-        android:title="jayce07_フレームバッファ" />
+        android:title="@string/ITEM_JAYCE07" />
     <item
         android:id="@+id/opengl_labo01"
-        android:title="labo01_テクスチャ" />
+        android:title="@string/ITEM_LABO01" />
 </menu>

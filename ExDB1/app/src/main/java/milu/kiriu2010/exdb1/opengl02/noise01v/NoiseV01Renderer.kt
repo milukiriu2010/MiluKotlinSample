@@ -15,11 +15,11 @@ import milu.kiriu2010.gui.shader.es20.wvbo.ES20VBOTexture01Shader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 import milu.kiriu2010.gui.vbo.es20.ES20VBOIpct
 
-// ---------------------------------------------------
+// -------------------------------------------
+// noise01_ノイズテクスチャ:VBOあり
 // パーリンノイズで生成した画像をテクスチャとして貼る
-// ---------------------------------------------------
-// https://wgld.org/d/webgl/w026.html
-// ---------------------------------------------------
+// OpenGL ES 2.0
+// -------------------------------------------
 class NoiseV01Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト

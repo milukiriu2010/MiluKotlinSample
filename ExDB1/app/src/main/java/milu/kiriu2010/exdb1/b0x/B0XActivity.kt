@@ -62,72 +62,52 @@ class B0XActivity : AppCompatActivity() {
             }
             // 高木曲線
             R.id.item_b13 -> {
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.flB0X, Draw13TakagiCurveFragment.newInstance())
-                        .commit()
+                changeFragment("b13")
                 true
             }
             // シェルピンスキー三角形
             R.id.item_b12 -> {
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.flB0X, Draw12SierpinSkiTriangleFragment.newInstance())
-                        .commit()
+                changeFragment("b12")
                 true
             }
             // シェルピンスキー・カーペット
             R.id.item_b11 -> {
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.flB0X, Draw11SierpinSkiCarpetFragment.newInstance())
-                        .commit()
+                changeFragment("b11")
                 true
             }
             // ジュリア集合
             R.id.item_b10 -> {
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.flB0X, Draw10JuliaSetFragment.newInstance())
-                        .commit()
+                changeFragment("b10")
                 true
             }
             // ドラゴン曲線
             R.id.item_b09 -> {
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.flB0X, Draw09DragonCurvFragment.newInstance())
-                        .commit()
+                changeFragment("b09")
                 true
             }
             // マンデルブロ
             R.id.item_b08 -> {
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.flB0X, Draw08MandelBrotFragment.newInstance())
-                        .commit()
+                changeFragment("b08")
                 true
             }
             // コッホツリーラップ
             R.id.item_b07 -> {
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.flB0X, Draw07KochTreeLapFragment.newInstance())
-                        .commit()
+                changeFragment("b07")
                 true
             }
             // コッホツリー
             R.id.item_b06 -> {
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.flB0X, Draw06KochTreeFragment.newInstance())
-                        .commit()
+                changeFragment("b06")
                 true
             }
             // コッホ雪片ラップ
             R.id.item_b05 -> {
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.flB0X, Draw05SnowFlakeLapFragment.newInstance())
-                        .commit()
+                changeFragment("b05")
                 true
             }
             // コッホ雪片
             R.id.item_b04 -> {
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.flB0X, Draw04SnowFlakeFragment.newInstance())
-                        .commit()
+                changeFragment("b04")
                 true
             }
             // ポリゴンラップ
@@ -152,12 +132,32 @@ class B0XActivity : AppCompatActivity() {
     // 表示するフラグメントを切り替える
     private fun changeFragment(tag: String) {
         val fragment = when (tag) {
-            // 影付きボタン
-            "b01" -> B01Fragment.newInstance()
-            // 枠アニメ
-            "b02" -> B02Fragment.newInstance()
+            // 高木曲線
+            "b13" -> B13Fragment.newInstance()
+            // シェルピンスキー三角形
+            "b12" -> B12Fragment.newInstance()
+            // シェルピンスキー・カーペット
+            "b11" -> B11Fragment.newInstance()
+            // ジュリア集合
+            "b10" -> B10Fragment.newInstance()
+            // ドラゴン曲線
+            "b09" -> B09Fragment.newInstance()
+            // マンデルブロ
+            "b08" -> B08Fragment.newInstance()
+            // コッホツリーラップ
+            "b07" -> B07Fragment.newInstance()
+            // コッホツリー
+            "b06" -> B06Fragment.newInstance()
+            // コッホ雪片ラップ
+            "b05" -> B05Fragment.newInstance()
+            // コッホ雪片
+            "b04" -> B04Fragment.newInstance()
             // ポリゴンラップ
             "b03" -> B03Fragment.newInstance()
+            // 枠アニメ
+            "b02" -> B02Fragment.newInstance()
+            // 影付きボタン
+            "b01" -> B01Fragment.newInstance()
             // 影付きボタン
             else -> B01Fragment.newInstance()
         }

@@ -19,7 +19,7 @@ import milu.kiriu2010.exdb1.R
  * This class implements our custom renderer. Note that the GL10 parameter passed in is unused for OpenGL ES 2.0
  * renderers -- the static class GLES20 is used instead.
  */
-class Test7Renderer
+class Jayce07Renderer
 /**
  * Initialize the model data.
  */
@@ -172,11 +172,11 @@ class Test7Renderer
     }
 
     protected fun getVertexShader(shader: Int): String? {
-        return ToolsUtil.readTextFileFromRawResource(mActivityContext, shader)
+        return Jayce07Util.readTextFileFromRawResource(mActivityContext, shader)
     }
 
     protected fun getFragmentShader(shader: Int): String? {
-        return ToolsUtil.readTextFileFromRawResource(mActivityContext, shader)
+        return Jayce07Util.readTextFileFromRawResource(mActivityContext, shader)
     }
 
     override fun onSurfaceCreated(glUnused: GL10, config: EGLConfig) {
@@ -216,14 +216,14 @@ class Test7Renderer
         val vertexShader = getVertexShader(R.raw.per_pixel_vertex_shader)
         val fragmentShader = getFragmentShader(R.raw.per_pixel_fragment_shader)
 
-        val vertexShaderHandle = ToolsUtil.compileShader(GLES20.GL_VERTEX_SHADER, vertexShader!!)
-        val fragmentShaderHandle = ToolsUtil.compileShader(GLES20.GL_FRAGMENT_SHADER, fragmentShader!!)
+        val vertexShaderHandle = Jayce07Util.compileShader(GLES20.GL_VERTEX_SHADER, vertexShader!!)
+        val fragmentShaderHandle = Jayce07Util.compileShader(GLES20.GL_FRAGMENT_SHADER, fragmentShader!!)
 
-        mProgramHandle = ToolsUtil.createAndLinkProgram(vertexShaderHandle, fragmentShaderHandle,
+        mProgramHandle = Jayce07Util.createAndLinkProgram(vertexShaderHandle, fragmentShaderHandle,
                 arrayOf("a_Position", "a_Color", "a_TexCoordinate"))
 
         // Load the texture
-        mTextureDataHandle = ToolsUtil.loadTexture(mActivityContext, R.drawable.texture_w026)
+        mTextureDataHandle = Jayce07Util.loadTexture(mActivityContext, R.drawable.texture_w026)
     }
 
     override fun onSurfaceChanged(glUnused: GL10, width: Int, height: Int) {

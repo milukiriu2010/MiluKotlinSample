@@ -11,10 +11,11 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.fractal.JuliaSetDrawable
-import milu.kiriu2010.gui.fractal.Mandelbrot3Drawable
+import milu.kiriu2010.gui.fractal.DragonCurvDrawable
 
-class Draw10JuliaSetFragment : Fragment() {
+// ドラゴン曲線
+class B09Fragment : Fragment() {
+
     val handler = Handler()
 
     private lateinit var runnable: Runnable
@@ -28,25 +29,26 @@ class Draw10JuliaSetFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_draw10_julia_set, container, false)
+        val view = inflater.inflate(R.layout.fragment_b09, container, false)
 
-        val imageView = view.findViewById<ImageView>(R.id.imageView)
-        val drawable = JuliaSetDrawable()
+        val imageView = view.findViewById<ImageView>(R.id.ivB09)
+        val drawable = DragonCurvDrawable()
         imageView.setImageDrawable(drawable)
 
-        val dataRepeat = view.findViewById<TextView>(R.id.dataRepeat)
+        val dataRepeat = view.findViewById<TextView>(R.id.tvB09)
 
         var repeat = 0
         runnable = Runnable {
-            drawable.scanImagenary(repeat)
+
+            drawable.divideKochPath()
             drawable.invalidateSelf()
-            if ( repeat < Mandelbrot3Drawable.n ) {
+            if ( repeat < 10 ) {
                 repeat++
                 dataRepeat.setText(repeat.toString())
-                handler.postDelayed(runnable,10)
+                handler.postDelayed(runnable,1000)
             }
         }
-        handler.postDelayed(runnable,10)
+        handler.postDelayed(runnable,1000)
 
         return view
     }
@@ -55,7 +57,7 @@ class Draw10JuliaSetFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                Draw10JuliaSetFragment().apply {
+                B09Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

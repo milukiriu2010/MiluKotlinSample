@@ -13,11 +13,11 @@ import milu.kiriu2010.gui.basic.MyNoiseX
 import milu.kiriu2010.gui.model.d2.Board00Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
-// ---------------------------------------------------
+// -------------------------------------------
+// noise01_ノイズテクスチャ:VBOなし
 // パーリンノイズで生成した画像をテクスチャとして貼る
-// ---------------------------------------------------
-// https://wgld.org/d/webgl/w026.html
-// ---------------------------------------------------
+// OpenGL ES 2.0
+// -------------------------------------------
 class Noise01Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画オブジェクト

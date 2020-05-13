@@ -5,7 +5,11 @@ import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
-// シェーダ(テクスチャをレンダリング)
+// -------------------------------------------
+// noise01_ノイズテクスチャ:VBOなし
+// パーリンノイズで生成した画像をテクスチャとして貼る
+// OpenGL ES 2.0
+// -------------------------------------------
 class Noise01Shader: ES20MgShader() {
     // 頂点シェーダ
     private val scv =

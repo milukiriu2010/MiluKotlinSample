@@ -12,6 +12,11 @@ import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.exdb1.opengl01.noise01.Noise01Renderer
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// -------------------------------------------
+// noise01_ノイズテクスチャ:VBOなし
+// パーリンノイズで生成した画像をテクスチャとして貼る
+// OpenGL ES 2.0
+// -------------------------------------------
 class Noise01Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

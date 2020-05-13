@@ -1,6 +1,5 @@
 package milu.kiriu2010.exdb1.b0x
 
-
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -11,10 +10,11 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.fractal.SierpinSkiCarpetDrawable
+import milu.kiriu2010.gui.fractal.JuliaSetDrawable
+import milu.kiriu2010.gui.fractal.Mandelbrot3Drawable
 
-class Draw11SierpinSkiCarpetFragment : Fragment() {
-
+// ジュリア集合
+class B10Fragment : Fragment() {
     val handler = Handler()
 
     private lateinit var runnable: Runnable
@@ -28,26 +28,25 @@ class Draw11SierpinSkiCarpetFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_draw11_sierpin_ski_carpet, container, false)
+        val view = inflater.inflate(R.layout.fragment_b10, container, false)
 
-
-        val imageView = view.findViewById<ImageView>(R.id.imageView)
-        val drawable = SierpinSkiCarpetDrawable()
+        val imageView = view.findViewById<ImageView>(R.id.ivB10)
+        val drawable = JuliaSetDrawable()
         imageView.setImageDrawable(drawable)
 
-        val dataRepeat = view.findViewById<TextView>(R.id.dataRepeat)
+        val dataRepeat = view.findViewById<TextView>(R.id.tvB10)
 
         var repeat = 0
         runnable = Runnable {
-            drawable.proc()
+            drawable.scanImagenary(repeat)
             drawable.invalidateSelf()
-            if ( repeat < 3 ) {
+            if ( repeat < Mandelbrot3Drawable.n ) {
                 repeat++
                 dataRepeat.setText(repeat.toString())
-                handler.postDelayed(runnable,1000)
+                handler.postDelayed(runnable,10)
             }
         }
-        handler.postDelayed(runnable,1000)
+        handler.postDelayed(runnable,10)
 
         return view
     }
@@ -56,7 +55,7 @@ class Draw11SierpinSkiCarpetFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                Draw11SierpinSkiCarpetFragment().apply {
+                B10Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

@@ -6,8 +6,8 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <milu.kiriu2010.exdb1.opengl02.labo01.TestGLView
-        android:id="@+id/testGLView"
+    <milu.kiriu2010.exdb1.opengl02.labo01.Labo01View
+        android:id="@+id/labo01View"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"

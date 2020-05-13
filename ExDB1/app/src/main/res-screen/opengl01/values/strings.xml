@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="ITEM_BEGIN00">OpenGL1.0</string>
+    <string name="ITEM_LABO01">labo01_テクスチャ</string>
+    <string name="ITEM_JAYCE07">jayce07_フレームバッファ</string>
+    <string name="ITEM_NOISE01">noise01_ノイズテクスチャ</string>
+    <string name="ITEM_NOISEV01">noisev01_ノイズテクスチャ</string>
+
     <string name="ITEM_OPEN_GL_w015">w015_ポリゴンに色を塗る</string>
     <string name="ITEM_OPEN_GL_wv015">wv015_ポリゴンに色を塗る</string>
     <string name="ITEM_OPEN_GL_w016">w016_複数モデルレンダリング</string>

@@ -25,4 +25,36 @@
     <string name="ITEM_B12">シェルピンスキー三角形</string>
     <string name="ITEM_B13">高木曲線</string>
 
+    <string name="IV_B04">コッホ雪片</string>
+    <string name="TV_B04">0</string>
+
+    <string name="IV_B05">コッホ雪片ラップ</string>
+    <string name="RB_B05_LINE">線アニメーション</string>
+    <string name="RB_B05_DOT">ドットアニメーション</string>
+
+    <string name="IV_B06">コッホツリー</string>
+    <string name="TV_B06">0</string>
+
+    <string name="IV_B07">コッホツリーラップ</string>
+    <string name="RB_B07_LINE">線アニメーション</string>
+    <string name="RB_B07_DOT">ドットアニメーション</string>
+
+    <string name="IV_B08">マンデルブロ</string>
+    <string name="TV_B08">0</string>
+
+    <string name="IV_B09">ドラゴン曲線</string>
+    <string name="TV_B09">0</string>
+
+    <string name="IV_B10">ジュリア集合</string>
+    <string name="TV_B10">0</string>
+
+    <string name="IV_B11">シェルピンスキー・カーペット</string>
+    <string name="TV_B11">0</string>
+
+    <string name="IV_B12">シェルピンスキー三角形</string>
+    <string name="TV_B12">0</string>
+
+    <string name="IV_B13">高木曲線</string>
+    <string name="TV_B13">0</string>
+
 </resources>

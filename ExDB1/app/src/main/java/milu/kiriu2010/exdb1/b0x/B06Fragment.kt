@@ -11,9 +11,10 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.fractal.SierpinSkiTriangleDrawable
+import milu.kiriu2010.gui.fractal.KochTreeDrawable
 
-class Draw12SierpinSkiTriangleFragment : Fragment() {
+// コッホツリー
+class B06Fragment : Fragment() {
 
     val handler = Handler()
 
@@ -28,19 +29,21 @@ class Draw12SierpinSkiTriangleFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_draw12_sierpin_ski_triangle, container, false)
+        val view = inflater.inflate(R.layout.fragment_b06, container, false)
 
-        val imageView = view.findViewById<ImageView>(R.id.imageView)
-        val drawable = SierpinSkiTriangleDrawable()
-        imageView.setImageDrawable(drawable)
 
-        val dataRepeat = view.findViewById<TextView>(R.id.dataRepeat)
+        val imageView = view.findViewById<ImageView>(R.id.ivB06)
+        val kochTreeDrawable = KochTreeDrawable()
+        imageView.setImageDrawable(kochTreeDrawable)
+
+        val dataRepeat = view.findViewById<TextView>(R.id.tvB06)
 
         var repeat = 0
         runnable = Runnable {
-            drawable.proc()
-            drawable.invalidateSelf()
-            if ( repeat < 6 ) {
+
+            kochTreeDrawable.divideKochPath()
+            kochTreeDrawable.invalidateSelf()
+            if ( repeat < 8 ) {
                 repeat++
                 dataRepeat.setText(repeat.toString())
                 handler.postDelayed(runnable,1000)
@@ -55,7 +58,7 @@ class Draw12SierpinSkiTriangleFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                Draw12SierpinSkiTriangleFragment().apply {
+                B06Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

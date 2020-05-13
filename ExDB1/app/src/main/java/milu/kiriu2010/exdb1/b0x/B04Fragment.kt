@@ -11,10 +11,10 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.fractal.Mandelbrot2Drawable
-import milu.kiriu2010.gui.fractal.Mandelbrot3Drawable
+import milu.kiriu2010.gui.fractal.KochSnowFlakeDrawable
 
-class DrawNotifyFragment : Fragment() {
+// コッホ雪片
+class B04Fragment : Fragment() {
 
     val handler = Handler()
 
@@ -29,26 +29,26 @@ class DrawNotifyFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_draw_notify, container, false)
+        val view = inflater.inflate(R.layout.fragment_b04, container, false)
 
+        val imageView = view.findViewById<ImageView>(R.id.ivB04)
+        val kochSnowFlakeDrawable = KochSnowFlakeDrawable()
+        imageView.setImageDrawable(kochSnowFlakeDrawable)
 
-        val imageView = view.findViewById<ImageView>(R.id.imageView)
-        val drawable = Mandelbrot3Drawable()
-        imageView.setImageDrawable(drawable)
-
-        val dataRepeat = view.findViewById<TextView>(R.id.dataRepeat)
+        val dataRepeat = view.findViewById<TextView>(R.id.tvB04)
 
         var repeat = 0
         runnable = Runnable {
-            drawable.scanImagenary(repeat)
-            drawable.invalidateSelf()
-            if ( repeat < Mandelbrot2Drawable.n ) {
+
+            kochSnowFlakeDrawable.divideKochPath()
+            kochSnowFlakeDrawable.invalidateSelf()
+            if ( repeat < 3 ) {
                 repeat++
                 dataRepeat.setText(repeat.toString())
-                handler.postDelayed(runnable,100)
+                handler.postDelayed(runnable,1000)
             }
         }
-        handler.postDelayed(runnable,100)
+        handler.postDelayed(runnable,1000)
 
         return view
     }
@@ -57,7 +57,7 @@ class DrawNotifyFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                DrawNotifyFragment().apply {
+                B04Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

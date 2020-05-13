@@ -15,7 +15,8 @@ import android.widget.RadioGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.fractal.KochTreeLapDrawable
 
-class Draw07KochTreeLapFragment : Fragment() {
+// コッホツリーラップ
+class B07Fragment : Fragment() {
 
     private lateinit var objectAnimator: ObjectAnimator
 
@@ -28,21 +29,21 @@ class Draw07KochTreeLapFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_draw07_koch_tree_lap, container, false)
+        val view = inflater.inflate(R.layout.fragment_b07, container, false)
 
 
-        val imageView = view.findViewById<ImageView>(R.id.imageView)
+        val imageView = view.findViewById<ImageView>(R.id.ivB07)
         val kochTreeLapDrawable = KochTreeLapDrawable()
         imageView.setImageDrawable(kochTreeLapDrawable)
 
-        val radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup)
+        val radioGroup = view.findViewById<RadioGroup>(R.id.rgB07)
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             if (this::objectAnimator.isInitialized) {
                 objectAnimator.cancel()
             }
 
             objectAnimator = when (checkedId) {
-                R.id.rbtnLine -> {
+                R.id.rbB07Line -> {
                     ObjectAnimator.ofFloat(kochTreeLapDrawable, KochTreeLapDrawable.PROGRESS,0f,1f)
                 }
                 else -> {
@@ -68,7 +69,7 @@ class Draw07KochTreeLapFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                Draw07KochTreeLapFragment().apply {
+                B07Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

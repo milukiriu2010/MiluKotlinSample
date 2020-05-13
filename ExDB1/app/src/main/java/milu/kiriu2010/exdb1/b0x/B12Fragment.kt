@@ -1,6 +1,5 @@
 package milu.kiriu2010.exdb1.b0x
 
-
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -11,9 +10,10 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.fractal.TakagiCurve01Drawable
+import milu.kiriu2010.gui.fractal.SierpinSkiTriangleDrawable
 
-class Draw13TakagiCurveFragment : Fragment() {
+// シェルピンスキー三角形
+class B12Fragment : Fragment() {
 
     val handler = Handler()
 
@@ -28,28 +28,23 @@ class Draw13TakagiCurveFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_draw13_takagi_curve, container, false)
+        val view = inflater.inflate(R.layout.fragment_b12, container, false)
 
-
-        val imageView = view.findViewById<ImageView>(R.id.imageView)
-        val drawable = TakagiCurve01Drawable()
+        val imageView = view.findViewById<ImageView>(R.id.ivB12)
+        val drawable = SierpinSkiTriangleDrawable()
         imageView.setImageDrawable(drawable)
 
-        val dataRepeat = view.findViewById<TextView>(R.id.dataRepeat)
+        val dataRepeat = view.findViewById<TextView>(R.id.tvB12)
 
-        drawable.cal(0)
-        drawable.invalidateSelf()
-
-        var n = 0
+        var repeat = 0
         runnable = Runnable {
-            n = when {
-                n < 10 -> n+1
-                else -> 0
-            }
-            drawable.cal(n)
+            drawable.proc()
             drawable.invalidateSelf()
-            dataRepeat.setText(n.toString())
-            handler.postDelayed(runnable,1000)
+            if ( repeat < 6 ) {
+                repeat++
+                dataRepeat.setText(repeat.toString())
+                handler.postDelayed(runnable,1000)
+            }
         }
         handler.postDelayed(runnable,1000)
 
@@ -60,7 +55,7 @@ class Draw13TakagiCurveFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                Draw13TakagiCurveFragment().apply {
+                B12Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

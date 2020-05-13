@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// jacye07氏によるフレームバッファのサンプル
 class Jayce07Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View
@@ -27,7 +28,7 @@ class Jayce07Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_gl_w15, container, false)
 
         myGLES20View = view.findViewById(R.id.myGLES20ViewW15)
-        val render = Test7Renderer(context!!)
+        val render = Jayce07Renderer(context!!)
         myGLES20View.setRenderer(render)
         myGLES20View.setOnTouchListener { _, event ->
             when (event.action) {

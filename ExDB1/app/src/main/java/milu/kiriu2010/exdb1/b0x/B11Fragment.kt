@@ -1,10 +1,8 @@
 package milu.kiriu2010.exdb1.b0x
 
 
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +11,10 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.gui.fractal.TakagiCurve01Drawable
+import milu.kiriu2010.gui.fractal.SierpinSkiCarpetDrawable
 
-class DrawHomeFragment : Fragment() {
+// シェルピンスキー・カーペット
+class B11Fragment : Fragment() {
 
     val handler = Handler()
 
@@ -27,35 +26,27 @@ class DrawHomeFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_draw_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_b11, container, false)
 
-        val imageView = view.findViewById<ImageView>(R.id.imageView)
-        val drawable = TakagiCurve01Drawable()
+
+        val imageView = view.findViewById<ImageView>(R.id.ivB11)
+        val drawable = SierpinSkiCarpetDrawable()
         imageView.setImageDrawable(drawable)
 
-        val dataRepeat = view.findViewById<TextView>(R.id.dataRepeat)
+        val dataRepeat = view.findViewById<TextView>(R.id.tvB11)
 
-        drawable.cal(0)
-        drawable.invalidateSelf()
-
-        var n = 0
+        var repeat = 0
         runnable = Runnable {
-            n = when {
-                n < 10 -> n+1
-                else -> 0
-            }
-            drawable.cal(n)
+            drawable.proc()
             drawable.invalidateSelf()
-            dataRepeat.setText(n.toString())
-            handler.postDelayed(runnable,1000)
+            if ( repeat < 3 ) {
+                repeat++
+                dataRepeat.setText(repeat.toString())
+                handler.postDelayed(runnable,1000)
+            }
         }
         handler.postDelayed(runnable,1000)
 
@@ -66,7 +57,7 @@ class DrawHomeFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-                DrawHomeFragment().apply {
+                B11Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

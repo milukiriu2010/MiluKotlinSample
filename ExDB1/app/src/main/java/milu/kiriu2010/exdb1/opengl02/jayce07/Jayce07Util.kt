@@ -13,7 +13,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
 
-object ToolsUtil {
+object Jayce07Util {
     fun loadTexture(context: Context, resourceId: Int): Int {
         val textureHandle = IntArray(1)
         GLES20.glGenTextures(1, textureHandle, 0)
