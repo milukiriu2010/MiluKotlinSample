@@ -57,9 +57,6 @@
         <activity android:name=".a0x.a23.A23Activity" />
         <activity android:name=".a0x.a24.A24Activity" />
         <activity android:name=".a0x.seek.SeekActivity" />
-        <activity
-            android:name=".a0x.navidrawer.NaviDrawerActivity"
-            android:label="@string/title_activity_navi_drawer" />
         <activity android:name=".b0x.B0XActivity" />
         <activity android:name=".b0x.conf.ConfActivity" />
         <activity android:name=".b0x.b03.B03Activity" />

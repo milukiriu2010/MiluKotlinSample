@@ -38,7 +38,6 @@ import milu.kiriu2010.excon2.a0x.a24.A24Activity
 import kotlinx.android.synthetic.main.activity_a0x.*
 import milu.kiriu2010.excon2.BuildConfig
 import milu.kiriu2010.excon2.R
-import milu.kiriu2010.excon2.a0x.navidrawer.NaviDrawerActivity
 import milu.kiriu2010.excon2.id.IntentID
 
 class A0xActivity : AppCompatActivity() {
@@ -219,12 +218,6 @@ class A0xActivity : AppCompatActivity() {
         // 傾きセンサ(結局、加速度センサ)
         btnA24.setOnClickListener {
             val intent = Intent( this, A24Activity::class.java)
-            this.startActivity(intent)
-        }
-
-        // Navigation Drawer
-        btnNaviDrawer.setOnClickListener {
-            val intent = Intent( this, NaviDrawerActivity::class.java)
             this.startActivity(intent)
         }
 
