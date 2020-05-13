@@ -15,131 +15,132 @@
         android:layout_marginEnd="8dp"
         android:text="conf"
         android:textAllCaps="false"
-        app:layout_constraintEnd_toStartOf="@+id/btnGallery"
+        app:layout_constraintEnd_toStartOf="@+id/btnB02"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnGallery"
+        android:id="@+id/btnB02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Gallery"
+        android:text="@string/BTN_B02"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="@+id/btnConf"
-        app:layout_constraintEnd_toStartOf="@+id/btnGallery2"
+        app:layout_constraintEnd_toStartOf="@+id/btnB03"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnConf"
         app:layout_constraintTop_toTopOf="@+id/btnConf" />
 
     <Button
-        android:id="@+id/btnGallery2"
+        android:id="@+id/btnB03"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Gallery2"
+        android:text="@string/BTN_B03"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="@+id/btnGallery"
+        app:layout_constraintBottom_toBottomOf="@+id/btnB02"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnGallery"
-        app:layout_constraintTop_toTopOf="@+id/btnGallery" />
+        app:layout_constraintStart_toEndOf="@+id/btnB02"
+        app:layout_constraintTop_toTopOf="@+id/btnB02" />
 
     <Button
-        android:id="@+id/btnCamera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Camera"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="@+id/btnRingtone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnRingtone"
-        app:layout_constraintTop_toTopOf="@+id/btnRingtone" />
-
-    <Button
-        android:id="@+id/btnCameraParam"
+        android:id="@+id/btnB04"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="CameraP"
+        android:text="@string/BTN_B04"
         android:textAllCaps="false"
-        app:layout_constraintEnd_toStartOf="@+id/btnDragDrop"
+        app:layout_constraintEnd_toStartOf="@+id/btnB05"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnConf" />
 
     <Button
-        android:id="@+id/btnDragDrop"
+        android:id="@+id/btnB05"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Drag"
+        android:text="@string/BTN_B05"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="@+id/btnCameraParam"
-        app:layout_constraintEnd_toStartOf="@+id/btnBearing"
+        app:layout_constraintBottom_toBottomOf="@+id/btnB04"
+        app:layout_constraintEnd_toStartOf="@+id/btnB06"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnCameraParam"
-        app:layout_constraintTop_toTopOf="@+id/btnCameraParam" />
+        app:layout_constraintStart_toEndOf="@+id/btnB04"
+        app:layout_constraintTop_toTopOf="@+id/btnB04" />
 
     <Button
-        android:id="@+id/btnBearing"
+        android:id="@+id/btnB06"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Bearing"
+        android:text="@string/BTN_B06"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="@+id/btnDragDrop"
+        app:layout_constraintBottom_toBottomOf="@+id/btnB05"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnDragDrop"
-        app:layout_constraintTop_toTopOf="@+id/btnDragDrop" />
+        app:layout_constraintStart_toEndOf="@+id/btnB05"
+        app:layout_constraintTop_toTopOf="@+id/btnB05" />
 
     <Button
-        android:id="@+id/btnCompass"
+        android:id="@+id/btnB07"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="コンパス"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/BTN_B07"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toStartOf="@+id/btnB08"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnServiceLst" />
+        app:layout_constraintTop_toBottomOf="@+id/btnB04" />
 
     <Button
-        android:id="@+id/btnServiceLst"
+        android:id="@+id/btnB08"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_B08"
+        app:layout_constraintBottom_toBottomOf="@+id/btnB07"
+        app:layout_constraintEnd_toStartOf="@+id/btnB09"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnB07"
+        app:layout_constraintTop_toTopOf="@+id/btnB07" />
+
+    <Button
+        android:id="@+id/btnB09"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/BTN_B09"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/btnB08"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnB08"
+        app:layout_constraintTop_toTopOf="@+id/btnB08" />
+
+    <Button
+        android:id="@+id/btnB10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="SrvLst"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toStartOf="@+id/btnRingtone"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:text="@string/BTN_B10"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCameraParam" />
+        app:layout_constraintTop_toBottomOf="@+id/btnB07" />
 
-    <Button
-        android:id="@+id/btnRingtone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="着信音"
-        app:layout_constraintBottom_toBottomOf="@+id/btnServiceLst"
-        app:layout_constraintEnd_toStartOf="@+id/btnCamera"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnServiceLst"
-        app:layout_constraintTop_toTopOf="@+id/btnServiceLst" />
 </androidx.constraintlayout.widget.ConstraintLayout>

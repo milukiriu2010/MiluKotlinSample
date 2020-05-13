@@ -57,23 +57,19 @@
         <activity android:name=".a0x.a23.A23Activity" />
         <activity android:name=".a0x.a24.A24Activity" />
         <activity android:name=".a0x.seek.SeekActivity" />
-        <activity android:name=".a0x.temperature.TemperatureActivity" />
         <activity
             android:name=".a0x.navidrawer.NaviDrawerActivity"
             android:label="@string/title_activity_navi_drawer" />
-        <activity
-            android:name=".a0x.setting.SettingsActivity"
-            android:label="@string/title_activity_settings" />
-        <activity android:name=".b0x.conf.ConfActivity" />
         <activity android:name=".b0x.B0XActivity" />
-        <activity android:name=".b0x.gallery2.Gallery2Activity" />
-        <activity android:name=".b0x.camera.CameraActivity" />
-        <activity android:name=".b0x.cameraparam.CameraParamActivity" />
-        <activity android:name=".b0x.dragdrop.DragDropActivity" />
-        <activity android:name=".b0x.bearing.BearingActivity" />
-        <activity android:name=".b0x.compass.CompassActivity" />
-        <activity android:name=".b0x.servicelst.ServiceLstActivity" />
-        <activity android:name=".b0x.ringtone.RingtoneActivity" />
+        <activity android:name=".b0x.conf.ConfActivity" />
+        <activity android:name=".b0x.b03.B03Activity" />
+        <activity android:name=".b0x.b04.B04Activity" />
+        <activity android:name=".b0x.b05.B05Activity" />
+        <activity android:name=".b0x.b06.B06Activity" />
+        <activity android:name=".b0x.b07.B07Activity" />
+        <activity android:name=".b0x.b08.B08Activity" />
+        <activity android:name=".b0x.b09.B09Activity" />
+        <activity android:name=".b0x.b10.B10Activity" />
     </application>
 
 </manifest>

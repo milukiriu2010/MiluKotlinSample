@@ -35,12 +35,10 @@ import milu.kiriu2010.excon2.a0x.a22.A22Activity
 import milu.kiriu2010.excon2.a0x.a23.A23Activity
 import milu.kiriu2010.excon2.a0x.seek.SeekActivity
 import milu.kiriu2010.excon2.a0x.a24.A24Activity
-import milu.kiriu2010.excon2.a0x.temperature.TemperatureActivity
 import kotlinx.android.synthetic.main.activity_a0x.*
 import milu.kiriu2010.excon2.BuildConfig
 import milu.kiriu2010.excon2.R
 import milu.kiriu2010.excon2.a0x.navidrawer.NaviDrawerActivity
-import milu.kiriu2010.excon2.a0x.setting.SettingsActivity
 import milu.kiriu2010.excon2.id.IntentID
 
 class A0xActivity : AppCompatActivity() {
@@ -230,12 +228,6 @@ class A0xActivity : AppCompatActivity() {
             this.startActivity(intent)
         }
 
-        // 設定
-        btnSetting.setOnClickListener {
-            val intent = Intent( this, SettingsActivity::class.java)
-            this.startActivity(intent)
-        }
-
     }
 
     // -------------------------------------------------------------------
@@ -253,12 +245,6 @@ class A0xActivity : AppCompatActivity() {
     // -------------------------------------------------------------------
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when(item?.itemId) {
-            // 温度(C<=>F)
-            R.id.menuCF -> {
-                val intent = Intent(this, TemperatureActivity::class.java )
-                this.startActivityForResult( intent, IntentID.ID_TEMPERATURE.value )
-                true
-            }
             // メール送信
             // http://tekeye.uk/android/examples/email-contact-form-in-app
             R.id.menuEMAIL -> {

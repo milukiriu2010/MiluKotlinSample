@@ -109,9 +109,33 @@
 
     <string name="BTN_A24">傾きセンサ(加速度)</string>
 
-    <string name="BTN_CALC">計算</string>
-    <string name="BTN_CELSIUS">摂氏</string>
-    <string name="BTN_FAHRENHEIT">華氏</string>
+
+    <string name="BTN_B02">Gallery</string>
+    <string name="BTN_B03">Gallery2</string>
+    <string name="BTN_B03A">ピックアップ</string>
+
+    <string name="BTN_B04">カメラ</string>
+
+    <string name="BTN_B05">D &amp; D</string>
+    <string name="BTN_B05A">Draggable Button</string>
+    <string name="TV_B05">Draggable Text</string>
+
+    <string name="BTN_B06">Bearing</string>
+
+    <string name="BTN_B07">起動App</string>
+
+    <string name="BTN_B08">着信音</string>
+    <string name="BTN_B08A">開始</string>
+    <string name="BTN_B08B">停止</string>
+    <string name="RB_B08_RINGTONE">着信音</string>
+    <string name="RB_B08_NOTIFICATION">通知音</string>
+    <string name="RB_B08_ALARM">アラーム音</string>
+
+    <string name="BTN_B09">カメラ</string>
+    <string name="BTN_B09A">カメラ</string>
+
+    <string name="BTN_B10">コンパス</string>
+
 
     <string name="MENU_ADD">add</string>
     <string name="MENU_RESET">reset</string>
