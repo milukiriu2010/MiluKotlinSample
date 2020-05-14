@@ -10,7 +10,8 @@ import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.shader.es20.nvbo.ES20PhongShading01Shader
 
 // ---------------------------------------------------
-// フォンシェーディング
+// フォンシェーディング:VBOなし
+// OpenGL ES 2.0
 // ---------------------------------------------------
 // https://wgld.org/d/webgl/w024.html
 // ---------------------------------------------------

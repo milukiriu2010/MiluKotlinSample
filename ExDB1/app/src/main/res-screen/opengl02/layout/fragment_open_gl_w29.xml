@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
-            android:text="通常"
+            android:text="@string/RB_W029_NORMAL"
             tools:layout_editor_absoluteX="137dp"
             tools:layout_editor_absoluteY="444dp" />
 
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="半透明"
+            android:text="@string/RB_W029_TRANSPARANCY"
             tools:layout_editor_absoluteX="137dp"
             tools:layout_editor_absoluteY="444dp" />
 
@@ -54,28 +54,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="加算" />
+            android:text="@string/RB_W029_ADD" />
 
         <RadioButton
             android:id="@+id/btnW029Reverse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="反転" />
+            android:text="@string/RB_W029_REVERSE" />
 
         <RadioButton
             android:id="@+id/btnW029PhotoShop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="加算α" />
+            android:text="@string/RB_W029_PHOTOSHOP" />
 
         <RadioButton
             android:id="@+id/btnW029Mult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="乗算" />
+            android:text="@string/RB_W029_MULTI" />
     </RadioGroup>
 
     <TextView
@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="α成分"
+        android:text="@string/TV_W029_BLENDALPHA"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupW29" />
 
@@ -108,7 +108,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="背景R"
+        android:text="@string/TV_W029_BACKRED"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewW29BlendAlpha" />
 
@@ -132,7 +132,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="背景G"
+        android:text="@string/TV_W029_BACKGREEN"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewW29BackRed" />
 
@@ -156,7 +156,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="背景B"
+        android:text="@string/TV_W029_BACKBLUE"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewW29BackGreen" />
 
@@ -180,7 +180,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="背景A"
+        android:text="@string/TV_W029_BACKALPHA"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewW29BackBlue" />
 

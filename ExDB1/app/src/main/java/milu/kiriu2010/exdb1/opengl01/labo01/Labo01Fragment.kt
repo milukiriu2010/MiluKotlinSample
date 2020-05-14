@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl02.labo01
+package milu.kiriu2010.exdb1.opengl01.labo01
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

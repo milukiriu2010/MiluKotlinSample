@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl02.jayce07
+package milu.kiriu2010.exdb1.opengl01.jayce07
 
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -213,8 +213,10 @@ class Jayce07Renderer
         // view matrix. In OpenGL 2, we can keep track of these matrices separately if we choose.
         Matrix.setLookAtM(mViewMatrix, 0, eyeX, eyeY, eyeZ, lookX, lookY, lookZ, upX, upY, upZ)
 
-        val vertexShader = getVertexShader(R.raw.per_pixel_vertex_shader)
-        val fragmentShader = getFragmentShader(R.raw.per_pixel_fragment_shader)
+        // 頂点シェーダ
+        val vertexShader = getVertexShader(R.raw.jayce07_per_pixel_vertex_shader)
+        // フラグメントシェーダ
+        val fragmentShader = getFragmentShader(R.raw.jayce07_per_pixel_fragment_shader)
 
         val vertexShaderHandle = Jayce07Util.compileShader(GLES20.GL_VERTEX_SHADER, vertexShader!!)
         val fragmentShaderHandle = Jayce07Util.compileShader(GLES20.GL_FRAGMENT_SHADER, fragmentShader!!)

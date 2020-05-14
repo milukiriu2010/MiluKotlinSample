@@ -20,4 +20,16 @@
     <string name="ITEM_OPEN_GL_wv028">wv028_テクスチャパラメータ</string>
     <string name="ITEM_OPEN_GL_w029">w029_アルファブレンディング"</string>
     <string name="ITEM_OPEN_GL_wv029">wv029_アルファブレンディング"</string>
+
+    <string name="RB_W029_NORMAL">通常</string>
+    <string name="RB_W029_TRANSPARANCY">半透明</string>
+    <string name="RB_W029_ADD">加算</string>
+    <string name="RB_W029_REVERSE">反転</string>
+    <string name="RB_W029_PHOTOSHOP">加算α</string>
+    <string name="RB_W029_MULTI">乗算</string>
+    <string name="TV_W029_BLENDALPHA">α成分</string>
+    <string name="TV_W029_BACKRED">背景R</string>
+    <string name="TV_W029_BACKGREEN">背景G</string>
+    <string name="TV_W029_BACKBLUE">背景B</string>
+    <string name="TV_W029_BACKALPHA">背景A</string>
 </resources>

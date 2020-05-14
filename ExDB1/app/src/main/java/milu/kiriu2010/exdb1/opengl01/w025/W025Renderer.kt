@@ -12,7 +12,8 @@ import milu.kiriu2010.gui.shader.es20.nvbo.ES20PointLight01Shader
 import milu.kiriu2010.math.MyMathUtil
 
 // ---------------------------------------------------
-// 点光源によるライティング
+// 点光源によるライティング:VBOなし
+// OpenGL ES 2.0
 // ---------------------------------------------------
 // https://wgld.org/d/webgl/w025.html
 // ---------------------------------------------------

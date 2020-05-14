@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl02.labo01
+package milu.kiriu2010.exdb1.opengl01.labo01
 
 import android.content.Context
 import android.opengl.GLES20
@@ -6,12 +6,8 @@ import android.opengl.GLSurfaceView
 import java.nio.FloatBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
-import java.nio.ByteOrder.nativeOrder
-import android.R.attr.order
-import java.nio.ByteBuffer.allocateDirect
 import android.opengl.GLUtils
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.util.AttributeSet
 import java.nio.ByteBuffer

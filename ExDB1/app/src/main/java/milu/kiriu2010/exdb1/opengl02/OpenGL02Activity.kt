@@ -5,10 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl02.labo01.Labo01Fragment
-import milu.kiriu2010.exdb1.opengl02.jayce07.Jayce07Fragment
-import milu.kiriu2010.exdb1.opengl02.noise01.Noise01Fragment
-import milu.kiriu2010.exdb1.opengl02.noise01v.NoiseV01Fragment
 import milu.kiriu2010.exdb1.opengl02.w026.W026Fragment
 import milu.kiriu2010.exdb1.opengl02.w026v.WV026Fragment
 import milu.kiriu2010.exdb1.opengl02.w027.W027Fragment
@@ -90,44 +86,28 @@ class OpenGL02Activity : AppCompatActivity() {
                 }
                 true
             }
-            // wv028_テクスチャパラメータ
+            // w028_テクスチャパラメータ:VBOあり
+            // OpenGL ES 2.0
             R.id.opengl_wv028 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv28") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL02, WV028Fragment.newInstance(), "wv28")
-                            .commit()
-                }
+                changeFragment("wv028")
                 true
             }
-            // w028_テクスチャパラメータ
+            // w028_テクスチャパラメータ:VBOなし
+            // OpenGL ES 2.0
             R.id.opengl_w028 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w028") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL02, W028Fragment.newInstance(), "w028")
-                            .commit()
-                }
+                changeFragment("w028")
                 true
             }
-            // wv027_マルチテクスチャ
+            // w027_マルチテクスチャ:VBOあり
+            // OpenGL ES 2.0
             R.id.opengl_wv027 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv27") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL02, WV027Fragment.newInstance(), "w27")
-                            .commit()
-                }
+                changeFragment("wv027")
                 true
             }
-            // w027_マルチテクスチャ
+            // w027_マルチテクスチャ:VBOなし
+            // OpenGL ES 2.0
             R.id.opengl_w027 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w027") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL02, W027Fragment.newInstance(), "w027")
-                            .commit()
-                }
+                changeFragment("w027")
                 true
             }
             // w026_テクスチャ:VBOあり
@@ -142,29 +122,6 @@ class OpenGL02Activity : AppCompatActivity() {
                 changeFragment("w026")
                 true
             }
-            // noise01_ノイズテクスチャ:VBOあり
-            // OpenGL ES 2.0
-            R.id.opengl_noisev01 -> {
-                changeFragment("noisev01")
-                true
-            }
-            // noise01_ノイズテクスチャ:VBOなし
-            // OpenGL ES 2.0
-            R.id.opengl_noise01 -> {
-                changeFragment("noise01")
-                true
-            }
-            // jayce07_フレームバッファ
-            R.id.opengl_jayce07 -> {
-                changeFragment("jayce07")
-                true
-            }
-            // labo01_テクスチャ
-            // OpenGL ES 2.0
-            R.id.opengl_labo01 -> {
-                changeFragment("labo01")
-                true
-            }
             else -> return super.onOptionsItemSelected(item!!)
         }
     }
@@ -172,18 +129,18 @@ class OpenGL02Activity : AppCompatActivity() {
     // 表示するフラグメントを切り替える
     private fun changeFragment(tag: String) {
         val fragment = when (tag) {
-            // noise01_ノイズテクスチャ:VBOあり
+            // w028_テクスチャパラメータ:VBOあり
             // OpenGL ES 2.0
-            "noisev01" -> NoiseV01Fragment.newInstance()
-            // noise01_ノイズテクスチャ:VBOなし
+            "wv028" -> WV028Fragment.newInstance()
+            // w028_テクスチャパラメータ:VBOなし
             // OpenGL ES 2.0
-            "noise01" -> Noise01Fragment.newInstance()
-            // labo01_テクスチャ
+            "w028" -> W028Fragment.newInstance()
+            // w027_マルチテクスチャ:VBOあり
             // OpenGL ES 2.0
-            "labo01" -> Labo01Fragment.newInstance()
-            // jayce07_フレームバッファ
+            "wv027" -> WV027Fragment.newInstance()
+            // w027_マルチテクスチャ:VBOなし
             // OpenGL ES 2.0
-            "jayce07" -> Jayce07Fragment.newInstance()
+            "w027" -> W027Fragment.newInstance()
             // w026_テクスチャ:VBOあり
             // OpenGL ES 2.0
             "wv026" -> WV026Fragment.newInstance()
@@ -192,6 +149,7 @@ class OpenGL02Activity : AppCompatActivity() {
             "w026" -> W026Fragment.newInstance()
             else -> W026Fragment.newInstance()
         }
+
         // 現在表示しているフラグメントをスタックから外す
         supportFragmentManager.popBackStack()
         // 選択したフラグメントを表示する

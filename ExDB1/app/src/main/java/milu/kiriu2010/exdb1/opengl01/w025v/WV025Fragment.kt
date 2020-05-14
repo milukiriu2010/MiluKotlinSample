@@ -9,6 +9,12 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ---------------------------------------------------
+// 点光源によるライティング:VBOあり
+// OpenGL ES 2.0
+// ---------------------------------------------------
+// https://wgld.org/d/webgl/w025.html
+// ---------------------------------------------------
 class WV025Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

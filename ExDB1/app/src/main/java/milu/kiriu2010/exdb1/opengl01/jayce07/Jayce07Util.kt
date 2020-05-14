@@ -1,16 +1,13 @@
-package milu.kiriu2010.exdb1.opengl02.jayce07
+package milu.kiriu2010.exdb1.opengl01.jayce07
 
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.opengl.GLES20
 import android.opengl.GLUtils
-import android.util.Log
 
 import java.io.BufferedReader
 import java.io.IOException
-import java.io.InputStream
 import java.io.InputStreamReader
 
 object Jayce07Util {

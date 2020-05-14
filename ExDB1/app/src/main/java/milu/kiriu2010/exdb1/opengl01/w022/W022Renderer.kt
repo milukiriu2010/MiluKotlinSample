@@ -10,7 +10,8 @@ import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.shader.es20.nvbo.ES20AmbientLight01Shader
 
 // ---------------------------------------------------
-// 環境光によるライティング
+// 環境光によるライティング:VBOなし
+// OpenGL ES 2.0
 // ---------------------------------------------------
 // https://wgld.org/d/webgl/w022.html
 // ---------------------------------------------------

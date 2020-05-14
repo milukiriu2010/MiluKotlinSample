@@ -7,7 +7,6 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import android.opengl.Matrix
 import android.os.SystemClock
-import milu.kiriu2010.exdb1.opengl02.noise01.Noise01Shader
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.basic.MyNoiseX
 import milu.kiriu2010.gui.model.d2.Board00Model

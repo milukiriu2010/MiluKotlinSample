@@ -10,9 +10,11 @@ import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.shader.es20.nvbo.ES20DirectionalLight01Shader
 
 // ---------------------------------------------------
-// 平行光源によるライティング
+// 平行光源によるライティング:VBOなし
+// OpenGL ES 2.0
 // ---------------------------------------------------
 // https://wgld.org/d/webgl/w021.html
+// ---------------------------------------------------
 class W021Renderer(ctx: Context): MgRenderer(ctx) {
 
     // 描画モデル(トーラス)

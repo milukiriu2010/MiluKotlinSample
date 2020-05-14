@@ -10,7 +10,8 @@ import milu.kiriu2010.gui.renderer.MgRenderer
 import milu.kiriu2010.gui.shader.es20.nvbo.ES20SpecularLight01Shader
 
 // ---------------------------------------------------
-// 反射光によるライティング
+// 反射光によるライティング:VBOなし
+// OpenGL ES 2.0
 // ---------------------------------------------------
 // https://wgld.org/d/webgl/w023.html
 // ---------------------------------------------------

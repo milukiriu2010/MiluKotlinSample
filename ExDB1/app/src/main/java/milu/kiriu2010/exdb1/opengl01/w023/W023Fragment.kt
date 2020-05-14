@@ -9,6 +9,12 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ---------------------------------------------------
+// 反射光によるライティング:VBOなし
+// OpenGL ES 2.0
+// ---------------------------------------------------
+// https://wgld.org/d/webgl/w023.html
+// ---------------------------------------------------
 class W023Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View
