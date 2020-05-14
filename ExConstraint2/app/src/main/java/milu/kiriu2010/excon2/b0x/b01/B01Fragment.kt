@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon2.b0x.conf
+package milu.kiriu2010.excon2.b0x.b01
 
 
 import android.content.SharedPreferences
@@ -9,7 +9,8 @@ import android.util.Log
 
 import milu.kiriu2010.excon2.R
 
-class ConfFragment : PreferenceFragmentCompat()
+// 設定
+class B01Fragment : PreferenceFragmentCompat()
         , SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var sp: SharedPreferences
@@ -21,13 +22,13 @@ class ConfFragment : PreferenceFragmentCompat()
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.conf_pref, rootKey)
+        setPreferencesFromResource(R.xml.b01_pref, rootKey)
         sp = PreferenceManager.getDefaultSharedPreferences(activity)
         //onSharedPreferenceChanged(sp,"list_key")
 
-        val seekBar = findPreference<Preference>("seekbar_key")
+        val seekBar = findPreference<Preference>("B18_SB_KEY")
         Log.d(javaClass.simpleName,"seekBar[${seekBar}]")
-        // こない
+        // シークバーの現在位置を変更すると、呼び出される
         seekBar?.setOnPreferenceChangeListener { preference, newVal ->
             Log.d(javaClass.simpleName,"preferenceChanged[${preference.javaClass.name}]")
             if (newVal is Int) {
@@ -45,6 +46,7 @@ class ConfFragment : PreferenceFragmentCompat()
         preference?.let {
             Log.d(javaClass.simpleName,"preference[${it.javaClass.name}]")
         }
+        // リストに変更があった場合
         if (preference is ListPreference) {
             val prefIndex = preference.findIndexOfValue(sharedPreferences?.getString(key,""))
             Log.d(javaClass.simpleName, "changed:key[$key]prefIndex[$prefIndex]")
@@ -52,20 +54,24 @@ class ConfFragment : PreferenceFragmentCompat()
                 preference.setSummary(preference.entries[prefIndex])
             }
         }
+        // チェックボックスに変更があった場合
         else if (preference is CheckBoxPreference) {
             val bl = sharedPreferences?.getBoolean(key,false) ?: false
             preference.setSummary(bl.toString())
             Log.d(javaClass.simpleName, "changed:checkbox:key[$key][${bl}]")
         }
+        // エディットボックスに変更があった場合
         else if (preference is EditTextPreference){
             Log.d(javaClass.simpleName, "changed:edit:key[$key][${sharedPreferences?.getString(key,"")}]")
             preference.setSummary(sharedPreferences?.getString(key,""))
         }
+        // スイッチに変更があった場合
         else if (preference is SwitchPreference) {
             val bl = sharedPreferences?.getBoolean(key,false) ?: false
             preference.setSummary(bl.toString())
             Log.d(javaClass.simpleName, "changed:switch:key[$key][${bl}]")
         }
+        // シークバーに変更があった場合
         else if (preference is SeekBarPreference) {
             val num = sharedPreferences?.getInt(key,2) ?: 2
             preference.setSummary(num.toString())
@@ -92,7 +98,7 @@ class ConfFragment : PreferenceFragmentCompat()
     companion object {
         @JvmStatic
         fun newInstance() =
-                ConfFragment().apply {
+                B01Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

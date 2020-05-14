@@ -7,13 +7,13 @@
     tools:context=".b0x.B0XActivity">
 
     <Button
-        android:id="@+id/btnConf"
+        android:id="@+id/btnB01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="conf"
+        android:text="@string/BTN_B01"
         android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@+id/btnB02"
         app:layout_constraintHorizontal_bias="0.5"
@@ -28,11 +28,11 @@
         android:layout_marginEnd="8dp"
         android:text="@string/BTN_B02"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="@+id/btnConf"
+        app:layout_constraintBottom_toBottomOf="@+id/btnB01"
         app:layout_constraintEnd_toStartOf="@+id/btnB03"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnConf"
-        app:layout_constraintTop_toTopOf="@+id/btnConf" />
+        app:layout_constraintStart_toEndOf="@+id/btnB01"
+        app:layout_constraintTop_toTopOf="@+id/btnB01" />
 
     <Button
         android:id="@+id/btnB03"
@@ -60,7 +60,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btnB05"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnConf" />
+        app:layout_constraintTop_toBottomOf="@+id/btnB01" />
 
     <Button
         android:id="@+id/btnB05"

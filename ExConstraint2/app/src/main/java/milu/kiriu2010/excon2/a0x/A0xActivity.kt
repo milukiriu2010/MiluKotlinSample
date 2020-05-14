@@ -33,7 +33,7 @@ import milu.kiriu2010.excon2.a0x.a20.A20Activity
 import milu.kiriu2010.excon2.a0x.a21.A21Activity
 import milu.kiriu2010.excon2.a0x.a22.A22Activity
 import milu.kiriu2010.excon2.a0x.a23.A23Activity
-import milu.kiriu2010.excon2.a0x.seek.SeekActivity
+import milu.kiriu2010.excon2.a0x.a25.A25Activity
 import milu.kiriu2010.excon2.a0x.a24.A24Activity
 import kotlinx.android.synthetic.main.activity_a0x.*
 import milu.kiriu2010.excon2.BuildConfig
@@ -182,7 +182,7 @@ class A0xActivity : AppCompatActivity() {
         // 関数を使ったサイズ変更するアニメーション
         btnA18.setOnClickListener{
             val intent = Intent(this, A18Activity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_ANIME.value )
+            this.startActivity( intent )
         }
 
         // キャンバス(SKEW)
@@ -229,7 +229,7 @@ class A0xActivity : AppCompatActivity() {
     // https://www.journaldev.com/9357/android-actionbar-example-tutorial
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //return super.onCreateOptionsMenu(menu)
-        menuInflater.inflate(R.menu.menu_journaldev, menu )
+        menuInflater.inflate(R.menu.menu_a0x, menu )
         return true
     }
 
@@ -240,7 +240,7 @@ class A0xActivity : AppCompatActivity() {
         return when(item?.itemId) {
             // メール送信
             // http://tekeye.uk/android/examples/email-contact-form-in-app
-            R.id.menuEMAIL -> {
+            R.id.itemEMAIL -> {
                 val strTo = "milu.kiriu2010@gmail.com"
                 val strSub = "test"
                 val strMsg = "ExConstraint2"
@@ -252,17 +252,17 @@ class A0xActivity : AppCompatActivity() {
                 startActivity(Intent.createChooser(mail,"Send email via:"))
                 true
             }
-            R.id.menuRESET -> {
+            R.id.itemRESET -> {
                 Toast.makeText(this,"Reset is clicked",Toast.LENGTH_SHORT).show()
                 true
             }
             // Seekバー
-            R.id.menuSEEK -> {
-                val intent = Intent(this, SeekActivity::class.java )
-                this.startActivityForResult( intent, IntentID.ID_SEEK.value )
+            R.id.itemSEEK -> {
+                val intent = Intent(this, A25Activity::class.java )
+                this.startActivity( intent )
                 true
             }
-            R.id.menuEXIT -> {
+            R.id.itemEXIT -> {
                 finish()
                 true
             }

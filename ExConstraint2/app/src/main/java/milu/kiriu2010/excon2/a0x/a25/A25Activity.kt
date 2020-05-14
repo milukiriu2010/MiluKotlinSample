@@ -1,4 +1,4 @@
-package milu.kiriu2010.excon2.a0x.seek
+package milu.kiriu2010.excon2.a0x.a25
 
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -7,26 +7,27 @@ import android.os.Bundle
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import milu.kiriu2010.excon2.R
-import kotlinx.android.synthetic.main.activity_seek.*
+import kotlinx.android.synthetic.main.activity_a25.*
 
-class SeekActivity : AppCompatActivity(), OnSeekBarChangeListener {
+// シークバー
+class A25Activity : AppCompatActivity(), OnSeekBarChangeListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_seek)
+        setContentView(R.layout.activity_a25)
 
-        seekBarRed.setOnSeekBarChangeListener(this)
-        seekBarGreen.setOnSeekBarChangeListener(this)
-        seekBarBlue.setOnSeekBarChangeListener(this)
+        sbA25Red.setOnSeekBarChangeListener(this)
+        sbA25Green.setOnSeekBarChangeListener(this)
+        sbA25Blue.setOnSeekBarChangeListener(this)
     }
 
     // OnSeekBarChangeListener
     override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-        val red   = seekBarRed.progress
-        val green = seekBarGreen.progress
-        val blue  = seekBarBlue.progress
+        val red   = sbA25Red.progress
+        val green = sbA25Green.progress
+        val blue  = sbA25Blue.progress
 
-        ivColor.setColorFilter( Color.rgb(red,green,blue), PorterDuff.Mode.LIGHTEN )
+        ivA25.setColorFilter( Color.rgb(red,green,blue), PorterDuff.Mode.LIGHTEN )
     }
 
     // OnSeekBarChangeListener

@@ -109,6 +109,14 @@
 
     <string name="BTN_A24">傾きセンサ(加速度)</string>
 
+    <string name="IV_A25">シークバーで色設定</string>
+
+    <string name="ITEM_A0X_EMAIL">E-Mail</string>
+    <string name="ITEM_A0X_RESET">reset</string>
+    <string name="ITEM_A0X_EXIT">exit</string>
+    <string name="ITEM_A0X_A25">Seek</string>
+
+    <string name="BTN_B01">設定</string>
 
     <string name="BTN_B02">Gallery</string>
     <string name="BTN_B03">Gallery2</string>
@@ -137,8 +145,4 @@
     <string name="BTN_B10">コンパス</string>
 
 
-    <string name="MENU_ADD">add</string>
-    <string name="MENU_RESET">reset</string>
-    <string name="MENU_ABOUT">about</string>
-    <string name="MENU_EXIT">exit</string>
 </resources>

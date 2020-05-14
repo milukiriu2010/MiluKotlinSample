@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".a0x.seek.SeekActivity">
+    tools:context=".a0x.a25.A25Activity">
 
     <SeekBar
-        android:id="@+id/seekBarRed"
+        android:id="@+id/sbA25Red"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <SeekBar
-        android:id="@+id/seekBarGreen"
+        android:id="@+id/sbA25Green"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -30,10 +30,10 @@
         android:progress="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBarRed" />
+        app:layout_constraintTop_toBottomOf="@+id/sbA25Red" />
 
     <SeekBar
-        android:id="@+id/seekBarBlue"
+        android:id="@+id/sbA25Blue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -43,18 +43,19 @@
         android:progress="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBarGreen" />
+        app:layout_constraintTop_toBottomOf="@+id/sbA25Green" />
 
     <ImageView
-        android:id="@+id/ivColor"
+        android:id="@+id/ivA25"
         android:layout_width="256dp"
         android:layout_height="256dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/IV_A25"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBarBlue"
+        app:layout_constraintTop_toBottomOf="@+id/sbA25Blue"
         app:srcCompat="@color/colorPrimaryDark" />
 </androidx.constraintlayout.widget.ConstraintLayout>

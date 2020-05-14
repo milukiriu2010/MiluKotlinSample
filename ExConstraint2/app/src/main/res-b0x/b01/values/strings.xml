@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="B18_PC_TITLE">設定画面(B18)</string>
+    <string name="B18_CB_TITLE">チェックボックスによる</string>
+    <string name="B18_CB_SUMMARY">ON/OFFによる設定を行い,設定情報を記録する</string>
+    <string name="B18_ED_TITLE">エディットテキストによる設定</string>
+    <string name="E18_ED_SUMMARY">テキストによる設定を行い,設定情報を記録する</string>
+    <string name="B18_LS_TITLE">リストによる設定</string>
+    <string name="B18_LS_SUMMARY">項目による設定を行い,設定情報を記録する</string>
+    <string name="B18_RT_TITLE">着信音設定</string>
+    <string name="B18_RT_SUMMARY">着信音による設定を行い,設定情報を記録する</string>
+</resources>

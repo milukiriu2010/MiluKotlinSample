@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- https://www.journaldev.com/9357/android-actionbar-example-tutorial -->
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".a0x.A0xActivity">
+
+    <item
+        android:id="@+id/itemEMAIL"
+        android:title="@string/ITEM_A0X_EMAIL"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/itemRESET"
+        android:icon="@android:drawable/ic_menu_revert"
+        android:title="@string/ITEM_A0X_RESET"
+        app:showAsAction="ifRoom|withText" />
+    <item
+        android:id="@+id/itemSEEK"
+        android:title="@string/ITEM_A0X_A25"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/itemEXIT"
+        android:title="@string/ITEM_A0X_EXIT"
+        app:showAsAction="never" />
+</menu>

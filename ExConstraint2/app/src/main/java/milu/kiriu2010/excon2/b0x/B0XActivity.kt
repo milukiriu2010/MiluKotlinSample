@@ -9,7 +9,7 @@ import milu.kiriu2010.excon2.b0x.b06.B06Activity
 import milu.kiriu2010.excon2.b0x.b09.B09Activity
 import milu.kiriu2010.excon2.b0x.b04.B04Activity
 import milu.kiriu2010.excon2.b0x.b10.B10Activity
-import milu.kiriu2010.excon2.b0x.conf.ConfActivity
+import milu.kiriu2010.excon2.b0x.b01.B01Activity
 import milu.kiriu2010.excon2.b0x.b05.B05Activity
 import milu.kiriu2010.excon2.b0x.b03.B03Activity
 import milu.kiriu2010.excon2.b0x.b08.B08Activity
@@ -22,8 +22,8 @@ class B0XActivity : AppCompatActivity() {
         setContentView(R.layout.activity_b0x)
 
         // 設定画面
-        btnConf.setOnClickListener {
-            val intent = Intent(this,ConfActivity::class.java)
+        btnB01.setOnClickListener {
+            val intent = Intent(this,B01Activity::class.java)
             startActivity(intent)
         }
 

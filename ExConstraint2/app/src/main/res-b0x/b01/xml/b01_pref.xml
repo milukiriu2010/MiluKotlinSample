@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:asp="http://schemas.android.com/apk/res-auto">
-    　　<PreferenceCategory android:title="@string/title_conf">
+    　　<PreferenceCategory android:title="@string/B18_PC_TITLE">
     　　　　<!-- チェックボックスによる設定 -->
-    　　　　<CheckBoxPreference android:key="checkbox_key"
-                android:title="@string/checkbox_title"
-                android:summary="@string/checkbox_summary"
+    　　　　<CheckBoxPreference android:key="B18_CB_KEY"
+                android:title="@string/B18_CB_TITLE"
+                android:summary="@string/B18_CB_SUMMARY"
                 android:defaultValue="true"/>
     　　　　<!-- エディットテキストによる設定 -->
-    　　　　<EditTextPreference android:key="edittext_key"
-                android:title="@string/edittext_title"
-                android:summary="@string/edittext_summary" />
+    　　　　<EditTextPreference android:key="B18_ED_KEY"
+                android:title="@string/B18_ED_TITLE"
+                android:summary="@string/E18_ED_SUMMARY" />
     　　　　<!-- リストによる設定 -->
-    　　　　<ListPreference android:key="list_key"
-                android:title="@string/list_title"
-                android:summary="@string/list_summary"
-                android:entries="@array/list_entries"
-                android:entryValues="@array/list_entryvalues"/>
+    　　　　<ListPreference android:key="B18_LIST_KEY"
+                android:title="@string/B18_LS_TITLE"
+                android:summary="@string/B18_LS_SUMMARY"
+                android:entries="@array/B18_LIST_ENTRIES"
+                android:entryValues="@array/B18_LIST_ENTRYVALUES"/>
             <!-- スイッチによる設定 -->
             <SwitchPreference
-                android:key="switch_key"
+                android:key="B18_SW_KEY"
                 android:title="スイッチ"
                 android:summary="スイッチによる設定だよ"
                 android:defaultValue="false"
                 />
             <!-- シークバー -->
             <SeekBarPreference
-                android:key="seekbar_key"
+                android:key="B18_SB_KEY"
                 android:title="シークバー"
                 android:summary="シークバーによる設定だよ"
                 android:defaultValue="3"
@@ -36,8 +36,8 @@
 
     　　　　<!-- 着信音の設定 -->
     　　　　<!-- RingtonePreference android:key="ringtone_key"
-                android:title="@string/ringtone_title"
-                android:summary="@string/ringtone_summary"
+                android:title="@string/B18_RT_TITLE"
+                android:summary="@string/B18_RT_SUMMARY"
                 android:showDefault="true"/ -->
     　　</PreferenceCategory>
 </PreferenceScreen>
