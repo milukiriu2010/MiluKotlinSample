@@ -13,7 +13,8 @@ import milu.kiriu2010.gui.model.d2.Board00Model
 import milu.kiriu2010.gui.renderer.MgRenderer
 
 // ---------------------------------------------------
-// ブレンドファクター
+// ブレンドファクター:VBOなし
+// OpenGL ES 2.0
 // ---------------------------------------------------
 // https://wgld.org/d/webgl/w030.html
 // ---------------------------------------------------

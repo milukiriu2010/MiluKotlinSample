@@ -17,6 +17,24 @@
         android:id="@+id/opengl_wv026"
         android:title="@string/ITEM_OPEN_GL_wv026" />
     <item
+        android:id="@+id/opengl_wv025"
+        android:title="@string/ITEM_OPEN_GL_wv025" />
+    <item
+        android:id="@+id/opengl_wv024"
+        android:title="@string/ITEM_OPEN_GL_wv024" />
+    <item
+        android:id="@+id/opengl_wv023"
+        android:title="@string/ITEM_OPEN_GL_wv023" />
+    <item
+        android:id="@+id/opengl_wv022"
+        android:title="@string/ITEM_OPEN_GL_wv022" />
+    <item
+        android:id="@+id/opengl_wv021"
+        android:title="@string/ITEM_OPEN_GL_wv021" />
+    <item
+        android:id="@+id/opengl_wv020"
+        android:title="@string/ITEM_OPEN_GL_wv020" />
+    <item
         android:id="@+id/opengl_w030"
         android:title="@string/ITEM_OPEN_GL_w030" />
     <item
@@ -31,4 +49,22 @@
     <item
         android:id="@+id/opengl_w026"
         android:title="@string/ITEM_OPEN_GL_w026" />
+    <item
+        android:id="@+id/opengl_w025"
+        android:title="@string/ITEM_OPEN_GL_w025" />
+    <item
+        android:id="@+id/opengl_w024"
+        android:title="@string/ITEM_OPEN_GL_w024" />
+    <item
+        android:id="@+id/opengl_w023"
+        android:title="@string/ITEM_OPEN_GL_w023" />
+    <item
+        android:id="@+id/opengl_w022"
+        android:title="@string/ITEM_OPEN_GL_w022" />
+    <item
+        android:id="@+id/opengl_w021"
+        android:title="@string/ITEM_OPEN_GL_w021" />
+    <item
+        android:id="@+id/opengl_w020"
+        android:title="@string/ITEM_OPEN_GL_w020" />
 </menu>

@@ -14,6 +14,12 @@ import android.widget.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ---------------------------------------------------
+// ブレンドファクター:VBOなし
+// OpenGL ES 2.0
+// ---------------------------------------------------
+// https://wgld.org/d/webgl/w030.html
+// ---------------------------------------------------
 class W030zFragment : Fragment() {
 
     private lateinit var scrollViewW030y: ScrollView

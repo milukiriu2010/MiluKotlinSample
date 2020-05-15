@@ -11,9 +11,6 @@ import milu.kiriu2010.exdb1.opengl01.labo01.Labo01Fragment
 import milu.kiriu2010.exdb1.opengl01.noise01.Noise01Fragment
 import milu.kiriu2010.exdb1.opengl01.w018.W018Fragment
 import milu.kiriu2010.exdb1.opengl01.w019.W019Fragment
-import milu.kiriu2010.exdb1.opengl01.w020.W020Fragment
-import milu.kiriu2010.exdb1.opengl01.w023.W023Fragment
-import milu.kiriu2010.exdb1.opengl01.w024.W024Fragment
 import milu.kiriu2010.exdb1.opengl01.w015.W015Fragment
 import milu.kiriu2010.exdb1.opengl01.w015v.WV015Fragment
 import milu.kiriu2010.exdb1.opengl01.w016.W016Fragment
@@ -22,15 +19,6 @@ import milu.kiriu2010.exdb1.opengl01.w017.W017Fragment
 import milu.kiriu2010.exdb1.opengl01.w017v.WV017Fragment
 import milu.kiriu2010.exdb1.opengl01.w018v.WV018Fragment
 import milu.kiriu2010.exdb1.opengl01.w019v.WV019Fragment
-import milu.kiriu2010.exdb1.opengl01.w020v.WV020Fragment
-import milu.kiriu2010.exdb1.opengl01.w021.W021Fragment
-import milu.kiriu2010.exdb1.opengl01.w021v.WV021Fragment
-import milu.kiriu2010.exdb1.opengl01.w022.W022Fragment
-import milu.kiriu2010.exdb1.opengl01.w022v.WV022Fragment
-import milu.kiriu2010.exdb1.opengl01.w023v.WV023Fragment
-import milu.kiriu2010.exdb1.opengl01.w024v.WV024Fragment
-import milu.kiriu2010.exdb1.opengl01.w025.W025Fragment
-import milu.kiriu2010.exdb1.opengl01.w025v.WV025Fragment
 import milu.kiriu2010.exdb1.opengl01.noise01v.NoiseV01Fragment
 
 // -------------------------------------
@@ -67,78 +55,6 @@ class OpenGL01Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
-                true
-            }
-            // w025_点光源:VBOあり
-            // OpenGL ES 2.0
-            R.id.opengl_wv025 -> {
-                changeFragment("wv025")
-                true
-            }
-            // w025_点光源:VBOなし
-            // OpenGL ES 2.0
-            R.id.opengl_w025 -> {
-                changeFragment("w025")
-                true
-            }
-            // w024_フォンシェーディング:VBOあり
-            // OpenGL ES 2.0
-            R.id.opengl_wv024 -> {
-                changeFragment("wv024")
-                true
-            }
-            // w024_フォンシェーディング:VBOなし
-            // OpenGL ES 2.0
-            R.id.opengl_w024 -> {
-                changeFragment("w024")
-                true
-            }
-            // w023_反射光:VBOあり
-            // OpenGL ES 2.0
-            R.id.opengl_wv023 -> {
-                changeFragment("wv023")
-                true
-            }
-            // w023_反射光:VBOなし
-            // OpenGL ES 2.0
-            R.id.opengl_w023 -> {
-                changeFragment("w023")
-                true
-            }
-            // w022_環境光:VBOあり
-            // OpenGL ES 2.0
-            R.id.opengl_wv022 -> {
-                changeFragment("wv022")
-                true
-            }
-            // w022_環境光:VBOなし
-            // OpenGL ES 2.0
-            R.id.opengl_w022 -> {
-                changeFragment("w022")
-                true
-            }
-            // w021_平行光源:VBOあり
-            // OpenGL ES 2.0
-            R.id.opengl_wv021 -> {
-                changeFragment("wv021")
-                true
-            }
-            // w021_平行光源:VBOなし
-            // OpenGL ES 2.0
-            R.id.opengl_w021 -> {
-                changeFragment("w021")
-                true
-            }
-            // w020_トーラス:VBOあり
-            // OpenGL ES 2.0
-            R.id.opengl_wv020 -> {
-                changeFragment("wv020")
-                true
-            }
-            // w020_トーラス:VBOなし
-            // OpenGL ES 2.0
-            R.id.opengl_w020 -> {
-                changeFragment("w020")
                 true
             }
             // w019_カリングと深度テスト:VBOあり
@@ -236,42 +152,6 @@ class OpenGL01Activity : AppCompatActivity() {
     // 表示するフラグメントを切り替える
     private fun changeFragment(tag: String) {
         val fragment = when (tag) {
-            // w025_点光源:VBOあり
-            // OpenGL ES 2.0
-            "wv025" -> WV025Fragment.newInstance()
-            // w025_点光源:VBOなし
-            // OpenGL ES 2.0
-            "w025" -> W025Fragment.newInstance()
-            // w024_フォンシェーディング:VBOあり
-            // OpenGL ES 2.0
-            "wv024" -> WV024Fragment.newInstance()
-            // w024_フォンシェーディング:VBOなし
-            // OpenGL ES 2.0
-            "w024" -> W024Fragment.newInstance()
-            // w023_反射光:VBOあり
-            // OpenGL ES 2.0
-            "wv023" -> WV023Fragment.newInstance()
-            // w023_反射光:VBOなし
-            // OpenGL ES 2.0
-            "w023" -> W023Fragment.newInstance()
-            // w022_環境光:VBOあり
-            // OpenGL ES 2.0
-            "wv022" -> WV022Fragment.newInstance()
-            // w022_環境光:VBOなし
-            // OpenGL ES 2.0
-            "w022" -> W022Fragment.newInstance()
-            // w021_平行光源:VBOあり
-            // OpenGL ES 2.0
-            "wv021" -> WV021Fragment.newInstance()
-            // w021_平行光源:VBOなし
-            // OpenGL ES 2.0
-            "w021" -> W021Fragment.newInstance()
-            // w020_トーラス:VBOあり
-            // OpenGL ES 2.0
-            "wv020" -> WV020Fragment.newInstance()
-            // w020_トーラス:VBOなし
-            // OpenGL ES 2.0
-            "w020" -> W020Fragment.newInstance()
             // w019_カリングと深度テスト:VBOあり
             // OpenGL ES 2.0
             "wv019" -> WV019Fragment.newInstance()
