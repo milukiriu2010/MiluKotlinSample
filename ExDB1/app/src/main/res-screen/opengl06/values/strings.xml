@@ -4,8 +4,43 @@
     <string name="ITEM_WV60">wv60_フォグ距離</string>
     <string name="ITEM_W061">w061_パーティクルフォグ</string>
     <string name="ITEM_WV61">wv61_パーティクルフォグ</string>
+    <string name="ITEM_W062">w062_ステンシル鏡面反射</string>
+    <string name="ITEM_WV62">wv62_ステンシル鏡面反射</string>
+    <string name="ITEM_W063">w063_半球ライティング</string>
+    <string name="ITEM_WV63">wv63_半球ライティング</string>
+    <string name="ITEM_W064">w064_リムライティング</string>
+    <string name="ITEM_WV64">wv64_リムライティング</string>
+    <string name="ITEM_W065">w065_後光表面化散乱</string>
+    <string name="ITEM_WV65">wv65_後光表面化散乱</string>
+    <string name="ITEM_W066">w066_モザイクフィルタ</string>
+    <string name="ITEM_WV66">wv66_モザイクフィルタ</string>
+    <string name="ITEM_W067">w067_ズームブラー</string>
+    <string name="ITEM_WV67">wv67_ズームブラー</string>
+    <string name="ITEM_W068">w068_ゴッドレイ</string>
+    <string name="ITEM_WV68">wv68_ゴッドレイ</string>
     <string name="ITEM_W069">w069_シャドウマッピング(新)</string>
     <string name="ITEM_WV69">wv69_シャドウマッピング(新)</string>
+
+    <string name="TV_W60_FOGSTART">FogStart(0.0–1.0)</string>
+    <string name="TV_W60_FOGEND">FogEnd(0.0–1.0)</string>
+
+    <string name="CB_W61_FOG">Soft Particle Fog</string>
+    <string name="TV_W61_DEPTHCOEF">Depth Coef(0.0–0.1)</string>
+
+    <string name="TV_W62">Reflection Alpha(0.0–1.0)</string>
+
+    <string name="TV_W64">Rim Light Coefficient(0.0–2.0)</string>
+
+    <string name="RB_W66_RENDER">Render</string>
+    <string name="RB_W66_TEXTURE1">Texture1</string>
+    <string name="RB_W66_TEXTURE2">Texture2</string>
+
+    <string name="RB_W67_RENDER">Render</string>
+    <string name="RB_W67_TEXTURE1">Texture1</string>
+    <string name="RB_W67_TEXTURE2">Texture2</string>
+    <string name="TV_W67">Strength(0–30)</string>
+
+    <string name="TV_W68">Strength(0–10)</string>
 
     <string name="TV_W69">光源位置補正係数(20–40)</string>
 </resources>

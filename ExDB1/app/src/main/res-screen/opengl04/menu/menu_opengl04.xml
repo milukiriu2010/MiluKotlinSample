@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/opengl_wv49"
+        android:title="@string/ITEM_OPEN_GL_wv049" />
+    <item
+        android:id="@+id/opengl_wv48"
+        android:title="@string/ITEM_OPEN_GL_wv048" />
     <item
         android:id="@+id/opengl_wv47"
         android:title="@string/ITEM_OPEN_GL_wv047" />
@@ -20,6 +25,18 @@
         android:id="@+id/opengl_wv42"
         android:title="@string/ITEM_OPEN_GL_wv042" />
     <item
+        android:id="@+id/opengl_wv41"
+        android:title="@string/ITEM_OPEN_GL_wv041" />
+    <item
+        android:id="@+id/opengl_wv40"
+        android:title="@string/ITEM_OPEN_GL_wv040" />
+    <item
+        android:id="@+id/opengl_w049"
+        android:title="@string/ITEM_OPEN_GL_w049" />
+    <item
+        android:id="@+id/opengl_w048"
+        android:title="@string/ITEM_OPEN_GL_w048" />
+    <item
         android:id="@+id/opengl_w047"
         android:title="@string/ITEM_OPEN_GL_w047" />
     <item
@@ -37,4 +54,10 @@
     <item
         android:id="@+id/opengl_w042"
         android:title="@string/ITEM_OPEN_GL_w042" />
+    <item
+        android:id="@+id/opengl_w041"
+        android:title="@string/ITEM_OPEN_GL_w041" />
+    <item
+        android:id="@+id/opengl_w040"
+        android:title="@string/ITEM_OPEN_GL_w040" />
 </menu>

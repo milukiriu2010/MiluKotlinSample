@@ -2,9 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/opengl_wv030"
-        android:title="@string/ITEM_OPEN_GL_wv030" />
-    <item
         android:id="@+id/opengl_wv029"
         android:title="@string/ITEM_OPEN_GL_wv029" />
     <item
@@ -34,9 +31,6 @@
     <item
         android:id="@+id/opengl_wv020"
         android:title="@string/ITEM_OPEN_GL_wv020" />
-    <item
-        android:id="@+id/opengl_w030"
-        android:title="@string/ITEM_OPEN_GL_w030" />
     <item
         android:id="@+id/opengl_w029"
         android:title="@string/ITEM_OPEN_GL_w029" />

@@ -1,6 +1,5 @@
 package milu.kiriu2010.exdb1.opengl05.w055
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.util.Log
@@ -13,6 +12,12 @@ import android.widget.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ------------------------------------
+// sobelフィルタ:VBOなし
+// OpenGL ES 2.0
+// ------------------------------------
+// https://wgld.org/d/webgl/w055.html
+// ------------------------------------
 class W055Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

@@ -3,25 +3,25 @@
 
     <item
         android:id="@+id/opengl_wv68"
-        android:title="wv68_ゴッドレイ" />
+        android:title="@string/ITEM_WV68" />
     <item
         android:id="@+id/opengl_wv67"
-        android:title="wv67_ズームブラー" />
+        android:title="@string/ITEM_WV67" />
     <item
         android:id="@+id/opengl_wv66"
-        android:title="wv66_モザイクフィルタ" />
+        android:title="@string/ITEM_WV66" />
     <item
         android:id="@+id/opengl_wv65"
-        android:title="wv65_後光表面化散乱" />
+        android:title="@string/ITEM_WV65" />
     <item
         android:id="@+id/opengl_wv64"
-        android:title="wv64_リムライティング" />
+        android:title="@string/ITEM_WV64" />
     <item
         android:id="@+id/opengl_wv63"
-        android:title="wv63_半球ライティング" />
+        android:title="@string/ITEM_WV63" />
     <item
         android:id="@+id/opengl_wv62"
-        android:title="wv62_ステンシル鏡面反射" />
+        android:title="@string/ITEM_WV62" />
     <item
         android:id="@+id/opengl_wv61"
         android:title="@string/ITEM_W061" />
@@ -29,42 +29,30 @@
         android:id="@+id/opengl_wv60"
         android:title="@string/ITEM_WV60" />
     <item
-        android:id="@+id/opengl_wv59"
-        android:title="@string/ITEM_WV59" />
-    <item
-        android:id="@+id/opengl_wv58"
-        android:title="@string/ITEM_WV58" />
-    <item
         android:id="@+id/opengl_w068"
-        android:title="w068_ゴッドレイ" />
+        android:title="@string/ITEM_W068" />
     <item
         android:id="@+id/opengl_w067"
-        android:title="w067_ズームブラー" />
+        android:title="@string/ITEM_W067" />
     <item
         android:id="@+id/opengl_w066"
-        android:title="w066_モザイクフィルタ" />
+        android:title="@string/ITEM_W066" />
     <item
         android:id="@+id/opengl_w065"
-        android:title="w065_後光表面化散乱" />
+        android:title="@string/ITEM_W065" />
     <item
         android:id="@+id/opengl_w064"
-        android:title="w064_リムライティング" />
+        android:title="@string/ITEM_W064" />
     <item
         android:id="@+id/opengl_w063"
-        android:title="w063_半球ライティング" />
+        android:title="@string/ITEM_W063" />
     <item
         android:id="@+id/opengl_w062"
-        android:title="w062_ステンシル鏡面反射" />
+        android:title="@string/ITEM_W062" />
     <item
         android:id="@+id/opengl_w061"
         android:title="@string/ITEM_W061" />
     <item
         android:id="@+id/opengl_w060"
         android:title="@string/ITEM_W060" />
-    <item
-        android:id="@+id/opengl_w059"
-        android:title="@string/ITEM_W059" />
-    <item
-        android:id="@+id/opengl_w058"
-        android:title="@string/ITEM_W058" />
 </menu>

@@ -2,12 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/opengl_wv41"
-        android:title="@string/ITEM_OPEN_GL_wv041" />
-    <item
-        android:id="@+id/opengl_wv40"
-        android:title="@string/ITEM_OPEN_GL_wv040" />
-    <item
         android:id="@+id/opengl_wv39"
         android:title="@string/ITEM_OPEN_GL_wv039" />
     <item
@@ -32,11 +26,8 @@
         android:id="@+id/opengl_wv32"
         android:title="@string/ITEM_OPEN_GL_wv032" />
     <item
-        android:id="@+id/opengl_w041"
-        android:title="@string/ITEM_OPEN_GL_w041" />
-    <item
-        android:id="@+id/opengl_w040"
-        android:title="@string/ITEM_OPEN_GL_w040" />
+        android:id="@+id/opengl_wv030"
+        android:title="@string/ITEM_OPEN_GL_wv030" />
     <item
         android:id="@+id/opengl_w039"
         android:title="@string/ITEM_OPEN_GL_w039" />
@@ -61,4 +52,7 @@
     <item
         android:id="@+id/opengl_w032"
         android:title="@string/ITEM_OPEN_GL_w032" />
+    <item
+        android:id="@+id/opengl_w030"
+        android:title="@string/ITEM_OPEN_GL_w030" />
 </menu>

@@ -5,10 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl06.w058.W058Fragment
-import milu.kiriu2010.exdb1.opengl06.w058v.WV058Fragment
-import milu.kiriu2010.exdb1.opengl06.w059.W059Fragment
-import milu.kiriu2010.exdb1.opengl06.w059v.WV059Fragment
 import milu.kiriu2010.exdb1.opengl06.w060.W060Fragment
 import milu.kiriu2010.exdb1.opengl06.w060v.WV060Fragment
 import milu.kiriu2010.exdb1.opengl06.w061.W061Fragment
@@ -236,30 +232,6 @@ class OpenGL06Activity : AppCompatActivity() {
                 changeFragment("w060")
                 true
             }
-            // 被写界深度:VBOあり
-            // OpenGL ES 2.0
-            R.id.opengl_wv59 -> {
-                changeFragment("wv059")
-                true
-            }
-            // 被写界深度:VBOなし
-            // OpenGL ES 2.0
-            R.id.opengl_w059 -> {
-                changeFragment("w059")
-                true
-            }
-            // グレアフィルタ:VBOあり
-            // OpenGL ES 2.0
-            R.id.opengl_wv58 -> {
-                changeFragment("wv058")
-                true
-            }
-            // グレアフィルタ:VBOなし
-            // OpenGL ES 2.0
-            R.id.opengl_w058 -> {
-                changeFragment("w058")
-                true
-            }
             else -> return super.onOptionsItemSelected(item!!)
         }
     }
@@ -273,18 +245,6 @@ class OpenGL06Activity : AppCompatActivity() {
             // w060_フォグ距離:VBOなし
             // OpenGL ES 2.0
             "w060" -> W060Fragment.newInstance()
-            // 被写界深度:VBOなし
-            // OpenGL ES 2.0
-            "wv059" -> WV059Fragment.newInstance()
-            // 被写界深度:VBOなし
-            // OpenGL ES 2.0
-            "w059" -> W059Fragment.newInstance()
-            // グレアフィルタ:VBOなし
-            // OpenGL ES 2.0
-            "wv058" -> WV058Fragment.newInstance()
-            // グレアフィルタ:VBOなし
-            // OpenGL ES 2.0
-            "w058" -> W058Fragment.newInstance()
             else -> W060Fragment.newInstance()
         }
 

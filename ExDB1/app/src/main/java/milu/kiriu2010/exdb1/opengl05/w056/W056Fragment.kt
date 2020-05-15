@@ -12,6 +12,12 @@ import android.widget.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// -------------------------------------------
+// laplacianフィルタ:VBOあり
+// OpenGL ES 2.0
+// -------------------------------------------
+// https://wgld.org/d/webgl/w056.html
+// -------------------------------------------
 class W056Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

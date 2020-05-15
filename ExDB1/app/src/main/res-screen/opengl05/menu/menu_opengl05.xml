@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/opengl_wv59"
+        android:title="@string/ITEM_WV59" />
+    <item
+        android:id="@+id/opengl_wv58"
+        android:title="@string/ITEM_WV58" />
+    <item
         android:id="@+id/opengl_wv57"
         android:title="@string/ITEM_WV57" />
     <item
@@ -25,11 +31,11 @@
         android:id="@+id/opengl_wv50"
         android:title="@string/ITEM_WV50" />
     <item
-        android:id="@+id/opengl_wv49"
-        android:title="@string/ITEM_OPEN_GL_wv049" />
+        android:id="@+id/opengl_w059"
+        android:title="@string/ITEM_W059" />
     <item
-        android:id="@+id/opengl_wv48"
-        android:title="@string/ITEM_OPEN_GL_wv048" />
+        android:id="@+id/opengl_w058"
+        android:title="@string/ITEM_W058" />
     <item
         android:id="@+id/opengl_w057"
         android:title="@string/ITEM_W057" />
@@ -54,10 +60,4 @@
     <item
         android:id="@+id/opengl_w050"
         android:title="@string/ITEM_W050" />
-    <item
-        android:id="@+id/opengl_w049"
-        android:title="@string/ITEM_OPEN_GL_w049" />
-    <item
-        android:id="@+id/opengl_w048"
-        android:title="@string/ITEM_OPEN_GL_w048" />
 </menu>

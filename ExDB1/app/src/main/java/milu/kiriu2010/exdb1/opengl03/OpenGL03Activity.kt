@@ -4,8 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_open_gl03.*
 import milu.kiriu2010.exdb1.R
+import milu.kiriu2010.exdb1.opengl03.w030.W030zFragment
+import milu.kiriu2010.exdb1.opengl03.w030v.WV030Fragment
 import milu.kiriu2010.exdb1.opengl03.w032.W032Fragment
 import milu.kiriu2010.exdb1.opengl03.w032v.WV032Fragment
 import milu.kiriu2010.exdb1.opengl03.w033.W033Fragment
@@ -22,10 +23,10 @@ import milu.kiriu2010.exdb1.opengl03.w038.W038Fragment
 import milu.kiriu2010.exdb1.opengl03.w038v.WV038Fragment
 import milu.kiriu2010.exdb1.opengl03.w039.W039Fragment
 import milu.kiriu2010.exdb1.opengl03.w039v.WV039Fragment
-import milu.kiriu2010.exdb1.opengl03.w040.W040Fragment
-import milu.kiriu2010.exdb1.opengl03.w040v.WV040Fragment
-import milu.kiriu2010.exdb1.opengl03.w041.W041Fragment
-import milu.kiriu2010.exdb1.opengl03.w041v.WV041Fragment
+import milu.kiriu2010.exdb1.opengl04.w040.W040Fragment
+import milu.kiriu2010.exdb1.opengl04.w040v.WV040Fragment
+import milu.kiriu2010.exdb1.opengl04.w041.W041Fragment
+import milu.kiriu2010.exdb1.opengl04.w041v.WV041Fragment
 
 // -------------------------------------
 // OpenGL ES 2.0サンプル
@@ -41,7 +42,7 @@ class OpenGL03Activity : AppCompatActivity() {
         setContentView(R.layout.activity_open_gl03)
 
         // 初期表示のフラグメントを設定
-        changeFragment("wv032")
+        changeFragment("wv030")
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -62,30 +63,6 @@ class OpenGL03Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
-                true
-            }
-            // ブラーフィルター:VBOあり
-            // OpenGL ES 2.0
-            R.id.opengl_wv41 -> {
-                changeFragment("wv041")
-                true
-            }
-            // ブラーフィルター:VBOなし
-            // OpenGL ES 2.0
-            R.id.opengl_w041 -> {
-                changeFragment("w041")
-                true
-            }
-            // フレームバッファ:VBOあり
-            // OpenGL ES 2.0
-            R.id.opengl_wv40 -> {
-                changeFragment("wv040")
-                true
-            }
-            // フレームバッファ:VBOなし
-            // OpenGL ES 2.0
-            R.id.opengl_w040 -> {
-                changeFragment("w040")
                 true
             }
             // ステンシルバッファでアウトライン:VBOあり
@@ -184,6 +161,18 @@ class OpenGL03Activity : AppCompatActivity() {
                 changeFragment("w032")
                 true
             }
+            // w030_ブレンドファクター:VBOあり
+            // OpenGL ES 2.0
+            R.id.opengl_wv030 -> {
+                changeFragment("wv030")
+                true
+            }
+            // w030_ブレンドファクター:VBOなし
+            // OpenGL ES 2.0
+            R.id.opengl_w030 -> {
+                changeFragment("w030")
+                true
+            }
             else -> return super.onOptionsItemSelected(item!!)
         }
     }
@@ -191,18 +180,6 @@ class OpenGL03Activity : AppCompatActivity() {
     // 表示するフラグメントを切り替える
     private fun changeFragment(tag: String) {
         val fragment = when (tag) {
-            // ブラーフィルター:VBOあり
-            // OpenGL ES 2.0
-            "wv041" -> WV041Fragment.newInstance()
-            // ブラーフィルター:VBOなし
-            // OpenGL ES 2.0
-            "w041" -> W041Fragment.newInstance()
-            // フレームバッファ:VBOなし
-            // OpenGL ES 2.0
-            "wv040" -> WV040Fragment.newInstance()
-            // フレームバッファ:VBOなし
-            // OpenGL ES 2.0
-            "w040" -> W040Fragment.newInstance()
             // ステンシルバッファでアウトライン:VBOあり
             // OpenGL ES 2.0
             "wv039" -> WV039Fragment.newInstance()
@@ -251,9 +228,13 @@ class OpenGL03Activity : AppCompatActivity() {
             // w032_クォータニオン:VBOなし
             // OpenGL ES 2.0
             "w032" -> W032Fragment.newInstance()
-            // w032_クォータニオン:VBOなし
+            // w030_ブレンドファクター:VBOあり
             // OpenGL ES 2.0
-            else -> W032Fragment.newInstance()
+            "wv030" -> WV030Fragment.newInstance()
+            // w030_ブレンドファクター:VBOなし
+            // OpenGL ES 2.0
+            "w030" -> W030zFragment.newInstance()
+            else -> W030zFragment.newInstance()
         }
 
         // 現在表示しているフラグメントをスタックから外す

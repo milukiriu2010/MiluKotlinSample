@@ -37,14 +37,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
-            android:text="Render" />
+            android:text="@string/RB_W66_RENDER" />
 
         <RadioButton
             android:id="@+id/radioButtonW66Texture1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Texture1" />
+            android:text="@string/RB_W66_TEXTURE1" />
 
         <RadioButton
             android:id="@+id/radioButtonW66Texture2"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="false"
-            android:text="Texture2" />
+            android:text="@string/RB_W66_TEXTURE2" />
     </RadioGroup>
 
 

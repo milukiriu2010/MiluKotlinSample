@@ -17,7 +17,8 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // ------------------------------------
-// sobelフィルタ
+// sobelフィルタ:VBOなし
+// OpenGL ES 2.0
 // ------------------------------------
 // https://wgld.org/d/webgl/w055.html
 // ------------------------------------

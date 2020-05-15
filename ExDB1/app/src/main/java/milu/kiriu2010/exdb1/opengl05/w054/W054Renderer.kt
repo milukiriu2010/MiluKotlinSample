@@ -14,7 +14,8 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // -------------------------------------------
-// セピア調変換
+// セピア調変換:VBOなし
+// OpenGL ES 2.0
 // -------------------------------------------
 // https://wgld.org/d/webgl/w054.html
 // -------------------------------------------

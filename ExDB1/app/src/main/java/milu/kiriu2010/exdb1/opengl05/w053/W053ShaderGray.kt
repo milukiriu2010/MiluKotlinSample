@@ -6,7 +6,8 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
 // -------------------------------------
-// シェーダ(グレースケール)
+// シェーダ(グレースケール):VBOなし
+// OpenGL ES 2.0
 // -------------------------------------
 // https://wgld.org/d/webgl/w053.html
 // -------------------------------------

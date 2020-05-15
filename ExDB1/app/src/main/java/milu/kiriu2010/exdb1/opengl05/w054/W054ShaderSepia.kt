@@ -5,7 +5,12 @@ import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
-// グレースケール用シェーダ
+// -------------------------------------------
+// セピア調変換:VBOなし
+// OpenGL ES 2.0
+// -------------------------------------------
+// https://wgld.org/d/webgl/w054.html
+// -------------------------------------------
 class W054ShaderSepia: ES20MgShader() {
     // 頂点シェーダ
     private val scv =

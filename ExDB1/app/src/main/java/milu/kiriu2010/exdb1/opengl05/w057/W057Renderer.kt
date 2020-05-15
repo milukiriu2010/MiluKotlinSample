@@ -18,7 +18,8 @@ import javax.microedition.khronos.opengles.GL10
 import kotlin.math.exp
 
 // -------------------------------------------
-// gaussianフィルタ
+// gaussianフィルタ:VBOなし
+// OpenGL ES 2.0
 // -------------------------------------------
 // https://wgld.org/d/webgl/w057.html
 // -------------------------------------------

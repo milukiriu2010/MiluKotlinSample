@@ -16,7 +16,8 @@ import javax.microedition.khronos.opengles.GL10
 import kotlin.math.floor
 
 // -------------------------------------
-// 高解像度シャドウマッピング
+// 高解像度シャドウマッピング:VBOなし
+// OpenGL ES 2.0
 // -------------------------------------
 // https://wgld.org/d/webgl/w052.html
 // -------------------------------------

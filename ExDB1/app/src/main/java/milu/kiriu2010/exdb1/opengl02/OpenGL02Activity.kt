@@ -25,8 +25,8 @@ import milu.kiriu2010.exdb1.opengl02.w028.W028Fragment
 import milu.kiriu2010.exdb1.opengl02.w028v.WV028Fragment
 import milu.kiriu2010.exdb1.opengl02.w029.W029Fragment
 import milu.kiriu2010.exdb1.opengl02.w029v.WV029Fragment
-import milu.kiriu2010.exdb1.opengl02.w030.W030zFragment
-import milu.kiriu2010.exdb1.opengl02.w030v.WV030Fragment
+import milu.kiriu2010.exdb1.opengl03.w030.W030zFragment
+import milu.kiriu2010.exdb1.opengl03.w030v.WV030Fragment
 
 // -------------------------------------
 // OpenGL ES 2.0サンプル
@@ -63,18 +63,6 @@ class OpenGL02Activity : AppCompatActivity() {
             // 前画面に戻る
             android.R.id.home -> {
                 finish()
-                true
-            }
-            // w030_ブレンドファクター:VBOあり
-            // OpenGL ES 2.0
-            R.id.opengl_wv030 -> {
-                changeFragment("wv030")
-                true
-            }
-            // w030_ブレンドファクター:VBOなし
-            // OpenGL ES 2.0
-            R.id.opengl_w030 -> {
-                changeFragment("w030")
                 true
             }
             // w029_アルファブレンディング:VBOあり
@@ -204,12 +192,6 @@ class OpenGL02Activity : AppCompatActivity() {
     // 表示するフラグメントを切り替える
     private fun changeFragment(tag: String) {
         val fragment = when (tag) {
-            // w030_ブレンドファクター:VBOあり
-            // OpenGL ES 2.0
-            "wv030" -> WV030Fragment.newInstance()
-            // w030_ブレンドファクター:VBOなし
-            // OpenGL ES 2.0
-            "w030" -> W030zFragment.newInstance()
             // w029_アルファブレンディング:VBOあり
             // OpenGL ES 2.0
             "wv029" -> WV029Fragment.newInstance()
