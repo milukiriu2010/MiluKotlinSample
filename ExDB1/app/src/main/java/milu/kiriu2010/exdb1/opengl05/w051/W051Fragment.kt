@@ -14,6 +14,24 @@ import android.widget.SeekBar
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// -----------------------------------------------------------
+// シャドウマッピング:VBOあり
+// OpenGL ES 2.0
+// -----------------------------------------------------------
+// フレームバッファにライトから見たときの各頂点の深度値を描く
+// 本番のレンダリングを行う際に、
+// フレームバッファから読みだした深度値と
+// 実際にレンダリングしようとしている頂点の深度を比較すれば
+// その頂点が影にあるのかどうかを判別できる
+// -----------------------------------------------------------
+// デプスバッファの値は0.0～1.0の範囲
+// カメラに最も近いところ  ⇒0.0
+// カメラから最も遠いところ⇒1.0
+// -----------------------------------------------------------
+// emuglGLESv2_enc: Out of bounds vertex attribute info: clientArray? 1 attribute 1 vbo 10 allocedBufferSize 48 bufferDataSpecified? 1 wantedStart 0 wantedEnd 13068
+// -----------------------------------------------------------
+// https://wgld.org/d/webgl/w051.html
+// -----------------------------------------------------------
 class W051Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

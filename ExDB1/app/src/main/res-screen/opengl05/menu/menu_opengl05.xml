@@ -2,62 +2,62 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/opengl_wv57"
-        android:title="wv57_gaussianフィルタ" />
+        android:title="@string/ITEM_WV57" />
     <item
         android:id="@+id/opengl_wv56"
-        android:title="wv56_laplacianフィルタ" />
+        android:title="@string/ITEM_WV56" />
     <item
         android:id="@+id/opengl_wv55"
-        android:title="wv55_sobelフィルタ" />
+        android:title="@string/ITEM_WV55" />
     <item
         android:id="@+id/opengl_wv54"
-        android:title="wv54_セピア調" />
+        android:title="@string/ITEM_WV54" />
     <item
         android:id="@+id/opengl_wv53"
-        android:title="wv53_グレースケール" />
+        android:title="@string/ITEM_WV53" />
     <item
         android:id="@+id/opengl_wv52"
-        android:title="wv52_高解像度シャドウマップ" />
+        android:title="@string/ITEM_WV52" />
     <item
         android:id="@+id/opengl_wv51"
-        android:title="wv51_シャドウマッピング" />
+        android:title="@string/ITEM_WV51" />
     <item
         android:id="@+id/opengl_wv50"
-        android:title="wv50_光学迷彩" />
+        android:title="@string/ITEM_WV50" />
     <item
         android:id="@+id/opengl_wv49"
-        android:title="wv49_射影テクスチャマッピング" />
+        android:title="@string/ITEM_OPEN_GL_wv049" />
     <item
         android:id="@+id/opengl_wv48"
-        android:title="wv48_トゥーンレンダリング" />
+        android:title="@string/ITEM_OPEN_GL_wv048" />
     <item
         android:id="@+id/opengl_w057"
-        android:title="w057_gaussianフィルタ" />
+        android:title="@string/ITEM_W057" />
     <item
         android:id="@+id/opengl_w056"
-        android:title="w056_laplacianフィルタ" />
+        android:title="@string/ITEM_W056" />
     <item
         android:id="@+id/opengl_w055"
-        android:title="w055_sobelフィルタ" />
+        android:title="@string/ITEM_W055" />
     <item
         android:id="@+id/opengl_w054"
-        android:title="w054_セピア調" />
+        android:title="@string/ITEM_W054" />
     <item
         android:id="@+id/opengl_w053"
-        android:title="w053_グレースケール" />
+        android:title="@string/ITEM_W053" />
     <item
         android:id="@+id/opengl_w052"
-        android:title="w052_高解像度シャドウマップ" />
+        android:title="@string/ITEM_W052" />
     <item
         android:id="@+id/opengl_w051"
-        android:title="w051_シャドウマッピング" />
+        android:title="@string/ITEM_W051" />
     <item
         android:id="@+id/opengl_w050"
-        android:title="w050_光学迷彩" />
+        android:title="@string/ITEM_W050" />
     <item
         android:id="@+id/opengl_w049"
-        android:title="w049_射影テクスチャマッピング" />
+        android:title="@string/ITEM_OPEN_GL_w049" />
     <item
         android:id="@+id/opengl_w048"
-        android:title="w048_トゥーンレンダリング" />
+        android:title="@string/ITEM_OPEN_GL_w048" />
 </menu>

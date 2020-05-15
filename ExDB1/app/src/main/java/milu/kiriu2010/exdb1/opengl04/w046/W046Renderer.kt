@@ -16,7 +16,8 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // -------------------------------------------------------
-// 屈折マッピング
+// 屈折マッピング:VBOなし
+// OpenGL ES 2.0
 // -------------------------------------------------------
 // ガラスのように少しゆがんだ風景の映りこみを表現できる
 // ビー玉のような質感を演出できる

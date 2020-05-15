@@ -3,62 +3,62 @@
 
     <item
         android:id="@+id/opengl_wv41"
-        android:title="wv41_ブラーフィルター" />
+        android:title="@string/ITEM_OPEN_GL_wv041" />
     <item
         android:id="@+id/opengl_wv40"
-        android:title="wv40_フレームバッファ" />
+        android:title="@string/ITEM_OPEN_GL_wv040" />
     <item
         android:id="@+id/opengl_wv39"
-        android:title="wv39_ステンシルバッファでアウトライン" />
+        android:title="@string/ITEM_OPEN_GL_wv039" />
     <item
         android:id="@+id/opengl_wv38"
-        android:title="wv38_ステンシルバッファ" />
+        android:title="@string/ITEM_OPEN_GL_wv038" />
     <item
         android:id="@+id/opengl_wv37"
-        android:title="wv37_ポイントスプライト" />
+        android:title="@string/ITEM_OPEN_GL_wv037" />
     <item
         android:id="@+id/opengl_wv36"
-        android:title="wv36_点や線のレンダリング" />
+        android:title="@string/ITEM_OPEN_GL_wv036" />
     <item
         android:id="@+id/opengl_wv35"
-        android:title="wv35_クォータニオン(ビルボード)" />
+        android:title="@string/ITEM_OPEN_GL_wv035" />
     <item
         android:id="@+id/opengl_wv34"
-        android:title="wv34_クォータニオン(球面線形補間)" />
+        android:title="@string/ITEM_OPEN_GL_wv034" />
     <item
         android:id="@+id/opengl_wv33"
-        android:title="wv33_クォータニオン(タッチで回転)" />
+        android:title="@string/ITEM_OPEN_GL_wv033" />
     <item
         android:id="@+id/opengl_wv32"
-        android:title="wv32_クォータニオン" />
+        android:title="@string/ITEM_OPEN_GL_wv032" />
     <item
         android:id="@+id/opengl_w041"
-        android:title="w041_ブラーフィルター" />
+        android:title="@string/ITEM_OPEN_GL_w041" />
     <item
         android:id="@+id/opengl_w040"
-        android:title="w040_フレームバッファ" />
+        android:title="@string/ITEM_OPEN_GL_w040" />
     <item
         android:id="@+id/opengl_w039"
-        android:title="w039_ステンシルバッファでアウトライン" />
+        android:title="@string/ITEM_OPEN_GL_w039" />
     <item
         android:id="@+id/opengl_w038"
-        android:title="w038_ステンシルバッファ" />
+        android:title="@string/ITEM_OPEN_GL_w038" />
     <item
         android:id="@+id/opengl_w037"
-        android:title="w037_ポイントスプライト" />
+        android:title="@string/ITEM_OPEN_GL_w037" />
     <item
         android:id="@+id/opengl_w036"
-        android:title="w036_点や線のレンダリング" />
+        android:title="@string/ITEM_OPEN_GL_w036" />
     <item
         android:id="@+id/opengl_w035"
-        android:title="w035_クォータニオン(ビルボード)" />
+        android:title="@string/ITEM_OPEN_GL_w035" />
     <item
         android:id="@+id/opengl_w034"
-        android:title="w034_クォータニオン(球面線形補間)" />
+        android:title="@string/ITEM_OPEN_GL_w034" />
     <item
         android:id="@+id/opengl_w033"
-        android:title="w033_クォータニオン(タッチで回転)" />
+        android:title="@string/ITEM_OPEN_GL_w033" />
     <item
         android:id="@+id/opengl_w032"
-        android:title="w032_クォータニオン" />
+        android:title="@string/ITEM_OPEN_GL_w032" />
 </menu>

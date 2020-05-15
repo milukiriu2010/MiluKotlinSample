@@ -13,7 +13,8 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // --------------------------------------
-// 点や線のレンダリング
+// 点や線のレンダリング:VBOあり
+// OpenGL ES 2.0
 // --------------------------------------
 // https://wgld.org/d/webgl/w036.html
 // --------------------------------------

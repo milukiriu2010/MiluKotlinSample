@@ -18,7 +18,10 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // -----------------------------------------------------------------------
-// 被写界深度
+// emuglGLESv2_enc: a vertex attribute index out of boundary is detected. Skipping corresponding vertex attribute. buf=0xe7b8f050
+// -----------------------------------------------------------------------
+// 被写界深度:VBOなし
+// OpenGL ES 2.0
 // -----------------------------------------------------------------------
 //   ピントが合っていない部分がぼやけて写るようにすること
 //   被写界深度ではピントを合わせたい深度を決め、

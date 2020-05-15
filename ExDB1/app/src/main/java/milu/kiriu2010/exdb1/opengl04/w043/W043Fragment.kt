@@ -1,6 +1,5 @@
 package milu.kiriu2010.exdb1.opengl04.w043
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.util.Log
@@ -13,6 +12,20 @@ import android.widget.SeekBar
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// -----------------------------------------------------
+// 視差マッピング:VBOなし
+// OpenGL ES 2.0
+// -----------------------------------------------------
+// 視線や高さを考慮したバンプマッピング
+// -----------------------------------------------------
+// 視差マッピングを行うためには、
+// 法線マップと高さマップの２つのテクスチャが必要
+// 高さマップは、画像データに高さデータを格納したもので
+// 通常モノクロで扱う
+// 黒⇒0(最も低い),白⇒1(最も高い)
+// -----------------------------------------------------
+// https://wgld.org/d/webgl/w043.html
+// -----------------------------------------------------
 class W043Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

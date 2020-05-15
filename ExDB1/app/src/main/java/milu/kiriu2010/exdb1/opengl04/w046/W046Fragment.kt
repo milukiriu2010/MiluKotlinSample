@@ -12,6 +12,15 @@ import android.widget.SeekBar
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// -------------------------------------------------------
+// 屈折マッピング:VBOなし
+// OpenGL ES 2.0
+// -------------------------------------------------------
+// ガラスのように少しゆがんだ風景の映りこみを表現できる
+// ビー玉のような質感を演出できる
+// -------------------------------------------------------
+// https://wgld.org/d/webgl/w046.html
+// -------------------------------------------------------
 class W046Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

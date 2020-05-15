@@ -3,38 +3,38 @@
 
     <item
         android:id="@+id/opengl_wv47"
-        android:title="wv47_動的キューブマッピング" />
+        android:title="@string/ITEM_OPEN_GL_wv047" />
     <item
         android:id="@+id/opengl_wv46"
-        android:title="wv46_屈折マッピング" />
+        android:title="@string/ITEM_OPEN_GL_wv046" />
     <item
         android:id="@+id/opengl_wv45"
-        android:title="wv45_キューブ環境バンプマッピング" />
+        android:title="@string/ITEM_OPEN_GL_wv045" />
     <item
         android:id="@+id/opengl_wv44"
-        android:title="wv44_キューブ環境マッピング" />
+        android:title="@string/ITEM_OPEN_GL_wv044" />
     <item
         android:id="@+id/opengl_wv43"
-        android:title="wv43_視差マッピング" />
+        android:title="@string/ITEM_OPEN_GL_wv043" />
     <item
         android:id="@+id/opengl_wv42"
-        android:title="wv42_バンプマッピング" />
+        android:title="@string/ITEM_OPEN_GL_wv042" />
     <item
         android:id="@+id/opengl_w047"
-        android:title="w047_動的キューブマッピング" />
+        android:title="@string/ITEM_OPEN_GL_w047" />
     <item
         android:id="@+id/opengl_w046"
-        android:title="w046_屈折マッピング" />
+        android:title="@string/ITEM_OPEN_GL_w046" />
     <item
         android:id="@+id/opengl_w045"
-        android:title="w045_キューブ環境バンプマッピング" />
+        android:title="@string/ITEM_OPEN_GL_w045" />
     <item
         android:id="@+id/opengl_w044"
-        android:title="w044_キューブ環境マッピング" />
+        android:title="@string/ITEM_OPEN_GL_w044" />
     <item
         android:id="@+id/opengl_w043"
-        android:title="w043_視差マッピング" />
+        android:title="@string/ITEM_OPEN_GL_w043" />
     <item
         android:id="@+id/opengl_w042"
-        android:title="w042_バンプマッピング" />
+        android:title="@string/ITEM_OPEN_GL_w042" />
 </menu>

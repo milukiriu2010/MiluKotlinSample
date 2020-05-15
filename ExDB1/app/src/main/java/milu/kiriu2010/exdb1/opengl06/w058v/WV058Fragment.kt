@@ -12,6 +12,15 @@ import android.widget.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// --------------------------------------------
+// グレアフィルタ:VBOあり
+// OpenGL ES 2.0
+// --------------------------------------------
+// まぶしい光や反射光などがあふれて見える現象
+// 別名ライトブルーム
+// --------------------------------------------
+// https://wgld.org/d/webgl/w058.html
+// --------------------------------------------
 class WV058Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

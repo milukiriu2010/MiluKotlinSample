@@ -13,8 +13,9 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // ---------------------------------------
-// クォータニオン
+// クォータニオン:VBOあり
 //   マウス座標による回転
+// OpenGL ES 2.0
 // ---------------------------------------
 // https://wgld.org/d/webgl/w033.html
 // ---------------------------------------

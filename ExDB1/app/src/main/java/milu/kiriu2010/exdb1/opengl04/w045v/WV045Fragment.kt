@@ -1,6 +1,5 @@
 package milu.kiriu2010.exdb1.opengl04.w045v
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.util.Log
@@ -12,6 +11,17 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ----------------------------------------------------------------------------------
+// キューブ環境バンプマッピング:VBOあり
+// OpenGL ES 2.0
+// ----------------------------------------------------------------------------------
+// バンプマッピングでは、法線マップの参照を行う上で"接空間"での計算を行う必要がある。
+// 一方、キューブマップ環境では"視線空間"での計算を行う必要がある。
+// この２つの空間上での変換をいかにして行うのかが、キューブ環境マッピングの肝
+// ----------------------------------------------------------------------------------
+// https://wgld.org/d/webgl/w045.html
+// http://opengles2learning.blogspot.com/2011/06/texturing-cube-different-textures-on.html
+// ----------------------------------------------------------------------------------
 class WV045Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

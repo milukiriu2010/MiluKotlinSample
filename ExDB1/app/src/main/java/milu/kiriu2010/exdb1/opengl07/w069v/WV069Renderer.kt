@@ -20,7 +20,8 @@ import kotlin.math.floor
 // a vertex attribute index out of boundary is detected. Skipping corresponding vertex attribute. buf=0xe7b8ec30
 // emuglGLESv2_enc: Out of bounds vertex attribute info: clientArray? 1 attribute 2 vbo 13 allocedBufferSize 64 bufferDataSpecified? 1 wantedStart 0 wantedEnd 17424
 // -------------------------------------------
-// 正しい深度値を適用したシャドウマッピング
+// 正しい深度値を適用したシャドウマッピング:VBOあり
+// OpenGL ES 2.0
 // -------------------------------------------
 // w51とは違うらしい
 // -------------------------------------------

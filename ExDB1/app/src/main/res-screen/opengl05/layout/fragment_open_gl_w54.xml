@@ -36,14 +36,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Color" />
+            android:text="@string/RB_W54_COLOR" />
 
         <RadioButton
             android:id="@+id/radioButtonW54Gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Gray" />
+            android:text="@string/RB_W54_GRAY" />
 
         <RadioButton
             android:id="@+id/radioButtonW54Sepia"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
-            android:text="Sepia" />
+            android:text="@string/RB_W54_SEPIA" />
     </RadioGroup>
 
 

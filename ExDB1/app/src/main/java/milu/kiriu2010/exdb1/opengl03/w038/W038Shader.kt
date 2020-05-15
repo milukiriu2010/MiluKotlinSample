@@ -6,7 +6,8 @@ import milu.kiriu2010.gui.model.MgModelAbs
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
 // --------------------------------------
-// ステンシルバッファ
+// ステンシルバッファ:VBOなし
+// OpenGL ES 2.0
 // --------------------------------------
 // https://wgld.org/d/webgl/w038.html
 // --------------------------------------

@@ -17,7 +17,8 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // --------------------------------------
-// 動的キューブマッピング
+// 動的キューブマッピング:VBOなし
+// OpenGL ES 2.0
 // --------------------------------------
 // https://wgld.org/d/webgl/w047.html
 // --------------------------------------

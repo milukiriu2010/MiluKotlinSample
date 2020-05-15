@@ -16,6 +16,12 @@ import android.widget.TextView
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ------------------------------------
+// ポイントスプライト:VBOなし
+// OpenGL ES 2.0
+// ------------------------------------
+// https://wgld.org/d/webgl/w037.html
+// ------------------------------------
 class W037Fragment : Fragment() {
     private lateinit var renderer: W037Renderer
 

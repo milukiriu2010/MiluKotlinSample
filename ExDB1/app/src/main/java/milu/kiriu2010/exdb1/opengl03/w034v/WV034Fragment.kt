@@ -12,6 +12,12 @@ import android.widget.SeekBar
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// --------------------------------------
+// クォータニオンによる球面線形補間:VBOあり
+// OpenGL ES 2.0
+// --------------------------------------
+// https://wgld.org/d/webgl/w034.html
+// --------------------------------------
 class WV034Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

@@ -2,4 +2,30 @@
 <resources>
     <string name="ITEM_OPEN_GL_w030">w030_ブレンドファクター</string>
     <string name="ITEM_OPEN_GL_wv030">wv030_ブレンドファクター</string>
+    <string name="ITEM_OPEN_GL_w032">w032_クォータニオン</string>
+    <string name="ITEM_OPEN_GL_wv032">wv032_クォータニオン</string>
+    <string name="ITEM_OPEN_GL_w033">w033_クォータニオン(タッチで回転)</string>
+    <string name="ITEM_OPEN_GL_wv033">wv033_クォータニオン(タッチで回転)</string>
+    <string name="ITEM_OPEN_GL_w034">w034_クォータニオン(球面線形補間)</string>
+    <string name="ITEM_OPEN_GL_wv034">wv034_クォータニオン(球面線形補間)</string>
+    <string name="ITEM_OPEN_GL_w035">w035_クォータニオン(ビルボード)</string>
+    <string name="ITEM_OPEN_GL_wv035">wv035_クォータニオン(ビルボード)</string>
+    <string name="ITEM_OPEN_GL_w036">w036_点や線のレンダリング</string>
+    <string name="ITEM_OPEN_GL_wv036">wv036_点や線のレンダリング</string>
+    <string name="ITEM_OPEN_GL_w037">w037_ポイントスプライト</string>
+    <string name="ITEM_OPEN_GL_wv037">wv037_ポイントスプライト</string>
+    <string name="ITEM_OPEN_GL_w038">w038_ステンシルバッファ</string>
+    <string name="ITEM_OPEN_GL_wv038">wv038_ステンシルバッファ</string>
+    <string name="ITEM_OPEN_GL_w039">w039_ステンシルバッファでアウトライン</string>
+    <string name="ITEM_OPEN_GL_wv039">wv039_ステンシルバッファでアウトライン</string>
+
+    <string name="TV_W34">球面線形補間</string>
+    <string name="SW_W35">ビルボード</string>
+
+    <string name="RB_W36_LINES">LINES</string>
+    <string name="RB_W36_LINESTRIP">LINE_STRIP</string>
+    <string name="RB_W36_LINELOOP">LINE_LOOP</string>
+    <string name="TV_W36_MINSIZETXT">点サイズ(最小)</string>
+    <string name="TV_W36_MAXSIZETXT">点サイズ(最大)</string>
+
 </resources>

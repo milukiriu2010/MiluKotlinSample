@@ -14,7 +14,8 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // --------------------------------------
-// クォータニオンによる球面線形補間
+// クォータニオンによる球面線形補間:VBOあり
+// OpenGL ES 2.0
 // --------------------------------------
 // https://wgld.org/d/webgl/w034.html
 // --------------------------------------

@@ -11,6 +11,16 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// --------------------------------------
+// 動的キューブマッピング:VBOあり
+// OpenGL ES 2.0
+// --------------------------------------
+// https://wgld.org/d/webgl/w047.html
+// --------------------------------------
+// キューブマップのシェーダで
+// UseProgramで0x502が発生する
+// トーラスが写らない
+// --------------------------------------
 class WV047Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

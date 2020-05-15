@@ -12,6 +12,18 @@ import android.widget.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// -----------------------------------------------------------------------
+// emuglGLESv2_enc: a vertex attribute index out of boundary is detected. Skipping corresponding vertex attribute. buf=0xe7b8f050
+// -----------------------------------------------------------------------
+// 被写界深度:VBOあり
+// OpenGL ES 2.0
+// -----------------------------------------------------------------------
+//   ピントが合っていない部分がぼやけて写るようにすること
+//   被写界深度ではピントを合わせたい深度を決め、
+//   その深度に応じて、ぼけていないシーンとぼけたシーンとを合成する
+// -----------------------------------------------------------------------
+// https://wgld.org/d/webgl/w059.html
+// -----------------------------------------------------------------------
 class WV059Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

@@ -17,7 +17,8 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // ---------------------------------------------
-// ステンシルバッファを使ってアウトライン描画
+// ステンシルバッファを使ってアウトライン描画:VBOあり
+// OpenGL ES 2.0
 // ---------------------------------------------
 // https://wgld.org/d/webgl/w039.html
 // ---------------------------------------------

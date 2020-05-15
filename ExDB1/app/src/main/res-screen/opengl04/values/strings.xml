@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ITEM_OPEN_GL_w040">w040_フレームバッファ</string>
+    <string name="ITEM_OPEN_GL_wv040">wv040_フレームバッファ</string>
+    <string name="ITEM_OPEN_GL_w041">w041_ブラーフィルター</string>
+    <string name="ITEM_OPEN_GL_wv041">wv041_ブラーフィルター</string>
+    <string name="ITEM_OPEN_GL_w042">w042_バンプマッピング</string>
+    <string name="ITEM_OPEN_GL_wv042">wv042_バンプマッピング</string>
+    <string name="ITEM_OPEN_GL_w043">w043_視差マッピング</string>
+    <string name="ITEM_OPEN_GL_wv043">wv043_視差マッピング</string>
+    <string name="ITEM_OPEN_GL_w044">w044_キューブ環境マッピング</string>
+    <string name="ITEM_OPEN_GL_wv044">wv044_キューブ環境マッピング</string>
+    <string name="ITEM_OPEN_GL_w045">w045_キューブ環境バンプマッピング</string>
+    <string name="ITEM_OPEN_GL_wv045">wv045_キューブ環境バンプマッピング</string>
+    <string name="ITEM_OPEN_GL_w046">w046_屈折マッピング</string>
+    <string name="ITEM_OPEN_GL_wv046">wv046_屈折マッピング</string>
+    <string name="ITEM_OPEN_GL_w047">w047_動的キューブマッピング</string>
+    <string name="ITEM_OPEN_GL_wv047">wv047_動的キューブマッピング</string>
+    <string name="ITEM_OPEN_GL_w048">w048_トゥーンレンダリング</string>
+    <string name="ITEM_OPEN_GL_wv048">wv048_トゥーンレンダリング</string>
+    <string name="ITEM_OPEN_GL_w049">w049_射影テクスチャマッピング</string>
+    <string name="ITEM_OPEN_GL_wv049">wv049_射影テクスチャマッピング</string>
+
+    <string name="SW_W41">blur</string>
+    <string name="SW_W43">高さ(0.0–1.0)</string>
+    <string name="SW_W46">屈折率(0.0–1.0)</string>
+    <string name="SW_W49">光源位置補正係数(0–20)</string>
+</resources>

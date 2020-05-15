@@ -11,6 +11,14 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ------------------------------------------------
+// ステンシルバッファ:VBOあり
+// OpenGL ES 2.0
+// ------------------------------------------------
+// 基準値を保存するためのバッファとして機能する
+// ------------------------------------------------
+// https://wgld.org/d/webgl/w038.html
+// ------------------------------------------------
 class WV038Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

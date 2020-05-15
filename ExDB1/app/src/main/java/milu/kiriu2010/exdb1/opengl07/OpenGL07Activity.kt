@@ -146,24 +146,16 @@ class OpenGL07Activity : AppCompatActivity() {
                 }
                 true
             }
-            // 正しい深度値を適用したシャドウマッピング
+            // 正しい深度値を適用したシャドウマッピング:VBOあり
+            // OpenGL ES 2.0
             R.id.opengl_wv69 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv69") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL07, WV069Fragment.newInstance(), "wv69")
-                            .commit()
-                }
+                changeFragment("wv069")
                 true
             }
-            // 正しい深度値を適用したシャドウマッピング
+            // 正しい深度値を適用したシャドウマッピング:VBOなし
+            // OpenGL ES 2.0
             R.id.opengl_w069 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w069") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL07, W069Fragment.newInstance(), "w069")
-                            .commit()
-                }
+                changeFragment("w069")
                 true
             }
             else -> return super.onOptionsItemSelected(item!!)
@@ -179,8 +171,12 @@ class OpenGL07Activity : AppCompatActivity() {
             // w077_ラインシェード:VBOなし
             // OpenGL ES 2.0
             "w077" -> W077Fragment.newInstance()
-            // w077_ラインシェード:VBOなし
+            // 正しい深度値を適用したシャドウマッピング:VBOあり
             // OpenGL ES 2.0
+            "wv069" -> WV069Fragment.newInstance()
+            // 正しい深度値を適用したシャドウマッピング:VBOなし
+            // OpenGL ES 2.0
+            "w069" -> W069Fragment.newInstance()
             else -> W077Fragment.newInstance()
         }
 

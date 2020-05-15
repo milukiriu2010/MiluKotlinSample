@@ -37,14 +37,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
-            android:text="Render" />
+            android:text="@string/RB_W57_RENDER" />
 
         <RadioButton
             android:id="@+id/radioButtonW57Texture1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Texture1" />
+            android:text="@string/RB_W57_TEXTURE1" />
 
         <RadioButton
             android:id="@+id/radioButtonW57Texture2"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="false"
-            android:text="Texture2" />
+            android:text="@string/RB_W57_TEXTURE2" />
     </RadioGroup>
 
     <CheckBox
@@ -62,7 +62,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:checked="true"
-        android:text="Gaussian"
+        android:text="@string/CB_W57_GAUSSIAN"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupW57" />
 
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="分散(1.0-10.0)"
+        android:text="@string/CB_W57_DISPERSION"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxW57Gaussian" />
 

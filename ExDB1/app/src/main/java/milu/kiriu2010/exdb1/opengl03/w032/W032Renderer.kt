@@ -11,7 +11,7 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // ---------------------------------------
-// クォータニオン
+// クォータニオン:VBOなし
 //   カメラの位置を回転させる
 // OpenGL ES 2.0
 // ---------------------------------------

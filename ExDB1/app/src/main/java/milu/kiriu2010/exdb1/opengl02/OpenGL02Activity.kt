@@ -28,6 +28,13 @@ import milu.kiriu2010.exdb1.opengl02.w029v.WV029Fragment
 import milu.kiriu2010.exdb1.opengl02.w030.W030zFragment
 import milu.kiriu2010.exdb1.opengl02.w030v.WV030Fragment
 
+// -------------------------------------
+// OpenGL ES 2.0サンプル
+// -------------------------------------
+// https://wgld.org/d/webgl/w020.html
+// ～
+// https://wgld.org/d/webgl/w029.html
+// -------------------------------------
 class OpenGL02Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

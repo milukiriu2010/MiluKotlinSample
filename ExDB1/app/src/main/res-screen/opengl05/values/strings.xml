@@ -1,7 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="ITEM_W050">w050_光学迷彩</string>
+    <string name="ITEM_WV50">wv50_光学迷彩</string>
+    <string name="ITEM_W051">w051_シャドウマッピング</string>
+    <string name="ITEM_WV51">wv51_シャドウマッピング</string>
+    <string name="ITEM_W052">w052_高解像度シャドウマップ</string>
+    <string name="ITEM_WV52">wv52_高解像度シャドウマップ</string>
+    <string name="ITEM_W053">w053_グレースケール</string>
+    <string name="ITEM_WV53">wv53_グレースケール</string>
+    <string name="ITEM_W054">w054_セピア調</string>
+    <string name="ITEM_WV54">wv54_セピア調</string>
+    <string name="ITEM_W055">w055_sobelフィルタ</string>
+    <string name="ITEM_WV55">wv55_sobelフィルタ</string>
+    <string name="ITEM_W056">w056_laplacianフィルタ</string>
+    <string name="ITEM_WV56">wv56_laplacianフィルタ</string>
+    <string name="ITEM_W057">w057_gaussianフィルタ</string>
+    <string name="ITEM_WV57">wv57_gaussianフィルタ</string>
     <string name="ITEM_W058">w058_グレアフィルタ</string>
     <string name="ITEM_WV58">wv58_グレアフィルタ</string>
     <string name="ITEM_W059">w059_被写界深度</string>
     <string name="ITEM_WV59">wv59_被写界深度</string>
+
+    <string name="TV_W50">光学迷彩係数(-1.0～1.0)</string>
+
+    <string name="TV_W51">光源位置補正係数(20–40)</string>
+    <string name="RB_W51_FRAG">gl_FragCoord.z(デプスバッファを使った深度値比較)</string>
+    <string name="RB_W51_VERTEX">Vertex Position(頂点座標を用いた深度値比較)</string>
+
+    <string name="SW_W53">GrayScale</string>
+
+    <string name="RB_W54_COLOR">Color</string>
+    <string name="RB_W54_GRAY">Gray</string>
+    <string name="RB_W54_SEPIA">Sepia</string>
+
+    <string name="RB_W55_RENDER">Render</string>
+    <string name="RB_W55_TEXTURE1">Texture1</string>
+    <string name="RB_W55_TEXTURE2">Texture2</string>
+    <string name="CB_W55_SOBEL">Sobel</string>
+    <string name="CB_W55_GRAY">Gray</string>
+
+    <string name="RB_W56_RENDER">Render</string>
+    <string name="RB_W56_TEXTURE1">Texture1</string>
+    <string name="RB_W56_TEXTURE2">Texture2</string>
+    <string name="CB_W56_LAPLACIAN">Laplacian</string>
+    <string name="CB_W56_GRAY">Gray</string>
+
+    <string name="RB_W57_RENDER">Render</string>
+    <string name="RB_W57_TEXTURE1">Texture1</string>
+    <string name="RB_W57_TEXTURE2">Texture2</string>
+    <string name="CB_W57_GAUSSIAN">Gaussian</string>
+    <string name="CB_W57_DISPERSION">分散(1.0–10.0)</string>
+
+    <string name="CB_W58_GLARE">Glare</string>
+    <string name="TV_W58_DISPERSION">分散(1.0–10.0)</string>
+
+    <string name="TV_W59_DEPTH">TargetDepth(-4.25～+4.25)</string>
+
 </resources>

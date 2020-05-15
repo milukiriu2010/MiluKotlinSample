@@ -8,7 +8,8 @@ import milu.kiriu2010.gui.shader.es20.ES20MgShader
 import milu.kiriu2010.gui.vbo.es20.ES20VBOAbs
 
 // --------------------------------------
-// シェーダ(反射光ライティング)
+// シェーダ(反射光ライティング):VBOあり
+// OpenGL ES 2.0
 // --------------------------------------
 // ES20VBOSpecularLight01Shaderと同じ
 // --------------------------------------

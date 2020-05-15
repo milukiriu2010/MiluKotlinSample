@@ -11,6 +11,12 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ---------------------------------------------
+// ステンシルバッファを使ってアウトライン描画:VBOなし
+// OpenGL ES 2.0
+// ---------------------------------------------
+// https://wgld.org/d/webgl/w039.html
+// ---------------------------------------------
 class W039Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

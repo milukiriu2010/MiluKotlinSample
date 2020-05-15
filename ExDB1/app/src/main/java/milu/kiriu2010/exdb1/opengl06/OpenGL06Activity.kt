@@ -28,6 +28,13 @@ import milu.kiriu2010.exdb1.opengl06.w067v.WV067Fragment
 import milu.kiriu2010.exdb1.opengl06.w068.W068Fragment
 import milu.kiriu2010.exdb1.opengl06.w068v.WV068Fragment
 
+// -------------------------------------
+// OpenGL ES 2.0サンプル
+// -------------------------------------
+// https://wgld.org/d/webgl/w060.html
+// ～
+// https://wgld.org/d/webgl/w069.html
+// -------------------------------------
 class OpenGL06Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -229,44 +236,28 @@ class OpenGL06Activity : AppCompatActivity() {
                 changeFragment("w060")
                 true
             }
-            // 被写界深度
+            // 被写界深度:VBOあり
+            // OpenGL ES 2.0
             R.id.opengl_wv59 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv59") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL06, WV059Fragment.newInstance(), "wv59")
-                            .commit()
-                }
+                changeFragment("wv059")
                 true
             }
-            // 被写界深度
+            // 被写界深度:VBOなし
+            // OpenGL ES 2.0
             R.id.opengl_w059 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w059") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL06, W059Fragment.newInstance(), "w059")
-                            .commit()
-                }
+                changeFragment("w059")
                 true
             }
-            // グレアフィルタ
+            // グレアフィルタ:VBOあり
+            // OpenGL ES 2.0
             R.id.opengl_wv58 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv58") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL06, WV058Fragment.newInstance(), "wv58")
-                            .commit()
-                }
+                changeFragment("wv058")
                 true
             }
-            // グレアフィルタ
+            // グレアフィルタ:VBOなし
+            // OpenGL ES 2.0
             R.id.opengl_w058 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w058") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL06, W058Fragment.newInstance(), "w058")
-                            .commit()
-                }
+                changeFragment("w058")
                 true
             }
             else -> return super.onOptionsItemSelected(item!!)
@@ -282,8 +273,18 @@ class OpenGL06Activity : AppCompatActivity() {
             // w060_フォグ距離:VBOなし
             // OpenGL ES 2.0
             "w060" -> W060Fragment.newInstance()
-            // w060_フォグ距離:VBOなし
+            // 被写界深度:VBOなし
             // OpenGL ES 2.0
+            "wv059" -> WV059Fragment.newInstance()
+            // 被写界深度:VBOなし
+            // OpenGL ES 2.0
+            "w059" -> W059Fragment.newInstance()
+            // グレアフィルタ:VBOなし
+            // OpenGL ES 2.0
+            "wv058" -> WV058Fragment.newInstance()
+            // グレアフィルタ:VBOなし
+            // OpenGL ES 2.0
+            "w058" -> W058Fragment.newInstance()
             else -> W060Fragment.newInstance()
         }
 

@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="光源位置補正係数(20-40)"
+        android:text="@string/TV_W51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myGLES20ViewW51" />
 
@@ -61,14 +61,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
-            android:text="gl_FragCoord.z(デプスバッファを使った深度値比較)" />
+            android:text="@string/RB_W51_FRAG" />
 
         <RadioButton
             android:id="@+id/radioButtonW51Vertex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Vertex Position(頂点座標を用いた深度値比較)" />
+            android:text="@string/RB_W51_VERTEX" />
     </RadioGroup>
 
 

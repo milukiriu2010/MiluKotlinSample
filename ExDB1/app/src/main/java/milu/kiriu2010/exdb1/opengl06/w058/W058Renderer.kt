@@ -16,7 +16,8 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // --------------------------------------------
-// グレアフィルタ
+// グレアフィルタ:VBOなし
+// OpenGL ES 2.0
 // --------------------------------------------
 // まぶしい光や反射光などがあふれて見える現象
 // 別名ライトブルーム
