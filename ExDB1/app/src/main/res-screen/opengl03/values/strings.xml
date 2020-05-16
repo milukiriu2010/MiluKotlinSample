@@ -19,6 +19,30 @@
     <string name="ITEM_OPEN_GL_w039">w039_ステンシルバッファでアウトライン</string>
     <string name="ITEM_OPEN_GL_wv039">wv039_ステンシルバッファでアウトライン</string>
 
+    <string-array name="w30_equation">
+        <item>FUNC_ADD</item>
+        <item>FUNC_SUBTRACT</item>
+        <item>FUNC_REVERSE_SUBTRACT</item>
+    </string-array>
+
+    <string-array name="w30_blend_factor">
+        <item>ZERO</item>
+        <item>ONE</item>
+        <item>SRC_COLOR</item>
+        <item>DST_COLOR</item>
+        <item>ONE_MINUS_SRC_COLOR</item>
+        <item>ONE_MINUS_DST_COLOR</item>
+        <item>SRC_ALPHA</item>
+        <item>DST_ALPHA</item>
+        <item>ONE_MINUS_SRC_ALPHA</item>
+        <item>ONE_MINUS_DST_ALPHA</item>
+        <item>CONSTANT_COLOR</item>
+        <item>ONE_MINUS_CONSTANT_COLOR</item>
+        <item>CONSTANT_ALPHA</item>
+        <item>ONE_MINUS_CONSTANT_ALPHA</item>
+        <item>SRC_ALPHA_SATURATE</item>
+    </string-array>
+
     <string name="TV_W34">球面線形補間</string>
     <string name="SW_W35">ビルボード</string>
 

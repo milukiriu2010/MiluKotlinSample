@@ -26,7 +26,7 @@ import milu.kiriu2010.exdb1.opengl06.OpenGL06Activity
 import milu.kiriu2010.exdb1.opengl07.OpenGL07Activity
 import milu.kiriu2010.exdb1.opengl08.OpenGL08Activity
 import milu.kiriu2010.exdb1.scheduler.SchedulerActivity
-import milu.kiriu2010.exdb1.sqlite.SQLite01Activity
+import milu.kiriu2010.exdb1.sqlite01.SQLite01Activity
 
 class MainActivity : AppCompatActivity() {
 
@@ -170,7 +170,7 @@ class MainActivity : AppCompatActivity() {
     // ------------------------------------------------------
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //return super.onCreateOptionsMenu(menu)
-        menuInflater.inflate(R.menu.menu_module,menu)
+        menuInflater.inflate(R.menu.menu_main,menu)
         return true
     }
 
@@ -189,7 +189,7 @@ class MainActivity : AppCompatActivity() {
             // ----------------------------------------------------
             // "SQLite"をクリックすると、SQLite画面へ遷移
             // ----------------------------------------------------
-            R.id.item_top_sqlite -> {
+            R.id.item_top_sqlite01 -> {
                 val intent = Intent(this,SQLite01Activity::class.java)
                 startActivity(intent)
             }

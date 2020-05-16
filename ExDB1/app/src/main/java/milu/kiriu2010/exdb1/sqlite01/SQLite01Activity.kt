@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.sqlite
+package milu.kiriu2010.exdb1.sqlite01
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,8 +17,9 @@ class SQLite01Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sqlite01)
 
-        val btnAdd = findViewById<Button>(R.id.btnSQLite01)
-        btnAdd.setOnClickListener {
+        val btnSQLite01 = findViewById<Button>(R.id.btnSQLite01)
+        // "追加"ボタンをクリックすると、SQLiteにメモを保存する
+        btnSQLite01.setOnClickListener {
             val editText = findViewById<EditText>(R.id.etSQLite01)
             insertText(this,editText.text.toString())
             show()

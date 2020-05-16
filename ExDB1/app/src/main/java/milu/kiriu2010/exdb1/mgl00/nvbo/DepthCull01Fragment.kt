@@ -99,13 +99,13 @@ class DepthCull01Fragment : Fragment() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 // http://android-note.open-memo.net/sub/spinner--get-resource-id-for-selected-item.html
-                val array = resources.obtainTypedArray(R.array.shaderlist)
-                val itemId = array.getResourceId(position,R.string.shader_simple)
+                val array = resources.obtainTypedArray(R.array.MGL00_LIST_SHADER)
+                val itemId = array.getResourceId(position,R.string.MGL00_SHADER_SIMPLE)
                 renderer.shaderSwitch = when (itemId) {
-                    R.string.shader_simple -> 0
-                    R.string.shader_directional_light -> 1
-                    R.string.shader_texture -> 2
-                    R.string.shader_lines -> 3
+                    R.string.MGL00_SHADER_SIMPLE -> 0
+                    R.string.MGL00_SHADER_DIRECTIONAL_LIGHT -> 1
+                    R.string.MGL00_SHADER_TEXTURE -> 2
+                    R.string.MGL00_SHADER_LINES -> 3
                     else -> 0
                 }
                 // 使わなくなったら解放

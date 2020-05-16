@@ -19,4 +19,18 @@
     <string name="MGL00_MODEL_ICOSAHEDRON">正二十面体</string>
     <string name="MGL00_MODEL_SPHERE">球</string>
     <string name="MGL00_MODEL_TORUS">トーラス</string>
+
+
+    <string name="MGL00_SHADER_SIMPLE">Simple</string>
+    <string name="MGL00_SHADER_LINES">Lines</string>
+    <string name="MGL00_SHADER_DIRECTIONAL_LIGHT">Directional Light</string>
+    <string name="MGL00_SHADER_TEXTURE">Texture</string>
+
+    <string-array name="MGL00_LIST_SHADER">
+        <item>@string/MGL00_SHADER_SIMPLE</item>
+        <item>@string/MGL00_SHADER_LINES</item>
+        <item>@string/MGL00_SHADER_DIRECTIONAL_LIGHT</item>
+        <item>@string/MGL00_SHADER_TEXTURE</item>
+    </string-array>
+
 </resources>

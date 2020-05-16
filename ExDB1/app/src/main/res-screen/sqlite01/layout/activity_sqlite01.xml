@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".sqlite.SQLite01Activity">
+    tools:context=".sqlite01.SQLite01Activity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glSQLite01"

@@ -56,4 +56,18 @@
 
     <string name="TV_W59_DEPTH">TargetDepth(-4.25～+4.25)</string>
 
+    <string name="w59_depth_of_field">depth of field</string>
+    <string name="w59_depth">depth</string>
+    <string name="w59_scene">scene</string>
+    <string name="w59_blur1">blur scene1</string>
+    <string name="w59_blur2">blur scene2</string>
+
+    <string-array name="w59list">
+        <item>@string/w59_depth_of_field</item>
+        <item>@string/w59_depth</item>
+        <item>@string/w59_scene</item>
+        <item>@string/w59_blur1</item>
+        <item>@string/w59_blur2</item>
+    </string-array>
+
 </resources>

@@ -47,6 +47,8 @@
             android:name=".es30x01.ES30x01Activity"
             android:hardwareAccelerated="false" />
         <activity android:name=".es30x02.ES30x02Activity" />
+        <activity android:name=".mgl00.Mgl00Activity" />
+        <activity android:name=".mgl01.Mgl01Activity" />
         <activity android:name=".opengl01.OpenGL01Activity" />
         <activity android:name=".opengl02.OpenGL02Activity" />
         <activity android:name=".opengl03.OpenGL03Activity" />
@@ -61,14 +63,8 @@
             android:name=".scheduler.SchedulerActivity"
             android:label="@string/title_activity_scheduler"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".sqlite.SQLite01Activity" />
         <activity android:name=".scheduler.ScheduleEditActivity" />
-        <activity
-            android:name=".mgl01.Mgl01Activity"
-            android:label="@string/title_activity_mgl01" />
-        <activity
-            android:name=".mgl00.Mgl00Activity"
-            android:label="@string/title_activity_mgl00" />
+        <activity android:name=".sqlite01.SQLite01Activity" />
     </application>
 
 </manifest>

@@ -25,5 +25,9 @@
 
     <string name="ITEM_TOP_HOME">Home</string>
     <string name="ITEM_TOP_SCHEDULE">Schedule</string>
-    <string name="ITEM_TOP_SQLITE">SQLite</string>
+    <string name="ITEM_TOP_SQLITE01">SQLite01</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
