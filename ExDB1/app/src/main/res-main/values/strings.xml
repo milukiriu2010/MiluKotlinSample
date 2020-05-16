@@ -23,4 +23,7 @@
     <string name="BTN_GLSL_01">GLSL01</string>
     <string name="BTN_GLSL_02">GLSL02</string>
 
+    <string name="ITEM_TOP_HOME">Home</string>
+    <string name="ITEM_TOP_SCHEDULE">Schedule</string>
+    <string name="ITEM_TOP_SQLITE">SQLite</string>
 </resources>

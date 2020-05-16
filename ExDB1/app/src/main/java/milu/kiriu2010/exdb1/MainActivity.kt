@@ -26,7 +26,7 @@ import milu.kiriu2010.exdb1.opengl06.OpenGL06Activity
 import milu.kiriu2010.exdb1.opengl07.OpenGL07Activity
 import milu.kiriu2010.exdb1.opengl08.OpenGL08Activity
 import milu.kiriu2010.exdb1.scheduler.SchedulerActivity
-import milu.kiriu2010.exdb1.sqlite.SQLiteOpenHelperActivity
+import milu.kiriu2010.exdb1.sqlite.SQLite01Activity
 
 class MainActivity : AppCompatActivity() {
 
@@ -182,15 +182,15 @@ class MainActivity : AppCompatActivity() {
             // ----------------------------------------------------
             // "Scheduler"をクリックすると、スケジューラ画面へ遷移
             // ----------------------------------------------------
-            R.id.menuItemScheduler -> {
+            R.id.item_top_scheduler -> {
                 val intent = Intent(this,SchedulerActivity::class.java)
                 startActivity(intent)
             }
             // ----------------------------------------------------
             // "SQLite"をクリックすると、SQLite画面へ遷移
             // ----------------------------------------------------
-            R.id.menuItemSQLite -> {
-                val intent = Intent(this,SQLiteOpenHelperActivity::class.java)
+            R.id.item_top_sqlite -> {
+                val intent = Intent(this,SQLite01Activity::class.java)
                 startActivity(intent)
             }
         }

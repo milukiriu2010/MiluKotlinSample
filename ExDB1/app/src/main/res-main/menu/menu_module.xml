@@ -3,14 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menuItemTop"
+        android:id="@+id/item_top_home"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="TOP"
+        android:title="@string/ITEM_TOP_HOME"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/menuItemScheduler"
-        android:title="Schedule" />
+        android:id="@+id/item_top_scheduler"
+        android:title="@string/ITEM_TOP_SCHEDULE" />
     <item
-        android:id="@+id/menuItemSQLite"
-        android:title="SQLite" />
+        android:id="@+id/item_top_sqlite"
+        android:title="@string/ITEM_TOP_SQLITE" />
 </menu>

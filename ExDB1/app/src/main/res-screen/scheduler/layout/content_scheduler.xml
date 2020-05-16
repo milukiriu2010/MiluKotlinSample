@@ -9,7 +9,7 @@
     tools:showIn="@layout/activity_scheduler">
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/lvSQLite01"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"

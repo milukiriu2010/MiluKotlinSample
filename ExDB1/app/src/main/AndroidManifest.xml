@@ -61,7 +61,7 @@
             android:name=".scheduler.SchedulerActivity"
             android:label="@string/title_activity_scheduler"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".sqlite.SQLiteOpenHelperActivity" />
+        <activity android:name=".sqlite.SQLite01Activity" />
         <activity android:name=".scheduler.ScheduleEditActivity" />
         <activity
             android:name=".mgl01.Mgl01Activity"

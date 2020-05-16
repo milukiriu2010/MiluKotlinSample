@@ -1,7 +1,6 @@
 package milu.kiriu2010.exdb1.scheduler
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import io.realm.Realm
 import io.realm.kotlin.where
@@ -23,10 +22,10 @@ class SchedulerActivity : AppCompatActivity() {
         realm = Realm.getDefaultInstance()
         // Realmインスタンスからデータを取得するクエリを発行
         val schedules = realm.where<Schedule>().findAll()
-        listView.adapter = ScheduleAdapter(schedules)
+        lvSQLite01.adapter = ScheduleAdapter(schedules)
         
         // アイテムクリックでスケジュール詳細を表示する画面へ遷移
-        listView.setOnItemClickListener { parent, _, position, _ ->
+        lvSQLite01.setOnItemClickListener { parent, _, position, _ ->
             val schedule = parent.getItemAtPosition(position) as Schedule
             // レコードのプライマリキーを渡す
             startActivity<ScheduleEditActivity>( "schedule_id" to schedule.id )
