@@ -6,7 +6,8 @@ import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
 // --------------------------------------
-// シェーダ(ハーフトーンシェーディング)
+// シェーダ(ハーフトーンシェーディング):VBOなし
+// OpenGL ES 2.0
 // --------------------------------------
 // https://wgld.org/d/webgl/w076.html
 // --------------------------------------

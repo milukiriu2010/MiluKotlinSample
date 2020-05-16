@@ -12,6 +12,16 @@ import android.widget.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// -----------------------------------
+// emuglGLESv2_enc: device/generic/goldfish-opengl/system/GLESv2_enc/GL2Encoder.cpp:s_glVertexAttribPointer:599 GL error 0x501
+//    Info: Invalid vertex attribute index. Wanted index: 4294967295. Max index: 16
+// WV067ShaderZoomBlur:a_TextureCoord:Board00Model:1281
+// -----------------------------------
+// ズームブラーフィルタ:VBOあり
+// OpenGL ES 2.0
+// -----------------------------------
+// https://wgld.org/d/webgl/w067.html
+// -----------------------------------
 class WV067Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

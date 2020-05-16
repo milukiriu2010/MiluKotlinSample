@@ -11,6 +11,15 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ----------------------------------------
+// emuglGLESv2_enc: device/generic/goldfish-opengl/system/GLESv2_enc/GL2Encoder.cpp:s_glVertexAttribPointer:599
+// WV065ShaderGaussian:a_TexCoord:Board00Model:1281
+// ----------------------------------------
+// 後光表面化散乱:VBOあり
+// OpenGL ES 2.0
+// ----------------------------------------
+// https://wgld.org/d/webgl/w065.html
+// ----------------------------------------
 class WV065Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

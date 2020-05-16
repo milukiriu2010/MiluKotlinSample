@@ -17,7 +17,8 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // ----------------------------------------
-// 後光表面化散乱
+// シェーダ(裏面深度値レンダリング):VBOなし
+// OpenGL ES 2.0
 // ----------------------------------------
 // https://wgld.org/d/webgl/w065.html
 // ----------------------------------------

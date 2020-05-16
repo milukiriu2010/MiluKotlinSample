@@ -1,4 +1,4 @@
-package milu.kiriu2010.exdb1.opengl07.w069
+package milu.kiriu2010.exdb1.opengl06.w069
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.SeekBar
 
 import milu.kiriu2010.exdb1.R

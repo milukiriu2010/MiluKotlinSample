@@ -9,7 +9,12 @@ import milu.kiriu2010.gui.renderer.MgRenderer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
-// 半球ライティング
+// -----------------------------------------------------
+// 半球ライティング:VBOなし
+// OpenGL ES 2.0
+// -----------------------------------------------------
+// https://wgld.org/d/webgl/w062.html
+// -----------------------------------------------------
 class W063Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)
     private lateinit var modelTorus: Torus01Model

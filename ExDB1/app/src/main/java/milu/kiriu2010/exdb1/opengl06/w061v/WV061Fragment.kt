@@ -12,6 +12,20 @@ import android.widget.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ------------------------------------------------------------
+// emuglGLESv2_enc: device/generic/goldfish-opengl/system/GLESv2_enc/GL2Encoder.cpp:s_glVertexAttribPointer:599 GL error 0x501
+// WV061ShaderFog:a_Normal:Particle01Model:1281
+// ------------------------------------------------------------
+// パーティクルフォグ:VBOあり
+// OpenGL ES 2.0
+// ------------------------------------------------------------
+//   板状の四角形ポリゴンを３次元空間にたくさん配置し、
+//   これら板状のポリゴンに霧のようなテクスチャを適用して、
+//   ブレンドを有効にして半透明描画することにより、
+//   なんとなく霧っぽく見えるようにしている
+// ------------------------------------------------------------
+// https://wgld.org/d/webgl/w061.html
+// ------------------------------------------------------------
 class WV061Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

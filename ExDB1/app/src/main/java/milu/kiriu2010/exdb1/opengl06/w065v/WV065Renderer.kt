@@ -24,7 +24,8 @@ import javax.microedition.khronos.opengles.GL10
 // emuglGLESv2_enc: device/generic/goldfish-opengl/system/GLESv2_enc/GL2Encoder.cpp:s_glVertexAttribPointer:599
 // WV065ShaderGaussian:a_TexCoord:Board00Model:1281
 // ----------------------------------------
-// 後光表面化散乱
+// 後光表面化散乱:VBOあり
+// OpenGL ES 2.0
 // ----------------------------------------
 // https://wgld.org/d/webgl/w065.html
 // ----------------------------------------

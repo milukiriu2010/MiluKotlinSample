@@ -9,7 +9,8 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // --------------------------------------
-// ハーフトーンシェーディング
+// ハーフトーンシェーディング:VBOなし
+// OpenGL ES 2.0
 // --------------------------------------
 // どっとを用いて陰影を表現する
 // --------------------------------------

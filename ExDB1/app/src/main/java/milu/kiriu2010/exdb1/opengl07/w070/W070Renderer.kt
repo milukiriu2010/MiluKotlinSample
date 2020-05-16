@@ -5,8 +5,8 @@ import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.Matrix
 import android.util.Log
-import milu.kiriu2010.exdb1.opengl07.w069.W069ShaderDepth
-import milu.kiriu2010.exdb1.opengl07.w069.W069ShaderScreen
+import milu.kiriu2010.exdb1.opengl06.w069.W069ShaderDepth
+import milu.kiriu2010.exdb1.opengl06.w069.W069ShaderScreen
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.d2.Board00Model
 import milu.kiriu2010.gui.model.Torus01Model
@@ -17,7 +17,8 @@ import javax.microedition.khronos.opengles.GL10
 import kotlin.math.floor
 
 // -------------------------------------------
-// 正しい深度値を適用したシャドウマッピング
+// 正しい深度値を適用したシャドウマッピング:VBOなし
+// OpenGL ES 2.0
 // -------------------------------------------
 // w69に対して
 // 浮動小数点数テクスチャに対応

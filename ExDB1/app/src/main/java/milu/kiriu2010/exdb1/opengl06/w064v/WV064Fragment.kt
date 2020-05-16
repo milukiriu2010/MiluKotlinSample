@@ -12,6 +12,13 @@ import android.widget.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ---------------------------------------------------------------
+// リムライティング:VBOあり
+// OpenGL ES 2.0
+//   モデルの後方からライトが当たっている情報を再現する照明効果
+// ---------------------------------------------------------------
+// https://wgld.org/d/webgl/w064.html
+// ---------------------------------------------------------------
 class WV064Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

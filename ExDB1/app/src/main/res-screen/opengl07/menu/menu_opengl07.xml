@@ -16,9 +16,6 @@
         android:id="@+id/opengl_wv70"
         android:title="@string/ITEM_WV70" />
     <item
-        android:id="@+id/opengl_wv69"
-        android:title="@string/ITEM_WV69" />
-    <item
         android:id="@+id/opengl_w077"
         android:title="@string/ITEM_W077" />
     <item
@@ -33,7 +30,4 @@
     <item
         android:id="@+id/opengl_w070"
         android:title="@string/ITEM_W070" />
-    <item
-        android:id="@+id/opengl_w069"
-        android:title="@string/ITEM_W069" />
 </menu>

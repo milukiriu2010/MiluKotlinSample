@@ -1,9 +1,7 @@
 package milu.kiriu2010.exdb1.opengl07.w076
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -13,6 +11,14 @@ import android.widget.*
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// --------------------------------------
+// ハーフトーンシェーディング:VBOなし
+// OpenGL ES 2.0
+// --------------------------------------
+// どっとを用いて陰影を表現する
+// --------------------------------------
+// https://wgld.org/d/webgl/w076.html
+// --------------------------------------
 class W076Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

@@ -25,7 +25,8 @@ import kotlin.random.Random
 // emuglGLESv2_enc: device/generic/goldfish-opengl/system/GLESv2_enc/GL2Encoder.cpp:s_glVertexAttribPointer:599 GL error 0x501
 // WV061ShaderFog:a_Normal:Particle01Model:1281
 // ------------------------------------------------------------
-// パーティクルフォグ
+// パーティクルフォグ:VBOあり
+// OpenGL ES 2.0
 // ------------------------------------------------------------
 //   板状の四角形ポリゴンを３次元空間にたくさん配置し、
 //   これら板状のポリゴンに霧のようなテクスチャを適用して、

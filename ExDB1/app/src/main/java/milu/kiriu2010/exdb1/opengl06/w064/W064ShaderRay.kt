@@ -6,7 +6,8 @@ import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.shader.es20.ES20MgShader
 
 // -------------------------------------
-// シェーダ(レイをレンダリング)
+// シェーダ(レイをレンダリング):VBOなし
+// OpenGL ES 2.0
 // -------------------------------------
 // https://wgld.org/d/webgl/w064.html
 // -------------------------------------

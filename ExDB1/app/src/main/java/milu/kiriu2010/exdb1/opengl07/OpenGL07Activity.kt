@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import milu.kiriu2010.exdb1.R
-import milu.kiriu2010.exdb1.opengl07.w069.W069Fragment
-import milu.kiriu2010.exdb1.opengl07.w069v.WV069Fragment
+import milu.kiriu2010.exdb1.opengl06.w069.W069Fragment
+import milu.kiriu2010.exdb1.opengl06.w069v.WV069Fragment
 import milu.kiriu2010.exdb1.opengl07.w070.W070Fragment
 import milu.kiriu2010.exdb1.opengl07.w070v.WV070Fragment
 import milu.kiriu2010.exdb1.opengl07.w071.W071Fragment
@@ -66,96 +66,52 @@ class OpenGL07Activity : AppCompatActivity() {
                 changeFragment("w077")
                 true
             }
-            // ハーフトーンシェーディング
+            // ハーフトーンシェーディング:VBOあり
+            // OpenGL ES 2.0
             R.id.opengl_wv76 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv76") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL07, WV076Fragment.newInstance(), "wv76")
-                            .commit()
-                }
+                changeFragment("wv076")
                 true
             }
-            // ハーフトーンシェーディング
+            // ハーフトーンシェーディング:VBOなし
+            // OpenGL ES 2.0
             R.id.opengl_w076 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w076") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL07, W076Fragment.newInstance(), "w076")
-                            .commit()
-                }
+                changeFragment("w076")
                 true
             }
-            // 浮動小数点数VTF
+            // 浮動小数点数VTF:VBOあり
+            // OpenGL ES 2.0
             R.id.opengl_wv72 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv72") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL07, WV072Fragment.newInstance(), "wv72")
-                            .commit()
-                }
+                changeFragment("wv072")
                 true
             }
-            // 浮動小数点数VTF
+            // 浮動小数点数VTF:VBOなし
+            // OpenGL ES 2.0
             R.id.opengl_w072 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w072") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL07, W072Fragment.newInstance(), "w072")
-                            .commit()
-                }
+                changeFragment("w072")
                 true
             }
-            // 頂点テクスチャフェッチ
+            // 頂点テクスチャフェッチ:VBOあり
+            // OpenGL ES 2.0
             R.id.opengl_wv71 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv71") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL07, WV071Fragment.newInstance(), "wv71")
-                            .commit()
-                }
+                changeFragment("wv071")
                 true
             }
-            // 頂点テクスチャフェッチ
+            // 頂点テクスチャフェッチ:VBOなし
+            // OpenGL ES 2.0
             R.id.opengl_w071 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w071") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL07, W071Fragment.newInstance(), "w071")
-                            .commit()
-                }
+                changeFragment("w071")
                 true
             }
-            // 浮動小数点数テクスチャ
+            // 浮動小数点数テクスチャ:VBOあり
+            // OpenGL ES 2.0
             R.id.opengl_wv70 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("wv70") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL07, WV070Fragment.newInstance(), "wv70")
-                            .commit()
-                }
+                changeFragment("wv070")
                 true
             }
-            // 浮動小数点数テクスチャ
+            // 浮動小数点数テクスチャ:VBOなし
+            // OpenGL ES 2.0
             R.id.opengl_w070 -> {
-                supportFragmentManager.popBackStack()
-                if (supportFragmentManager.findFragmentByTag("w070") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flGL07, W070Fragment.newInstance(), "w070")
-                            .commit()
-                }
-                true
-            }
-            // 正しい深度値を適用したシャドウマッピング:VBOあり
-            // OpenGL ES 2.0
-            R.id.opengl_wv69 -> {
-                changeFragment("wv069")
-                true
-            }
-            // 正しい深度値を適用したシャドウマッピング:VBOなし
-            // OpenGL ES 2.0
-            R.id.opengl_w069 -> {
-                changeFragment("w069")
+                changeFragment("w070")
                 true
             }
             else -> return super.onOptionsItemSelected(item!!)
@@ -171,12 +127,30 @@ class OpenGL07Activity : AppCompatActivity() {
             // w077_ラインシェード:VBOなし
             // OpenGL ES 2.0
             "w077" -> W077Fragment.newInstance()
-            // 正しい深度値を適用したシャドウマッピング:VBOあり
+            // ハーフトーンシェーディング:VBOあり
             // OpenGL ES 2.0
-            "wv069" -> WV069Fragment.newInstance()
-            // 正しい深度値を適用したシャドウマッピング:VBOなし
+            "wv076" -> WV076Fragment.newInstance()
+            // ハーフトーンシェーディング:VBOなし
             // OpenGL ES 2.0
-            "w069" -> W069Fragment.newInstance()
+            "w076" -> W076Fragment.newInstance()
+            // 浮動小数点数VTF:VBOあり
+            // OpenGL ES 2.0
+            "wv072" -> WV072Fragment.newInstance()
+            // 浮動小数点数VTF:VBOなし
+            // OpenGL ES 2.0
+            "w072" -> W072Fragment.newInstance()
+            // 頂点テクスチャフェッチ:VBOあり
+            // OpenGL ES 2.0
+            "wv071" -> WV071Fragment.newInstance()
+            // 頂点テクスチャフェッチ:VBOなし
+            // OpenGL ES 2.0
+            "w071" -> W071Fragment.newInstance()
+            // 浮動小数点数テクスチャ:VBOあり
+            // OpenGL ES 2.0
+            "wv070" -> WV070Fragment.newInstance()
+            // 浮動小数点数テクスチャ:VBOなし
+            // OpenGL ES 2.0
+            "w070" -> W070Fragment.newInstance()
             else -> W077Fragment.newInstance()
         }
 

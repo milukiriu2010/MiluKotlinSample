@@ -14,6 +14,15 @@ import android.widget.SeekBar
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// -------------------------------------------
+// 正しい深度値を適用したシャドウマッピング:VBOなし
+// OpenGL ES 2.0
+// -------------------------------------------
+// w69に対して
+// 浮動小数点数テクスチャに対応
+// -------------------------------------------
+// https://wgld.org/d/webgl/w070.html
+// -------------------------------------------
 class W070Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

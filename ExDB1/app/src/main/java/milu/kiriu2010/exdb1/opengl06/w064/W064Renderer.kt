@@ -10,7 +10,8 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // ---------------------------------------------------------------
-// リムライティング
+// リムライティング:VBOなし
+// OpenGL ES 2.0
 //   モデルの後方からライトが当たっている情報を再現する照明効果
 // ---------------------------------------------------------------
 // https://wgld.org/d/webgl/w064.html

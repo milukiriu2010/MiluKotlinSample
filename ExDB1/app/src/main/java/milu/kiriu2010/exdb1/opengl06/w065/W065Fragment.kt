@@ -11,6 +11,12 @@ import android.view.ViewGroup
 import milu.kiriu2010.exdb1.R
 import milu.kiriu2010.gui.view.MyGLES20View
 
+// ----------------------------------------
+// シェーダ(裏面深度値レンダリング):VBOなし
+// OpenGL ES 2.0
+// ----------------------------------------
+// https://wgld.org/d/webgl/w065.html
+// ----------------------------------------
 class W065Fragment : Fragment() {
 
     private lateinit var myGLES20View: MyGLES20View

@@ -16,9 +16,10 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // -----------------------------------------
-// ゴッドレイフィルタ
+// ゴッドレイフィルタ:VBOなし
+// OpenGL ES 2.0
 // -----------------------------------------
-// // https://wgld.org/d/webgl/w068.html
+// https://wgld.org/d/webgl/w068.html
 // -----------------------------------------
 class W068Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)

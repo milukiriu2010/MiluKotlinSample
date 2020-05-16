@@ -23,9 +23,10 @@ import javax.microedition.khronos.opengles.GL10
 //    Info: Invalid vertex attribute index. Wanted index: 4294967295. Max index: 16
 // WV068ShaderZoomBlur:a_TextureCoord:Board00Model:1281
 // -----------------------------------------
-// ゴッドレイフィルタ
+// ゴッドレイフィルタ:VBOあり
+// OpenGL ES 2.0
 // -----------------------------------------
-// // https://wgld.org/d/webgl/w068.html
+// https://wgld.org/d/webgl/w068.html
 // -----------------------------------------
 class WV068Renderer(ctx: Context): MgRenderer(ctx) {
     // 描画オブジェクト(トーラス)

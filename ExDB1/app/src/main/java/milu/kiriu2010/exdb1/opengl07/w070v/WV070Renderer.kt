@@ -5,8 +5,8 @@ import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.Matrix
 import android.util.Log
-import milu.kiriu2010.exdb1.opengl07.w069v.WV069ShaderDepth
-import milu.kiriu2010.exdb1.opengl07.w069v.WV069ShaderScreen
+import milu.kiriu2010.exdb1.opengl06.w069v.WV069ShaderDepth
+import milu.kiriu2010.exdb1.opengl06.w069v.WV069ShaderScreen
 import milu.kiriu2010.gui.basic.MyGLES20Func
 import milu.kiriu2010.gui.model.d2.Board00Model
 import milu.kiriu2010.gui.model.Torus01Model
@@ -23,7 +23,8 @@ import kotlin.math.floor
 // a vertex attribute index out of boundary is detected. Skipping corresponding vertex attribute. buf=0xe7b8ec30
 // emuglGLESv2_enc: Out of bounds vertex attribute info: clientArray? 1 attribute 2 vbo 13 allocedBufferSize 64 bufferDataSpecified? 1 wantedStart 0 wantedEnd 17424
 // -------------------------------------------
-// 正しい深度値を適用したシャドウマッピング
+// 正しい深度値を適用したシャドウマッピング:VBOあり
+// OpenGL ES 2.0
 // -------------------------------------------
 // w69に対して
 // 浮動小数点数テクスチャに対応
