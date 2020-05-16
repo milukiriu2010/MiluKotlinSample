@@ -25,7 +25,7 @@ import milu.kiriu2010.exdb1.opengl05.OpenGL05Activity
 import milu.kiriu2010.exdb1.opengl06.OpenGL06Activity
 import milu.kiriu2010.exdb1.opengl07.OpenGL07Activity
 import milu.kiriu2010.exdb1.opengl08.OpenGL08Activity
-import milu.kiriu2010.exdb1.scheduler.SchedulerActivity
+import milu.kiriu2010.exdb1.realm01.Realm01Activity
 import milu.kiriu2010.exdb1.sqlite01.SQLite01Activity
 
 class MainActivity : AppCompatActivity() {
@@ -59,105 +59,90 @@ class MainActivity : AppCompatActivity() {
         }
 
         // 描画OpenGL01ページへ遷移
-        btnOpenGL01.transformationMethod = null
         btnOpenGL01.setOnClickListener {
             val intent = Intent(this, OpenGL01Activity::class.java)
             startActivity(intent)
         }
 
         // 描画OpenGL02ページへ遷移
-        btnOpenGL02.transformationMethod = null
         btnOpenGL02.setOnClickListener {
             val intent = Intent(this, OpenGL02Activity::class.java)
             startActivity(intent)
         }
 
         // 描画OpenGL03ページへ遷移
-        btnOpenGL03.transformationMethod = null
         btnOpenGL03.setOnClickListener {
             val intent = Intent(this, OpenGL03Activity::class.java)
             startActivity(intent)
         }
 
         // 描画OpenGL04ページへ遷移
-        btnOpenGL04.transformationMethod = null
         btnOpenGL04.setOnClickListener {
             val intent = Intent(this, OpenGL04Activity::class.java)
             startActivity(intent)
         }
 
         // 描画OpenGL05ページへ遷移
-        btnOpenGL05.transformationMethod = null
         btnOpenGL05.setOnClickListener {
             val intent = Intent(this, OpenGL05Activity::class.java)
             startActivity(intent)
         }
 
         // 描画OpenGL06ページへ遷移
-        btnOpenGL06.transformationMethod = null
         btnOpenGL06.setOnClickListener {
             val intent = Intent(this, OpenGL06Activity::class.java)
             startActivity(intent)
         }
 
         // 描画OpenGL07ページへ遷移
-        btnOpenGL07.transformationMethod = null
         btnOpenGL07.setOnClickListener {
             val intent = Intent(this, OpenGL07Activity::class.java)
             startActivity(intent)
         }
 
         // 描画OpenGL08ページへ遷移
-        btnOpenGL08.transformationMethod = null
         btnOpenGL08.setOnClickListener {
             val intent = Intent(this, OpenGL08Activity::class.java)
             startActivity(intent)
         }
 
         // 描画GLSL ES30x01ページへ遷移
-        btnES30x01.transformationMethod = null
         btnES30x01.setOnClickListener {
             val intent = Intent(this, ES30x01Activity::class.java)
             startActivity(intent)
         }
 
         // 描画GLSL ES30x02ページへ遷移
-        btnES30x02.transformationMethod = null
         btnES30x02.setOnClickListener {
             val intent = Intent(this, ES30x02Activity::class.java)
             startActivity(intent)
         }
 
         // 描画MGL00ページへ遷移
-        btnMGL00.transformationMethod = null
         btnMGL00.setOnClickListener {
             val intent = Intent(this, Mgl00Activity::class.java)
             startActivity(intent)
         }
 
         // 描画MGL01ページへ遷移
-        btnMGL01.transformationMethod = null
         btnMGL01.setOnClickListener {
             val intent = Intent(this, Mgl01Activity::class.java)
             startActivity(intent)
         }
 
         // 描画GLSL01ページへ遷移
-        btnOpenGLSL01.transformationMethod = null
         btnOpenGLSL01.setOnClickListener {
             val intent = Intent(this, GLSL01Activity::class.java)
             startActivity(intent)
         }
 
         // 描画GLSL02ページへ遷移
-        btnOpenGLSL02.transformationMethod = null
         btnOpenGLSL02.setOnClickListener {
             val intent = Intent(this, GLSL02Activity::class.java)
             startActivity(intent)
         }
 
         // 描画GLSL ES32x01ページへ遷移
-        btnES32x01.transformationMethod = null
         btnES32x01.setOnClickListener {
             val intent = Intent(this, ES32x01Activity::class.java)
             startActivity(intent)
@@ -180,14 +165,14 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             // ----------------------------------------------------
-            // "Scheduler"をクリックすると、スケジューラ画面へ遷移
+            // Realmの練習
             // ----------------------------------------------------
-            R.id.item_top_scheduler -> {
-                val intent = Intent(this,SchedulerActivity::class.java)
+            R.id.item_top_realm01 -> {
+                val intent = Intent(this,Realm01Activity::class.java)
                 startActivity(intent)
             }
             // ----------------------------------------------------
-            // "SQLite"をクリックすると、SQLite画面へ遷移
+            // SQLiteの練習
             // ----------------------------------------------------
             R.id.item_top_sqlite01 -> {
                 val intent = Intent(this,SQLite01Activity::class.java)

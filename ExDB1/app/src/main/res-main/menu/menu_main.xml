@@ -8,8 +8,8 @@
         android:title="@string/ITEM_TOP_HOME"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/item_top_scheduler"
-        android:title="@string/ITEM_TOP_SCHEDULE" />
+        android:id="@+id/item_top_realm01"
+        android:title="@string/ITEM_TOP_REALM01" />
     <item
         android:id="@+id/item_top_sqlite01"
         android:title="@string/ITEM_TOP_SQLITE01" />

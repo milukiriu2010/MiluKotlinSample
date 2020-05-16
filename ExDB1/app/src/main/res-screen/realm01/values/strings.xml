@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="LBL_REALM01_DATE">日付：</string>
+    <string name="LBL_REALM01_TITLE">タイトル：</string>
+    <string name="LBL_REALM01_DETAIL">詳細：</string>
+
+    <string name="BTN_REALM01_SAVE">保存</string>
+    <string name="BTN_REALM01_DELETE">削除</string>
+</resources>
