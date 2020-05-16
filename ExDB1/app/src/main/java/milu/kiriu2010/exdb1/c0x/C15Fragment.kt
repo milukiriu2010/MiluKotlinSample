@@ -10,13 +10,8 @@ import android.view.*
 
 import milu.kiriu2010.exdb1.R
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Canvas14LiquidFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class Canvas14LiquidFragment : Fragment()
+// SurfaceView上で引力を表現
+class C15Fragment : Fragment()
         , SurfaceHolder.Callback {
 
     // 描画に使うサーフェースビュー
@@ -32,14 +27,16 @@ class Canvas14LiquidFragment : Fragment()
     // 画像リスト
     private val mvLst = mutableListOf<Mover>()
 
-    // 液体
-    private val liquid = Liquid( c = 0.01f )
+    // 質量の大きい星の画像
+    private lateinit var bmpG: Bitmap
+
+    // 質量の大きい星
+    private val attract = Attractor()
 
     // タッチ中かどうか
     private var touched = false
 
     // タッチ位置のリスト
-    //private val tl = PVector()
     private var tlLst = mutableListOf<PVector>()
 
     // 画像に使うペイント
@@ -52,17 +49,11 @@ class Canvas14LiquidFragment : Fragment()
         color = Color.BLACK
         strokeWidth = 50f
     }
-    // 液体に使うペイント
-    private val paintLiquid = Paint().apply {
-        color = Color.GRAY
-        style = Paint.Style.FILL_AND_STROKE
-    }
 
     // 描画に使うハンドラ
     val handler = Handler()
     // 描画に使うスレッド
     private lateinit var runnable: Runnable
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,11 +69,11 @@ class Canvas14LiquidFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_canvas14_liquid, container, false)
+        val view = inflater.inflate(R.layout.fragment_c15, container, false)
 
 
         // サーフェースビューを取得
-        surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
+        surfaceViewCanvas = view.findViewById(R.id.svC15)
 
         surfaceViewCanvas.setOnTouchListener { _, event ->
             Log.d(javaClass.simpleName, "touch.x[${event.x}]touch.y[${event.y}]")
@@ -114,40 +105,38 @@ class Canvas14LiquidFragment : Fragment()
         val holder = surfaceViewCanvas.holder
         holder.addCallback(this)
 
+        // 質量の大きい星の画像
+        bmpG = BitmapFactory.decodeResource(resources,R.drawable.a_female)
+
+
         // 描画する画像
         bmp = BitmapFactory.decodeResource(resources,R.drawable.a_male)
 
         // 画像リスト作成
-        (1..10).reversed().forEach {
-            // 質量をランダムに変える
-            // 0.2～2.0
-            //val mover = Mover( mass = (1..10).shuffled().first()/5f )
+        (3..7).reversed().forEach {
             val mover = Mover( mass = it.toFloat()/5f )
             mvLst.add(mover)
         }
 
         // 力(重力)
-        val gravity = PVector( 0f, 5f )
+        //val gravity = PVector( 0f, 5f )
 
         // 力を加える
         mvLst.forEach {
-            it.applyForce(gravity)
+            //it.applyForce(gravity)
         }
 
         runnable = Runnable {
             mvLst.forEach {
-                // 液体の中にいた場合、
-                // 物体に加わる力を
-                // "drag+重力"を合わせて再計算
+
+                // 引力を加える
+                val force = attract.attract(it,5f,25f)
+                // 一旦加速度をクリアする
                 it.ia.set( PVector() )
-                if (it.isInside(liquid)) {
-                    //Log.d(javaClass.simpleName, "mass[{${it.mass}}]inside")
-                    it.drag(liquid)
-                }
-                it.applyForce(gravity)
+                it.applyForce(force)
 
                 // 移動
-                it.moveReflect()
+                it.moveReflect(50f, false)
             }
 
             drawCanvas()
@@ -168,16 +157,20 @@ class Canvas14LiquidFragment : Fragment()
         // バックグラウンドを描画
         canvas.drawColor(Color.WHITE)
 
-        // 液体を描画
-        canvas.drawRect(liquid.x, liquid.y, liquid.x+liquid.w, liquid.y+liquid.h, paintLiquid)
+        // 質量の大きい星を描画
+        val dstG = RectF(attract.il.x-(bmpG.width*attract.mass/2f),
+                attract.il.y-(bmpG.height*attract.mass/2f),
+                attract.il.x+(bmpG.width*attract.mass/2f),
+                attract.il.y+(bmpG.height*attract.mass/2f))
+        canvas.drawBitmap(bmpG, null, dstG, paintImage)
 
         // 画像を描画
         mvLst.forEach {
             // 元画像を質量によって大きさを変える
-            val dst = Rect(it.il.x.toInt(),
-                    it.il.y.toInt(),
-                    it.il.x.toInt()+(bmp.width*it.mass).toInt(),
-                    it.il.y.toInt()+(bmp.height*it.mass).toInt())
+            val dst = RectF(it.il.x-(bmp.width*it.mass/2f),
+                    it.il.y-(bmp.height*it.mass/2f),
+                    it.il.x+(bmp.width*it.mass/2f),
+                    it.il.y+(bmp.height*it.mass/2f))
             canvas.drawBitmap(bmp, null, dst, paintImage)
         }
 
@@ -197,11 +190,32 @@ class Canvas14LiquidFragment : Fragment()
         sw = width.toFloat()
         sh = height.toFloat()
 
+        /*
+        // 質量が大きい星の位置の初期値
+        attract.il.x = sw/2f - bmpG.width.toFloat()*attract.mass/2f
+        attract.il.y = sh/2f - bmpG.height.toFloat()*attract.mass/2f
+
         // 画像を描画する位置の初期値
         // 横：左端　縦：中央(画像の高さ分引き算)
         var i = 0f
         mvLst.forEach {
-            // 横の初期位置をずらす
+            it.il.x = bmp.width/2f + (i++)*100f
+            it.il.y = bmp.height/2f
+            // 画像の移動領域
+            it.il.x1 = -bmp.width.toFloat()*it.mass
+            it.il.x2 = sw-bmp.width.toFloat()*it.mass
+            it.il.y1 = -bmp.height.toFloat()*it.mass
+            it.il.y2 = sh-bmp.height.toFloat()*it.mass
+        }
+        */
+        // 質量が大きい星の位置の初期値
+        attract.il.x = sw/2f
+        attract.il.y = sh/2f
+
+        // 画像を描画する位置の初期値
+        // 横：左端　縦：中央(画像の高さ分引き算)
+        var i = 0f
+        mvLst.forEach {
             it.il.x = bmp.width/2f + (i++)*100f
             it.il.y = bmp.height/2f
             // 画像の移動領域
@@ -211,12 +225,6 @@ class Canvas14LiquidFragment : Fragment()
             it.il.y2 = sh-bmp.height.toFloat()*it.mass
         }
 
-        // 液体の大きさを設定する
-        // 画面下半分を液体とする
-        liquid.x = 0f
-        liquid.y = (height/2).toFloat()
-        liquid.w = width.toFloat()
-        liquid.h = (height/2).toFloat()
     }
 
     // SurfaceHolder.Callback
@@ -227,18 +235,10 @@ class Canvas14LiquidFragment : Fragment()
     override fun surfaceCreated(holder: SurfaceHolder?) {
     }
 
-
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment Canvas14LiquidFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                Canvas14LiquidFragment().apply {
+                C15Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

@@ -1,7 +1,9 @@
 package milu.kiriu2010.exdb1.c0x
 
 
-import android.graphics.*
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Path
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -14,14 +16,9 @@ import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CanvasHomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class CanvasHomeFragment : Fragment()
-    , SurfaceHolder.Callback {
+// SurfaceView上で"多角形"を描画
+class C04Fragment : Fragment()
+        , SurfaceHolder.Callback {
 
     // 描画に使うサーフェースビュー
     private lateinit var surfaceViewCanvas: SurfaceView
@@ -71,23 +68,18 @@ class CanvasHomeFragment : Fragment()
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        //handler.removeCallbacks(runnable)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_canvas_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_c04, container, false)
 
         // サーフェースビューを取得
-        surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
+        surfaceViewCanvas = view.findViewById(R.id.svC04)
 
         val holder = surfaceViewCanvas.holder
         holder.addCallback(this)
 
-        seekBar = view.findViewById<SeekBar>(R.id.seekBar)
+        seekBar = view.findViewById<SeekBar>(R.id.sbC04)
         seekBar.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 changeSides(progress)
@@ -159,7 +151,7 @@ class CanvasHomeFragment : Fragment()
     companion object {
         @JvmStatic
         fun newInstance() =
-                CanvasHomeFragment().apply {
+                C04Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

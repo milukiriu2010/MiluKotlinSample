@@ -13,13 +13,8 @@ import android.view.*
 
 import milu.kiriu2010.exdb1.R
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Canvas11AccelTouchMultiFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class Canvas11AccelTouchMultiFragment : Fragment()
+// SurfaceView上でタッチ方向加速
+class C10Fragment : Fragment()
         , SurfaceHolder.Callback {
 
     // 描画に使うサーフェースビュー
@@ -31,8 +26,17 @@ class Canvas11AccelTouchMultiFragment : Fragment()
 
     // 描画する画像
     private lateinit var bmp: Bitmap
-    // 画像リスト
-    private val mvLst = mutableListOf<Mover>()
+
+    // 画像を描画する位置
+    private val il = PVector()
+
+    // 画像の移動速度
+    //private val iv = PVector(10f,1f)
+    private val iv = PVector()
+
+    // 画像の移動加速度
+    //private val ia = PVector(0.3f,0.1f)
+    private val ia = PVector()
 
     // タッチ中かどうか
     private var touched = false
@@ -71,11 +75,11 @@ class Canvas11AccelTouchMultiFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_canvas11_accel_touch_multi, container, false)
+        val view = inflater.inflate(R.layout.fragment_c10, container, false)
 
 
         // サーフェースビューを取得
-        surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
+        surfaceViewCanvas = view.findViewById(R.id.svC10)
 
         surfaceViewCanvas.setOnTouchListener { _, event ->
             Log.d(javaClass.simpleName, "touch.x[${event.x}]touch.y[${event.y}]")
@@ -110,21 +114,39 @@ class Canvas11AccelTouchMultiFragment : Fragment()
         // 描画する画像
         bmp = BitmapFactory.decodeResource(resources,R.drawable.a_male)
 
-        // 画像リスト作成
-        (0..20).forEach { mvLst.add(Mover()) }
-
         runnable = Runnable {
-            mvLst.forEach {
+            // 画面タッチされていないときは
+            // 加速度をランダムに決定
+            if ( touched == false ) {
+                val ta = PVector().random2D()
+                // random2Dは単位ベクトル化されているので倍数計算する
+                ta.mult((0..10).shuffled().first().toFloat() )
+                ia.set(ta)
+            }
+            // 画面タッチしているときは
+            // 現在位置とタッチ位置を元に加速度を決定
+            else {
                 // 画面タッチ位置
-                val tl = if (tlLst.size > 0 ) {
-                    tlLst[tlLst.size-1]
-                }
-                else {
-                    PVector()
-                }
-                it.moveBallon( touched, tl)
+                val tl = tlLst[tlLst.size-1]
+                // 次の加速度
+                val dir = PVector().set(tl)
+                // "画面タッチ位置"－"現在位置"
+                dir.sub(il)
+                // 単位ベクトル化
+                dir.normalize()
+                // スケール
+                //dir.mult((0..10).shuffled().first().toFloat())
+                dir.mult(5f)
+                ia.set(dir)
             }
 
+            // 速度に加速度を加算する
+            // 速度にリミットを設けている
+            iv.add(ia,20f)
+            // 移動
+            il.add(iv)
+            // 右端調整
+            il.checkEdge()
             drawCanvas()
             handler.postDelayed( runnable, 50)
         }
@@ -132,6 +154,7 @@ class Canvas11AccelTouchMultiFragment : Fragment()
 
         return view
     }
+
 
     // 描画
     private fun drawCanvas() {
@@ -143,9 +166,7 @@ class Canvas11AccelTouchMultiFragment : Fragment()
         canvas.drawColor(Color.WHITE)
 
         // 画像を描画
-        mvLst.forEach {
-            canvas.drawBitmap(bmp, it.il.x, it.il.y, paintImage)
-        }
+        canvas.drawBitmap(bmp, il.x, il.y, paintImage)
 
         // タッチ箇所を描画
         tlLst.forEach {
@@ -165,15 +186,13 @@ class Canvas11AccelTouchMultiFragment : Fragment()
 
         // 画像を描画する位置の初期値
         // 横：左端　縦：中央(画像の高さ分引き算)
-        mvLst.forEach {
-            it.il.x = sw/2 - bmp.width/2
-            it.il.y = sh/2 - bmp.height/2
-            // 画像の移動領域
-            it.il.x1 = -bmp.width.toFloat()
-            it.il.x2 = sw
-            it.il.y1 = -bmp.height.toFloat()
-            it.il.y2 = sh
-        }
+        il.x = sw/2 - bmp.width/2
+        il.y = sh/2 - bmp.height/2
+        // 画像の移動領域
+        il.x1 = -bmp.width.toFloat()
+        il.x2 = sw
+        il.y1 = -bmp.height.toFloat()
+        il.y2 = sh
     }
 
     // SurfaceHolder.Callback
@@ -189,12 +208,12 @@ class Canvas11AccelTouchMultiFragment : Fragment()
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment Canvas11AccelTouchMultiFragment.
+         * @return A new instance of fragment Canvas10AccelTouchFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                Canvas11AccelTouchMultiFragment().apply {
+                C10Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

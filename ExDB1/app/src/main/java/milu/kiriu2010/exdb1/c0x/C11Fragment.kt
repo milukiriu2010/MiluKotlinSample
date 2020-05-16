@@ -1,7 +1,10 @@
 package milu.kiriu2010.exdb1.c0x
 
 
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.Paint
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -10,14 +13,10 @@ import android.view.*
 
 import milu.kiriu2010.exdb1.R
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Canvas12ForceFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class Canvas12ForceFragment : Fragment()
+// SurfaceView上でタッチ方向加速(複数)
+class C11Fragment : Fragment()
         , SurfaceHolder.Callback {
+
     // 描画に使うサーフェースビュー
     private lateinit var surfaceViewCanvas: SurfaceView
 
@@ -27,7 +26,6 @@ class Canvas12ForceFragment : Fragment()
 
     // 描画する画像
     private lateinit var bmp: Bitmap
-
     // 画像リスト
     private val mvLst = mutableListOf<Mover>()
 
@@ -68,10 +66,11 @@ class Canvas12ForceFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_canvas12_force, container, false)
+        val view = inflater.inflate(R.layout.fragment_c11, container, false)
+
 
         // サーフェースビューを取得
-        surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
+        surfaceViewCanvas = view.findViewById(R.id.svC11)
 
         surfaceViewCanvas.setOnTouchListener { _, event ->
             Log.d(javaClass.simpleName, "touch.x[${event.x}]touch.y[${event.y}]")
@@ -107,29 +106,18 @@ class Canvas12ForceFragment : Fragment()
         bmp = BitmapFactory.decodeResource(resources,R.drawable.a_male)
 
         // 画像リスト作成
-        (1..15).reversed().forEach {
-            // 質量をランダムに変える
-            // 0.2～2.0
-            //val mover = Mover( mass = (1..10).shuffled().first()/5f )
-            val mover = Mover( mass = it.toFloat()/5f )
-            mvLst.add(mover)
-        }
-
-        // 力(風)
-        val wind = PVector(1f, 0f)
-        // 力(重力)
-        val gravity = PVector( 0f, 5f )
-
-        // 力を加える
-        mvLst.forEach {
-            it.applyForce(wind)
-            it.applyForce(gravity)
-        }
+        (0..20).forEach { mvLst.add(Mover()) }
 
         runnable = Runnable {
             mvLst.forEach {
-                // 移動
-                it.moveReflect()
+                // 画面タッチ位置
+                val tl = if (tlLst.size > 0 ) {
+                    tlLst[tlLst.size-1]
+                }
+                else {
+                    PVector()
+                }
+                it.moveBallon( touched, tl)
             }
 
             drawCanvas()
@@ -139,7 +127,6 @@ class Canvas12ForceFragment : Fragment()
 
         return view
     }
-
 
     // 描画
     private fun drawCanvas() {
@@ -152,18 +139,7 @@ class Canvas12ForceFragment : Fragment()
 
         // 画像を描画
         mvLst.forEach {
-            // 元画像の大きさ
-            //val src = Rect(it.il.x.toInt(),
-            //        it.il.y.toInt(),
-            //        it.il.x.toInt()+bmp.width,
-            //        it.il.y.toInt()+bmp.height)
-
-            // 元画像を質量によって大きさを変える
-            val dst = Rect(it.il.x.toInt(),
-                    it.il.y.toInt(),
-                    it.il.x.toInt()+(bmp.width*it.mass).toInt(),
-                    it.il.y.toInt()+(bmp.height*it.mass).toInt())
-            canvas.drawBitmap(bmp, null, dst, paintImage)
+            canvas.drawBitmap(bmp, it.il.x, it.il.y, paintImage)
         }
 
         // タッチ箇所を描画
@@ -185,15 +161,13 @@ class Canvas12ForceFragment : Fragment()
         // 画像を描画する位置の初期値
         // 横：左端　縦：中央(画像の高さ分引き算)
         mvLst.forEach {
-            //it.il.x = sw/2 - bmp.width/2
-            //it.il.y = sh/2 - bmp.height/2
-            it.il.x = bmp.width/2f
-            it.il.y = bmp.height/2f
+            it.il.x = sw/2 - bmp.width/2
+            it.il.y = sh/2 - bmp.height/2
             // 画像の移動領域
-            it.il.x1 = -bmp.width.toFloat()*it.mass
-            it.il.x2 = sw-bmp.width.toFloat()*it.mass
-            it.il.y1 = -bmp.height.toFloat()*it.mass
-            it.il.y2 = sh-bmp.height.toFloat()*it.mass
+            it.il.x1 = -bmp.width.toFloat()
+            it.il.x2 = sw
+            it.il.y1 = -bmp.height.toFloat()
+            it.il.y2 = sh
         }
     }
 
@@ -206,16 +180,9 @@ class Canvas12ForceFragment : Fragment()
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment Canvas12ForceFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                Canvas12ForceFragment().apply {
+                C11Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

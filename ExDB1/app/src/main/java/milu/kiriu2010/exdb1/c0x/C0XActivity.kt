@@ -5,6 +5,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_c0x.*
 import milu.kiriu2010.exdb1.R
 
@@ -13,23 +14,15 @@ class C0XActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                changeFragment("Home")
+                changeFragment("c01")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                if (supportFragmentManager.findFragmentByTag("Dashboard") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flC0X, CanvasDashboardFragment.newInstance(), "Dashboard")
-                            .commit()
-                }
+                changeFragment("c02")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                if (supportFragmentManager.findFragmentByTag("Notification") == null) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flC0X, CanvasNotificationFragment.newInstance(), "Notification")
-                            .commit()
-                }
+                changeFragment("c03")
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -66,94 +59,54 @@ class C0XActivity : AppCompatActivity() {
                 finish()
                 true
             }
-        // 引力
-            R.id.canvas_15_attract -> {
-                if ( supportFragmentManager.findFragmentByTag("Canvas15Attract") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flC0X, Canvas15AttractFragment.newInstance(), "Canvas15Attract")
-                            .commit()
-                }
+            // SurfaceView上で引力を表現
+            R.id.item_c15 -> {
+                changeFragment("c15")
                 true
             }
-        // 液体
-            R.id.canvas_14_liquid -> {
-                if ( supportFragmentManager.findFragmentByTag("Canvas14Liquid") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flC0X, Canvas14LiquidFragment.newInstance(), "Canvas14Liquid")
-                            .commit()
-                }
+            // SurfaceView上で液体を表現
+            R.id.item_c14 -> {
+                changeFragment("c14")
                 true
             }
-        // 摩擦
-            R.id.canvas_13_friction -> {
-                if ( supportFragmentManager.findFragmentByTag("Canvas13Friction") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flC0X, Canvas13FrictionFragment.newInstance(), "Canvas13Friction")
-                            .commit()
-                }
+            // SurfaceView上で摩擦を表現
+            R.id.item_c13 -> {
+                changeFragment("c13")
                 true
             }
-        // 力
-            R.id.canvas_12_force -> {
-                if ( supportFragmentManager.findFragmentByTag("Canvas12Force") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flC0X, Canvas12ForceFragment.newInstance(), "Canvas12Force")
-                            .commit()
-                }
+            // SurfaceView上で力を表現
+            R.id.item_c12 -> {
+                changeFragment("c12")
                 true
             }
-        // タッチ方向加速(複数)
-            R.id.canvas_11_accel_touch_multi -> {
-                if ( supportFragmentManager.findFragmentByTag("Canvas11AccelTouchMulti") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flC0X, Canvas11AccelTouchMultiFragment.newInstance(), "Canvas11AccelTouchMulti")
-                            .commit()
-                }
+            // SurfaceView上でタッチ方向加速(複数)
+            R.id.item_c11 -> {
+                changeFragment("c11")
                 true
             }
-        // タッチ方向加速
-            R.id.canvas_10_accel_touch -> {
-                if ( supportFragmentManager.findFragmentByTag("Canvas10AccelTouch") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flC0X, Canvas10AccelTouchFragment.newInstance(), "Canvas10AccelTouch")
-                            .commit()
-                }
+            // SurfaceView上でタッチ方向加速
+            R.id.item_c10 -> {
+                changeFragment("c10")
                 true
             }
-        // バルーン
-            R.id.canvas_09_baloon -> {
-                if ( supportFragmentManager.findFragmentByTag("Canvas09Balloon") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flC0X, Canvas09BalloonFragment.newInstance(), "Canvas09Ballon")
-                            .commit()
-                }
+            // SurfaceView上でバルーンを描画
+            R.id.item_c09 -> {
+                changeFragment("c09")
                 true
             }
-        // "多角形"
-            R.id.canvas_04_polygon -> {
-                if ( supportFragmentManager.findFragmentByTag("Canvas04Polygon") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flC0X, Canvas04PolygonFragment.newInstance(), "Canvas04Polygon")
-                            .commit()
-                }
+            // SurfaceView上で"多角形"を描画
+            R.id.item_c04 -> {
+                changeFragment("c04")
                 true
             }
-        // "画像(シェーダ)"
-            R.id.canvas_03_bmp_shader -> {
-                if ( supportFragmentManager.findFragmentByTag("Canvas03BmpShader") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flC0X, Canvas03BmpShaderFragment.newInstance(), "Canvas03BmpShader")
-                            .commit()
-                }
+            // SurfaceView上で"画像(シェーダ)"
+            R.id.item_c03 -> {
+                changeFragment("c03")
                 true
             }
-        // "回転(Y軸)"
-            R.id.canvas_02_rotatey -> {
-                if ( supportFragmentManager.findFragmentByTag("Canvas02RotateY") == null ) {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.flC0X, Canvas02RotateYFragment.newInstance(), "Canvas02RotateY")
-                            .commit()
-                }
+            // SurfaceView上で画像を"回転(Y軸)"
+            R.id.item_c02 -> {
+                changeFragment("c02")
                 true
             }
             // SurfaceView上で画像を"左⇒右"へ移動する
@@ -167,11 +120,29 @@ class C0XActivity : AppCompatActivity() {
 
     // 表示するフラグメントを切り替える
     private fun changeFragment(tag: String) {
-        val fragment = when (tag) {
+        val fragment: Fragment = when (tag) {
+            // SurfaceView上で引力を表現
+            "c15" -> C15Fragment.newInstance()
+            // SurfaceView上で液体を表現
+            "c14" -> C14Fragment.newInstance()
+            // SurfaceView上で摩擦を表現
+            "c13" -> C13Fragment.newInstance()
+            // SurfaceView上で力を表現
+            "c12" -> C12Fragment.newInstance()
+            // SurfaceView上でタッチ方向加速(複数)
+            "c11" -> C11Fragment.newInstance()
+            // SurfaceView上でタッチ方向加速
+            "c10" -> C10Fragment.newInstance()
+            // SurfaceView上でバルーンを描画
+            "c09" -> C09Fragment.newInstance()
+            // SurfaceView上で"多角形"を描画
+            "c04" -> C04Fragment.newInstance()
+            // SurfaceView上で"画像(シェーダ)"
+            "c03" -> C03Fragment.newInstance()
+            // SurfaceView上で画像を"回転(Y軸)"
+            "c02" -> C02Fragment.newInstance()
             // SurfaceView上で画像を"左⇒右"へ移動する
             "c01" -> C01Fragment.newInstance()
-            // SurfaceView上で画像を"左⇒右"へ移動する
-            "Home" -> C01Fragment.newInstance()
             // SurfaceView上で画像を"左⇒右"へ移動する
             else -> C01Fragment.newInstance()
         }

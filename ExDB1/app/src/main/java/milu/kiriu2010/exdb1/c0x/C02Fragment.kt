@@ -10,13 +10,8 @@ import android.view.*
 
 import milu.kiriu2010.exdb1.R
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Canvas02RotateYFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class Canvas02RotateYFragment : Fragment()
+// SurfaceView上で画像を"回転(Y軸)"
+class C02Fragment : Fragment()
         , SurfaceHolder.Callback {
     // 描画に使うサーフェースビュー
     private lateinit var surfaceViewCanvas: SurfaceView
@@ -56,10 +51,10 @@ class Canvas02RotateYFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_canvas02_rotate_y, container, false)
+        val view = inflater.inflate(R.layout.fragment_c02, container, false)
 
         // サーフェースビューを取得
-        surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
+        surfaceViewCanvas = view.findViewById(R.id.svC02)
 
         val holder = surfaceViewCanvas.holder
         holder.addCallback(this)
@@ -178,16 +173,9 @@ class Canvas02RotateYFragment : Fragment()
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment Canvas02RotateYFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                Canvas02RotateYFragment().apply {
+                C02Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

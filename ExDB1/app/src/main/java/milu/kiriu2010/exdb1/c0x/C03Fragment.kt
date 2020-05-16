@@ -10,13 +10,9 @@ import android.widget.ImageButton
 
 import milu.kiriu2010.exdb1.R
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Canvas03BmpShaderFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class Canvas03BmpShaderFragment : Fragment()
+// SurfaceView上で"画像(シェーダ)"
+//  画像をペンとして用いる
+class C03Fragment : Fragment()
         , SurfaceHolder.Callback {
 
 
@@ -57,10 +53,10 @@ class Canvas03BmpShaderFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_canvas03_bmp_shader, container, false)
+        val view = inflater.inflate(R.layout.fragment_c03, container, false)
 
         // サーフェースビューを取得
-        surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
+        surfaceViewCanvas = view.findViewById(R.id.svC03)
         surfaceViewCanvas.setOnTouchListener ret@ { _, event ->
 
             when (event.action) {
@@ -90,13 +86,13 @@ class Canvas03BmpShaderFragment : Fragment()
         val holder = surfaceViewCanvas.holder
         holder.addCallback(this)
 
-        val imageButtonR = view.findViewById<ImageButton>(R.id.imageButtonR)
+        val imageButtonR = view.findViewById<ImageButton>(R.id.ibC03Red)
         imageButtonR.setOnClickListener { changeDrawPaint( R.drawable.ic_b01e_red ) }
-        val imageButtonG = view.findViewById<ImageButton>(R.id.imageButtonG)
+        val imageButtonG = view.findViewById<ImageButton>(R.id.ibC03Green)
         imageButtonG.setOnClickListener { changeDrawPaint( R.drawable.ic_b01e_green ) }
-        val imageButtonB = view.findViewById<ImageButton>(R.id.imageButtonB)
+        val imageButtonB = view.findViewById<ImageButton>(R.id.ibC03Blue)
         imageButtonB.setOnClickListener { changeDrawPaint( R.drawable.ic_b01e_blue ) }
-        val imageButtonC = view.findViewById<ImageButton>(R.id.imageButtonC)
+        val imageButtonC = view.findViewById<ImageButton>(R.id.ibC03Black)
         imageButtonC.setOnClickListener {
             drawPaint.apply {
                 color = Color.BLACK
@@ -161,16 +157,9 @@ class Canvas03BmpShaderFragment : Fragment()
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment Canvas03BmpShaderFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                Canvas03BmpShaderFragment().apply {
+                C03Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

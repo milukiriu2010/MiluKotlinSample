@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="ITEM_C01">左⇒右</string>
+    <string name="ITEM_C02">回転(Y軸)</string>
+    <string name="ITEM_C03">画像(シェーダ)</string>
+    <string name="ITEM_C04">多角形</string>
+    <string name="ITEM_C09">バルーン</string>
+    <string name="ITEM_C10">タッチ方向加速</string>
+    <string name="ITEM_C11">タッチ方向加速(複数)</string>
+    <string name="ITEM_C12">力</string>
+    <string name="ITEM_C13">摩擦</string>
+    <string name="ITEM_C14">液体</string>
+    <string name="ITEM_C15">引力</string>
+
+    <string name="IB_C03_RED">Red</string>
+    <string name="IB_C03_GREEN">Green</string>
+    <string name="IB_C03_BLUE">Blue</string>
+    <string name="IB_C03_BLACK">Black</string>
 </resources>

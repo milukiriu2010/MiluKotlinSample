@@ -10,13 +10,8 @@ import android.view.*
 
 import milu.kiriu2010.exdb1.R
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Canvas15AttractFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class Canvas15AttractFragment : Fragment()
+// SurfaceView上で摩擦を表現
+class C13Fragment : Fragment()
         , SurfaceHolder.Callback {
 
     // 描画に使うサーフェースビュー
@@ -32,16 +27,11 @@ class Canvas15AttractFragment : Fragment()
     // 画像リスト
     private val mvLst = mutableListOf<Mover>()
 
-    // 質量の大きい星の画像
-    private lateinit var bmpG: Bitmap
-
-    // 質量の大きい星
-    private val attract = Attractor()
-
     // タッチ中かどうか
     private var touched = false
 
     // タッチ位置のリスト
+    //private val tl = PVector()
     private var tlLst = mutableListOf<PVector>()
 
     // 画像に使うペイント
@@ -59,7 +49,6 @@ class Canvas15AttractFragment : Fragment()
     val handler = Handler()
     // 描画に使うスレッド
     private lateinit var runnable: Runnable
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -74,11 +63,11 @@ class Canvas15AttractFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_canvas15_attract, container, false)
+        val view = inflater.inflate(R.layout.fragment_c13, container, false)
 
 
         // サーフェースビューを取得
-        surfaceViewCanvas = view.findViewById(R.id.surfaceViewCanvas)
+        surfaceViewCanvas = view.findViewById(R.id.svC13)
 
         surfaceViewCanvas.setOnTouchListener { _, event ->
             Log.d(javaClass.simpleName, "touch.x[${event.x}]touch.y[${event.y}]")
@@ -110,38 +99,51 @@ class Canvas15AttractFragment : Fragment()
         val holder = surfaceViewCanvas.holder
         holder.addCallback(this)
 
-        // 質量の大きい星の画像
-        bmpG = BitmapFactory.decodeResource(resources,R.drawable.a_female)
-
-
         // 描画する画像
         bmp = BitmapFactory.decodeResource(resources,R.drawable.a_male)
 
         // 画像リスト作成
-        (3..7).reversed().forEach {
+        (1..15).reversed().forEach {
+            // 質量をランダムに変える
+            // 0.2～2.0
+            //val mover = Mover( mass = (1..10).shuffled().first()/5f )
             val mover = Mover( mass = it.toFloat()/5f )
             mvLst.add(mover)
         }
 
+        // 力(風)
+        val wind = PVector(1f, 0f)
         // 力(重力)
-        //val gravity = PVector( 0f, 5f )
+        val gravity = PVector( 0f, 5f )
+        // 摩擦係数
+        val c = 0.5f
+        //val c = 0.1f
+        //val c = 0.8f
+        //val c = 0.05f
+        //val c = 0.01f
+        // 力(摩擦)
+        //var friction = PVector( 0.2f, 1f )
 
         // 力を加える
         mvLst.forEach {
-            //it.applyForce(gravity)
+            it.applyForce(wind)
+            it.applyForce(gravity)
         }
 
         runnable = Runnable {
             mvLst.forEach {
+                // 力(摩擦)
+                val fric = PVector().set( it.iv )
+                fric.mult(-1f)
+                fric.normalize()
+                fric.mult(c)
 
-                // 引力を加える
-                val force = attract.attract(it,5f,25f)
-                // 一旦加速度をクリアする
-                it.ia.set( PVector() )
-                it.applyForce(force)
+                it.ia.set( fric )
+                it.applyForce(wind)
+                it.applyForce(gravity)
 
                 // 移動
-                it.moveReflect(50f, false)
+                it.moveReflect()
             }
 
             drawCanvas()
@@ -153,6 +155,7 @@ class Canvas15AttractFragment : Fragment()
         return view
     }
 
+
     // 描画
     private fun drawCanvas() {
         val canvas = surfaceViewCanvas.holder.lockCanvas()
@@ -162,20 +165,19 @@ class Canvas15AttractFragment : Fragment()
         // バックグラウンドを描画
         canvas.drawColor(Color.WHITE)
 
-        // 質量の大きい星を描画
-        val dstG = RectF(attract.il.x-(bmpG.width*attract.mass/2f),
-                attract.il.y-(bmpG.height*attract.mass/2f),
-                attract.il.x+(bmpG.width*attract.mass/2f),
-                attract.il.y+(bmpG.height*attract.mass/2f))
-        canvas.drawBitmap(bmpG, null, dstG, paintImage)
-
         // 画像を描画
         mvLst.forEach {
+            // 元画像の大きさ
+            //val src = Rect(it.il.x.toInt(),
+            //        it.il.y.toInt(),
+            //        it.il.x.toInt()+bmp.width,
+            //        it.il.y.toInt()+bmp.height)
+
             // 元画像を質量によって大きさを変える
-            val dst = RectF(it.il.x-(bmp.width*it.mass/2f),
-                    it.il.y-(bmp.height*it.mass/2f),
-                    it.il.x+(bmp.width*it.mass/2f),
-                    it.il.y+(bmp.height*it.mass/2f))
+            val dst = Rect(it.il.x.toInt(),
+                    it.il.y.toInt(),
+                    it.il.x.toInt()+(bmp.width*it.mass).toInt(),
+                    it.il.y.toInt()+(bmp.height*it.mass).toInt())
             canvas.drawBitmap(bmp, null, dst, paintImage)
         }
 
@@ -195,16 +197,10 @@ class Canvas15AttractFragment : Fragment()
         sw = width.toFloat()
         sh = height.toFloat()
 
-        /*
-        // 質量が大きい星の位置の初期値
-        attract.il.x = sw/2f - bmpG.width.toFloat()*attract.mass/2f
-        attract.il.y = sh/2f - bmpG.height.toFloat()*attract.mass/2f
-
         // 画像を描画する位置の初期値
         // 横：左端　縦：中央(画像の高さ分引き算)
-        var i = 0f
         mvLst.forEach {
-            it.il.x = bmp.width/2f + (i++)*100f
+            it.il.x = bmp.width/2f
             it.il.y = bmp.height/2f
             // 画像の移動領域
             it.il.x1 = -bmp.width.toFloat()*it.mass
@@ -212,24 +208,6 @@ class Canvas15AttractFragment : Fragment()
             it.il.y1 = -bmp.height.toFloat()*it.mass
             it.il.y2 = sh-bmp.height.toFloat()*it.mass
         }
-        */
-        // 質量が大きい星の位置の初期値
-        attract.il.x = sw/2f
-        attract.il.y = sh/2f
-
-        // 画像を描画する位置の初期値
-        // 横：左端　縦：中央(画像の高さ分引き算)
-        var i = 0f
-        mvLst.forEach {
-            it.il.x = bmp.width/2f + (i++)*100f
-            it.il.y = bmp.height/2f
-            // 画像の移動領域
-            it.il.x1 = -bmp.width.toFloat()*it.mass
-            it.il.x2 = sw-bmp.width.toFloat()*it.mass
-            it.il.y1 = -bmp.height.toFloat()*it.mass
-            it.il.y2 = sh-bmp.height.toFloat()*it.mass
-        }
-
     }
 
     // SurfaceHolder.Callback
@@ -241,16 +219,9 @@ class Canvas15AttractFragment : Fragment()
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment Canvas15AttractFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-                Canvas15AttractFragment().apply {
+                C13Fragment().apply {
                     arguments = Bundle().apply {
                     }
                 }

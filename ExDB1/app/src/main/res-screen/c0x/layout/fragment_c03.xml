@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <SurfaceView
+        android:id="@+id/svC03"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/ibC03Red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ibC03Red"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/IB_C03_RED"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ibC03Green"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_b01e_red" />
+
+    <ImageButton
+        android:id="@+id/ibC03Green"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/IB_C03_GREEN"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/ibC03Red"
+        app:layout_constraintEnd_toStartOf="@+id/ibC03Blue"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ibC03Red"
+        app:layout_constraintTop_toTopOf="@+id/ibC03Red"
+        app:srcCompat="@drawable/ic_b01e_green" />
+
+    <ImageButton
+        android:id="@+id/ibC03Blue"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/IB_C03_BLUE"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/ibC03Green"
+        app:layout_constraintEnd_toStartOf="@+id/ibC03Black"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ibC03Green"
+        app:layout_constraintTop_toTopOf="@+id/ibC03Green"
+        app:srcCompat="@drawable/ic_b01e_blue" />
+
+    <ImageButton
+        android:id="@+id/ibC03Black"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/IB_C03_BLACK"
+        app:layout_constraintBottom_toBottomOf="@+id/ibC03Blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ibC03Blue"
+        app:layout_constraintTop_toTopOf="@+id/ibC03Blue"
+        app:srcCompat="@android:color/black" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
