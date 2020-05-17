@@ -5,7 +5,8 @@
 
     <string name="BTN_A00A">Get(Async)</string>
     <string name="BTN_A00B">Get(NoSync)</string>
-    <string name="BTN_A00C">Clear</string>
+    <string name="BTN_A00C">Clear:XML</string>
+    <string name="BTN_A00D">Clear:Pref</string>
 
     <string name="BTN_A01">BROWSE</string>
 
@@ -15,6 +16,7 @@
     <string name="TITLE_A02">HTTP</string>
 
     <string name="BTN_A03">TimeZone(ListView)</string>
+    <string name="ET_A03">Search Timezone</string>
 
     <string name="BTN_A04">Alarm</string>
     <string name="BTN_A04A">Set Alarm</string>

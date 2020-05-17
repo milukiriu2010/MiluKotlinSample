@@ -7,7 +7,8 @@
 
     <string name="BTN_A00A">取得(Async)</string>
     <string name="BTN_A00B">取得(NoSync)</string>
-    <string name="BTN_A00C">クリア</string>
+    <string name="BTN_A00C">クリア:XML</string>
+    <string name="BTN_A00D">クリア:Pref</string>
 
     <string name="BTN_A01">ブラウズ</string>
 
@@ -17,6 +18,7 @@
     <string name="TITLE_A02">HTTP</string>
 
     <string name="BTN_A03">TimeZone(ListView)</string>
+    <string name="ET_A03">タイムゾーンを検索</string>
 
     <string name="BTN_A04">アラーム</string>
     <string name="BTN_A04A">アラームをセットする</string>

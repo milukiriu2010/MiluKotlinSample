@@ -1,5 +1,7 @@
 package milu.kiriu2010.excon1.a00
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -21,8 +23,6 @@ class A00Activity : AppCompatActivity() {
         // 前のアクティビティから渡されたデータを表示する
         val str = intent.getStringExtra("a00") ?: "<NULL>"
         tvA00A.text = str
-        Toast.makeText(this, str, Toast.LENGTH_LONG )
-        Log.d("bXXXXXXXXXXXX:", str )
 
         // データをバックグラウンドで取得する
         btnA00A.setOnClickListener{
@@ -36,19 +36,28 @@ class A00Activity : AppCompatActivity() {
 
         // データを取得する
         btnA00B.setOnClickListener{
-            if (android.os.Build.VERSION.SDK_INT > 9) {
-                val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
-                StrictMode.setThreadPolicy(policy)
-            }
+            val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+            StrictMode.setThreadPolicy(policy)
+
             val httpGet = HttpGet()
             val strGet = httpGet.doGet(URL("https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123"))
             Log.w("HttpGet:",strGet)
             tvA00C.text = strGet
         }
 
-        // データをクリアする
+        // XMLデータをクリアする
         btnA00C.setOnClickListener {
             tvA00C.text = ""
+        }
+
+        // 共有プリファレンスをクリアする
+        btnA00D.setOnClickListener {
+            val pref: SharedPreferences = getApplicationContext().getSharedPreferences(A00Const.PREF_A00.toString(), Context.MODE_PRIVATE)
+            pref.edit()
+                    .remove(A00Const.KEY_A00.toString())
+                    .apply()
+
+            tvA00A.text = ""
         }
     }
 

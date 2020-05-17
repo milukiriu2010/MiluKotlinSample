@@ -38,8 +38,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // 共有プリファレンスの値をロードし、テキストボックスに設定する
         this.setTVA00B()
 
+        // ボタンをクリックしたときのアクションを定義
         this.setAction()
     }
 
@@ -49,7 +51,6 @@ class MainActivity : AppCompatActivity() {
         val str = pref.getString( A00Const.KEY_A00.toString(), "" )
         tvA00B.setText(str)
     }
-
 
     private fun setAction() {
         // "ユーザ登録"ボタンを押下
