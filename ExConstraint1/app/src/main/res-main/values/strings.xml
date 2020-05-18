@@ -1,40 +1,7 @@
 <resources>
-    <string name="app_name">ExCon1</string>
-    <string name="BTN_A00">Add User</string>
-    <string name="TV_A00">Name</string>
-
-    <string name="BTN_A00A">Get(Async)</string>
-    <string name="BTN_A00B">Get(NoSync)</string>
-    <string name="BTN_A00C">Clear:XML</string>
-    <string name="BTN_A00D">Clear:Pref</string>
+    <string name="app_name" translatable="false">ExCon1</string>
 
     <string name="BTN_A01">BROWSE</string>
-
-    <string name="BTN_A02">HTTP</string>
-    <string name="BTN_A02A">BACK</string>
-    <string name="BTN_A02B">GET</string>
-    <string name="TITLE_A02">HTTP</string>
-
-    <string name="BTN_A03">TimeZone(ListView)</string>
-    <string name="ET_A03">Search Timezone</string>
-
-    <string name="BTN_A04">Alarm</string>
-    <string name="BTN_A04A">Set Alarm</string>
-    <string name="BTN_A04B">Cancel Alarm</string>
-    <string name="IV_A04">Alarm</string>
-
-    <string name="BTN_A05">Json</string>
-    <string name="TITLE_A05">JSON</string>
-
-    <string name="BTN_A06">Count Down</string>
-
-    <string name="BTN_A07">Clock</string>
-    <string name="BTN_A07A">Add</string>
-
-    <string name="BTN_A08">Memo</string>
-    <string name="BTN_A08A">Save</string>
-    <string name="TV_A08A">Memo</string>
-    <string name="FMT_A08">%1$tY年%1$tm月%1$td日 %1$tH時%1$tM分</string>
 
     <string name="BTN_A09">Sencer Accel</string>
 

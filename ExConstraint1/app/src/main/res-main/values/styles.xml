@@ -2,26 +2,34 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <!-- アクションバーの上の色 -->
         <item name="colorPrimary">@color/colorPrimary</item>
+        <!-- テキストの色 -->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorPrimary">@color/colorPrimary</item>
     </style>
 
+    <!-- A02:HTTPで利用 -->
+    <!-- アクションバーが表示されない -->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!-- A05:jsonで利用 -->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- A06:カウントダウンで利用 -->
     <style name="AppThemeOrange" parent="AppTheme" >
+        <!-- アクションバーの上の色 -->
         <item name="android:colorPrimary">@android:color/holo_orange_light</item>
+        <!-- テキストの色 -->
         <item name="android:colorPrimaryDark">@android:color/holo_orange_dark</item>
-        <item name="android:colorBackground">@color/background_material_light</item>
+        <!-- ビューの色 -->
+        <item name="android:colorBackground">@color/a06_background_material_light</item>
     </style>
 
     <style name="AppTheme.AppThemeSaintTropez" parent="AppTheme" >

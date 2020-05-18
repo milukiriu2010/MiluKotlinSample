@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="BTN_A02">HTTP</string>
+    <string name="BTN_A02A">戻る</string>
+    <string name="BTN_A02B">取得</string>
+    <string name="TITLE_A02">HTTP</string>
+</resources>

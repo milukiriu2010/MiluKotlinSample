@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="BTN_A02">HTTP</string>
+    <string name="BTN_A02A">BACK</string>
+    <string name="BTN_A02B">GET</string>
+    <string name="TITLE_A02">HTTP</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="BTN_A04">Alarm</string>
+    <string name="BTN_A04A">Set Alarm</string>
+    <string name="BTN_A04B">Cancel Alarm</string>
+    <string name="IV_A04">Alarm</string>
+    <string name="TV_A04B_FMT" translatable="false">%1$02d:%2$02d</string>
+</resources>

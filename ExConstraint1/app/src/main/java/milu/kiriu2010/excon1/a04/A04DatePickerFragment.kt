@@ -8,9 +8,11 @@ import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import java.util.*
 
+// 日付選択ダイアログ
 class A04DatePickerFragment: DialogFragment(),
         DatePickerDialog.OnDateSetListener {
 
+    // 呼び出し元が、このinterfaceを実装している必要がある
     interface OnDateSelectedListener {
         fun onSelected(year: Int, month: Int, date: Int)
     }
@@ -19,7 +21,7 @@ class A04DatePickerFragment: DialogFragment(),
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if ( context is OnDateSelectedListener) {
+        if ( context is OnDateSelectedListener ) {
             listener = context
         }
     }
@@ -33,6 +35,7 @@ class A04DatePickerFragment: DialogFragment(),
         return DatePickerDialog(context!!,this, year, month, date)
     }
 
+    // OKボタンを押すと呼ばれる
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         listener.onSelected(year,month,dayOfMonth)
     }

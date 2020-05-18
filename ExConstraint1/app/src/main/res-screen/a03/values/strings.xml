@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="BTN_A03">TimeZone(ListView)</string>
+    <string name="ET_A03">Search Timezone</string>
+</resources>

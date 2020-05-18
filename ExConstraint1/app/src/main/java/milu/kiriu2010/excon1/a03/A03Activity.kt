@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_a03.*
 import java.util.*
 
 // タイムゾーンの一覧をリスト表示する
+// アクションバーが白い理由が謎
 class A03Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

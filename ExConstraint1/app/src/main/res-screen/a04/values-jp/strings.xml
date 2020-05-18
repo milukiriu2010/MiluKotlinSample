@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="BTN_A04">アラーム</string>
+    <string name="BTN_A04A">アラームをセットする</string>
+    <string name="BTN_A04B">アラームを取り消す</string>
+    <string name="IV_A04">アラーム</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="BTN_A00">Add User</string>
+    <string name="TV_A00">Name</string>
+
+    <string name="BTN_A00A">Get(Async)</string>
+    <string name="BTN_A00B">Get(NoSync)</string>
+    <string name="BTN_A00C">Clear:XML</string>
+    <string name="BTN_A00D">Clear:Pref</string>
+</resources>

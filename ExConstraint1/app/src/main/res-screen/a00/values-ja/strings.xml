@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="BTN_A00">ユーザ登録</string>
+    <string name="TV_A00">名前</string>
+
+    <string name="BTN_A00A">取得(Async)</string>
+    <string name="BTN_A00B">取得(NoSync)</string>
+    <string name="BTN_A00C">クリア:XML</string>
+    <string name="BTN_A00D">クリア:Pref</string>
+</resources>

@@ -22,7 +22,8 @@ class A06Activity : AppCompatActivity() {
 
         // タイマーの残り時間が０になると、音がなる
         override fun onFinish() {
-            tvA06.text = "0:00"
+            // タイマーが切れると0:00を設定する
+            tvA06.text = resources.getString(R.string.TV_A06A_END)
             soundPool.play(soundResId,1.0f,100f,0,0,1.0f)
         }
 
@@ -30,16 +31,17 @@ class A06Activity : AppCompatActivity() {
         override fun onTick(millisUntilFinished: Long) {
             val minute = millisUntilFinished/1000L/60L
             val second = millisUntilFinished/1000L%60L
-            tvA06.text = "%1d:%2$02d".format(minute,second)
+            // M:SS形式でタイマーの残り時間を表示する
+            tvA06.text = resources.getString(R.string.TV_A06A_FMT).format(minute,second)
         }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_a06)
 
-        tvA06.text = "1:00"
+        // タイマーの初期残時間を1:00とする
+        tvA06.text = resources.getString(R.string.TV_A06A_START)
         // タイマー設定(1分)
         val timer = MyCountDownTimer(1*60*1000,100)
 
@@ -51,12 +53,19 @@ class A06Activity : AppCompatActivity() {
                     isRunning = false
                     cancel()
                     fabA06.setImageResource(R.drawable.ic_a06a)
+
+                    // オーディオ停止
+                    soundPool.stop(soundResId)
                 }
                 // タイマー開始
                 false -> timer.apply {
                     isRunning = true
                     start()
                     fabA06.setImageResource(R.drawable.ic_a06b)
+
+                    // オーディオをロードする
+                    // ボタン押す度にロードしなおさないと、次回再生されない
+                    loadAudio()
                 }
             }
         }
@@ -64,23 +73,6 @@ class A06Activity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        /*
-        soundPool =
-                if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP ) {
-                    @Suppress("DEPRECATION")
-                    SoundPool(2, AudioManager.STREAM_ALARM, 0)
-                }
-                else {
-                    val audioAttributes = AudioAttributes.Builder()
-                            .setUsage(AudioAttributes.USAGE_ALARM)
-                            .build()
-                    SoundPool.Builder()
-                            .setMaxStreams(1)
-                            .setAudioAttributes(audioAttributes)
-                            .build()
-                }
-
-         */
         // オーディオファイルをロードする
         val audioAttributes = AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ALARM)
@@ -89,6 +81,11 @@ class A06Activity : AppCompatActivity() {
                 .setMaxStreams(1)
                 .setAudioAttributes(audioAttributes)
                 .build()
+        //soundResId = soundPool.load(this, R.raw.sound_a06,1)
+    }
+
+    // オーディオをロードする
+    private fun loadAudio() {
         soundResId = soundPool.load(this, R.raw.sound_a06,1)
     }
 

@@ -21,6 +21,8 @@ import java.util.*
 // デバイすがスリープしている間は保持されるが、
 // オフになって再起動されるとクリアされる
 // -----------------------------------------
+// アクションバーが白い理由はわからない。
+// -----------------------------------------
 class A04Activity : AppCompatActivity(),
         A04AlertDialog.OnClickListener,
         A04DatePickerFragment.OnDateSelectedListener,
@@ -30,23 +32,13 @@ class A04Activity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
 
         // アラームを受信した場合に、実行される
-        //
         if ( intent?.getBooleanExtra("onReceive",false) == true ) {
-            /*
-            // スリープ中でもダイアログが表示されるようにする
-            @Suppress("DEPRECATION")
-            when {
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ->
-                    window.addFlags(FLAG_TURN_SCREEN_ON or FLAG_SHOW_WHEN_LOCKED)
-                else ->
-                    window.addFlags(FLAG_TURN_SCREEN_ON or FLAG_SHOW_WHEN_LOCKED or FLAG_DISMISS_KEYGUARD )
-            }
-             */
             // スリープ中でもダイアログが表示されるようにする
             // https://stackoverflow.com/questions/48277302/android-o-flag-show-when-locked-is-deprecated
             setShowWhenLocked(true)
             setTurnScreenOn(true)
 
+            // 警告ダイアログを表示する
             val dialog = A04AlertDialog()
             dialog.show(supportFragmentManager, "alert_dialog")
         }
@@ -99,7 +91,8 @@ class A04Activity : AppCompatActivity(),
     // アラームが鳴る時分を設定する
     // A04TimePickerFragment.OnTimeSelectedListener
     override fun onSelected(hourOfDay: Int, minute: Int) {
-        tvA04B.text = "%1$02d:%2$02d".format(hourOfDay,minute)
+        // hh:mm形式でビューに設定する
+        tvA04B.text = resources.getString(R.string.TV_A04B_FMT).format(hourOfDay,minute)
     }
 
     // "起きる"ボタンを押す
@@ -126,34 +119,20 @@ class A04Activity : AppCompatActivity(),
 
     // アラームを設定する
     private fun setAlarmManager(calendar: Calendar) {
-        val intent = Intent(this, A04BroadcastReceiver::class.java)
-        val pending = PendingIntent.getBroadcast(this,0,intent,0)
+        val intent = Intent(this, A04BroadcastReceiver::class.java )
+        val pendingIntent = PendingIntent.getBroadcast(this,0,intent,0)
         // 時刻になったら、インテントを全体に通知
         // ブロードキャストするインテントと、ブロードキャストする時間をAlarmManagerに設定する
         val am = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        am.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis,pending)
-        /*
-        when {
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP -> {
-                val info = AlarmManager.AlarmClockInfo(calendar.timeInMillis,null)
-                am.setAlarmClock(info,pending)
-            }
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT -> {
-                am.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pending)
-            }
-            else -> {
-                am.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis,pending)
-            }
-        }
-         */
+        am.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis,pendingIntent)
     }
 
     // アラームを取り消す
     private fun cancelAlarmManager() {
         val am = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent( this, A04BroadcastReceiver::class.java )
-        val pending = PendingIntent.getBroadcast(this,0,intent,0)
-        am.cancel(pending)
+        val pendingIntent = PendingIntent.getBroadcast(this,0,intent,0)
+        am.cancel(pendingIntent)
     }
 
     // 文字列を日付型に変換

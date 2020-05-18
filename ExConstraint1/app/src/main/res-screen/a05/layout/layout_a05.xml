@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="milu.kiriu2010.excon1.a05.A05Activity"
-    tools:showIn="@layout/activity_json">
+    tools:showIn="@layout/activity_a05">
 
     <TextView
         android:id="@+id/tvA05"

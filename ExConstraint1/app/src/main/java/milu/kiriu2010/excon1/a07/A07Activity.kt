@@ -10,8 +10,12 @@ import milu.kiriu2010.excon1.R
 import kotlinx.android.synthetic.main.activity_a07.*
 import java.util.*
 
+// -------------------------------------------
 // 時刻表示
 // 表示するタイムゾーンを追加しリスト表示する
+// -------------------------------------------
+// activity_a07.xmlのレンダリングがうまくいかない
+// -------------------------------------------
 class A07Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

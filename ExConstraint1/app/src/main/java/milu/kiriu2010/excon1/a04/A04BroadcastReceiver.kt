@@ -7,8 +7,6 @@ import android.content.Intent
 // ブロードキャストされたインテントを受信する
 class A04BroadcastReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        //context?.toast("アラームを受信しました")
-
         // アプリが軌道していない場合は、自動的にアプリを起動して処理を実行する
         val intent2 = Intent(context, A04Activity::class.java)
                 .putExtra("onReceive", true)

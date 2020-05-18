@@ -51,6 +51,9 @@ class A05Activity : AppCompatActivity() {
 
         val objJSON = JSONObject(sb.toString())
 
+        // jsonファイルの次の箇所を連結している
+        // colors
+        //   color
         val sbColor = StringBuffer()
         val colors = objJSON.getJSONArray("colors")
         for ( i in 0 until colors.length() ){
