@@ -3,23 +3,8 @@
     <string name="BTN_A0X">A0X</string>
     <string name="BTN_B0X">B0X</string>
 
-    <string name="BTN_A01">読上げ</string>
-    <string name="BTN_A02">StopWatch</string>
-    <string name="BTN_A02A">START</string>
-    <string name="BTN_A02B">STOP</string>
-    <string name="BTN_A02C">RESET</string>
 
-    <string name="RB_A0XA">Female</string>
-    <string name="RB_A0XB">Male</string>
-
-    <string name="TV_A01A">かーめーはーめーはーー</string>
-    <string name="TV_A01AH">読み上げるテキストを入力してください</string>
-    <string name="TV_A01B">声の高さ</string>
-    <string name="TV_A01C">読み上げ速度</string>
-
-    <string name="TV_A02">00:00:00</string>
-
-    <string name="BTN_A03">Custom Bar</string>
+    <string name="BTN_A03">Cust Bar</string>
     <string name="TV_A03">Custom ActionBar</string>
     <string name="IV_A03A">戻る</string>
     <string name="IV_A03B">進む</string>
@@ -32,7 +17,7 @@
     <string name="TV_A05B">Donald Trump</string>
     <string name="IV_A05">Web Search</string>
 
-    <string name="BTN_A06">コンテキスト</string>
+    <string name="BTN_A06">Context</string>
     <string name="IV_A06">コンテキストメニュー</string>
 
     <string name="BTN_A07">Scan</string>
@@ -94,7 +79,7 @@
     <string name="TV_A20_STEPTL">歩行数(総数)</string>
     <string name="TV_A20_ACCELL">歩行数(加速度)</string>
 
-    <string name="BTN_A21">移動/回転/透明</string>
+    <string name="BTN_A21">移/回/透</string>
     <string name="BTN_A21A_MOVE">移動</string>
     <string name="BTN_A21B_ROTATE">回転</string>
     <string name="BTN_A21C_ALPHA">透明</string>
@@ -107,7 +92,7 @@
 
     <string name="BTN_A23">近接センサ</string>
 
-    <string name="BTN_A24">傾きセンサ(加速度)</string>
+    <string name="BTN_A24">傾きセンサ</string>
 
     <string name="IV_A25">シークバーで色設定</string>
 

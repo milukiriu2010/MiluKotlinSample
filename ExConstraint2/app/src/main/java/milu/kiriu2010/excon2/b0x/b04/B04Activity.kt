@@ -81,7 +81,7 @@ class B04Activity : AppCompatActivity() {
         return super.onKeyDown(keyCode, event)
     }
 
-    fun onClickShutter(view: View) {
+    fun onClickShutter(@Suppress("UNUSED_PARAMETER")view: View) {
         mCamera2.takePicture(object : ImageReader.OnImageAvailableListener {
             override fun onImageAvailable(reader: ImageReader) {
                 // 撮れた画像をImageViewに貼り付けて表示。

@@ -8,6 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- BossActivityの背景を緑にする -->
+    <drawable name="bossback">#4400ff00</drawable>
+    <!-- style name="Theme.ChildTranslucent" parent="android:style/Theme.Translucent" -->
+    <style name="Theme.ChildTranslucent" parent="AppTheme">
+        　　<item name="android:windowBackground">@drawable/bossback</item>
+        　　<item name="android:windowNoTitle">true</item>
+    </style>
+
     <!-- Custom ActionBar -->
     <!-- https://www.journaldev.com/9952/android-custom-action-bar-example-tutorial -->
     <style name="CustomTheme" parent="Theme.AppCompat.Light">
@@ -17,12 +25,5 @@
     </style>
 
 
-    <!-- 背景を半透明 -->
-    <drawable name="bossback">#4400ff00</drawable>
-    <!-- style name="Theme.ChildTranslucent" parent="android:style/Theme.Translucent" -->
-    <style name="Theme.ChildTranslucent" parent="AppTheme">
-    　　<item name="android:windowBackground">@drawable/bossback</item>
-    　　<item name="android:windowNoTitle">true</item>
-    </style>
 
 </resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="TV_A0X_DEBUG">DEBUG</string>
+    <string name="TV_A0X_RELEASE">RELEASE</string>
+
+    <string name="RB_A0XA">Female</string>
+    <string name="RB_A0XB">Male</string>
+</resources>

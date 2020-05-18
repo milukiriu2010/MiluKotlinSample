@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="BTN_A02">StopWatch</string>
+    <string name="BTN_A02A">START</string>
+    <string name="BTN_A02B">STOP</string>
+    <string name="BTN_A02C">RESET</string>
+
+    <string name="TV_A02">00:00:00</string>
+</resources>

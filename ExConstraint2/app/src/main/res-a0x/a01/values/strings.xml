@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="BTN_A01">読上げ</string>
+
+    <string name="TV_A01A">かーめーはーめーはーー</string>
+    <string name="TV_A01AH">読み上げるテキストを入力してください</string>
+    <string name="TV_A01B">声の高さ</string>
+    <string name="TV_A01C">読み上げ速度</string>
+
+</resources>

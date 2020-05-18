@@ -60,16 +60,7 @@ class A01Activity : AppCompatActivity()
                 }
                 // テキスト読み上げ実施
                 tts.speak(tvA01A.text.toString(), TextToSpeech.QUEUE_FLUSH, null, "messageID")
-                /*
-                if (Build.VERSION.SDK_INT >= 21){
-                    tts.speak(tvA01A.text.toString(), TextToSpeech.QUEUE_FLUSH, null, "messageID")
-                }
-                else {
-                    tts.speak(tvA01A.text.toString(), TextToSpeech.QUEUE_FLUSH, null)
-                }
-                */
             }
-
         }
 
     }
@@ -117,11 +108,9 @@ class A01Activity : AppCompatActivity()
     }
 
     // SeekBar.OnSeekBarChangeListener
-    override fun onStartTrackingTouch(seekBar: SeekBar?) {
-    }
+    override fun onStartTrackingTouch(seekBar: SeekBar?) {}
 
     // SeekBar.OnSeekBarChangeListener
-    override fun onStopTrackingTouch(seekBar: SeekBar?) {
-    }
+    override fun onStopTrackingTouch(seekBar: SeekBar?) {}
 
 }

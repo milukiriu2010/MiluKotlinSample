@@ -51,24 +51,29 @@ class A0xActivity : AppCompatActivity() {
         //   0     => release
         Log.d( javaClass.simpleName, "Application Debug/Release:" + ( applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE ) )
         if ( ( applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE ) != 0 ) {
-            tvA0XA.setText("DEBUG")
+            tvA0XA.setText(R.string.TV_A0X_DEBUG)
         }
         else {
-            tvA0XA.setText("RELEASE")
+            tvA0XA.setText(R.string.TV_A0X_RELEASE)
         }
 
         // debugモード/releaseモード　どちらでコンパイルしているか表示
         // コンパイル時に自動的に生成されるBuildConfigクラスをもとに判断
         // "Build Clean"すると認識されず赤になるので、おすすめしない
         if (BuildConfig.DEBUG) {
-            tvA0XB.setText("DEBUG")
+            tvA0XB.setText(R.string.TV_A0X_DEBUG)
         }
         else {
-            tvA0XB.setText("RELEASE")
+            tvA0XB.setText(R.string.TV_A0X_RELEASE)
         }
 
-        // 動作しているOSのバージョン
+        // Build.VERSION.RELEASE => 9
+        // Build.VERSION.SDK_INT => 28
+        // 動作しているOSのバージョン(数字)
         tvA0XC.text = Build.VERSION.SDK_INT.toString()
+
+        // 動作しているOSのバージョン(名前)
+        tvA0XD.text = Build.VERSION.RELEASE
 
         // 女or男のラジオボタンをクリックするとツールチップ表示する
         rgA0X.setOnCheckedChangeListener { _, checkedId ->
@@ -85,49 +90,49 @@ class A0xActivity : AppCompatActivity() {
         // ストップウォッチ
         btnA02.setOnClickListener {
             val intent = Intent(this, A02Activity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_A02.value )
+            this.startActivity( intent )
         }
 
         // アクションバーをカスタマイズ
         btnA03.setOnClickListener {
             val intent = Intent(this, A03Activity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_A03.value )
+            this.startActivity( intent )
         }
 
         // サイコロを振る
         btnA04.setOnClickListener {
             val intent = Intent(this, A04Activity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_A04.value )
+            this.startActivity( intent )
         }
 
         // Web検索
         btnA05.setOnClickListener {
             val intent = Intent(this, A05Activity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_A05.value )
+            this.startActivity( intent )
         }
 
         // コンテキストメニュー
         btnA06.setOnClickListener {
             val intent = Intent(this, A06Activity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_A06.value )
+            this.startActivity( intent )
         }
 
         // QRコード/バーコードスキャン
         btnA07.setOnClickListener {
             val intent = Intent(this, A07Activity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_A07.value )
+            this.startActivity( intent )
         }
 
         // フィボナッチ数列
         btnA08.setOnClickListener {
             val intent = Intent(this, A08Activity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_A08.value )
+            this.startActivity( intent )
         }
 
         // リサイクラービュー
         btnA09.setOnClickListener{
             val intent = Intent(this, A09Activity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_A09.value )
+            this.startActivity( intent )
         }
 
         // 音声入力
@@ -139,13 +144,13 @@ class A0xActivity : AppCompatActivity() {
         // 大きな画像をロードする
         btnA11.setOnClickListener {
             val intent = Intent(this, A11Activity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_A11.value )
+            this.startActivity( intent )
         }
 
         // 信号のアニメーション
         btnA12.setOnClickListener {
             val intent = Intent(this, A12Activity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_A12.value )
+            this.startActivity( intent )
         }
 
         // エクセル－アップロード
@@ -163,11 +168,10 @@ class A0xActivity : AppCompatActivity() {
         // レーティングバー
         btnA15.setOnClickListener{
             val intent = Intent(this, A15Activity::class.java )
-            this.startActivityForResult( intent, IntentID.ID_A15.value )
+            this.startActivity( intent )
         }
 
         // ピンチ　イン・アウト
-        btnA16.transformationMethod = null
         btnA16.setOnClickListener {
             val intent = Intent( this, A16Activity::class.java )
             this.startActivity( intent )
@@ -176,7 +180,7 @@ class A0xActivity : AppCompatActivity() {
         // 照度センサ
         btnA17.setOnClickListener {
             val intent = Intent( this, A17Activity::class.java)
-            this.startActivity(intent)
+            this.startActivity( intent )
         }
 
         // 関数を使ったサイズ変更するアニメーション
@@ -188,37 +192,37 @@ class A0xActivity : AppCompatActivity() {
         // キャンバス(SKEW)
         btnA19.setOnClickListener {
             val intent = Intent(this,A19Activity::class.java)
-            this.startActivity(intent)
+            this.startActivity( intent )
         }
 
         // 歩行センサ
         btnA20.setOnClickListener {
             val intent = Intent( this, A20Activity::class.java)
-            this.startActivity(intent)
+            this.startActivity( intent )
         }
 
         // アニメ(移動/回転/透明)
         btnA21.setOnClickListener {
             val intent = Intent( this, A21Activity::class.java )
-            this.startActivity(intent)
+            this.startActivity( intent )
         }
 
         // ページャ
         btnA22.setOnClickListener {
             val intent = Intent(this, A22Activity::class.java)
-            this.startActivity(intent)
+            this.startActivity( intent )
         }
 
         // 近接センサ
         btnA23.setOnClickListener {
             val intent = Intent( this, A23Activity::class.java)
-            this.startActivity(intent)
+            this.startActivity( intent )
         }
 
         // 傾きセンサ(結局、加速度センサ)
         btnA24.setOnClickListener {
             val intent = Intent( this, A24Activity::class.java)
-            this.startActivity(intent)
+            this.startActivity( intent )
         }
 
     }
