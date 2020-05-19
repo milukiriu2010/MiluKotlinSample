@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TextView A0AXAのデザインを設定 -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 一番外側 -->
+    <item>
+        <!-- shape:rectangle(=四角形) -->
+        <shape android:shape="rectangle">
+            <padding
+                android:bottom="2dp"
+                android:left="2dp"
+                android:right="2dp"
+                android:top="2dp" />
+            <!-- 色:パープル -->
+            <solid android:color="#8e44ad" />
+            <!-- solid android:color="#1abc9c" /  -->
+        </shape>
+    </item>
+
+    <!-- 真ん中 -->
+    <item>
+        <!-- shape:rectangle(=四角形) -->
+        <shape android:shape="rectangle">
+            <!-- item①に対して2dp内側に入る。 -->
+            <padding
+                android:bottom="2dp"
+                android:left="2dp"
+                android:right="2dp"
+                android:top="2dp" />
+            <!-- 色:白 -->
+            <solid android:color="#ffffff" />
+        </shape>
+    </item>
+
+    <!-- 一番内側 -->
+    <item>
+        <!-- shape:rectangle(=四角形) -->
+        <!-- item②に対して2dp内側に入る。 -->
+        <shape android:shape="rectangle">
+            <padding
+                android:bottom="2dp"
+                android:left="2dp"
+                android:right="2dp"
+                android:top="2dp" />
+            <!-- 色:パープル -->
+            <!-- solid android:color="#9b59b6" / -->
+            <solid android:color="#00ff00" />
+        </shape>
+    </item>
+</layer-list>

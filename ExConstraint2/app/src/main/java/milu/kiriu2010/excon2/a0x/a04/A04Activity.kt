@@ -39,13 +39,12 @@ class A04Activity : AppCompatActivity() {
         ivA04.setOnClickListener {
             if ( !rolling ) {
                 rolling = true
-                //Show rolling image
+                // サイコロ振る前の初期画像を設定
                 ivA04.setImageResource(R.drawable.ic_a04g)
-                //Start rolling sound
-                diceSound.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f )
                 // タイマー開始
                 timer = Timer()
                 timer.scheduleAtFixedRate(Roll(), 600, 200)
+                // ここで音再生すると、音が鳴り終わってから、サイコロが回るので、TimerTask内に移動した
             }
         }
 
@@ -66,7 +65,7 @@ class A04Activity : AppCompatActivity() {
             // "it.what"はRollからのメッセージ
             // 規定回数(5回)を超えた場合、サイコロを停止する
             // すなわち、サイコロは5回回る
-            if ( it.what >= repeatCntMax ) {
+            if ( it.what >= this.repeatCntMax) {
                 timer.cancel()
                 // user can press again
                 rolling = false
@@ -88,27 +87,6 @@ class A04Activity : AppCompatActivity() {
         //default max streams is 1
         //also uses builder pattern
         diceSound = SoundPool.Builder().setAudioAttributes(aa).build()
-        /*
-        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ) {
-            // Use the newer SoundPool.Builder
-            // Set the audio attributes, SONIFICATION is for interaction events
-            // uses builder pattern
-            val aa = AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .build()
-            //default max streams is 1
-            //also uses builder pattern
-            diceSound = SoundPool.Builder().setAudioAttributes(aa).build()
-
-        }
-        else {
-            // Running on device earlier than Lollipop
-            // Use the older SoundPool constructor
-            @Suppress("DEPRECATION")
-            diceSound = SoundPool(1,AudioManager.STREAM_MUSIC,0)
-        }
-         */
 
         // サイコロの音をロード
         soundId = diceSound.load(this, R.raw.sound_a04,1 )
@@ -117,6 +95,13 @@ class A04Activity : AppCompatActivity() {
     // When pause completed message sent to callback
     inner class Roll: TimerTask() {
         override fun run() {
+            if ( repeatCnt == 0 ) {
+                // サイコロが転がる音を再生
+                // ハンドラ内では再生しない
+                // TimerTaskないだと再生するのでここにおく
+                diceSound.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f )
+            }
+
             handler.sendEmptyMessage(repeatCnt++)
         }
     }

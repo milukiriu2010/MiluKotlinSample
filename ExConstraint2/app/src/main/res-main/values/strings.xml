@@ -24,8 +24,10 @@
     <string name="BTN_A07A">QRコード</string>
     <string name="BTN_A07B">バーコード</string>
     <string name="BTN_A07C">その他</string>
+    <string name="TV_A07A">Press a button to start a scan.</string>
     <string name="TV_A07B">結果</string>
-    <string name="TV_A07C">https://www.vector.co.jp/vpack/filearea/winnt/net/network/</string>
+    <string name="TV_A07C_DEFAULT">https://www.vector.co.jp/vpack/filearea/winnt/net/network/</string>
+    <string name="TV_A07C_CANCELED">CANCELED</string>
 
     <string name="BTN_A08">Fibon</string>
     <string name="BTN_A08A">Next</string>
@@ -93,8 +95,6 @@
     <string name="BTN_A23">近接センサ</string>
 
     <string name="BTN_A24">傾きセンサ</string>
-
-    <string name="IV_A25">シークバーで色設定</string>
 
     <string name="ITEM_A0X_EMAIL">E-Mail</string>
     <string name="ITEM_A0X_RESET">reset</string>
