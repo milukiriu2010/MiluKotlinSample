@@ -1,5 +1,6 @@
 package milu.kiriu2010.excon1.a07
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.icu.util.TimeZone
 import android.view.LayoutInflater
@@ -12,8 +13,9 @@ import milu.kiriu2010.excon1.R
 
 // アダプタにタイムゾーン情報を表示する
 // TimeZone.getAvailableIDs() => 24
-class A07AAdapter(private val context: Context,
-                  private val timeZones: Array<String> = TimeZone.getAvailableIDs() ) : BaseAdapter() {
+class A07AAdapter(context: Context,
+                  private val timeZones: MutableList<String> = mutableListOf() ) : BaseAdapter() {
+
     private val inflater = LayoutInflater.from(context)
 
     private fun createView( parent: ViewGroup? ): View {
@@ -23,6 +25,7 @@ class A07AAdapter(private val context: Context,
     }
 
     // アダプタ位置に対応するタイムゾーン情報を表示
+    @SuppressLint("SetTextI18n")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view = convertView ?: createView(parent)
 

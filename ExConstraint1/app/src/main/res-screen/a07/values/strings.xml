@@ -2,4 +2,6 @@
 <resources>
     <string name="BTN_A07">Clock</string>
     <string name="BTN_A07A">Add</string>
+    <string name="BTN_A07B">Del</string>
+    <string name="ET_A07A">search</string>
 </resources>

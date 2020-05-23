@@ -18,6 +18,11 @@ import java.util.*
 // -------------------------------------------
 class A07Activity : AppCompatActivity() {
 
+    companion object {
+        val PREF_NAME = "prefs"
+        val PREF_KEY = "time_zone"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_a07)
@@ -30,6 +35,15 @@ class A07Activity : AppCompatActivity() {
         btnA07A.setOnClickListener {
             val intent = Intent( this, A07AActivity::class.java)
             startActivityForResult(intent, IntentID.ID_A07A.value)
+        }
+
+        // タイムゾーン一覧をクリア
+        // 共有プリファレンスを全クリアする
+        btnA07B.setOnClickListener {
+            val pref = getSharedPreferences( PREF_NAME, Context.MODE_PRIVATE )
+            pref.edit().clear().apply()
+
+            lvA07.adapter = A07AAdapter(this, mutableListOf())
         }
 
         this.showWorldClocks()
@@ -47,12 +61,12 @@ class A07Activity : AppCompatActivity() {
                 ) {
             val timeZone = data.getStringExtra("timeZone" )
 
-            val pref = getSharedPreferences( "prefs", Context.MODE_PRIVATE )
-            val timeZones = pref.getStringSet("time_zone", mutableSetOf() )
+            val pref = getSharedPreferences( PREF_NAME, Context.MODE_PRIVATE )
+            val timeZones = pref.getStringSet(PREF_KEY, mutableSetOf() )
 
             timeZones?.add( timeZone )
 
-            pref.edit().putStringSet("time_zone", timeZones ).apply()
+            pref.edit().putStringSet(PREF_KEY, timeZones ).apply()
 
             this.showWorldClocks()
         }
@@ -60,11 +74,11 @@ class A07Activity : AppCompatActivity() {
 
     // 共有プリファレンスに格納されたタイムゾーン一覧を表示
     private fun showWorldClocks(){
-        val pref = getSharedPreferences("prefs", Context.MODE_PRIVATE )
-        val timeZones = pref.getStringSet( "time_zone", setOf() )
+        val pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE )
+        val timeZones = pref.getStringSet( PREF_KEY, setOf() )
 
         timeZones?.let {
-            lvA07.adapter = A07AAdapter(this, it.toTypedArray())
+            lvA07.adapter = A07AAdapter(this, it.toMutableList() )
         }
     }
 }
