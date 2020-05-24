@@ -11,6 +11,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import android.util.Log
 import android.view.MenuItem
+import androidx.core.view.GravityCompat
 import milu.kiriu2010.excon1.R
 import java.io.File
 
@@ -20,6 +21,9 @@ class A08Activity : AppCompatActivity(),
         A08AFragment.OnFileOutputListener {
     // ナビゲーションドロワーの状態操作用オブジェクト
     private var drawerToggle: ActionBarDrawerToggle? = null
+
+    // ドロワーレイアウト
+    private var drawerLayout: DrawerLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +65,8 @@ class A08Activity : AppCompatActivity(),
 
     // オプションメニューがタップされたときに呼ばれる
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // ドロワーメニューを表示する際、ドロワーメニューの表示内容を更新
+        onFileOutput()
         // ドロワーに伝える
         if ( drawerToggle?.onOptionsItemSelected(item) == true ) {
             return true
@@ -75,12 +81,10 @@ class A08Activity : AppCompatActivity(),
         setContentView(R.layout.activity_a08)
 
         // レイアウトからドロワーを探す
-        val drawerLayout = findViewById<DrawerLayout>(R.id.dlA08)
+        drawerLayout = findViewById(R.id.dlA08)
 
         // レイアウト中にドロワーがある場合にだけ行う処理
-        if ( drawerLayout != null ) {
-            setupDrawer(drawerLayout)
-        }
+        drawerLayout?.let { setupDrawer(it) }
     }
 
     // 外部ストレージへの書き込み権限を得てからレイアウトを行う
@@ -107,14 +111,16 @@ class A08Activity : AppCompatActivity(),
     }
 
     // メモ入力用フラグメントに保存されたメモを開く
-    // ただし、ドロワーは自分で閉じないといけない
     override fun onFileSelected(file: File) {
         Log.d(javaClass.simpleName, "=== onFileSelected ===")
         val fragment = supportFragmentManager.findFragmentById(R.id.frgA08A) as A08AFragment
         fragment.show(file)
+        // ドロワーレイアウトを閉じる
+        drawerLayout?.closeDrawer(GravityCompat.START)
     }
 
-    // メモ入力用フラグメントにて"保存"を押下すると、ファイルを保存する
+    // メモ入力用フラグメントにて"保存"を押下 or ドロワーメニューを表示する際、
+    // ドロワーレイアウトのメニューを更新する
     override fun onFileOutput() {
         Log.d(javaClass.simpleName, "=== onFileOutput ===")
         val fragment = supportFragmentManager.findFragmentById(R.id.frgA08B) as A08BFragment

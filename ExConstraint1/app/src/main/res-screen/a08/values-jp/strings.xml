@@ -2,6 +2,7 @@
 <resources>
     <string name="BTN_A08">メモ</string>
     <string name="BTN_A08A">保存</string>
+    <string name="BTN_A08B">削除</string>
     <string name="TV_A08A">メモ</string>
     <string name="FMT_A08">%1$tY年%1$tm月%1$td日 %1$tH時%1$tM分</string>
 </resources>
