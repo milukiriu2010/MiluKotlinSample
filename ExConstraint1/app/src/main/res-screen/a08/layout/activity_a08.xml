@@ -4,6 +4,7 @@
     android:id="@+id/dlA08"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:keepScreenOn="true"
     tools:context="milu.kiriu2010.excon1.a08.A08Activity">
 
     <!-- メインコンテンツ -->

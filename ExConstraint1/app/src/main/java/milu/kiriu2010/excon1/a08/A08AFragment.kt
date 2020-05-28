@@ -35,6 +35,8 @@ class A08AFragment: Fragment() {
         val btnA08A = view.findViewById<Button>(R.id.btnA08A)
         // 削除ボタン
         val btnA08B = view.findViewById<Button>(R.id.btnA08B)
+        // 新規ボタン
+        val btnA08C = view.findViewById<Button>(R.id.btnA08C)
 
         // 内部ストレージにメモを保存する
         //   ディレクトリ：Documents以下
@@ -49,6 +51,13 @@ class A08AFragment: Fragment() {
         // 内部ストレージのファイルを削除
         btnA08B.setOnClickListener {
             currentFile?.delete()
+            // 入力内容もクリア
+            tvA08A.text.clear()
+        }
+
+        // 新規メモ
+        btnA08C.setOnClickListener {
+            currentFile = null
             // 入力内容もクリア
             tvA08A.text.clear()
         }

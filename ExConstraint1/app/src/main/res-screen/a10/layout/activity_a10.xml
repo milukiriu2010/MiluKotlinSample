@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:keepScreenOn="true"
     android:background="@android:color/black"
     tools:context="milu.kiriu2010.excon1.a10.A10Activity">
 
     <ImageView
         android:id="@+id/ivA10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -56,13 +57,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageSwitcher
-        android:id="@+id/imageSwitcher"
-        android:layout_width="368dp"
-        android:layout_height="395dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:id="@+id/isA10"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/btnA10C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -35,11 +35,16 @@ class A10Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_a10)
 
-        imageSwitcher.setFactory { ImageView(this) }
-        imageSwitcher.setImageResource(imgLst[0])
+        isA10.setFactory { ImageView(this) }
+        isA10.setImageResource(imgLst[0])
 
         // 画像をクリックすると、アニメーションを実行する
         ivA10.setOnClickListener {
+            // 回転を初期化
+            // これを入れないと、連打しても回転しない
+            it.rotation = 0f
+
+            // 3秒間の間に５回転する
             it.animate().apply {
                 duration = 3000L
                 // 5回転
@@ -60,19 +65,22 @@ class A10Activity : AppCompatActivity() {
         }
 
         // 前ボタン
+        // フェードイン・フェードアウトで写真を入れ替える
         btnA10A.setOnClickListener {
-            imageSwitcher.setInAnimation(this, android.R.anim.fade_in )
-            imageSwitcher.setOutAnimation(this,android.R.anim.fade_out )
+            isA10.setInAnimation(this, android.R.anim.fade_in )
+            isA10.setOutAnimation(this,android.R.anim.fade_out )
             movePosition(-1)
         }
 
         // 次ボタン
+        // 左⇒右へ写真が流れる
         btnA10B.setOnClickListener {
-            imageSwitcher.setInAnimation(this, android.R.anim.slide_in_left )
-            imageSwitcher.setOutAnimation(this,android.R.anim.slide_out_right )
+            isA10.setInAnimation(this, android.R.anim.slide_in_left )
+            isA10.setOutAnimation(this,android.R.anim.slide_out_right )
             movePosition(1)
         }
 
+        // 5秒ごとに写真を入れ替える
         timer( period = 5000 ) {
             handler.post {
                 if ( isSlideshow ) movePosition(1)
@@ -104,6 +112,6 @@ class A10Activity : AppCompatActivity() {
         else if ( position < 0 ) {
             position = imgLst.size - 1
         }
-        imageSwitcher.setImageResource(imgLst[position])
+        isA10.setImageResource(imgLst[position])
     }
 }

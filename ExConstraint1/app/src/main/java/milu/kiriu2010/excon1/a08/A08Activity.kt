@@ -81,7 +81,8 @@ class A08Activity : AppCompatActivity(),
         setContentView(R.layout.activity_a08)
 
         // レイアウトからドロワーを探す
-        drawerLayout = findViewById(R.id.dlA08)
+        // DrawLayoutでない場合は、NULLのままにしておく
+        drawerLayout = findViewById(R.id.dlA08) as? DrawerLayout
 
         // レイアウト中にドロワーがある場合にだけ行う処理
         drawerLayout?.let { setupDrawer(it) }

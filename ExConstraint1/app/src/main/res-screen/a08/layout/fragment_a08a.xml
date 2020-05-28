@@ -42,4 +42,14 @@
         android:text="@string/BTN_A08B"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnA08C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/BTN_A08C"
+        app:layout_constraintBottom_toBottomOf="@+id/btnA08B"
+        app:layout_constraintEnd_toStartOf="@+id/btnA08A"
+        app:layout_constraintStart_toEndOf="@+id/btnA08B"
+        app:layout_constraintTop_toTopOf="@+id/btnA08B" />
 </androidx.constraintlayout.widget.ConstraintLayout>

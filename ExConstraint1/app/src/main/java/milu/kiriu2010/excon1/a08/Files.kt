@@ -54,7 +54,7 @@ private fun getFilesDir(context: Context) : File {
 fun getFiles() = getFilesDir().listFiles()?.toList()!!
 
 // ディレクトリ内のファイル一覧を取得
-fun getFiles(context: Context) = getFilesDir(context).listFiles()?.toList()!!
+fun getFiles(context: Context) = getFilesDir(context).listFiles()?.toList()?.sortedDescending()!!
 
 // ファイルを出力
 fun outputFile(original: File?, content: String, context: Context) : File {

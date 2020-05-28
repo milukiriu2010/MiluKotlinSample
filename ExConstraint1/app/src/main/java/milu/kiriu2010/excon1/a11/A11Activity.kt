@@ -28,11 +28,14 @@ class A11Activity : AppCompatActivity() {
     }
 
     private fun showFiles() {
-        val adapter = A11Adapter(this, currentDir.listFiles()!!.toList()) { file ->
+        val adapter = A11Adapter(this, currentDir.listFiles()!!.toList().sorted()) { file ->
+            // ディレクトリをタップした場合、下のディレクトリのファイル一覧を表示
             if (file.isDirectory) {
                 currentDir = file
                 showFiles()
-            } else {
+            }
+            // ファイルをタップした場合、トーストする
+            else {
                 Toast.makeText(this, file.absolutePath, Toast.LENGTH_SHORT).show()
             }
         }
@@ -44,7 +47,8 @@ class A11Activity : AppCompatActivity() {
 
     private fun hasPermission(): Boolean {
         // パーミッションを持っているか確認
-        if ( ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ) {
+        if ( ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED ) {
             // 持っていない場合パーミッションを要求
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
             return false
@@ -52,11 +56,15 @@ class A11Activity : AppCompatActivity() {
         return true
     }
 
+    // パーミッションの結果を取得
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         //super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        // パーミッションが許可された場合、ファイル一覧を表示する
         if ( !grantResults.isEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED ) {
             showFiles()
         }
+        // パーミッションが不許可な場合、アクティビティを終了する
         else {
             finish()
         }

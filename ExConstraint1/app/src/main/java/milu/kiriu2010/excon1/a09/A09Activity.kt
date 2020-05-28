@@ -72,6 +72,7 @@ class A09Activity : AppCompatActivity(),
 
     // SensorEventListener
     // ボールの位置を計算する
+    @SuppressLint("SetTextI18n")
     override fun onSensorChanged(event: SensorEvent?) {
         if ( event == null ) return
 
@@ -94,7 +95,7 @@ class A09Activity : AppCompatActivity(),
             time = System.currentTimeMillis()
             t /= 1000.0f
 
-            // 差分時間における移動距離(v*t+1/2a*t^2)
+            // 差分時間における移動距離(v*t+0.5*a*t^2)
             val dx = vx*t + x*t*t/2.0f
             val dy = vy*t + y*t*t/2.0f
             // 移動後のボールの位置
