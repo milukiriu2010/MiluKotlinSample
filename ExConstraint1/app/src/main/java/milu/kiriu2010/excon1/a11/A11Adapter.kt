@@ -1,6 +1,7 @@
 package milu.kiriu2010.excon1.a11
 
 import android.content.Context
+import android.graphics.Color
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,7 @@ class A11Adapter(context: Context,
         view.setOnClickListener {
             onClick(files[viewHolder.adapterPosition])
         }
+
         return viewHolder
     }
 
@@ -31,6 +33,12 @@ class A11Adapter(context: Context,
 
     override fun onBindViewHolder(holder: FileViewHolder, position: Int) {
         holder.fileName.text = files[position].name
+
+        // ディレクトリのバックグランドは、薄赤にする
+        val file = files[position]
+        if (file.isDirectory) {
+            holder.itemView.setBackgroundColor(Color.parseColor("#ffcccc"))
+        }
     }
 
     class FileViewHolder(view : View) : RecyclerView.ViewHolder(view) {

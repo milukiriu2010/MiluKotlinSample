@@ -9,6 +9,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import milu.kiriu2010.excon1.R
 import kotlinx.android.synthetic.main.activity_a11.*
 import java.io.File
@@ -23,6 +24,13 @@ class A11Activity : AppCompatActivity() {
         setContentView(R.layout.activity_a11)
 
         rvA11.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        // 項目ごとに枠を描く
+        val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        // 上だけだと、細い白い線がひかれるだけなので、黒線の定義ファイルを読み込む
+        // ただし、これでも下に線が引かれるだけで、上左右がない
+        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this,R.drawable.divider_a11)!!)
+        rvA11.addItemDecoration(dividerItemDecoration)
 
         if ( hasPermission() ) showFiles()
     }
@@ -50,7 +58,9 @@ class A11Activity : AppCompatActivity() {
         if ( ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED ) {
             // 持っていない場合パーミッションを要求
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+            ActivityCompat.requestPermissions(this,
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    1)
             return false
         }
         return true
@@ -61,7 +71,8 @@ class A11Activity : AppCompatActivity() {
         //super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         // パーミッションが許可された場合、ファイル一覧を表示する
-        if ( !grantResults.isEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED ) {
+        if ( !grantResults.isEmpty() &&
+                grantResults[0] == PackageManager.PERMISSION_GRANTED ) {
             showFiles()
         }
         // パーミッションが不許可な場合、アクティビティを終了する
