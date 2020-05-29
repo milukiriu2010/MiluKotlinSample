@@ -7,7 +7,7 @@ import android.util.Log
 import milu.kiriu2010.excon2.R
 import kotlinx.android.synthetic.main.activity_a11.*
 
-// 大きな画像をロードする
+// 大きな画像をロードする(5684x4223=8.4MB)
 // ivA11のlayout_width,layout_height=0dpにするとロードできない
 // http://tekeye.uk/android/examples/android-bitmap-loading
 class A11Activity : AppCompatActivity() {
@@ -29,6 +29,7 @@ class A11Activity : AppCompatActivity() {
             val options = BitmapFactory.Options()
             options.inJustDecodeBounds = true
             val resId = R.drawable.ic_a11
+            // optionsに変更がかかる？
             BitmapFactory.decodeResource( resources, resId, options )
             // Calculate inSampleSize
             options.inSampleSize = calculateInSampleSize(options, xDim, yDim )

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- TextView A0AXAのデザインを設定 -->
+<!-- DEBUG左 -->
+<!-- テキスト:白 -->
+<!-- 枠１層:紫 -->
+<!-- 枠２層:白 -->
+<!-- 枠３層:緑 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 一番外側 -->
     <item>
@@ -43,6 +48,7 @@
                 android:top="2dp" />
             <!-- 色:パープル -->
             <!-- solid android:color="#9b59b6" / -->
+            <!-- 色:緑 -->
             <solid android:color="#00ff00" />
         </shape>
     </item>

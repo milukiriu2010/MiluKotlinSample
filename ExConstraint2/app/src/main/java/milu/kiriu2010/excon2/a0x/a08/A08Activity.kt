@@ -22,12 +22,12 @@ class A08Activity : AppCompatActivity() {
 
         // 次ボタンを押下すると、フィボナッチ数列の次の数を表示
         btnA08A.setOnClickListener {
-            //Load previous number from the state
+            // 前回の数字
             val previous_number = number_state
-            //Update the state (from the screen) prior to next calculation
-            number_state =  tvA08B.text.toString().toLong()
-            //Calculate next Fibonacci number and update screen
-            tvA08B.setText( (number_state + previous_number).toString() )
+            // 今回の数字
+            number_state += previous_number
+            // 今回の数字でテキストを更新
+            tvA08B.text = number_state.toString()
         }
     }
 

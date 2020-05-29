@@ -47,6 +47,7 @@ class A10Activity : AppCompatActivity() {
 
         if ( (requestCode == REQUEST_CODE) and (resultCode == RESULT_OK) ) {
             // 認識結果を取得
+            // 認識結果として、複数の候補が渡される
             val candidates = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
 
             val sb = StringBuilder()

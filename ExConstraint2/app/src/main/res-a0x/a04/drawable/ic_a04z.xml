@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- DICEボタン:角が丸い四角 -->
+<!-- 通常:下側が黒っぽい -->
+<!-- 押下:上側が黒っぽい -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- ボタンが押されていない状態 -->
     <item android:state_pressed="false">

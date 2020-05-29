@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- TextView A0XBのデザインを設定 -->
+<!-- DEBUG右 -->
+<!-- テキスト:白 -->
+<!-- 枠１層:左上を白っぽく-->
+<!-- 枠２層:右下を黒っぽく -->
+<!-- 枠３層:中を灰色っぽく -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- item① -->
     <!-- 左上を白っぽく -->

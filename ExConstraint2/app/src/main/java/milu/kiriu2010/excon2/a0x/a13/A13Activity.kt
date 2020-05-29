@@ -18,8 +18,11 @@ import java.lang.StringBuilder
 import java.util.*
 import kotlin.math.log
 
+// ------------------------------------------------
 // エクセル－アップロード
 // といっても、Excel作成するところでエラーになる
+// ------------------------------------------------
+// java.lang.NoClassDefFoundError: Failed resolution of: Ljavax/xml/stream/XMLStreamReader
 // ------------------------------------------------
 // どうやらApache POIはAndroid上で動作しないらしい
 // https://stackoverflow.com/questions/34644528/noclassdeffounderror-failed-resolution-of-ljavax-xml-stream-xmleventfactory-wi
@@ -89,7 +92,8 @@ class A13Activity : AppCompatActivity() {
             val style_header = book.createCellStyle()
             style_header.borderBottom = BorderStyle.THIN
             setBorder(style_header, BorderStyle.THIN)
-            style_header.fillForegroundColor = HSSFColor.HSSFColorPredefined.LIGHT_CORNFLOWER_BLUE.index
+            // java.lang.NoClassDefFoundError: Failed resolution of: Ljava/awt/Color;
+            //style_header.fillForegroundColor = HSSFColor.HSSFColorPredefined.LIGHT_CORNFLOWER_BLUE.index
             style_header.fillPattern = FillPatternType.SOLID_FOREGROUND
             style_header.verticalAlignment = VerticalAlignment.TOP
             style_header.setFont(font)
@@ -145,6 +149,7 @@ class A13Activity : AppCompatActivity() {
 
             // シートの作成(3シート作ってみる)
             (0..3).forEach { i ->
+                // java.lang.NoClassDefFoundError: Failed resolution of: Ljava/awt/font/FontRenderContext;
                 val sheet: Sheet = book.createSheet()
                 if (sheet is SXSSFSheet) {
                     sheet.trackAllColumnsForAutoSizing()
@@ -159,47 +164,47 @@ class A13Activity : AppCompatActivity() {
                 var row = sheet.createRow(rowNumber)
                 var cell = row.createCell(colNumber++)
                 cell.setCellStyle(style_header)
-                cell.setCellType(CellType.STRING)
+                //cell.setCellType(CellType.STRING)
                 cell.setCellValue("No.")
 
                 cell = row.createCell(colNumber++)
                 cell.setCellStyle(style_header)
-                cell.setCellType(CellType.STRING)
+                //cell.setCellType(CellType.STRING)
                 cell.setCellValue("文字列")
 
                 cell = row.createCell(colNumber++)
                 cell.setCellStyle(style_header)
-                cell.setCellType(CellType.STRING)
+                //cell.setCellType(CellType.STRING)
                 cell.setCellValue("改行の入った文字列")
 
                 cell = row.createCell(colNumber++)
                 cell.setCellStyle(style_header)
-                cell.setCellType(CellType.STRING)
+                //cell.setCellType(CellType.STRING)
                 cell.setCellValue("整数")
 
                 cell = row.createCell(colNumber++)
                 cell.setCellStyle(style_header)
-                cell.setCellType(CellType.STRING)
+                //cell.setCellType(CellType.STRING)
                 cell.setCellValue("小数")
 
                 cell = row.createCell(colNumber++)
                 cell.setCellStyle(style_header)
-                cell.setCellType(CellType.STRING)
+                //cell.setCellType(CellType.STRING)
                 cell.setCellValue("円")
 
                 cell = row.createCell(colNumber++)
                 cell.setCellStyle(style_header)
-                cell.setCellType(CellType.STRING)
+                //cell.setCellType(CellType.STRING)
                 cell.setCellValue("パーセント")
 
                 cell = row.createCell(colNumber++)
                 cell.setCellStyle(style_header)
-                cell.setCellType(CellType.STRING)
+                //cell.setCellType(CellType.STRING)
                 cell.setCellValue("日時")
 
                 cell = row.createCell(colNumber)
                 cell.setCellStyle(style_header)
-                cell.setCellType(CellType.STRING)
+                //cell.setCellType(CellType.STRING)
                 cell.setCellValue("円(8%の税込)")
 
                 //ウィンドウ枠の固定
@@ -220,47 +225,47 @@ class A13Activity : AppCompatActivity() {
                     row = sheet.createRow(rowNumber)
                     cell = row.createCell(colNumber++)
                     cell.cellStyle = style_int
-                    cell.cellType = CellType.NUMERIC
+                    //cell.cellType = CellType.NUMERIC
                     cell.setCellValue((j + 1).toString() )
 
                     cell = row.createCell(colNumber++)
                     cell.cellStyle = style_string
-                    cell.cellType = CellType.STRING
+                    //cell.cellType = CellType.STRING
                     cell.setCellValue("これは" + (j + 1) + "行目のデータです。")
 
                     cell = row.createCell(colNumber++)
                     cell.cellStyle = style_string_wrap
-                    cell.cellType = CellType.STRING
+                    //cell.cellType = CellType.STRING
                     cell.setCellValue("これは\n" + (j + 1) + "行目の\nデータです。")
 
                     cell = row.createCell(colNumber++)
                     cell.cellStyle = style_int
-                    cell.cellType = CellType.STRING
+                    //cell.cellType = CellType.STRING
                     cell.setCellValue(((j + 1) * 1000).toString())
 
                     cell = row.createCell(colNumber++)
                     cell.cellStyle = style_double
-                    cell.cellType = CellType.STRING
+                    //cell.cellType = CellType.STRING
                     cell.setCellValue((j + 1).toDouble() * 1000)
 
                     cell = row.createCell(colNumber++)
                     cell.cellStyle = style_yen
-                    cell.cellType = CellType.STRING
+                    //cell.cellType = CellType.STRING
                     cell.setCellValue(((j + 1) * 1000).toString())
 
                     cell = row.createCell(colNumber++)
                     cell.cellStyle = style_percent
-                    cell.cellType = CellType.STRING
+                    //cell.cellType = CellType.STRING
                     cell.setCellValue((j + 1).toDouble())
 
                     cell = row.createCell(colNumber++)
                     cell.cellStyle = style_datetime
-                    cell.cellType = CellType.STRING
+                    //cell.cellType = CellType.STRING
                     cell.setCellValue(Date())
 
                     cell = row.createCell(colNumber)
                     cell.cellStyle = style_yen
-                    cell.cellType = CellType.FORMULA
+                    //cell.cellType = CellType.FORMULA
                     cell.cellFormula = "ROUND(" + getExcelColumnString(colNumber - 3) + (rowNumber + 1) + "*1.08, 0)"
 
                     //列幅の自動調整

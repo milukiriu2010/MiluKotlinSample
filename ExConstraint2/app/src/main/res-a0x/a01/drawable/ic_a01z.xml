@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 読上げボタン:楕円 -->
+<!-- テキスト:黒 -->
+<!-- フォーカス:エメラルドグリーン:ただし動いていない -->
+<!-- 通常:左側が水色っぽい -->
+<!-- 押下:右側が水色っぽい -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- フォーカス状態 -->
-    <!-- うまく動いてない
+    <!-- うまく動いてない -->
     <item
         android:state_focused="true"
         android:state_enabled="true"
@@ -10,7 +15,6 @@
             <solid android:color="#21ffd3"/>
         </shape>
     </item>
-    -->
     <!-- 押下状態 -->
     <item
         android:state_pressed="true">

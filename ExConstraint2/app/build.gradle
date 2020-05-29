@@ -53,12 +53,24 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.1'
 
     // Apache POI
+    implementation 'org.apache.commons:commons-collections4:4.4'
+    implementation 'org.apache.commons:commons-compress:1.19'
+    implementation 'org.apache.poi:poi:4.1.2'
+    implementation 'org.apache.poi:poi-ooxml:4.1.2'
+    implementation 'org.apache.poi:poi-ooxml-schemas:4.1.2'
+    implementation 'org.apache.xmlbeans:xmlbeans:3.1.0'
+    //implementation 'javax.xml.stream:stax-api:1.0-2'
+    implementation 'javax.xml.stream:com.springsource.javax.xml.stream:1.0.1'
+    //implementation 'javax.xml.stream:javax.xml.stream:1.0.1.v201004272200'
+    //implementation 'javax.xml.stream:geronimo-stax-api:1.0'
+
+    // Apache POI
     // https://mvnrepository.com/artifact/org.apache.poi/poi
-    implementation group: 'org.apache.poi', name: 'poi', version: '4.0.0'
+    //implementation group: 'org.apache.poi', name: 'poi', version: '4.0.0'
     // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
-    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.0.0'
+    //implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.0.0'
     // https://mvnrepository.com/artifact/org.apache.poi/poi-scratchpad
-    implementation group: 'org.apache.poi', name: 'poi-scratchpad', version: '4.0.0'
+    //implementation group: 'org.apache.poi', name: 'poi-scratchpad', version: '4.0.0'
     // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas
-    implementation group: 'org.apache.poi', name: 'poi-ooxml-schemas', version: '4.0.0'
+    //implementation group: 'org.apache.poi', name: 'poi-ooxml-schemas', version: '4.0.0'
 }
