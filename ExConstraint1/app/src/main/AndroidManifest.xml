@@ -52,7 +52,7 @@
         <activity android:name=".a13.A13Activity" />
         <activity android:name=".a14.A14Activity" />
         <activity android:name=".a15.A15Activity" />
-        <activity android:name=".a15.A15RActivity" />
+        <activity android:name=".a15.A15TeamActivity" />
         <activity android:name=".a16.A16Activity" />
         <activity android:name=".a17.A17Activity" />
         <activity android:name=".a18.A18Activity" />

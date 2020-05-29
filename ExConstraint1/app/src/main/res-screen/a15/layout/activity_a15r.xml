@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:keepScreenOn="true"
-    tools:context="milu.kiriu2010.excon1.a15.A15RActivity">
+    tools:context="milu.kiriu2010.excon1.a15.A15TeamActivity">
 
     <TextView
         android:id="@+id/tvA15_Type"
@@ -32,6 +32,19 @@
         tools:text="Team Name" />
 
     <TextView
+        android:id="@+id/tvA15_League"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvA15_Name"
+        tools:text="Central" />
+
+    <TextView
         android:id="@+id/tvA15_Level"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -39,8 +52,39 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvA15_Name"
+        app:layout_constraintTop_toBottomOf="@+id/tvA15_League"
         tools:text="Team Level" />
+
+    <ListView
+        android:id="@+id/lvA15_Players"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/lvA15_YearPos"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvA15_Level">
+
+    </ListView>
+
+    <ListView
+        android:id="@+id/lvA15_YearPos"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/lvA15_Players"
+        app:layout_constraintTop_toBottomOf="@+id/tvA15_Level" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

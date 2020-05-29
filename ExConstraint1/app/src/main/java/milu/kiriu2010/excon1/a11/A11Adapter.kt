@@ -12,7 +12,7 @@ import java.io.File
 
 // Android上のファイルシステムを一覧表示に使うアダプタ
 class A11Adapter(context: Context,
-                 private val files: List<File>,
+                 private val files: MutableList<File>,
                  private val onClick : (File) -> Unit)
     : RecyclerView.Adapter<A11Adapter.FileViewHolder>() {
 

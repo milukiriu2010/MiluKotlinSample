@@ -65,7 +65,7 @@ class A12Activity : AppCompatActivity() {
             R.id.a12_sms -> {
                 val number = "999-9999-9999"
                 val uri = Uri.parse("sms:$number")
-                var intent = Intent(Intent.ACTION_VIEW)
+                val intent = Intent(Intent.ACTION_VIEW)
                 intent.data = uri
                 intent.putExtra("sms_body", "こんにちは")
                 startActivity(intent)

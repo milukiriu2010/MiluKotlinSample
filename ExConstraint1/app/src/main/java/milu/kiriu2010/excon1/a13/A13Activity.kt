@@ -15,8 +15,11 @@ class A13Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_a13)
 
+        // ラジオボタンの選択で、表示する画像を切り替える
+        // rbA13Blue => 青い三角形
+        // rbA13Red  => 赤い丸
         rgA13.setOnCheckedChangeListener { _, checkedId ->
-            val rbImage = findViewById<RadioButton>(checkedId) as RadioButton
+            val rbImage = findViewById<RadioButton>(checkedId)
 
             val bmpID = if ( rbA13Blue.equals(rbImage) ) R.drawable.ic_a13_blue else R.drawable.ic_a13_red
             val bmp = BitmapFactory.decodeResource( resources, bmpID )

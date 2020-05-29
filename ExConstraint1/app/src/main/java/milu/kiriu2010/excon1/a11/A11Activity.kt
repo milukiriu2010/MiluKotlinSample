@@ -5,6 +5,10 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.text.Editable
+import android.text.InputFilter
+import android.text.Spanned
+import android.text.TextWatcher
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +17,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import milu.kiriu2010.excon1.R
 import kotlinx.android.synthetic.main.activity_a11.*
 import java.io.File
+import java.util.*
 
 // Android上のファイルシステムを一覧表示
 class A11Activity : AppCompatActivity() {
@@ -32,11 +37,47 @@ class A11Activity : AppCompatActivity() {
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this,R.drawable.divider_a11)!!)
         rvA11.addItemDecoration(dividerItemDecoration)
 
+        // 絞り込み検索は英字とアンダーバーのみ許容
+        etA11.filters = arrayOf(A11InputFilter())
+        // 絞り込み検索実行
+        etA11.addTextChangedListener( object: TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                s?.let {
+                    // 入力されたフィルター文字
+                    val str = it.toString()
+
+                    if ( str.length > 0 ) {
+                        val filteredLst = mutableListOf<File>()
+                        currentDir.listFiles()?.sorted()?.forEach {
+                            if ( it.name.toLowerCase(Locale.ROOT).contains(str) ) {
+                                filteredLst.add(it)
+                            }
+                        }
+                        showFiles(1,filteredLst)
+                    }
+                    else {
+                        // アダプタの更新
+                        showFiles()
+                    }
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
         if ( hasPermission() ) showFiles()
     }
 
-    private fun showFiles() {
-        val adapter = A11Adapter(this, currentDir.listFiles()!!.toList().sorted()) { file ->
+    private fun showFiles(flag: Int = 0, filteredLst: MutableList<File> = mutableListOf()) {
+
+        val fileLst = when (flag) {
+            0 -> currentDir.listFiles()!!.toList().sorted().toMutableList()
+            else -> filteredLst
+        }
+
+        val adapter = A11Adapter(this, fileLst ) { file ->
             // ディレクトリをタップした場合、下のディレクトリのファイル一覧を表示
             if (file.isDirectory) {
                 currentDir = file
@@ -88,6 +129,17 @@ class A11Activity : AppCompatActivity() {
         }
         else {
             super.onBackPressed()
+        }
+    }
+
+    // 検索テキストのフィルタ
+    private class A11InputFilter: InputFilter {
+        override fun filter(source: CharSequence?, start: Int, end: Int, dest: Spanned?, dstart: Int, dend: Int): CharSequence {
+            return if ( source.toString().matches(Regex("^[a-zA-Z_]+$") ) ) {
+                source.toString()
+            } else {
+                ""
+            }
         }
     }
 }
