@@ -13,12 +13,13 @@ import milu.kiriu2010.exdb1.R
 import kotlin.math.PI
 import kotlin.math.sin
 
-// リサージュ
+// XY平面:リサージュ
+// Y軸を上から見て左回りに回転
 class A10Fragment : Fragment() {
 
     private lateinit var imageView: ImageView
 
-    private var isCalculated = false
+    //private var isCalculated = false
 
     // 半径
     private val radius = 300.0f
@@ -31,9 +32,9 @@ class A10Fragment : Fragment() {
 
     // 回転角度(Y軸)
     private val angleY = 10.0f
-    // 回転角度(Z軸)
+    // 回転角度(XY平面の媒介変数)
     private var angleZ = 0.0f
-    // 回転角度(Z軸)差分
+    // 回転角度(XY平面の媒介変数)差分
     private var angleZd = 10.0f
 
     // アニメーションする時間
@@ -61,7 +62,7 @@ class A10Fragment : Fragment() {
         // エミュレータ(1038x1542) => ButtonNavigationあり
         // 64x64 => 168x168
         view.viewTreeObserver.addOnGlobalLayoutListener {
-            if (isCalculated == true) return@addOnGlobalLayoutListener
+            //if (isCalculated == true) return@addOnGlobalLayoutListener
             Log.d(javaClass.simpleName, "W:w[${view.width}]h[${view.height}]/I:w[${imageView.width}]h[${imageView.height}]")
 
             // レイアウト幅・高さ

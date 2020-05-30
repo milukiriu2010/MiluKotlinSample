@@ -16,7 +16,7 @@ import milu.kiriu2010.exdb1.R
 class A03Fragment : Fragment() {
     private lateinit var imageView: ImageView
 
-    private var isCalculated = false
+    //private var isCalculated = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +40,7 @@ class A03Fragment : Fragment() {
         // エミュレータ(1038x1542) => ButtonNavigationあり
         // 64x64 => 168x168
         view.viewTreeObserver.addOnGlobalLayoutListener {
-            if ( isCalculated == true ) return@addOnGlobalLayoutListener
+            //if ( isCalculated == true ) return@addOnGlobalLayoutListener
             Log.d( javaClass.simpleName, "W:w[${view.width}]h[${view.height}]/I:w[${imageView.width}]h[${imageView.height}]")
 
             // レイアウト幅・高さ

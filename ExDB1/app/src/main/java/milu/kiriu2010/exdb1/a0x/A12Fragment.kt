@@ -15,16 +15,16 @@ import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
-// インボリュート
+// XY平面:インボリュート
+// Y軸を上から見て左回りに回転
 class A12Fragment : Fragment() {
 
     private lateinit var imageView: ImageView
 
-    private var isCalculated = false
+    //private var isCalculated = false
 
     // 半径
     private val radius = 10.0f
-
 
     // 中心
     private var centerX = 0.0f
@@ -32,9 +32,9 @@ class A12Fragment : Fragment() {
 
     // 回転角度(Y軸)
     private val angleY = 10.0f
-    // 回転角度(Z軸)
+    // 回転角度(XY平面の媒介変数)
     private var angleZ = 0.0f
-    // 回転角度(Z軸)差分
+    // 回転角度(XY平面の媒介変数)差分
     private var angleZd = 10.0f
 
     // アニメーションする時間
@@ -62,7 +62,7 @@ class A12Fragment : Fragment() {
         // エミュレータ(1038x1542) => ButtonNavigationあり
         // 64x64 => 168x168
         view.viewTreeObserver.addOnGlobalLayoutListener {
-            if (isCalculated == true) return@addOnGlobalLayoutListener
+            //if (isCalculated == true) return@addOnGlobalLayoutListener
             Log.d(javaClass.simpleName, "W:w[${view.width}]h[${view.height}]/I:w[${imageView.width}]h[${imageView.height}]")
 
             // レイアウト幅・高さ

@@ -15,12 +15,13 @@ import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
-// 8の字アニメーション
+// XY平面:8の字アニメーション
+// Y軸を上から見て左回りに回転
 class A05Fragment : Fragment() {
 
     private lateinit var imageView: ImageView
 
-    private var isCalculated = false
+    //private var isCalculated = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +45,7 @@ class A05Fragment : Fragment() {
         // エミュレータ(1038x1542) => ButtonNavigationあり
         // 64x64 => 168x168
         view.viewTreeObserver.addOnGlobalLayoutListener {
-            if (isCalculated == true) return@addOnGlobalLayoutListener
+            //if (isCalculated == true) return@addOnGlobalLayoutListener
             Log.d(javaClass.simpleName, "W:w[${view.width}]h[${view.height}]/I:w[${imageView.width}]h[${imageView.height}]")
 
             // レイアウト幅・高さ
@@ -63,10 +64,10 @@ class A05Fragment : Fragment() {
 
             // 回転角度(Y軸)
             val angleY = 10.0f
-            // 回転角度(Z軸)
+            // 回転角度(XY平面の媒介変数)
             var angleZ = 10.0f
-            // 回転角度(Z軸)差分
-            var angleZd = 10.0f
+            // 回転角度(XY平面の媒介変数)差分
+            val angleZd = 10.0f
 
             // 縦横真ん中から半径分右にずらして表示
             imageView.x = centerX + (radius * cos(0.0)).toFloat()

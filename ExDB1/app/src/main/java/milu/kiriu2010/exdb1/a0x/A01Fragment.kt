@@ -17,7 +17,7 @@ class A01Fragment : Fragment() {
     // アニメーションする画像
     private lateinit var imageView: ImageView
 
-    private var isCalculated = false
+    //private var isCalculated = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +34,8 @@ class A01Fragment : Fragment() {
         imageView = ImageView(context)
         imageView.setImageResource(R.drawable.a_male)
         imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+        // FrameLayoutはViewGroupを継承している
+        // ViewGroupはViewを継承している
         (view as ViewGroup).addView(imageView)
 
         // レイアウト・画像サイズ取得
@@ -41,7 +43,7 @@ class A01Fragment : Fragment() {
         // エミュレータ(1038x1542) => ButtonNavigationあり
         // 64x64 => 168x168
         view.viewTreeObserver.addOnGlobalLayoutListener {
-            if ( isCalculated == true ) return@addOnGlobalLayoutListener
+            //if ( isCalculated == true ) return@addOnGlobalLayoutListener
             Log.d( javaClass.simpleName, "W:w[${view.width}]h[${view.height}]/I:w[${imageView.width}]h[${imageView.height}]")
 
             // レイアウト幅・高さ
@@ -51,7 +53,10 @@ class A01Fragment : Fragment() {
             val iw = imageView.width.toFloat()
             val ih = imageView.height.toFloat()
 
-            // 縦は真ん中に表示
+            // 初期表示
+            // 縦:中央
+            // 横:左端
+            imageView.x = 0.0f
             imageView.y = lh/2 - ih/2
 
             // 100msごとに画像の幅分横に移動するアニメーションオブジェクトを生成

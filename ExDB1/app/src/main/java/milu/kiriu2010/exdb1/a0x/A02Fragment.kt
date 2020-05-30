@@ -15,7 +15,7 @@ import milu.kiriu2010.exdb1.R
 class A02Fragment : Fragment() {
     private lateinit var imageView: ImageView
 
-    private var isCalculated = false
+    //private var isCalculated = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,7 @@ class A02Fragment : Fragment() {
         // エミュレータ(1038x1542) => ButtonNavigationあり
         // 64x64 => 168x168
         view.viewTreeObserver.addOnGlobalLayoutListener {
-            if ( isCalculated == true ) return@addOnGlobalLayoutListener
+            //if ( isCalculated == true ) return@addOnGlobalLayoutListener
             Log.d( javaClass.simpleName, "W:w[${view.width}]h[${view.height}]/I:w[${imageView.width}]h[${imageView.height}]")
 
             // レイアウト幅・高さ
@@ -49,7 +49,10 @@ class A02Fragment : Fragment() {
             val iw = imageView.width.toFloat()
             val ih = imageView.height.toFloat()
 
-            // 縦は真ん中に表示
+            // 初期表示
+            // 縦:中央
+            // 横:左端
+            imageView.x = 0.0f
             imageView.y = lh/2 - ih/2
 
             // 画像の幅分横に移動
@@ -81,13 +84,14 @@ class A02Fragment : Fragment() {
                     // (1) 1行上に移動
                     // (2) 左端に戻す
                     // ------------------------------------------
-                    if ( (imageView.x+imageView.width*2) >= lw ) {
+                    if ( (imageView.x+iw*2) >= lw ) {
                         when (mode) {
                             // "1:左=>右" => "2:下=>上"
                             1 -> {
                                 mode = 2
                                 imageView.animate()
                                         .setDuration(duration)
+                                        //.x(lw-iw)
                                         .y( lh/2 - ih*3/2 )
                             }
                             // "2:下=>上" => "3:右=>左"
