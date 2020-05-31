@@ -28,10 +28,12 @@ class A15TeamActivity : AppCompatActivity() {
         tvA15_Type.text = team.type
         tvA15_Name.text = team.name
 
-        // チームが野球の場合、レベルを表示
+        // チームが野球の場合、リーグを表示
         tvA15_League.visibility = when (team) {
             is TeamBaseBall -> View.VISIBLE
-            else -> View.INVISIBLE
+            // INVISIBLEだと、みえなくなるだけ
+            // GONEは、みえなくなるだけでなく、隙間を詰めてくれる
+            else -> View.GONE
         }
         tvA15_League.text = when (team) {
             is TeamBaseBall -> team.league.wamei
@@ -41,7 +43,7 @@ class A15TeamActivity : AppCompatActivity() {
         // チームがサッカーの場合、レベルを表示
         tvA15_Level.visibility = when (team){
             is TeamSoccer -> View.VISIBLE
-            else -> View.INVISIBLE
+            else -> View.GONE
         }
         tvA15_Level.text = when (team) {
             is TeamSoccer -> team.level.toString()

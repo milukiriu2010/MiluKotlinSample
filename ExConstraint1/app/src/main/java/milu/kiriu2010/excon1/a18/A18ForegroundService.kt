@@ -24,8 +24,11 @@ class A18ForegroundService : Service() {
         val name = "通知のタイトル的情報を設定"
         val notifyDescription = "この通知の詳細情報を設定します"
 
+        // 通知チャネルを作成
         if (manager.getNotificationChannel(A18NotificationChannelID.ID_FOREGROUND.id) == null) {
-            val mChannel = NotificationChannel(A18NotificationChannelID.ID_FOREGROUND.id, name, NotificationManager.IMPORTANCE_HIGH)
+            val mChannel = NotificationChannel(A18NotificationChannelID.ID_FOREGROUND.id,
+                    name,
+                    NotificationManager.IMPORTANCE_HIGH)
             mChannel.apply {
                 description = notifyDescription
             }
@@ -40,27 +43,17 @@ class A18ForegroundService : Service() {
                     setSmallIcon(R.mipmap.ic_launcher)
                 }.build()
 
+        // 5秒たったら、通知を自動的に消す
         Thread(
                 Runnable {
                     (0..5).map {
                         Thread.sleep(1000)
                     }
 
-                    if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ) {
-                        // サービスが終了する際に呼び出す
-                        // STOP_FOREGROUND_REMOVE  => 通知を削除
-                        // STOP_FOREGROUND_DETACH => 通知を残す
-                        stopForeground(Service.STOP_FOREGROUND_REMOVE)
-                    }
-                    else {
-                        // サービスが終了する際に呼び出す
-                        // true  => 通知を削除
-                        // false => 通知を残す
-                        stopForeground(true)
-                        // もしくは
-                        // stopSelf()
-                        // この場合は通知は削除される
-                    }
+                    // サービスが終了する際に呼び出す
+                    // STOP_FOREGROUND_REMOVE  => 通知を削除
+                    // STOP_FOREGROUND_DETACH => 通知を残す
+                    stopForeground(STOP_FOREGROUND_REMOVE)
                 }).start()
 
         // 通知を表示する

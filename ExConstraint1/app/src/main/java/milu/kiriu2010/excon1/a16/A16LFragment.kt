@@ -8,13 +8,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import milu.kiriu2010.excon1.R
 
+// ---------------------------------------
+// カウントアップされた結果を表示するフラグメント
+// ---------------------------------------
 class A16LFragment: Fragment() {
     private var counter = 0
     private lateinit var counterLabel: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //counter = arguments?.getInt("counter") ?: 0
+
+        // savedInstanceStateは、フラグメントが再開したとき
+        // argumentsは、フラグメントが生成されたとき
         counter = savedInstanceState?.getInt("counter")
                 ?: arguments?.getInt("counter")
                 ?: 0

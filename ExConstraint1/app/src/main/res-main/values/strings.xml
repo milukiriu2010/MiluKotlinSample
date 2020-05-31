@@ -12,6 +12,9 @@
     <string name="IV_A10">A10</string>
 
     <string name="BTN_A11">File</string>
+    <string name="BTN_A11_AUDIO_START">Start</string>
+    <string name="BTN_A11_AUDIO_STOP">Stop</string>
+    <string name="BTN_A11_AUDIO_PAUSE">Pause</string>
 
 
     <string name="BTN_A12">Saint Tropez</string>
@@ -45,7 +48,7 @@
 
     <string name="BTN_A18">Notify</string>
     <string name="BTN_NOTIFY">通知</string>
-    <string name="BTN_NOTIFY_START_SERVICE">startServiceによる開始</string>
+    <string name="BTN_NOTIFY_START_SERVICE">startForegroundService</string>
     <string name="BTN_NOTIFY_DOWNLOAD">Download</string>
     <string name="BTN_NOTIFY_INTENT_START">IntentService開始</string>
     <string name="BTN_NOTIFY_INTENT_STOP">IntentService停止</string>

@@ -15,7 +15,7 @@ import com.github.kittinunf.fuel.httpDownload
 class A18DownloadService : Service() {
 
     override fun onBind(intent: Intent): IBinder {
-        TODO("Return the communication channel to the service.")
+        throw UnsupportedOperationException("Not yet implemented")
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -24,8 +24,11 @@ class A18DownloadService : Service() {
         val name = "通知のタイトル的情報を設定"
         val notifyDescription = "この通知の詳細情報を設定します"
 
+        // 通知チャネルを作成
         if (manager.getNotificationChannel(A18NotificationChannelID.ID_DOWNLOAD.id) == null) {
-            val mChannel = NotificationChannel(A18NotificationChannelID.ID_DOWNLOAD.id, name, NotificationManager.IMPORTANCE_HIGH)
+            val mChannel = NotificationChannel(A18NotificationChannelID.ID_DOWNLOAD.id,
+                    name,
+                    NotificationManager.IMPORTANCE_HIGH)
             mChannel.apply {
                 description = notifyDescription
             }
@@ -39,7 +42,8 @@ class A18DownloadService : Service() {
         //val url = "https://sourceforge.net/projects/miludbviewer/files/MiluDBViewer0.3.0/MiluDBViewer_Setup0.3.0.exe/download"
 
 
-        val builder = NotificationCompat.Builder(this, A18NotificationChannelID.ID_DOWNLOAD.id)
+        val builder = NotificationCompat
+                .Builder(this, A18NotificationChannelID.ID_DOWNLOAD.id)
                 .apply {
                     setContentTitle("MiluDBViewerダウンロード")
                     setContentText("0%")

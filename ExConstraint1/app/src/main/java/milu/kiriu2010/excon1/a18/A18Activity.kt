@@ -80,7 +80,10 @@ class A18Activity : AppCompatActivity() {
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         // 通知チャネルはAndroid 8.0で導入された機能
-        val channel = NotificationChannel(A18NotificationChannelID.ID_NEW_ARTICLE.id, "新着記事", NotificationManager.IMPORTANCE_DEFAULT)
+        val channel = NotificationChannel(
+                A18NotificationChannelID.ID_NEW_ARTICLE.id,
+                "新着記事",
+                NotificationManager.IMPORTANCE_DEFAULT)
 
         channel.description = "新着記事を通知するためのチャネルです"
         channel.enableVibration(true)
@@ -95,10 +98,14 @@ class A18Activity : AppCompatActivity() {
         // 通知タップ時に開かれる画面へのインテント
         val intent = Intent(this, A18Activity::class.java)
         // ペンディングインテントに詰める
-        val pendingIntent = PendingIntent.getActivity(this, A18NotificationRequestCode.ID_NEW_ARTICLE.code, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = PendingIntent.getActivity(this,
+                A18NotificationRequestCode.ID_NEW_ARTICLE.code,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT)
 
         // NotificationCompat.Builderオブジェクトを生成
-        val builder = NotificationCompat.Builder(this, A18NotificationChannelID.ID_NEW_ARTICLE.id)
+        val builder = NotificationCompat
+                .Builder(this, A18NotificationChannelID.ID_NEW_ARTICLE.id)
 
         when (radioGroupNotificationStyle.checkedRadioButtonId) {
             // BigPictureStyleによる通知

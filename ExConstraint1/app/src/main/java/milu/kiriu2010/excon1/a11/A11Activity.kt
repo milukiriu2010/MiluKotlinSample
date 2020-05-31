@@ -1,7 +1,9 @@
 package milu.kiriu2010.excon1.a11
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
@@ -9,6 +11,8 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.Spanned
 import android.text.TextWatcher
+import android.util.Log
+import android.webkit.MimeTypeMap
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -67,9 +71,13 @@ class A11Activity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
+        // 外部ストレージの読み込み権限を持っているかチェックする
+        // 持っていない場合⇒パーミッションを要求する
+        // 持っている場合  ⇒ファイル一覧を表示
         if ( hasPermission() ) showFiles()
     }
 
+    // ファイル一覧を表示する
     private fun showFiles(flag: Int = 0, filteredLst: MutableList<File> = mutableListOf()) {
 
         val fileLst = when (flag) {
@@ -83,9 +91,24 @@ class A11Activity : AppCompatActivity() {
                 currentDir = file
                 showFiles()
             }
-            // ファイルをタップした場合、トーストする
+            // ファイルをタップした場合、それぞれを処理するアクティビティへ遷移する
             else {
-                Toast.makeText(this, file.absolutePath, Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, file.absolutePath, Toast.LENGTH_SHORT).show()
+
+                // png : image/png
+                // jpg : image/jpeg
+                // mp3 : audio/mpeg
+                val uri = Uri.fromFile(file)
+                val ext = MimeTypeMap.getFileExtensionFromUrl(uri.toString().toLowerCase(Locale.ROOT))
+                val mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext)
+                Log.d(javaClass.simpleName,"MIMETYPE={$mimeType}")
+
+                when (mimeType) {
+                    "image/png" -> startActivityImg(file)
+                    "image/jpg" -> startActivityImg(file)
+                    "audio/mpeg" -> startActivityAudio(file)
+                    else -> startActivityTxt(file)
+                }
             }
         }
 
@@ -94,6 +117,8 @@ class A11Activity : AppCompatActivity() {
         title = currentDir.path
     }
 
+    // 外部ストレージの読み込み権限を持っているかチェックし、
+    // 持っていない場合、パーミッションを要求する
     private fun hasPermission(): Boolean {
         // パーミッションを持っているか確認
         if ( ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -108,7 +133,10 @@ class A11Activity : AppCompatActivity() {
     }
 
     // パーミッションの結果を取得
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+            requestCode: Int,
+            permissions: Array<out String>,
+            grantResults: IntArray) {
         //super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         // パーミッションが許可された場合、ファイル一覧を表示する
@@ -129,6 +157,60 @@ class A11Activity : AppCompatActivity() {
         }
         else {
             super.onBackPressed()
+        }
+    }
+
+    // 画像を表示するアクティビティへ遷移
+    private fun startActivityImg(file: File) {
+        val intent = Intent(this,A11ImageActivity::class.java)
+        intent.putExtra("file",file)
+        startActivity(intent)
+    }
+
+    // オーディオを再生するアクティビティへ遷移
+    private fun startActivityAudio(file: File) {
+        val intent = Intent(this,A11AudioActivity::class.java)
+        intent.putExtra("file",file)
+        startActivity(intent)
+    }
+
+    // テキストを表示するアクティビティへ遷移
+    private fun startActivityTxt(file: File) {
+        val intent = Intent(this,A11TxtActivity::class.java)
+        intent.putExtra("file",file)
+        startActivity(intent)
+    }
+
+    // ファイルの拡張子を取得
+    private fun getFileExtension(file: File): String {
+        val dotPos = file.name.lastIndexOf(".")
+        return when {
+            ( dotPos != -1 ) && ( dotPos != 0 ) -> file.name.substring(dotPos+1)
+            else -> ""
+        }
+    }
+
+    // ファイルの拡張子から画像かどうか判断
+    // 画像=>true
+    // 画像でない=>false
+    private fun isImage(file: File): Boolean {
+        val ext = getFileExtension(file)
+
+        return when (ext) {
+            "jpg" -> true
+            else -> false
+        }
+    }
+
+    // ファイルの拡張子からオーディオかどうか判断
+    // オーディオ=>true
+    // オーディオでない=>false
+    private fun isAudio(file: File): Boolean {
+        val ext = getFileExtension(file)
+
+        return when (ext) {
+            "mp3" -> true
+            else -> false
         }
     }
 

@@ -4,8 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import milu.kiriu2010.excon1.R
 
+// -----------------------------------
 // フラグメントの練習
-class A16Activity : AppCompatActivity(), A16BFragment.OnButtonClickListener {
+// -----------------------------------
+// 上:Fragment　　　:A16BFragment:ボタン
+// 下:FrameLayout:A16LFragment:結果
+// -----------------------------------
+class A16Activity : AppCompatActivity(),
+        A16BFragment.OnButtonClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +32,7 @@ class A16Activity : AppCompatActivity(), A16BFragment.OnButtonClickListener {
         }
     }
 
+    // OnButtonClickListener
     override fun onButtonClicked() {
         val fragment = supportFragmentManager.findFragmentByTag("labelFragment") as A16LFragment
         fragment.update()

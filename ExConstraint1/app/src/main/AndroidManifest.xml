@@ -3,21 +3,24 @@
     package="milu.kiriu2010.excon1">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- プログラムによるパーミッション確認も必要 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
-        <!-- android:theme="@style/AppTheme" -->
-
+        <activity android:name=".a11.A11TxtActivity"></activity>
+        <activity android:name=".a11.A11AudioActivity" />
+        <activity android:name=".a11.A11ImageActivity" /> <!-- android:theme="@style/AppTheme" -->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +35,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".a03.A03Activity" />
         <activity android:name=".a04.A04Activity" />
+
         <receiver android:name=".a04.A04BroadcastReceiver" />
+
         <activity
             android:name=".a05.A05Activity"
             android:label="@string/TITLE_A05"
@@ -56,6 +61,7 @@
         <activity android:name=".a16.A16Activity" />
         <activity android:name=".a17.A17Activity" />
         <activity android:name=".a18.A18Activity" />
+
         <service
             android:name=".a18.A18ForegroundService"
             android:enabled="true"

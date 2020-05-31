@@ -12,7 +12,6 @@ import androidx.core.app.NotificationManagerCompat
 import android.util.Log
 import milu.kiriu2010.excon1.R
 
-// TODO: Rename actions, choose action names that describe tasks that this
 // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
 private const val ACTION_FOO = "milu.kiriu2010.excon1.notify.action.FOO"
 private const val ACTION_BAZ = "milu.kiriu2010.excon1.notify.action.BAZ"
@@ -47,8 +46,11 @@ class MyIntentService : IntentService("MyIntentService") {
         val name = "通知のタイトル的情報を設定"
         val notifyDescription = "この通知の詳細情報を設定します"
 
+        // 通知チャネルを作成
         if (manager.getNotificationChannel(A18NotificationChannelID.ID_MY_INTENTSERVICE.id) == null) {
-            val mChannel = NotificationChannel(A18NotificationChannelID.ID_MY_INTENTSERVICE.id, name, NotificationManager.IMPORTANCE_HIGH)
+            val mChannel = NotificationChannel(A18NotificationChannelID.ID_MY_INTENTSERVICE.id,
+                    name,
+                    NotificationManager.IMPORTANCE_HIGH)
             mChannel.apply {
                 description = notifyDescription
             }
@@ -59,10 +61,11 @@ class MyIntentService : IntentService("MyIntentService") {
         val notification = NotificationCompat
                 .Builder(this, A18NotificationChannelID.ID_MY_INTENTSERVICE.id).apply {
                     setContentTitle("通知のタイトル(MyIntentService:${param1})")
-                    setContentText("MyIntentService({$param2})完了")
+                    setContentText("MyIntentService(${param2})完了")
                     setSmallIcon(R.mipmap.ic_launcher)
                 }.build()
 
+        // 10秒後に通知
         Thread(
                 Runnable {
                     (0..5).map {
@@ -70,11 +73,11 @@ class MyIntentService : IntentService("MyIntentService") {
                     }
                     Log.d(javaClass.simpleName, "MyIntentService is done.")
                     // 通知する
-                    NotificationManagerCompat.from(this).notify(A18NotificationID.ID_MY_INTENTSERVICE.id, notification)
+                    NotificationManagerCompat
+                            .from(this)
+                            .notify(A18NotificationID.ID_MY_INTENTSERVICE.id, notification)
                 }
         ).start()
-        // 通知する
-        //NotificationManagerCompat.from(this).notify(NotificationID.ID_MY_INTENTSERVICE.id, notification)
     }
 
     /**
@@ -103,7 +106,6 @@ class MyIntentService : IntentService("MyIntentService") {
          *
          * @see IntentService
          */
-        // TODO: Customize helper method
         @JvmStatic
         fun startActionBaz(context: Context, param1: String, param2: String) {
             val intent = Intent(context, MyIntentService::class.java).apply {
