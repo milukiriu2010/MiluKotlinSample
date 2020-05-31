@@ -7,11 +7,15 @@ import android.util.Log
 import android.view.View
 import kotlin.math.log10
 
+// -------------------------------------------------------
+// 照度を矢印で表示するビュー
+// -------------------------------------------------------
 // http://ojed.hatenablog.com/entry/2015/12/05/161013
 // カスタムビューでは
 //   onSizeChanged
 //   onDraw
 // を継承する必要がある
+// -------------------------------------------------------
 class LightView: View {
     // 照度
     var lux: Float = 0f
@@ -44,14 +48,11 @@ class LightView: View {
         style = Paint.Style.FILL
     }
 
-    constructor(context: Context?): super(context) {
-    }
+    constructor(context: Context?): super(context) {}
 
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
-    }
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {}
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle) {
-    }
+    constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle) {}
 
     init {
         // スケール
@@ -60,7 +61,7 @@ class LightView: View {
         scale.left = scaleMarginL
         scale.right = scaleMarginL + scaleWidth
 
-        // スケール位置
+        // スケール位置(左向きの三角形)
         // 左
         pos.moveTo( posMarginL, scaleMarginT.toFloat())
         // 右上
@@ -84,11 +85,11 @@ class LightView: View {
         // バックグラウンドを白く塗りつぶす
         canvas?.drawColor(Color.WHITE)
 
-        // スケールを塗りつぶす
+        // スケールを長方形で描画し、黒で塗りつぶす
         canvas?.drawRect( scale, scalePaint )
 
+        // スケール位置を左向き三角形で描画し、赤で塗りつぶす
         canvas?.drawPath( pos, posPaint )
-
     }
 
     fun movePos() {

@@ -25,7 +25,7 @@ class A23Activity : AppCompatActivity() , SensorEventListener {
         val sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         // 近接センサ
-        var sensorProx: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
+        val sensorProx: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
         // 近接センサあり
         if ( sensorProx != null ) {
             sensorManager.registerListener( this, sensorProx, SensorManager.SENSOR_DELAY_GAME )

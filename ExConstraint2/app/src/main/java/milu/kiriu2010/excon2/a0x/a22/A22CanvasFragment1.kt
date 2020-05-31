@@ -36,13 +36,25 @@ class A22CanvasFragment1 : Fragment()
         canvasBasicView1.mode = mode
 
         seekBarX = view.findViewById(R.id.sbA22X)
-
         seekBarY = view.findViewById(R.id.sbA22Y)
 
         seekBarX.setOnSeekBarChangeListener(this)
         seekBarY.setOnSeekBarChangeListener(this)
 
+        // シークバーを使う描画だけ、シークバーを表示するようにしている
+        when (mode) {
+            0 -> seekOnOff(View.VISIBLE)
+            6 -> seekOnOff(View.VISIBLE)
+            else -> seekOnOff(View.INVISIBLE)
+        }
+
         return view
+    }
+
+    // シークバーの表示・非表示を制御する
+    private fun seekOnOff(visibility: Int) {
+        seekBarX.visibility = visibility
+        seekBarY.visibility = visibility
     }
 
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {

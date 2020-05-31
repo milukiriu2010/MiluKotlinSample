@@ -62,8 +62,8 @@ class CanvasBasicView: View {
         canvas.restore()
     }
 
+    // 正方形を、ずらして３つ描画
     private fun drawMode1(canvas: Canvas) {
-        // 正方形を、ずらして３つ描画
         val rect = Rect(100, 100, 200, 200)
 
         canvas.drawRect(rect, mPaint)
@@ -73,6 +73,9 @@ class CanvasBasicView: View {
         canvas.drawRect(rect, mPaint)
     }
 
+    // ドロイド君の画像(100x100)を
+    // 左上1/4を2倍に拡大して表示
+    // 右下1/4をそのままの大きさで表示
     private fun drawMode2(canvas: Canvas) {
         // 画像(100x100)を描画
         val bmp = BitmapFactory.decodeResource(resources, R.drawable.ic_a19)
@@ -83,28 +86,33 @@ class CanvasBasicView: View {
         val srcRect2 = Rect(bmp.width / 2, bmp.height / 2,
                 bmp.width, bmp.height)
 
+        // (100,500) - (200,600)
         val destRect1 = Rect(0, 0, bmp.width, bmp.height)
         destRect1.offset(100, 500)
+        // (400,700) - (450,750)
         val destRect2 = Rect(0, 0, bmp.width/2, bmp.height/2)
         destRect2.offset(400, 700)
 
+        // そのままの大きさを左上に描画
+        canvas.drawBitmap(bmp,0f,0f,mPaint)
         // 左上1/4を2倍に拡大して表示
         canvas.drawBitmap(bmp, srcRect1, destRect1, mPaint)
         // 右下1/4をそのままの大きさで表示
         canvas.drawBitmap(bmp, srcRect2, destRect2, mPaint)
     }
 
+    // 円を原点をずらして描画
     private fun drawMode3(canvas: Canvas) {
-        // 円を原点をずらして描画
         for ( i in 0 until 5) {
             canvas.drawCircle(0f, 0f, 50f, mPaint)
             canvas.translate(100f, 100f)
         }
     }
 
+    // 10度ずつ回転して36個の正方形を描画
     private fun drawMode4(canvas: Canvas) {
         canvas.translate(500f, 500f)
-        // 10度ずつ回転して36個の正方形を描画
+
         val rect = Rect( 100, 0, 150, 50 )
         for ( i in 0 until 36 ) {
             canvas.rotate(10f)
@@ -112,26 +120,31 @@ class CanvasBasicView: View {
         }
     }
 
+    // saveLayerで領域の一部をクリッピング
+    // ドロイド君が切れてみえるようになる
     private fun drawMode5(canvas: Canvas) {
-        // saveLayerで領域の一部をクリッピング
         val bmp = BitmapFactory.decodeResource(resources, R.drawable.ic_a19)
+        // saveLayerで領域の一部をクリッピング
         val bounds = RectF(0f, 0f, 300f, 300f)
         canvas.saveLayer(bounds, mPaint)
 
+        // バックグラウンドを緑
         canvas.drawColor(Color.GREEN)
 
         canvas.drawBitmap(bmp, 100f, 200f, mPaint)
 
-        canvas.restore() // saveLayer直前に戻る
+        // saveLayer直前に戻る
+        canvas.restore()
 
         canvas.drawBitmap(bmp, 200f, 200f, mPaint)
     }
 
+    // スピナ―で、ドロイド君を拡大・縮小表示
     private fun drawMode6(canvas: Canvas) {
         // 画像(SVG)を描画
         // java.lang.NullPointerException: Attempt to invoke virtual method 'boolean android.graphics.Bitmap.isRecycled()' on a null object reference
         // val bmp = BitmapFactory.decodeResource(resources, R.drawable.xic_a19)
-        // 何も表氏されない
+        // 何も表示されない
         //val drawable = ContextCompat.getDrawable(context,R.drawable.xic_a19)
         //val bmp = Bitmap.createBitmap(drawable!!.intrinsicWidth, drawable!!.intrinsicHeight, Bitmap.Config.ARGB_8888)
         //Log.d( javaClass.simpleName, "dw[${drawable.intrinsicWidth}]/dh[${drawable.intrinsicHeight}]")
@@ -141,12 +154,14 @@ class CanvasBasicView: View {
         val drawable = ContextCompat.getDrawable(context,R.drawable.ic_a19)
         // (100,100)位置にx倍で表示
         // skewX -5.0 - 5.0
-        drawable?.setBounds(100,100,100+(drawable.intrinsicWidth*(4+skewX)).toInt(),100+(drawable.intrinsicHeight*(4+skewY)).toInt())
+        drawable?.setBounds(100,100,
+                100+(drawable.intrinsicWidth*(4+skewX)).toInt(),100+(drawable.intrinsicHeight*(4+skewY)).toInt())
         drawable?.draw(canvas)
     }
 
+    // A19Activityでは、なにもしない
+    // A22Activityで、アニメーションする
     private fun drawMode7(canvas: Canvas) {
-        // アニメーション
         canvas.drawRect(400f, (100+yval).toFloat(), 600f, (300+yval).toFloat(), mPaint);
     }
 }

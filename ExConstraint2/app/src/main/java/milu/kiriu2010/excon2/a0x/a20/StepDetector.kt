@@ -65,7 +65,8 @@ class StepDetector {
         // ・今回の計測がスレッシュホールド(50)を超えている
         // ・前回の計測がスレッシュホールド(50)を超えていない
         // ・今回の計測が前回から250msecたっている
-        if (velocityEstimate > STEP_THRESHOLD && oldVelocityEstimate <= STEP_THRESHOLD
+        if (velocityEstimate > STEP_THRESHOLD
+                && oldVelocityEstimate <= STEP_THRESHOLD
                 && timeNs - lastStepTimeNs > STEP_DELAY_NS) {
             listener!!.step(timeNs)
             lastStepTimeNs = timeNs

@@ -56,7 +56,8 @@
     <string name="TV_A14_LABEL_HUMI">％</string>
     <string name="TV_A14_LABEL_PRES">hPa</string>
     <string name="TV_A14_LABEL_TYPE">Type</string>
-    <string name="TV_A14_LABEL_Name">Name</string>
+    <string name="TV_A14_LABEL_NAME">Name</string>
+    <string name="TV_A14_LABEL_VENDOR">Vendor</string>
 
     <string name="BTN_A15">Rating</string>
     <string name="ITEM_A15A">Setting</string>

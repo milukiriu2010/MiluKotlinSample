@@ -36,9 +36,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/TV_A14_LABEL_Name"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/TV_A14_LABEL_NAME"
         app:layout_constraintEnd_toStartOf="@+id/glA14"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvA14_LabelType" />
@@ -49,12 +47,37 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/tvA14_LabelName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/glA14"
         app:layout_constraintTop_toTopOf="@+id/tvA14_LabelName"
         tools:text="accelerometer-lsm6ds3" />
+
+    <TextView
+        android:id="@+id/tvA14_LabelVendor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/TV_A14_LABEL_VENDOR"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/glA14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvA14_LabelName" />
+
+    <TextView
+        android:id="@+id/tvA14_DataVendor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvA14_LabelVendor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/glA14"
+        app:layout_constraintTop_toTopOf="@+id/tvA14_LabelVendor"
+        tools:text="ベンダー名" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glA14"

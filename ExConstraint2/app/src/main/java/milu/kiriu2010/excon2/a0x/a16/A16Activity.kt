@@ -30,7 +30,6 @@ class A16Activity : AppCompatActivity() {
                 }
 
                 return true
-
             }
         })
     }

@@ -31,11 +31,13 @@ class A14Adapter(
 
         holder.dataType.text = sensor.stringType
         holder.dataName.text = sensor.name
+        holder.dataVendor.text = sensor.vendor
     }
 
 
     class SensorViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val dataType = view.findViewById<TextView>(R.id.tvA14_DataType)
         val dataName = view.findViewById<TextView>(R.id.tvA14_DataName)
+        val dataVendor = view.findViewById<TextView>(R.id.tvA14_DataVendor)
     }
 }

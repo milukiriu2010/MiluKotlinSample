@@ -6,7 +6,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 
 // ページャの各ページ
 // ページごとに配置するフラグメントを変えている
-class A22PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class A22PagerAdapter(fm: FragmentManager) :
+        FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     override fun getItem(pos: Int): Fragment {
         return when (pos) {
             0 -> A22CanvasFragment1.newInstance(0)

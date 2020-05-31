@@ -4,4 +4,5 @@
     android:id="@+id/vpA22"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:keepScreenOn="true"
     tools:context=".a0x.a22.A22Activity" />

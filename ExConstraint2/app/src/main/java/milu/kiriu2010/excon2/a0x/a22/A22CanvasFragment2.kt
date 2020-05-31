@@ -26,6 +26,11 @@ class A22CanvasFragment2 : Fragment() {
         val canvasBasicView1 = view.findViewById<CanvasBasicView>(R.id.cvA22)
         canvasBasicView1.mode = 7
 
+        // シークバーは使わないので非表示
+        view.findViewById<View>(R.id.sbA22X).visibility = View.INVISIBLE
+        view.findViewById<View>(R.id.sbA22Y).visibility = View.INVISIBLE
+
+
         // 下(0->1000)へ落ちるアニメーション
         val testAnimation = A22TestAnimation(canvasBasicView1, 0, 1000)
 

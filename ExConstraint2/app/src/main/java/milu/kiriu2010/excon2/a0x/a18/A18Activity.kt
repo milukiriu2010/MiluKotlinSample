@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.view.animation.*
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import milu.kiriu2010.excon2.R
 import kotlinx.android.synthetic.main.activity_a18.*
@@ -34,10 +36,37 @@ class A18Activity : AppCompatActivity() {
             //setHomeButtonEnabled(true)
         }
 
-        // 補完スピナーに補完一覧を設定
-        spA18.adapter = ArrayAdapter.createFromResource(this, R.array.a18_interpolators, android.R.layout.simple_spinner_item )
+        // 補間スピナーに補間一覧を設定
+        spA18.adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.a18_interpolators,
+                android.R.layout.simple_spinner_item )
 
-        // 補完のファクターを設定
+        // ファクターを設定するビューを表示・非表示制御する
+        spA18.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val item = spA18.selectedItem
+                when (item) {
+                    "LinearInterpolator" -> factorVisibility(View.INVISIBLE)
+                    "AccelerateInterpolator" -> factorVisibility(View.VISIBLE)
+                    "DecelerateInterpolator" -> factorVisibility(View.VISIBLE)
+                    "AccelerateDecelerateInterpolator" -> factorVisibility(View.INVISIBLE)
+                    "AnticipateInterpolator" -> factorVisibility(View.VISIBLE)
+                    "OvershootInterpolator" -> factorVisibility(View.VISIBLE)
+                    "AnticipateOvershootInterpolator" -> factorVisibility(View.VISIBLE)
+                    "BounceInterpolator" -> factorVisibility(View.INVISIBLE)
+                    "CycleInterpolator" -> factorVisibility(View.VISIBLE)
+                    "HesitateInterpolator" -> factorVisibility(View.INVISIBLE)
+                }
+            }
+        }
+        // 初期表示は、LinearInterpolatorなので、
+        // ファクターを設定するビューは、非表示とする
+        factorVisibility(View.INVISIBLE)
+
+        // 補間のファクターを設定
         // 数値１桁目
         npA18A.maxValue = 9
         npA18A.minValue = 0
@@ -95,6 +124,13 @@ class A18Activity : AppCompatActivity() {
             // アニメーションのスタート
             ivA18.startAnimation(scale)
         }
+    }
+
+    // ファクターを設定するビューを表示・非表示制御する
+    private fun factorVisibility(visivility: Int) {
+        npA18A.visibility = visivility
+        tvA18.visibility = visivility
+        npA18B.visibility = visivility
     }
 
     // レイアウトからスクリーンサイズを取得

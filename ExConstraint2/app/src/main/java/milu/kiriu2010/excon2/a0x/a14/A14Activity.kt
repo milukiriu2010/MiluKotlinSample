@@ -51,7 +51,7 @@ class A14Activity : AppCompatActivity()
         val notFoundLst = mutableListOf<String>()
 
         // 温度センサ
-        var sensorAmbientTemperature: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
+        val sensorAmbientTemperature: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
         // 温度センサあり
         if ( sensorAmbientTemperature != null ) {
             sensorManager.registerListener(this, sensorAmbientTemperature, SensorManager.SENSOR_DELAY_GAME)
@@ -63,7 +63,7 @@ class A14Activity : AppCompatActivity()
         }
 
         // 湿度センサ
-        var sensorRelativeHumidity: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY)
+        val sensorRelativeHumidity: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY)
         // 湿度センサあり
         if ( sensorRelativeHumidity != null ) {
             sensorManager.registerListener(this, sensorRelativeHumidity, SensorManager.SENSOR_DELAY_GAME)
@@ -75,7 +75,7 @@ class A14Activity : AppCompatActivity()
         }
 
         // 圧力センサ
-        var sensorPressure: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE)
+        val sensorPressure: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE)
         // 圧力センサあり
         if ( sensorPressure != null ) {
             sensorManager.registerListener(this, sensorPressure, SensorManager.SENSOR_DELAY_GAME)
@@ -86,12 +86,14 @@ class A14Activity : AppCompatActivity()
             tvA14_DataPres.text = "×"
         }
 
+        // 温度センサ・湿度センサ・圧力センサのいづれかが見つからない場合
+        // エラーダイアログを表示
         if ( notFoundLst.size > 0 ) {
             val sb = StringBuilder()
             notFoundLst.forEach { sb.append("$it\n") }
             AlertDialog.Builder(this)
                     .setTitle("センサなし")
-                    .setMessage("${sb.toString()}")
+                    .setMessage(sb.toString())
                     .setPositiveButton("OK",null)
                     .show()
         }

@@ -11,7 +11,8 @@ import android.util.Log
 import kotlinx.android.synthetic.main.activity_a20.*
 import milu.kiriu2010.excon2.R
 
-// 歩行センサ
+// 歩行センサは、数が正確でない
+// 加速度センサを使って、計測したほうがよさそう
 class A20Activity : AppCompatActivity()
         , SensorEventListener
         , StepListener {
@@ -23,7 +24,6 @@ class A20Activity : AppCompatActivity()
     var stepAcclCnt = 0
 
     val simpleStepDetector = StepDetector()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,7 +85,9 @@ class A20Activity : AppCompatActivity()
                     stepInitCnt = stepCnt
                 }
 
+                // 歩行数(今回)
                 tvA20_STEPND.text = (stepCnt-stepInitCnt).toString()
+                // 歩行数(総数)
                 tvA20_STEPTD.text = stepCnt.toString()
             }
             // 加速度センサ

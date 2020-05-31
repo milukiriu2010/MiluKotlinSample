@@ -1,5 +1,6 @@
 package milu.kiriu2010.excon2.a0x.a15
 
+import android.annotation.SuppressLint
 import android.app.ActionBar
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
@@ -9,11 +10,18 @@ import android.view.MenuItem
 import milu.kiriu2010.excon2.R
 import kotlinx.android.synthetic.main.activity_a15.*
 
+// --------------------------------
 // レーティングバー
+// --------------------------------
+// アクションバーにプログレスバーを表示
+// "Load"メニューを選択すると、
+// ５秒間プログレスバーが非同期で回る
+// --------------------------------
 class A15Activity : AppCompatActivity() {
 
     lateinit var menuItem: MenuItem
 
+    @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_a15)
@@ -68,6 +76,7 @@ class A15Activity : AppCompatActivity() {
     }
 
     // ５秒間プログレスバーが非同期で回る
+    @SuppressLint("StaticFieldLeak")
     inner class TestTask: AsyncTask<String?, Unit, String?>() {
         override fun doInBackground(vararg p0: String?): String? {
             try {
@@ -83,6 +92,5 @@ class A15Activity : AppCompatActivity() {
             menuItem.collapseActionView()
             menuItem.setActionView(null)
         }
-
     }
 }

@@ -11,7 +11,11 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_a17.*
 import milu.kiriu2010.excon2.R
 
+// -----------------------------------
 // 照度センサ
+// -----------------------------------
+// 照度をカスタムビューで表示
+// -----------------------------------
 class A17Activity : AppCompatActivity()
     , SensorEventListener {
 
@@ -37,7 +41,7 @@ class A17Activity : AppCompatActivity()
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         // 照度センサ
-        var sensorLight: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+        val sensorLight: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
         // 照度センサあり
         if ( sensorLight != null ) {
             sensorManager.registerListener(this, sensorLight, SensorManager.SENSOR_DELAY_NORMAL)

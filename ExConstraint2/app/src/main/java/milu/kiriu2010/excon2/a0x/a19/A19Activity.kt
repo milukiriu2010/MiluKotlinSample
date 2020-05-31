@@ -56,18 +56,37 @@ class A19Activity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
         })
         */
 
-        // 補完スピナーに補完一覧を設定
-        spA19.adapter = ArrayAdapter.createFromResource(this, R.array.a19_mode, android.R.layout.simple_spinner_item )
+        // スピナ―に描画する内容の種類を設定する
+        spA19.adapter = ArrayAdapter.createFromResource(this,
+                R.array.a19_mode,
+                android.R.layout.simple_spinner_item )
 
+        // スピナ―の選択を変更すると、描画する内容が変更される
         spA19.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                cbView.mode = spA19.selectedItem.toString().toInt()
+                val mode = spA19.selectedItem.toString().toInt()
+                cbView.mode = mode
                 cbView.invalidate()
-            }
 
+                // シークバーを使う描画だけ、シークバーを表示するようにしている
+                when (mode) {
+                    0 -> {
+                        sbA19X.visibility = View.VISIBLE
+                        sbA19Y.visibility = View.VISIBLE
+                    }
+                    6 -> {
+                        sbA19X.visibility = View.VISIBLE
+                        sbA19Y.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        sbA19X.visibility = View.INVISIBLE
+                        sbA19Y.visibility = View.INVISIBLE
+                    }
+                }
+            }
         }
 
         sbA19X.setOnSeekBarChangeListener(this)
