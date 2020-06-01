@@ -95,8 +95,6 @@
 
     <string name="BTN_A23">近接センサ</string>
 
-    <string name="BTN_A24">傾きセンサ</string>
-
     <string name="ITEM_A0X_EMAIL">E-Mail</string>
     <string name="ITEM_A0X_RESET">reset</string>
     <string name="ITEM_A0X_EXIT">exit</string>

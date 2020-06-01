@@ -322,6 +322,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/BTN_A22"
+        app:layout_constraintEnd_toStartOf="@+id/btnA23"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnA19" />
 
@@ -332,21 +334,9 @@
         android:layout_marginStart="8dp"
         android:text="@string/BTN_A23"
         app:layout_constraintBottom_toBottomOf="@+id/btnA22"
-        app:layout_constraintEnd_toStartOf="@+id/btnA24"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnA22"
         app:layout_constraintTop_toTopOf="@+id/btnA22" />
-
-    <Button
-        android:id="@+id/btnA24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/BTN_A24"
-        app:layout_constraintBottom_toBottomOf="@+id/btnA23"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnA23"
-        app:layout_constraintTop_toTopOf="@+id/btnA23" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,6 +28,7 @@ class B0XActivity : AppCompatActivity() {
         }
 
         // ギャラリー表示
+        // カメラアプリを起動するだけで、このアプリで何かするわけではない
         btnB02.setOnClickListener {
             val intent = Intent()
             intent.type = "image/*"

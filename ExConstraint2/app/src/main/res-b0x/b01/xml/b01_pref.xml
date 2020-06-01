@@ -3,16 +3,19 @@
     xmlns:asp="http://schemas.android.com/apk/res-auto">
     　　<PreferenceCategory android:title="@string/B18_PC_TITLE">
     　　　　<!-- チェックボックスによる設定 -->
-    　　　　<CheckBoxPreference android:key="B18_CB_KEY"
+    　　　　<CheckBoxPreference
+                android:key="B18_CB_KEY"
                 android:title="@string/B18_CB_TITLE"
                 android:summary="@string/B18_CB_SUMMARY"
                 android:defaultValue="true"/>
     　　　　<!-- エディットテキストによる設定 -->
-    　　　　<EditTextPreference android:key="B18_ED_KEY"
+    　　　　<EditTextPreference
+                android:key="B18_ED_KEY"
                 android:title="@string/B18_ED_TITLE"
-                android:summary="@string/E18_ED_SUMMARY" />
+                android:summary="@string/B18_ED_SUMMARY" />
     　　　　<!-- リストによる設定 -->
-    　　　　<ListPreference android:key="B18_LIST_KEY"
+    　　　　<ListPreference
+                android:key="B18_LIST_KEY"
                 android:title="@string/B18_LS_TITLE"
                 android:summary="@string/B18_LS_SUMMARY"
                 android:entries="@array/B18_LIST_ENTRIES"
@@ -20,15 +23,15 @@
             <!-- スイッチによる設定 -->
             <SwitchPreference
                 android:key="B18_SW_KEY"
-                android:title="スイッチ"
-                android:summary="スイッチによる設定だよ"
+                android:title="@string/B18_SW_TITLE"
+                android:summary="@string/B18_SW_SUMMARY"
                 android:defaultValue="false"
                 />
             <!-- シークバー -->
             <SeekBarPreference
                 android:key="B18_SB_KEY"
-                android:title="シークバー"
-                android:summary="シークバーによる設定だよ"
+                android:title="@string/B18_SB_TITLE"
+                android:summary="@string/B18_SB_SUMMARY"
                 android:defaultValue="3"
                 android:max="10"
                 asp:min="2"

@@ -33,7 +33,8 @@ class B04Activity : AppCompatActivity() {
     private fun checkPermission() {
         // パーミッションを確認し,
         // 許可されている場合
-        if (ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA) ==
+                PackageManager.PERMISSION_GRANTED) {
             mCamera2.open(this, aftvB04 )
         }
         // 許可されていない場合、
@@ -48,16 +49,19 @@ class B04Activity : AppCompatActivity() {
         Toast.makeText(this,"カメラ起動できません", Toast.LENGTH_LONG).show()
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+            requestCode: Int,
+            permissions: Array<out String>,
+            grantResults: IntArray) {
         //super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         // 許可
-        if ( permissions.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED ) {
+        if ( permissions.isNotEmpty() && grantResults[0] ==
+                PackageManager.PERMISSION_GRANTED ) {
             // パーミッションが付与されたらカメラを起動
             checkPermission()
         }
         // 不許可
         else {
-
             showErrorMessage()
         }
     }

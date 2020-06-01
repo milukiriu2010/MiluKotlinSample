@@ -26,9 +26,7 @@ class B05Activity : AppCompatActivity()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_a05)
-
-        // なぜかtvB05がNULL判定される
+        setContentView(R.layout.activity_b05)
 
         //Find all views and set Tag to all draggable views
         tvB05.tag = "DRAGGABLE TEXTVIEW"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:keepScreenOn="true"
     tools:context=".b0x.b04.B04Activity">
 
     <milu.kiriu2010.excon2.b0x.b04.AutoFitTextureView

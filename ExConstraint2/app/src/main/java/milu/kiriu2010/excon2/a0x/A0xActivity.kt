@@ -34,7 +34,6 @@ import milu.kiriu2010.excon2.a0x.a21.A21Activity
 import milu.kiriu2010.excon2.a0x.a22.A22Activity
 import milu.kiriu2010.excon2.a0x.a23.A23Activity
 import milu.kiriu2010.excon2.a0x.a25.A25Activity
-import milu.kiriu2010.excon2.a0x.a24.A24Activity
 import kotlinx.android.synthetic.main.activity_a0x.*
 import milu.kiriu2010.excon2.BuildConfig
 import milu.kiriu2010.excon2.R
@@ -216,12 +215,6 @@ class A0xActivity : AppCompatActivity() {
         // 近接センサ
         btnA23.setOnClickListener {
             val intent = Intent( this, A23Activity::class.java)
-            this.startActivity( intent )
-        }
-
-        // 傾きセンサ(結局、加速度センサ)
-        btnA24.setOnClickListener {
-            val intent = Intent( this, A24Activity::class.java)
             this.startActivity( intent )
         }
 

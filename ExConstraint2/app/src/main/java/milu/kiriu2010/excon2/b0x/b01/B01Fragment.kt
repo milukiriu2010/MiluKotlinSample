@@ -1,6 +1,5 @@
 package milu.kiriu2010.excon2.b0x.b01
 
-
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.preference.SwitchPreference
@@ -26,13 +25,60 @@ class B01Fragment : PreferenceFragmentCompat()
         sp = PreferenceManager.getDefaultSharedPreferences(activity)
         //onSharedPreferenceChanged(sp,"list_key")
 
-        val seekBar = findPreference<Preference>("B18_SB_KEY")
-        Log.d(javaClass.simpleName,"seekBar[${seekBar}]")
+        // -------------------------------------------------------------
+        // チェックボックス
+        // -------------------------------------------------------------
+        // 特に実装する必要なし
+
+        // -------------------------------------------------------------
+        // エディットテキスト
+        // -------------------------------------------------------------
+        val etB18 = findPreference<EditTextPreference>("B18_ED_KEY")
+        // 共有プリファレンスの値
+        val etB18Val = sp.getString("B18_ED_KEY","")
+        // エディットテキストのサマリの中身
+        etB18?.summary = resources.getString(R.string.B18_ED_SUMMARY) + "\n" + etB18Val.toString()
+
+        // -------------------------------------------------------------
+        // リスト
+        // -------------------------------------------------------------
+        val ltB18 = findPreference<ListPreference>("B18_LIST_KEY")
+        // 共有プリファレンスの値
+        // リストの場合、entryvaluesが保存されるので、和名に変換する必要がある
+        val ltB18Val = sp.getString("B18_LIST_KEY","")
+        ltB18?.let {
+            // 値に対応するインデックスを取得
+            val ltB18ID = it.findIndexOfValue(ltB18Val)
+            if ( ltB18ID >= 0 ) {
+                // インデックスから和名を求める
+                val ltB18Name = it.entries[ltB18ID]
+                // サマリに、和名を付与する
+                it.summary = resources.getString(R.string.B18_LS_SUMMARY) + "\n" + ltB18Name.toString()
+            }
+        }
+
+        // -------------------------------------------------------------
+        // スイッチ
+        // -------------------------------------------------------------
+        // 特に実装する必要なし
+
+        // -------------------------------------------------------------
+        // シークバー
+        // -------------------------------------------------------------
+        val sbB18 = findPreference<Preference>("B18_SB_KEY")
+        Log.d(javaClass.simpleName,"seekBar[${sbB18}]")
+        // 共有プリファレンスの値
+        val sbB18Val = sp.getInt("B18_SB_KEY",2)
+        // シークバーのサマリの中身
+        sbB18?.summary = resources.getString(R.string.B18_SB_SUMMARY) + "\n" + sbB18Val.toString()
+
         // シークバーの現在位置を変更すると、呼び出される
-        seekBar?.setOnPreferenceChangeListener { preference, newVal ->
+        // 変更された後、呼び出されるっぽいので、あんま意味ない
+        sbB18?.setOnPreferenceChangeListener { preference, newVal ->
             Log.d(javaClass.simpleName,"preferenceChanged[${preference.javaClass.name}]")
             if (newVal is Int) {
-                seekBar.setSummary(newVal.toString())
+                // シークバーのサマリの中身
+                sbB18.summary = resources.getString(R.string.B18_SB_SUMMARY) + "\n" + newVal.toString()
                 true
             }
             else {
@@ -46,35 +92,50 @@ class B01Fragment : PreferenceFragmentCompat()
         preference?.let {
             Log.d(javaClass.simpleName,"preference[${it.javaClass.name}]")
         }
-        // リストに変更があった場合
-        if (preference is ListPreference) {
-            val prefIndex = preference.findIndexOfValue(sharedPreferences?.getString(key,""))
-            Log.d(javaClass.simpleName, "changed:key[$key]prefIndex[$prefIndex]")
-            if (prefIndex >= 0) {
-                preference.setSummary(preference.entries[prefIndex])
-            }
-        }
         // チェックボックスに変更があった場合
-        else if (preference is CheckBoxPreference) {
+        if (preference is CheckBoxPreference) {
             val bl = sharedPreferences?.getBoolean(key,false) ?: false
-            preference.setSummary(bl.toString())
+            //preference.setSummary(bl.toString())
             Log.d(javaClass.simpleName, "changed:checkbox:key[$key][${bl}]")
         }
         // エディットボックスに変更があった場合
         else if (preference is EditTextPreference){
             Log.d(javaClass.simpleName, "changed:edit:key[$key][${sharedPreferences?.getString(key,"")}]")
-            preference.setSummary(sharedPreferences?.getString(key,""))
+            // 共有プリファレンスのエディットテキストの値
+            val etB18Val = sharedPreferences?.getString(key,"")
+            // エディットテキストのサマリの中身
+            preference.summary = resources.getString(R.string.B18_ED_SUMMARY) + "\n" + etB18Val.toString()
+            //preference.setSummary(sharedPreferences?.getString(key,""))
+        }
+        // リストに変更があった場合
+        else if (preference is ListPreference) {
+            // 共有プリファレンスのリストの値
+            // リストの場合、entryvaluesが保存されるので、和名に変換する必要がある
+            val ltB18Val = sharedPreferences?.getString(key,"")
+            // 値に対応するインデックスを取得
+            val ltB18ID = preference.findIndexOfValue(ltB18Val)
+            Log.d(javaClass.simpleName, "changed:key[$key]prefIndex[$ltB18ID]")
+            if (ltB18ID >= 0) {
+                // インデックスから和名を求める
+                val ltB18Name = preference.entries[ltB18ID]
+                // サマリに、和名を付与する
+                preference.summary = resources.getString(R.string.B18_LS_SUMMARY) +
+                        "\n" +
+                        ltB18Name.toString()
+            }
         }
         // スイッチに変更があった場合
         else if (preference is SwitchPreference) {
             val bl = sharedPreferences?.getBoolean(key,false) ?: false
-            preference.setSummary(bl.toString())
+            //preference.setSummary(bl.toString())
             Log.d(javaClass.simpleName, "changed:switch:key[$key][${bl}]")
         }
         // シークバーに変更があった場合
         else if (preference is SeekBarPreference) {
             val num = sharedPreferences?.getInt(key,2) ?: 2
             preference.setSummary(num.toString())
+            // シークバーのサマリの中身
+            preference.summary = resources.getString(R.string.B18_SB_SUMMARY) + "\n" + num
             Log.d(javaClass.simpleName, "changed:seekbar:key[$key][${num}]")
         }
         else {
