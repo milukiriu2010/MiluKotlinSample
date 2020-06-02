@@ -25,6 +25,7 @@ class B09Activity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             0 -> {
+                // シャッターを押したときの画像が渡される
                 val bmp = data?.getExtras()?.get("data") as? Bitmap ?: return
                 ivB09.setImageBitmap(bmp)
             }

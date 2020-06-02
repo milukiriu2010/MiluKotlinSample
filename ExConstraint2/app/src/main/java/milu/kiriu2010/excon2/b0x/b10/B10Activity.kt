@@ -12,6 +12,7 @@ import android.view.animation.RotateAnimation
 import android.hardware.SensorEvent
 
 // コンパス
+// 加速度センサと磁器センサを使っている
 class B10Activity : AppCompatActivity()
     , SensorEventListener {
 

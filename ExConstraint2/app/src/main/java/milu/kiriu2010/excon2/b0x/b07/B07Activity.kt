@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_b07.*
 import milu.kiriu2010.excon2.R
 
 // 起動中アプリ一覧を表示
+// 自分しか表示されない
 class B07Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

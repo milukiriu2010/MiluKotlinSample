@@ -116,28 +116,35 @@ class B06Activity : AppCompatActivity()
         // 方位角:Z軸の回転角度(azimuth)
         // 傾斜角:X軸の回転角度(pitch:前後の傾斜)
         // 回転角:Y軸の回転角度(roll:左右の傾斜)
-        val str = "1) 地磁気+加速度センサ" +
-                "\n  方位角:" + "%3.1f".format(Math.toDegrees(attitude[0].toDouble())) +
-                "\n  傾斜角:" + "%3.1f".format(Math.toDegrees(attitude[1].toDouble())) +
-                "\n  回転角:" + "%3.1f".format(Math.toDegrees(attitude[2].toDouble())) +
-                "\n\n 5) 光センサ" +
-                "\n  　　Ⅹ:" + "%3.1f".format(light[0]) +
-                "\n\n 2) 傾きセンサ" +
-                "\n  方位角:" + "%3.1f".format( if (orientation[0] > 180.0) orientation[0]-360.0 else orientation[0] ) +
-                "\n  傾斜角:" + "%3.1f".format(orientation[1]) +
-                "\n  回転角:" + "%3.1f".format(orientation[2]) +
-                "\n\n 3) 加速度センサ" +
-                "\n  　　Ⅹ:" + "%3.1f".format(gravity[0]) +
-                "\n  　　Ｙ:" + "%3.1f".format(gravity[1]) +
-                "\n  　　Ｚ:" + "%3.1f".format(gravity[2]) +
-                "\n\n 4) 地磁気センサ" +
-                "\n  　　Ⅹ:" + "%3.1f".format(geomagnetic[0]) +
-                "\n  　　Ｙ:" + "%3.1f".format(geomagnetic[1]) +
-                "\n  　　Ｚ:" + "%3.1f".format(geomagnetic[2]) +
-                "\n\n 6) ジャイロセンサ" +
-                "\n  　　Ⅹ:" + "%f".format(gyro[0]) +
-                "\n  　　Ｙ:" + "%f".format(gyro[1]) +
-                "\n  　　Ｚ:" + "%f".format(gyro[2])
+        val str = """
+                |1) 地磁気+加速度センサ
+                |方位角:${"%3.1f".format(Math.toDegrees(attitude[0].toDouble()))}
+                |傾斜角:${"%3.1f".format(Math.toDegrees(attitude[1].toDouble()))}
+                |回転角:${"%3.1f".format(Math.toDegrees(attitude[2].toDouble()))}
+                |
+                |5) 光センサ
+                |Ⅹ:${"%3.1f".format(light[0])}
+                |
+                |2) 傾きセンサ
+                |方位角:${"%3.1f".format( if (orientation[0] > 180.0) orientation[0]-360.0 else orientation[0] )}
+                |傾斜角:${"%3.1f".format(orientation[1])}
+                |回転角:${"%3.1f".format(orientation[2])}
+                |
+                |3) 加速度センサ
+                |Ⅹ:${"%3.1f".format(gravity[0])}
+                |Ｙ:${"%3.1f".format(gravity[1])}
+                |Ｚ:${"%3.1f".format(gravity[2])}
+                |
+                |4) 地磁気センサ
+                |Ⅹ:${"%3.1f".format(geomagnetic[0])}
+                |Ｙ:${"%3.1f".format(geomagnetic[1])}
+                |Ｚ:${"%3.1f".format(geomagnetic[2])}
+                |
+                |6) ジャイロセンサ
+                |Ⅹ:${"%f".format(gyro[0])}
+                |Ｙ:${"%f".format(gyro[1])}
+                |Ｚ:${"%f".format(gyro[2])}
+                """.trimMargin("|")
 
         tvB06.text = str
     }
