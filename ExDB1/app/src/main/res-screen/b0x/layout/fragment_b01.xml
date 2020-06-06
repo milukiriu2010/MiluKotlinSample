@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".b0x.B01Fragment">
 
+    <!-- テキスト:黒 -->
+    <!-- テキスト(影):赤 -->
     <TextView
         android:id="@+id/tvB01A"
         android:layout_width="wrap_content"

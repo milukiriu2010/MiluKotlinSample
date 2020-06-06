@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- https://developer.android.com/guide/topics/resources/drawable-resource -->
+<!-- 1層:左上:薄い灰色 -->
+<!-- 2層:右下:濃い灰色 -->
+<!-- 3層:中央:中間の灰色 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>

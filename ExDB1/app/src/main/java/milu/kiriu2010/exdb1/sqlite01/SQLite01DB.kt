@@ -6,9 +6,6 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 
-private const val DB_NAME = "SampleDatabase"
-private const val DB_VERSION = 1
-
 class SQLite01DB(context: Context):
         SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
 
@@ -33,40 +30,66 @@ class SQLite01DB(context: Context):
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
     }
 
-}
+    companion object {
+        private const val DB_NAME = "SampleDatabase"
+        private const val DB_VERSION = 1
 
-// textsテーブルから保存されているテキストを検索する
-fun queryTexts(context: Context): List<String> {
-    // 読み込み用のデータベースを開く
-    val database = SQLite01DB(context).readableDatabase
-    // データベースから全件検索する
-    val cursor = database.query("texts",null,null,null,null,null,"created_at DESC")
+        // textsテーブルから保存されているテキストを検索する
+        fun queryTexts(context: Context): MutableList<SQLite01Data> {
+            // 読み込み用のデータベースを開く
+            val database = SQLite01DB(context).readableDatabase
+            // データベースから全件検索する
+            val cursor = database.query("texts",
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    "created_at DESC")
 
-    val texts = mutableListOf<String>()
-    cursor.use {
-        // カーソルで順次処理していく
-        while(cursor.moveToNext()) {
-            // 保存されているテキストを得る
-            val text = cursor.getString(cursor.getColumnIndex("text"))
-            texts.add(text)
+            val datas = mutableListOf<SQLite01Data>()
+            cursor.use {
+                // カーソルで順次処理していく
+                while(cursor.moveToNext()) {
+                    // ID
+                    val id = cursor.getInt(cursor.getColumnIndex("_id"))
+                    // テキスト
+                    val text = cursor.getString(cursor.getColumnIndex("text"))
+                    // 作成日
+                    val created_at = cursor.getString(cursor.getColumnIndex("created_at"))
+
+                    datas.add(SQLite01Data(id,text,created_at))
+                }
+            }
+
+            database.close()
+            return datas
+        }
+
+        // textsテーブルにレコードを挿入する
+        fun insertText(context: Context, text: String) {
+            // 書き込み可能なデータベースを開く
+            val database = SQLite01DB(context).writableDatabase
+
+            database.use { db ->
+                // 挿入するレコード
+                val record = ContentValues().apply {
+                    put("text",text)
+                }
+                // データベースに挿入する
+                db.insert("texts",null,record)
+            }
+        }
+
+        // textsテーブルからレコードを削除
+        fun deleteText(context: Context, data: SQLite01Data) {
+            // 書き込み可能なデータベースを開く
+            val database = SQLite01DB(context).writableDatabase
+
+            database.use { db ->
+                db.delete("texts", "_id = ?", arrayOf(data.id.toString()) )
+            }
         }
     }
-
-    database.close()
-    return texts
 }
 
-// textsテーブルにレコードを挿入する
-fun insertText(context: Context, text: String) {
-    // 書き込み可能なデータベースを開く
-    val database = SQLite01DB(context).writableDatabase
-
-    database.use { db ->
-        // 挿入するレコード
-        val record = ContentValues().apply {
-            put("text",text)
-        }
-        // データベースに挿入する
-        db.insert("texts",null,record)
-    }
-}

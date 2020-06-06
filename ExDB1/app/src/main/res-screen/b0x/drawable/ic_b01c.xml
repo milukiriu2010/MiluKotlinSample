@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- https://developer.android.com/guide/topics/resources/drawable-resource -->
+<!-- 外枠：灰色 内側:白 な四角形 -->
+<!-- 1層:灰色 -->
+<!-- 2層:白 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>

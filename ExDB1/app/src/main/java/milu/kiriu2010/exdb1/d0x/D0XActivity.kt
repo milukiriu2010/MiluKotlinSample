@@ -5,6 +5,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_d0x.*
 import milu.kiriu2010.exdb1.R
 
@@ -13,15 +14,15 @@ class D0XActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                changeFragment("Home")
+                changeFragment(D01Fragment.newInstance())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                changeFragment("Navi")
+                changeFragment(D01Fragment.newInstance())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                changeFragment("Notifiation")
+                changeFragment(D01Fragment.newInstance())
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -36,7 +37,7 @@ class D0XActivity : AppCompatActivity() {
         nvD0X.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         // 初期表示のフラグメントを設定
-        changeFragment("d01")
+        changeFragment(D01Fragment.newInstance())
 
         // アクションバーの設定を行う
         supportActionBar?.apply {
@@ -60,7 +61,7 @@ class D0XActivity : AppCompatActivity() {
             }
             // パスエフェクト
             R.id.item_d01 -> {
-                changeFragment("d01")
+                changeFragment(D01Fragment.newInstance())
                 true
             }
             else -> return super.onOptionsItemSelected(item!!)
@@ -68,20 +69,13 @@ class D0XActivity : AppCompatActivity() {
     }
 
     // 表示するフラグメントを切り替える
-    private fun changeFragment(tag: String) {
-        val fragment = when (tag) {
-            // パスエフェクト
-            "d01" -> D01Fragment.newInstance()
-            // パスエフェクト
-            else -> D01Fragment.newInstance()
-        }
-
+    private fun changeFragment(fragment: Fragment) {
         // 現在表示しているフラグメントをスタックから外す
         supportFragmentManager.popBackStack()
         // 選択したフラグメントを表示する
-        if ( supportFragmentManager.findFragmentByTag(tag) == null ) {
+        if ( supportFragmentManager.findFragmentByTag(fragment.javaClass.simpleName) == null ) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.flD0X, fragment, tag)
+                    .replace(R.id.flD0X, fragment, fragment.javaClass.simpleName)
                     .commit()
         }
     }

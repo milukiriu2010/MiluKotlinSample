@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 
+// Viewを継承して、カスタムビューを作成
 class DecorateView
     @JvmOverloads
     constructor(

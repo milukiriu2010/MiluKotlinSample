@@ -1,6 +1,7 @@
 package milu.kiriu2010.exdb1.c0x
 
 
+import android.annotation.SuppressLint
 import android.graphics.*
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -50,6 +51,7 @@ class C03Fragment : Fragment()
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment

@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
 import android.util.Log
 
+// ConstraintLayoutを継承して、カスタムビューを作成
 // 2018.10.13 clear markRectLst in kickRunnable
 class Deco03ConstraintLayout
 @JvmOverloads

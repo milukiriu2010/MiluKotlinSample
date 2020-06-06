@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 1層:赤 -->
+<!-- 2層:緑:50dpずらす -->
+<!-- 3層:青:100dpずらす -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <bitmap android:src="@drawable/ic_b01e_red"

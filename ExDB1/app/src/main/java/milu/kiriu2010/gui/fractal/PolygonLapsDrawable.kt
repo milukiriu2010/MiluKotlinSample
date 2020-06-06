@@ -21,6 +21,7 @@ import android.util.FloatProperty
 import android.util.Log
 import java.lang.Math.PI
 
+// Drawableを継承して、多角形を描画
 class PolygonLapsDrawable : Drawable() {
 
     var progress = 1f

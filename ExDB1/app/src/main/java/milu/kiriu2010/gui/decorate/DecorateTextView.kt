@@ -7,19 +7,17 @@ import android.os.Handler
 import androidx.annotation.RequiresApi
 import android.util.AttributeSet
 import android.util.Log
-import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 
-
+// AppCompatTextViewを継承して、カスタムビューを作成
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 class DecorateTextView
     @JvmOverloads
     constructor(
             context: Context?,
-            attrs: AttributeSet? = null,
-            defStyleAttr: Int = 0,
-            defStyleRes: Int = 0
+            attrs: AttributeSet? = null
     )
-    : TextView(context, attrs, defStyleAttr, defStyleRes) {
+    : AppCompatTextView(context, attrs) {
 
     // マーカの長さ
     var markLen = 100f

@@ -125,36 +125,6 @@ class A0XActivity : AppCompatActivity() {
     }
 
     private fun changeFragment(fragment: Fragment) {
-        /*
-        val fragment = when (tag) {
-            // インボリュート
-            "a12" -> A12Fragment.newInstance()
-            // レムニスケート
-            "a11" -> A11Fragment.newInstance()
-            // リサージュ
-            "a10" -> A10Fragment.newInstance()
-            // ベルヌーイ
-            "a09" -> A09Fragment.newInstance()
-            // カージオイド
-            "a08" -> A08Fragment.newInstance()
-            // アステロイド
-            "a07" -> A07Fragment.newInstance()
-            // サイクロイド
-            "a06" -> A06Fragment.newInstance()
-            // 8の字アニメーション
-            "a05" -> A05Fragment.newInstance()
-            // 回転するアニメーション
-            "a04" -> A04Fragment.newInstance()
-            // バウンスするアニメーション
-            "a03" -> A03Fragment.newInstance()
-            // 長方形の動きをするアニメーション
-            "a02" -> A02Fragment.newInstance()
-            // 左⇒右へアニメーション
-            "a01" -> A01Fragment.newInstance()
-            // 左⇒右へアニメーション
-            else -> A01Fragment.newInstance()
-        }
-        */
         // 現在表示しているフラグメントをスタックから外す
         supportFragmentManager.popBackStack()
         // 選択したフラグメントを表示する

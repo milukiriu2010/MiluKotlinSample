@@ -1,5 +1,6 @@
 package milu.kiriu2010.exdb1.b0x
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -29,6 +30,7 @@ class B02Fragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -37,17 +39,20 @@ class B02Fragment : Fragment() {
         // レイアウト
         dclB02 = view.findViewById(R.id.dclB02)
 
-        // 飾りつけされたテキストビュー
+        // Viewを継承して、カスタムビューを作成
         dvB02 = view.findViewById(R.id.dvB02)
         dvB02.text = "あいうえお"
 
+        // AppCompatTextViewを継承して、カスタムビューを作成
         dtvB02A = view.findViewById(R.id.dtvB02A)
         dtvB02A.text = "かきくけこ"
 
+        // AppCompatTextViewを継承して、カスタムビューを作成
         dtvB02B = view.findViewById(R.id.dtvB02B)
         dtvB02B.text = "さしすせそ"
         dtvB02B.mode = 1
 
+        // AppCompatTextViewを継承して、カスタムビューを作成
         dtvB02C = view.findViewById(R.id.dtvB02C)
         dtvB02C.text = "たちつてと"
         dtvB02C.mode = 2
