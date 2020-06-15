@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
-        <activity android:name=".a11.A11TxtActivity"></activity>
+        <activity android:name=".a11.A11TxtActivity" />
         <activity android:name=".a11.A11AudioActivity" />
         <activity android:name=".a11.A11ImageActivity" /> <!-- android:theme="@style/AppTheme" -->
         <activity android:name=".MainActivity">
@@ -65,11 +65,11 @@
         <service
             android:name=".a18.A18ForegroundService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="false" />
         <service
             android:name=".a18.A18DownloadService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="false" />
         <service
             android:name=".a18.MyIntentService"
             android:exported="false" />

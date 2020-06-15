@@ -35,7 +35,7 @@ class A18Activity : AppCompatActivity() {
             handler.postDelayed(NotifyHandler(),1000 * dataDelayA18.text.toString().toLong() )
         }
 
-        // "startServiceによる開始"ボタンをクリック
+        // "startForegroundService"ボタンをクリック
         btnNotifyStartService.setOnClickListener {
             val intent = Intent(this,A18ForegroundService::class.java)
             startForegroundService(intent)
