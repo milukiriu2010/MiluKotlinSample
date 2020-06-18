@@ -57,7 +57,6 @@
         <activity android:name=".a0x.a21.A21Activity" />
         <activity android:name=".a0x.a22.A22Activity" />
         <activity android:name=".a0x.a23.A23Activity" />
-        <activity android:name=".a0x.a24.A24Activity" />
         <activity android:name=".a0x.a25.A25Activity" />
         <activity android:name=".b0x.B0XActivity" />
         <activity android:name=".b0x.b01.B01Activity" />
