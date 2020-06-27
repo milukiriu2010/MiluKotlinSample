@@ -2,6 +2,7 @@
     <string name="app_name">ExCon2</string>
     <string name="BTN_A0X">A0X</string>
     <string name="BTN_B0X">B0X</string>
+    <string name="BTN_C0X">C0X</string>
 
 
     <string name="BTN_A03">Cust Bar</string>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="LB_C01_ACTIVITY">Activity保持の整数</string>
+    <string name="LB_C01_VIEWMODEL">ViewModel保持の整数</string>
+    <string name="BTN_C01_COUNTUP">カウントアップ</string>
+</resources>

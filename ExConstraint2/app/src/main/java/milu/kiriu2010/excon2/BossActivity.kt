@@ -6,6 +6,7 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_boss.*
 import milu.kiriu2010.excon2.a0x.A0xActivity
 import milu.kiriu2010.excon2.b0x.B0XActivity
+import milu.kiriu2010.excon2.c0x.C0XActivity
 
 class BossActivity : AppCompatActivity() {
 
@@ -19,9 +20,15 @@ class BossActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // A1X画面を表示
+        // B0X画面を表示
         btnB0X.setOnClickListener {
             val intent = Intent(this, B0XActivity::class.java)
+            startActivity(intent)
+        }
+
+        // C0X画面を表示
+        btnC0X.setOnClickListener {
+            val intent = Intent(this, C0XActivity::class.java)
             startActivity(intent)
         }
     }
