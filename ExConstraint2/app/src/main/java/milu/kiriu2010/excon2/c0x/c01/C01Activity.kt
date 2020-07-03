@@ -19,8 +19,7 @@ import milu.kiriu2010.excon2.R
 // ボタンをクリックしたら、
 // ActivityのカウンターとViewModelのカウンターをプラス１する
 // ----------------------------------------------------------
-// Data Binding
-// https://qiita.com/KIRIN3qiita/items/4a2b16b4ce3c9b1cffd5
+
 class C01Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
