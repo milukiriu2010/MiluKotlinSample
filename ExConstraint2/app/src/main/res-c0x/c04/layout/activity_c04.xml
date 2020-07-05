@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/layoutC04"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <ImageView
+            android:id="@+id/ivC04"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            tools:ignore="ContentDescription" />
+
+        <RadioGroup
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/rgC04"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+            <RadioButton
+                android:text="@string/RB_C04_ENG"
+                android:id="@+id/rbC04_ENG"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:checked="true"
+                />
+            <RadioButton
+                android:text="@string/RB_C04_JPN"
+                android:id="@+id/rbC04_JPN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <RadioButton
+                android:text="@string/RB_C04_JPNNEW"
+                android:id="@+id/rbC04_JPNNEW"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnC04_SCAN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/BTN_C04_SCAN"/>
+
+        <EditText
+            android:id="@+id/tvC04_OCR"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            tools:ignore="Autofill,LabelFor,TextFields" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -75,6 +75,11 @@ dependencies {
     //implementation 'javax.xml.stream:javax.xml.stream:1.0.1.v201004272200'
     //implementation 'javax.xml.stream:geronimo-stax-api:1.0'
 
+    // 文字認識
+    implementation 'com.rmtheis:tess-two:9.0.0'
+    // 画像をギャラリーから読み込む際にExifを読み取って画像の向きを正しい方向に直す
+    implementation 'androidx.exifinterface:exifinterface:1.2.0'
+
     // Apache POI
     // https://mvnrepository.com/artifact/org.apache.poi/poi
     //implementation group: 'org.apache.poi', name: 'poi', version: '4.0.0'

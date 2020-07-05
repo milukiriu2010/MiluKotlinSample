@@ -8,6 +8,7 @@ import milu.kiriu2010.excon2.R
 import milu.kiriu2010.excon2.c0x.c01.C01Activity
 import milu.kiriu2010.excon2.c0x.c02.C02Activity
 import milu.kiriu2010.excon2.c0x.c03.C03Activity
+import milu.kiriu2010.excon2.c0x.c04.C04Activity
 
 class C0XActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +30,12 @@ class C0XActivity : AppCompatActivity() {
         // DataBinding
         btnC03.setOnClickListener {
             val intent = Intent(this, C03Activity::class.java)
+            startActivity(intent)
+        }
+
+        // 文字認識
+        btnC04.setOnClickListener {
+            val intent = Intent(this, C04Activity::class.java)
             startActivity(intent)
         }
 

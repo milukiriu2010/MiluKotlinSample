@@ -18,7 +18,8 @@
         android:roundIcon="@drawable/ic_main"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".c0x.c03.C03Activity"></activity>
+        <activity android:name=".c0x.c04.C04Activity"></activity>
+        <activity android:name=".c0x.c03.C03Activity" />
         <activity android:name=".c0x.c02.C02Activity" />
         <activity android:name=".c0x.c01.C01Activity" />
         <activity android:name=".c0x.C0XActivity" /> <!-- android:roundIcon="@mipmap/ic_launcher_round" -->
