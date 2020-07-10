@@ -13,6 +13,8 @@ import milu.kiriu2010.excon2.c0x.c04.C04OCRUtil
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 
+// カメラでキャプチャーした画像に対して、
+// 文字認識をかける
 class C05Activity : AppCompatActivity() {
     private val REQUEST = 0
     private lateinit var ocrUtil: C04OCRUtil
@@ -34,11 +36,13 @@ class C05Activity : AppCompatActivity() {
             REQUEST -> {
                 // シャッターを押したときの画像が渡される
                 val bmpOrg = data?.getExtras()?.get("data") as? Bitmap ?: return
-                val bos = ByteArrayOutputStream()
                 // https://stackoverflow.com/questions/7698409/android-transform-a-bitmap-into-an-input-stream
+                // BitmapをInputStreamに変換
+                val bos = ByteArrayOutputStream()
                 bmpOrg.compress(Bitmap.CompressFormat.PNG,0,bos)
                 val bitmapOriginData = bos.toByteArray()
                 val bis = ByteArrayInputStream(bitmapOriginData)
+                // 文字の上下を合わせるため、画像を回転させる
                 val bmp = bis.let {
                     val exifInterface = ExifInterface(it)
                     val orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
