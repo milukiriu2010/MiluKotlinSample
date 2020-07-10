@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="BTN_C01">C01</string>
-    <string name="BTN_C02">C02</string>
-    <string name="BTN_C03">C03</string>
-    <string name="BTN_C04">C04</string>
+    <string name="BTN_C01">ViewModel</string>
+    <string name="BTN_C02">LiveData</string>
+    <string name="BTN_C03">DataBind</string>
+    <string name="BTN_C04">OCR1</string>
+    <string name="BTN_C05">OCR2</string>
 </resources>

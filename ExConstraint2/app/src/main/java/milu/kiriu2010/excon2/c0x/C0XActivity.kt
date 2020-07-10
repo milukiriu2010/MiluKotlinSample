@@ -9,6 +9,7 @@ import milu.kiriu2010.excon2.c0x.c01.C01Activity
 import milu.kiriu2010.excon2.c0x.c02.C02Activity
 import milu.kiriu2010.excon2.c0x.c03.C03Activity
 import milu.kiriu2010.excon2.c0x.c04.C04Activity
+import milu.kiriu2010.excon2.c0x.c05.C05Activity
 
 class C0XActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,11 +34,16 @@ class C0XActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // 文字認識
+        // 文字認識(キャプチャー一覧から)
         btnC04.setOnClickListener {
             val intent = Intent(this, C04Activity::class.java)
             startActivity(intent)
         }
 
+        // 文字認識(カメラから)
+        btnC05.setOnClickListener {
+            val intent = Intent(this, C05Activity::class.java)
+            startActivity(intent)
+        }
     }
 }

@@ -13,6 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/BTN_C01"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@+id/btnC02"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +26,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/BTN_C02"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@+id/btnC03"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnC01"
@@ -37,6 +39,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/BTN_C03"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnC02"
@@ -49,6 +52,17 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/BTN_C04"
+        android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnC01" />
+
+    <Button
+        android:id="@+id/btnC05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/BTN_C05"
+        app:layout_constraintBottom_toBottomOf="@+id/btnC04"
+        app:layout_constraintStart_toEndOf="@+id/btnC04"
+        app:layout_constraintTop_toTopOf="@+id/btnC04" />
 </androidx.constraintlayout.widget.ConstraintLayout>
