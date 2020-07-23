@@ -3,6 +3,7 @@
     <string name="BTN_C01">ViewModel</string>
     <string name="BTN_C02">LiveData</string>
     <string name="BTN_C03">DataBind</string>
-    <string name="BTN_C04">OCR1</string>
-    <string name="BTN_C05">OCR2</string>
+    <string name="BTN_C04">OCR:File</string>
+    <string name="BTN_C05">OCR:Cam</string>
+    <string name="BTN_C06">NFC</string>
 </resources>

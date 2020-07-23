@@ -10,6 +10,7 @@ import milu.kiriu2010.excon2.c0x.c02.C02Activity
 import milu.kiriu2010.excon2.c0x.c03.C03Activity
 import milu.kiriu2010.excon2.c0x.c04.C04Activity
 import milu.kiriu2010.excon2.c0x.c05.C05Activity
+import milu.kiriu2010.excon2.c0x.c06.C06Activity
 
 class C0XActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +44,12 @@ class C0XActivity : AppCompatActivity() {
         // 文字認識(カメラから)
         btnC05.setOnClickListener {
             val intent = Intent(this, C05Activity::class.java)
+            startActivity(intent)
+        }
+
+        // NFC有効無効
+        btnC06.setOnClickListener {
+            val intent = Intent(this, C06Activity::class.java)
             startActivity(intent)
         }
     }
