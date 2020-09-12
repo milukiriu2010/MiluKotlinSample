@@ -6,4 +6,5 @@
     <string name="BTN_C04">OCR:File</string>
     <string name="BTN_C05">OCR:Cam</string>
     <string name="BTN_C06">NFC</string>
+    <string name="BTN_C07">NFC ID</string>
 </resources>

@@ -81,4 +81,14 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnC05"
         app:layout_constraintTop_toTopOf="@+id/btnC05" />
+
+    <Button
+        android:id="@+id/btnC07"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/BTN_C07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnC04" />
 </androidx.constraintlayout.widget.ConstraintLayout>

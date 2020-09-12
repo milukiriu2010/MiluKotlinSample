@@ -31,7 +31,7 @@ class C06Activity : AppCompatActivity() {
         mNfcAdapter = NfcAdapter.getDefaultAdapter(applicationContext)
         val nfcONOFF = if (mNfcAdapter.isEnabled) "ON" else "OFF"
 
-        // NFの有効/無効
+        // NFCの有効/無効
         tvC06_ONOFF.text = nfcONOFF
 
         val intent2 = Intent(this,javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)

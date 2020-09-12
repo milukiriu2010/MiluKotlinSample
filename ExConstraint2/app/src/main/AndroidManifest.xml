@@ -7,12 +7,13 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.NFC" />
-    <uses-feature android:name="android.hardware.nfc" android:required="true"/>
 
-    <!-- プログラムによるパーミッション確認も必要 -->
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" /> <!-- プログラムによるパーミッション確認も必要 -->
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
 
     <application
@@ -61,7 +62,6 @@
         <activity android:name=".a0x.a22.A22Activity" />
         <activity android:name=".a0x.a23.A23Activity" />
         <activity android:name=".a0x.a25.A25Activity" />
-
         <activity android:name=".b0x.B0XActivity" />
         <activity android:name=".b0x.b01.B01Activity" />
         <activity android:name=".b0x.b03.B03Activity" />
@@ -72,24 +72,42 @@
         <activity android:name=".b0x.b08.B08Activity" />
         <activity android:name=".b0x.b09.B09Activity" />
         <activity android:name=".b0x.b10.B10Activity" />
-
         <activity android:name=".c0x.C0XActivity" />
         <activity android:name=".c0x.c01.C01Activity" />
         <activity android:name=".c0x.c02.C02Activity" />
         <activity android:name=".c0x.c03.C03Activity" />
         <activity android:name=".c0x.c04.C04Activity" />
         <activity android:name=".c0x.c05.C05Activity" />
-        <activity android:name=".c0x.c06.C06Activity"
+        <activity
+            android:name=".c0x.c06.C06Activity"
             android:permission="android.permission.NFC">
             <intent-filter>
+
                 <!-- action android:name="android.nfc.action.TECH_DISCOVERED"/ -->
-                <action android:name="android.nfc.action.TAG_DISCOVERED"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
             <meta-data
                 android:name="android.nfc.action.TAG_DISCOVERED"
-                android:resource="@xml/filter_nfc"/>
+                android:resource="@xml/filter_nfc" />
             <!-- android:name="android.nfc.action.TECH_DISCOVERED" -->
+        </activity>
+        <activity android:name=".c0x.c07.C07Activity">
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED"/>
+                <!-- action android:name="android.nfc.action.TAG_DISCOVERED" / -->
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/filter_nfc2" />
+            <!-- meta-data
+                android:name="android.nfc.action.TAG_DISCOVERED"
+                android:resource="@xml/filter_nfc" / -->
         </activity>
     </application>
 
