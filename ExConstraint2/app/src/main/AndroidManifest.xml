@@ -104,7 +104,7 @@
 
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"
-                android:resource="@xml/filter_nfc2" />
+                android:resource="@xml/filter_nfc_c07" />
             <!-- meta-data
                 android:name="android.nfc.action.TAG_DISCOVERED"
                 android:resource="@xml/filter_nfc" / -->
