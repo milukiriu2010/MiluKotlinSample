@@ -7,4 +7,5 @@
     <string name="BTN_C05">OCR:Cam</string>
     <string name="BTN_C06">NFC</string>
     <string name="BTN_C07">NFC ID</string>
+    <string name="BTN_C08">NFC Ndef</string>
 </resources>

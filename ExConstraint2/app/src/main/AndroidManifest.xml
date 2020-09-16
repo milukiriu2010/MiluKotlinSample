@@ -96,7 +96,7 @@
         </activity>
         <activity android:name=".c0x.c07.C07Activity">
             <intent-filter>
-                <action android:name="android.nfc.action.TECH_DISCOVERED"/>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
                 <!-- action android:name="android.nfc.action.TAG_DISCOVERED" / -->
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -105,9 +105,18 @@
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/filter_nfc_c07" />
-            <!-- meta-data
+            <!--
+                 meta-data
                 android:name="android.nfc.action.TAG_DISCOVERED"
-                android:resource="@xml/filter_nfc" / -->
+                android:resource="@xml/filter_nfc" /
+            -->
+        </activity>
+        <activity android:name=".c0x.c08.C08Activity">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+            　　　<category android:name="android.intent.category.DEFAULT" />
+            　　　<data android:mimeType="text/plain" />
+            </intent-filter>
         </activity>
     </application>
 
