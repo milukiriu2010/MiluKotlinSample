@@ -10,7 +10,7 @@ import android.util.Log
 class DecorateConstraintLayout
     @JvmOverloads
     constructor(
-            context: Context?,
+            context: Context,
             attrs: AttributeSet? = null,
             defStyleAttr: Int = 0
     )

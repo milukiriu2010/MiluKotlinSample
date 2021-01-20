@@ -12,7 +12,7 @@ import android.util.Log
 class Deco03ConstraintLayout
 @JvmOverloads
 constructor(
-        context: Context?,
+        context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0
 )

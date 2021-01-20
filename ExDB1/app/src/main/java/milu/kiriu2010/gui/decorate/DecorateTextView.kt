@@ -14,7 +14,7 @@ import androidx.appcompat.widget.AppCompatTextView
 class DecorateTextView
     @JvmOverloads
     constructor(
-            context: Context?,
+            context: Context,
             attrs: AttributeSet? = null
     )
     : AppCompatTextView(context, attrs) {
