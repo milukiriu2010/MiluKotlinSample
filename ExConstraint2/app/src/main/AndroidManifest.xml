@@ -23,6 +23,7 @@
         android:roundIcon="@drawable/ic_main"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".c0x.c09.C09Activity"></activity>
         <!-- android:roundIcon="@mipmap/ic_launcher_round" -->
         <activity
             android:name=".BossActivity"
@@ -114,8 +115,12 @@
         <activity android:name=".c0x.c08.C08Activity">
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-            　　　<category android:name="android.intent.category.DEFAULT" />
-            　　　<data android:mimeType="text/plain" />
+
+                　　　
+                <category android:name="android.intent.category.DEFAULT" />
+
+                　　　
+                <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
     </application>

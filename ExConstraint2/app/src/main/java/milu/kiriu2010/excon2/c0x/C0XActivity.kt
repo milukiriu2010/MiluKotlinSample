@@ -13,6 +13,7 @@ import milu.kiriu2010.excon2.c0x.c05.C05Activity
 import milu.kiriu2010.excon2.c0x.c06.C06Activity
 import milu.kiriu2010.excon2.c0x.c07.C07Activity
 import milu.kiriu2010.excon2.c0x.c08.C08Activity
+import milu.kiriu2010.excon2.c0x.c09.C09Activity
 
 class C0XActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +65,12 @@ class C0XActivity : AppCompatActivity() {
         // NFCメッセージを取得
         btnC08.setOnClickListener {
             val intent = Intent(this, C08Activity::class.java)
+            startActivity(intent)
+        }
+
+        // データバインディング双方向通信
+        btnC09.setOnClickListener {
+            val intent = Intent(this, C09Activity::class.java)
             startActivity(intent)
         }
     }

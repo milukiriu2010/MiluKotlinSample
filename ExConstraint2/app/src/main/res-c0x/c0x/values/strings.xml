@@ -8,4 +8,5 @@
     <string name="BTN_C06">NFC</string>
     <string name="BTN_C07">NFC ID</string>
     <string name="BTN_C08">NFC Ndef</string>
+    <string name="BTN_C09">2Way</string>
 </resources>
