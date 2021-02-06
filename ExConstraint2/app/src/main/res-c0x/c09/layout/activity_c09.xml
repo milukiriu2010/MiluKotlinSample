@@ -15,6 +15,7 @@
         android:layout_height="match_parent"
         tools:context=".c0x.c09.C09Activity">
 
+        <!-- viewModelのgetClickText()に対応 -->
         <TextView
             android:id="@+id/tvC09A"
             android:layout_width="0dp"
@@ -23,6 +24,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:textSize="24sp"
+            android:text="@{viewModel.clickText}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -37,11 +39,13 @@
             android:autofillHints=""
             android:ems="10"
             android:inputType="textPersonName"
+            android:text="@={viewModel.formText}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvC09A"
             tools:ignore="LabelFor" />
 
+        <!-- ViewModelのonButtonClick()に対応 -->
         <Button
             android:id="@+id/btnC09A"
             android:layout_width="wrap_content"
@@ -50,6 +54,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="@string/btnC09A"
+            android:enabled="@{viewModel.buttonEnable}"
+            android:onClick="@{() -> viewModel.onButtonClick()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etC09" />
@@ -62,6 +68,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:textSize="24sp"
+            android:text="@{viewModel.realTimeText}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnC09A" />
